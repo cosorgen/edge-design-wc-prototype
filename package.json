@@ -4,9 +4,6 @@
   "version": "0.0.1",
   "description": "A web component based prototype for the Edge browser",
   "main": "src/index.js",
-  "scripts": {
-    "compile": "npm run compile -ws --if-present"
-  },
   "author": "",
   "license": "MIT",
   "workspaces": [
