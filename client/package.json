@@ -5,5 +5,8 @@
   "description": "A web component based prototype for the Edge browser",
   "main": "src/index.js",
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "compile": "tsc"
+  }
 }
