@@ -1,0 +1,9 @@
+{
+  "name": "@edge-design-wc-prototype/client",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A web component based prototype for the Edge browser",
+  "main": "src/index.js",
+  "author": "",
+  "license": "MIT"
+}

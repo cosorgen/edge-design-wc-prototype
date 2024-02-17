@@ -1,0 +1,25 @@
+{
+  "name": "edge-design-wc-prototype",
+  "private": true,
+  "version": "0.0.1",
+  "description": "A web component based prototype for the Edge browser",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-storybook": "^0.6.15",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  }
+}
