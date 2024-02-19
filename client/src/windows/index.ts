@@ -6,18 +6,22 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   phoenixDarkThemeWin11,
+  colorNeutralForeground1,
 } from '@phoenixui/themes';
 import { setThemeFor } from '@fluentui/web-components';
 import { phoenixLightThemeWin11 } from '@phoenixui/themes';
 import WindowsService from '#services/windowsService.js';
-
-const backgroundImages = {
-  light: '/img/desktopLight.jpg',
-  dark: '/img/desktopDark.jpg',
-};
+import './views/taskBar.js';
 
 const styles = css`
   :host {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    color: ${colorNeutralForeground1};
+    fill: currentColor;
+
     /* body1 */
     font-family: ${fontFamilyBase};
     font-size: ${fontSizeBase300};
@@ -26,6 +30,7 @@ const styles = css`
   }
 
   img {
+    position: absolute;
     width: 100vw;
     height: 100vh;
     object-fit: cover;
@@ -33,14 +38,14 @@ const styles = css`
 `;
 
 const template = html`
-  <main>
-    <img
-      src=${(x: WindowsShell) => backgroundImages[x.ws.theme]}
-      decoding="async"
-      loading="lazy"
-      alt="layers of transparent glass panes"
-    />
-  </main>
+  <img
+    src=${(x: WindowsShell) =>
+      x.ws.theme === 'dark' ? '/img/desktopDark.jpg' : '/img/desktopLight.jpg'}
+    decoding="async"
+    loading="lazy"
+    alt="layers of transparent glass panes"
+  />
+  <task-bar></task-bar>
 `;
 
 @customElement({ name: 'windows-shell', template, styles })
