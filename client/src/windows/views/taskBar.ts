@@ -11,6 +11,9 @@ import '@fluentui/web-components/text.js';
 import '../controls/taskbarButton.js';
 import installedApps from '../installedApps.js';
 import './clockWidget.js';
+import './systemTray.js';
+import './showDesktopButton.js';
+import './showMoreButton.js';
 
 const template = html<TaskBar>`
   <div class="group">
@@ -18,7 +21,10 @@ const template = html<TaskBar>`
   </div>
   <div class="group"></div>
   <div class="group">
+    <show-more-button></show-more-button>
+    <system-tray></system-tray>
     <clock-widget></clock-widget>
+    <show-desktop-button></show-desktop-button>
   </div>
 `;
 
