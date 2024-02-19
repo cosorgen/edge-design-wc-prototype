@@ -1,15 +1,8 @@
-import {
-  FASTElement,
-  css,
-  customElement,
-  html,
-  repeat,
-} from '@microsoft/fast-element';
+import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import { colorNeutralStroke1, strokeWidthThin } from '@fluentui/web-components';
 import { spacingHorizontalL } from '@phoenixui/themes';
 import '@fluentui/web-components/text.js';
 import '../controls/taskbarButton.js';
-import installedApps from '../installedApps.js';
 import './clockWidget.js';
 import './systemTray.js';
 import './showDesktopButton.js';
