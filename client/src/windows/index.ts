@@ -9,7 +9,7 @@ import {
 } from '@phoenixui/themes';
 import { setThemeFor } from '@fluentui/web-components';
 import { phoenixLightThemeWin11 } from '@phoenixui/themes';
-import WindowsService from './services/windowsService';
+import WindowsService from '#services/windowsService.js';
 
 const backgroundImages = {
   light: '/img/desktopLight.jpg',

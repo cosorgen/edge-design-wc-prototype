@@ -11,7 +11,10 @@
     "server"
   ],
   "scripts": {
-    "start": "npm run start --ws --if-present"
+    "start": "npm run start --ws --if-present",
+    "lint": "npm run lint --ws --if-present",
+    "lint:fix": "npm run lint:fix --ws --if-present",
+    "prettier": "npm run prettier --ws --if-present"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.7.4",

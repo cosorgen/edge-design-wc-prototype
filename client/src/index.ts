@@ -12,9 +12,4 @@ const template = html` ${(x: AppRoot) =>
 })
 export class AppRoot extends FASTElement {
   @inject(PrototypeService) ps!: PrototypeService;
-
-  connectedCallback() {
-    super.connectedCallback();
-    console.log(this.ps);
-  }
 }
