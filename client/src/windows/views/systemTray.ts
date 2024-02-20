@@ -3,6 +3,7 @@ import {
   borderRadiusSmall,
   colorNeutralBackground2Hover,
   spacingHorizontalXS,
+  colorNeutralForeground1,
 } from '@phoenixui/themes';
 
 const template = html<SystemTray>`
@@ -33,6 +34,7 @@ const styles = css`
     border-radius: ${borderRadiusSmall};
     border: none;
     background: none;
+    color: ${colorNeutralForeground1};
   }
   button:hover {
     background: ${colorNeutralBackground2Hover};

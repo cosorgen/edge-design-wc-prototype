@@ -8,6 +8,7 @@ import {
 import {
   borderRadiusSmall,
   colorNeutralBackground2Hover,
+  colorNeutralForeground1,
   fontFamilyBase,
   fontSizeBase200,
   fontWeightRegular,
@@ -45,6 +46,7 @@ const styles = css`
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase200};
     white-space: nowrap;
+    color: ${colorNeutralForeground1};
   }
 `;
 

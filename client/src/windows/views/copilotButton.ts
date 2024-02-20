@@ -3,14 +3,11 @@ import {
   borderRadiusSmall,
   colorNeutralBackground2Hover,
   colorNeutralForeground1,
-  spacingHorizontalXS,
 } from '@phoenixui/themes';
 
-const template = html<ShowMoreButton>`
+const template = html<CopilotButton>`
   <button>
-    <svg width="16" height="16">
-      <use href="img/windows/icons.svg#chevron-up"></use>
-    </svg>
+    <img src="img/windows/copilot-24.svg" />
   </button>
 `;
 
@@ -20,11 +17,10 @@ const styles = css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: ${spacingHorizontalXS};
     user-select: none;
-    padding: 0 ${spacingHorizontalXS};
     cursor: pointer;
     height: 44px;
+    width: 44px;
     border-radius: ${borderRadiusSmall};
     border: none;
     background: none;
@@ -36,8 +32,8 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'show-more-button',
+  name: 'copilot-button',
   template,
   styles,
 })
-export default class ShowMoreButton extends FASTElement {}
+export default class CopilotButton extends FASTElement {}

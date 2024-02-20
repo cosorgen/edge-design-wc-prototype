@@ -14,6 +14,7 @@ import './clockWidget.js';
 import './systemTray.js';
 import './showDesktopButton.js';
 import './showMoreButton.js';
+import './copilotButton.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '../../services/windowsService.js';
 
@@ -40,6 +41,7 @@ const template = html<TaskBar>`
     <show-more-button></show-more-button>
     <system-tray></system-tray>
     <clock-widget></clock-widget>
+    <copilot-button></copilot-button>
     <show-desktop-button></show-desktop-button>
   </div>
 `;

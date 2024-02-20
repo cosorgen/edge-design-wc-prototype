@@ -11,7 +11,9 @@
     "server"
   ],
   "scripts": {
-    "start": "npm run start --ws --if-present",
+    "build": "npm run build --ws --if-present",
+    "start:client": "npm run start -w client",
+    "start:server": "npm run start -w server",
     "lint": "npm run lint --ws --if-present",
     "lint:fix": "npm run lint:fix --ws --if-present",
     "prettier": "npm run prettier --ws --if-present"

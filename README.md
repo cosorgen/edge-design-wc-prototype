@@ -2,5 +2,7 @@
 
 ```bash
 npm install
-npm run start
+npm run build
+npm run start:server
+npm run start:client
 ```
