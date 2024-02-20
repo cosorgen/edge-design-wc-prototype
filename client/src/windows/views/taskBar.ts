@@ -1,4 +1,10 @@
-import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  css,
+  customElement,
+  html,
+  repeat,
+} from '@microsoft/fast-element';
 import { colorNeutralStroke1, strokeWidthThin } from '@fluentui/web-components';
 import { spacingHorizontalL } from '@phoenixui/themes';
 import '@fluentui/web-components/text.js';
@@ -7,12 +13,28 @@ import './clockWidget.js';
 import './systemTray.js';
 import './showDesktopButton.js';
 import './showMoreButton.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import WindowsService from '../../services/windowsService.js';
 
 const template = html<TaskBar>`
   <div class="group">
     <weather-widget></weather-widget>
   </div>
-  <div class="group"></div>
+  <div class="group">
+    ${repeat(
+      (x) => x.ws.apps,
+      html`
+        <taskbar-button>
+          <img
+            src="${(x, c) =>
+              c.parent.ws.theme === 'dark' && x.darkIcon
+                ? x.darkIcon
+                : x.lightIcon}"
+          />
+        </taskbar-button>
+      `,
+    )}
+  </div>
   <div class="group">
     <show-more-button></show-more-button>
     <system-tray></system-tray>
@@ -60,4 +82,6 @@ const styles = css`
   template,
   styles,
 })
-export class TaskBar extends FASTElement {}
+export class TaskBar extends FASTElement {
+  @inject(WindowsService) ws!: WindowsService;
+}

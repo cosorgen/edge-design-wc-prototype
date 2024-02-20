@@ -40,7 +40,9 @@ const styles = css`
 const template = html`
   <img
     src=${(x: WindowsShell) =>
-      x.ws.theme === 'dark' ? '/img/desktopDark.jpg' : '/img/desktopLight.jpg'}
+      x.ws.theme === 'dark'
+        ? 'img/windows/desktopDark.jpg'
+        : 'img/windows/desktopLight.jpg'}
     decoding="async"
     loading="lazy"
     alt="layers of transparent glass panes"

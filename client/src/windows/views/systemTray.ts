@@ -7,13 +7,13 @@ import {
 
 const template = html<SystemTray>`
   <svg width="16" height="16">
-    <use href="img/windows-icons.svg#wifi" />
+    <use href="img/windows/icons.svg#wifi" />
   </svg>
   <svg width="16" height="16">
-    <use href="img/windows-icons.svg#volume" />
+    <use href="img/windows/icons.svg#volume" />
   </svg>
   <svg width="16" height="16">
-    <use href="img/windows-icons.svg#battery" />
+    <use href="img/windows/icons.svg#battery" />
   </svg>
 `;
 

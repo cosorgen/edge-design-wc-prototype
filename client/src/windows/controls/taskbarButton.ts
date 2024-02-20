@@ -2,31 +2,51 @@ import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
   colorBrandForeground1,
+  colorNeutralBackground2Hover,
+  colorNeutralBackground2Pressed,
   colorNeutralForeground4,
+  colorNeutralStroke1Hover,
+  colorNeutralStroke1Pressed,
+  strokeWidthThin,
 } from '@phoenixui/themes';
 
 const template = html`
-  <slot></slot>
-  <div part="backplate"></div>
-  <div part="indicator"></div>
+  <button>
+    <slot></slot>
+    <div part="backplate"></div>
+    <div part="indicator"></div>
+  </button>
 `;
 
 const styles = css`
-  :host {
+  button {
     position: relative;
     width: 44px;
     height: 44px;
+    cursor: pointer;
+    border: none;
+    background: none;
   }
 
   [part='backplate'] {
     position: absolute;
-    inset: 1px;
+    inset: 2px;
     border-radius: ${borderRadiusSmall};
     overflow: hidden;
     z-index: -1;
   }
 
-  [part='indicator'] {
+  button:hover [part='backplate'] {
+    background: ${colorNeutralBackground2Hover};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1Hover};
+  }
+
+  button:hover:active [part='backplate'] {
+    background: ${colorNeutralBackground2Pressed};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1Pressed};
+  }
+
+  :host([running]) [part='indicator'] {
     background: ${colorNeutralForeground4};
     position: absolute;
     bottom: 2px;
@@ -36,10 +56,18 @@ const styles = css`
     border-radius: 3px;
   }
 
-  :host([active]) [part='indicator'] {
+  :host([running][active]) [part='indicator'] {
     background: ${colorBrandForeground1};
     width: 16px;
     left: calc(50% - 8px);
+  }
+
+  slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
   }
 `;
 

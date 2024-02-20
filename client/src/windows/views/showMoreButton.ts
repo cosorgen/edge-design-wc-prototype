@@ -7,7 +7,7 @@ import {
 
 const template = html<ShowMoreButton>`
   <svg width="16" height="16">
-    <use href="img/windows-icons.svg#chevron-up"></use>
+    <use href="img/windows/icons.svg#chevron-up"></use>
   </svg>
 `;
 
