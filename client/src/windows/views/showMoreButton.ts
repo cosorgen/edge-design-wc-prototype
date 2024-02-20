@@ -6,13 +6,15 @@ import {
 } from '@phoenixui/themes';
 
 const template = html<ShowMoreButton>`
-  <svg width="16" height="16">
-    <use href="img/windows/icons.svg#chevron-up"></use>
-  </svg>
+  <button>
+    <svg width="16" height="16">
+      <use href="img/windows/icons.svg#chevron-up"></use>
+    </svg>
+  </button>
 `;
 
 const styles = css`
-  :host {
+  button {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -23,8 +25,10 @@ const styles = css`
     cursor: pointer;
     height: 44px;
     border-radius: ${borderRadiusSmall};
+    border: none;
+    background: none;
   }
-  :host(:hover) {
+  button:hover {
     background: ${colorNeutralBackground2Hover};
   }
 `;

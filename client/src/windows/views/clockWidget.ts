@@ -16,12 +16,14 @@ import {
 } from '@phoenixui/themes';
 
 const template = html<ClockWidget>`
-  <caption-1>${(x) => x.time}</caption-1>
-  <caption-1>${(x) => x.date}</caption-1>
+  <button>
+    <caption-1>${(x) => x.time}</caption-1>
+    <caption-1>${(x) => x.date}</caption-1>
+  </button>
 `;
 
 const styles = css`
-  :host {
+  button {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,8 +33,10 @@ const styles = css`
     cursor: pointer;
     height: 44px;
     border-radius: ${borderRadiusSmall};
+    border: none;
+    background: none;
   }
-  :host(:hover) {
+  button:hover {
     background: ${colorNeutralBackground2Hover};
   }
   caption-1 {

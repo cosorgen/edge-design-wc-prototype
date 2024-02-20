@@ -1,4 +1,4 @@
-import { FASTElement, css, customElement } from '@microsoft/fast-element';
+import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
   colorNeutralBackground2Hover,
@@ -6,20 +6,23 @@ import {
 } from '@phoenixui/themes';
 
 const styles = css`
-  :host {
+  button {
     user-select: none;
     width: ${spacingHorizontalM};
     cursor: pointer;
     height: 44px;
     border-radius: ${borderRadiusSmall};
+    border: none;
+    background: none;
   }
-  :host(:hover) {
+  button:hover {
     background: ${colorNeutralBackground2Hover};
   }
 `;
 
 @customElement({
   name: 'show-desktop-button',
+  template: html`<button></button>`,
   styles,
 })
 export default class ShowDesktopButton extends FASTElement {}
