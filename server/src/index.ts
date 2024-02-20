@@ -1,6 +1,5 @@
 import * as dotenv from 'dotenv';
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path from 'path';
 import express from 'express';
 import { suggest, proxy, metadata, weather } from './api/index.js';
 
@@ -8,8 +7,8 @@ dotenv.config(); // Load .env file for keys
 
 const PORT = process.env.PORT || 4000;
 const app = express();
-const curDirName = dirname(fileURLToPath(import.meta.url));
-const pathToApp = path.resolve(curDirName, '../../client/www');
+const pathToApp = path.resolve(__dirname, '../../client/www');
+console.log('pathToApp', pathToApp);
 
 // Have Node serve the files for our built React app
 app.use(express.static(pathToApp));

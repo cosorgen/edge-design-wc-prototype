@@ -8,7 +8,7 @@ export type App = {
 };
 
 export default class WindowsService {
-  @observable theme: OSTheme = 'dark';
+  @observable theme: OSTheme = 'light';
   @observable apps: App[] = [
     {
       name: 'Start',
