@@ -5,16 +5,21 @@ import {
   html,
   repeat,
 } from '@microsoft/fast-element';
-import { colorNeutralStroke1, strokeWidthThin } from '@fluentui/web-components';
-import { spacingHorizontalL } from '@phoenixui/themes';
+import {
+  spacingHorizontalL,
+  colorNeutralStroke1,
+  strokeWidthThin,
+  spacingHorizontalXS,
+} from '@phoenixui/themes';
 import { micaBackgroundColor } from '../designSystem.js';
 import '@fluentui/web-components/text.js';
 import '../controls/taskbarButton.js';
 import './clockWidget.js';
 import './systemTray.js';
-import './showDesktopButton.js';
-import './showMoreButton.js';
-import './copilotButton.js';
+import '../controls/showDesktopButton.js';
+import '../controls/showMoreButton.js';
+import '../controls/copilotButton.js';
+import './weatherWidget.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '../../services/windowsService.js';
 
@@ -56,6 +61,7 @@ const styles = css`
     bottom: 0;
     inset-inline: 0;
     border-top: var(${strokeWidthThin}) solid var(${colorNeutralStroke1});
+    padding-inline-start: ${spacingHorizontalXS};
     /* Mica */
     backdrop-filter: blur(120px) saturate(150%);
     background: ${micaBackgroundColor};

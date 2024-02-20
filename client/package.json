@@ -8,7 +8,7 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "start": "esbuild --bundle --minify --watch --outfile=www/bundle.js --servedir=www src/index.ts",
+    "start": "esbuild --bundle --minify --watch --outfile=www/bundle.js src/index.ts",
     "build": "esbuild --bundle --minify --outfile=www/bundle.js src/index.ts",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
