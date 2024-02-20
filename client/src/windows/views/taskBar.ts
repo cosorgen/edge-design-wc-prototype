@@ -7,6 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import { colorNeutralStroke1, strokeWidthThin } from '@fluentui/web-components';
 import { spacingHorizontalL } from '@phoenixui/themes';
+import { micaBackgroundColor } from '../designSystem.js';
 import '@fluentui/web-components/text.js';
 import '../controls/taskbarButton.js';
 import './clockWidget.js';
@@ -55,7 +56,7 @@ const styles = css`
     border-top: var(${strokeWidthThin}) solid var(${colorNeutralStroke1});
     /* Mica */
     backdrop-filter: blur(120px) saturate(150%);
-    background: #f0f0f0b9;
+    background: ${micaBackgroundColor};
     background-blend-mode: luminosity;
   }
   .group {

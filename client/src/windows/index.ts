@@ -6,10 +6,8 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   colorNeutralForeground1,
-  webLightTheme,
-  webDarkTheme,
 } from '@phoenixui/themes';
-import { setThemeFor } from '@fluentui/web-components';
+import { setThemeFor } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import './views/taskBar.js';
 
@@ -56,10 +54,8 @@ export class WindowsShell extends FASTElement {
 
   connectedCallback() {
     super.connectedCallback();
+
     // set our theme for the OS
-    setThemeFor(
-      document.getElementsByTagName('app-root')[0] as HTMLElement,
-      this.ws.theme === 'dark' ? webDarkTheme : webLightTheme,
-    );
+    setThemeFor(this, this.ws.theme);
   }
 }

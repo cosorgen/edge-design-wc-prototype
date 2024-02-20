@@ -5,8 +5,7 @@ import {
   colorNeutralBackground2Hover,
   colorNeutralBackground2Pressed,
   colorNeutralForeground4,
-  colorNeutralStroke1Hover,
-  colorNeutralStroke1Pressed,
+  colorNeutralStrokeSubtle,
   strokeWidthThin,
 } from '@phoenixui/themes';
 
@@ -38,12 +37,11 @@ const styles = css`
 
   button:hover [part='backplate'] {
     background: ${colorNeutralBackground2Hover};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1Hover};
+    border: ${strokeWidthThin} solid ${colorNeutralStrokeSubtle};
   }
 
   button:hover:active [part='backplate'] {
     background: ${colorNeutralBackground2Pressed};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1Pressed};
   }
 
   :host([running]) [part='indicator'] {
