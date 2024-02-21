@@ -1,6 +1,6 @@
 import {
   FASTElement,
-  attr,
+  observable,
   css,
   customElement,
   html,
@@ -107,10 +107,10 @@ const styles = css`
   styles,
 })
 export default class WeatherWidget extends FASTElement {
-  @attr temp: number = 0;
-  @attr condition: string = '';
-  @attr icon: IconCode = '01';
-  @attr loaded = false;
+  @observable temp: number = 0;
+  @observable condition: string = '';
+  @observable icon: IconCode = '01';
+  @observable loaded = false;
 
   connectedCallback() {
     super.connectedCallback();

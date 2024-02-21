@@ -9648,10 +9648,10 @@
     }
   };
   __decorateClass([
-    attr
+    observable
   ], ClockWidget.prototype, "time", 2);
   __decorateClass([
-    attr
+    observable
   ], ClockWidget.prototype, "date", 2);
   ClockWidget = __decorateClass([
     customElement({
@@ -9910,16 +9910,16 @@
     }
   };
   __decorateClass([
-    attr
+    observable
   ], WeatherWidget.prototype, "temp", 2);
   __decorateClass([
-    attr
+    observable
   ], WeatherWidget.prototype, "condition", 2);
   __decorateClass([
-    attr
+    observable
   ], WeatherWidget.prototype, "icon", 2);
   __decorateClass([
-    attr
+    observable
   ], WeatherWidget.prototype, "loaded", 2);
   WeatherWidget = __decorateClass([
     customElement({

@@ -1,9 +1,9 @@
 import {
   FASTElement,
-  attr,
   css,
   customElement,
   html,
+  observable,
 } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
@@ -62,8 +62,8 @@ const styles = css`
   styles,
 })
 export default class ClockWidget extends FASTElement {
-  @attr time = this.formatTime();
-  @attr date = this.formatDate();
+  @observable time = this.formatTime();
+  @observable date = this.formatDate();
 
   connectedCallback() {
     super.connectedCallback();
