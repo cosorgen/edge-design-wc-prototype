@@ -10018,20 +10018,17 @@
     line-height: ${lineHeightBase300};
   }
 
-  img {
+  #desktop {
     position: absolute;
     width: 100vw;
     height: 100vh;
-    object-fit: cover;
+    background-image: ${(x) => x.ws.theme === "dark" ? "url('/img/windows/desktopDark.jpg')" : "url('/img/windows/desktopLight.jpg')"};
+    background-size: cover;
+    background-position: center;
   }
 `;
   var template9 = html`
-  <img
-    src=${(x) => x.ws.theme === "dark" ? "img/windows/desktopDark.jpg" : "img/windows/desktopLight.jpg"}
-    decoding="async"
-    loading="lazy"
-    alt="layers of transparent glass panes"
-  />
+  <div id="desktop"></div>
   <task-bar></task-bar>
 `;
   var WindowsShell = class extends FASTElement {
