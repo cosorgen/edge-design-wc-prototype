@@ -7499,11 +7499,7 @@
   var spacingHorizontalL = "var(--spacingHorizontalL)";
   var colorNeutralForeground1 = "var(--colorNeutralForeground1)";
   var colorNeutralForeground4 = "var(--colorNeutralForeground4)";
-  var colorBrandForeground1 = "var(--colorBrandForeground1)";
-  var colorNeutralBackground2Hover = "var(--colorNeutralBackground2Hover)";
-  var colorNeutralBackground2Pressed = "var(--colorNeutralBackground2Pressed)";
   var colorNeutralStroke1 = "var(--colorNeutralStroke1)";
-  var colorNeutralStrokeSubtle = "var(--colorNeutralStrokeSubtle)";
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
   // ../node_modules/@microsoft/fast-foundation/node_modules/tslib/tslib.es6.mjs
@@ -8455,7 +8451,7 @@
     colorBrandBackgroundPressed: () => colorBrandBackgroundPressed,
     colorBrandBackgroundSelected: () => colorBrandBackgroundSelected,
     colorBrandBackgroundStatic: () => colorBrandBackgroundStatic,
-    colorBrandForeground1: () => colorBrandForeground12,
+    colorBrandForeground1: () => colorBrandForeground1,
     colorBrandForeground2: () => colorBrandForeground2,
     colorBrandForegroundInverted: () => colorBrandForegroundInverted,
     colorBrandForegroundInvertedHover: () => colorBrandForegroundInvertedHover,
@@ -8486,8 +8482,8 @@
     colorNeutralBackground1Pressed: () => colorNeutralBackground1Pressed,
     colorNeutralBackground1Selected: () => colorNeutralBackground1Selected,
     colorNeutralBackground2: () => colorNeutralBackground2,
-    colorNeutralBackground2Hover: () => colorNeutralBackground2Hover2,
-    colorNeutralBackground2Pressed: () => colorNeutralBackground2Pressed2,
+    colorNeutralBackground2Hover: () => colorNeutralBackground2Hover,
+    colorNeutralBackground2Pressed: () => colorNeutralBackground2Pressed,
     colorNeutralBackground2Selected: () => colorNeutralBackground2Selected,
     colorNeutralBackground3: () => colorNeutralBackground3,
     colorNeutralBackground3Hover: () => colorNeutralBackground3Hover,
@@ -8866,7 +8862,7 @@
   var colorNeutralForegroundInvertedLinkPressed = "--colorNeutralForegroundInvertedLinkPressed";
   var colorNeutralForegroundInvertedLinkSelected = "--colorNeutralForegroundInvertedLinkSelected";
   var colorNeutralForegroundInvertedDisabled = "--colorNeutralForegroundInvertedDisabled";
-  var colorBrandForeground12 = "--colorBrandForeground1";
+  var colorBrandForeground1 = "--colorBrandForeground1";
   var colorBrandForeground2 = "--colorBrandForeground2";
   var colorNeutralForeground1Static = "--colorNeutralForeground1Static";
   var colorBrandForegroundInverted = "--colorBrandForegroundInverted";
@@ -8881,8 +8877,8 @@
   var colorNeutralBackground1Pressed = "--colorNeutralBackground1Pressed";
   var colorNeutralBackground1Selected = "--colorNeutralBackground1Selected";
   var colorNeutralBackground2 = "--colorNeutralBackground2";
-  var colorNeutralBackground2Hover2 = "--colorNeutralBackground2Hover";
-  var colorNeutralBackground2Pressed2 = "--colorNeutralBackground2Pressed";
+  var colorNeutralBackground2Hover = "--colorNeutralBackground2Hover";
+  var colorNeutralBackground2Pressed = "--colorNeutralBackground2Pressed";
   var colorNeutralBackground2Selected = "--colorNeutralBackground2Selected";
   var colorNeutralBackground3 = "--colorNeutralBackground3";
   var colorNeutralBackground3Hover = "--colorNeutralBackground3Hover";
@@ -9386,6 +9382,19 @@
   };
 
   // src/windows/designSystem.ts
+  var commonThemeOverrides = {
+    borderRadiusSmall: "4px",
+    borderRadiusMedium: "8px",
+    borderRadiusLarge: "16px"
+  };
+  var windowsLightTheme = {
+    ...webLightTheme,
+    ...commonThemeOverrides
+  };
+  var windowsDarkTheme = {
+    ...webDarkTheme,
+    ...commonThemeOverrides
+  };
   var micaBackgroundColor = DesignToken.create(
     "micaBackgroundColor"
   );
@@ -9393,27 +9402,53 @@
   var micaBackgroundBlendMode = DesignToken.create(
     "micaBackgroundBlendMode"
   );
+  var colorShellFillTaksbarItemPrimary = DesignToken.create(
+    "colorShellFillTaksbarItemPrimary"
+  );
+  var colorShellFillTaksbarItemSecondary = DesignToken.create(
+    "colorShellFillTaksbarItemSecondary"
+  );
+  var colorShellFillTaksbarItemTeritary = DesignToken.create(
+    "colorShellFillTaksbarItemTeritary"
+  );
+  var colorShellStrokeTaskbarItemQuinary = DesignToken.create(
+    "colorShellStrokeTaskbarItemPrimary"
+  );
+  var colorShellStrokeTaskbarItemSecondary = DesignToken.create(
+    "colorShellStrokeTaskbarItemSecondary"
+  );
+  var colorShellFillTaskbarItemIndicator = DesignToken.create(
+    "colorShellFillTaskbarItemIndicator"
+  );
+  var colorFillAccent = DesignToken.create("colorFillAccent");
   function setThemeFor2(element, theme) {
-    setThemeFor(element, theme === "dark" ? webDarkTheme : webLightTheme);
+    setThemeFor(
+      element,
+      theme === "dark" ? windowsDarkTheme : windowsLightTheme
+    );
     if (theme === "dark") {
       micaBackgroundColor.setValueFor(element, "rgba(32, 32, 32, 0.7)");
       micaBackdropFilter.setValueFor(element, "blur(120px) saturate(150%)");
       micaBackgroundBlendMode.setValueFor(element, "luminosity");
+      colorShellFillTaksbarItemPrimary.setValueFor(element, "#FFFFFF15");
+      colorShellFillTaksbarItemSecondary.setValueFor(element, "#FFFFFF0F");
+      colorShellFillTaksbarItemTeritary.setValueFor(element, "#FFFFFF0B");
+      colorShellStrokeTaskbarItemSecondary.setValueFor(element, "#FFFFFF1A");
+      colorShellStrokeTaskbarItemQuinary.setValueFor(element, "#FFFFFF0F");
+      colorShellFillTaskbarItemIndicator.setValueFor(element, "#FFFFFF63");
+      colorFillAccent.setValueFor(element, "#005FB8");
     } else {
       micaBackgroundColor.setValueFor(element, "rgba(243, 243, 243, 0.7)");
       micaBackdropFilter.setValueFor(element, "blur(120px) saturate(150%)");
       micaBackgroundBlendMode.setValueFor(element, "luminosity");
+      colorShellFillTaksbarItemPrimary.setValueFor(element, "#FFFFFFB2");
+      colorShellFillTaksbarItemSecondary.setValueFor(element, "#FFFFFF80");
+      colorShellFillTaksbarItemTeritary.setValueFor(element, "#FFFFFF4D");
+      colorShellStrokeTaskbarItemSecondary.setValueFor(element, "#0000000f");
+      colorShellStrokeTaskbarItemQuinary.setValueFor(element, "#00000005");
+      colorShellFillTaskbarItemIndicator.setValueFor(element, "#00000070");
+      colorFillAccent.setValueFor(element, "#005FB8");
     }
-    const curStyle = element.getAttribute("style");
-    element.setAttribute(
-      "style",
-      `
-      ${curStyle}
-      --borderRadiusSmall: 4px;
-      --borderRadiusMedium: 8px;
-      --borderRadiusLarge: 16px;
-    `
-    );
   }
 
   // src/services/windowsService.ts
@@ -9497,17 +9532,27 @@
     z-index: -1;
   }
 
-  button:hover [part='backplate'] {
-    background: ${colorNeutralBackground2Hover};
-    border: ${strokeWidthThin} solid ${colorNeutralStrokeSubtle};
+  button:hover [part='backplate'],
+  :host([running][active]) [part='backplate'] {
+    background: ${colorShellFillTaksbarItemSecondary};
+    border: ${strokeWidthThin} solid ${colorShellStrokeTaskbarItemSecondary};
   }
 
   button:hover:active [part='backplate'] {
-    background: ${colorNeutralBackground2Pressed};
+    background: ${colorShellFillTaksbarItemTeritary};
+    border: ${strokeWidthThin} solid ${colorShellStrokeTaskbarItemQuinary};
+  }
+
+  :host([running][active]) button:hover [part='backplate'] {
+    background: ${colorShellFillTaksbarItemPrimary};
+  }
+
+  :host([running][active]) button:hover:active [part='backplate'] {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 
   :host([running]) [part='indicator'] {
-    background: ${colorNeutralForeground4};
+    background: ${colorShellFillTaskbarItemIndicator};
     position: absolute;
     bottom: 2px;
     left: calc(50% - 3px);
@@ -9517,7 +9562,7 @@
   }
 
   :host([running][active]) [part='indicator'] {
-    background: ${colorBrandForeground1};
+    background: ${colorFillAccent};
     width: 16px;
     left: calc(50% - 8px);
   }
@@ -9562,7 +9607,10 @@
     background: none;
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
   caption-1 {
     font-family: ${fontFamilyBase};
@@ -9633,7 +9681,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${spacingHorizontalS};
     user-select: none;
     padding: 0 ${spacingHorizontalXS};
     cursor: pointer;
@@ -9643,8 +9691,13 @@
     background: none;
     color: ${colorNeutralForeground1};
   }
+
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
   var SystemTray = class extends FASTElement {
@@ -9669,7 +9722,10 @@
     background: none;
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
   var ShowDesktopButton = class extends FASTElement {
@@ -9707,7 +9763,10 @@
     color: ${colorNeutralForeground1};
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
   var ShowMoreButton = class extends FASTElement {
@@ -9742,7 +9801,10 @@
     color: ${colorNeutralForeground1};
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
   var CopilotButton = class extends FASTElement {
@@ -9804,7 +9866,10 @@
     }
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
   caption-1 {
     font-family: ${fontFamilyBase};
@@ -9898,7 +9963,7 @@
     position: absolute;
     bottom: 0;
     inset-inline: 0;
-    border-top: var(${strokeWidthThin}) solid var(${colorNeutralStroke1});
+    border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
     padding-inline-start: ${spacingHorizontalXS};
     /* Mica */
     backdrop-filter: blur(120px) saturate(150%);

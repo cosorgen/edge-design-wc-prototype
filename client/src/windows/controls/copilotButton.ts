@@ -1,9 +1,9 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
+import { borderRadiusSmall, colorNeutralForeground1 } from '@phoenixui/themes';
 import {
-  borderRadiusSmall,
-  colorNeutralBackground2Hover,
-  colorNeutralForeground1,
-} from '@phoenixui/themes';
+  colorShellFillTaksbarItemSecondary,
+  colorShellFillTaksbarItemTeritary,
+} from '../designSystem.js';
 
 const template = html<CopilotButton>`
   <button>
@@ -27,7 +27,10 @@ const styles = css`
     color: ${colorNeutralForeground1};
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
 

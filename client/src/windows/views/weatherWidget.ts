@@ -8,7 +8,6 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
-  colorNeutralBackground2Hover,
   colorNeutralForeground1,
   colorNeutralForeground4,
   fontFamilyBase,
@@ -17,6 +16,10 @@ import {
   lineHeightBase200,
   spacingHorizontalS,
 } from '@phoenixui/themes';
+import {
+  colorShellFillTaksbarItemSecondary,
+  colorShellFillTaksbarItemTeritary,
+} from '../designSystem.js';
 
 export type IconCode =
   | '01'
@@ -79,7 +82,10 @@ const styles = css`
     }
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
   caption-1 {
     font-family: ${fontFamilyBase};

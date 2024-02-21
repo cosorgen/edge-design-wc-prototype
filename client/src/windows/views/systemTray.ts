@@ -1,10 +1,14 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
-  colorNeutralBackground2Hover,
+  spacingHorizontalS,
   spacingHorizontalXS,
   colorNeutralForeground1,
 } from '@phoenixui/themes';
+import {
+  colorShellFillTaksbarItemSecondary,
+  colorShellFillTaksbarItemTeritary,
+} from '../designSystem.js';
 
 const template = html<SystemTray>`
   <button>
@@ -26,7 +30,7 @@ const styles = css`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${spacingHorizontalS};
     user-select: none;
     padding: 0 ${spacingHorizontalXS};
     cursor: pointer;
@@ -36,8 +40,13 @@ const styles = css`
     background: none;
     color: ${colorNeutralForeground1};
   }
+
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
 

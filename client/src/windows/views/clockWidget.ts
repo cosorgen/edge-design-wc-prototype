@@ -7,7 +7,6 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
-  colorNeutralBackground2Hover,
   colorNeutralForeground1,
   fontFamilyBase,
   fontSizeBase200,
@@ -15,6 +14,10 @@ import {
   lineHeightBase200,
   spacingHorizontalS,
 } from '@phoenixui/themes';
+import {
+  colorShellFillTaksbarItemSecondary,
+  colorShellFillTaksbarItemTeritary,
+} from '../designSystem.js';
 
 const template = html<ClockWidget>`
   <button>
@@ -38,7 +41,10 @@ const styles = css`
     background: none;
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
   caption-1 {
     font-family: ${fontFamilyBase};

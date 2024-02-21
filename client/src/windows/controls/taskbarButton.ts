@@ -1,13 +1,14 @@
 import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
+import { borderRadiusSmall, strokeWidthThin } from '@phoenixui/themes';
 import {
-  borderRadiusSmall,
-  colorBrandForeground1,
-  colorNeutralBackground2Hover,
-  colorNeutralBackground2Pressed,
-  colorNeutralForeground4,
-  colorNeutralStrokeSubtle,
-  strokeWidthThin,
-} from '@phoenixui/themes';
+  colorShellFillTaskbarItemIndicator,
+  colorShellFillTaksbarItemPrimary,
+  colorShellFillTaksbarItemSecondary,
+  colorShellFillTaksbarItemTeritary,
+  colorShellStrokeTaskbarItemSecondary,
+  colorShellStrokeTaskbarItemQuinary,
+  colorFillAccent,
+} from '../designSystem.js';
 
 const template = html`
   <button>
@@ -35,17 +36,27 @@ const styles = css`
     z-index: -1;
   }
 
-  button:hover [part='backplate'] {
-    background: ${colorNeutralBackground2Hover};
-    border: ${strokeWidthThin} solid ${colorNeutralStrokeSubtle};
+  button:hover [part='backplate'],
+  :host([running][active]) [part='backplate'] {
+    background: ${colorShellFillTaksbarItemSecondary};
+    border: ${strokeWidthThin} solid ${colorShellStrokeTaskbarItemSecondary};
   }
 
   button:hover:active [part='backplate'] {
-    background: ${colorNeutralBackground2Pressed};
+    background: ${colorShellFillTaksbarItemTeritary};
+    border: ${strokeWidthThin} solid ${colorShellStrokeTaskbarItemQuinary};
+  }
+
+  :host([running][active]) button:hover [part='backplate'] {
+    background: ${colorShellFillTaksbarItemPrimary};
+  }
+
+  :host([running][active]) button:hover:active [part='backplate'] {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 
   :host([running]) [part='indicator'] {
-    background: ${colorNeutralForeground4};
+    background: ${colorShellFillTaskbarItemIndicator};
     position: absolute;
     bottom: 2px;
     left: calc(50% - 3px);
@@ -55,7 +66,7 @@ const styles = css`
   }
 
   :host([running][active]) [part='indicator'] {
-    background: ${colorBrandForeground1};
+    background: ${colorFillAccent};
     width: 16px;
     left: calc(50% - 8px);
   }

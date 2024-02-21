@@ -1,10 +1,13 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
-  colorNeutralBackground2Hover,
   colorNeutralForeground1,
   spacingHorizontalXS,
 } from '@phoenixui/themes';
+import {
+  colorShellFillTaksbarItemSecondary,
+  colorShellFillTaksbarItemTeritary,
+} from '../designSystem.js';
 
 const template = html<ShowMoreButton>`
   <button>
@@ -31,7 +34,10 @@ const styles = css`
     color: ${colorNeutralForeground1};
   }
   button:hover {
-    background: ${colorNeutralBackground2Hover};
+    background: ${colorShellFillTaksbarItemSecondary};
+  }
+  button:hover:active {
+    background: ${colorShellFillTaksbarItemTeritary};
   }
 `;
 

@@ -60,7 +60,7 @@ const styles = css`
     position: absolute;
     bottom: 0;
     inset-inline: 0;
-    border-top: var(${strokeWidthThin}) solid var(${colorNeutralStroke1});
+    border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
     padding-inline-start: ${spacingHorizontalXS};
     /* Mica */
     backdrop-filter: blur(120px) saturate(150%);
