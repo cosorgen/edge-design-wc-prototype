@@ -9733,7 +9733,7 @@
   ShowDesktopButton = __decorateClass([
     customElement({
       name: "show-desktop-button",
-      template: html`<button></button>`,
+      template: html`<button>&NonBreakingSpace;</button>`,
       styles: styles5
     })
   ], ShowDesktopButton);

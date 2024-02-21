@@ -25,7 +25,7 @@ const styles = css`
 
 @customElement({
   name: 'show-desktop-button',
-  template: html`<button></button>`,
+  template: html`<button>&NonBreakingSpace;</button>`,
   styles,
 })
 export default class ShowDesktopButton extends FASTElement {}
