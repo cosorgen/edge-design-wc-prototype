@@ -9494,6 +9494,30 @@
           lightIcon: "img/windows/settings-24.svg"
         }
       ];
+      this.windowsById = [];
+      this.windowOrder = [];
+      this.activeWindowId = null;
+    }
+    openWindow(appName) {
+      const windowId = crypto.randomUUID();
+      this.windowsById = [
+        ...this.windowsById,
+        {
+          appName,
+          height: 400,
+          maximized: false,
+          minHeight: 200,
+          minimized: false,
+          minWidth: 300,
+          width: 500,
+          xPos: 100,
+          yPos: 100,
+          zIndex: this.windowsById.length + 1
+        }
+      ];
+      this.windowOrder = [...this.windowOrder, windowId];
+      this.activeWindowId = windowId;
+      return windowId;
     }
   };
   __decorateClass([
@@ -9502,6 +9526,15 @@
   __decorateClass([
     observable
   ], WindowsService.prototype, "apps", 2);
+  __decorateClass([
+    observable
+  ], WindowsService.prototype, "windowsById", 2);
+  __decorateClass([
+    observable
+  ], WindowsService.prototype, "windowOrder", 2);
+  __decorateClass([
+    observable
+  ], WindowsService.prototype, "activeWindowId", 2);
 
   // ../node_modules/@fluentui/web-components/dist/esm/text/define.js
   definition.define(FluentDesignSystem.registry);
@@ -10035,6 +10068,8 @@
     connectedCallback() {
       super.connectedCallback();
       setThemeFor2(this, this.ws.theme);
+      this.ws.openWindow("Microsoft Edge");
+      console.log(this.ws.windowsById);
     }
   };
   __decorateClass([

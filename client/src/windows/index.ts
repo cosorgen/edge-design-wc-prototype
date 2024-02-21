@@ -54,5 +54,8 @@ export class WindowsShell extends FASTElement {
 
     // set our theme for the OS
     setThemeFor(this, this.ws.theme);
+
+    this.ws.openWindow('Microsoft Edge');
+    console.log(this.ws.windowsById);
   }
 }

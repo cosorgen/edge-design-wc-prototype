@@ -6,6 +6,18 @@ export type App = {
   lightIcon: string;
   darkIcon?: string;
 };
+export type Window = {
+  appName: string;
+  height: number;
+  maximized: boolean;
+  minHeight: number;
+  minimized: boolean;
+  minWidth: number;
+  width: number;
+  xPos: number;
+  yPos: number;
+  zIndex: number;
+};
 
 export default class WindowsService {
   @observable theme: OSTheme = 'light';
@@ -48,4 +60,30 @@ export default class WindowsService {
       lightIcon: 'img/windows/settings-24.svg',
     },
   ];
+  @observable windowsById: Window[] = [];
+  @observable windowOrder: string[] = [];
+  @observable activeWindowId: string | null = null;
+
+  openWindow(appName: string) {
+    const windowId = crypto.randomUUID();
+    this.windowsById = [
+      ...this.windowsById,
+      {
+        appName,
+        height: 400,
+        maximized: false,
+        minHeight: 200,
+        minimized: false,
+        minWidth: 300,
+        width: 500,
+        xPos: 100,
+        yPos: 100,
+        zIndex: this.windowsById.length + 1,
+      },
+    ];
+    this.windowOrder = [...this.windowOrder, windowId];
+    this.activeWindowId = windowId;
+
+    return windowId;
+  }
 }
