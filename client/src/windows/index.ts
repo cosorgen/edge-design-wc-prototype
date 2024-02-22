@@ -51,29 +51,6 @@ const styles = css`
 
 const template = html<WindowsShell>`
   <div id="desktop"></div>
-  <task-bar>
-    ${repeat(
-      () => installedApps,
-      html`
-        <taskbar-button
-          ?running="${(x, c) =>
-            c.parent.ws.windows.some((w) => w.appName === x.name)}"
-          ?active="${(x, c) =>
-            c.parent.ws.windows.find(
-              (win) => win.id === c.parent.ws.activeWindowId,
-            )?.appName === x.name}"
-          @click="${(x, c) => c.parent.handleTaskbarButtonClick(x.name)}"
-        >
-          <img
-            src="${(x, c) =>
-              c.parent.ws.theme === 'dark' && x.darkIcon
-                ? x.darkIcon
-                : x.lightIcon}"
-          />
-        </taskbar-button>
-      `,
-    )}
-  </task-bar>
   ${repeat(
     (x) => x.ws.windows,
     html`
@@ -93,6 +70,30 @@ const template = html<WindowsShell>`
       </app-window>
     `,
   )}
+  <task-bar>
+    ${repeat(
+      () => installedApps,
+      html`
+        <taskbar-button
+          ?running="${(x, c) =>
+            c.parent.ws.windows.some((w) => w.appName === x.name)}"
+          ?active="${(x, c) =>
+            c.parent.ws.windows.find(
+              (win) => win.id === c.parent.ws.activeWindowId,
+            )?.appName === x.name}"
+          @click="${(x, c) =>
+            x.element ? c.parent.handleTaskbarButtonClick(x.name) : ''}"
+        >
+          <img
+            src="${(x, c) =>
+              c.parent.ws.theme === 'dark' && x.darkIcon
+                ? x.darkIcon
+                : x.lightIcon}"
+          />
+        </taskbar-button>
+      `,
+    )}
+  </task-bar>
 `;
 
 @customElement({ name: 'windows-shell', template, styles })
@@ -110,14 +111,33 @@ export class WindowsShell extends FASTElement {
   }
 
   handleTaskbarButtonClick(appName: string) {
-    // if app is running, focus it
-    const window = this.ws.windows.find((w) => w.appName === appName);
-    if (window) {
-      this.ws.activateWindow(window.id);
+    // find app windows
+    const windows = this.ws.windows.filter((w) => w.appName === appName);
+
+    // if no windows are open, open it
+    if (windows.length === 0) {
+      this.ws.openWindow(appName);
       return;
     }
 
-    // otherwise, open it
-    this.ws.openWindow(appName);
+    // if there's one window open
+    if (windows.length === 1) {
+      // if it's minimized, restore it
+      if (windows[0].minimized) {
+        this.ws.restoreWindow(windows[0].id);
+        return;
+      }
+      // if it's not active, activate it
+      if (windows[0].id !== this.ws.activeWindowId) {
+        this.ws.activateWindow(windows[0].id);
+        return;
+      }
+      // if it's active, minimize it
+      this.ws.minimizeWindow(windows[0].id);
+      return;
+    }
+
+    // if there are multiple windows open
+    return;
   }
 }

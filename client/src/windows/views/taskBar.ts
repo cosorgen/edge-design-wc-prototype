@@ -14,8 +14,6 @@ import '../controls/showDesktopButton.js';
 import '../controls/showMoreButton.js';
 import '../controls/copilotButton.js';
 import './weatherWidget.js';
-import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '../../services/windowsService.js';
 
 const template = html<TaskBar>`
   <div class="group">
@@ -48,6 +46,7 @@ const styles = css`
     backdrop-filter: blur(120px) saturate(150%);
     background: ${micaBackgroundColor};
     background-blend-mode: luminosity;
+    z-index: 1000;
   }
   .group {
     height: 100%;
@@ -73,6 +72,4 @@ const styles = css`
   template,
   styles,
 })
-export class TaskBar extends FASTElement {
-  @inject(WindowsService) ws!: WindowsService;
-}
+export class TaskBar extends FASTElement {}

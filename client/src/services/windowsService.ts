@@ -55,24 +55,37 @@ export default class WindowsService {
 
   closeWindow(id: string) {
     this.windows = this.windows.filter((w) => w.id !== id);
-    if (this.activeWindowId === id) {
-      this.activeWindowId = this.windows[this.windows.length - 1]?.id || null;
-    }
+    this.activateNextWindow(id);
   }
 
   activateWindow(id: string) {
     this.activeWindowId = id;
   }
 
+  activateNextWindow(id: string) {
+    if (this.activeWindowId === id) {
+      this.activeWindowId =
+        this.windows.find((win) => win.id !== id && !win.minimized)?.id || null;
+    }
+  }
+
   minimizeWindow(id: string) {
     this.windows = this.windows.map((w) =>
       w.id === id ? { ...w, minimized: true } : w,
     );
+    this.activateNextWindow(id);
+  }
+
+  restoreWindow(id: string) {
+    this.windows = this.windows.map((w) =>
+      w.id === id ? { ...w, minimized: false, maximized: false } : w,
+    );
+    this.activateWindow(id);
   }
 
   maximizeWindow(id: string) {
     this.windows = this.windows.map((w) =>
-      w.id === id ? { ...w, maximized: !w.maximized } : w,
+      w.id === id ? { ...w, maximized: true } : w,
     );
   }
 }

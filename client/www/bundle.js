@@ -7486,6 +7486,7 @@
     ...darkThemeUtilities
   };
   var borderRadiusSmall = "var(--borderRadiusSmall)";
+  var borderRadiusMedium = "var(--borderRadiusMedium)";
   var fontSizeBase200 = "var(--fontSizeBase200)";
   var fontSizeBase300 = "var(--fontSizeBase300)";
   var lineHeightBase200 = "var(--lineHeightBase200)";
@@ -8419,7 +8420,7 @@
   FASTDesignTokenNode.rootStyleSheetTarget = new RootStyleSheetTarget();
   FASTDesignTokenNode.cache = /* @__PURE__ */ new WeakMap();
 
-  // ../node_modules/@microsoft/fast-foundation/dist/esm/utilities/style/display.js
+  // ../node_modules/@fluentui/web-components/node_modules/@microsoft/fast-foundation/dist/esm/utilities/style/display.js
   var hidden = `:host([hidden]){display:none}`;
   function display(displayValue) {
     return `${hidden}:host{display:${displayValue}}`;
@@ -8437,7 +8438,7 @@
   __export(design_tokens_exports, {
     borderRadiusCircular: () => borderRadiusCircular,
     borderRadiusLarge: () => borderRadiusLarge,
-    borderRadiusMedium: () => borderRadiusMedium,
+    borderRadiusMedium: () => borderRadiusMedium2,
     borderRadiusNone: () => borderRadiusNone,
     borderRadiusSmall: () => borderRadiusSmall2,
     borderRadiusXLarge: () => borderRadiusXLarge,
@@ -9119,7 +9120,7 @@
   var colorPaletteTealForeground2 = "--colorPaletteTealForeground2";
   var borderRadiusNone = "--borderRadiusNone";
   var borderRadiusSmall2 = "--borderRadiusSmall";
-  var borderRadiusMedium = "--borderRadiusMedium";
+  var borderRadiusMedium2 = "--borderRadiusMedium";
   var borderRadiusLarge = "--borderRadiusLarge";
   var borderRadiusXLarge = "--borderRadiusXLarge";
   var borderRadiusCircular = "--borderRadiusCircular";
@@ -9494,21 +9495,31 @@
     }
     closeWindow(id3) {
       this.windows = this.windows.filter((w) => w.id !== id3);
-      if (this.activeWindowId === id3) {
-        this.activeWindowId = this.windows[this.windows.length - 1]?.id || null;
-      }
+      this.activateNextWindow(id3);
     }
     activateWindow(id3) {
       this.activeWindowId = id3;
+    }
+    activateNextWindow(id3) {
+      if (this.activeWindowId === id3) {
+        this.activeWindowId = this.windows.find((win) => win.id !== id3 && !win.minimized)?.id || null;
+      }
     }
     minimizeWindow(id3) {
       this.windows = this.windows.map(
         (w) => w.id === id3 ? { ...w, minimized: true } : w
       );
+      this.activateNextWindow(id3);
+    }
+    restoreWindow(id3) {
+      this.windows = this.windows.map(
+        (w) => w.id === id3 ? { ...w, minimized: false, maximized: false } : w
+      );
+      this.activateWindow(id3);
     }
     maximizeWindow(id3) {
       this.windows = this.windows.map(
-        (w) => w.id === id3 ? { ...w, maximized: !w.maximized } : w
+        (w) => w.id === id3 ? { ...w, maximized: true } : w
       );
     }
   };
@@ -10032,6 +10043,7 @@
     backdrop-filter: blur(120px) saturate(150%);
     background: ${micaBackgroundColor};
     background-blend-mode: luminosity;
+    z-index: 1000;
   }
   .group {
     height: 100%;
@@ -10053,9 +10065,6 @@
 `;
   var TaskBar = class extends FASTElement {
   };
-  __decorateClass([
-    inject(WindowsService)
-  ], TaskBar.prototype, "ws", 2);
   TaskBar = __decorateClass([
     customElement({
       name: "task-bar",
@@ -10070,7 +10079,7 @@
   :host {
     display: block;
     position: absolute;
-    border-radius: 5px;
+    border-radius: ${borderRadiusMedium};
     z-index: ${(x) => x.zIndex};
     width: ${(x) => x.width};
     height: ${(x) => x.height};
@@ -10106,6 +10115,16 @@
       this.xPos = "100px";
       this.yPos = "100px";
       this.zIndex = 0;
+    }
+    connectedCallback() {
+      super.connectedCallback();
+      this.addEventListener("mousedown", this.handleMouseDown);
+    }
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.removeEventListener("mousedown", this.handleMouseDown);
+    }
+    handleMouseDown(e) {
     }
   };
   __decorateClass([
@@ -10159,24 +10178,6 @@
 `;
   var template10 = html`
   <div id="desktop"></div>
-  <task-bar>
-    ${repeat(
-    () => installedApps_default,
-    html`
-        <taskbar-button
-          ?running="${(x, c) => c.parent.ws.windows.some((w) => w.appName === x.name)}"
-          ?active="${(x, c) => c.parent.ws.windows.find(
-      (win) => win.id === c.parent.ws.activeWindowId
-    )?.appName === x.name}"
-          @click="${(x, c) => c.parent.handleTaskbarButtonClick(x.name)}"
-        >
-          <img
-            src="${(x, c) => c.parent.ws.theme === "dark" && x.darkIcon ? x.darkIcon : x.lightIcon}"
-          />
-        </taskbar-button>
-      `
-  )}
-  </task-bar>
   ${repeat(
     (x) => x.ws.windows,
     html`
@@ -10194,6 +10195,24 @@
       </app-window>
     `
   )}
+  <task-bar>
+    ${repeat(
+    () => installedApps_default,
+    html`
+        <taskbar-button
+          ?running="${(x, c) => c.parent.ws.windows.some((w) => w.appName === x.name)}"
+          ?active="${(x, c) => c.parent.ws.windows.find(
+      (win) => win.id === c.parent.ws.activeWindowId
+    )?.appName === x.name}"
+          @click="${(x, c) => x.element ? c.parent.handleTaskbarButtonClick(x.name) : ""}"
+        >
+          <img
+            src="${(x, c) => c.parent.ws.theme === "dark" && x.darkIcon ? x.darkIcon : x.lightIcon}"
+          />
+        </taskbar-button>
+      `
+  )}
+  </task-bar>
 `;
   var WindowsShell = class extends FASTElement {
     connectedCallback() {
@@ -10202,12 +10221,24 @@
       this.ws.openWindow("Microsoft Edge");
     }
     handleTaskbarButtonClick(appName) {
-      const window2 = this.ws.windows.find((w) => w.appName === appName);
-      if (window2) {
-        this.ws.activateWindow(window2.id);
+      const windows = this.ws.windows.filter((w) => w.appName === appName);
+      if (windows.length === 0) {
+        this.ws.openWindow(appName);
         return;
       }
-      this.ws.openWindow(appName);
+      if (windows.length === 1) {
+        if (windows[0].minimized) {
+          this.ws.restoreWindow(windows[0].id);
+          return;
+        }
+        if (windows[0].id !== this.ws.activeWindowId) {
+          this.ws.activateWindow(windows[0].id);
+          return;
+        }
+        this.ws.minimizeWindow(windows[0].id);
+        return;
+      }
+      return;
     }
   };
   __decorateClass([

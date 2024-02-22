@@ -7,6 +7,7 @@ import {
   html,
 } from '@microsoft/fast-element';
 import { shadowBaseLayer } from '../designSystem.js';
+import { borderRadiusMedium } from '@phoenixui/themes';
 
 const template = html<AppWindow>`<slot></slot>`;
 
@@ -14,7 +15,7 @@ const styles = css`
   :host {
     display: block;
     position: absolute;
-    border-radius: 5px;
+    border-radius: ${borderRadiusMedium};
     z-index: ${(x) => x.zIndex};
     width: ${(x) => x.width};
     height: ${(x) => x.height};
@@ -54,4 +55,16 @@ export class AppWindow extends FASTElement {
   @attr xPos: string = '100px';
   @attr yPos: string = '100px';
   @attr zIndex: number = 0;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('mousedown', this.handleMouseDown);
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.removeEventListener('mousedown', this.handleMouseDown);
+  }
+
+  handleMouseDown(e: MouseEvent) {}
 }
