@@ -55,7 +55,15 @@ const template = html<WindowsShell>`
     ${repeat(
       () => installedApps,
       html`
-        <taskbar-button>
+        <taskbar-button
+          ?running="${(x, c) =>
+            c.parent.ws.windows.some((w) => w.appName === x.name)}"
+          ?active="${(x, c) =>
+            c.parent.ws.windows.find(
+              (win) => win.id === c.parent.ws.activeWindowId,
+            )?.appName === x.name}"
+          @click="${(x, c) => c.parent.handleTaskbarButtonClick(x.name)}"
+        >
           <img
             src="${(x, c) =>
               c.parent.ws.theme === 'dark' && x.darkIcon
@@ -99,5 +107,17 @@ export class WindowsShell extends FASTElement {
 
     // open default windows
     this.ws.openWindow('Microsoft Edge');
+  }
+
+  handleTaskbarButtonClick(appName: string) {
+    // if app is running, focus it
+    const window = this.ws.windows.find((w) => w.appName === appName);
+    if (window) {
+      this.ws.activateWindow(window.id);
+      return;
+    }
+
+    // otherwise, open it
+    this.ws.openWindow(appName);
   }
 }

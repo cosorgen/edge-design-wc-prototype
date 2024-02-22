@@ -8419,7 +8419,7 @@
   FASTDesignTokenNode.rootStyleSheetTarget = new RootStyleSheetTarget();
   FASTDesignTokenNode.cache = /* @__PURE__ */ new WeakMap();
 
-  // ../node_modules/@fluentui/web-components/node_modules/@microsoft/fast-foundation/dist/esm/utilities/style/display.js
+  // ../node_modules/@microsoft/fast-foundation/dist/esm/utilities/style/display.js
   var hidden = `:host([hidden]){display:none}`;
   function display(displayValue) {
     return `${hidden}:host{display:${displayValue}}`;
@@ -9470,24 +9470,46 @@
     }
     openWindow(appName) {
       const id3 = crypto.randomUUID();
+      const width = Math.min(window.innerWidth - 48, 1920);
+      let height = width * 0.75;
+      height = Math.min(height, window.innerHeight - 96);
       this.windows = [
         ...this.windows,
         {
           id: id3,
           appName,
-          height: 400,
+          height,
           maximized: false,
           minHeight: 200,
           minimized: false,
           minWidth: 300,
-          width: 500,
-          xPos: 20 * this.windows.length + 100,
-          yPos: 20 * this.windows.length + 100,
+          width,
+          xPos: window.innerWidth - width - 24 + 24 * this.windows.length,
+          yPos: (window.innerHeight - 48 - height) / 2 + 24 * this.windows.length,
           zIndex: this.windows.length + 1
         }
       ];
       this.activeWindowId = id3;
       return id3;
+    }
+    closeWindow(id3) {
+      this.windows = this.windows.filter((w) => w.id !== id3);
+      if (this.activeWindowId === id3) {
+        this.activeWindowId = this.windows[this.windows.length - 1]?.id || null;
+      }
+    }
+    activateWindow(id3) {
+      this.activeWindowId = id3;
+    }
+    minimizeWindow(id3) {
+      this.windows = this.windows.map(
+        (w) => w.id === id3 ? { ...w, minimized: true } : w
+      );
+    }
+    maximizeWindow(id3) {
+      this.windows = this.windows.map(
+        (w) => w.id === id3 ? { ...w, maximized: !w.maximized } : w
+      );
     }
   };
   __decorateClass([
@@ -10141,7 +10163,13 @@
     ${repeat(
     () => installedApps_default,
     html`
-        <taskbar-button>
+        <taskbar-button
+          ?running="${(x, c) => c.parent.ws.windows.some((w) => w.appName === x.name)}"
+          ?active="${(x, c) => c.parent.ws.windows.find(
+      (win) => win.id === c.parent.ws.activeWindowId
+    )?.appName === x.name}"
+          @click="${(x, c) => c.parent.handleTaskbarButtonClick(x.name)}"
+        >
           <img
             src="${(x, c) => c.parent.ws.theme === "dark" && x.darkIcon ? x.darkIcon : x.lightIcon}"
           />
@@ -10172,6 +10200,14 @@
       super.connectedCallback();
       setThemeFor2(this, this.ws.theme);
       this.ws.openWindow("Microsoft Edge");
+    }
+    handleTaskbarButtonClick(appName) {
+      const window2 = this.ws.windows.find((w) => w.appName === appName);
+      if (window2) {
+        this.ws.activateWindow(window2.id);
+        return;
+      }
+      this.ws.openWindow(appName);
     }
   };
   __decorateClass([
