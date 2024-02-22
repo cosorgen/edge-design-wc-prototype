@@ -1,4 +1,10 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
+import {
+  customElement,
+  FASTElement,
+  html,
+  css,
+  repeat,
+} from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
   fontFamilyBase,
@@ -9,7 +15,10 @@ import {
 } from '@phoenixui/themes';
 import { setThemeFor } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
+import installedApps from './installedApps.js';
 import './views/taskBar.js';
+import './controls/taskbarButton.js';
+import './views/appWindow.js';
 
 const styles = css`
   :host {
@@ -40,9 +49,42 @@ const styles = css`
   }
 `;
 
-const template = html`
+const template = html<WindowsShell>`
   <div id="desktop"></div>
-  <task-bar></task-bar>
+  <task-bar>
+    ${repeat(
+      () => installedApps,
+      html`
+        <taskbar-button>
+          <img
+            src="${(x, c) =>
+              c.parent.ws.theme === 'dark' && x.darkIcon
+                ? x.darkIcon
+                : x.lightIcon}"
+          />
+        </taskbar-button>
+      `,
+    )}
+  </task-bar>
+  ${repeat(
+    (x) => x.ws.windows,
+    html`
+      <app-window
+        width="${(x) => x.width}px"
+        height="${(x) => x.height}px"
+        xPos="${(x) => x.xPos}px"
+        yPos="${(x) => x.yPos}px"
+        zIndex="${(x) => x.zIndex}"
+        ?minimized="${(x) => x.minimized}"
+        ?maximized="${(x) => x.maximized}"
+        ?active="${(x, c) => x.id === c.parent.ws.activeWindowId}"
+      >
+        ${(x) =>
+          installedApps.filter((app) => app.name === x.appName)[0].element ||
+          ''}
+      </app-window>
+    `,
+  )}
 `;
 
 @customElement({ name: 'windows-shell', template, styles })
@@ -55,7 +97,7 @@ export class WindowsShell extends FASTElement {
     // set our theme for the OS
     setThemeFor(this, this.ws.theme);
 
+    // open default windows
     this.ws.openWindow('Microsoft Edge');
-    console.log(this.ws.windowsById);
   }
 }

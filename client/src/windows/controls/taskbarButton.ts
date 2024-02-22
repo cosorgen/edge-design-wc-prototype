@@ -26,6 +26,7 @@ const styles = css`
     cursor: pointer;
     border: none;
     background: none;
+    user-select: none;
   }
 
   [part='backplate'] {

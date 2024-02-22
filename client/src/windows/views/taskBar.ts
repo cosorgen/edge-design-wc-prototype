@@ -1,10 +1,4 @@
-import {
-  FASTElement,
-  css,
-  customElement,
-  html,
-  repeat,
-} from '@microsoft/fast-element';
+import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   spacingHorizontalL,
   colorNeutralStroke1,
@@ -28,19 +22,7 @@ const template = html<TaskBar>`
     <weather-widget></weather-widget>
   </div>
   <div class="group">
-    ${repeat(
-      (x) => x.ws.apps,
-      html`
-        <taskbar-button>
-          <img
-            src="${(x, c) =>
-              c.parent.ws.theme === 'dark' && x.darkIcon
-                ? x.darkIcon
-                : x.lightIcon}"
-          />
-        </taskbar-button>
-      `,
-    )}
+    <slot></slot>
   </div>
   <div class="group">
     <show-more-button></show-more-button>

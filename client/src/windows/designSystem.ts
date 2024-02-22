@@ -52,6 +52,7 @@ export const colorShellFillTaskbarItemIndicator = DesignToken.create<string>(
   'colorShellFillTaskbarItemIndicator',
 );
 export const colorFillAccent = DesignToken.create<string>('colorFillAccent');
+export const shadowBaseLayer = DesignToken.create<string>('shadowBaseLayer');
 
 export function setThemeFor(element: FASTElement, theme: OSTheme) {
   FUISetThemeFor(
@@ -70,6 +71,10 @@ export function setThemeFor(element: FASTElement, theme: OSTheme) {
     colorShellStrokeTaskbarItemQuinary.setValueFor(element, '#FFFFFF0F');
     colorShellFillTaskbarItemIndicator.setValueFor(element, '#FFFFFF63');
     colorFillAccent.setValueFor(element, '#005FB8');
+    shadowBaseLayer.setValueFor(
+      element,
+      '0px 32px 64px 0px rgba(0, 0, 0, 0.48), 0px 2px 21px 0px rgba(0, 0, 0, 0.40)',
+    );
   } else {
     micaBackgroundColor.setValueFor(element, 'rgba(243, 243, 243, 0.7)');
     micaBackdropFilter.setValueFor(element, 'blur(120px) saturate(150%)');
@@ -81,5 +86,9 @@ export function setThemeFor(element: FASTElement, theme: OSTheme) {
     colorShellStrokeTaskbarItemQuinary.setValueFor(element, '#00000005');
     colorShellFillTaskbarItemIndicator.setValueFor(element, '#00000070');
     colorFillAccent.setValueFor(element, '#005FB8');
+    shadowBaseLayer.setValueFor(
+      element,
+      '0px 32px 64px 0px rgba(0, 0, 0, 0.24), 0px 2px 21px 0px rgba(0, 0, 0, 0.20)',
+    );
   }
 }

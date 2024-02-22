@@ -1263,19 +1263,19 @@
 
   // ../node_modules/@microsoft/fast-element/dist/esm/styles/element-styles.js
   var DefaultStyleStrategy;
-  function reduceStyles(styles12) {
-    return styles12.map((x) => x instanceof ElementStyles ? reduceStyles(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
+  function reduceStyles(styles13) {
+    return styles13.map((x) => x instanceof ElementStyles ? reduceStyles(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
   }
   var ElementStyles = class _ElementStyles {
     /**
      * Creates an instance of ElementStyles.
      * @param styles - The styles that will be associated with elements.
      */
-    constructor(styles12) {
-      this.styles = styles12;
+    constructor(styles13) {
+      this.styles = styles13;
       this.targets = /* @__PURE__ */ new WeakSet();
       this._strategy = null;
-      this.behaviors = styles12.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
+      this.behaviors = styles13.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
     }
     /**
      * Gets the StyleStrategy associated with these element styles.
@@ -1328,8 +1328,8 @@
      * @param styles - The style options to normalize.
      * @returns A singular ElementStyles instance or undefined.
      */
-    static normalize(styles12) {
-      return styles12 === void 0 ? void 0 : Array.isArray(styles12) ? new _ElementStyles(styles12) : styles12 instanceof _ElementStyles ? styles12 : new _ElementStyles([styles12]);
+    static normalize(styles13) {
+      return styles13 === void 0 ? void 0 : Array.isArray(styles13) ? new _ElementStyles(styles13) : styles13 instanceof _ElementStyles ? styles13 : new _ElementStyles([styles13]);
     }
   };
   ElementStyles.supportsAdoptedStyleSheets = Array.isArray(document.adoptedStyleSheets) && "replace" in CSSStyleSheet.prototype;
@@ -1439,7 +1439,7 @@
   var varId = 0;
   var nextCSSVariable = () => `--v${marker}${++varId}`;
   function collectStyles(strings, values) {
-    const styles12 = [];
+    const styles13 = [];
     let cssString = "";
     const behaviors = [];
     const add = (behavior) => {
@@ -1457,33 +1457,33 @@
       }
       if (value instanceof ElementStyles || value instanceof CSSStyleSheet) {
         if (cssString.trim() !== "") {
-          styles12.push(cssString);
+          styles13.push(cssString);
           cssString = "";
         }
-        styles12.push(value);
+        styles13.push(value);
       } else {
         cssString += value;
       }
     }
     cssString += strings[strings.length - 1];
     if (cssString.trim() !== "") {
-      styles12.push(cssString);
+      styles13.push(cssString);
     }
     return {
-      styles: styles12,
+      styles: styles13,
       behaviors
     };
   }
   var css = (strings, ...values) => {
-    const { styles: styles12, behaviors } = collectStyles(strings, values);
-    const elementStyles = new ElementStyles(styles12);
+    const { styles: styles13, behaviors } = collectStyles(strings, values);
+    const elementStyles = new ElementStyles(styles13);
     return behaviors.length ? elementStyles.withBehaviors(...behaviors) : elementStyles;
   };
   var CSSPartial = class {
-    constructor(styles12, behaviors) {
+    constructor(styles13, behaviors) {
       this.behaviors = behaviors;
       this.css = "";
-      const stylesheets = styles12.reduce((accumulated, current) => {
+      const stylesheets = styles13.reduce((accumulated, current) => {
         if (isString(current)) {
           this.css += current;
         } else {
@@ -1511,8 +1511,8 @@
   };
   CSSDirective.define(CSSPartial);
   css.partial = (strings, ...values) => {
-    const { styles: styles12, behaviors } = collectStyles(strings, values);
-    return new CSSPartial(styles12, behaviors);
+    const { styles: styles13, behaviors } = collectStyles(strings, values);
+    return new CSSPartial(styles13, behaviors);
   };
 
   // ../node_modules/@microsoft/fast-element/dist/esm/templating/markup.js
@@ -2240,26 +2240,26 @@
      * @public
      */
     compile(html2, factories2, policy = DOM.policy) {
-      let template11;
+      let template12;
       if (isString(html2)) {
-        template11 = document.createElement(templateTag);
-        template11.innerHTML = policy.createHTML(html2);
-        const fec = template11.content.firstElementChild;
+        template12 = document.createElement(templateTag);
+        template12.innerHTML = policy.createHTML(html2);
+        const fec = template12.content.firstElementChild;
         if (fec !== null && fec.tagName === templateTag) {
-          template11 = fec;
+          template12 = fec;
         }
       } else {
-        template11 = html2;
+        template12 = html2;
       }
-      if (!template11.content.firstChild && !template11.content.lastChild) {
-        template11.content.appendChild(document.createComment(""));
+      if (!template12.content.firstChild && !template12.content.lastChild) {
+        template12.content.appendChild(document.createComment(""));
       }
-      const fragment = document.adoptNode(template11.content);
+      const fragment = document.adoptNode(template12.content);
       const context = new CompilationContext(fragment, factories2, policy);
       compileAttributes(
         context,
         "",
-        template11,
+        template12,
         /* host */
         "h",
         0,
@@ -2607,7 +2607,7 @@
       const views = this.views;
       const bindView = this.bindView;
       const items = this.items;
-      const template11 = this.template;
+      const template12 = this.template;
       const controller = this.controller;
       const recycle = this.directive.options.recycle;
       const leftoverViews = [];
@@ -2635,7 +2635,7 @@
             }
             availableViews--;
           } else {
-            view = template11.create();
+            view = template12.create();
           }
           views.splice(addIndex, 0, view);
           bindView(view, items, addIndex, controller);
@@ -2658,7 +2658,7 @@
     }
     refreshAllViews(templateChanged = false) {
       const items = this.items;
-      const template11 = this.template;
+      const template12 = this.template;
       const location = this.location;
       const bindView = this.bindView;
       const controller = this.controller;
@@ -2672,7 +2672,7 @@
       if (viewsLength === 0) {
         this.views = views = new Array(itemsLength);
         for (let i = 0; i < itemsLength; ++i) {
-          const view = template11.create();
+          const view = template12.create();
           bindView(view, items, i, controller);
           views[i] = view;
           view.insertBefore(location);
@@ -2684,7 +2684,7 @@
             const view = views[i];
             bindView(view, items, i, controller);
           } else {
-            const view = template11.create();
+            const view = template12.create();
             bindView(view, items, i, controller);
             views.push(view);
             view.insertBefore(location);
@@ -2732,9 +2732,9 @@
     }
   };
   HTMLDirective.define(RepeatDirective);
-  function repeat(items, template11, options = defaultRepeatOptions) {
+  function repeat(items, template12, options = defaultRepeatOptions) {
     const dataBinding = normalizeBinding(items);
-    const templateBinding = normalizeBinding(template11);
+    const templateBinding = normalizeBinding(template12);
     return new RepeatDirective(dataBinding, templateBinding, Object.assign(Object.assign({}, defaultRepeatOptions), options));
   }
 
@@ -3162,18 +3162,18 @@
      * Adds styles to this element. Providing an HTMLStyleElement will attach the element instance to the shadowRoot.
      * @param styles - The styles to add.
      */
-    addStyles(styles12) {
+    addStyles(styles13) {
       var _a;
-      if (!styles12) {
+      if (!styles13) {
         return;
       }
       const source = this.source;
-      if (styles12 instanceof HTMLElement) {
+      if (styles13 instanceof HTMLElement) {
         const target = (_a = getShadowRoot(source)) !== null && _a !== void 0 ? _a : this.source;
-        target.append(styles12);
-      } else if (!styles12.isAttachedTo(source)) {
-        const sourceBehaviors = styles12.behaviors;
-        styles12.addStylesTo(source);
+        target.append(styles13);
+      } else if (!styles13.isAttachedTo(source)) {
+        const sourceBehaviors = styles13.behaviors;
+        styles13.addStylesTo(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.addBehavior(sourceBehaviors[i]);
@@ -3185,18 +3185,18 @@
      * Removes styles from this element. Providing an HTMLStyleElement will detach the element instance from the shadowRoot.
      * @param styles - the styles to remove.
      */
-    removeStyles(styles12) {
+    removeStyles(styles13) {
       var _a;
-      if (!styles12) {
+      if (!styles13) {
         return;
       }
       const source = this.source;
-      if (styles12 instanceof HTMLElement) {
+      if (styles13 instanceof HTMLElement) {
         const target = (_a = getShadowRoot(source)) !== null && _a !== void 0 ? _a : source;
-        target.removeChild(styles12);
-      } else if (styles12.isAttachedTo(source)) {
-        const sourceBehaviors = styles12.behaviors;
-        styles12.removeStylesFrom(source);
+        target.removeChild(styles13);
+      } else if (styles13.isAttachedTo(source)) {
+        const sourceBehaviors = styles13.behaviors;
+        styles13.removeStylesFrom(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.removeBehavior(sourceBehaviors[i]);
@@ -3286,7 +3286,7 @@
       }
       return false;
     }
-    renderTemplate(template11) {
+    renderTemplate(template12) {
       var _a;
       const element = this.source;
       const host = (_a = getShadowRoot(element)) !== null && _a !== void 0 ? _a : element;
@@ -3299,8 +3299,8 @@
           host.removeChild(child);
         }
       }
-      if (template11) {
-        this.view = template11.render(element, host, element);
+      if (template12) {
+        this.view = template12.render(element, host, element);
         this.view.sourceLifetime = SourceLifetime.coupled;
       }
     }
@@ -3346,9 +3346,9 @@
     }
   }
   var AdoptedStyleSheetsStrategy = class _AdoptedStyleSheetsStrategy {
-    constructor(styles12) {
+    constructor(styles13) {
       const styleSheetCache = _AdoptedStyleSheetsStrategy.styleSheetCache;
-      this.sheets = styles12.map((x) => {
+      this.sheets = styles13.map((x) => {
         if (x instanceof CSSStyleSheet) {
           return x;
         }
@@ -3375,26 +3375,26 @@
     return target === document ? document.body : target;
   }
   var StyleElementStrategy = class {
-    constructor(styles12) {
-      this.styles = styles12;
+    constructor(styles13) {
+      this.styles = styles13;
       this.styleClass = nextStyleId();
     }
     addStylesTo(target) {
       target = usableStyleTarget(normalizeStyleTarget(target));
-      const styles12 = this.styles;
+      const styles13 = this.styles;
       const styleClass = this.styleClass;
-      for (let i = 0; i < styles12.length; i++) {
+      for (let i = 0; i < styles13.length; i++) {
         const element = document.createElement("style");
-        element.innerHTML = styles12[i];
+        element.innerHTML = styles13[i];
         element.className = styleClass;
         target.append(element);
       }
     }
     removeStylesFrom(target) {
       target = usableStyleTarget(normalizeStyleTarget(target));
-      const styles12 = target.querySelectorAll(`.${this.styleClass}`);
-      for (let i = 0, ii = styles12.length; i < ii; ++i) {
-        target.removeChild(styles12[i]);
+      const styles13 = target.querySelectorAll(`.${this.styleClass}`);
+      for (let i = 0, ii = styles13.length; i < ii; ++i) {
+        target.removeChild(styles13[i]);
       }
     }
   };
@@ -7500,6 +7500,7 @@
   var colorNeutralForeground1 = "var(--colorNeutralForeground1)";
   var colorNeutralForeground4 = "var(--colorNeutralForeground4)";
   var colorNeutralStroke1 = "var(--colorNeutralStroke1)";
+  var shadow28 = "var(--shadow28)";
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
   // ../node_modules/@microsoft/fast-foundation/node_modules/tslib/tslib.es6.mjs
@@ -8783,7 +8784,7 @@
     shadow16: () => shadow16,
     shadow16Brand: () => shadow16Brand,
     shadow2: () => shadow2,
-    shadow28: () => shadow28,
+    shadow28: () => shadow282,
     shadow28Brand: () => shadow28Brand,
     shadow2Brand: () => shadow2Brand,
     shadow4: () => shadow4,
@@ -9153,7 +9154,7 @@
   var shadow4 = "--shadow4";
   var shadow8 = "--shadow8";
   var shadow16 = "--shadow16";
-  var shadow28 = "--shadow28";
+  var shadow282 = "--shadow28";
   var shadow64 = "--shadow64";
   var shadow2Brand = "--shadow2Brand";
   var shadow4Brand = "--shadow4Brand";
@@ -9421,6 +9422,7 @@
     "colorShellFillTaskbarItemIndicator"
   );
   var colorFillAccent = DesignToken.create("colorFillAccent");
+  var shadowBaseLayer = DesignToken.create("shadowBaseLayer");
   function setThemeFor2(element, theme) {
     setThemeFor(
       element,
@@ -9437,6 +9439,10 @@
       colorShellStrokeTaskbarItemQuinary.setValueFor(element, "#FFFFFF0F");
       colorShellFillTaskbarItemIndicator.setValueFor(element, "#FFFFFF63");
       colorFillAccent.setValueFor(element, "#005FB8");
+      shadowBaseLayer.setValueFor(
+        element,
+        "0px 32px 64px 0px rgba(0, 0, 0, 0.48), 0px 2px 21px 0px rgba(0, 0, 0, 0.40)"
+      );
     } else {
       micaBackgroundColor.setValueFor(element, "rgba(243, 243, 243, 0.7)");
       micaBackdropFilter.setValueFor(element, "blur(120px) saturate(150%)");
@@ -9448,6 +9454,10 @@
       colorShellStrokeTaskbarItemQuinary.setValueFor(element, "#00000005");
       colorShellFillTaskbarItemIndicator.setValueFor(element, "#00000070");
       colorFillAccent.setValueFor(element, "#005FB8");
+      shadowBaseLayer.setValueFor(
+        element,
+        "0px 32px 64px 0px rgba(0, 0, 0, 0.24), 0px 2px 21px 0px rgba(0, 0, 0, 0.20)"
+      );
     }
   }
 
@@ -9455,54 +9465,15 @@
   var WindowsService = class {
     constructor() {
       this.theme = "light";
-      this.apps = [
-        {
-          name: "Start",
-          lightIcon: "img/windows/start-24.svg",
-          darkIcon: "img/windows/start-24-dark.svg"
-        },
-        {
-          name: "Search",
-          lightIcon: "img/windows/search-24.svg",
-          darkIcon: "img/windows/search-24-dark.svg"
-        },
-        {
-          name: "Task View",
-          lightIcon: "img/windows/task-view-24.svg",
-          darkIcon: "img/windows/task-view-24-dark.svg"
-        },
-        {
-          name: "Chat",
-          lightIcon: "img/windows/chat-24.svg",
-          darkIcon: "img/windows/chat-24-dark.svg"
-        },
-        {
-          name: "File Explorer",
-          lightIcon: "img/windows/file-explorer-24.svg"
-        },
-        {
-          name: "Microsoft Edge",
-          lightIcon: "img/windows/edge-24.svg"
-        },
-        {
-          name: "Microsoft Store",
-          lightIcon: "img/windows/store-24.svg",
-          darkIcon: "img/windows/store-24-dark.svg"
-        },
-        {
-          name: "Settings",
-          lightIcon: "img/windows/settings-24.svg"
-        }
-      ];
-      this.windowsById = [];
-      this.windowOrder = [];
+      this.windows = [];
       this.activeWindowId = null;
     }
     openWindow(appName) {
-      const windowId = crypto.randomUUID();
-      this.windowsById = [
-        ...this.windowsById,
+      const id3 = crypto.randomUUID();
+      this.windows = [
+        ...this.windows,
         {
+          id: id3,
           appName,
           height: 400,
           maximized: false,
@@ -9510,14 +9481,13 @@
           minimized: false,
           minWidth: 300,
           width: 500,
-          xPos: 100,
-          yPos: 100,
-          zIndex: this.windowsById.length + 1
+          xPos: 20 * this.windows.length + 100,
+          yPos: 20 * this.windows.length + 100,
+          zIndex: this.windows.length + 1
         }
       ];
-      this.windowOrder = [...this.windowOrder, windowId];
-      this.activeWindowId = windowId;
-      return windowId;
+      this.activeWindowId = id3;
+      return id3;
     }
   };
   __decorateClass([
@@ -9525,16 +9495,62 @@
   ], WindowsService.prototype, "theme", 2);
   __decorateClass([
     observable
-  ], WindowsService.prototype, "apps", 2);
-  __decorateClass([
-    observable
-  ], WindowsService.prototype, "windowsById", 2);
-  __decorateClass([
-    observable
-  ], WindowsService.prototype, "windowOrder", 2);
+  ], WindowsService.prototype, "windows", 2);
   __decorateClass([
     observable
   ], WindowsService.prototype, "activeWindowId", 2);
+
+  // src/edge/index.ts
+  var MicrosoftEdge = class extends FASTElement {
+  };
+  MicrosoftEdge = __decorateClass([
+    customElement({
+      name: "microsoft-edge",
+      template: html`<div>Edge</div>`
+    })
+  ], MicrosoftEdge);
+
+  // src/windows/installedApps.ts
+  var installedApps_default = [
+    {
+      name: "Start",
+      lightIcon: "img/windows/start-24.svg",
+      darkIcon: "img/windows/start-24-dark.svg"
+    },
+    {
+      name: "Search",
+      lightIcon: "img/windows/search-24.svg",
+      darkIcon: "img/windows/search-24-dark.svg"
+    },
+    {
+      name: "Task View",
+      lightIcon: "img/windows/task-view-24.svg",
+      darkIcon: "img/windows/task-view-24-dark.svg"
+    },
+    {
+      name: "Chat",
+      lightIcon: "img/windows/chat-24.svg",
+      darkIcon: "img/windows/chat-24-dark.svg"
+    },
+    {
+      name: "File Explorer",
+      lightIcon: "img/windows/file-explorer-24.svg"
+    },
+    {
+      name: "Microsoft Edge",
+      lightIcon: "img/windows/edge-24.svg",
+      element: html`<microsoft-edge></microsoft-edge>`
+    },
+    {
+      name: "Microsoft Store",
+      lightIcon: "img/windows/store-24.svg",
+      darkIcon: "img/windows/store-24-dark.svg"
+    },
+    {
+      name: "Settings",
+      lightIcon: "img/windows/settings-24.svg"
+    }
+  ];
 
   // ../node_modules/@fluentui/web-components/dist/esm/text/define.js
   definition.define(FluentDesignSystem.registry);
@@ -9555,6 +9571,7 @@
     cursor: pointer;
     border: none;
     background: none;
+    user-select: none;
   }
 
   [part='backplate'] {
@@ -9968,16 +9985,7 @@
     <weather-widget></weather-widget>
   </div>
   <div class="group">
-    ${repeat(
-    (x) => x.ws.apps,
-    html`
-        <taskbar-button>
-          <img
-            src="${(x, c) => c.parent.ws.theme === "dark" && x.darkIcon ? x.darkIcon : x.lightIcon}"
-          />
-        </taskbar-button>
-      `
-  )}
+    <slot></slot>
   </div>
   <div class="group">
     <show-more-button></show-more-button>
@@ -10034,8 +10042,75 @@
     })
   ], TaskBar);
 
-  // src/windows/index.ts
+  // src/windows/views/appWindow.ts
+  var template9 = html`<slot></slot>`;
   var styles10 = css`
+  :host {
+    display: block;
+    position: absolute;
+    border-radius: 5px;
+    z-index: ${(x) => x.zIndex};
+    width: ${(x) => x.width};
+    height: ${(x) => x.height};
+    top: ${(x) => x.yPos};
+    left: ${(x) => x.xPos};
+    box-shadow: ${shadow28};
+  }
+
+  :host([active]) {
+    box-shadow: ${shadowBaseLayer};
+  }
+
+  :host([minimized]) {
+    display: none;
+  }
+
+  :host([maximized]) {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 48px;
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+`;
+  var AppWindow = class extends FASTElement {
+    constructor() {
+      super(...arguments);
+      this.width = "800px";
+      this.height = "600px";
+      this.xPos = "100px";
+      this.yPos = "100px";
+      this.zIndex = 0;
+    }
+  };
+  __decorateClass([
+    attr
+  ], AppWindow.prototype, "width", 2);
+  __decorateClass([
+    attr
+  ], AppWindow.prototype, "height", 2);
+  __decorateClass([
+    attr
+  ], AppWindow.prototype, "xPos", 2);
+  __decorateClass([
+    attr
+  ], AppWindow.prototype, "yPos", 2);
+  __decorateClass([
+    attr
+  ], AppWindow.prototype, "zIndex", 2);
+  AppWindow = __decorateClass([
+    customElement({
+      name: "app-window",
+      template: template9,
+      styles: styles10
+    })
+  ], AppWindow);
+
+  // src/windows/index.ts
+  var styles11 = css`
   :host {
     display: block;
     width: 100vw;
@@ -10060,28 +10135,55 @@
     background-position: center;
   }
 `;
-  var template9 = html`
+  var template10 = html`
   <div id="desktop"></div>
-  <task-bar></task-bar>
+  <task-bar>
+    ${repeat(
+    () => installedApps_default,
+    html`
+        <taskbar-button>
+          <img
+            src="${(x, c) => c.parent.ws.theme === "dark" && x.darkIcon ? x.darkIcon : x.lightIcon}"
+          />
+        </taskbar-button>
+      `
+  )}
+  </task-bar>
+  ${repeat(
+    (x) => x.ws.windows,
+    html`
+      <app-window
+        width="${(x) => x.width}px"
+        height="${(x) => x.height}px"
+        xPos="${(x) => x.xPos}px"
+        yPos="${(x) => x.yPos}px"
+        zIndex="${(x) => x.zIndex}"
+        ?minimized="${(x) => x.minimized}"
+        ?maximized="${(x) => x.maximized}"
+        ?active="${(x, c) => x.id === c.parent.ws.activeWindowId}"
+      >
+        ${(x) => installedApps_default.filter((app) => app.name === x.appName)[0].element || ""}
+      </app-window>
+    `
+  )}
 `;
   var WindowsShell = class extends FASTElement {
     connectedCallback() {
       super.connectedCallback();
       setThemeFor2(this, this.ws.theme);
       this.ws.openWindow("Microsoft Edge");
-      console.log(this.ws.windowsById);
     }
   };
   __decorateClass([
     inject(WindowsService)
   ], WindowsShell.prototype, "ws", 2);
   WindowsShell = __decorateClass([
-    customElement({ name: "windows-shell", template: template9, styles: styles10 })
+    customElement({ name: "windows-shell", template: template10, styles: styles11 })
   ], WindowsShell);
 
   // src/index.ts
-  var template10 = html` ${(x) => x.ps.os === "windows" ? html`<windows-shell></windows-shell>` : ""}`;
-  var styles11 = css`
+  var template11 = html` ${(x) => x.ps.os === "windows" ? html`<windows-shell></windows-shell>` : ""}`;
+  var styles12 = css`
   :host {
     display: block;
     width: 100vw;
@@ -10097,8 +10199,8 @@
   AppRoot = __decorateClass([
     customElement({
       name: "app-root",
-      template: template10,
-      styles: styles11
+      template: template11,
+      styles: styles12
     })
   ], AppRoot);
 })();
