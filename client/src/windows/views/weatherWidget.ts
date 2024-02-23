@@ -22,15 +22,15 @@ import {
 } from '../designSystem.js';
 
 export type IconCode =
-  | '01'
-  | '02'
-  | '03'
-  | '04'
-  | '09'
-  | '10'
-  | '11'
-  | '13'
-  | '50';
+  | '01' // clear sky
+  | '02' // few clouds
+  | '03' // scattered clouds
+  | '04' // broken clouds
+  | '09' // shower rain
+  | '10' // rain
+  | '11' // thunderstorm
+  | '13' // snow
+  | '50'; // mist
 
 const weatherIcons = {
   '01': 'img/windows/weather-sunny-24.svg',
@@ -40,8 +40,8 @@ const weatherIcons = {
   '09': 'img/windows/weather-rain-24.svg',
   '10': 'img/windows/weather-rain-24.svg',
   '11': 'img/windows/weather-thunder-24.svg',
-  '13': 'img/windows/weather-snow-24.svg',
-  '50': 'img/windows/weather-mist-24.svg',
+  '13': 'img/windows/weather-cloudy-24.svg',
+  '50': 'img/windows/weather-cloudy-24.svg',
 };
 
 const template = html<WeatherWidget>`

@@ -87,10 +87,10 @@
   var FAST = globalThis.FAST;
   if (FAST.getById === void 0) {
     const storage = /* @__PURE__ */ Object.create(null);
-    Reflect.defineProperty(FAST, "getById", Object.assign({ value(id3, initialize) {
-      let found = storage[id3];
+    Reflect.defineProperty(FAST, "getById", Object.assign({ value(id5, initialize) {
+      let found = storage[id5];
       if (found === void 0) {
-        found = initialize ? storage[id3] = initialize() : null;
+        found = initialize ? storage[id5] = initialize() : null;
       }
       return found;
     } }, propConfig));
@@ -110,11 +110,11 @@
   function createTypeRegistry() {
     const typeToDefinition = /* @__PURE__ */ new Map();
     return Object.freeze({
-      register(definition) {
-        if (typeToDefinition.has(definition.type)) {
+      register(definition2) {
+        if (typeToDefinition.has(definition2.type)) {
           return false;
         }
-        typeToDefinition.set(definition.type, definition);
+        typeToDefinition.set(definition2.type, definition2);
         return true;
       },
       getByType(key) {
@@ -179,7 +179,7 @@
      */
     event: 6
   });
-  var createHTML = (html2) => html2;
+  var createHTML = (html3) => html3;
   var fastTrustedType = globalThis.trustedTypes ? globalThis.trustedTypes.createPolicy("fast-html", { createHTML }) : { createHTML };
   var defaultPolicy = Object.freeze({
     createHTML(value) {
@@ -588,10 +588,10 @@
         }
       }
       *records() {
-        let next2 = this.first;
-        while (next2 !== void 0) {
-          yield next2;
-          next2 = next2.next;
+        let next3 = this.first;
+        while (next3 !== void 0) {
+          yield next3;
+          next3 = next3.next;
         }
       }
     }
@@ -1259,19 +1259,19 @@
 
   // ../node_modules/@microsoft/fast-element/dist/esm/styles/element-styles.js
   var DefaultStyleStrategy;
-  function reduceStyles(styles13) {
-    return styles13.map((x) => x instanceof ElementStyles ? reduceStyles(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
+  function reduceStyles(styles15) {
+    return styles15.map((x) => x instanceof ElementStyles ? reduceStyles(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
   }
   var ElementStyles = class _ElementStyles {
     /**
      * Creates an instance of ElementStyles.
      * @param styles - The styles that will be associated with elements.
      */
-    constructor(styles13) {
-      this.styles = styles13;
+    constructor(styles15) {
+      this.styles = styles15;
       this.targets = /* @__PURE__ */ new WeakSet();
       this._strategy = null;
-      this.behaviors = styles13.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
+      this.behaviors = styles15.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
     }
     /**
      * Gets the StyleStrategy associated with these element styles.
@@ -1324,8 +1324,8 @@
      * @param styles - The style options to normalize.
      * @returns A singular ElementStyles instance or undefined.
      */
-    static normalize(styles13) {
-      return styles13 === void 0 ? void 0 : Array.isArray(styles13) ? new _ElementStyles(styles13) : styles13 instanceof _ElementStyles ? styles13 : new _ElementStyles([styles13]);
+    static normalize(styles15) {
+      return styles15 === void 0 ? void 0 : Array.isArray(styles15) ? new _ElementStyles(styles15) : styles15 instanceof _ElementStyles ? styles15 : new _ElementStyles([styles15]);
     }
   };
   ElementStyles.supportsAdoptedStyleSheets = Array.isArray(document.adoptedStyleSheets) && "replace" in CSSStyleSheet.prototype;
@@ -1385,9 +1385,9 @@
       if (!element.$cssBindings) {
         element.$cssBindings = /* @__PURE__ */ new Map();
         const setAttribute = element.setAttribute;
-        element.setAttribute = (attr2, value) => {
-          setAttribute.call(element, attr2, value);
-          if (attr2 === "style") {
+        element.setAttribute = (attr3, value) => {
+          setAttribute.call(element, attr3, value);
+          if (attr3 === "style") {
             element.$cssBindings.forEach((v, k) => handleChange(k, v.controller, v.observer));
           }
         };
@@ -1430,7 +1430,7 @@
   var varId = 0;
   var nextCSSVariable = () => `--v${marker}${++varId}`;
   function collectStyles(strings, values) {
-    const styles13 = [];
+    const styles15 = [];
     let cssString = "";
     const behaviors = [];
     const add = (behavior) => {
@@ -1448,33 +1448,33 @@
       }
       if (value instanceof ElementStyles || value instanceof CSSStyleSheet) {
         if (cssString.trim() !== "") {
-          styles13.push(cssString);
+          styles15.push(cssString);
           cssString = "";
         }
-        styles13.push(value);
+        styles15.push(value);
       } else {
         cssString += value;
       }
     }
     cssString += strings[strings.length - 1];
     if (cssString.trim() !== "") {
-      styles13.push(cssString);
+      styles15.push(cssString);
     }
     return {
-      styles: styles13,
+      styles: styles15,
       behaviors
     };
   }
   var css = (strings, ...values) => {
-    const { styles: styles13, behaviors } = collectStyles(strings, values);
-    const elementStyles = new ElementStyles(styles13);
+    const { styles: styles15, behaviors } = collectStyles(strings, values);
+    const elementStyles = new ElementStyles(styles15);
     return behaviors.length ? elementStyles.withBehaviors(...behaviors) : elementStyles;
   };
   var CSSPartial = class {
-    constructor(styles13, behaviors) {
+    constructor(styles15, behaviors) {
       this.behaviors = behaviors;
       this.css = "";
-      const stylesheets = styles13.reduce((accumulated, current) => {
+      const stylesheets = styles15.reduce((accumulated, current) => {
         if (isString(current)) {
           this.css += current;
         } else {
@@ -1502,8 +1502,8 @@
   };
   CSSDirective.define(CSSPartial);
   css.partial = (strings, ...values) => {
-    const { styles: styles13, behaviors } = collectStyles(strings, values);
-    return new CSSPartial(styles13, behaviors);
+    const { styles: styles15, behaviors } = collectStyles(strings, values);
+    return new CSSPartial(styles15, behaviors);
   };
 
   // ../node_modules/@microsoft/fast-element/dist/esm/templating/markup.js
@@ -1521,7 +1521,7 @@
      * @remarks
      * Used internally by binding directives.
      */
-    interpolation: (id3) => `${interpolationStart}${id3}${interpolationEnd}`,
+    interpolation: (id5) => `${interpolationStart}${id5}${interpolationEnd}`,
     /**
      * Creates a placeholder that manifests itself as an attribute on an
      * element.
@@ -1530,14 +1530,14 @@
      * @remarks
      * Used internally by attribute directives such as `ref`, `slotted`, and `children`.
      */
-    attribute: (id3) => `${nextId()}="${interpolationStart}${id3}${interpolationEnd}"`,
+    attribute: (id5) => `${nextId()}="${interpolationStart}${id5}${interpolationEnd}"`,
     /**
      * Creates a placeholder that manifests itself as a marker within the DOM structure.
      * @param index - The directive index to create the placeholder for.
      * @remarks
      * Used internally by structural directives such as `repeat`.
      */
-    comment: (id3) => `<!--${interpolationStart}${id3}${interpolationEnd}-->`
+    comment: (id5) => `<!--${interpolationStart}${id5}${interpolationEnd}-->`
   });
   var Parser = Object.freeze({
     /**
@@ -1826,11 +1826,11 @@
   function removeNodeSequence(firstNode, lastNode) {
     const parent = firstNode.parentNode;
     let current = firstNode;
-    let next2;
+    let next3;
     while (current !== lastNode) {
-      next2 = current.nextSibling;
+      next3 = current.nextSibling;
       parent.removeChild(current);
-      current = next2;
+      current = next3;
     }
     parent.removeChild(lastNode);
   }
@@ -1928,11 +1928,11 @@
           return;
         const parentNode = node.parentNode;
         let current = this.firstChild;
-        let next2;
+        let next3;
         while (current !== end) {
-          next2 = current.nextSibling;
+          next3 = current.nextSibling;
           parentNode.insertBefore(current, node);
-          current = next2;
+          current = next3;
         }
         parentNode.insertBefore(end, node);
       }
@@ -1945,11 +1945,11 @@
       const fragment = this.fragment;
       const end = this.lastChild;
       let current = this.firstChild;
-      let next2;
+      let next3;
       while (current !== end) {
-        next2 = current.nextSibling;
+        next3 = current.nextSibling;
         fragment.appendChild(current);
-        current = next2;
+        current = next3;
       }
       fragment.appendChild(end);
     }
@@ -2113,8 +2113,8 @@
       const targets = Object.create(this.proto);
       targets.r = fragment;
       targets.h = hostBindingTarget !== null && hostBindingTarget !== void 0 ? hostBindingTarget : warningHost;
-      for (const id3 of this.nodeIds) {
-        targets[id3];
+      for (const id5 of this.nodeIds) {
+        targets[id5];
       }
       return new HTMLView(fragment, this.factories, targets);
     }
@@ -2123,20 +2123,20 @@
     const attributes = node.attributes;
     const directives = context.directives;
     for (let i = 0, ii = attributes.length; i < ii; ++i) {
-      const attr2 = attributes[i];
-      const attrValue = attr2.value;
+      const attr3 = attributes[i];
+      const attrValue = attr3.value;
       const parseResult = Parser.parse(attrValue, directives);
       let result = null;
       if (parseResult === null) {
         if (includeBasicValues) {
           result = new HTMLBindingDirective(oneTime(() => attrValue, context.policy));
-          HTMLDirective.assignAspect(result, attr2.name);
+          HTMLDirective.assignAspect(result, attr3.name);
         }
       } else {
         result = Compiler.aggregate(parseResult, context.policy);
       }
       if (result !== null) {
-        node.removeAttributeNode(attr2);
+        node.removeAttributeNode(attr3);
         i--;
         ii--;
         context.addFactory(result, parentId, nodeId, nodeIndex, node.tagName);
@@ -2225,27 +2225,27 @@
      * it is recommended that you clone the original and pass the clone to this API.
      * @public
      */
-    compile(html2, factories2, policy = DOM.policy) {
-      let template12;
-      if (isString(html2)) {
-        template12 = document.createElement(templateTag);
-        template12.innerHTML = policy.createHTML(html2);
-        const fec = template12.content.firstElementChild;
+    compile(html3, factories2, policy = DOM.policy) {
+      let template14;
+      if (isString(html3)) {
+        template14 = document.createElement(templateTag);
+        template14.innerHTML = policy.createHTML(html3);
+        const fec = template14.content.firstElementChild;
         if (fec !== null && fec.tagName === templateTag) {
-          template12 = fec;
+          template14 = fec;
         }
       } else {
-        template12 = html2;
+        template14 = html3;
       }
-      if (!template12.content.firstChild && !template12.content.lastChild) {
-        template12.content.appendChild(document.createComment(""));
+      if (!template14.content.firstChild && !template14.content.lastChild) {
+        template14.content.appendChild(document.createComment(""));
       }
-      const fragment = document.adoptNode(template12.content);
+      const fragment = document.adoptNode(template14.content);
       const context = new CompilationContext(fragment, factories2, policy);
       compileAttributes(
         context,
         "",
-        template12,
+        template14,
         /* host */
         "h",
         0,
@@ -2333,8 +2333,8 @@
      * Creates an instance of InlineTemplateDirective.
      * @param template - The template to inline.
      */
-    constructor(html2, factories2 = noFactories) {
-      this.html = html2;
+    constructor(html3, factories2 = noFactories) {
+      this.html = html3;
       this.factories = factories2;
     }
     /**
@@ -2351,8 +2351,8 @@
   };
   InlineTemplateDirective.empty = new InlineTemplateDirective("");
   HTMLDirective.define(InlineTemplateDirective);
-  function createHTML2(value, prevString, add, definition = HTMLDirective.getForInstance(value)) {
-    if (definition.aspected) {
+  function createHTML2(value, prevString, add, definition2 = HTMLDirective.getForInstance(value)) {
+    if (definition2.aspected) {
       const match = lastAttributeNameRegex.exec(prevString);
       if (match !== null) {
         HTMLDirective.assignAspect(value, match[2]);
@@ -2367,10 +2367,10 @@
      * @param factories - The directives that will be connected to placeholders in the html.
      * @param policy - The security policy to use when compiling this template.
      */
-    constructor(html2, factories2 = {}, policy) {
+    constructor(html3, factories2 = {}, policy) {
       this.policy = policy;
       this.result = null;
-      this.html = html2;
+      this.html = html3;
       this.factories = factories2;
     }
     /**
@@ -2440,30 +2440,30 @@
      * come from user input.
      */
     static create(strings, values, policy) {
-      let html2 = "";
+      let html3 = "";
       const factories2 = /* @__PURE__ */ Object.create(null);
       const add = (factory) => {
         var _a;
-        const id3 = (_a = factory.id) !== null && _a !== void 0 ? _a : factory.id = nextId();
-        factories2[id3] = factory;
-        return id3;
+        const id5 = (_a = factory.id) !== null && _a !== void 0 ? _a : factory.id = nextId();
+        factories2[id5] = factory;
+        return id5;
       };
       for (let i = 0, ii = strings.length - 1; i < ii; ++i) {
         const currentString = strings[i];
         let currentValue = values[i];
-        let definition;
-        html2 += currentString;
+        let definition2;
+        html3 += currentString;
         if (isFunction(currentValue)) {
           currentValue = new HTMLBindingDirective(oneWay(currentValue));
         } else if (currentValue instanceof Binding) {
           currentValue = new HTMLBindingDirective(currentValue);
-        } else if (!(definition = HTMLDirective.getForInstance(currentValue))) {
+        } else if (!(definition2 = HTMLDirective.getForInstance(currentValue))) {
           const staticValue = currentValue;
           currentValue = new HTMLBindingDirective(oneTime(() => staticValue));
         }
-        html2 += createHTML2(currentValue, currentString, add, definition);
+        html3 += createHTML2(currentValue, currentString, add, definition2);
       }
-      return new _ViewTemplate(html2 + strings[strings.length - 1], factories2, policy);
+      return new _ViewTemplate(html3 + strings[strings.length - 1], factories2, policy);
     }
   };
   makeSerializationNoop(ViewTemplate);
@@ -2476,8 +2476,8 @@
       /* Message.directCallToHTMLTagNotAllowed */
     );
   };
-  html.partial = (html2) => {
-    return new InlineTemplateDirective(html2);
+  html.partial = (html3) => {
+    return new InlineTemplateDirective(html3);
   };
 
   // ../node_modules/@microsoft/fast-element/dist/esm/templating/when.js
@@ -2593,7 +2593,7 @@
       const views = this.views;
       const bindView = this.bindView;
       const items = this.items;
-      const template12 = this.template;
+      const template14 = this.template;
       const controller = this.controller;
       const recycle = this.directive.options.recycle;
       const leftoverViews = [];
@@ -2621,7 +2621,7 @@
             }
             availableViews--;
           } else {
-            view = template12.create();
+            view = template14.create();
           }
           views.splice(addIndex, 0, view);
           bindView(view, items, addIndex, controller);
@@ -2644,7 +2644,7 @@
     }
     refreshAllViews(templateChanged = false) {
       const items = this.items;
-      const template12 = this.template;
+      const template14 = this.template;
       const location = this.location;
       const bindView = this.bindView;
       const controller = this.controller;
@@ -2658,7 +2658,7 @@
       if (viewsLength === 0) {
         this.views = views = new Array(itemsLength);
         for (let i = 0; i < itemsLength; ++i) {
-          const view = template12.create();
+          const view = template14.create();
           bindView(view, items, i, controller);
           views[i] = view;
           view.insertBefore(location);
@@ -2670,7 +2670,7 @@
             const view = views[i];
             bindView(view, items, i, controller);
           } else {
-            const view = template12.create();
+            const view = template14.create();
             bindView(view, items, i, controller);
             views.push(view);
             view.insertBefore(location);
@@ -2718,9 +2718,9 @@
     }
   };
   HTMLDirective.define(RepeatDirective);
-  function repeat(items, template12, options = defaultRepeatOptions) {
+  function repeat(items, template14, options = defaultRepeatOptions) {
     const dataBinding = normalizeBinding(items);
-    const templateBinding = normalizeBinding(template12);
+    const templateBinding = normalizeBinding(template14);
     return new RepeatDirective(dataBinding, templateBinding, Object.assign(Object.assign({}, defaultRepeatOptions), options));
   }
 
@@ -2918,11 +2918,11 @@
      * @remarks
      * This operation is idempotent per registry.
      */
-    define(registry3 = this.registry) {
+    define(registry5 = this.registry) {
       const type = this.type;
-      if (!registry3.get(this.name)) {
+      if (!registry5.get(this.name)) {
         this.platformDefined = true;
-        registry3.define(this.name, type, this.elementOptions);
+        registry5.define(this.name, type, this.elementOptions);
       }
       return this;
     }
@@ -2972,7 +2972,7 @@
      * controller in how to handle rendering and other platform integrations.
      * @internal
      */
-    constructor(element, definition) {
+    constructor(element, definition2) {
       super(element);
       this.boundObservables = null;
       this.needsInitialization = true;
@@ -2985,8 +2985,8 @@
       this.$fastController = this;
       this.view = null;
       this.source = element;
-      this.definition = definition;
-      const shadowOptions = definition.shadowOptions;
+      this.definition = definition2;
+      const shadowOptions = definition2.shadowOptions;
       if (shadowOptions !== void 0) {
         let shadowRoot = element.shadowRoot;
         if (shadowRoot) {
@@ -3048,11 +3048,11 @@
     get template() {
       var _a;
       if (this._template === null) {
-        const definition = this.definition;
+        const definition2 = this.definition;
         if (this.source.resolveTemplate) {
           this._template = this.source.resolveTemplate();
-        } else if (definition.template) {
-          this._template = (_a = definition.template) !== null && _a !== void 0 ? _a : null;
+        } else if (definition2.template) {
+          this._template = (_a = definition2.template) !== null && _a !== void 0 ? _a : null;
         }
       }
       return this._template;
@@ -3073,11 +3073,11 @@
     get mainStyles() {
       var _a;
       if (this._mainStyles === null) {
-        const definition = this.definition;
+        const definition2 = this.definition;
         if (this.source.resolveStyles) {
           this._mainStyles = this.source.resolveStyles();
-        } else if (definition.styles) {
-          this._mainStyles = (_a = definition.styles) !== null && _a !== void 0 ? _a : null;
+        } else if (definition2.styles) {
+          this._mainStyles = (_a = definition2.styles) !== null && _a !== void 0 ? _a : null;
         }
       }
       return this._mainStyles;
@@ -3148,18 +3148,18 @@
      * Adds styles to this element. Providing an HTMLStyleElement will attach the element instance to the shadowRoot.
      * @param styles - The styles to add.
      */
-    addStyles(styles13) {
+    addStyles(styles15) {
       var _a;
-      if (!styles13) {
+      if (!styles15) {
         return;
       }
       const source = this.source;
-      if (styles13 instanceof HTMLElement) {
+      if (styles15 instanceof HTMLElement) {
         const target = (_a = getShadowRoot(source)) !== null && _a !== void 0 ? _a : this.source;
-        target.append(styles13);
-      } else if (!styles13.isAttachedTo(source)) {
-        const sourceBehaviors = styles13.behaviors;
-        styles13.addStylesTo(source);
+        target.append(styles15);
+      } else if (!styles15.isAttachedTo(source)) {
+        const sourceBehaviors = styles15.behaviors;
+        styles15.addStylesTo(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.addBehavior(sourceBehaviors[i]);
@@ -3171,18 +3171,18 @@
      * Removes styles from this element. Providing an HTMLStyleElement will detach the element instance from the shadowRoot.
      * @param styles - the styles to remove.
      */
-    removeStyles(styles13) {
+    removeStyles(styles15) {
       var _a;
-      if (!styles13) {
+      if (!styles15) {
         return;
       }
       const source = this.source;
-      if (styles13 instanceof HTMLElement) {
+      if (styles15 instanceof HTMLElement) {
         const target = (_a = getShadowRoot(source)) !== null && _a !== void 0 ? _a : source;
-        target.removeChild(styles13);
-      } else if (styles13.isAttachedTo(source)) {
-        const sourceBehaviors = styles13.behaviors;
-        styles13.removeStylesFrom(source);
+        target.removeChild(styles15);
+      } else if (styles15.isAttachedTo(source)) {
+        const sourceBehaviors = styles15.behaviors;
+        styles15.removeStylesFrom(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.removeBehavior(sourceBehaviors[i]);
@@ -3272,7 +3272,7 @@
       }
       return false;
     }
-    renderTemplate(template12) {
+    renderTemplate(template14) {
       var _a;
       const element = this.source;
       const host = (_a = getShadowRoot(element)) !== null && _a !== void 0 ? _a : element;
@@ -3285,8 +3285,8 @@
           host.removeChild(child);
         }
       }
-      if (template12) {
-        this.view = template12.render(element, host, element);
+      if (template14) {
+        this.view = template14.render(element, host, element);
         this.view.sourceLifetime = SourceLifetime.coupled;
       }
     }
@@ -3303,14 +3303,14 @@
       if (controller !== void 0) {
         return controller;
       }
-      const definition = FASTElementDefinition.getForInstance(element);
-      if (definition === void 0) {
+      const definition2 = FASTElementDefinition.getForInstance(element);
+      if (definition2 === void 0) {
         throw FAST.error(
           1401
           /* Message.missingElementDefinition */
         );
       }
-      return element.$fastController = new elementControllerStrategy(element, definition);
+      return element.$fastController = new elementControllerStrategy(element, definition2);
     }
     /**
      * Sets the strategy that ElementController.forCustomElement uses to construct
@@ -3332,9 +3332,9 @@
     }
   }
   var AdoptedStyleSheetsStrategy = class _AdoptedStyleSheetsStrategy {
-    constructor(styles13) {
+    constructor(styles15) {
       const styleSheetCache = _AdoptedStyleSheetsStrategy.styleSheetCache;
-      this.sheets = styles13.map((x) => {
+      this.sheets = styles15.map((x) => {
         if (x instanceof CSSStyleSheet) {
           return x;
         }
@@ -3361,26 +3361,26 @@
     return target === document ? document.body : target;
   }
   var StyleElementStrategy = class {
-    constructor(styles13) {
-      this.styles = styles13;
+    constructor(styles15) {
+      this.styles = styles15;
       this.styleClass = nextStyleId();
     }
     addStylesTo(target) {
       target = usableStyleTarget(normalizeStyleTarget(target));
-      const styles13 = this.styles;
+      const styles15 = this.styles;
       const styleClass = this.styleClass;
-      for (let i = 0; i < styles13.length; i++) {
+      for (let i = 0; i < styles15.length; i++) {
         const element = document.createElement("style");
-        element.innerHTML = styles13[i];
+        element.innerHTML = styles15[i];
         element.className = styleClass;
         target.append(element);
       }
     }
     removeStylesFrom(target) {
       target = usableStyleTarget(normalizeStyleTarget(target));
-      const styles13 = target.querySelectorAll(`.${this.styleClass}`);
-      for (let i = 0, ii = styles13.length; i < ii; ++i) {
-        target.removeChild(styles13[i]);
+      const styles15 = target.querySelectorAll(`.${this.styleClass}`);
+      for (let i = 0, ii = styles15.length; i < ii; ++i) {
+        target.removeChild(styles15[i]);
       }
     }
   };
@@ -4043,7 +4043,7 @@
                   /* Message.connectUpdateRequiresController */
                 );
               }
-              const handleChange2 = () => {
+              const handleChange3 = () => {
                 const newContainer = DI.findResponsibleContainer(this);
                 const newValue = newContainer.get(key);
                 const oldValue = this[field];
@@ -4052,7 +4052,7 @@
                   notifier.notify(propertyName);
                 }
               };
-              notifier.subscribe({ handleChange: handleChange2 }, "isConnected");
+              notifier.subscribe({ handleChange: handleChange3 }, "isConnected");
             }
           }
           return value;
@@ -4880,6 +4880,3941 @@
     observable
   ], PrototypeService.prototype, "os", 2);
 
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/interfaces.js
+  var kernelMode2;
+  var kernelAttr2 = "fast-kernel";
+  try {
+    if (document.currentScript) {
+      kernelMode2 = document.currentScript.getAttribute(kernelAttr2);
+    } else {
+      const scripts = document.getElementsByTagName("script");
+      const currentScript = scripts[scripts.length - 1];
+      kernelMode2 = currentScript.getAttribute(kernelAttr2);
+    }
+  } catch (e) {
+    kernelMode2 = "isolate";
+  }
+  var KernelServiceId2;
+  switch (kernelMode2) {
+    case "share":
+      KernelServiceId2 = Object.freeze({
+        updateQueue: 1,
+        observable: 2,
+        contextEvent: 3,
+        elementRegistry: 4
+      });
+      break;
+    case "share-v2":
+      KernelServiceId2 = Object.freeze({
+        updateQueue: 1.2,
+        observable: 2.2,
+        contextEvent: 3.2,
+        elementRegistry: 4.2
+      });
+      break;
+    default:
+      const postfix = `-${Math.random().toString(36).substring(2, 8)}`;
+      KernelServiceId2 = Object.freeze({
+        updateQueue: `1.2${postfix}`,
+        observable: `2.2${postfix}`,
+        contextEvent: `3.2${postfix}`,
+        elementRegistry: `4.2${postfix}`
+      });
+      break;
+  }
+  var isFunction2 = (object) => typeof object === "function";
+  var isString2 = (object) => typeof object === "string";
+  var noop2 = () => void 0;
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/polyfills.js
+  (function ensureGlobalThis2() {
+    if (typeof globalThis !== "undefined") {
+      return;
+    }
+    if (typeof global !== "undefined") {
+      global.globalThis = global;
+    } else if (typeof self !== "undefined") {
+      self.globalThis = self;
+    } else if (typeof window !== "undefined") {
+      window.globalThis = window;
+    } else {
+      const result = new Function("return this")();
+      result.globalThis = result;
+    }
+  })();
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/platform.js
+  var propConfig2 = {
+    configurable: false,
+    enumerable: false,
+    writable: false
+  };
+  if (globalThis.FAST === void 0) {
+    Reflect.defineProperty(globalThis, "FAST", Object.assign({ value: /* @__PURE__ */ Object.create(null) }, propConfig2));
+  }
+  var FAST2 = globalThis.FAST;
+  if (FAST2.getById === void 0) {
+    const storage = /* @__PURE__ */ Object.create(null);
+    Reflect.defineProperty(FAST2, "getById", Object.assign({ value(id5, initialize) {
+      let found = storage[id5];
+      if (found === void 0) {
+        found = initialize ? storage[id5] = initialize() : null;
+      }
+      return found;
+    } }, propConfig2));
+  }
+  if (FAST2.error === void 0) {
+    Object.assign(FAST2, {
+      warn() {
+      },
+      error(code) {
+        return new Error(`Error ${code}`);
+      },
+      addMessages() {
+      }
+    });
+  }
+  var emptyArray2 = Object.freeze([]);
+  function createTypeRegistry2() {
+    const typeToDefinition = /* @__PURE__ */ new Map();
+    return Object.freeze({
+      register(definition2) {
+        if (typeToDefinition.has(definition2.type)) {
+          return false;
+        }
+        typeToDefinition.set(definition2.type, definition2);
+        return true;
+      },
+      getByType(key) {
+        return typeToDefinition.get(key);
+      },
+      getForInstance(object) {
+        if (object === null || object === void 0) {
+          return void 0;
+        }
+        return typeToDefinition.get(object.constructor);
+      }
+    });
+  }
+  function createMetadataLocator2() {
+    const metadataLookup = /* @__PURE__ */ new WeakMap();
+    return function(target) {
+      let metadata = metadataLookup.get(target);
+      if (metadata === void 0) {
+        let currentTarget = Reflect.getPrototypeOf(target);
+        while (metadata === void 0 && currentTarget !== null) {
+          metadata = metadataLookup.get(currentTarget);
+          currentTarget = Reflect.getPrototypeOf(currentTarget);
+        }
+        metadata = metadata === void 0 ? [] : metadata.slice(0);
+        metadataLookup.set(target, metadata);
+      }
+      return metadata;
+    };
+  }
+  function makeSerializationNoop2(type) {
+    type.prototype.toJSON = noop2;
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/dom.js
+  var DOMAspect2 = Object.freeze({
+    /**
+     * Not aspected.
+     */
+    none: 0,
+    /**
+     * An attribute.
+     */
+    attribute: 1,
+    /**
+     * A boolean attribute.
+     */
+    booleanAttribute: 2,
+    /**
+     * A property.
+     */
+    property: 3,
+    /**
+     * Content
+     */
+    content: 4,
+    /**
+     * A token list.
+     */
+    tokenList: 5,
+    /**
+     * An event.
+     */
+    event: 6
+  });
+  var createHTML3 = (html3) => html3;
+  var fastTrustedType2 = globalThis.trustedTypes ? globalThis.trustedTypes.createPolicy("fast-html", { createHTML: createHTML3 }) : { createHTML: createHTML3 };
+  var defaultPolicy2 = Object.freeze({
+    createHTML(value) {
+      return fastTrustedType2.createHTML(value);
+    },
+    protect(tagName, aspect, aspectName, sink) {
+      return sink;
+    }
+  });
+  var fastPolicy2 = defaultPolicy2;
+  var DOM2 = Object.freeze({
+    /**
+     * Gets the dom policy used by the templating system.
+     */
+    get policy() {
+      return defaultPolicy2;
+    },
+    /**
+     * Sets the dom policy used by the templating system.
+     * @param policy - The policy to set.
+     * @remarks
+     * This API can only be called once, for security reasons. It should be
+     * called by the application developer at the start of their program.
+     */
+    setPolicy(value) {
+      if (defaultPolicy2 !== fastPolicy2) {
+        throw FAST2.error(
+          1201
+          /* Message.onlySetDOMPolicyOnce */
+        );
+      }
+      defaultPolicy2 = value;
+    },
+    /**
+     * Sets an attribute value on an element.
+     * @param element - The element to set the attribute value on.
+     * @param attributeName - The attribute name to set.
+     * @param value - The value of the attribute to set.
+     * @remarks
+     * If the value is `null` or `undefined`, the attribute is removed, otherwise
+     * it is set to the provided value using the standard `setAttribute` API.
+     */
+    setAttribute(element, attributeName, value) {
+      value === null || value === void 0 ? element.removeAttribute(attributeName) : element.setAttribute(attributeName, value);
+    },
+    /**
+     * Sets a boolean attribute value.
+     * @param element - The element to set the boolean attribute value on.
+     * @param attributeName - The attribute name to set.
+     * @param value - The value of the attribute to set.
+     * @remarks
+     * If the value is true, the attribute is added; otherwise it is removed.
+     */
+    setBooleanAttribute(element, attributeName, value) {
+      value ? element.setAttribute(attributeName, "") : element.removeAttribute(attributeName);
+    }
+  });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/observation/update-queue.js
+  var Updates2 = FAST2.getById(KernelServiceId2.updateQueue, () => {
+    const tasks = [];
+    const pendingErrors = [];
+    const rAF = globalThis.requestAnimationFrame;
+    let updateAsync = true;
+    function throwFirstError() {
+      if (pendingErrors.length) {
+        throw pendingErrors.shift();
+      }
+    }
+    function tryRunTask(task) {
+      try {
+        task.call();
+      } catch (error) {
+        if (updateAsync) {
+          pendingErrors.push(error);
+          setTimeout(throwFirstError, 0);
+        } else {
+          tasks.length = 0;
+          throw error;
+        }
+      }
+    }
+    function process() {
+      const capacity = 1024;
+      let index = 0;
+      while (index < tasks.length) {
+        tryRunTask(tasks[index]);
+        index++;
+        if (index > capacity) {
+          for (let scan = 0, newLength = tasks.length - index; scan < newLength; scan++) {
+            tasks[scan] = tasks[scan + index];
+          }
+          tasks.length -= index;
+          index = 0;
+        }
+      }
+      tasks.length = 0;
+    }
+    function enqueue(callable) {
+      tasks.push(callable);
+      if (tasks.length < 2) {
+        updateAsync ? rAF(process) : process();
+      }
+    }
+    return Object.freeze({
+      enqueue,
+      next: () => new Promise(enqueue),
+      process,
+      setMode: (isAsync) => updateAsync = isAsync
+    });
+  });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/observation/notifier.js
+  var SubscriberSet2 = class {
+    /**
+     * Creates an instance of SubscriberSet for the specified subject.
+     * @param subject - The subject that subscribers will receive notifications from.
+     * @param initialSubscriber - An initial subscriber to changes.
+     */
+    constructor(subject, initialSubscriber) {
+      this.sub1 = void 0;
+      this.sub2 = void 0;
+      this.spillover = void 0;
+      this.subject = subject;
+      this.sub1 = initialSubscriber;
+    }
+    /**
+     * Checks whether the provided subscriber has been added to this set.
+     * @param subscriber - The subscriber to test for inclusion in this set.
+     */
+    has(subscriber) {
+      return this.spillover === void 0 ? this.sub1 === subscriber || this.sub2 === subscriber : this.spillover.indexOf(subscriber) !== -1;
+    }
+    /**
+     * Subscribes to notification of changes in an object's state.
+     * @param subscriber - The object that is subscribing for change notification.
+     */
+    subscribe(subscriber) {
+      const spillover = this.spillover;
+      if (spillover === void 0) {
+        if (this.has(subscriber)) {
+          return;
+        }
+        if (this.sub1 === void 0) {
+          this.sub1 = subscriber;
+          return;
+        }
+        if (this.sub2 === void 0) {
+          this.sub2 = subscriber;
+          return;
+        }
+        this.spillover = [this.sub1, this.sub2, subscriber];
+        this.sub1 = void 0;
+        this.sub2 = void 0;
+      } else {
+        const index = spillover.indexOf(subscriber);
+        if (index === -1) {
+          spillover.push(subscriber);
+        }
+      }
+    }
+    /**
+     * Unsubscribes from notification of changes in an object's state.
+     * @param subscriber - The object that is unsubscribing from change notification.
+     */
+    unsubscribe(subscriber) {
+      const spillover = this.spillover;
+      if (spillover === void 0) {
+        if (this.sub1 === subscriber) {
+          this.sub1 = void 0;
+        } else if (this.sub2 === subscriber) {
+          this.sub2 = void 0;
+        }
+      } else {
+        const index = spillover.indexOf(subscriber);
+        if (index !== -1) {
+          spillover.splice(index, 1);
+        }
+      }
+    }
+    /**
+     * Notifies all subscribers.
+     * @param args - Data passed along to subscribers during notification.
+     */
+    notify(args) {
+      const spillover = this.spillover;
+      const subject = this.subject;
+      if (spillover === void 0) {
+        const sub1 = this.sub1;
+        const sub2 = this.sub2;
+        if (sub1 !== void 0) {
+          sub1.handleChange(subject, args);
+        }
+        if (sub2 !== void 0) {
+          sub2.handleChange(subject, args);
+        }
+      } else {
+        for (let i = 0, ii = spillover.length; i < ii; ++i) {
+          spillover[i].handleChange(subject, args);
+        }
+      }
+    }
+  };
+  var PropertyChangeNotifier2 = class {
+    /**
+     * Creates an instance of PropertyChangeNotifier for the specified subject.
+     * @param subject - The object that subscribers will receive notifications for.
+     */
+    constructor(subject) {
+      this.subscribers = {};
+      this.subjectSubscribers = null;
+      this.subject = subject;
+    }
+    /**
+     * Notifies all subscribers, based on the specified property.
+     * @param propertyName - The property name, passed along to subscribers during notification.
+     */
+    notify(propertyName) {
+      var _a, _b;
+      (_a = this.subscribers[propertyName]) === null || _a === void 0 ? void 0 : _a.notify(propertyName);
+      (_b = this.subjectSubscribers) === null || _b === void 0 ? void 0 : _b.notify(propertyName);
+    }
+    /**
+     * Subscribes to notification of changes in an object's state.
+     * @param subscriber - The object that is subscribing for change notification.
+     * @param propertyToWatch - The name of the property that the subscriber is interested in watching for changes.
+     */
+    subscribe(subscriber, propertyToWatch) {
+      var _a, _b;
+      let subscribers;
+      if (propertyToWatch) {
+        subscribers = (_a = this.subscribers[propertyToWatch]) !== null && _a !== void 0 ? _a : this.subscribers[propertyToWatch] = new SubscriberSet2(this.subject);
+      } else {
+        subscribers = (_b = this.subjectSubscribers) !== null && _b !== void 0 ? _b : this.subjectSubscribers = new SubscriberSet2(this.subject);
+      }
+      subscribers.subscribe(subscriber);
+    }
+    /**
+     * Unsubscribes from notification of changes in an object's state.
+     * @param subscriber - The object that is unsubscribing from change notification.
+     * @param propertyToUnwatch - The name of the property that the subscriber is no longer interested in watching.
+     */
+    unsubscribe(subscriber, propertyToUnwatch) {
+      var _a, _b;
+      if (propertyToUnwatch) {
+        (_a = this.subscribers[propertyToUnwatch]) === null || _a === void 0 ? void 0 : _a.unsubscribe(subscriber);
+      } else {
+        (_b = this.subjectSubscribers) === null || _b === void 0 ? void 0 : _b.unsubscribe(subscriber);
+      }
+    }
+  };
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/observation/observable.js
+  var SourceLifetime2 = Object.freeze({
+    /**
+     * The source to controller lifetime relationship is unknown.
+     */
+    unknown: void 0,
+    /**
+     * The source and controller lifetimes are coupled to one another.
+     * They can/will be GC'd together.
+     */
+    coupled: 1
+  });
+  var Observable2 = FAST2.getById(KernelServiceId2.observable, () => {
+    const queueUpdate = Updates2.enqueue;
+    const volatileRegex = /(:|&&|\|\||if|\?\.)/;
+    const notifierLookup = /* @__PURE__ */ new WeakMap();
+    let watcher = void 0;
+    let createArrayObserver = (array) => {
+      throw FAST2.error(
+        1101
+        /* Message.needsArrayObservation */
+      );
+    };
+    function getNotifier(source) {
+      var _a;
+      let found = (_a = source.$fastController) !== null && _a !== void 0 ? _a : notifierLookup.get(source);
+      if (found === void 0) {
+        Array.isArray(source) ? found = createArrayObserver(source) : notifierLookup.set(source, found = new PropertyChangeNotifier2(source));
+      }
+      return found;
+    }
+    const getAccessors = createMetadataLocator2();
+    class DefaultObservableAccessor {
+      constructor(name) {
+        this.name = name;
+        this.field = `_${name}`;
+        this.callback = `${name}Changed`;
+      }
+      getValue(source) {
+        if (watcher !== void 0) {
+          watcher.watch(source, this.name);
+        }
+        return source[this.field];
+      }
+      setValue(source, newValue) {
+        const field = this.field;
+        const oldValue = source[field];
+        if (oldValue !== newValue) {
+          source[field] = newValue;
+          const callback = source[this.callback];
+          if (isFunction2(callback)) {
+            callback.call(source, oldValue, newValue);
+          }
+          getNotifier(source).notify(this.name);
+        }
+      }
+    }
+    class ExpressionNotifierImplementation extends SubscriberSet2 {
+      constructor(expression, initialSubscriber, isVolatileBinding = false) {
+        super(expression, initialSubscriber);
+        this.expression = expression;
+        this.isVolatileBinding = isVolatileBinding;
+        this.needsRefresh = true;
+        this.needsQueue = true;
+        this.isAsync = true;
+        this.first = this;
+        this.last = null;
+        this.propertySource = void 0;
+        this.propertyName = void 0;
+        this.notifier = void 0;
+        this.next = void 0;
+      }
+      setMode(isAsync) {
+        this.isAsync = this.needsQueue = isAsync;
+      }
+      bind(controller) {
+        this.controller = controller;
+        const value = this.observe(controller.source, controller.context);
+        if (!controller.isBound && this.requiresUnbind(controller)) {
+          controller.onUnbind(this);
+        }
+        return value;
+      }
+      requiresUnbind(controller) {
+        return controller.sourceLifetime !== SourceLifetime2.coupled || this.first !== this.last || this.first.propertySource !== controller.source;
+      }
+      unbind(controller) {
+        this.dispose();
+      }
+      observe(source, context) {
+        if (this.needsRefresh && this.last !== null) {
+          this.dispose();
+        }
+        const previousWatcher = watcher;
+        watcher = this.needsRefresh ? this : void 0;
+        this.needsRefresh = this.isVolatileBinding;
+        let result;
+        try {
+          result = this.expression(source, context);
+        } finally {
+          watcher = previousWatcher;
+        }
+        return result;
+      }
+      // backwards compat with v1 kernel
+      disconnect() {
+        this.dispose();
+      }
+      dispose() {
+        if (this.last !== null) {
+          let current = this.first;
+          while (current !== void 0) {
+            current.notifier.unsubscribe(this, current.propertyName);
+            current = current.next;
+          }
+          this.last = null;
+          this.needsRefresh = this.needsQueue = this.isAsync;
+        }
+      }
+      watch(propertySource, propertyName) {
+        const prev = this.last;
+        const notifier = getNotifier(propertySource);
+        const current = prev === null ? this.first : {};
+        current.propertySource = propertySource;
+        current.propertyName = propertyName;
+        current.notifier = notifier;
+        notifier.subscribe(this, propertyName);
+        if (prev !== null) {
+          if (!this.needsRefresh) {
+            let prevValue;
+            watcher = void 0;
+            prevValue = prev.propertySource[prev.propertyName];
+            watcher = this;
+            if (propertySource === prevValue) {
+              this.needsRefresh = true;
+            }
+          }
+          prev.next = current;
+        }
+        this.last = current;
+      }
+      handleChange() {
+        if (this.needsQueue) {
+          this.needsQueue = false;
+          queueUpdate(this);
+        } else if (!this.isAsync) {
+          this.call();
+        }
+      }
+      call() {
+        if (this.last !== null) {
+          this.needsQueue = this.isAsync;
+          this.notify(this);
+        }
+      }
+      *records() {
+        let next3 = this.first;
+        while (next3 !== void 0) {
+          yield next3;
+          next3 = next3.next;
+        }
+      }
+    }
+    makeSerializationNoop2(ExpressionNotifierImplementation);
+    return Object.freeze({
+      /**
+       * @internal
+       * @param factory - The factory used to create array observers.
+       */
+      setArrayObserverFactory(factory) {
+        createArrayObserver = factory;
+      },
+      /**
+       * Gets a notifier for an object or Array.
+       * @param source - The object or Array to get the notifier for.
+       */
+      getNotifier,
+      /**
+       * Records a property change for a source object.
+       * @param source - The object to record the change against.
+       * @param propertyName - The property to track as changed.
+       */
+      track(source, propertyName) {
+        watcher && watcher.watch(source, propertyName);
+      },
+      /**
+       * Notifies watchers that the currently executing property getter or function is volatile
+       * with respect to its observable dependencies.
+       */
+      trackVolatile() {
+        watcher && (watcher.needsRefresh = true);
+      },
+      /**
+       * Notifies subscribers of a source object of changes.
+       * @param source - the object to notify of changes.
+       * @param args - The change args to pass to subscribers.
+       */
+      notify(source, args) {
+        getNotifier(source).notify(args);
+      },
+      /**
+       * Defines an observable property on an object or prototype.
+       * @param target - The target object to define the observable on.
+       * @param nameOrAccessor - The name of the property to define as observable;
+       * or a custom accessor that specifies the property name and accessor implementation.
+       */
+      defineProperty(target, nameOrAccessor) {
+        if (isString2(nameOrAccessor)) {
+          nameOrAccessor = new DefaultObservableAccessor(nameOrAccessor);
+        }
+        getAccessors(target).push(nameOrAccessor);
+        Reflect.defineProperty(target, nameOrAccessor.name, {
+          enumerable: true,
+          get() {
+            return nameOrAccessor.getValue(this);
+          },
+          set(newValue) {
+            nameOrAccessor.setValue(this, newValue);
+          }
+        });
+      },
+      /**
+       * Finds all the observable accessors defined on the target,
+       * including its prototype chain.
+       * @param target - The target object to search for accessor on.
+       */
+      getAccessors,
+      /**
+       * Creates a {@link ExpressionNotifier} that can watch the
+       * provided {@link Expression} for changes.
+       * @param expression - The binding to observe.
+       * @param initialSubscriber - An initial subscriber to changes in the binding value.
+       * @param isVolatileBinding - Indicates whether the binding's dependency list must be re-evaluated on every value evaluation.
+       */
+      binding(expression, initialSubscriber, isVolatileBinding = this.isVolatileBinding(expression)) {
+        return new ExpressionNotifierImplementation(expression, initialSubscriber, isVolatileBinding);
+      },
+      /**
+       * Determines whether a binding expression is volatile and needs to have its dependency list re-evaluated
+       * on every evaluation of the value.
+       * @param expression - The binding to inspect.
+       */
+      isVolatileBinding(expression) {
+        return volatileRegex.test(expression.toString());
+      }
+    });
+  });
+  function observable2(target, nameOrAccessor) {
+    Observable2.defineProperty(target, nameOrAccessor);
+  }
+  var contextEvent2 = FAST2.getById(KernelServiceId2.contextEvent, () => {
+    let current = null;
+    return {
+      get() {
+        return current;
+      },
+      set(event) {
+        current = event;
+      }
+    };
+  });
+  var ExecutionContext2 = Object.freeze({
+    /**
+     * A default execution context.
+     */
+    default: {
+      index: 0,
+      length: 0,
+      get event() {
+        return ExecutionContext2.getEvent();
+      },
+      eventDetail() {
+        return this.event.detail;
+      },
+      eventTarget() {
+        return this.event.target;
+      }
+    },
+    /**
+     * Gets the current event.
+     * @returns An event object.
+     */
+    getEvent() {
+      return contextEvent2.get();
+    },
+    /**
+     * Sets the current event.
+     * @param event - An event object.
+     */
+    setEvent(event) {
+      contextEvent2.set(event);
+    }
+  });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/binding/binding.js
+  var Binding2 = class {
+    /**
+     * Creates a binding.
+     * @param evaluate - Evaluates the binding.
+     * @param policy - The security policy to associate with this binding.
+     * @param isVolatile - Indicates whether the binding is volatile.
+     */
+    constructor(evaluate, policy, isVolatile = false) {
+      this.evaluate = evaluate;
+      this.policy = policy;
+      this.isVolatile = isVolatile;
+    }
+  };
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/binding/one-way.js
+  var OneWayBinding2 = class extends Binding2 {
+    createObserver(subscriber) {
+      return Observable2.binding(this.evaluate, subscriber, this.isVolatile);
+    }
+  };
+  function oneWay2(expression, policy, isVolatile = Observable2.isVolatileBinding(expression)) {
+    return new OneWayBinding2(expression, policy, isVolatile);
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/binding/one-time.js
+  var OneTimeBinding2 = class extends Binding2 {
+    createObserver() {
+      return this;
+    }
+    bind(controller) {
+      return this.evaluate(controller.source, controller.context);
+    }
+  };
+  makeSerializationNoop2(OneTimeBinding2);
+  function oneTime2(expression, policy) {
+    return new OneTimeBinding2(expression, policy);
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/styles/element-styles.js
+  var DefaultStyleStrategy2;
+  function reduceStyles2(styles15) {
+    return styles15.map((x) => x instanceof ElementStyles2 ? reduceStyles2(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
+  }
+  var ElementStyles2 = class _ElementStyles {
+    /**
+     * Creates an instance of ElementStyles.
+     * @param styles - The styles that will be associated with elements.
+     */
+    constructor(styles15) {
+      this.styles = styles15;
+      this.targets = /* @__PURE__ */ new WeakSet();
+      this._strategy = null;
+      this.behaviors = styles15.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
+    }
+    /**
+     * Gets the StyleStrategy associated with these element styles.
+     */
+    get strategy() {
+      if (this._strategy === null) {
+        this.withStrategy(DefaultStyleStrategy2);
+      }
+      return this._strategy;
+    }
+    /** @internal */
+    addStylesTo(target) {
+      this.strategy.addStylesTo(target);
+      this.targets.add(target);
+    }
+    /** @internal */
+    removeStylesFrom(target) {
+      this.strategy.removeStylesFrom(target);
+      this.targets.delete(target);
+    }
+    /** @internal */
+    isAttachedTo(target) {
+      return this.targets.has(target);
+    }
+    /**
+     * Associates behaviors with this set of styles.
+     * @param behaviors - The behaviors to associate.
+     */
+    withBehaviors(...behaviors) {
+      this.behaviors = this.behaviors === null ? behaviors : this.behaviors.concat(behaviors);
+      return this;
+    }
+    /**
+     * Sets the strategy that handles adding/removing these styles for an element.
+     * @param strategy - The strategy to use.
+     */
+    withStrategy(Strategy) {
+      this._strategy = new Strategy(reduceStyles2(this.styles));
+      return this;
+    }
+    /**
+     * Sets the default strategy type to use when creating style strategies.
+     * @param Strategy - The strategy type to construct.
+     */
+    static setDefaultStrategy(Strategy) {
+      DefaultStyleStrategy2 = Strategy;
+    }
+    /**
+     * Normalizes a set of composable style options.
+     * @param styles - The style options to normalize.
+     * @returns A singular ElementStyles instance or undefined.
+     */
+    static normalize(styles15) {
+      return styles15 === void 0 ? void 0 : Array.isArray(styles15) ? new _ElementStyles(styles15) : styles15 instanceof _ElementStyles ? styles15 : new _ElementStyles([styles15]);
+    }
+  };
+  ElementStyles2.supportsAdoptedStyleSheets = Array.isArray(document.adoptedStyleSheets) && "replace" in CSSStyleSheet.prototype;
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/styles/css-directive.js
+  var registry3 = createTypeRegistry2();
+  var CSSDirective2 = Object.freeze({
+    /**
+     * Gets the directive definition associated with the instance.
+     * @param instance - The directive instance to retrieve the definition for.
+     */
+    getForInstance: registry3.getForInstance,
+    /**
+     * Gets the directive definition associated with the specified type.
+     * @param type - The directive type to retrieve the definition for.
+     */
+    getByType: registry3.getByType,
+    /**
+     * Defines a CSSDirective.
+     * @param type - The type to define as a directive.
+     */
+    define(type) {
+      registry3.register({ type });
+      return type;
+    }
+  });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/styles/css-binding-directive.js
+  function handleChange2(directive, controller, observer) {
+    controller.source.style.setProperty(directive.targetAspect, observer.bind(controller));
+  }
+  var CSSBindingDirective2 = class {
+    /**
+     * Creates an instance of CSSBindingDirective.
+     * @param dataBinding - The binding to use in CSS.
+     * @param targetAspect - The CSS property to target.
+     */
+    constructor(dataBinding, targetAspect) {
+      this.dataBinding = dataBinding;
+      this.targetAspect = targetAspect;
+    }
+    /**
+     * Creates a CSS fragment to interpolate into the CSS document.
+     * @returns - the string to interpolate into CSS
+     */
+    createCSS(add) {
+      add(this);
+      return `var(${this.targetAspect})`;
+    }
+    /**
+     * Executed when this behavior is attached to a controller.
+     * @param controller - Controls the behavior lifecycle.
+     */
+    addedCallback(controller) {
+      var _a;
+      const element = controller.source;
+      if (!element.$cssBindings) {
+        element.$cssBindings = /* @__PURE__ */ new Map();
+        const setAttribute = element.setAttribute;
+        element.setAttribute = (attr3, value) => {
+          setAttribute.call(element, attr3, value);
+          if (attr3 === "style") {
+            element.$cssBindings.forEach((v, k) => handleChange2(k, v.controller, v.observer));
+          }
+        };
+      }
+      const observer = (_a = controller[this.targetAspect]) !== null && _a !== void 0 ? _a : controller[this.targetAspect] = this.dataBinding.createObserver(this, this);
+      observer.controller = controller;
+      controller.source.$cssBindings.set(this, { controller, observer });
+    }
+    /**
+     * Executed when this behavior's host is connected.
+     * @param controller - Controls the behavior lifecycle.
+     */
+    connectedCallback(controller) {
+      handleChange2(this, controller, controller[this.targetAspect]);
+    }
+    /**
+     * Executed when this behavior is detached from a controller.
+     * @param controller - Controls the behavior lifecycle.
+     */
+    removedCallback(controller) {
+      if (controller.source.$cssBindings) {
+        controller.source.$cssBindings.delete(this);
+      }
+    }
+    /**
+     * Called when a subject this instance has subscribed to changes.
+     * @param subject - The subject of the change.
+     * @param args - The event args detailing the change that occurred.
+     *
+     * @internal
+     */
+    handleChange(_, observer) {
+      handleChange2(this, observer.controller, observer);
+    }
+  };
+  CSSDirective2.define(CSSBindingDirective2);
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/styles/css.js
+  var marker3 = `${Math.random().toString(36).substring(2, 8)}`;
+  var varId2 = 0;
+  var nextCSSVariable2 = () => `--v${marker3}${++varId2}`;
+  function collectStyles2(strings, values) {
+    const styles15 = [];
+    let cssString = "";
+    const behaviors = [];
+    const add = (behavior) => {
+      behaviors.push(behavior);
+    };
+    for (let i = 0, ii = strings.length - 1; i < ii; ++i) {
+      cssString += strings[i];
+      let value = values[i];
+      if (isFunction2(value)) {
+        value = new CSSBindingDirective2(oneWay2(value), nextCSSVariable2()).createCSS(add);
+      } else if (value instanceof Binding2) {
+        value = new CSSBindingDirective2(value, nextCSSVariable2()).createCSS(add);
+      } else if (CSSDirective2.getForInstance(value) !== void 0) {
+        value = value.createCSS(add);
+      }
+      if (value instanceof ElementStyles2 || value instanceof CSSStyleSheet) {
+        if (cssString.trim() !== "") {
+          styles15.push(cssString);
+          cssString = "";
+        }
+        styles15.push(value);
+      } else {
+        cssString += value;
+      }
+    }
+    cssString += strings[strings.length - 1];
+    if (cssString.trim() !== "") {
+      styles15.push(cssString);
+    }
+    return {
+      styles: styles15,
+      behaviors
+    };
+  }
+  var css2 = (strings, ...values) => {
+    const { styles: styles15, behaviors } = collectStyles2(strings, values);
+    const elementStyles = new ElementStyles2(styles15);
+    return behaviors.length ? elementStyles.withBehaviors(...behaviors) : elementStyles;
+  };
+  var CSSPartial2 = class {
+    constructor(styles15, behaviors) {
+      this.behaviors = behaviors;
+      this.css = "";
+      const stylesheets = styles15.reduce((accumulated, current) => {
+        if (isString2(current)) {
+          this.css += current;
+        } else {
+          accumulated.push(current);
+        }
+        return accumulated;
+      }, []);
+      if (stylesheets.length) {
+        this.styles = new ElementStyles2(stylesheets);
+      }
+    }
+    createCSS(add) {
+      this.behaviors.forEach(add);
+      if (this.styles) {
+        add(this);
+      }
+      return this.css;
+    }
+    addedCallback(controller) {
+      controller.addStyles(this.styles);
+    }
+    removedCallback(controller) {
+      controller.removeStyles(this.styles);
+    }
+  };
+  CSSDirective2.define(CSSPartial2);
+  css2.partial = (strings, ...values) => {
+    const { styles: styles15, behaviors } = collectStyles2(strings, values);
+    return new CSSPartial2(styles15, behaviors);
+  };
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/markup.js
+  var marker4 = `fast-${Math.random().toString(36).substring(2, 8)}`;
+  var interpolationStart2 = `${marker4}{`;
+  var interpolationEnd2 = `}${marker4}`;
+  var interpolationEndLength2 = interpolationEnd2.length;
+  var id3 = 0;
+  var nextId2 = () => `${marker4}-${++id3}`;
+  var Markup2 = Object.freeze({
+    /**
+     * Creates a placeholder string suitable for marking out a location *within*
+     * an attribute value or HTML content.
+     * @param index - The directive index to create the placeholder for.
+     * @remarks
+     * Used internally by binding directives.
+     */
+    interpolation: (id5) => `${interpolationStart2}${id5}${interpolationEnd2}`,
+    /**
+     * Creates a placeholder that manifests itself as an attribute on an
+     * element.
+     * @param attributeName - The name of the custom attribute.
+     * @param index - The directive index to create the placeholder for.
+     * @remarks
+     * Used internally by attribute directives such as `ref`, `slotted`, and `children`.
+     */
+    attribute: (id5) => `${nextId2()}="${interpolationStart2}${id5}${interpolationEnd2}"`,
+    /**
+     * Creates a placeholder that manifests itself as a marker within the DOM structure.
+     * @param index - The directive index to create the placeholder for.
+     * @remarks
+     * Used internally by structural directives such as `repeat`.
+     */
+    comment: (id5) => `<!--${interpolationStart2}${id5}${interpolationEnd2}-->`
+  });
+  var Parser2 = Object.freeze({
+    /**
+     * Parses text content or HTML attribute content, separating out the static strings
+     * from the directives.
+     * @param value - The content or attribute string to parse.
+     * @param factories - A list of directives to search for in the string.
+     * @returns A heterogeneous array of static strings interspersed with
+     * directives or null if no directives are found in the string.
+     */
+    parse(value, factories2) {
+      const parts = value.split(interpolationStart2);
+      if (parts.length === 1) {
+        return null;
+      }
+      const result = [];
+      for (let i = 0, ii = parts.length; i < ii; ++i) {
+        const current = parts[i];
+        const index = current.indexOf(interpolationEnd2);
+        let literal;
+        if (index === -1) {
+          literal = current;
+        } else {
+          const factoryId = current.substring(0, index);
+          result.push(factories2[factoryId]);
+          literal = current.substring(index + interpolationEndLength2);
+        }
+        if (literal !== "") {
+          result.push(literal);
+        }
+      }
+      return result;
+    }
+  });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/html-directive.js
+  var registry4 = createTypeRegistry2();
+  var HTMLDirective2 = Object.freeze({
+    /**
+     * Gets the directive definition associated with the instance.
+     * @param instance - The directive instance to retrieve the definition for.
+     */
+    getForInstance: registry4.getForInstance,
+    /**
+     * Gets the directive definition associated with the specified type.
+     * @param type - The directive type to retrieve the definition for.
+     */
+    getByType: registry4.getByType,
+    /**
+     * Defines an HTMLDirective based on the options.
+     * @param type - The type to define as a directive.
+     * @param options - Options that specify the directive's application.
+     */
+    define(type, options) {
+      options = options || {};
+      options.type = type;
+      registry4.register(options);
+      return type;
+    },
+    /**
+     *
+     * @param directive - The directive to assign the aspect to.
+     * @param value - The value to base the aspect determination on.
+     * @remarks
+     * If a falsy value is provided, then the content aspect will be assigned.
+     */
+    assignAspect(directive, value) {
+      if (!value) {
+        directive.aspectType = DOMAspect2.content;
+        return;
+      }
+      directive.sourceAspect = value;
+      switch (value[0]) {
+        case ":":
+          directive.targetAspect = value.substring(1);
+          directive.aspectType = directive.targetAspect === "classList" ? DOMAspect2.tokenList : DOMAspect2.property;
+          break;
+        case "?":
+          directive.targetAspect = value.substring(1);
+          directive.aspectType = DOMAspect2.booleanAttribute;
+          break;
+        case "@":
+          directive.targetAspect = value.substring(1);
+          directive.aspectType = DOMAspect2.event;
+          break;
+        default:
+          directive.targetAspect = value;
+          directive.aspectType = DOMAspect2.attribute;
+          break;
+      }
+    }
+  });
+  var StatelessAttachedAttributeDirective2 = class {
+    /**
+     * Creates an instance of RefDirective.
+     * @param options - The options to use in configuring the directive.
+     */
+    constructor(options) {
+      this.options = options;
+    }
+    /**
+     * Creates a placeholder string based on the directive's index within the template.
+     * @param index - The index of the directive within the template.
+     * @remarks
+     * Creates a custom attribute placeholder.
+     */
+    createHTML(add) {
+      return Markup2.attribute(add(this));
+    }
+    /**
+     * Creates a behavior.
+     * @param targets - The targets available for behaviors to be attached to.
+     */
+    createBehavior() {
+      return this;
+    }
+  };
+  makeSerializationNoop2(StatelessAttachedAttributeDirective2);
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/html-binding-directive.js
+  function updateContent2(target, aspect, value, controller) {
+    if (value === null || value === void 0) {
+      value = "";
+    }
+    if (value.create) {
+      target.textContent = "";
+      let view = target.$fastView;
+      if (view === void 0) {
+        view = value.create();
+      } else {
+        if (target.$fastTemplate !== value) {
+          if (view.isComposed) {
+            view.remove();
+            view.unbind();
+          }
+          view = value.create();
+        }
+      }
+      if (!view.isComposed) {
+        view.isComposed = true;
+        view.bind(controller.source, controller.context);
+        view.insertBefore(target);
+        target.$fastView = view;
+        target.$fastTemplate = value;
+      } else if (view.needsBindOnly) {
+        view.needsBindOnly = false;
+        view.bind(controller.source, controller.context);
+      }
+    } else {
+      const view = target.$fastView;
+      if (view !== void 0 && view.isComposed) {
+        view.isComposed = false;
+        view.remove();
+        if (view.needsBindOnly) {
+          view.needsBindOnly = false;
+        } else {
+          view.unbind();
+        }
+      }
+      target.textContent = value;
+    }
+  }
+  function updateTokenList2(target, aspect, value) {
+    var _a;
+    const lookup = `${this.id}-t`;
+    const state = (_a = target[lookup]) !== null && _a !== void 0 ? _a : target[lookup] = { v: 0, cv: /* @__PURE__ */ Object.create(null) };
+    const classVersions = state.cv;
+    let version = state.v;
+    const tokenList = target[aspect];
+    if (value !== null && value !== void 0 && value.length) {
+      const names = value.split(/\s+/);
+      for (let i = 0, ii = names.length; i < ii; ++i) {
+        const currentName = names[i];
+        if (currentName === "") {
+          continue;
+        }
+        classVersions[currentName] = version;
+        tokenList.add(currentName);
+      }
+    }
+    state.v = version + 1;
+    if (version === 0) {
+      return;
+    }
+    version -= 1;
+    for (const name in classVersions) {
+      if (classVersions[name] === version) {
+        tokenList.remove(name);
+      }
+    }
+  }
+  var sinkLookup2 = {
+    [DOMAspect2.attribute]: DOM2.setAttribute,
+    [DOMAspect2.booleanAttribute]: DOM2.setBooleanAttribute,
+    [DOMAspect2.property]: (t, a, v) => t[a] = v,
+    [DOMAspect2.content]: updateContent2,
+    [DOMAspect2.tokenList]: updateTokenList2,
+    [DOMAspect2.event]: () => void 0
+  };
+  var HTMLBindingDirective2 = class {
+    /**
+     * Creates an instance of HTMLBindingDirective.
+     * @param dataBinding - The binding configuration to apply.
+     */
+    constructor(dataBinding) {
+      this.dataBinding = dataBinding;
+      this.updateTarget = null;
+      this.aspectType = DOMAspect2.content;
+    }
+    /**
+     * Creates HTML to be used within a template.
+     * @param add - Can be used to add  behavior factories to a template.
+     */
+    createHTML(add) {
+      return Markup2.interpolation(add(this));
+    }
+    /**
+     * Creates a behavior.
+     */
+    createBehavior() {
+      var _a;
+      if (this.updateTarget === null) {
+        const sink = sinkLookup2[this.aspectType];
+        const policy = (_a = this.dataBinding.policy) !== null && _a !== void 0 ? _a : this.policy;
+        if (!sink) {
+          throw FAST2.error(
+            1205
+            /* Message.unsupportedBindingBehavior */
+          );
+        }
+        this.data = `${this.id}-d`;
+        this.updateTarget = policy.protect(this.targetTagName, this.aspectType, this.targetAspect, sink);
+      }
+      return this;
+    }
+    /** @internal */
+    bind(controller) {
+      var _a;
+      const target = controller.targets[this.targetNodeId];
+      switch (this.aspectType) {
+        case DOMAspect2.event:
+          target[this.data] = controller;
+          target.addEventListener(this.targetAspect, this, this.dataBinding.options);
+          break;
+        case DOMAspect2.content:
+          controller.onUnbind(this);
+        default:
+          const observer = (_a = target[this.data]) !== null && _a !== void 0 ? _a : target[this.data] = this.dataBinding.createObserver(this, this);
+          observer.target = target;
+          observer.controller = controller;
+          this.updateTarget(target, this.targetAspect, observer.bind(controller), controller);
+          break;
+      }
+    }
+    /** @internal */
+    unbind(controller) {
+      const target = controller.targets[this.targetNodeId];
+      const view = target.$fastView;
+      if (view !== void 0 && view.isComposed) {
+        view.unbind();
+        view.needsBindOnly = true;
+      }
+    }
+    /** @internal */
+    handleEvent(event) {
+      const controller = event.currentTarget[this.data];
+      if (controller.isBound) {
+        ExecutionContext2.setEvent(event);
+        const result = this.dataBinding.evaluate(controller.source, controller.context);
+        ExecutionContext2.setEvent(null);
+        if (result !== true) {
+          event.preventDefault();
+        }
+      }
+    }
+    /** @internal */
+    handleChange(binding, observer) {
+      const target = observer.target;
+      const controller = observer.controller;
+      this.updateTarget(target, this.targetAspect, observer.bind(controller), controller);
+    }
+  };
+  HTMLDirective2.define(HTMLBindingDirective2, { aspected: true });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/view.js
+  function removeNodeSequence2(firstNode, lastNode) {
+    const parent = firstNode.parentNode;
+    let current = firstNode;
+    let next3;
+    while (current !== lastNode) {
+      next3 = current.nextSibling;
+      parent.removeChild(current);
+      current = next3;
+    }
+    parent.removeChild(lastNode);
+  }
+  var HTMLView2 = class {
+    /**
+     * Constructs an instance of HTMLView.
+     * @param fragment - The html fragment that contains the nodes for this view.
+     * @param behaviors - The behaviors to be applied to this view.
+     */
+    constructor(fragment, factories2, targets) {
+      this.fragment = fragment;
+      this.factories = factories2;
+      this.targets = targets;
+      this.behaviors = null;
+      this.unbindables = [];
+      this.source = null;
+      this.isBound = false;
+      this.sourceLifetime = SourceLifetime2.unknown;
+      this.context = this;
+      this.index = 0;
+      this.length = 0;
+      this.firstChild = fragment.firstChild;
+      this.lastChild = fragment.lastChild;
+    }
+    /**
+     * The current event within an event handler.
+     */
+    get event() {
+      return ExecutionContext2.getEvent();
+    }
+    /**
+     * Indicates whether the current item within a repeat context
+     * has an even index.
+     */
+    get isEven() {
+      return this.index % 2 === 0;
+    }
+    /**
+     * Indicates whether the current item within a repeat context
+     * has an odd index.
+     */
+    get isOdd() {
+      return this.index % 2 !== 0;
+    }
+    /**
+     * Indicates whether the current item within a repeat context
+     * is the first item in the collection.
+     */
+    get isFirst() {
+      return this.index === 0;
+    }
+    /**
+     * Indicates whether the current item within a repeat context
+     * is somewhere in the middle of the collection.
+     */
+    get isInMiddle() {
+      return !this.isFirst && !this.isLast;
+    }
+    /**
+     * Indicates whether the current item within a repeat context
+     * is the last item in the collection.
+     */
+    get isLast() {
+      return this.index === this.length - 1;
+    }
+    /**
+     * Returns the typed event detail of a custom event.
+     */
+    eventDetail() {
+      return this.event.detail;
+    }
+    /**
+     * Returns the typed event target of the event.
+     */
+    eventTarget() {
+      return this.event.target;
+    }
+    /**
+     * Appends the view's DOM nodes to the referenced node.
+     * @param node - The parent node to append the view's DOM nodes to.
+     */
+    appendTo(node) {
+      node.appendChild(this.fragment);
+    }
+    /**
+     * Inserts the view's DOM nodes before the referenced node.
+     * @param node - The node to insert the view's DOM before.
+     */
+    insertBefore(node) {
+      if (this.fragment.hasChildNodes()) {
+        node.parentNode.insertBefore(this.fragment, node);
+      } else {
+        const end = this.lastChild;
+        if (node.previousSibling === end)
+          return;
+        const parentNode = node.parentNode;
+        let current = this.firstChild;
+        let next3;
+        while (current !== end) {
+          next3 = current.nextSibling;
+          parentNode.insertBefore(current, node);
+          current = next3;
+        }
+        parentNode.insertBefore(end, node);
+      }
+    }
+    /**
+     * Removes the view's DOM nodes.
+     * The nodes are not disposed and the view can later be re-inserted.
+     */
+    remove() {
+      const fragment = this.fragment;
+      const end = this.lastChild;
+      let current = this.firstChild;
+      let next3;
+      while (current !== end) {
+        next3 = current.nextSibling;
+        fragment.appendChild(current);
+        current = next3;
+      }
+      fragment.appendChild(end);
+    }
+    /**
+     * Removes the view and unbinds its behaviors, disposing of DOM nodes afterward.
+     * Once a view has been disposed, it cannot be inserted or bound again.
+     */
+    dispose() {
+      removeNodeSequence2(this.firstChild, this.lastChild);
+      this.unbind();
+    }
+    onUnbind(behavior) {
+      this.unbindables.push(behavior);
+    }
+    /**
+     * Binds a view's behaviors to its binding source.
+     * @param source - The binding source for the view's binding behaviors.
+     * @param context - The execution context to run the behaviors within.
+     */
+    bind(source, context = this) {
+      if (this.source === source) {
+        return;
+      }
+      let behaviors = this.behaviors;
+      if (behaviors === null) {
+        this.source = source;
+        this.context = context;
+        this.behaviors = behaviors = new Array(this.factories.length);
+        const factories2 = this.factories;
+        for (let i = 0, ii = factories2.length; i < ii; ++i) {
+          const behavior = factories2[i].createBehavior();
+          behavior.bind(this);
+          behaviors[i] = behavior;
+        }
+      } else {
+        if (this.source !== null) {
+          this.evaluateUnbindables();
+        }
+        this.isBound = false;
+        this.source = source;
+        this.context = context;
+        for (let i = 0, ii = behaviors.length; i < ii; ++i) {
+          behaviors[i].bind(this);
+        }
+      }
+      this.isBound = true;
+    }
+    /**
+     * Unbinds a view's behaviors from its binding source.
+     */
+    unbind() {
+      if (!this.isBound || this.source === null) {
+        return;
+      }
+      this.evaluateUnbindables();
+      this.source = null;
+      this.context = this;
+      this.isBound = false;
+    }
+    evaluateUnbindables() {
+      const unbindables = this.unbindables;
+      for (let i = 0, ii = unbindables.length; i < ii; ++i) {
+        unbindables[i].unbind(this);
+      }
+      unbindables.length = 0;
+    }
+    /**
+     * Efficiently disposes of a contiguous range of synthetic view instances.
+     * @param views - A contiguous range of views to be disposed.
+     */
+    static disposeContiguousBatch(views) {
+      if (views.length === 0) {
+        return;
+      }
+      removeNodeSequence2(views[0].firstChild, views[views.length - 1].lastChild);
+      for (let i = 0, ii = views.length; i < ii; ++i) {
+        views[i].unbind();
+      }
+    }
+  };
+  makeSerializationNoop2(HTMLView2);
+  Observable2.defineProperty(HTMLView2.prototype, "index");
+  Observable2.defineProperty(HTMLView2.prototype, "length");
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/compiler.js
+  var targetIdFrom2 = (parentId, nodeIndex) => `${parentId}.${nodeIndex}`;
+  var descriptorCache2 = {};
+  var next2 = {
+    index: 0,
+    node: null
+  };
+  function tryWarn2(name) {
+    if (!name.startsWith("fast-")) {
+      FAST2.warn(1204, { name });
+    }
+  }
+  var warningHost2 = new Proxy(document.createElement("div"), {
+    get(target, property) {
+      tryWarn2(property);
+      const value = Reflect.get(target, property);
+      return isFunction2(value) ? value.bind(target) : value;
+    },
+    set(target, property, value) {
+      tryWarn2(property);
+      return Reflect.set(target, property, value);
+    }
+  });
+  var CompilationContext2 = class {
+    constructor(fragment, directives, policy) {
+      this.fragment = fragment;
+      this.directives = directives;
+      this.policy = policy;
+      this.proto = null;
+      this.nodeIds = /* @__PURE__ */ new Set();
+      this.descriptors = {};
+      this.factories = [];
+    }
+    addFactory(factory, parentId, nodeId, targetIndex, tagName) {
+      var _a, _b;
+      if (!this.nodeIds.has(nodeId)) {
+        this.nodeIds.add(nodeId);
+        this.addTargetDescriptor(parentId, nodeId, targetIndex);
+      }
+      factory.id = (_a = factory.id) !== null && _a !== void 0 ? _a : nextId2();
+      factory.targetNodeId = nodeId;
+      factory.targetTagName = tagName;
+      factory.policy = (_b = factory.policy) !== null && _b !== void 0 ? _b : this.policy;
+      this.factories.push(factory);
+    }
+    freeze() {
+      this.proto = Object.create(null, this.descriptors);
+      return this;
+    }
+    addTargetDescriptor(parentId, targetId, targetIndex) {
+      const descriptors = this.descriptors;
+      if (targetId === "r" || // root
+      targetId === "h" || // host
+      descriptors[targetId]) {
+        return;
+      }
+      if (!descriptors[parentId]) {
+        const index = parentId.lastIndexOf(".");
+        const grandparentId = parentId.substring(0, index);
+        const childIndex = parseInt(parentId.substring(index + 1));
+        this.addTargetDescriptor(grandparentId, parentId, childIndex);
+      }
+      let descriptor = descriptorCache2[targetId];
+      if (!descriptor) {
+        const field = `_${targetId}`;
+        descriptorCache2[targetId] = descriptor = {
+          get() {
+            var _a;
+            return (_a = this[field]) !== null && _a !== void 0 ? _a : this[field] = this[parentId].childNodes[targetIndex];
+          }
+        };
+      }
+      descriptors[targetId] = descriptor;
+    }
+    createView(hostBindingTarget) {
+      const fragment = this.fragment.cloneNode(true);
+      const targets = Object.create(this.proto);
+      targets.r = fragment;
+      targets.h = hostBindingTarget !== null && hostBindingTarget !== void 0 ? hostBindingTarget : warningHost2;
+      for (const id5 of this.nodeIds) {
+        targets[id5];
+      }
+      return new HTMLView2(fragment, this.factories, targets);
+    }
+  };
+  function compileAttributes2(context, parentId, node, nodeId, nodeIndex, includeBasicValues = false) {
+    const attributes = node.attributes;
+    const directives = context.directives;
+    for (let i = 0, ii = attributes.length; i < ii; ++i) {
+      const attr3 = attributes[i];
+      const attrValue = attr3.value;
+      const parseResult = Parser2.parse(attrValue, directives);
+      let result = null;
+      if (parseResult === null) {
+        if (includeBasicValues) {
+          result = new HTMLBindingDirective2(oneTime2(() => attrValue, context.policy));
+          HTMLDirective2.assignAspect(result, attr3.name);
+        }
+      } else {
+        result = Compiler2.aggregate(parseResult, context.policy);
+      }
+      if (result !== null) {
+        node.removeAttributeNode(attr3);
+        i--;
+        ii--;
+        context.addFactory(result, parentId, nodeId, nodeIndex, node.tagName);
+      }
+    }
+  }
+  function compileContent2(context, node, parentId, nodeId, nodeIndex) {
+    const parseResult = Parser2.parse(node.textContent, context.directives);
+    if (parseResult === null) {
+      next2.node = node.nextSibling;
+      next2.index = nodeIndex + 1;
+      return next2;
+    }
+    let currentNode;
+    let lastNode = currentNode = node;
+    for (let i = 0, ii = parseResult.length; i < ii; ++i) {
+      const currentPart = parseResult[i];
+      if (i !== 0) {
+        nodeIndex++;
+        nodeId = targetIdFrom2(parentId, nodeIndex);
+        currentNode = lastNode.parentNode.insertBefore(document.createTextNode(""), lastNode.nextSibling);
+      }
+      if (isString2(currentPart)) {
+        currentNode.textContent = currentPart;
+      } else {
+        currentNode.textContent = " ";
+        HTMLDirective2.assignAspect(currentPart);
+        context.addFactory(currentPart, parentId, nodeId, nodeIndex, null);
+      }
+      lastNode = currentNode;
+    }
+    next2.index = nodeIndex + 1;
+    next2.node = lastNode.nextSibling;
+    return next2;
+  }
+  function compileChildren2(context, parent, parentId) {
+    let nodeIndex = 0;
+    let childNode = parent.firstChild;
+    while (childNode) {
+      const result = compileNode2(context, parentId, childNode, nodeIndex);
+      childNode = result.node;
+      nodeIndex = result.index;
+    }
+  }
+  function compileNode2(context, parentId, node, nodeIndex) {
+    const nodeId = targetIdFrom2(parentId, nodeIndex);
+    switch (node.nodeType) {
+      case 1:
+        compileAttributes2(context, parentId, node, nodeId, nodeIndex);
+        compileChildren2(context, node, nodeId);
+        break;
+      case 3:
+        return compileContent2(context, node, parentId, nodeId, nodeIndex);
+      case 8:
+        const parts = Parser2.parse(node.data, context.directives);
+        if (parts !== null) {
+          context.addFactory(
+            /* eslint-disable-next-line @typescript-eslint/no-use-before-define */
+            Compiler2.aggregate(parts),
+            parentId,
+            nodeId,
+            nodeIndex,
+            null
+          );
+        }
+        break;
+    }
+    next2.index = nodeIndex + 1;
+    next2.node = node.nextSibling;
+    return next2;
+  }
+  function isMarker2(node, directives) {
+    return node && node.nodeType == 8 && Parser2.parse(node.data, directives) !== null;
+  }
+  var templateTag2 = "TEMPLATE";
+  var Compiler2 = {
+    /**
+     * Compiles a template and associated directives into a compilation
+     * result which can be used to create views.
+     * @param html - The html string or template element to compile.
+     * @param factories - The behavior factories referenced by the template.
+     * @param policy - The security policy to compile the html with.
+     * @remarks
+     * The template that is provided for compilation is altered in-place
+     * and cannot be compiled again. If the original template must be preserved,
+     * it is recommended that you clone the original and pass the clone to this API.
+     * @public
+     */
+    compile(html3, factories2, policy = DOM2.policy) {
+      let template14;
+      if (isString2(html3)) {
+        template14 = document.createElement(templateTag2);
+        template14.innerHTML = policy.createHTML(html3);
+        const fec = template14.content.firstElementChild;
+        if (fec !== null && fec.tagName === templateTag2) {
+          template14 = fec;
+        }
+      } else {
+        template14 = html3;
+      }
+      if (!template14.content.firstChild && !template14.content.lastChild) {
+        template14.content.appendChild(document.createComment(""));
+      }
+      const fragment = document.adoptNode(template14.content);
+      const context = new CompilationContext2(fragment, factories2, policy);
+      compileAttributes2(
+        context,
+        "",
+        template14,
+        /* host */
+        "h",
+        0,
+        true
+      );
+      if (
+        // If the first node in a fragment is a marker, that means it's an unstable first node,
+        // because something like a when, repeat, etc. could add nodes before the marker.
+        // To mitigate this, we insert a stable first node. However, if we insert a node,
+        // that will alter the result of the TreeWalker. So, we also need to offset the target index.
+        isMarker2(fragment.firstChild, factories2) || // Or if there is only one node and a directive, it means the template's content
+        // is *only* the directive. In that case, HTMLView.dispose() misses any nodes inserted by
+        // the directive. Inserting a new node ensures proper disposal of nodes added by the directive.
+        fragment.childNodes.length === 1 && Object.keys(factories2).length > 0
+      ) {
+        fragment.insertBefore(document.createComment(""), fragment.firstChild);
+      }
+      compileChildren2(
+        context,
+        fragment,
+        /* root */
+        "r"
+      );
+      next2.node = null;
+      return context.freeze();
+    },
+    /**
+     * Sets the default compilation strategy that will be used by the ViewTemplate whenever
+     * it needs to compile a view preprocessed with the html template function.
+     * @param strategy - The compilation strategy to use when compiling templates.
+     */
+    setDefaultStrategy(strategy) {
+      this.compile = strategy;
+    },
+    /**
+     * Aggregates an array of strings and directives into a single directive.
+     * @param parts - A heterogeneous array of static strings interspersed with
+     * directives.
+     * @param policy - The security policy to use with the aggregated bindings.
+     * @returns A single inline directive that aggregates the behavior of all the parts.
+     */
+    aggregate(parts, policy = DOM2.policy) {
+      if (parts.length === 1) {
+        return parts[0];
+      }
+      let sourceAspect;
+      let binding;
+      let isVolatile = false;
+      let bindingPolicy = void 0;
+      const partCount = parts.length;
+      const finalParts = parts.map((x) => {
+        if (isString2(x)) {
+          return () => x;
+        }
+        sourceAspect = x.sourceAspect || sourceAspect;
+        binding = x.dataBinding || binding;
+        isVolatile = isVolatile || x.dataBinding.isVolatile;
+        bindingPolicy = bindingPolicy || x.dataBinding.policy;
+        return x.dataBinding.evaluate;
+      });
+      const expression = (scope, context) => {
+        let output = "";
+        for (let i = 0; i < partCount; ++i) {
+          output += finalParts[i](scope, context);
+        }
+        return output;
+      };
+      binding.evaluate = expression;
+      binding.isVolatile = isVolatile;
+      binding.policy = bindingPolicy !== null && bindingPolicy !== void 0 ? bindingPolicy : policy;
+      const directive = new HTMLBindingDirective2(binding);
+      HTMLDirective2.assignAspect(directive, sourceAspect);
+      return directive;
+    }
+  };
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/template.js
+  var lastAttributeNameRegex2 = (
+    /* eslint-disable-next-line no-control-regex */
+    /([ \x09\x0a\x0c\x0d])([^\0-\x1F\x7F-\x9F "'>=/]+)([ \x09\x0a\x0c\x0d]*=[ \x09\x0a\x0c\x0d]*(?:[^ \x09\x0a\x0c\x0d"'`<>=]*|"[^"]*|'[^']*))$/
+  );
+  var noFactories2 = /* @__PURE__ */ Object.create(null);
+  var InlineTemplateDirective2 = class {
+    /**
+     * Creates an instance of InlineTemplateDirective.
+     * @param template - The template to inline.
+     */
+    constructor(html3, factories2 = noFactories2) {
+      this.html = html3;
+      this.factories = factories2;
+    }
+    /**
+     * Creates HTML to be used within a template.
+     * @param add - Can be used to add  behavior factories to a template.
+     */
+    createHTML(add) {
+      const factories2 = this.factories;
+      for (const key in factories2) {
+        add(factories2[key]);
+      }
+      return this.html;
+    }
+  };
+  InlineTemplateDirective2.empty = new InlineTemplateDirective2("");
+  HTMLDirective2.define(InlineTemplateDirective2);
+  function createHTML4(value, prevString, add, definition2 = HTMLDirective2.getForInstance(value)) {
+    if (definition2.aspected) {
+      const match = lastAttributeNameRegex2.exec(prevString);
+      if (match !== null) {
+        HTMLDirective2.assignAspect(value, match[2]);
+      }
+    }
+    return value.createHTML(add);
+  }
+  var ViewTemplate2 = class _ViewTemplate {
+    /**
+     * Creates an instance of ViewTemplate.
+     * @param html - The html representing what this template will instantiate, including placeholders for directives.
+     * @param factories - The directives that will be connected to placeholders in the html.
+     * @param policy - The security policy to use when compiling this template.
+     */
+    constructor(html3, factories2 = {}, policy) {
+      this.policy = policy;
+      this.result = null;
+      this.html = html3;
+      this.factories = factories2;
+    }
+    /**
+     * Creates an HTMLView instance based on this template definition.
+     * @param hostBindingTarget - The element that host behaviors will be bound to.
+     */
+    create(hostBindingTarget) {
+      if (this.result === null) {
+        this.result = Compiler2.compile(this.html, this.factories, this.policy);
+      }
+      return this.result.createView(hostBindingTarget);
+    }
+    /**
+     * Returns a directive that can inline the template.
+     */
+    inline() {
+      return new InlineTemplateDirective2(isString2(this.html) ? this.html : this.html.innerHTML, this.factories);
+    }
+    /**
+     * Sets the DOMPolicy for this template.
+     * @param policy - The policy to associated with this template.
+     * @returns The modified template instance.
+     * @remarks
+     * The DOMPolicy can only be set once for a template and cannot be
+     * set after the template is compiled.
+     */
+    withPolicy(policy) {
+      if (this.result) {
+        throw FAST2.error(
+          1208
+          /* Message.cannotSetTemplatePolicyAfterCompilation */
+        );
+      }
+      if (this.policy) {
+        throw FAST2.error(
+          1207
+          /* Message.onlySetTemplatePolicyOnce */
+        );
+      }
+      this.policy = policy;
+      return this;
+    }
+    /**
+     * Creates an HTMLView from this template, binds it to the source, and then appends it to the host.
+     * @param source - The data source to bind the template to.
+     * @param host - The Element where the template will be rendered.
+     * @param hostBindingTarget - An HTML element to target the host bindings at if different from the
+     * host that the template is being attached to.
+     */
+    render(source, host, hostBindingTarget) {
+      const view = this.create(hostBindingTarget);
+      view.bind(source);
+      view.appendTo(host);
+      return view;
+    }
+    /**
+     * Creates a template based on a set of static strings and dynamic values.
+     * @param strings - The static strings to create the template with.
+     * @param values - The dynamic values to create the template with.
+     * @param policy - The DOMPolicy to associated with the template.
+     * @returns A ViewTemplate.
+     * @remarks
+     * This API should not be used directly under normal circumstances because constructing
+     * a template in this way, if not done properly, can open up the application to XSS
+     * attacks. When using this API, provide a strong DOMPolicy that can properly sanitize
+     * and also be sure to manually sanitize all static strings particularly if they can
+     * come from user input.
+     */
+    static create(strings, values, policy) {
+      let html3 = "";
+      const factories2 = /* @__PURE__ */ Object.create(null);
+      const add = (factory) => {
+        var _a;
+        const id5 = (_a = factory.id) !== null && _a !== void 0 ? _a : factory.id = nextId2();
+        factories2[id5] = factory;
+        return id5;
+      };
+      for (let i = 0, ii = strings.length - 1; i < ii; ++i) {
+        const currentString = strings[i];
+        let currentValue = values[i];
+        let definition2;
+        html3 += currentString;
+        if (isFunction2(currentValue)) {
+          currentValue = new HTMLBindingDirective2(oneWay2(currentValue));
+        } else if (currentValue instanceof Binding2) {
+          currentValue = new HTMLBindingDirective2(currentValue);
+        } else if (!(definition2 = HTMLDirective2.getForInstance(currentValue))) {
+          const staticValue = currentValue;
+          currentValue = new HTMLBindingDirective2(oneTime2(() => staticValue));
+        }
+        html3 += createHTML4(currentValue, currentString, add, definition2);
+      }
+      return new _ViewTemplate(html3 + strings[strings.length - 1], factories2, policy);
+    }
+  };
+  makeSerializationNoop2(ViewTemplate2);
+  var html2 = (strings, ...values) => {
+    if (Array.isArray(strings) && Array.isArray(strings.raw)) {
+      return ViewTemplate2.create(strings, values);
+    }
+    throw FAST2.error(
+      1206
+      /* Message.directCallToHTMLTagNotAllowed */
+    );
+  };
+  html2.partial = (html3) => {
+    return new InlineTemplateDirective2(html3);
+  };
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/ref.js
+  var RefDirective = class extends StatelessAttachedAttributeDirective2 {
+    /**
+     * Bind this behavior.
+     * @param controller - The view controller that manages the lifecycle of this behavior.
+     */
+    bind(controller) {
+      controller.source[this.options] = controller.targets[this.targetNodeId];
+    }
+  };
+  HTMLDirective2.define(RefDirective);
+  var ref = (propertyName) => new RefDirective(propertyName);
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/node-observation.js
+  var NodeObservationDirective = class extends StatelessAttachedAttributeDirective2 {
+    /**
+     * The unique id of the factory.
+     */
+    get id() {
+      return this._id;
+    }
+    set id(value) {
+      this._id = value;
+      this._controllerProperty = `${value}-c`;
+    }
+    /**
+     * Bind this behavior to the source.
+     * @param source - The source to bind to.
+     * @param context - The execution context that the binding is operating within.
+     * @param targets - The targets that behaviors in a view can attach to.
+     */
+    bind(controller) {
+      const target = controller.targets[this.targetNodeId];
+      target[this._controllerProperty] = controller;
+      this.updateTarget(controller.source, this.computeNodes(target));
+      this.observe(target);
+      controller.onUnbind(this);
+    }
+    /**
+     * Unbinds this behavior from the source.
+     * @param source - The source to unbind from.
+     * @param context - The execution context that the binding is operating within.
+     * @param targets - The targets that behaviors in a view can attach to.
+     */
+    unbind(controller) {
+      const target = controller.targets[this.targetNodeId];
+      this.updateTarget(controller.source, emptyArray2);
+      this.disconnect(target);
+      target[this._controllerProperty] = null;
+    }
+    /**
+     * Gets the data source for the target.
+     * @param target - The target to get the source for.
+     * @returns The source.
+     */
+    getSource(target) {
+      return target[this._controllerProperty].source;
+    }
+    /**
+     * Updates the source property with the computed nodes.
+     * @param source - The source object to assign the nodes property to.
+     * @param value - The nodes to assign to the source object property.
+     */
+    updateTarget(source, value) {
+      source[this.options.property] = value;
+    }
+    /**
+     * Computes the set of nodes that should be assigned to the source property.
+     * @param target - The target to compute the nodes for.
+     * @returns The computed nodes.
+     * @remarks
+     * Applies filters if provided.
+     */
+    computeNodes(target) {
+      let nodes = this.getNodes(target);
+      if ("filter" in this.options) {
+        nodes = nodes.filter(this.options.filter);
+      }
+      return nodes;
+    }
+  };
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/slotted.js
+  var slotEvent = "slotchange";
+  var SlottedDirective = class extends NodeObservationDirective {
+    /**
+     * Begins observation of the nodes.
+     * @param target - The target to observe.
+     */
+    observe(target) {
+      target.addEventListener(slotEvent, this);
+    }
+    /**
+     * Disconnects observation of the nodes.
+     * @param target - The target to unobserve.
+     */
+    disconnect(target) {
+      target.removeEventListener(slotEvent, this);
+    }
+    /**
+     * Retrieves the raw nodes that should be assigned to the source property.
+     * @param target - The target to get the node to.
+     */
+    getNodes(target) {
+      return target.assignedNodes(this.options);
+    }
+    /** @internal */
+    handleEvent(event) {
+      const target = event.currentTarget;
+      this.updateTarget(this.getSource(target), this.computeNodes(target));
+    }
+  };
+  HTMLDirective2.define(SlottedDirective);
+  function slotted(propertyOrOptions) {
+    if (isString2(propertyOrOptions)) {
+      propertyOrOptions = { property: propertyOrOptions };
+    }
+    return new SlottedDirective(propertyOrOptions);
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/components/attributes.js
+  var booleanMode2 = "boolean";
+  var reflectMode2 = "reflect";
+  var AttributeConfiguration2 = Object.freeze({
+    /**
+     * Locates all attribute configurations associated with a type.
+     */
+    locate: createMetadataLocator2()
+  });
+  var booleanConverter2 = {
+    toView(value) {
+      return value ? "true" : "false";
+    },
+    fromView(value) {
+      return value === null || value === void 0 || value === "false" || value === false || value === 0 ? false : true;
+    }
+  };
+  var AttributeDefinition2 = class _AttributeDefinition {
+    /**
+     * Creates an instance of AttributeDefinition.
+     * @param Owner - The class constructor that owns this attribute.
+     * @param name - The name of the property associated with the attribute.
+     * @param attribute - The name of the attribute in HTML.
+     * @param mode - The {@link AttributeMode} that describes the behavior of this attribute.
+     * @param converter - A {@link ValueConverter} that integrates with the property getter/setter
+     * to convert values to and from a DOM string.
+     */
+    constructor(Owner, name, attribute = name.toLowerCase(), mode = reflectMode2, converter) {
+      this.guards = /* @__PURE__ */ new Set();
+      this.Owner = Owner;
+      this.name = name;
+      this.attribute = attribute;
+      this.mode = mode;
+      this.converter = converter;
+      this.fieldName = `_${name}`;
+      this.callbackName = `${name}Changed`;
+      this.hasCallback = this.callbackName in Owner.prototype;
+      if (mode === booleanMode2 && converter === void 0) {
+        this.converter = booleanConverter2;
+      }
+    }
+    /**
+     * Sets the value of the attribute/property on the source element.
+     * @param source - The source element to access.
+     * @param value - The value to set the attribute/property to.
+     */
+    setValue(source, newValue) {
+      const oldValue = source[this.fieldName];
+      const converter = this.converter;
+      if (converter !== void 0) {
+        newValue = converter.fromView(newValue);
+      }
+      if (oldValue !== newValue) {
+        source[this.fieldName] = newValue;
+        this.tryReflectToAttribute(source);
+        if (this.hasCallback) {
+          source[this.callbackName](oldValue, newValue);
+        }
+        source.$fastController.notify(this.name);
+      }
+    }
+    /**
+     * Gets the value of the attribute/property on the source element.
+     * @param source - The source element to access.
+     */
+    getValue(source) {
+      Observable2.track(source, this.name);
+      return source[this.fieldName];
+    }
+    /** @internal */
+    onAttributeChangedCallback(element, value) {
+      if (this.guards.has(element)) {
+        return;
+      }
+      this.guards.add(element);
+      this.setValue(element, value);
+      this.guards.delete(element);
+    }
+    tryReflectToAttribute(element) {
+      const mode = this.mode;
+      const guards = this.guards;
+      if (guards.has(element) || mode === "fromView") {
+        return;
+      }
+      Updates2.enqueue(() => {
+        guards.add(element);
+        const latestValue = element[this.fieldName];
+        switch (mode) {
+          case reflectMode2:
+            const converter = this.converter;
+            DOM2.setAttribute(element, this.attribute, converter !== void 0 ? converter.toView(latestValue) : latestValue);
+            break;
+          case booleanMode2:
+            DOM2.setBooleanAttribute(element, this.attribute, latestValue);
+            break;
+        }
+        guards.delete(element);
+      });
+    }
+    /**
+     * Collects all attribute definitions associated with the owner.
+     * @param Owner - The class constructor to collect attribute for.
+     * @param attributeLists - Any existing attributes to collect and merge with those associated with the owner.
+     * @internal
+     */
+    static collect(Owner, ...attributeLists) {
+      const attributes = [];
+      attributeLists.push(AttributeConfiguration2.locate(Owner));
+      for (let i = 0, ii = attributeLists.length; i < ii; ++i) {
+        const list = attributeLists[i];
+        if (list === void 0) {
+          continue;
+        }
+        for (let j = 0, jj = list.length; j < jj; ++j) {
+          const config = list[j];
+          if (isString2(config)) {
+            attributes.push(new _AttributeDefinition(Owner, config));
+          } else {
+            attributes.push(new _AttributeDefinition(Owner, config.property, config.attribute, config.mode, config.converter));
+          }
+        }
+      }
+      return attributes;
+    }
+  };
+  function attr2(configOrTarget, prop) {
+    let config;
+    function decorator($target, $prop) {
+      if (arguments.length > 1) {
+        config.property = $prop;
+      }
+      AttributeConfiguration2.locate($target.constructor).push(config);
+    }
+    if (arguments.length > 1) {
+      config = {};
+      decorator(configOrTarget, prop);
+      return;
+    }
+    config = configOrTarget === void 0 ? {} : configOrTarget;
+    return decorator;
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/components/fast-definitions.js
+  var defaultShadowOptions2 = { mode: "open" };
+  var defaultElementOptions2 = {};
+  var fastElementBaseTypes2 = /* @__PURE__ */ new Set();
+  var fastElementRegistry2 = FAST2.getById(KernelServiceId2.elementRegistry, () => createTypeRegistry2());
+  var FASTElementDefinition2 = class _FASTElementDefinition {
+    constructor(type, nameOrConfig = type.definition) {
+      var _a;
+      this.platformDefined = false;
+      if (isString2(nameOrConfig)) {
+        nameOrConfig = { name: nameOrConfig };
+      }
+      this.type = type;
+      this.name = nameOrConfig.name;
+      this.template = nameOrConfig.template;
+      this.registry = (_a = nameOrConfig.registry) !== null && _a !== void 0 ? _a : customElements;
+      const proto = type.prototype;
+      const attributes = AttributeDefinition2.collect(type, nameOrConfig.attributes);
+      const observedAttributes = new Array(attributes.length);
+      const propertyLookup = {};
+      const attributeLookup = {};
+      for (let i = 0, ii = attributes.length; i < ii; ++i) {
+        const current = attributes[i];
+        observedAttributes[i] = current.attribute;
+        propertyLookup[current.name] = current;
+        attributeLookup[current.attribute] = current;
+        Observable2.defineProperty(proto, current);
+      }
+      Reflect.defineProperty(type, "observedAttributes", {
+        value: observedAttributes,
+        enumerable: true
+      });
+      this.attributes = attributes;
+      this.propertyLookup = propertyLookup;
+      this.attributeLookup = attributeLookup;
+      this.shadowOptions = nameOrConfig.shadowOptions === void 0 ? defaultShadowOptions2 : nameOrConfig.shadowOptions === null ? void 0 : Object.assign(Object.assign({}, defaultShadowOptions2), nameOrConfig.shadowOptions);
+      this.elementOptions = nameOrConfig.elementOptions === void 0 ? defaultElementOptions2 : Object.assign(Object.assign({}, defaultElementOptions2), nameOrConfig.elementOptions);
+      this.styles = ElementStyles2.normalize(nameOrConfig.styles);
+      fastElementRegistry2.register(this);
+    }
+    /**
+     * Indicates if this element has been defined in at least one registry.
+     */
+    get isDefined() {
+      return this.platformDefined;
+    }
+    /**
+     * Defines a custom element based on this definition.
+     * @param registry - The element registry to define the element in.
+     * @remarks
+     * This operation is idempotent per registry.
+     */
+    define(registry5 = this.registry) {
+      const type = this.type;
+      if (!registry5.get(this.name)) {
+        this.platformDefined = true;
+        registry5.define(this.name, type, this.elementOptions);
+      }
+      return this;
+    }
+    /**
+     * Creates an instance of FASTElementDefinition.
+     * @param type - The type this definition is being created for.
+     * @param nameOrDef - The name of the element to define or a config object
+     * that describes the element to define.
+     */
+    static compose(type, nameOrDef) {
+      if (fastElementBaseTypes2.has(type) || fastElementRegistry2.getByType(type)) {
+        return new _FASTElementDefinition(class extends type {
+        }, nameOrDef);
+      }
+      return new _FASTElementDefinition(type, nameOrDef);
+    }
+    /**
+     * Registers a FASTElement base type.
+     * @param type - The type to register as a base type.
+     * @internal
+     */
+    static registerBaseType(type) {
+      fastElementBaseTypes2.add(type);
+    }
+  };
+  FASTElementDefinition2.getByType = fastElementRegistry2.getByType;
+  FASTElementDefinition2.getForInstance = fastElementRegistry2.getForInstance;
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/components/element-controller.js
+  var defaultEventOptions2 = {
+    bubbles: true,
+    composed: true,
+    cancelable: true
+  };
+  var isConnectedPropertyName2 = "isConnected";
+  var shadowRoots2 = /* @__PURE__ */ new WeakMap();
+  function getShadowRoot2(element) {
+    var _a, _b;
+    return (_b = (_a = element.shadowRoot) !== null && _a !== void 0 ? _a : shadowRoots2.get(element)) !== null && _b !== void 0 ? _b : null;
+  }
+  var elementControllerStrategy2;
+  var ElementController2 = class extends PropertyChangeNotifier2 {
+    /**
+     * Creates a Controller to control the specified element.
+     * @param element - The element to be controlled by this controller.
+     * @param definition - The element definition metadata that instructs this
+     * controller in how to handle rendering and other platform integrations.
+     * @internal
+     */
+    constructor(element, definition2) {
+      super(element);
+      this.boundObservables = null;
+      this.needsInitialization = true;
+      this.hasExistingShadowRoot = false;
+      this._template = null;
+      this.stage = 3;
+      this.guardBehaviorConnection = false;
+      this.behaviors = null;
+      this._mainStyles = null;
+      this.$fastController = this;
+      this.view = null;
+      this.source = element;
+      this.definition = definition2;
+      const shadowOptions = definition2.shadowOptions;
+      if (shadowOptions !== void 0) {
+        let shadowRoot = element.shadowRoot;
+        if (shadowRoot) {
+          this.hasExistingShadowRoot = true;
+        } else {
+          shadowRoot = element.attachShadow(shadowOptions);
+          if (shadowOptions.mode === "closed") {
+            shadowRoots2.set(element, shadowRoot);
+          }
+        }
+      }
+      const accessors = Observable2.getAccessors(element);
+      if (accessors.length > 0) {
+        const boundObservables = this.boundObservables = /* @__PURE__ */ Object.create(null);
+        for (let i = 0, ii = accessors.length; i < ii; ++i) {
+          const propertyName = accessors[i].name;
+          const value = element[propertyName];
+          if (value !== void 0) {
+            delete element[propertyName];
+            boundObservables[propertyName] = value;
+          }
+        }
+      }
+    }
+    /**
+     * Indicates whether or not the custom element has been
+     * connected to the document.
+     */
+    get isConnected() {
+      Observable2.track(this, isConnectedPropertyName2);
+      return this.stage === 1;
+    }
+    /**
+     * The context the expression is evaluated against.
+     */
+    get context() {
+      var _a, _b;
+      return (_b = (_a = this.view) === null || _a === void 0 ? void 0 : _a.context) !== null && _b !== void 0 ? _b : ExecutionContext2.default;
+    }
+    /**
+     * Indicates whether the controller is bound.
+     */
+    get isBound() {
+      var _a, _b;
+      return (_b = (_a = this.view) === null || _a === void 0 ? void 0 : _a.isBound) !== null && _b !== void 0 ? _b : false;
+    }
+    /**
+     * Indicates how the source's lifetime relates to the controller's lifetime.
+     */
+    get sourceLifetime() {
+      var _a;
+      return (_a = this.view) === null || _a === void 0 ? void 0 : _a.sourceLifetime;
+    }
+    /**
+     * Gets/sets the template used to render the component.
+     * @remarks
+     * This value can only be accurately read after connect but can be set at any time.
+     */
+    get template() {
+      var _a;
+      if (this._template === null) {
+        const definition2 = this.definition;
+        if (this.source.resolveTemplate) {
+          this._template = this.source.resolveTemplate();
+        } else if (definition2.template) {
+          this._template = (_a = definition2.template) !== null && _a !== void 0 ? _a : null;
+        }
+      }
+      return this._template;
+    }
+    set template(value) {
+      if (this._template === value) {
+        return;
+      }
+      this._template = value;
+      if (!this.needsInitialization) {
+        this.renderTemplate(value);
+      }
+    }
+    /**
+     * The main set of styles used for the component, independent
+     * of any dynamically added styles.
+     */
+    get mainStyles() {
+      var _a;
+      if (this._mainStyles === null) {
+        const definition2 = this.definition;
+        if (this.source.resolveStyles) {
+          this._mainStyles = this.source.resolveStyles();
+        } else if (definition2.styles) {
+          this._mainStyles = (_a = definition2.styles) !== null && _a !== void 0 ? _a : null;
+        }
+      }
+      return this._mainStyles;
+    }
+    set mainStyles(value) {
+      if (this._mainStyles === value) {
+        return;
+      }
+      if (this._mainStyles !== null) {
+        this.removeStyles(this._mainStyles);
+      }
+      this._mainStyles = value;
+      if (!this.needsInitialization) {
+        this.addStyles(value);
+      }
+    }
+    /**
+     * Registers an unbind handler with the controller.
+     * @param behavior - An object to call when the controller unbinds.
+     */
+    onUnbind(behavior) {
+      var _a;
+      (_a = this.view) === null || _a === void 0 ? void 0 : _a.onUnbind(behavior);
+    }
+    /**
+     * Adds the behavior to the component.
+     * @param behavior - The behavior to add.
+     */
+    addBehavior(behavior) {
+      var _a, _b;
+      const targetBehaviors = (_a = this.behaviors) !== null && _a !== void 0 ? _a : this.behaviors = /* @__PURE__ */ new Map();
+      const count = (_b = targetBehaviors.get(behavior)) !== null && _b !== void 0 ? _b : 0;
+      if (count === 0) {
+        targetBehaviors.set(behavior, 1);
+        behavior.addedCallback && behavior.addedCallback(this);
+        if (behavior.connectedCallback && !this.guardBehaviorConnection && (this.stage === 1 || this.stage === 0)) {
+          behavior.connectedCallback(this);
+        }
+      } else {
+        targetBehaviors.set(behavior, count + 1);
+      }
+    }
+    /**
+     * Removes the behavior from the component.
+     * @param behavior - The behavior to remove.
+     * @param force - Forces removal even if this behavior was added more than once.
+     */
+    removeBehavior(behavior, force = false) {
+      const targetBehaviors = this.behaviors;
+      if (targetBehaviors === null) {
+        return;
+      }
+      const count = targetBehaviors.get(behavior);
+      if (count === void 0) {
+        return;
+      }
+      if (count === 1 || force) {
+        targetBehaviors.delete(behavior);
+        if (behavior.disconnectedCallback && this.stage !== 3) {
+          behavior.disconnectedCallback(this);
+        }
+        behavior.removedCallback && behavior.removedCallback(this);
+      } else {
+        targetBehaviors.set(behavior, count - 1);
+      }
+    }
+    /**
+     * Adds styles to this element. Providing an HTMLStyleElement will attach the element instance to the shadowRoot.
+     * @param styles - The styles to add.
+     */
+    addStyles(styles15) {
+      var _a;
+      if (!styles15) {
+        return;
+      }
+      const source = this.source;
+      if (styles15 instanceof HTMLElement) {
+        const target = (_a = getShadowRoot2(source)) !== null && _a !== void 0 ? _a : this.source;
+        target.append(styles15);
+      } else if (!styles15.isAttachedTo(source)) {
+        const sourceBehaviors = styles15.behaviors;
+        styles15.addStylesTo(source);
+        if (sourceBehaviors !== null) {
+          for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
+            this.addBehavior(sourceBehaviors[i]);
+          }
+        }
+      }
+    }
+    /**
+     * Removes styles from this element. Providing an HTMLStyleElement will detach the element instance from the shadowRoot.
+     * @param styles - the styles to remove.
+     */
+    removeStyles(styles15) {
+      var _a;
+      if (!styles15) {
+        return;
+      }
+      const source = this.source;
+      if (styles15 instanceof HTMLElement) {
+        const target = (_a = getShadowRoot2(source)) !== null && _a !== void 0 ? _a : source;
+        target.removeChild(styles15);
+      } else if (styles15.isAttachedTo(source)) {
+        const sourceBehaviors = styles15.behaviors;
+        styles15.removeStylesFrom(source);
+        if (sourceBehaviors !== null) {
+          for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
+            this.removeBehavior(sourceBehaviors[i]);
+          }
+        }
+      }
+    }
+    /**
+     * Runs connected lifecycle behavior on the associated element.
+     */
+    connect() {
+      if (this.stage !== 3) {
+        return;
+      }
+      this.stage = 0;
+      if (this.boundObservables !== null) {
+        const element = this.source;
+        const boundObservables = this.boundObservables;
+        const propertyNames = Object.keys(boundObservables);
+        for (let i = 0, ii = propertyNames.length; i < ii; ++i) {
+          const propertyName = propertyNames[i];
+          element[propertyName] = boundObservables[propertyName];
+        }
+        this.boundObservables = null;
+      }
+      const behaviors = this.behaviors;
+      if (behaviors !== null) {
+        this.guardBehaviorConnection = true;
+        for (const key of behaviors.keys()) {
+          key.connectedCallback && key.connectedCallback(this);
+        }
+        this.guardBehaviorConnection = false;
+      }
+      if (this.needsInitialization) {
+        this.renderTemplate(this.template);
+        this.addStyles(this.mainStyles);
+        this.needsInitialization = false;
+      } else if (this.view !== null) {
+        this.view.bind(this.source);
+      }
+      this.stage = 1;
+      Observable2.notify(this, isConnectedPropertyName2);
+    }
+    /**
+     * Runs disconnected lifecycle behavior on the associated element.
+     */
+    disconnect() {
+      if (this.stage !== 1) {
+        return;
+      }
+      this.stage = 2;
+      Observable2.notify(this, isConnectedPropertyName2);
+      if (this.view !== null) {
+        this.view.unbind();
+      }
+      const behaviors = this.behaviors;
+      if (behaviors !== null) {
+        for (const key of behaviors.keys()) {
+          key.disconnectedCallback && key.disconnectedCallback(this);
+        }
+      }
+      this.stage = 3;
+    }
+    /**
+     * Runs the attribute changed callback for the associated element.
+     * @param name - The name of the attribute that changed.
+     * @param oldValue - The previous value of the attribute.
+     * @param newValue - The new value of the attribute.
+     */
+    onAttributeChangedCallback(name, oldValue, newValue) {
+      const attrDef = this.definition.attributeLookup[name];
+      if (attrDef !== void 0) {
+        attrDef.onAttributeChangedCallback(this.source, newValue);
+      }
+    }
+    /**
+     * Emits a custom HTML event.
+     * @param type - The type name of the event.
+     * @param detail - The event detail object to send with the event.
+     * @param options - The event options. By default bubbles and composed.
+     * @remarks
+     * Only emits events if connected.
+     */
+    emit(type, detail, options) {
+      if (this.stage === 1) {
+        return this.source.dispatchEvent(new CustomEvent(type, Object.assign(Object.assign({ detail }, defaultEventOptions2), options)));
+      }
+      return false;
+    }
+    renderTemplate(template14) {
+      var _a;
+      const element = this.source;
+      const host = (_a = getShadowRoot2(element)) !== null && _a !== void 0 ? _a : element;
+      if (this.view !== null) {
+        this.view.dispose();
+        this.view = null;
+      } else if (!this.needsInitialization || this.hasExistingShadowRoot) {
+        this.hasExistingShadowRoot = false;
+        for (let child = host.firstChild; child !== null; child = host.firstChild) {
+          host.removeChild(child);
+        }
+      }
+      if (template14) {
+        this.view = template14.render(element, host, element);
+        this.view.sourceLifetime = SourceLifetime2.coupled;
+      }
+    }
+    /**
+     * Locates or creates a controller for the specified element.
+     * @param element - The element to return the controller for.
+     * @remarks
+     * The specified element must have a {@link FASTElementDefinition}
+     * registered either through the use of the {@link customElement}
+     * decorator or a call to `FASTElement.define`.
+     */
+    static forCustomElement(element) {
+      const controller = element.$fastController;
+      if (controller !== void 0) {
+        return controller;
+      }
+      const definition2 = FASTElementDefinition2.getForInstance(element);
+      if (definition2 === void 0) {
+        throw FAST2.error(
+          1401
+          /* Message.missingElementDefinition */
+        );
+      }
+      return element.$fastController = new elementControllerStrategy2(element, definition2);
+    }
+    /**
+     * Sets the strategy that ElementController.forCustomElement uses to construct
+     * ElementController instances for an element.
+     * @param strategy - The strategy to use.
+     */
+    static setStrategy(strategy) {
+      elementControllerStrategy2 = strategy;
+    }
+  };
+  makeSerializationNoop2(ElementController2);
+  ElementController2.setStrategy(ElementController2);
+  function normalizeStyleTarget2(target) {
+    var _a;
+    if ("adoptedStyleSheets" in target) {
+      return target;
+    } else {
+      return (_a = getShadowRoot2(target)) !== null && _a !== void 0 ? _a : target.getRootNode();
+    }
+  }
+  var AdoptedStyleSheetsStrategy2 = class _AdoptedStyleSheetsStrategy {
+    constructor(styles15) {
+      const styleSheetCache = _AdoptedStyleSheetsStrategy.styleSheetCache;
+      this.sheets = styles15.map((x) => {
+        if (x instanceof CSSStyleSheet) {
+          return x;
+        }
+        let sheet = styleSheetCache.get(x);
+        if (sheet === void 0) {
+          sheet = new CSSStyleSheet();
+          sheet.replaceSync(x);
+          styleSheetCache.set(x, sheet);
+        }
+        return sheet;
+      });
+    }
+    addStylesTo(target) {
+      addAdoptedStyleSheets2(normalizeStyleTarget2(target), this.sheets);
+    }
+    removeStylesFrom(target) {
+      removeAdoptedStyleSheets2(normalizeStyleTarget2(target), this.sheets);
+    }
+  };
+  AdoptedStyleSheetsStrategy2.styleSheetCache = /* @__PURE__ */ new Map();
+  var id4 = 0;
+  var nextStyleId2 = () => `fast-${++id4}`;
+  function usableStyleTarget2(target) {
+    return target === document ? document.body : target;
+  }
+  var StyleElementStrategy2 = class {
+    constructor(styles15) {
+      this.styles = styles15;
+      this.styleClass = nextStyleId2();
+    }
+    addStylesTo(target) {
+      target = usableStyleTarget2(normalizeStyleTarget2(target));
+      const styles15 = this.styles;
+      const styleClass = this.styleClass;
+      for (let i = 0; i < styles15.length; i++) {
+        const element = document.createElement("style");
+        element.innerHTML = styles15[i];
+        element.className = styleClass;
+        target.append(element);
+      }
+    }
+    removeStylesFrom(target) {
+      target = usableStyleTarget2(normalizeStyleTarget2(target));
+      const styles15 = target.querySelectorAll(`.${this.styleClass}`);
+      for (let i = 0, ii = styles15.length; i < ii; ++i) {
+        target.removeChild(styles15[i]);
+      }
+    }
+  };
+  var addAdoptedStyleSheets2 = (target, sheets) => {
+    target.adoptedStyleSheets = [...target.adoptedStyleSheets, ...sheets];
+  };
+  var removeAdoptedStyleSheets2 = (target, sheets) => {
+    target.adoptedStyleSheets = target.adoptedStyleSheets.filter((x) => sheets.indexOf(x) === -1);
+  };
+  if (ElementStyles2.supportsAdoptedStyleSheets) {
+    try {
+      document.adoptedStyleSheets.push();
+      document.adoptedStyleSheets.splice();
+      addAdoptedStyleSheets2 = (target, sheets) => {
+        target.adoptedStyleSheets.push(...sheets);
+      };
+      removeAdoptedStyleSheets2 = (target, sheets) => {
+        for (const sheet of sheets) {
+          const index = target.adoptedStyleSheets.indexOf(sheet);
+          if (index !== -1) {
+            target.adoptedStyleSheets.splice(index, 1);
+          }
+        }
+      };
+    } catch (e) {
+    }
+    ElementStyles2.setDefaultStrategy(AdoptedStyleSheetsStrategy2);
+  } else {
+    ElementStyles2.setDefaultStrategy(StyleElementStrategy2);
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/components/fast-element.js
+  function createFASTElement2(BaseType) {
+    const type = class extends BaseType {
+      constructor() {
+        super();
+        ElementController2.forCustomElement(this);
+      }
+      $emit(type2, detail, options) {
+        return this.$fastController.emit(type2, detail, options);
+      }
+      connectedCallback() {
+        this.$fastController.connect();
+      }
+      disconnectedCallback() {
+        this.$fastController.disconnect();
+      }
+      attributeChangedCallback(name, oldValue, newValue) {
+        this.$fastController.onAttributeChangedCallback(name, oldValue, newValue);
+      }
+    };
+    FASTElementDefinition2.registerBaseType(type);
+    return type;
+  }
+  function compose2(type, nameOrDef) {
+    if (isFunction2(type)) {
+      return FASTElementDefinition2.compose(type, nameOrDef);
+    }
+    return FASTElementDefinition2.compose(this, type);
+  }
+  function define2(type, nameOrDef) {
+    if (isFunction2(type)) {
+      return FASTElementDefinition2.compose(type, nameOrDef).define().type;
+    }
+    return FASTElementDefinition2.compose(this, type).define().type;
+  }
+  function from2(BaseType) {
+    return createFASTElement2(BaseType);
+  }
+  var FASTElement2 = Object.assign(createFASTElement2(HTMLElement), {
+    /**
+     * Creates a new FASTElement base class inherited from the
+     * provided base type.
+     * @param BaseType - The base element type to inherit from.
+     */
+    from: from2,
+    /**
+     * Defines a platform custom element based on the provided type and definition.
+     * @param type - The custom element type to define.
+     * @param nameOrDef - The name of the element to define or a definition object
+     * that describes the element to define.
+     */
+    define: define2,
+    /**
+     * Defines metadata for a FASTElement which can be used to later define the element.
+     * @public
+     */
+    compose: compose2
+  });
+
+  // ../../phoenixui/node_modules/@microsoft/fast-web-utilities/dist/key-codes.js
+  var keyEnter = "Enter";
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/patterns/aria-globals.js
+  var __decorate = function(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var ARIAGlobalStatesAndProperties = class {
+  };
+  __decorate([
+    attr2({ attribute: "aria-atomic" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaAtomic", void 0);
+  __decorate([
+    attr2({ attribute: "aria-busy" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaBusy", void 0);
+  __decorate([
+    attr2({ attribute: "aria-controls" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaControls", void 0);
+  __decorate([
+    attr2({ attribute: "aria-current" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaCurrent", void 0);
+  __decorate([
+    attr2({ attribute: "aria-describedby" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaDescribedby", void 0);
+  __decorate([
+    attr2({ attribute: "aria-details" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaDetails", void 0);
+  __decorate([
+    attr2({ attribute: "aria-disabled" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaDisabled", void 0);
+  __decorate([
+    attr2({ attribute: "aria-errormessage" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaErrormessage", void 0);
+  __decorate([
+    attr2({ attribute: "aria-flowto" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaFlowto", void 0);
+  __decorate([
+    attr2({ attribute: "aria-haspopup" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaHaspopup", void 0);
+  __decorate([
+    attr2({ attribute: "aria-hidden" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaHidden", void 0);
+  __decorate([
+    attr2({ attribute: "aria-invalid" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaInvalid", void 0);
+  __decorate([
+    attr2({ attribute: "aria-keyshortcuts" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaKeyshortcuts", void 0);
+  __decorate([
+    attr2({ attribute: "aria-label" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaLabel", void 0);
+  __decorate([
+    attr2({ attribute: "aria-labelledby" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaLabelledby", void 0);
+  __decorate([
+    attr2({ attribute: "aria-live" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaLive", void 0);
+  __decorate([
+    attr2({ attribute: "aria-owns" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaOwns", void 0);
+  __decorate([
+    attr2({ attribute: "aria-relevant" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaRelevant", void 0);
+  __decorate([
+    attr2({ attribute: "aria-roledescription" })
+  ], ARIAGlobalStatesAndProperties.prototype, "ariaRoledescription", void 0);
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/utils/template-helpers.js
+  function staticallyCompose(item) {
+    if (!item) {
+      return InlineTemplateDirective2.empty;
+    }
+    if (typeof item === "string") {
+      return new InlineTemplateDirective2(item);
+    }
+    if ("inline" in item) {
+      return item.inline();
+    }
+    return item;
+  }
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/patterns/start-end.js
+  var StartEnd = class {
+  };
+  function endSlotTemplate(options) {
+    return html2` <slot name="end" ${ref("end")}>${staticallyCompose(options.end)}</slot> `.inline();
+  }
+  function startSlotTemplate(options) {
+    return html2` <slot name="start" ${ref("start")}>${staticallyCompose(options.start)}</slot> `.inline();
+  }
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/utils/apply-mixins.js
+  function applyMixins(derivedCtor, ...baseCtors) {
+    const derivedAttributes = AttributeConfiguration2.locate(derivedCtor);
+    baseCtors.forEach((baseCtor) => {
+      Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
+        if (name !== "constructor") {
+          Object.defineProperty(
+            derivedCtor.prototype,
+            name,
+            /* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */
+            Object.getOwnPropertyDescriptor(baseCtor.prototype, name)
+          );
+        }
+      });
+      const baseAttributes = AttributeConfiguration2.locate(baseCtor);
+      baseAttributes.forEach((x) => derivedAttributes.push(x));
+    });
+  }
+
+  // ../../phoenixui/node_modules/@microsoft/fast-foundation/dist/esm/utilities/match-media-stylesheet-behavior.js
+  var MatchMediaBehavior = class {
+    /**
+     *
+     * @param query - The media query to operate from.
+     */
+    constructor(query) {
+      this.listenerCache = /* @__PURE__ */ new WeakMap();
+      this.query = query;
+    }
+    /**
+     * Binds the behavior to the element.
+     * @param controller - The host controller orchestrating this behavior.
+     */
+    connectedCallback(controller) {
+      const { query } = this;
+      let listener = this.listenerCache.get(controller);
+      if (!listener) {
+        listener = this.constructListener(controller);
+        this.listenerCache.set(controller, listener);
+      }
+      listener.bind(query)();
+      query.addEventListener("change", listener);
+    }
+    /**
+     * Unbinds the behavior from the element.
+     * @param controller - The host controller orchestrating this behavior.
+     */
+    disconnectedCallback(controller) {
+      const listener = this.listenerCache.get(controller);
+      if (listener) {
+        this.query.removeEventListener("change", listener);
+      }
+    }
+  };
+  var MatchMediaStyleSheetBehavior = class _MatchMediaStyleSheetBehavior extends MatchMediaBehavior {
+    /**
+     * Constructs a {@link MatchMediaStyleSheetBehavior} instance.
+     * @param query - The media query to operate from.
+     * @param styles - The styles to coordinate with the query.
+     */
+    constructor(query, styles15) {
+      super(query);
+      this.styles = styles15;
+    }
+    /**
+     * Defines a function to construct {@link MatchMediaStyleSheetBehavior | MatchMediaStyleSheetBehaviors} for
+     * a provided query.
+     * @param query - The media query to operate from.
+     *
+     * @public
+     * @example
+     *
+     * ```ts
+     * import { css } from "@microsoft/fast-element";
+     * import { MatchMediaStyleSheetBehavior } from "@microsoft/fast-foundation";
+     *
+     * const landscapeBehavior = MatchMediaStyleSheetBehavior.with(
+     *   window.matchMedia("(orientation: landscape)")
+     * );
+     *
+     * const styles = css`
+     *   :host {
+     *     width: 200px;
+     *     height: 400px;
+     *   }
+     * `
+     * .withBehaviors(landscapeBehavior(css`
+     *   :host {
+     *     width: 400px;
+     *     height: 200px;
+     *   }
+     * `))
+     * ```
+     */
+    static with(query) {
+      return (styles15) => {
+        return new _MatchMediaStyleSheetBehavior(query, styles15);
+      };
+    }
+    /**
+     * Constructs a match-media listener for a provided element.
+     * @param source - the element for which to attach or detach styles.
+     */
+    constructListener(controller) {
+      let attached = false;
+      const styles15 = this.styles;
+      return function listener() {
+        const { matches } = this;
+        if (matches && !attached) {
+          controller.addStyles(styles15);
+          attached = matches;
+        } else if (!matches && attached) {
+          controller.removeStyles(styles15);
+          attached = matches;
+        }
+      };
+    }
+    /**
+     * Unbinds the behavior from the element.
+     * @param controller - The host controller orchestrating this behavior.
+     * @internal
+     */
+    removedCallback(controller) {
+      controller.removeStyles(this.styles);
+    }
+  };
+  var forcedColorsStylesheetBehavior = MatchMediaStyleSheetBehavior.with(window.matchMedia("(forced-colors)"));
+  var darkModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(window.matchMedia("(prefers-color-scheme: dark)"));
+  var lightModeStylesheetBehavior = MatchMediaStyleSheetBehavior.with(window.matchMedia("(prefers-color-scheme: light)"));
+
+  // ../../phoenixui/node_modules/@microsoft/fast-foundation/dist/esm/utilities/style/display.js
+  var hidden = `:host([hidden]){display:none}`;
+  function display(displayValue) {
+    return `${hidden}:host{display:${displayValue}}`;
+  }
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/theme/design-tokens.js
+  var colorNeutralForeground1 = "--colorNeutralForeground1";
+  var colorNeutralForeground1Hover = "--colorNeutralForeground1Hover";
+  var colorNeutralForeground1Pressed = "--colorNeutralForeground1Pressed";
+  var colorNeutralForeground2 = "--colorNeutralForeground2";
+  var colorNeutralForeground2Hover = "--colorNeutralForeground2Hover";
+  var colorNeutralForeground2Pressed = "--colorNeutralForeground2Pressed";
+  var colorNeutralForeground2BrandHover = "--colorNeutralForeground2BrandHover";
+  var colorNeutralForeground2BrandPressed = "--colorNeutralForeground2BrandPressed";
+  var colorNeutralForegroundDisabled = "--colorNeutralForegroundDisabled";
+  var colorNeutralForegroundOnBrand = "--colorNeutralForegroundOnBrand";
+  var colorNeutralBackground1 = "--colorNeutralBackground1";
+  var colorNeutralBackground1Hover = "--colorNeutralBackground1Hover";
+  var colorNeutralBackground1Pressed = "--colorNeutralBackground1Pressed";
+  var colorSubtleBackground = "--colorSubtleBackground";
+  var colorSubtleBackgroundHover = "--colorSubtleBackgroundHover";
+  var colorSubtleBackgroundPressed = "--colorSubtleBackgroundPressed";
+  var colorTransparentBackground = "--colorTransparentBackground";
+  var colorTransparentBackgroundHover = "--colorTransparentBackgroundHover";
+  var colorTransparentBackgroundPressed = "--colorTransparentBackgroundPressed";
+  var colorNeutralBackgroundDisabled = "--colorNeutralBackgroundDisabled";
+  var colorBrandBackground = "--colorBrandBackground";
+  var colorBrandBackgroundHover = "--colorBrandBackgroundHover";
+  var colorBrandBackgroundPressed = "--colorBrandBackgroundPressed";
+  var colorNeutralStroke1 = "--colorNeutralStroke1";
+  var colorNeutralStroke1Hover = "--colorNeutralStroke1Hover";
+  var colorNeutralStroke1Pressed = "--colorNeutralStroke1Pressed";
+  var colorNeutralStrokeDisabled = "--colorNeutralStrokeDisabled";
+  var colorTransparentStroke = "--colorTransparentStroke";
+  var colorStrokeFocus2 = "--colorStrokeFocus2";
+  var borderRadiusNone = "--borderRadiusNone";
+  var borderRadiusSmall = "--borderRadiusSmall";
+  var borderRadiusMedium = "--borderRadiusMedium";
+  var borderRadiusLarge = "--borderRadiusLarge";
+  var borderRadiusCircular = "--borderRadiusCircular";
+  var fontFamilyBase = "--fontFamilyBase";
+  var fontSizeBase200 = "--fontSizeBase200";
+  var fontSizeBase300 = "--fontSizeBase300";
+  var fontSizeBase400 = "--fontSizeBase400";
+  var fontWeightRegular = "--fontWeightRegular";
+  var fontWeightSemibold = "--fontWeightSemibold";
+  var lineHeightBase200 = "--lineHeightBase200";
+  var lineHeightBase300 = "--lineHeightBase300";
+  var lineHeightBase400 = "--lineHeightBase400";
+  var shadow2 = "--shadow2";
+  var shadow4 = "--shadow4";
+  var strokeWidthThin = "--strokeWidthThin";
+  var strokeWidthThick = "--strokeWidthThick";
+  var spacingHorizontalXS = "--spacingHorizontalXS";
+  var spacingHorizontalSNudge = "--spacingHorizontalSNudge";
+  var spacingHorizontalS = "--spacingHorizontalS";
+  var spacingHorizontalM = "--spacingHorizontalM";
+  var spacingHorizontalL = "--spacingHorizontalL";
+  var durationFaster = "--durationFaster";
+  var curveEasyEase = "--curveEasyEase";
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/button/button.options.js
+  var ButtonType = {
+    submit: "submit",
+    reset: "reset",
+    button: "button"
+  };
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/button/button.styles.js
+  var styles = css2`
+  ${display("inline-flex")}
+
+  :host {
+    --icon-spacing: var(${spacingHorizontalSNudge});
+    contain: layout style;
+    vertical-align: middle;
+  }
+
+  :host .control {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+    text-decoration-line: none;
+    margin: 0;
+    min-height: 32px;
+    outline-style: none;
+    background-color: var(${colorNeutralBackground1});
+    color: var(${colorNeutralForeground1});
+    border: var(${strokeWidthThin}) solid var(${colorNeutralStroke1});
+    padding: 0 var(${spacingHorizontalM});
+    min-width: 96px;
+    border-radius: var(${borderRadiusMedium});
+    font-size: var(${fontSizeBase300});
+    font-family: var(${fontFamilyBase});
+    font-weight: var(${fontWeightSemibold});
+    line-height: var(${lineHeightBase300});
+    transition-duration: var(${durationFaster});
+    transition-property: background, border, color;
+    transition-timing-function: var(${curveEasyEase});
+    cursor: pointer;
+  }
+
+  .content {
+    display: inherit;
+  }
+
+  :host(:hover) .control {
+    background-color: var(${colorNeutralBackground1Hover});
+    color: var(${colorNeutralForeground1Hover});
+    border-color: var(${colorNeutralStroke1Hover});
+  }
+
+  :host(:hover:active) .control {
+    background-color: var(${colorNeutralBackground1Pressed});
+    border-color: var(${colorNeutralStroke1Pressed});
+    color: var(${colorNeutralForeground1Pressed});
+    outline-style: none;
+  }
+
+  :host .control:focus-visible {
+    border-color: var(${colorTransparentStroke});
+    outline: var(${strokeWidthThick}) solid var(${colorTransparentStroke});
+    box-shadow: var(${shadow4}), 0 0 0 2px var(${colorStrokeFocus2});
+  }
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition-duration: 0.01ms;
+  }
+
+  ::slotted(svg) {
+    font-size: 20px;
+    height: 20px;
+    width: 20px;
+    fill: currentColor;
+  }
+
+  [slot='start'],
+  ::slotted([slot='start']) {
+    margin-inline-end: var(--icon-spacing);
+  }
+
+  [slot='end'],
+  ::slotted([slot='end']) {
+    margin-inline-start: var(--icon-spacing);
+  }
+
+  :host([icon-only]) .control {
+    min-width: 32px;
+    max-width: 32px;
+  }
+
+  :host([size='small']) {
+    --icon-spacing: var(${spacingHorizontalXS});
+  }
+
+  :host([size='small']) .control {
+    min-height: 24px;
+    min-width: 64px;
+    padding: 0 var(${spacingHorizontalS});
+    border-radius: var(${borderRadiusSmall});
+    font-size: var(${fontSizeBase200});
+    line-height: var(${lineHeightBase200});
+    font-weight: var(${fontWeightRegular});
+  }
+
+  :host([size='small'][icon-only]) .control {
+    min-width: 24px;
+    max-width: 24px;
+  }
+
+  :host([size='large']) .control {
+    min-height: 40px;
+    border-radius: var(${borderRadiusLarge});
+    padding: 0 var(${spacingHorizontalL});
+    font-size: var(${fontSizeBase400});
+    line-height: var(${lineHeightBase400});
+  }
+
+  :host([size='large'][icon-only]) .control {
+    min-width: 40px;
+    max-width: 40px;
+  }
+
+  :host([size='large']) ::slotted(svg) {
+    font-size: 24px;
+    height: 24px;
+    width: 24px;
+  }
+
+  :host([shape='circular']) .control,
+  :host([shape='circular']) .control:focus-visible {
+    border-radius: var(${borderRadiusCircular});
+  }
+
+  :host([shape='square']) .control,
+  :host([shape='square']) .control:focus-visible {
+    border-radius: var(${borderRadiusNone});
+  }
+
+  :host([appearance='primary']) .control {
+    background-color: var(${colorBrandBackground});
+    color: var(${colorNeutralForegroundOnBrand});
+    border-color: transparent;
+  }
+
+  :host([appearance='primary']:hover) .control {
+    background-color: var(${colorBrandBackgroundHover});
+  }
+
+  :host([appearance='primary']:hover) .control,
+  :host([appearance='primary']:hover:active) .control {
+    border-color: transparent;
+    color: var(${colorNeutralForegroundOnBrand});
+  }
+
+  :host([appearance='primary']:hover:active) .control {
+    background-color: var(${colorBrandBackgroundPressed});
+  }
+
+  :host([appearance='primary']) .control:focus-visible {
+    border-color: var(${colorNeutralForegroundOnBrand});
+    box-shadow: var(${shadow2}), 0 0 0 2px var(${colorStrokeFocus2});
+  }
+
+  :host(is:([disabled][appearance='primary'], [disabled-focusabale][appearance="primary"])) .control,
+  :host(is:([disabled][appearance='primary'], [disabled-focusabale][appearance="primary"]):hover) .control,
+  :host(is:([disabled][appearance='primary'], [disabled-focusabale][appearance="primary"]):hover:active) .control {
+    border-color: transparent;
+  }
+
+  :host([appearance='outline']) .control {
+    background-color: var(${colorTransparentBackground});
+  }
+
+  :host([appearance='outline']:hover) .control {
+    background-color: var(${colorTransparentBackgroundHover});
+  }
+
+  :host([appearance='outline']:hover:active) .control {
+    background-color: var(${colorTransparentBackgroundPressed});
+  }
+
+  :host(is:([disabled][appearance='outline'], [disabled-focusabale][appearance="outline"])) .control,
+  :host(is:([disabled][appearance='outline'], [disabled-focusabale][appearance="outline"]):hover) .control,
+  :host(is:([disabled][appearance='outline'], [disabled-focusabale][appearance="outline"]):hover:active) .control {
+    background-color: var(${colorTransparentBackground});
+  }
+
+  :host([appearance='subtle']) .control {
+    background-color: var(${colorSubtleBackground});
+    color: var(${colorNeutralForeground2});
+    border-color: transparent;
+  }
+
+  :host([appearance='subtle']:hover) .control {
+    background-color: var(${colorSubtleBackgroundHover});
+    color: var(${colorNeutralForeground2Hover});
+    border-color: transparent;
+  }
+
+  :host([appearance='subtle']:hover:active) .control {
+    background-color: var(${colorSubtleBackgroundPressed});
+    color: var(${colorNeutralForeground2Pressed});
+    border-color: transparent;
+  }
+
+  :host(is:([disabled][appearance='subtle'], [disabled-focusabale][appearance="subtle"])) .control,
+  :host(is:([disabled][appearance='subtle'], [disabled-focusabale][appearance="subtle"]):hover) .control,
+  :host(is:([disabled][appearance='subtle'], [disabled-focusabale][appearance="subtle"]):hover:active) .control {
+    background-color: var(${colorTransparentBackground});
+    border-color: transparent;
+  }
+
+  :host([appearance='subtle']:hover) ::slotted(svg) {
+    fill: var(${colorNeutralForeground2BrandHover});
+  }
+
+  :host([appearance='subtle']:hover:active) ::slotted(svg) {
+    fill: var(${colorNeutralForeground2BrandPressed});
+  }
+
+  :host([appearance='transparent']) .control {
+    background-color: var(${colorTransparentBackground});
+    color: var(${colorNeutralForeground2});
+  }
+
+  :host([appearance='transparent']:hover) .control {
+    background-color: var(${colorTransparentBackgroundHover});
+    color: var(${colorNeutralForeground2BrandHover});
+  }
+
+  :host([appearance='transparent']:hover:active) .control {
+    background-color: var(${colorTransparentBackgroundPressed});
+    color: var(${colorNeutralForeground2BrandPressed});
+  }
+
+  :host([appearance='transparent']) .control,
+  :host([appearance='transparent']:hover) .control,
+  :host([appearance='transparent']:hover:active) .control {
+    border-color: transparent;
+  }
+
+  :host(is:([disabled][appearance='transparent'], [disabled-focusabale][appearance="transparent"])) .control,
+  :host(is:([disabled][appearance='transparent'], [disabled-focusabale][appearance="transparent"]):hover) .control,
+  :host(is:([disabled][appearance='transparent'], [disabled-focusabale][appearance="transparent"]):hover:active) .control {
+    border-color: transparent;
+    background-color: var(${colorTransparentBackground});
+  }
+
+  :host(:is([disabled], [disabled-focusable], [appearance][disabled], [appearance][disabled-focusable])) .control,
+  :host(:is([disabled], [disabled-focusable], [appearance][disabled], [appearance][disabled-focusable]):hover) .control,
+  :host(:is([disabled], [disabled-focusable], [appearance][disabled], [appearance][disabled-focusable]):hover:active)
+    .control {
+    background-color: var(${colorNeutralBackgroundDisabled});
+    border-color: var(${colorNeutralStrokeDisabled});
+    color: var(${colorNeutralForegroundDisabled});
+    cursor: not-allowed;
+  }
+`.withBehaviors(forcedColorsStylesheetBehavior(css2`
+    :host([appearance='transparent']:hover) .control {
+      border-color: Highlight;
+    }
+  `));
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/form-associated/form-associated.js
+  var proxySlotName = "form-associated-proxy";
+  var ElementInternalsKey = "ElementInternals";
+  var supportsElementInternals = ElementInternalsKey in window && "setFormValue" in window[ElementInternalsKey].prototype;
+  var InternalsMap = /* @__PURE__ */ new WeakMap();
+  function FormAssociated(BaseCtor) {
+    const C = class extends BaseCtor {
+      constructor(...args) {
+        super(...args);
+        this.dirtyValue = false;
+        this.initialValue = "";
+        this.disabled = false;
+        this.proxyEventsToBlock = ["change", "click"];
+        this.proxyInitialized = false;
+        this.required = false;
+        this.initialValue = this.initialValue || "";
+        if (!this.elementInternals) {
+          this.formResetCallback = this.formResetCallback.bind(this);
+        }
+      }
+      /**
+       * Must evaluate to true to enable elementInternals.
+       * Feature detects API support and resolve respectively
+       *
+       * @internal
+       */
+      static get formAssociated() {
+        return supportsElementInternals;
+      }
+      /**
+       * Returns the validity state of the element
+       *
+       * @beta
+       */
+      get validity() {
+        return this.elementInternals ? this.elementInternals.validity : this.proxy.validity;
+      }
+      /**
+       * Retrieve a reference to the associated form.
+       * Returns null if not associated to any form.
+       *
+       * @beta
+       */
+      get form() {
+        return this.elementInternals ? this.elementInternals.form : this.proxy.form;
+      }
+      /**
+       * Retrieve the localized validation message,
+       * or custom validation message if set.
+       *
+       * @beta
+       */
+      get validationMessage() {
+        return this.elementInternals ? this.elementInternals.validationMessage : this.proxy.validationMessage;
+      }
+      /**
+       * Whether the element will be validated when the
+       * form is submitted
+       */
+      get willValidate() {
+        return this.elementInternals ? this.elementInternals.willValidate : this.proxy.willValidate;
+      }
+      /**
+       * A reference to all associated label elements
+       */
+      get labels() {
+        if (this.elementInternals) {
+          return Object.freeze(Array.from(this.elementInternals.labels));
+        } else if (this.proxy instanceof HTMLElement && this.proxy.ownerDocument && this.id) {
+          const parentLabels = this.proxy.labels;
+          const forLabels = Array.from(this.proxy.getRootNode().querySelectorAll(`[for='${this.id}']`));
+          const labels = parentLabels ? forLabels.concat(Array.from(parentLabels)) : forLabels;
+          return Object.freeze(labels);
+        } else {
+          return emptyArray2;
+        }
+      }
+      /**
+       * Invoked when the `value` property changes
+       * @param previous - the previous value
+       * @param next - the new value
+       *
+       * @remarks
+       * If elements extending `FormAssociated` implement a `valueChanged` method
+       * They must be sure to invoke `super.valueChanged(previous, next)` to ensure
+       * proper functioning of `FormAssociated`
+       */
+      valueChanged(previous, next3) {
+        this.dirtyValue = true;
+        if (this.proxy instanceof HTMLElement) {
+          this.proxy.value = this.value;
+        }
+        this.currentValue = this.value;
+        this.setFormValue(this.value);
+        this.validate();
+      }
+      currentValueChanged() {
+        this.value = this.currentValue;
+      }
+      /**
+       * Invoked when the `initialValue` property changes
+       *
+       * @param previous - the previous value
+       * @param next - the new value
+       *
+       * @remarks
+       * If elements extending `FormAssociated` implement a `initialValueChanged` method
+       * They must be sure to invoke `super.initialValueChanged(previous, next)` to ensure
+       * proper functioning of `FormAssociated`
+       */
+      initialValueChanged(previous, next3) {
+        if (!this.dirtyValue) {
+          this.value = this.initialValue;
+          this.dirtyValue = false;
+        }
+      }
+      /**
+       * Invoked when the `disabled` property changes
+       *
+       * @param previous - the previous value
+       * @param next - the new value
+       *
+       * @remarks
+       * If elements extending `FormAssociated` implement a `disabledChanged` method
+       * They must be sure to invoke `super.disabledChanged(previous, next)` to ensure
+       * proper functioning of `FormAssociated`
+       */
+      disabledChanged(previous, next3) {
+        if (this.proxy instanceof HTMLElement) {
+          this.proxy.disabled = this.disabled;
+        }
+        Updates2.enqueue(() => this.classList.toggle("disabled", this.disabled));
+      }
+      /**
+       * Invoked when the `name` property changes
+       *
+       * @param previous - the previous value
+       * @param next - the new value
+       *
+       * @remarks
+       * If elements extending `FormAssociated` implement a `nameChanged` method
+       * They must be sure to invoke `super.nameChanged(previous, next)` to ensure
+       * proper functioning of `FormAssociated`
+       */
+      nameChanged(previous, next3) {
+        if (this.proxy instanceof HTMLElement) {
+          this.proxy.name = this.name;
+        }
+      }
+      /**
+       * Invoked when the `required` property changes
+       *
+       * @param previous - the previous value
+       * @param next - the new value
+       *
+       * @remarks
+       * If elements extending `FormAssociated` implement a `requiredChanged` method
+       * They must be sure to invoke `super.requiredChanged(previous, next)` to ensure
+       * proper functioning of `FormAssociated`
+       */
+      requiredChanged(prev, next3) {
+        if (this.proxy instanceof HTMLElement) {
+          this.proxy.required = this.required;
+        }
+        Updates2.enqueue(() => this.classList.toggle("required", this.required));
+        this.validate();
+      }
+      /**
+       * The element internals object. Will only exist
+       * in browsers supporting the attachInternals API
+       */
+      get elementInternals() {
+        if (!supportsElementInternals) {
+          return null;
+        }
+        let internals = InternalsMap.get(this);
+        if (!internals) {
+          internals = this.attachInternals();
+          InternalsMap.set(this, internals);
+        }
+        return internals;
+      }
+      /**
+       * @internal
+       */
+      connectedCallback() {
+        super.connectedCallback();
+        this.addEventListener("keypress", this._keypressHandler);
+        if (!this.value) {
+          this.value = this.initialValue;
+          this.dirtyValue = false;
+        }
+        if (!this.elementInternals) {
+          this.attachProxy();
+          if (this.form) {
+            this.form.addEventListener("reset", this.formResetCallback);
+          }
+        }
+      }
+      /**
+       * @internal
+       */
+      disconnectedCallback() {
+        this.proxyEventsToBlock.forEach((name) => this.proxy.removeEventListener(name, this.stopPropagation));
+        if (!this.elementInternals && this.form) {
+          this.form.removeEventListener("reset", this.formResetCallback);
+        }
+      }
+      /**
+       * Return the current validity of the element.
+       */
+      checkValidity() {
+        return this.elementInternals ? this.elementInternals.checkValidity() : this.proxy.checkValidity();
+      }
+      /**
+       * Return the current validity of the element.
+       * If false, fires an invalid event at the element.
+       */
+      reportValidity() {
+        return this.elementInternals ? this.elementInternals.reportValidity() : this.proxy.reportValidity();
+      }
+      /**
+       * Set the validity of the control. In cases when the elementInternals object is not
+       * available (and the proxy element is used to report validity), this function will
+       * do nothing unless a message is provided, at which point the setCustomValidity method
+       * of the proxy element will be invoked with the provided message.
+       * @param flags - Validity flags
+       * @param message - Optional message to supply
+       * @param anchor - Optional element used by UA to display an interactive validation UI
+       */
+      setValidity(flags, message, anchor2) {
+        if (this.elementInternals) {
+          this.elementInternals.setValidity(flags, message, anchor2);
+        } else if (typeof message === "string") {
+          this.proxy.setCustomValidity(message);
+        }
+      }
+      /**
+       * Invoked when a connected component's form or fieldset has its disabled
+       * state changed.
+       * @param disabled - the disabled value of the form / fieldset
+       */
+      formDisabledCallback(disabled) {
+        this.disabled = disabled;
+      }
+      formResetCallback() {
+        this.value = this.initialValue;
+        this.dirtyValue = false;
+      }
+      /**
+       * Attach the proxy element to the DOM
+       */
+      attachProxy() {
+        var _a;
+        if (!this.proxyInitialized) {
+          this.proxyInitialized = true;
+          this.proxy.style.display = "none";
+          this.proxyEventsToBlock.forEach((name) => this.proxy.addEventListener(name, this.stopPropagation));
+          this.proxy.disabled = this.disabled;
+          this.proxy.required = this.required;
+          if (typeof this.name === "string") {
+            this.proxy.name = this.name;
+          }
+          if (typeof this.value === "string") {
+            this.proxy.value = this.value;
+          }
+          this.proxy.setAttribute("slot", proxySlotName);
+          this.proxySlot = document.createElement("slot");
+          this.proxySlot.setAttribute("name", proxySlotName);
+        }
+        (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.appendChild(this.proxySlot);
+        this.appendChild(this.proxy);
+      }
+      /**
+       * Detach the proxy element from the DOM
+       */
+      detachProxy() {
+        var _a;
+        this.removeChild(this.proxy);
+        (_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.removeChild(this.proxySlot);
+      }
+      /** {@inheritDoc (FormAssociated:interface).validate} */
+      validate(anchor2) {
+        if (this.proxy instanceof HTMLElement) {
+          this.setValidity(this.proxy.validity, this.proxy.validationMessage, anchor2);
+        }
+      }
+      /**
+       * Associates the provided value (and optional state) with the parent form.
+       * @param value - The value to set
+       * @param state - The state object provided to during session restores and when autofilling.
+       */
+      setFormValue(value, state) {
+        if (this.elementInternals) {
+          this.elementInternals.setFormValue(value, state || value);
+        }
+      }
+      _keypressHandler(e) {
+        switch (e.key) {
+          case keyEnter:
+            if (this.form instanceof HTMLFormElement) {
+              const defaultButton = this.form.querySelector("[type=submit]");
+              defaultButton === null || defaultButton === void 0 ? void 0 : defaultButton.click();
+            }
+            break;
+        }
+      }
+      /**
+       * Used to stop propagation of proxy element events
+       * @param e - Event object
+       */
+      stopPropagation(e) {
+        e.stopPropagation();
+      }
+    };
+    attr2({ mode: "boolean" })(C.prototype, "disabled");
+    attr2({ mode: "fromView", attribute: "value" })(C.prototype, "initialValue");
+    attr2({ attribute: "current-value" })(C.prototype, "currentValue");
+    attr2(C.prototype, "name");
+    attr2({ mode: "boolean" })(C.prototype, "required");
+    observable2(C.prototype, "value");
+    return C;
+  }
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/button/button.form-associated.js
+  var _Button = class extends FASTElement2 {
+  };
+  var FormAssociatedButton = class extends FormAssociated(_Button) {
+    constructor() {
+      super(...arguments);
+      this.proxy = document.createElement("input");
+    }
+  };
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/button/button.js
+  var __decorate2 = function(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+      r = Reflect.decorate(decorators, target, key, desc);
+    else
+      for (var i = decorators.length - 1; i >= 0; i--)
+        if (d = decorators[i])
+          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var Button = class extends FormAssociatedButton {
+    constructor() {
+      super(...arguments);
+      this.iconOnly = false;
+      this.disabledFocusable = false;
+      this.handleDisabledFocusableClick = (e) => {
+        if (e && this.disabledFocusable) {
+          e.stopImmediatePropagation();
+          return;
+        }
+      };
+      this.handleSubmission = () => {
+        if (!this.form) {
+          return;
+        }
+        const attached = this.proxy.isConnected;
+        if (!attached) {
+          this.attachProxy();
+        }
+        typeof this.form.requestSubmit === "function" ? this.form.requestSubmit(this.proxy) : this.proxy.click();
+        if (!attached) {
+          this.detachProxy();
+        }
+      };
+      this.handleFormReset = () => {
+        var _a;
+        (_a = this.form) === null || _a === void 0 ? void 0 : _a.reset();
+      };
+    }
+    formactionChanged() {
+      if (this.proxy instanceof HTMLInputElement) {
+        this.proxy.formAction = this.formaction;
+      }
+    }
+    formenctypeChanged() {
+      if (this.proxy instanceof HTMLInputElement) {
+        this.proxy.formEnctype = this.formenctype;
+      }
+    }
+    formmethodChanged() {
+      if (this.proxy instanceof HTMLInputElement) {
+        this.proxy.formMethod = this.formmethod;
+      }
+    }
+    formnovalidateChanged() {
+      if (this.proxy instanceof HTMLInputElement) {
+        this.proxy.formNoValidate = this.formnovalidate;
+      }
+    }
+    formtargetChanged() {
+      if (this.proxy instanceof HTMLInputElement) {
+        this.proxy.formTarget = this.formtarget;
+      }
+    }
+    typeChanged(previous, next3) {
+      if (this.proxy instanceof HTMLInputElement) {
+        this.proxy.type = this.type;
+      }
+      next3 === ButtonType.submit && this.addEventListener("click", this.handleSubmission);
+      previous === ButtonType.submit && this.removeEventListener("click", this.handleSubmission);
+      next3 === ButtonType.reset && this.addEventListener("click", this.handleFormReset);
+      previous === ButtonType.reset && this.removeEventListener("click", this.handleFormReset);
+    }
+    disabledFocusableChanged(prev, next3) {
+      if (!this.$fastController.isConnected) {
+        return;
+      }
+      if (this.disabledFocusable) {
+        this.setAttribute("aria-disabled", "true");
+      } else {
+        this.removeAttribute("aria-disabled");
+      }
+    }
+    /** {@inheritDoc (FormAssociated:interface).validate} */
+    validate() {
+      super.validate(this.control);
+    }
+    /**
+     * @internal
+     */
+    connectedCallback() {
+      super.connectedCallback();
+      this.proxy.setAttribute("type", this.type);
+      this.addEventListener("click", this.handleDisabledFocusableClick);
+    }
+    disconnectedCallback() {
+      super.disconnectedCallback();
+      this.removeEventListener("click", this.handleDisabledFocusableClick);
+    }
+  };
+  __decorate2([
+    attr2({ mode: "boolean" })
+  ], Button.prototype, "autofocus", void 0);
+  __decorate2([
+    attr2({ attribute: "form" })
+  ], Button.prototype, "formId", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "formaction", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "formenctype", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "formmethod", void 0);
+  __decorate2([
+    attr2({ mode: "boolean" })
+  ], Button.prototype, "formnovalidate", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "formtarget", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "type", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "appearance", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "shape", void 0);
+  __decorate2([
+    attr2
+  ], Button.prototype, "size", void 0);
+  __decorate2([
+    attr2({ attribute: "icon-only", mode: "boolean" })
+  ], Button.prototype, "iconOnly", void 0);
+  __decorate2([
+    attr2({ attribute: "disabled-focusable", mode: "boolean" })
+  ], Button.prototype, "disabledFocusable", void 0);
+  __decorate2([
+    observable2
+  ], Button.prototype, "defaultSlottedContent", void 0);
+  var DelegatesARIAButton = class {
+  };
+  __decorate2([
+    attr2({ attribute: "aria-expanded" })
+  ], DelegatesARIAButton.prototype, "ariaExpanded", void 0);
+  __decorate2([
+    attr2({ attribute: "aria-pressed" })
+  ], DelegatesARIAButton.prototype, "ariaPressed", void 0);
+  applyMixins(DelegatesARIAButton, ARIAGlobalStatesAndProperties);
+  applyMixins(Button, StartEnd, DelegatesARIAButton);
+
+  // ../../phoenixui/node_modules/@fluentui/web-components/dist/esm/button/button.template.js
+  function buttonTemplate(options = {}) {
+    return html2`
+    <button
+      class="control"
+      part="control"
+      ?autofocus="${(x) => x.autofocus}"
+      ?disabled="${(x) => x.disabled}"
+      form="${(x) => x.formId}"
+      formaction="${(x) => x.formaction}"
+      formenctype="${(x) => x.formenctype}"
+      formmethod="${(x) => x.formmethod}"
+      ?formnovalidate="${(x) => x.formnovalidate}"
+      formtarget="${(x) => x.formtarget}"
+      name="${(x) => x.name}"
+      type="${(x) => x.type}"
+      value="${(x) => x.value}"
+      aria-atomic="${(x) => x.ariaAtomic}"
+      aria-busy="${(x) => x.ariaBusy}"
+      aria-controls="${(x) => x.ariaControls}"
+      aria-current="${(x) => x.ariaCurrent}"
+      aria-describedby="${(x) => x.ariaDescribedby}"
+      aria-details="${(x) => x.ariaDetails}"
+      aria-disabled="${(x) => x.ariaDisabled}"
+      aria-errormessage="${(x) => x.ariaErrormessage}"
+      aria-expanded="${(x) => x.ariaExpanded}"
+      aria-flowto="${(x) => x.ariaFlowto}"
+      aria-haspopup="${(x) => x.ariaHaspopup}"
+      aria-hidden="${(x) => x.ariaHidden}"
+      aria-invalid="${(x) => x.ariaInvalid}"
+      aria-keyshortcuts="${(x) => x.ariaKeyshortcuts}"
+      aria-label="${(x) => x.ariaLabel}"
+      aria-labelledby="${(x) => x.ariaLabelledby}"
+      aria-live="${(x) => x.ariaLive}"
+      aria-owns="${(x) => x.ariaOwns}"
+      aria-pressed="${(x) => x.ariaPressed}"
+      aria-relevant="${(x) => x.ariaRelevant}"
+      aria-roledescription="${(x) => x.ariaRoledescription}"
+      ${ref("control")}
+    >
+      ${startSlotTemplate(options)}
+      <span class="content" part="content">
+        <slot ${slotted("defaultSlottedContent")}></slot>
+      </span>
+      ${endSlotTemplate(options)}
+    </button>
+  `;
+  }
+  var template = buttonTemplate();
+
   // ../../phoenixui/packages/themes/dist/index.esm.js
   var win11BorderRadius = {
     borderRadiusLayerApp: "8px",
@@ -5142,7 +9077,7 @@
     acrylicBackgroundImage: "none",
     micaBackdropFilter: "blur(120px) saturate(150%)",
     micaBackgroundBlendMode: "luminosity",
-    micaBackgroundColor: "#F0F0F0B9",
+    micaBackgroundColor: "#F0F0F0C8",
     micaBackgroundImage: "none",
     micaInactiveBackgroundColor: "#E5E5E5D9"
   };
@@ -5164,7 +9099,7 @@
     acrylicBackgroundImage: "linear-gradient(0deg, #2C2C2C26, #2C2C2C26), none",
     micaBackdropFilter: "blur(120px) saturate(150%)",
     micaBackgroundBlendMode: "color, luminosity",
-    micaBackgroundColor: "#141414B9",
+    micaBackgroundColor: "#141414C8",
     micaBackgroundImage: "linear-gradient(0deg, #2C2C2C26, #2C2C2C26), none",
     micaInactiveBackgroundColor: "#202020D9"
   };
@@ -7471,22 +11406,23 @@
     ...durationTokens,
     ...darkThemeUtilities
   };
-  var borderRadiusSmall = "var(--borderRadiusSmall)";
-  var borderRadiusMedium = "var(--borderRadiusMedium)";
-  var fontSizeBase200 = "var(--fontSizeBase200)";
-  var fontSizeBase300 = "var(--fontSizeBase300)";
-  var lineHeightBase200 = "var(--lineHeightBase200)";
-  var lineHeightBase300 = "var(--lineHeightBase300)";
-  var fontFamilyBase = "var(--fontFamilyBase)";
-  var fontWeightRegular = "var(--fontWeightRegular)";
-  var strokeWidthThin = "var(--strokeWidthThin)";
-  var spacingHorizontalXS = "var(--spacingHorizontalXS)";
-  var spacingHorizontalS = "var(--spacingHorizontalS)";
-  var spacingHorizontalM = "var(--spacingHorizontalM)";
-  var spacingHorizontalL = "var(--spacingHorizontalL)";
-  var colorNeutralForeground1 = "var(--colorNeutralForeground1)";
+  var borderRadiusSmall2 = "var(--borderRadiusSmall)";
+  var borderRadiusMedium2 = "var(--borderRadiusMedium)";
+  var fontSizeBase2002 = "var(--fontSizeBase200)";
+  var fontSizeBase3002 = "var(--fontSizeBase300)";
+  var lineHeightBase2002 = "var(--lineHeightBase200)";
+  var lineHeightBase3002 = "var(--lineHeightBase300)";
+  var fontFamilyBase2 = "var(--fontFamilyBase)";
+  var fontWeightRegular2 = "var(--fontWeightRegular)";
+  var strokeWidthThin2 = "var(--strokeWidthThin)";
+  var spacingHorizontalXS2 = "var(--spacingHorizontalXS)";
+  var spacingHorizontalS2 = "var(--spacingHorizontalS)";
+  var spacingHorizontalM2 = "var(--spacingHorizontalM)";
+  var spacingHorizontalL2 = "var(--spacingHorizontalL)";
+  var spacingVerticalXXS = "var(--spacingVerticalXXS)";
+  var colorNeutralForeground12 = "var(--colorNeutralForeground1)";
   var colorNeutralForeground4 = "var(--colorNeutralForeground4)";
-  var colorNeutralStroke1 = "var(--colorNeutralStroke1)";
+  var colorNeutralStroke12 = "var(--colorNeutralStroke1)";
   var shadow28 = "var(--shadow28)";
   var micaBackdropFilter = "var(--micaBackdropFilter)";
   var micaBackgroundBlendMode = "var(--micaBackgroundBlendMode)";
@@ -7494,13 +11430,23 @@
   var shadowBaseLayer = "var(--shadowBaseLayer)";
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
-  // ../../phoenixui/packages/web-components/dist/index.esm.js
+  // ../../phoenixui/packages/web-components/dist/esm/theme.js
   var setTheme = (theme, element = document.body) => {
     const tokenNames = Object.keys(theme);
     for (const t of tokenNames) {
       element.style.setProperty(`--${t}`, theme[t]);
     }
   };
+
+  // ../../phoenixui/packages/web-components/dist/esm/Button/definition.js
+  var definition = Button.compose({
+    name: `phx-button`,
+    template,
+    styles,
+    shadowOptions: {
+      delegatesFocus: true
+    }
+  });
 
   // src/windows/designSystem.ts
   var commonThemeOverrides = {
@@ -7553,14 +11499,14 @@
       this.activeWindowId = null;
     }
     openWindow(appName) {
-      const id3 = crypto.randomUUID();
+      const id5 = crypto.randomUUID();
       const width = Math.min(window.innerWidth - 48, 1920);
       let height = width * 0.75;
       height = Math.min(height, window.innerHeight - 96);
       this.windows = [
         ...this.windows,
         {
-          id: id3,
+          id: id5,
           appName,
           height,
           maximized: false,
@@ -7573,36 +11519,36 @@
           zIndex: this.windows.length + 1
         }
       ];
-      this.activeWindowId = id3;
-      return id3;
+      this.activeWindowId = id5;
+      return id5;
     }
-    closeWindow(id3) {
-      this.windows = this.windows.filter((w) => w.id !== id3);
-      this.activateNextWindow(id3);
+    closeWindow(id5) {
+      this.windows = this.windows.filter((w) => w.id !== id5);
+      this.activateNextWindow(id5);
     }
-    activateWindow(id3) {
-      this.activeWindowId = id3;
+    activateWindow(id5) {
+      this.activeWindowId = id5;
     }
-    activateNextWindow(id3) {
-      if (this.activeWindowId === id3) {
-        this.activeWindowId = this.windows.find((win) => win.id !== id3 && !win.minimized)?.id || null;
+    activateNextWindow(id5) {
+      if (this.activeWindowId === id5) {
+        this.activeWindowId = this.windows.find((win) => win.id !== id5 && !win.minimized)?.id || null;
       }
     }
-    minimizeWindow(id3) {
+    minimizeWindow(id5) {
       this.windows = this.windows.map(
-        (w) => w.id === id3 ? { ...w, minimized: true } : w
+        (w) => w.id === id5 ? { ...w, minimized: true } : w
       );
-      this.activateNextWindow(id3);
+      this.activateNextWindow(id5);
     }
-    restoreWindow(id3) {
+    restoreWindow(id5) {
       this.windows = this.windows.map(
-        (w) => w.id === id3 ? { ...w, minimized: false, maximized: false } : w
+        (w) => w.id === id5 ? { ...w, minimized: false, maximized: false } : w
       );
-      this.activateWindow(id3);
+      this.activateWindow(id5);
     }
-    maximizeWindow(id3) {
+    maximizeWindow(id5) {
       this.windows = this.windows.map(
-        (w) => w.id === id3 ? { ...w, maximized: true } : w
+        (w) => w.id === id5 ? { ...w, maximized: true } : w
       );
     }
   };
@@ -7616,9 +11562,93 @@
     observable
   ], WindowsService.prototype, "activeWindowId", 2);
 
+  // src/services/edgeService.ts
+  var EdgeSerivce = class {
+    constructor() {
+      this.theme = "system";
+      this.showFavoritesBar = "always";
+      this.showSideBar = true;
+    }
+  };
+  __decorateClass([
+    observable
+  ], EdgeSerivce.prototype, "theme", 2);
+  __decorateClass([
+    observable
+  ], EdgeSerivce.prototype, "showFavoritesBar", 2);
+  __decorateClass([
+    observable
+  ], EdgeSerivce.prototype, "showSideBar", 2);
+
+  // src/services/edgeWindowService.ts
+  var EdgeWindowSerivce = class {
+  };
+
+  // ../../phoenixui/packages/web-components/dist/esm/button/define.js
+  definition.define(customElements);
+
+  // src/edge/views/tabBar.ts
+  var template2 = html`
+  <div class="group">
+    <identity-control></identity-control>
+  </div>
+  <div class="group">
+    <phx-button appearance="subtle" icon-only>
+      <svg>
+        <use href="img/edge/icons.svg#layer-diagonal-20-regular"></use>
+      </svg>
+    </phx-button>
+    <phx-button appearance="subtle" icon-only>
+      <svg>
+        <use href="img/edge/icons.svg#tab-position-horizontal-20-regular"></use>
+      </svg>
+    </phx-button>
+  </div>
+`;
+  var styles2 = css`
+  :host {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 40px;
+    padding-inline: ${spacingHorizontalXS2};
+    padding-block-end: ${spacingVerticalXXS};
+  }
+
+  .group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalXS2};
+  }
+`;
+  var TabBar = class extends FASTElement {
+    connectedCallback() {
+      super.connectedCallback();
+    }
+  };
+  TabBar = __decorateClass([
+    customElement({
+      name: "tab-bar",
+      template: template2,
+      styles: styles2
+    })
+  ], TabBar);
+
   // src/edge/index.ts
-  var template = html`Edge`;
-  var styles = `
+  var template3 = html`
+  <tab-bar></tab-bar>
+  <address-bar></address-bar>
+  <div class="row">
+    <div class="column">
+      ${(x) => x.es.showFavoritesBar === "always" ? html`<favorites-bar></favorites-bar>` : ""}
+      <web-content></web-content>
+    </div>
+    ${(x) => x.es.showSideBar ? html`<side-bar></side-bar>` : ""}
+  </div>
+`;
+  var styles3 = css`
   :host {
     display: block;
     width: 100%;
@@ -7626,20 +11656,39 @@
     background: ${micaBackgroundColor};
     backdrop-filter: ${micaBackdropFilter};
     background-blend-mode: ${micaBackgroundBlendMode};
+    color: ${colorNeutralForeground12};
+    fill: currentColor;
+
+    /* body1 */
+    font-family: ${fontFamilyBase2};
+    font-size: ${fontSizeBase3002};
+    font-weight: ${fontWeightRegular2};
+    line-height: ${lineHeightBase3002};
   }
 `;
   var MicrosoftEdge = class extends FASTElement {
+    constructor() {
+      super(...arguments);
+      this.ews = new EdgeWindowSerivce();
+    }
     connectedCallback() {
       super.connectedCallback();
-      console.log("Microsoft Edge connected");
-      setTheme(phoenixLightThemeWin11, this);
+      const selectedTheme = this.es.theme === "system" ? this.ws.theme : this.es.theme;
+      const derivedTheme = selectedTheme === "dark" ? phoenixDarkThemeWin11 : phoenixLightThemeWin11;
+      setTheme(derivedTheme, this);
     }
   };
+  __decorateClass([
+    inject(WindowsService)
+  ], MicrosoftEdge.prototype, "ws", 2);
+  __decorateClass([
+    inject(EdgeSerivce)
+  ], MicrosoftEdge.prototype, "es", 2);
   MicrosoftEdge = __decorateClass([
     customElement({
       name: "microsoft-edge",
-      template,
-      styles
+      template: template3,
+      styles: styles3
     })
   ], MicrosoftEdge);
 
@@ -7686,14 +11735,14 @@
   ];
 
   // src/windows/controls/taskbarButton.ts
-  var template2 = html`
+  var template4 = html`
   <button>
     <slot></slot>
     <div part="backplate"></div>
     <div part="indicator"></div>
   </button>
 `;
-  var styles2 = css`
+  var styles4 = css`
   button {
     position: relative;
     width: 44px;
@@ -7707,7 +11756,7 @@
   [part='backplate'] {
     position: absolute;
     inset: 2px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     overflow: hidden;
     z-index: -1;
   }
@@ -7715,12 +11764,12 @@
   button:hover [part='backplate'],
   :host([running][active]) [part='backplate'] {
     background: ${colorShellFillTaksbarItemSecondary};
-    border: ${strokeWidthThin} solid ${colorShellStrokeTaskbarItemSecondary};
+    border: ${strokeWidthThin2} solid ${colorShellStrokeTaskbarItemSecondary};
   }
 
   button:hover:active [part='backplate'] {
     background: ${colorShellFillTaksbarItemTeritary};
-    border: ${strokeWidthThin} solid ${colorShellStrokeTaskbarItemQuinary};
+    border: ${strokeWidthThin2} solid ${colorShellStrokeTaskbarItemQuinary};
   }
 
   :host([running][active]) button:hover [part='backplate'] {
@@ -7760,29 +11809,29 @@
   TaskbarButton = __decorateClass([
     customElement({
       name: "taskbar-button",
-      template: template2,
-      styles: styles2
+      template: template4,
+      styles: styles4
     })
   ], TaskbarButton);
 
   // src/windows/views/clockWidget.ts
-  var template3 = html`
+  var template5 = html`
   <button>
     <caption-1>${(x) => x.time}</caption-1>
     <caption-1>${(x) => x.date}</caption-1>
   </button>
 `;
-  var styles3 = css`
+  var styles5 = css`
   button {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
     user-select: none;
-    padding: 0 ${spacingHorizontalS};
+    padding: 0 ${spacingHorizontalS2};
     cursor: pointer;
     height: 44px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     border: none;
     background: none;
   }
@@ -7793,12 +11842,12 @@
     background: ${colorShellFillTaksbarItemTeritary};
   }
   caption-1 {
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase200};
+    font-family: ${fontFamilyBase2};
+    font-size: ${fontSizeBase2002};
+    font-weight: ${fontWeightRegular2};
+    line-height: ${lineHeightBase2002};
     white-space: nowrap;
-    color: ${colorNeutralForeground1};
+    color: ${colorNeutralForeground12};
   }
 `;
   var ClockWidget = class extends FASTElement {
@@ -7836,13 +11885,13 @@
   ClockWidget = __decorateClass([
     customElement({
       name: "clock-widget",
-      template: template3,
-      styles: styles3
+      template: template5,
+      styles: styles5
     })
   ], ClockWidget);
 
   // src/windows/views/systemTray.ts
-  var template4 = html`
+  var template6 = html`
   <button>
     <svg width="16" height="16">
       <use href="img/windows/icons.svg#wifi" />
@@ -7855,21 +11904,21 @@
     </svg>
   </button>
 `;
-  var styles4 = css`
+  var styles6 = css`
   button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: ${spacingHorizontalS};
+    gap: ${spacingHorizontalS2};
     user-select: none;
-    padding: 0 ${spacingHorizontalXS};
+    padding: 0 ${spacingHorizontalXS2};
     cursor: pointer;
     height: 44px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     border: none;
     background: none;
-    color: ${colorNeutralForeground1};
+    color: ${colorNeutralForeground12};
   }
 
   button:hover {
@@ -7885,19 +11934,19 @@
   SystemTray = __decorateClass([
     customElement({
       name: "system-tray",
-      template: template4,
-      styles: styles4
+      template: template6,
+      styles: styles6
     })
   ], SystemTray);
 
   // src/windows/controls/showDesktopButton.ts
-  var styles5 = css`
+  var styles7 = css`
   button {
     user-select: none;
-    width: ${spacingHorizontalM};
+    width: ${spacingHorizontalM2};
     cursor: pointer;
     height: 44px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     border: none;
     background: none;
   }
@@ -7914,33 +11963,33 @@
     customElement({
       name: "show-desktop-button",
       template: html`<button>&NonBreakingSpace;</button>`,
-      styles: styles5
+      styles: styles7
     })
   ], ShowDesktopButton);
 
   // src/windows/controls/showMoreButton.ts
-  var template5 = html`
+  var template7 = html`
   <button>
     <svg width="16" height="16">
       <use href="img/windows/icons.svg#chevron-up"></use>
     </svg>
   </button>
 `;
-  var styles6 = css`
+  var styles8 = css`
   button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${spacingHorizontalXS2};
     user-select: none;
-    padding: 0 ${spacingHorizontalXS};
+    padding: 0 ${spacingHorizontalXS2};
     cursor: pointer;
     height: 44px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     border: none;
     background: none;
-    color: ${colorNeutralForeground1};
+    color: ${colorNeutralForeground12};
   }
   button:hover {
     background: ${colorShellFillTaksbarItemSecondary};
@@ -7954,18 +12003,18 @@
   ShowMoreButton = __decorateClass([
     customElement({
       name: "show-more-button",
-      template: template5,
-      styles: styles6
+      template: template7,
+      styles: styles8
     })
   ], ShowMoreButton);
 
   // src/windows/controls/copilotButton.ts
-  var template6 = html`
+  var template8 = html`
   <button>
     <img src="img/windows/copilot-24.svg" />
   </button>
 `;
-  var styles7 = css`
+  var styles9 = css`
   button {
     display: flex;
     flex-direction: row;
@@ -7975,10 +12024,10 @@
     cursor: pointer;
     height: 44px;
     width: 44px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     border: none;
     background: none;
-    color: ${colorNeutralForeground1};
+    color: ${colorNeutralForeground12};
   }
   button:hover {
     background: ${colorShellFillTaksbarItemSecondary};
@@ -7992,8 +12041,8 @@
   CopilotButton = __decorateClass([
     customElement({
       name: "copilot-button",
-      template: template6,
-      styles: styles7
+      template: template8,
+      styles: styles9
     })
   ], CopilotButton);
 
@@ -8006,10 +12055,10 @@
     "09": "img/windows/weather-rain-24.svg",
     "10": "img/windows/weather-rain-24.svg",
     "11": "img/windows/weather-thunder-24.svg",
-    "13": "img/windows/weather-snow-24.svg",
-    "50": "img/windows/weather-mist-24.svg"
+    "13": "img/windows/weather-cloudy-24.svg",
+    "50": "img/windows/weather-cloudy-24.svg"
   };
-  var template7 = html`
+  var template9 = html`
   <button>
     ${when(
     (x) => !x.loaded,
@@ -8022,18 +12071,18 @@
   )}
   </button>
 `;
-  var styles8 = css`
+  var styles10 = css`
   button {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: ${spacingHorizontalS};
+    gap: ${spacingHorizontalS2};
     user-select: none;
-    padding: 0 ${spacingHorizontalS};
+    padding: 0 ${spacingHorizontalS2};
     cursor: pointer;
     height: 44px;
-    border-radius: ${borderRadiusSmall};
+    border-radius: ${borderRadiusSmall2};
     border: none;
     background: none;
 
@@ -8052,12 +12101,12 @@
     background: ${colorShellFillTaksbarItemTeritary};
   }
   caption-1 {
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase200};
+    font-family: ${fontFamilyBase2};
+    font-size: ${fontSizeBase2002};
+    font-weight: ${fontWeightRegular2};
+    line-height: ${lineHeightBase2002};
     white-space: nowrap;
-    color: ${colorNeutralForeground1};
+    color: ${colorNeutralForeground12};
 
     &:nth-of-type(2) {
       color: ${colorNeutralForeground4};
@@ -8104,13 +12153,13 @@
   WeatherWidget = __decorateClass([
     customElement({
       name: "weather-widget",
-      template: template7,
-      styles: styles8
+      template: template9,
+      styles: styles10
     })
   ], WeatherWidget);
 
   // src/windows/views/taskBar.ts
-  var template8 = html`
+  var template10 = html`
   <div class="group">
     <weather-widget></weather-widget>
   </div>
@@ -8125,17 +12174,17 @@
     <show-desktop-button></show-desktop-button>
   </div>
 `;
-  var styles9 = css`
+  var styles11 = css`
   :host {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: ${spacingHorizontalL};
+    gap: ${spacingHorizontalL2};
     height: 48px;
     position: absolute;
     bottom: 0;
     inset-inline: 0;
-    border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
-    padding-inline-start: ${spacingHorizontalXS};
+    border-top: ${strokeWidthThin2} solid ${colorNeutralStroke12};
+    padding-inline-start: ${spacingHorizontalXS2};
     /* Mica */
     background: ${micaBackgroundColor};
     backdrop-filter: ${micaBackdropFilter};
@@ -8165,18 +12214,18 @@
   TaskBar = __decorateClass([
     customElement({
       name: "task-bar",
-      template: template8,
-      styles: styles9
+      template: template10,
+      styles: styles11
     })
   ], TaskBar);
 
   // src/windows/views/appWindow.ts
-  var template9 = html`<slot></slot>`;
-  var styles10 = css`
+  var template11 = html`<slot></slot>`;
+  var styles12 = css`
   :host {
     display: block;
     position: absolute;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${borderRadiusMedium2};
     z-index: ${(x) => x.zIndex};
     width: ${(x) => x.width};
     height: ${(x) => x.height};
@@ -8233,26 +12282,26 @@
   AppWindow = __decorateClass([
     customElement({
       name: "app-window",
-      template: template9,
-      styles: styles10
+      template: template11,
+      styles: styles12
     })
   ], AppWindow);
 
   // src/windows/index.ts
-  var styles11 = css`
+  var styles13 = css`
   :host {
     display: block;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    color: ${colorNeutralForeground1};
+    color: ${colorNeutralForeground12};
     fill: currentColor;
 
     /* body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase300};
+    font-family: ${fontFamilyBase2};
+    font-size: ${fontSizeBase3002};
+    font-weight: ${fontWeightRegular2};
+    line-height: ${lineHeightBase3002};
   }
 
   #desktop {
@@ -8264,7 +12313,7 @@
     background-position: center;
   }
 `;
-  var template10 = html`
+  var template12 = html`
   <div id="desktop"></div>
   ${repeat(
     (x) => x.ws.windows,
@@ -8333,12 +12382,12 @@
     inject(WindowsService)
   ], WindowsShell.prototype, "ws", 2);
   WindowsShell = __decorateClass([
-    customElement({ name: "windows-shell", template: template10, styles: styles11 })
+    customElement({ name: "windows-shell", template: template12, styles: styles13 })
   ], WindowsShell);
 
   // src/index.ts
-  var template11 = html` ${(x) => x.ps.os === "windows" ? html`<windows-shell></windows-shell>` : ""}`;
-  var styles12 = css`
+  var template13 = html` ${(x) => x.ps.os === "windows" ? html`<windows-shell></windows-shell>` : ""}`;
+  var styles14 = css`
   :host {
     display: block;
     width: 100vw;
@@ -8354,8 +12403,8 @@
   AppRoot = __decorateClass([
     customElement({
       name: "app-root",
-      template: template11,
-      styles: styles12
+      template: template13,
+      styles: styles14
     })
   ], AppRoot);
 })();
