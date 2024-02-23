@@ -4,9 +4,10 @@ import {
   colorNeutralStroke1,
   strokeWidthThin,
   spacingHorizontalXS,
-} from '@phoenixui/themes';
-import { micaBackgroundColor } from '../designSystem.js';
-import '@fluentui/web-components/text.js';
+  micaBackgroundColor,
+  micaBackdropFilter,
+  micaBackgroundBlendMode,
+} from '@phoenixui/web-components';
 import '../controls/taskbarButton.js';
 import './clockWidget.js';
 import './systemTray.js';
@@ -43,9 +44,9 @@ const styles = css`
     border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
     padding-inline-start: ${spacingHorizontalXS};
     /* Mica */
-    backdrop-filter: blur(120px) saturate(150%);
     background: ${micaBackgroundColor};
-    background-blend-mode: luminosity;
+    backdrop-filter: ${micaBackdropFilter};
+    background-blend-mode: ${micaBackgroundBlendMode};
     z-index: 1000;
   }
   .group {

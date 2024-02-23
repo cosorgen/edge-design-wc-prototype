@@ -12,8 +12,8 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   colorNeutralForeground1,
-} from '@phoenixui/themes';
-import { setThemeFor } from './designSystem.js';
+} from '@phoenixui/web-components';
+import { setTheme } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/taskBar.js';
@@ -104,7 +104,7 @@ export class WindowsShell extends FASTElement {
     super.connectedCallback();
 
     // set our theme for the OS
-    setThemeFor(this, this.ws.theme);
+    setTheme(this.ws.theme, this);
 
     // open default windows
     this.ws.openWindow('Microsoft Edge');

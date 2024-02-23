@@ -1,94 +1,72 @@
-import { DesignToken } from '@microsoft/fast-foundation';
-import { FASTElement } from '@microsoft/fast-element';
-import { setThemeFor as FUISetThemeFor } from '@fluentui/web-components';
+import { setTheme as PUISetTheme } from '@phoenixui/web-components';
 import {
   BorderRadiusTokens,
   Theme,
   webDarkTheme,
   webLightTheme,
-} from '@phoenixui/themes';
+} from '@phoenixui/web-components';
 import { OSTheme } from '../services/windowsService.js';
 
-const commonThemeOverrides: Partial<BorderRadiusTokens> = {
+export type WindowsTokens = {
+  colorShellFillTaksbarItemPrimary: string;
+  colorShellFillTaksbarItemSecondary: string;
+  colorShellFillTaksbarItemTeritary: string;
+  colorShellStrokeTaskbarItemQuinary: string;
+  colorShellStrokeTaskbarItemSecondary: string;
+  colorShellFillTaskbarItemIndicator: string;
+  colorFillAccent: string;
+};
+
+export type WindowsTheme = Theme & WindowsTokens;
+
+const commonThemeOverrides: Partial<WindowsTheme> = {
   borderRadiusSmall: '4px',
   borderRadiusMedium: '8px',
   borderRadiusLarge: '16px',
+  micaBackdropFilter: 'blur(120px) saturate(150%)',
+  micaBackgroundBlendMode: 'luminosity',
 };
 
-const windowsLightTheme: Theme = {
+const windowsLightTheme: WindowsTheme = {
   ...webLightTheme,
   ...commonThemeOverrides,
+  colorShellFillTaksbarItemPrimary: '#FFFFFFB2',
+  colorShellFillTaksbarItemSecondary: '#FFFFFF80',
+  colorShellFillTaksbarItemTeritary: '#FFFFFF4D',
+  colorShellStrokeTaskbarItemSecondary: '#0000000f',
+  colorShellStrokeTaskbarItemQuinary: '#00000005',
+  colorShellFillTaskbarItemIndicator: '#00000070',
+  colorFillAccent: '#005FB8',
+  micaBackgroundColor: 'rgba(243,243,243,0.7)',
 };
 
-const windowsDarkTheme: Theme = {
+const windowsDarkTheme: WindowsTheme = {
   ...webDarkTheme,
   ...commonThemeOverrides,
+  colorShellFillTaksbarItemPrimary: '#FFFFFF15',
+  colorShellFillTaksbarItemSecondary: '#FFFFFF0F',
+  colorShellFillTaksbarItemTeritary: '#FFFFFF0B',
+  colorShellStrokeTaskbarItemSecondary: '#FFFFFF1A',
+  colorShellStrokeTaskbarItemQuinary: '#FFFFFF0F',
+  colorShellFillTaskbarItemIndicator: '#FFFFFF63',
+  colorFillAccent: '#005FB8',
+  micaBackgroundColor: 'rgba(32,32,32,0.7)',
 };
 
-export const micaBackgroundColor = DesignToken.create<string>(
-  'micaBackgroundColor',
-);
-export const micaBackdropFilter =
-  DesignToken.create<string>('micaBackdropFilter');
-export const micaBackgroundBlendMode = DesignToken.create<string>(
-  'micaBackgroundBlendMode',
-);
-export const colorShellFillTaksbarItemPrimary = DesignToken.create<string>(
-  'colorShellFillTaksbarItemPrimary',
-);
-export const colorShellFillTaksbarItemSecondary = DesignToken.create<string>(
-  'colorShellFillTaksbarItemSecondary',
-);
-export const colorShellFillTaksbarItemTeritary = DesignToken.create<string>(
-  'colorShellFillTaksbarItemTeritary',
-);
-export const colorShellStrokeTaskbarItemQuinary = DesignToken.create<string>(
-  'colorShellStrokeTaskbarItemPrimary',
-);
-export const colorShellStrokeTaskbarItemSecondary = DesignToken.create<string>(
-  'colorShellStrokeTaskbarItemSecondary',
-);
-export const colorShellFillTaskbarItemIndicator = DesignToken.create<string>(
-  'colorShellFillTaskbarItemIndicator',
-);
-export const colorFillAccent = DesignToken.create<string>('colorFillAccent');
-export const shadowBaseLayer = DesignToken.create<string>('shadowBaseLayer');
-
-export function setThemeFor(element: FASTElement, theme: OSTheme) {
-  FUISetThemeFor(
-    element,
-    theme === 'dark' ? windowsDarkTheme : windowsLightTheme,
-  );
-
-  if (theme === 'dark') {
-    micaBackgroundColor.setValueFor(element, 'rgba(32, 32, 32, 0.7)');
-    micaBackdropFilter.setValueFor(element, 'blur(120px) saturate(150%)');
-    micaBackgroundBlendMode.setValueFor(element, 'luminosity');
-    colorShellFillTaksbarItemPrimary.setValueFor(element, '#FFFFFF15');
-    colorShellFillTaksbarItemSecondary.setValueFor(element, '#FFFFFF0F');
-    colorShellFillTaksbarItemTeritary.setValueFor(element, '#FFFFFF0B');
-    colorShellStrokeTaskbarItemSecondary.setValueFor(element, '#FFFFFF1A');
-    colorShellStrokeTaskbarItemQuinary.setValueFor(element, '#FFFFFF0F');
-    colorShellFillTaskbarItemIndicator.setValueFor(element, '#FFFFFF63');
-    colorFillAccent.setValueFor(element, '#005FB8');
-    shadowBaseLayer.setValueFor(
-      element,
-      '0px 32px 64px 0px rgba(0, 0, 0, 0.48), 0px 2px 21px 0px rgba(0, 0, 0, 0.40)',
-    );
-  } else {
-    micaBackgroundColor.setValueFor(element, 'rgba(243, 243, 243, 0.7)');
-    micaBackdropFilter.setValueFor(element, 'blur(120px) saturate(150%)');
-    micaBackgroundBlendMode.setValueFor(element, 'luminosity');
-    colorShellFillTaksbarItemPrimary.setValueFor(element, '#FFFFFFB2');
-    colorShellFillTaksbarItemSecondary.setValueFor(element, '#FFFFFF80');
-    colorShellFillTaksbarItemTeritary.setValueFor(element, '#FFFFFF4D');
-    colorShellStrokeTaskbarItemSecondary.setValueFor(element, '#0000000f');
-    colorShellStrokeTaskbarItemQuinary.setValueFor(element, '#00000005');
-    colorShellFillTaskbarItemIndicator.setValueFor(element, '#00000070');
-    colorFillAccent.setValueFor(element, '#005FB8');
-    shadowBaseLayer.setValueFor(
-      element,
-      '0px 32px 64px 0px rgba(0, 0, 0, 0.24), 0px 2px 21px 0px rgba(0, 0, 0, 0.20)',
-    );
-  }
+export function setTheme(theme: OSTheme, element: HTMLElement) {
+  PUISetTheme(theme === 'dark' ? windowsDarkTheme : windowsLightTheme, element);
 }
+
+export const colorShellFillTaksbarItemPrimary =
+  'var(--colorShellFillTaksbarItemPrimary)';
+export const colorShellFillTaksbarItemSecondary =
+  'var(--colorShellFillTaksbarItemSecondary)';
+export const colorShellFillTaksbarItemTeritary =
+  'var(--colorShellFillTaksbarItemTeritary)';
+export const colorShellStrokeTaskbarItemQuinary =
+  'var(--colorShellStrokeTaskbarItemQuinary)';
+export const colorShellStrokeTaskbarItemSecondary =
+  'var(--colorShellStrokeTaskbarItemSecondary)';
+export const colorShellFillTaskbarItemIndicator =
+  'var(--colorShellFillTaskbarItemIndicator)';
+export const colorFillAccent = 'var(--colorFillAccent)';

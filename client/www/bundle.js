@@ -2,10 +2,6 @@
 (() => {
   var __defProp = Object.defineProperty;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __export = (target, all2) => {
-    for (var name in all2)
-      __defProp(target, name, { get: all2[name], enumerable: true });
-  };
   var __decorateClass = (decorators, target, key, kind) => {
     var result = kind > 1 ? void 0 : kind ? __getOwnPropDesc(target, key) : target;
     for (var i = decorators.length - 1, decorator; i >= 0; i--)
@@ -114,11 +110,11 @@
   function createTypeRegistry() {
     const typeToDefinition = /* @__PURE__ */ new Map();
     return Object.freeze({
-      register(definition2) {
-        if (typeToDefinition.has(definition2.type)) {
+      register(definition) {
+        if (typeToDefinition.has(definition.type)) {
           return false;
         }
-        typeToDefinition.set(definition2.type, definition2);
+        typeToDefinition.set(definition.type, definition);
         return true;
       },
       getByType(key) {
@@ -1356,11 +1352,6 @@
       return type;
     }
   });
-  function cssDirective() {
-    return function(type) {
-      CSSDirective.define(type);
-    };
-  }
 
   // ../node_modules/@microsoft/fast-element/dist/esm/styles/css-binding-directive.js
   function handleChange(directive, controller, observer) {
@@ -1639,11 +1630,6 @@
       }
     }
   });
-  function htmlDirective(options) {
-    return function(type) {
-      HTMLDirective.define(type, options);
-    };
-  }
   var StatelessAttachedAttributeDirective = class {
     /**
      * Creates an instance of RefDirective.
@@ -2365,8 +2351,8 @@
   };
   InlineTemplateDirective.empty = new InlineTemplateDirective("");
   HTMLDirective.define(InlineTemplateDirective);
-  function createHTML2(value, prevString, add, definition2 = HTMLDirective.getForInstance(value)) {
-    if (definition2.aspected) {
+  function createHTML2(value, prevString, add, definition = HTMLDirective.getForInstance(value)) {
+    if (definition.aspected) {
       const match = lastAttributeNameRegex.exec(prevString);
       if (match !== null) {
         HTMLDirective.assignAspect(value, match[2]);
@@ -2465,17 +2451,17 @@
       for (let i = 0, ii = strings.length - 1; i < ii; ++i) {
         const currentString = strings[i];
         let currentValue = values[i];
-        let definition2;
+        let definition;
         html2 += currentString;
         if (isFunction(currentValue)) {
           currentValue = new HTMLBindingDirective(oneWay(currentValue));
         } else if (currentValue instanceof Binding) {
           currentValue = new HTMLBindingDirective(currentValue);
-        } else if (!(definition2 = HTMLDirective.getForInstance(currentValue))) {
+        } else if (!(definition = HTMLDirective.getForInstance(currentValue))) {
           const staticValue = currentValue;
           currentValue = new HTMLBindingDirective(oneTime(() => staticValue));
         }
-        html2 += createHTML2(currentValue, currentString, add, definition2);
+        html2 += createHTML2(currentValue, currentString, add, definition);
       }
       return new _ViewTemplate(html2 + strings[strings.length - 1], factories2, policy);
     }
@@ -2986,7 +2972,7 @@
      * controller in how to handle rendering and other platform integrations.
      * @internal
      */
-    constructor(element, definition2) {
+    constructor(element, definition) {
       super(element);
       this.boundObservables = null;
       this.needsInitialization = true;
@@ -2999,8 +2985,8 @@
       this.$fastController = this;
       this.view = null;
       this.source = element;
-      this.definition = definition2;
-      const shadowOptions = definition2.shadowOptions;
+      this.definition = definition;
+      const shadowOptions = definition.shadowOptions;
       if (shadowOptions !== void 0) {
         let shadowRoot = element.shadowRoot;
         if (shadowRoot) {
@@ -3062,11 +3048,11 @@
     get template() {
       var _a;
       if (this._template === null) {
-        const definition2 = this.definition;
+        const definition = this.definition;
         if (this.source.resolveTemplate) {
           this._template = this.source.resolveTemplate();
-        } else if (definition2.template) {
-          this._template = (_a = definition2.template) !== null && _a !== void 0 ? _a : null;
+        } else if (definition.template) {
+          this._template = (_a = definition.template) !== null && _a !== void 0 ? _a : null;
         }
       }
       return this._template;
@@ -3087,11 +3073,11 @@
     get mainStyles() {
       var _a;
       if (this._mainStyles === null) {
-        const definition2 = this.definition;
+        const definition = this.definition;
         if (this.source.resolveStyles) {
           this._mainStyles = this.source.resolveStyles();
-        } else if (definition2.styles) {
-          this._mainStyles = (_a = definition2.styles) !== null && _a !== void 0 ? _a : null;
+        } else if (definition.styles) {
+          this._mainStyles = (_a = definition.styles) !== null && _a !== void 0 ? _a : null;
         }
       }
       return this._mainStyles;
@@ -3317,14 +3303,14 @@
       if (controller !== void 0) {
         return controller;
       }
-      const definition2 = FASTElementDefinition.getForInstance(element);
-      if (definition2 === void 0) {
+      const definition = FASTElementDefinition.getForInstance(element);
+      if (definition === void 0) {
         throw FAST.error(
           1401
           /* Message.missingElementDefinition */
         );
       }
-      return element.$fastController = new elementControllerStrategy(element, definition2);
+      return element.$fastController = new elementControllerStrategy(element, definition);
     }
     /**
      * Sets the strategy that ElementController.forCustomElement uses to construct
@@ -4894,7 +4880,7 @@
     observable
   ], PrototypeService.prototype, "os", 2);
 
-  // ../node_modules/@phoenixui/themes/dist/index.esm.js
+  // ../../phoenixui/packages/themes/dist/index.esm.js
   var win11BorderRadius = {
     borderRadiusLayerApp: "8px",
     borderRadiusLayerBase: "8px",
@@ -7502,1884 +7488,17 @@
   var colorNeutralForeground4 = "var(--colorNeutralForeground4)";
   var colorNeutralStroke1 = "var(--colorNeutralStroke1)";
   var shadow28 = "var(--shadow28)";
+  var micaBackdropFilter = "var(--micaBackdropFilter)";
+  var micaBackgroundBlendMode = "var(--micaBackgroundBlendMode)";
+  var micaBackgroundColor = "var(--micaBackgroundColor)";
+  var shadowBaseLayer = "var(--shadowBaseLayer)";
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
-  // ../node_modules/@microsoft/fast-foundation/node_modules/tslib/tslib.es6.mjs
-  function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  }
-
-  // ../node_modules/@microsoft/fast-element/dist/esm/utilities.js
-  function composedParent(element) {
-    const parentNode = element.parentElement;
-    if (parentNode) {
-      return parentNode;
-    } else {
-      const rootNode = element.getRootNode();
-      if (rootNode.host instanceof HTMLElement) {
-        return rootNode.host;
-      }
-    }
-    return null;
-  }
-  function composedContains(reference, test) {
-    let current = test;
-    while (current !== null) {
-      if (current === reference) {
-        return true;
-      }
-      current = composedParent(current);
-    }
-    return false;
-  }
-  var ViewBehaviorOrchestrator = Object.freeze({
-    /**
-     * Creates a ViewBehaviorOrchestrator.
-     * @param source - The source to to associate behaviors with.
-     * @returns A ViewBehaviorOrchestrator.
-     */
-    create(source) {
-      const behaviors = [];
-      const targets = {};
-      let unbindables = null;
-      let isConnected = false;
-      return {
-        source,
-        context: ExecutionContext.default,
-        targets,
-        get isBound() {
-          return isConnected;
-        },
-        addBehaviorFactory(factory, target) {
-          var _a, _b, _c, _d;
-          const compiled = factory;
-          compiled.id = (_a = compiled.id) !== null && _a !== void 0 ? _a : nextId();
-          compiled.targetNodeId = (_b = compiled.targetNodeId) !== null && _b !== void 0 ? _b : nextId();
-          compiled.targetTagName = (_c = target.tagName) !== null && _c !== void 0 ? _c : null;
-          compiled.policy = (_d = compiled.policy) !== null && _d !== void 0 ? _d : DOM.policy;
-          this.addTarget(compiled.targetNodeId, target);
-          this.addBehavior(compiled.createBehavior());
-        },
-        addTarget(nodeId, target) {
-          targets[nodeId] = target;
-        },
-        addBehavior(behavior) {
-          behaviors.push(behavior);
-          if (isConnected) {
-            behavior.bind(this);
-          }
-        },
-        onUnbind(unbindable) {
-          if (unbindables === null) {
-            unbindables = [];
-          }
-          unbindables.push(unbindable);
-        },
-        connectedCallback(controller) {
-          if (!isConnected) {
-            isConnected = true;
-            behaviors.forEach((x) => x.bind(this));
-          }
-        },
-        disconnectedCallback(controller) {
-          if (isConnected) {
-            isConnected = false;
-            if (unbindables !== null) {
-              unbindables.forEach((x) => x.unbind(this));
-            }
-          }
-        }
-      };
-    }
-  });
-
-  // ../node_modules/@microsoft/fast-foundation/dist/esm/design-token/core/design-token-node.js
-  var DerivedValueEvaluator = class _DerivedValueEvaluator {
-    constructor(value) {
-      this.value = value;
-      this.notifier = Observable.getNotifier(this);
-      this.dependencies = /* @__PURE__ */ new Set();
-      this.binding = Observable.binding(value, this);
-      this.binding.setMode(false);
-    }
-    static getOrCreate(value) {
-      let v = _DerivedValueEvaluator.cache.get(value);
-      if (v) {
-        return v;
-      }
-      v = new _DerivedValueEvaluator(value);
-      _DerivedValueEvaluator.cache.set(value, v);
-      return v;
-    }
-    evaluate(node, tokenContext) {
-      const resolve = (token) => {
-        this.dependencies.add(token);
-        if (tokenContext === token) {
-          if (node.parent) {
-            return node.parent.getTokenValue(token);
-          }
-          throw new Error("DesignTokenNode has encountered a circular token reference. Avoid this by setting the token value for an ancestor node.");
-        } else {
-          return node.getTokenValue(token);
-        }
-      };
-      return this.binding.observe(resolve);
-    }
-    handleChange() {
-      this.notifier.notify(void 0);
-    }
-  };
-  DerivedValueEvaluator.cache = /* @__PURE__ */ new WeakMap();
-  var DerivedValue = class {
-    constructor(token, evaluator, node, subscriber) {
-      this.token = token;
-      this.evaluator = evaluator;
-      this.node = node;
-      this.subscriber = subscriber;
-      this.value = evaluator.evaluate(node, token);
-      if (this.subscriber) {
-        Observable.getNotifier(this.evaluator).subscribe(this.subscriber);
-      }
-    }
-    dispose() {
-      if (this.subscriber) {
-        Observable.getNotifier(this.evaluator).unsubscribe(this.subscriber);
-      }
-    }
-    update() {
-      this.value = this.evaluator.evaluate(this.node, this.token);
-      return this;
-    }
-  };
-  var DesignTokenChangeRecordImpl = class {
-    constructor(target, type, token, value) {
-      this.target = target;
-      this.type = type;
-      this.token = token;
-      this.value = value;
-    }
-    notify() {
-      Observable.getNotifier(this.token).notify(this);
-    }
-  };
-  var DesignTokenNode = class _DesignTokenNode {
-    constructor() {
-      this._parent = null;
-      this._children = /* @__PURE__ */ new Set();
-      this._values = /* @__PURE__ */ new Map();
-      this._derived = /* @__PURE__ */ new Map();
-      this.dependencyGraph = /* @__PURE__ */ new Map();
-    }
-    /**
-     * Determines if a value is a {@link DerivedDesignTokenValue}
-     * @param value - The value to test
-     */
-    static isDerivedTokenValue(value) {
-      return typeof value === "function";
-    }
-    /**
-     * Determines if a token has a derived value for a node.
-     */
-    static isDerivedFor(node, token) {
-      return node._derived.has(token);
-    }
-    /**
-     * Collects token/value pairs for all derived token / values set on upstream nodes.
-     */
-    static collectDerivedContext(node) {
-      const collected = /* @__PURE__ */ new Map();
-      if (node.parent === null) {
-        return collected;
-      }
-      let ignored = _DesignTokenNode.getAssignedTokensForNode(node);
-      let current = node.parent;
-      do {
-        const assigned = _DesignTokenNode.getAssignedTokensForNode(current);
-        for (let i = 0, l = assigned.length; i < l; i++) {
-          const token = assigned[i];
-          if (!ignored.includes(token) && _DesignTokenNode.isDerivedFor(current, token)) {
-            collected.set(token, current._derived.get(token));
-          }
-        }
-        ignored = Array.from(new Set(ignored.concat(assigned)));
-        current = current.parent;
-      } while (current !== null);
-      return collected;
-    }
-    /**
-     * Resolves the local value for a token if it is assigned, otherwise returns undefined.
-     */
-    static getLocalTokenValue(node, token) {
-      return !_DesignTokenNode.isAssigned(node, token) ? void 0 : _DesignTokenNode.isDerivedFor(node, token) ? node._derived.get(token).value : node._values.get(token);
-    }
-    static getOrCreateDependencyGraph(node, token) {
-      let dependents = node.dependencyGraph.get(token);
-      if (dependents) {
-        return dependents;
-      }
-      dependents = /* @__PURE__ */ new Set();
-      node.dependencyGraph.set(token, dependents);
-      return dependents;
-    }
-    /**
-     * Emit all queued notifications
-     */
-    static notify() {
-      const notifications = this._notifications;
-      this._notifications = [];
-      for (const record of notifications) {
-        record.notify();
-      }
-    }
-    static queueNotification(...records) {
-      this._notifications.push(...records);
-    }
-    /**
-     * Retrieves all tokens assigned directly to a node.
-     * @param node - the node to retrieve assigned tokens for
-     * @returns
-     */
-    static getAssignedTokensForNode(node) {
-      return Array.from(node._values.keys());
-    }
-    /**
-     * Retrieves all tokens assigned to the node and ancestor nodes.
-     * @param node - the node to compose assigned tokens for
-     */
-    static composeAssignedTokensForNode(node) {
-      const tokens2 = new Set(_DesignTokenNode.getAssignedTokensForNode(node));
-      let current = node.parent;
-      while (current !== null) {
-        const assignedTokens = _DesignTokenNode.getAssignedTokensForNode(current);
-        for (const token of assignedTokens) {
-          tokens2.add(token);
-        }
-        current = current.parent;
-      }
-      return Array.from(tokens2);
-    }
-    /**
-     * Tests if a token is assigned directly to a node
-     * @param node - The node to test
-     * @param token  - The token to test
-     * @returns
-     */
-    static isAssigned(node, token) {
-      return node._values.has(token);
-    }
-    /**
-     * The parent node
-     */
-    get parent() {
-      return this._parent;
-    }
-    get children() {
-      return Array.from(this._children);
-    }
-    /**
-     * Appends a child to the node, notifying for any tokens set for the node's context.
-     */
-    appendChild(child) {
-      var _a, _b;
-      let prevContext = null;
-      if (child.parent !== null) {
-        prevContext = _DesignTokenNode.composeAssignedTokensForNode(child.parent);
-        child.parent._children.delete(child);
-      }
-      const context = _DesignTokenNode.composeAssignedTokensForNode(this);
-      const derivedContext = _DesignTokenNode.collectDerivedContext(this);
-      child._parent = this;
-      this._children.add(child);
-      for (const token of context) {
-        let type = 0;
-        if (prevContext !== null) {
-          const prevContextIndex = prevContext.indexOf(token);
-          if (prevContextIndex !== -1) {
-            type = 1;
-            prevContext.splice(prevContextIndex, 1);
-          }
-        }
-        child.dispatch(new DesignTokenChangeRecordImpl(this, type, token, (_a = derivedContext.get(token)) === null || _a === void 0 ? void 0 : _a.evaluator.value));
-      }
-      if (prevContext !== null && prevContext.length > 0) {
-        for (const token of prevContext) {
-          child.dispatch(new DesignTokenChangeRecordImpl(this, 2, token, (_b = derivedContext.get(token)) === null || _b === void 0 ? void 0 : _b.evaluator.value));
-        }
-      }
-      _DesignTokenNode.notify();
-    }
-    /**
-     * Appends a child to the node, notifying for any tokens set for the node's context.
-     */
-    removeChild(child) {
-      if (child.parent === this) {
-        const context = _DesignTokenNode.composeAssignedTokensForNode(this);
-        child._parent = null;
-        this._children.delete(child);
-        for (const token of context) {
-          child.dispatch(new DesignTokenChangeRecordImpl(this, 2, token));
-        }
-        _DesignTokenNode.notify();
-      }
-    }
-    /**
-     * Dispose of the node, removing parent/child relationships and
-     * unsubscribing all observable binding subscribers. Does not emit
-     * notifications.
-     */
-    dispose() {
-      if (this.parent) {
-        this.parent._children.delete(this);
-        this._parent = null;
-      }
-      for (const [, derived] of this._derived) {
-        derived.dispose();
-      }
-    }
-    /**
-     * Sets a token to a value
-     */
-    setTokenValue(token, value) {
-      const changeType = _DesignTokenNode.isAssigned(this, token) || _DesignTokenNode.isDerivedFor(this, token) ? 1 : 0;
-      const prev = _DesignTokenNode.getLocalTokenValue(this, token);
-      this._values.set(token, value);
-      if (_DesignTokenNode.isDerivedFor(this, token)) {
-        this.tearDownDerivedTokenValue(token);
-      }
-      const isDerived = _DesignTokenNode.isDerivedTokenValue(value);
-      const derivedContext = _DesignTokenNode.collectDerivedContext(this);
-      let result;
-      if (isDerived) {
-        const evaluator = this.setupDerivedTokenValue(token, value, true);
-        result = evaluator.value;
-      } else {
-        result = value;
-      }
-      if (prev !== result) {
-        _DesignTokenNode.queueNotification(new DesignTokenChangeRecordImpl(this, changeType, token, value));
-      }
-      this.dispatch(new DesignTokenChangeRecordImpl(this, changeType, token, value));
-      derivedContext.forEach((derivedValue, token2) => {
-        if (!_DesignTokenNode.isDerivedFor(this, token2)) {
-          const prev2 = _DesignTokenNode.getLocalTokenValue(this, token2);
-          derivedValue = this.setupDerivedTokenValue(token2, derivedValue.evaluator.value);
-          const result2 = derivedValue.value;
-          if (prev2 !== result2) {
-            _DesignTokenNode.queueNotification(new DesignTokenChangeRecordImpl(this, 1, token2, derivedValue.evaluator.value));
-          }
-          this.dispatch(new DesignTokenChangeRecordImpl(this, 0, token2, derivedValue.evaluator.value));
-        }
-      });
-      _DesignTokenNode.notify();
-    }
-    /**
-     * Returns the resolve value for a token
-     */
-    getTokenValue(token) {
-      let node = this;
-      let value;
-      while (node !== null) {
-        if (_DesignTokenNode.isDerivedFor(node, token)) {
-          value = node._derived.get(token).value;
-          break;
-        }
-        if (_DesignTokenNode.isAssigned(node, token)) {
-          value = node._values.get(token);
-          break;
-        }
-        node = node._parent;
-      }
-      if (value !== void 0) {
-        return value;
-      } else {
-        throw new Error(`No value set for token ${token} in node tree.`);
-      }
-    }
-    /**
-     * Deletes the token value for a node
-     */
-    deleteTokenValue(token) {
-      if (_DesignTokenNode.isAssigned(this, token)) {
-        const prev = _DesignTokenNode.getLocalTokenValue(this, token);
-        this._values.delete(token);
-        this.tearDownDerivedTokenValue(token);
-        let newValue;
-        try {
-          newValue = this.getTokenValue(token);
-        } catch (e) {
-          newValue = void 0;
-        }
-        _DesignTokenNode.queueNotification(new DesignTokenChangeRecordImpl(this, 2, token));
-        if (prev !== newValue) {
-          this.dispatch(new DesignTokenChangeRecordImpl(this, 2, token));
-        }
-        _DesignTokenNode.notify();
-      }
-    }
-    /**
-     * Notifies that a token has been mutated
-     */
-    dispatch(record) {
-      var _a, _b, _c;
-      if (this !== record.target) {
-        const { token } = record;
-        const isAssigned = _DesignTokenNode.isAssigned(this, token);
-        const containsCircularForToken = isAssigned && ((_a = this._derived.get(token)) === null || _a === void 0 ? void 0 : _a.evaluator.dependencies.has(token));
-        if (isAssigned && !containsCircularForToken) {
-          return;
-        }
-        if (record.type === 2 && !isAssigned && _DesignTokenNode.isDerivedFor(this, token)) {
-          this.tearDownDerivedTokenValue(token);
-          _DesignTokenNode.queueNotification(new DesignTokenChangeRecordImpl(this, 2, token));
-        }
-        if (containsCircularForToken) {
-          record = new DesignTokenChangeRecordImpl(this, 1, token, (_b = this._derived.get(token)) === null || _b === void 0 ? void 0 : _b.evaluator.value);
-        }
-        const { value } = record;
-        if (value && _DesignTokenNode.isDerivedTokenValue(value)) {
-          const dependencies = DerivedValueEvaluator.getOrCreate(value).dependencies;
-          let evaluate = false;
-          for (const dependency of dependencies) {
-            if (_DesignTokenNode.isAssigned(this, dependency)) {
-              evaluate = true;
-              break;
-            }
-          }
-          if (evaluate) {
-            const prev = (_c = this._derived.get(token)) === null || _c === void 0 ? void 0 : _c.value;
-            const derivedValue = this.setupDerivedTokenValue(token, value);
-            if (prev !== derivedValue.value) {
-              const type = prev === void 0 ? 0 : 1;
-              const notification = new DesignTokenChangeRecordImpl(this, type, token, derivedValue.evaluator.value);
-              _DesignTokenNode.queueNotification(notification);
-              record = notification;
-            }
-          }
-        }
-      }
-      this.collectLocalChangeRecords(record).forEach((_record) => {
-        _DesignTokenNode.queueNotification(_record);
-        this.dispatch(_record);
-      });
-      this.notifyChildren(record);
-    }
-    /**
-     * Generate change-records for local dependencies of a change record
-     */
-    collectLocalChangeRecords(record) {
-      const collected = /* @__PURE__ */ new Map();
-      for (const dependent of _DesignTokenNode.getOrCreateDependencyGraph(this, record.token)) {
-        if (dependent.value !== dependent.update().value) {
-          collected.set(dependent.token, new DesignTokenChangeRecordImpl(this, 1, dependent.token, dependent.evaluator.value));
-        }
-      }
-      return collected;
-    }
-    /**
-     *
-     * Notify children of changes to the node
-     */
-    notifyChildren(...records) {
-      if (this.children.length) {
-        for (let i = 0, l = this.children.length; i < l; i++) {
-          for (let j = 0; j < records.length; j++) {
-            this.children[i].dispatch(records[j]);
-          }
-        }
-      }
-    }
-    tearDownDerivedTokenValue(token) {
-      if (_DesignTokenNode.isDerivedFor(this, token)) {
-        const value = this._derived.get(token);
-        value.dispose();
-        this._derived.delete(token);
-        value.evaluator.dependencies.forEach((dependency) => {
-          _DesignTokenNode.getOrCreateDependencyGraph(this, dependency).delete(value);
-        });
-      }
-    }
-    setupDerivedTokenValue(token, value, subscribeNode = false) {
-      const deriver = new DerivedValue(token, DerivedValueEvaluator.getOrCreate(value), this, subscribeNode ? {
-        handleChange: () => {
-          if (deriver.value !== deriver.update().value) {
-            const record = new DesignTokenChangeRecordImpl(this, 1, deriver.token, deriver.evaluator.value);
-            _DesignTokenNode.queueNotification(record);
-            this.dispatch(record);
-            _DesignTokenNode.notify();
-          }
-        }
-      } : void 0);
-      this._derived.set(token, deriver);
-      deriver.evaluator.dependencies.forEach((dependency) => {
-        if (dependency !== token) {
-          _DesignTokenNode.getOrCreateDependencyGraph(this, dependency).add(deriver);
-        }
-      });
-      return deriver;
-    }
-  };
-  DesignTokenNode._notifications = [];
-
-  // ../node_modules/@microsoft/fast-foundation/dist/esm/design-token/custom-property-manager.js
-  var QueuedStyleSheetTarget = class {
-    setProperty(name, value) {
-      Updates.enqueue(() => this.target.setProperty(name, value));
-    }
-    removeProperty(name) {
-      Updates.enqueue(() => this.target.removeProperty(name));
-    }
-  };
-  var ConstructableStyleSheetTarget = class extends QueuedStyleSheetTarget {
-    constructor(source) {
-      super();
-      const sheet = new CSSStyleSheet();
-      this.target = sheet.cssRules[sheet.insertRule(":host{}")].style;
-      source.$fastController.addStyles(new ElementStyles([sheet]));
-    }
-  };
-  var DocumentStyleSheetTarget = class extends QueuedStyleSheetTarget {
-    constructor() {
-      super();
-      const sheet = new CSSStyleSheet();
-      this.target = sheet.cssRules[sheet.insertRule(":root{}")].style;
-      document.adoptedStyleSheets = [
-        ...document.adoptedStyleSheets,
-        sheet
-      ];
-    }
-  };
-  var HeadStyleElementStyleSheetTarget = class extends QueuedStyleSheetTarget {
-    constructor() {
-      super();
-      this.style = document.createElement("style");
-      document.head.appendChild(this.style);
-      const { sheet } = this.style;
-      if (sheet) {
-        const index = sheet.insertRule(":root{}", sheet.cssRules.length);
-        this.target = sheet.cssRules[index].style;
-      }
-    }
-  };
-  var StyleElementStyleSheetTarget = class {
-    constructor(target) {
-      this.store = /* @__PURE__ */ new Map();
-      this.target = null;
-      const controller = target.$fastController;
-      this.style = document.createElement("style");
-      controller.addStyles(this.style);
-      Observable.getNotifier(controller).subscribe(this, "isConnected");
-      this.handleChange(controller, "isConnected");
-    }
-    targetChanged() {
-      if (this.target !== null) {
-        for (const [key, value] of this.store.entries()) {
-          this.target.setProperty(key, value);
-        }
-      }
-    }
-    setProperty(name, value) {
-      this.store.set(name, value);
-      Updates.enqueue(() => {
-        if (this.target !== null) {
-          this.target.setProperty(name, value);
-        }
-      });
-    }
-    removeProperty(name) {
-      this.store.delete(name);
-      Updates.enqueue(() => {
-        if (this.target !== null) {
-          this.target.removeProperty(name);
-        }
-      });
-    }
-    handleChange(source, key) {
-      const { sheet } = this.style;
-      if (sheet) {
-        const index = sheet.insertRule(":host{}", sheet.cssRules.length);
-        this.target = sheet.cssRules[index].style;
-      } else {
-        this.target = null;
-      }
-    }
-  };
-  __decorate([
-    observable
-  ], StyleElementStyleSheetTarget.prototype, "target", void 0);
-  var RootStyleSheetTarget = class _RootStyleSheetTarget {
-    setProperty(name, value) {
-      _RootStyleSheetTarget.properties[name] = value;
-      for (const target of _RootStyleSheetTarget.roots.values()) {
-        target.setProperty(name, value);
-      }
-    }
-    removeProperty(name) {
-      delete _RootStyleSheetTarget.properties[name];
-      for (const target of _RootStyleSheetTarget.roots.values()) {
-        target.removeProperty(name);
-      }
-    }
-    static registerRoot(root) {
-      const { roots } = _RootStyleSheetTarget;
-      if (!roots.has(root)) {
-        roots.add(root);
-        for (const key in _RootStyleSheetTarget.properties) {
-          root.setProperty(key, _RootStyleSheetTarget.properties[key]);
-        }
-      }
-    }
-    static unregisterRoot(root) {
-      const { roots } = _RootStyleSheetTarget;
-      if (roots.has(root)) {
-        roots.delete(root);
-        for (const key in _RootStyleSheetTarget.properties) {
-          root.removeProperty(key);
-        }
-      }
-    }
-  };
-  RootStyleSheetTarget.roots = /* @__PURE__ */ new Set();
-  RootStyleSheetTarget.properties = {};
-  var propertyTargetCache = /* @__PURE__ */ new WeakMap();
-  var propertyTargetCtor = ElementStyles.supportsAdoptedStyleSheets ? ConstructableStyleSheetTarget : StyleElementStyleSheetTarget;
-  var PropertyTargetManager = Object.freeze({
-    getOrCreate(source) {
-      if (propertyTargetCache.has(source)) {
-        return propertyTargetCache.get(source);
-      }
-      let target;
-      if (source instanceof Document) {
-        target = ElementStyles.supportsAdoptedStyleSheets ? new DocumentStyleSheetTarget() : new HeadStyleElementStyleSheetTarget();
-      } else {
-        target = new propertyTargetCtor(source);
-      }
-      propertyTargetCache.set(source, target);
-      return target;
-    }
-  });
-
-  // ../node_modules/@microsoft/fast-foundation/dist/esm/design-token/fast-design-token.js
-  var DesignToken = class _DesignToken {
-    constructor(configuration) {
-      this.subscriberNotifier = {
-        handleChange: (source, change) => {
-          const record = {
-            target: change.target === FASTDesignTokenNode.defaultNode ? "default" : change.target.target,
-            token: this
-          };
-          this.subscribers.notify(record);
-        }
-      };
-      this.name = configuration.name;
-      Observable.getNotifier(this).subscribe(this.subscriberNotifier);
-    }
-    /**
-     * The default value of the token (alias of {@link DesignToken.default})
-     */
-    get $value() {
-      return this.default;
-    }
-    /**
-     * The default value of the token, or undefined if it has not been set.
-     */
-    get default() {
-      return FASTDesignTokenNode.defaultNode.getTokenValue(this);
-    }
-    get subscribers() {
-      if (this._subscribers) {
-        return this._subscribers;
-      }
-      this._subscribers = new SubscriberSet(this);
-      return this._subscribers;
-    }
-    static isCSSDesignTokenConfiguration(config) {
-      return typeof config.cssCustomPropertyName === "string";
-    }
-    static create(config) {
-      if (typeof config === "string") {
-        return new CSSDesignToken({ name: config, cssCustomPropertyName: config });
-      } else {
-        return _DesignToken.isCSSDesignTokenConfiguration(config) ? new CSSDesignToken(config) : new _DesignToken(config);
-      }
-    }
-    /**
-     * Configures the strategy for resolving hierarchical relationships between FASTElement targets.
-     */
-    static withStrategy(strategy) {
-      FASTDesignTokenNode.withStrategy(strategy);
-    }
-    /**
-     * Registers a target for emitting default style values.
-     * {@link CSSDesignToken | CSSDesignTokens} with default values assigned via
-     * {@link DesignToken.withDefault} will emit CSS custom properties to all
-     * registered targets.
-     * @param target - The target to register, defaults to the document
-     */
-    static registerDefaultStyleTarget(target = document) {
-      if (target instanceof FASTElement || target instanceof Document) {
-        target = PropertyTargetManager.getOrCreate(target);
-      }
-      RootStyleSheetTarget.registerRoot(target);
-    }
-    /**
-     * Unregister a target for default style emission.
-     * @param target - The root to deregister, defaults to the document
-     */
-    static unregisterDefaultStyleTarget(target = document) {
-      if (target instanceof FASTElement || target instanceof Document) {
-        target = PropertyTargetManager.getOrCreate(target);
-      }
-      RootStyleSheetTarget.unregisterRoot(target);
-    }
-    /**
-     * Retrieves the value of the token for a target element.
-     */
-    getValueFor(target) {
-      return FASTDesignTokenNode.getOrCreate(target).getTokenValue(this);
-    }
-    /**
-     * Sets the value of the token for a target element.
-     */
-    setValueFor(target, value) {
-      FASTDesignTokenNode.getOrCreate(target).setTokenValue(this, this.normalizeValue(value));
-    }
-    /**
-     * Deletes the value of the token for a target element.
-     */
-    deleteValueFor(target) {
-      FASTDesignTokenNode.getOrCreate(target).deleteTokenValue(this);
-      return this;
-    }
-    /**
-     * Sets the default value of the token.
-     */
-    withDefault(value) {
-      FASTDesignTokenNode.defaultNode.setTokenValue(this, this.normalizeValue(value));
-      return this;
-    }
-    /**
-     * Subscribes a subscriber to notifications for the token.
-     */
-    subscribe(subscriber) {
-      this.subscribers.subscribe(subscriber);
-    }
-    /**
-     * Unsubscribes a subscriber to notifications for the token.
-     */
-    unsubscribe(subscriber) {
-      this.subscribers.unsubscribe(subscriber);
-    }
-    /**
-     * Alias the token to the provided token.
-     * @param token - the token to alias to
-     */
-    alias(token) {
-      return (resolve) => resolve(token);
-    }
-    normalizeValue(value) {
-      if (value instanceof _DesignToken) {
-        value = this.alias(value);
-      }
-      return value;
-    }
-  };
-  var CSSDesignToken = class CSSDesignToken2 extends DesignToken {
-    constructor(configuration) {
-      super(configuration);
-      this.cssReflector = {
-        handleChange: (source, record) => {
-          const target = record.target === FASTDesignTokenNode.defaultNode ? FASTDesignTokenNode.rootStyleSheetTarget : record.target instanceof FASTDesignTokenNode ? PropertyTargetManager.getOrCreate(record.target.target) : null;
-          if (target) {
-            if (record.type === 2) {
-              target.removeProperty(this.cssCustomProperty);
-            } else {
-              target.setProperty(this.cssCustomProperty, this.resolveCSSValue(record.target.getTokenValue(this)));
-            }
-          }
-        }
-      };
-      this.cssCustomProperty = `--${configuration.cssCustomPropertyName}`;
-      this.cssVar = `var(${this.cssCustomProperty})`;
-      Observable.getNotifier(this).subscribe(this.cssReflector);
-    }
-    /**
-     * The DesignToken represented as a string that can be used in CSS.
-     */
-    createCSS() {
-      return this.cssVar;
-    }
-    /**
-     * Creates HTML to be used within a template.
-     */
-    createHTML() {
-      return this.cssVar;
-    }
-    resolveCSSValue(value) {
-      return value && typeof value.createCSS === "function" ? value.createCSS() : value;
-    }
-  };
-  CSSDesignToken = __decorate([
-    cssDirective(),
-    htmlDirective()
-  ], CSSDesignToken);
-  var defaultDesignTokenResolutionStrategy = {
-    contains: composedContains,
-    parent(element) {
-      let parent = composedParent(element);
-      while (parent !== null) {
-        if (parent instanceof FASTElement) {
-          return parent;
-        }
-        parent = composedParent(parent);
-      }
-      return null;
-    }
-  };
-  var FASTDesignTokenNode = class _FASTDesignTokenNode extends DesignTokenNode {
-    constructor(target) {
-      super();
-      this.target = target;
-      this.setTokenValue = this.lazyAttachToDefault(super.setTokenValue);
-      this.getTokenValue = this.lazyAttachToDefault(super.getTokenValue);
-      this.deleteTokenValue = this.lazyAttachToDefault(super.deleteTokenValue);
-    }
-    static get strategy() {
-      if (this._strategy === void 0) {
-        _FASTDesignTokenNode.withStrategy(defaultDesignTokenResolutionStrategy);
-      }
-      return this._strategy;
-    }
-    connectedCallback(controller) {
-      let parent = _FASTDesignTokenNode.findParent(controller.source);
-      if (parent === null) {
-        parent = _FASTDesignTokenNode.defaultNode;
-      }
-      if (parent !== this.parent) {
-        const reparent = [];
-        for (const child of parent.children) {
-          if (child instanceof _FASTDesignTokenNode && _FASTDesignTokenNode.strategy.contains(controller.source, child.target)) {
-            reparent.push(child);
-          }
-        }
-        parent.appendChild(this);
-        for (const child of reparent) {
-          this.appendChild(child);
-        }
-      }
-    }
-    disconnectedCallback(controller) {
-      _FASTDesignTokenNode.cache.delete(this.target);
-      this.dispose();
-    }
-    static getOrCreate(target) {
-      let found = _FASTDesignTokenNode.cache.get(target);
-      if (found) {
-        return found;
-      }
-      found = new _FASTDesignTokenNode(target);
-      _FASTDesignTokenNode.cache.set(target, found);
-      target.$fastController.addBehavior(_FASTDesignTokenNode.strategy);
-      target.$fastController.addBehavior(found);
-      return found;
-    }
-    static withStrategy(strategy) {
-      this._strategy = strategy;
-    }
-    static findParent(target) {
-      let current = _FASTDesignTokenNode.strategy.parent(target);
-      while (current !== null) {
-        const node = _FASTDesignTokenNode.cache.get(current);
-        if (node) {
-          return node;
-        }
-        current = _FASTDesignTokenNode.strategy.parent(current);
-      }
-      return null;
-    }
-    /**
-     * Creates a function from a function that lazily attaches the node to the default node.
-     */
-    lazyAttachToDefault(fn) {
-      const cb = (...args) => {
-        if (this.parent === null) {
-          _FASTDesignTokenNode.defaultNode.appendChild(this);
-        }
-        return fn.apply(this, args);
-      };
-      return cb;
-    }
-  };
-  FASTDesignTokenNode.defaultNode = new DesignTokenNode();
-  FASTDesignTokenNode.rootStyleSheetTarget = new RootStyleSheetTarget();
-  FASTDesignTokenNode.cache = /* @__PURE__ */ new WeakMap();
-
-  // ../node_modules/@fluentui/web-components/node_modules/@microsoft/fast-foundation/dist/esm/utilities/style/display.js
-  var hidden = `:host([hidden]){display:none}`;
-  function display(displayValue) {
-    return `${hidden}:host{display:${displayValue}}`;
-  }
-
-  // ../node_modules/@fluentui/web-components/dist/esm/fluent-design-system.js
-  var FluentDesignSystem = Object.freeze({
-    prefix: "fluent",
-    shadowRootMode: "open",
-    registry: customElements
-  });
-
-  // ../node_modules/@fluentui/web-components/dist/esm/theme/design-tokens.js
-  var design_tokens_exports = {};
-  __export(design_tokens_exports, {
-    borderRadiusCircular: () => borderRadiusCircular,
-    borderRadiusLarge: () => borderRadiusLarge,
-    borderRadiusMedium: () => borderRadiusMedium2,
-    borderRadiusNone: () => borderRadiusNone,
-    borderRadiusSmall: () => borderRadiusSmall2,
-    borderRadiusXLarge: () => borderRadiusXLarge,
-    colorBackgroundOverlay: () => colorBackgroundOverlay,
-    colorBrandBackground: () => colorBrandBackground,
-    colorBrandBackground2: () => colorBrandBackground2,
-    colorBrandBackgroundHover: () => colorBrandBackgroundHover,
-    colorBrandBackgroundInverted: () => colorBrandBackgroundInverted,
-    colorBrandBackgroundInvertedHover: () => colorBrandBackgroundInvertedHover,
-    colorBrandBackgroundInvertedPressed: () => colorBrandBackgroundInvertedPressed,
-    colorBrandBackgroundInvertedSelected: () => colorBrandBackgroundInvertedSelected,
-    colorBrandBackgroundPressed: () => colorBrandBackgroundPressed,
-    colorBrandBackgroundSelected: () => colorBrandBackgroundSelected,
-    colorBrandBackgroundStatic: () => colorBrandBackgroundStatic,
-    colorBrandForeground1: () => colorBrandForeground1,
-    colorBrandForeground2: () => colorBrandForeground2,
-    colorBrandForegroundInverted: () => colorBrandForegroundInverted,
-    colorBrandForegroundInvertedHover: () => colorBrandForegroundInvertedHover,
-    colorBrandForegroundInvertedPressed: () => colorBrandForegroundInvertedPressed,
-    colorBrandForegroundLink: () => colorBrandForegroundLink,
-    colorBrandForegroundLinkHover: () => colorBrandForegroundLinkHover,
-    colorBrandForegroundLinkPressed: () => colorBrandForegroundLinkPressed,
-    colorBrandForegroundLinkSelected: () => colorBrandForegroundLinkSelected,
-    colorBrandForegroundOnLight: () => colorBrandForegroundOnLight,
-    colorBrandForegroundOnLightHover: () => colorBrandForegroundOnLightHover,
-    colorBrandForegroundOnLightPressed: () => colorBrandForegroundOnLightPressed,
-    colorBrandForegroundOnLightSelected: () => colorBrandForegroundOnLightSelected,
-    colorBrandShadowAmbient: () => colorBrandShadowAmbient,
-    colorBrandShadowKey: () => colorBrandShadowKey,
-    colorBrandStroke1: () => colorBrandStroke1,
-    colorBrandStroke2: () => colorBrandStroke2,
-    colorCompoundBrandBackground: () => colorCompoundBrandBackground,
-    colorCompoundBrandBackgroundHover: () => colorCompoundBrandBackgroundHover,
-    colorCompoundBrandBackgroundPressed: () => colorCompoundBrandBackgroundPressed,
-    colorCompoundBrandForeground1: () => colorCompoundBrandForeground1,
-    colorCompoundBrandForeground1Hover: () => colorCompoundBrandForeground1Hover,
-    colorCompoundBrandForeground1Pressed: () => colorCompoundBrandForeground1Pressed,
-    colorCompoundBrandStroke: () => colorCompoundBrandStroke,
-    colorCompoundBrandStrokeHover: () => colorCompoundBrandStrokeHover,
-    colorCompoundBrandStrokePressed: () => colorCompoundBrandStrokePressed,
-    colorNeutralBackground1: () => colorNeutralBackground1,
-    colorNeutralBackground1Hover: () => colorNeutralBackground1Hover,
-    colorNeutralBackground1Pressed: () => colorNeutralBackground1Pressed,
-    colorNeutralBackground1Selected: () => colorNeutralBackground1Selected,
-    colorNeutralBackground2: () => colorNeutralBackground2,
-    colorNeutralBackground2Hover: () => colorNeutralBackground2Hover,
-    colorNeutralBackground2Pressed: () => colorNeutralBackground2Pressed,
-    colorNeutralBackground2Selected: () => colorNeutralBackground2Selected,
-    colorNeutralBackground3: () => colorNeutralBackground3,
-    colorNeutralBackground3Hover: () => colorNeutralBackground3Hover,
-    colorNeutralBackground3Pressed: () => colorNeutralBackground3Pressed,
-    colorNeutralBackground3Selected: () => colorNeutralBackground3Selected,
-    colorNeutralBackground4: () => colorNeutralBackground4,
-    colorNeutralBackground4Hover: () => colorNeutralBackground4Hover,
-    colorNeutralBackground4Pressed: () => colorNeutralBackground4Pressed,
-    colorNeutralBackground4Selected: () => colorNeutralBackground4Selected,
-    colorNeutralBackground5: () => colorNeutralBackground5,
-    colorNeutralBackground5Hover: () => colorNeutralBackground5Hover,
-    colorNeutralBackground5Pressed: () => colorNeutralBackground5Pressed,
-    colorNeutralBackground5Selected: () => colorNeutralBackground5Selected,
-    colorNeutralBackground6: () => colorNeutralBackground6,
-    colorNeutralBackgroundDisabled: () => colorNeutralBackgroundDisabled,
-    colorNeutralBackgroundInverted: () => colorNeutralBackgroundInverted,
-    colorNeutralBackgroundInvertedDisabled: () => colorNeutralBackgroundInvertedDisabled,
-    colorNeutralBackgroundStatic: () => colorNeutralBackgroundStatic,
-    colorNeutralForeground1: () => colorNeutralForeground12,
-    colorNeutralForeground1Hover: () => colorNeutralForeground1Hover,
-    colorNeutralForeground1Pressed: () => colorNeutralForeground1Pressed,
-    colorNeutralForeground1Selected: () => colorNeutralForeground1Selected,
-    colorNeutralForeground1Static: () => colorNeutralForeground1Static,
-    colorNeutralForeground2: () => colorNeutralForeground2,
-    colorNeutralForeground2BrandHover: () => colorNeutralForeground2BrandHover,
-    colorNeutralForeground2BrandPressed: () => colorNeutralForeground2BrandPressed,
-    colorNeutralForeground2BrandSelected: () => colorNeutralForeground2BrandSelected,
-    colorNeutralForeground2Hover: () => colorNeutralForeground2Hover,
-    colorNeutralForeground2Link: () => colorNeutralForeground2Link,
-    colorNeutralForeground2LinkHover: () => colorNeutralForeground2LinkHover,
-    colorNeutralForeground2LinkPressed: () => colorNeutralForeground2LinkPressed,
-    colorNeutralForeground2LinkSelected: () => colorNeutralForeground2LinkSelected,
-    colorNeutralForeground2Pressed: () => colorNeutralForeground2Pressed,
-    colorNeutralForeground2Selected: () => colorNeutralForeground2Selected,
-    colorNeutralForeground3: () => colorNeutralForeground3,
-    colorNeutralForeground3BrandHover: () => colorNeutralForeground3BrandHover,
-    colorNeutralForeground3BrandPressed: () => colorNeutralForeground3BrandPressed,
-    colorNeutralForeground3BrandSelected: () => colorNeutralForeground3BrandSelected,
-    colorNeutralForeground3Hover: () => colorNeutralForeground3Hover,
-    colorNeutralForeground3Pressed: () => colorNeutralForeground3Pressed,
-    colorNeutralForeground3Selected: () => colorNeutralForeground3Selected,
-    colorNeutralForeground4: () => colorNeutralForeground42,
-    colorNeutralForegroundDisabled: () => colorNeutralForegroundDisabled,
-    colorNeutralForegroundInverted: () => colorNeutralForegroundInverted,
-    colorNeutralForegroundInverted2: () => colorNeutralForegroundInverted2,
-    colorNeutralForegroundInvertedDisabled: () => colorNeutralForegroundInvertedDisabled,
-    colorNeutralForegroundInvertedHover: () => colorNeutralForegroundInvertedHover,
-    colorNeutralForegroundInvertedLink: () => colorNeutralForegroundInvertedLink,
-    colorNeutralForegroundInvertedLinkHover: () => colorNeutralForegroundInvertedLinkHover,
-    colorNeutralForegroundInvertedLinkPressed: () => colorNeutralForegroundInvertedLinkPressed,
-    colorNeutralForegroundInvertedLinkSelected: () => colorNeutralForegroundInvertedLinkSelected,
-    colorNeutralForegroundInvertedPressed: () => colorNeutralForegroundInvertedPressed,
-    colorNeutralForegroundInvertedSelected: () => colorNeutralForegroundInvertedSelected,
-    colorNeutralForegroundOnBrand: () => colorNeutralForegroundOnBrand,
-    colorNeutralForegroundStaticInverted: () => colorNeutralForegroundStaticInverted,
-    colorNeutralShadowAmbient: () => colorNeutralShadowAmbient,
-    colorNeutralShadowAmbientDarker: () => colorNeutralShadowAmbientDarker,
-    colorNeutralShadowAmbientLighter: () => colorNeutralShadowAmbientLighter,
-    colorNeutralShadowKey: () => colorNeutralShadowKey,
-    colorNeutralShadowKeyDarker: () => colorNeutralShadowKeyDarker,
-    colorNeutralShadowKeyLighter: () => colorNeutralShadowKeyLighter,
-    colorNeutralStencil1: () => colorNeutralStencil1,
-    colorNeutralStencil1Alpha: () => colorNeutralStencil1Alpha,
-    colorNeutralStencil2: () => colorNeutralStencil2,
-    colorNeutralStencil2Alpha: () => colorNeutralStencil2Alpha,
-    colorNeutralStroke1: () => colorNeutralStroke12,
-    colorNeutralStroke1Hover: () => colorNeutralStroke1Hover,
-    colorNeutralStroke1Pressed: () => colorNeutralStroke1Pressed,
-    colorNeutralStroke1Selected: () => colorNeutralStroke1Selected,
-    colorNeutralStroke2: () => colorNeutralStroke2,
-    colorNeutralStroke3: () => colorNeutralStroke3,
-    colorNeutralStrokeAccessible: () => colorNeutralStrokeAccessible,
-    colorNeutralStrokeAccessibleHover: () => colorNeutralStrokeAccessibleHover,
-    colorNeutralStrokeAccessiblePressed: () => colorNeutralStrokeAccessiblePressed,
-    colorNeutralStrokeAccessibleSelected: () => colorNeutralStrokeAccessibleSelected,
-    colorNeutralStrokeDisabled: () => colorNeutralStrokeDisabled,
-    colorNeutralStrokeInvertedDisabled: () => colorNeutralStrokeInvertedDisabled,
-    colorNeutralStrokeOnBrand: () => colorNeutralStrokeOnBrand,
-    colorNeutralStrokeOnBrand2: () => colorNeutralStrokeOnBrand2,
-    colorNeutralStrokeOnBrand2Hover: () => colorNeutralStrokeOnBrand2Hover,
-    colorNeutralStrokeOnBrand2Pressed: () => colorNeutralStrokeOnBrand2Pressed,
-    colorNeutralStrokeOnBrand2Selected: () => colorNeutralStrokeOnBrand2Selected,
-    colorPaletteAnchorBackground2: () => colorPaletteAnchorBackground2,
-    colorPaletteAnchorBorderActive: () => colorPaletteAnchorBorderActive,
-    colorPaletteAnchorForeground2: () => colorPaletteAnchorForeground2,
-    colorPaletteBeigeBackground2: () => colorPaletteBeigeBackground2,
-    colorPaletteBeigeBorderActive: () => colorPaletteBeigeBorderActive,
-    colorPaletteBeigeForeground2: () => colorPaletteBeigeForeground2,
-    colorPaletteBerryBackground1: () => colorPaletteBerryBackground1,
-    colorPaletteBerryBackground2: () => colorPaletteBerryBackground2,
-    colorPaletteBerryBackground3: () => colorPaletteBerryBackground3,
-    colorPaletteBerryBorder1: () => colorPaletteBerryBorder1,
-    colorPaletteBerryBorder2: () => colorPaletteBerryBorder2,
-    colorPaletteBerryBorderActive: () => colorPaletteBerryBorderActive,
-    colorPaletteBerryForeground1: () => colorPaletteBerryForeground1,
-    colorPaletteBerryForeground2: () => colorPaletteBerryForeground2,
-    colorPaletteBerryForeground3: () => colorPaletteBerryForeground3,
-    colorPaletteBlueBackground2: () => colorPaletteBlueBackground2,
-    colorPaletteBlueBorderActive: () => colorPaletteBlueBorderActive,
-    colorPaletteBlueForeground2: () => colorPaletteBlueForeground2,
-    colorPaletteBrassBackground2: () => colorPaletteBrassBackground2,
-    colorPaletteBrassBorderActive: () => colorPaletteBrassBorderActive,
-    colorPaletteBrassForeground2: () => colorPaletteBrassForeground2,
-    colorPaletteBrownBackground2: () => colorPaletteBrownBackground2,
-    colorPaletteBrownBorderActive: () => colorPaletteBrownBorderActive,
-    colorPaletteBrownForeground2: () => colorPaletteBrownForeground2,
-    colorPaletteCornflowerBackground2: () => colorPaletteCornflowerBackground2,
-    colorPaletteCornflowerBorderActive: () => colorPaletteCornflowerBorderActive,
-    colorPaletteCornflowerForeground2: () => colorPaletteCornflowerForeground2,
-    colorPaletteCranberryBackground2: () => colorPaletteCranberryBackground2,
-    colorPaletteCranberryBorderActive: () => colorPaletteCranberryBorderActive,
-    colorPaletteCranberryForeground2: () => colorPaletteCranberryForeground2,
-    colorPaletteDarkGreenBackground2: () => colorPaletteDarkGreenBackground2,
-    colorPaletteDarkGreenBorderActive: () => colorPaletteDarkGreenBorderActive,
-    colorPaletteDarkGreenForeground2: () => colorPaletteDarkGreenForeground2,
-    colorPaletteDarkOrangeBackground1: () => colorPaletteDarkOrangeBackground1,
-    colorPaletteDarkOrangeBackground2: () => colorPaletteDarkOrangeBackground2,
-    colorPaletteDarkOrangeBackground3: () => colorPaletteDarkOrangeBackground3,
-    colorPaletteDarkOrangeBorder1: () => colorPaletteDarkOrangeBorder1,
-    colorPaletteDarkOrangeBorder2: () => colorPaletteDarkOrangeBorder2,
-    colorPaletteDarkOrangeBorderActive: () => colorPaletteDarkOrangeBorderActive,
-    colorPaletteDarkOrangeForeground1: () => colorPaletteDarkOrangeForeground1,
-    colorPaletteDarkOrangeForeground2: () => colorPaletteDarkOrangeForeground2,
-    colorPaletteDarkOrangeForeground3: () => colorPaletteDarkOrangeForeground3,
-    colorPaletteDarkRedBackground2: () => colorPaletteDarkRedBackground2,
-    colorPaletteDarkRedBorderActive: () => colorPaletteDarkRedBorderActive,
-    colorPaletteDarkRedForeground2: () => colorPaletteDarkRedForeground2,
-    colorPaletteForestBackground2: () => colorPaletteForestBackground2,
-    colorPaletteForestBorderActive: () => colorPaletteForestBorderActive,
-    colorPaletteForestForeground2: () => colorPaletteForestForeground2,
-    colorPaletteGoldBackground2: () => colorPaletteGoldBackground2,
-    colorPaletteGoldBorderActive: () => colorPaletteGoldBorderActive,
-    colorPaletteGoldForeground2: () => colorPaletteGoldForeground2,
-    colorPaletteGrapeBackground2: () => colorPaletteGrapeBackground2,
-    colorPaletteGrapeBorderActive: () => colorPaletteGrapeBorderActive,
-    colorPaletteGrapeForeground2: () => colorPaletteGrapeForeground2,
-    colorPaletteGreenBackground1: () => colorPaletteGreenBackground1,
-    colorPaletteGreenBackground2: () => colorPaletteGreenBackground2,
-    colorPaletteGreenBackground3: () => colorPaletteGreenBackground3,
-    colorPaletteGreenBorder1: () => colorPaletteGreenBorder1,
-    colorPaletteGreenBorder2: () => colorPaletteGreenBorder2,
-    colorPaletteGreenBorderActive: () => colorPaletteGreenBorderActive,
-    colorPaletteGreenForeground1: () => colorPaletteGreenForeground1,
-    colorPaletteGreenForeground2: () => colorPaletteGreenForeground2,
-    colorPaletteGreenForeground3: () => colorPaletteGreenForeground3,
-    colorPaletteGreenForegroundInverted: () => colorPaletteGreenForegroundInverted,
-    colorPaletteLavenderBackground2: () => colorPaletteLavenderBackground2,
-    colorPaletteLavenderBorderActive: () => colorPaletteLavenderBorderActive,
-    colorPaletteLavenderForeground2: () => colorPaletteLavenderForeground2,
-    colorPaletteLightGreenBackground1: () => colorPaletteLightGreenBackground1,
-    colorPaletteLightGreenBackground2: () => colorPaletteLightGreenBackground2,
-    colorPaletteLightGreenBackground3: () => colorPaletteLightGreenBackground3,
-    colorPaletteLightGreenBorder1: () => colorPaletteLightGreenBorder1,
-    colorPaletteLightGreenBorder2: () => colorPaletteLightGreenBorder2,
-    colorPaletteLightGreenBorderActive: () => colorPaletteLightGreenBorderActive,
-    colorPaletteLightGreenForeground1: () => colorPaletteLightGreenForeground1,
-    colorPaletteLightGreenForeground2: () => colorPaletteLightGreenForeground2,
-    colorPaletteLightGreenForeground3: () => colorPaletteLightGreenForeground3,
-    colorPaletteLightTealBackground2: () => colorPaletteLightTealBackground2,
-    colorPaletteLightTealBorderActive: () => colorPaletteLightTealBorderActive,
-    colorPaletteLightTealForeground2: () => colorPaletteLightTealForeground2,
-    colorPaletteLilacBackground2: () => colorPaletteLilacBackground2,
-    colorPaletteLilacBorderActive: () => colorPaletteLilacBorderActive,
-    colorPaletteLilacForeground2: () => colorPaletteLilacForeground2,
-    colorPaletteMagentaBackground2: () => colorPaletteMagentaBackground2,
-    colorPaletteMagentaBorderActive: () => colorPaletteMagentaBorderActive,
-    colorPaletteMagentaForeground2: () => colorPaletteMagentaForeground2,
-    colorPaletteMarigoldBackground1: () => colorPaletteMarigoldBackground1,
-    colorPaletteMarigoldBackground2: () => colorPaletteMarigoldBackground2,
-    colorPaletteMarigoldBackground3: () => colorPaletteMarigoldBackground3,
-    colorPaletteMarigoldBorder1: () => colorPaletteMarigoldBorder1,
-    colorPaletteMarigoldBorder2: () => colorPaletteMarigoldBorder2,
-    colorPaletteMarigoldBorderActive: () => colorPaletteMarigoldBorderActive,
-    colorPaletteMarigoldForeground1: () => colorPaletteMarigoldForeground1,
-    colorPaletteMarigoldForeground2: () => colorPaletteMarigoldForeground2,
-    colorPaletteMarigoldForeground3: () => colorPaletteMarigoldForeground3,
-    colorPaletteMinkBackground2: () => colorPaletteMinkBackground2,
-    colorPaletteMinkBorderActive: () => colorPaletteMinkBorderActive,
-    colorPaletteMinkForeground2: () => colorPaletteMinkForeground2,
-    colorPaletteNavyBackground2: () => colorPaletteNavyBackground2,
-    colorPaletteNavyBorderActive: () => colorPaletteNavyBorderActive,
-    colorPaletteNavyForeground2: () => colorPaletteNavyForeground2,
-    colorPalettePeachBackground2: () => colorPalettePeachBackground2,
-    colorPalettePeachBorderActive: () => colorPalettePeachBorderActive,
-    colorPalettePeachForeground2: () => colorPalettePeachForeground2,
-    colorPalettePinkBackground2: () => colorPalettePinkBackground2,
-    colorPalettePinkBorderActive: () => colorPalettePinkBorderActive,
-    colorPalettePinkForeground2: () => colorPalettePinkForeground2,
-    colorPalettePlatinumBackground2: () => colorPalettePlatinumBackground2,
-    colorPalettePlatinumBorderActive: () => colorPalettePlatinumBorderActive,
-    colorPalettePlatinumForeground2: () => colorPalettePlatinumForeground2,
-    colorPalettePlumBackground2: () => colorPalettePlumBackground2,
-    colorPalettePlumBorderActive: () => colorPalettePlumBorderActive,
-    colorPalettePlumForeground2: () => colorPalettePlumForeground2,
-    colorPalettePumpkinBackground2: () => colorPalettePumpkinBackground2,
-    colorPalettePumpkinBorderActive: () => colorPalettePumpkinBorderActive,
-    colorPalettePumpkinForeground2: () => colorPalettePumpkinForeground2,
-    colorPalettePurpleBackground2: () => colorPalettePurpleBackground2,
-    colorPalettePurpleBorderActive: () => colorPalettePurpleBorderActive,
-    colorPalettePurpleForeground2: () => colorPalettePurpleForeground2,
-    colorPaletteRedBackground1: () => colorPaletteRedBackground1,
-    colorPaletteRedBackground2: () => colorPaletteRedBackground2,
-    colorPaletteRedBackground3: () => colorPaletteRedBackground3,
-    colorPaletteRedBorder1: () => colorPaletteRedBorder1,
-    colorPaletteRedBorder2: () => colorPaletteRedBorder2,
-    colorPaletteRedBorderActive: () => colorPaletteRedBorderActive,
-    colorPaletteRedForeground1: () => colorPaletteRedForeground1,
-    colorPaletteRedForeground2: () => colorPaletteRedForeground2,
-    colorPaletteRedForeground3: () => colorPaletteRedForeground3,
-    colorPaletteRedForegroundInverted: () => colorPaletteRedForegroundInverted,
-    colorPaletteRoyalBlueBackground2: () => colorPaletteRoyalBlueBackground2,
-    colorPaletteRoyalBlueBorderActive: () => colorPaletteRoyalBlueBorderActive,
-    colorPaletteRoyalBlueForeground2: () => colorPaletteRoyalBlueForeground2,
-    colorPaletteSeafoamBackground2: () => colorPaletteSeafoamBackground2,
-    colorPaletteSeafoamBorderActive: () => colorPaletteSeafoamBorderActive,
-    colorPaletteSeafoamForeground2: () => colorPaletteSeafoamForeground2,
-    colorPaletteSteelBackground2: () => colorPaletteSteelBackground2,
-    colorPaletteSteelBorderActive: () => colorPaletteSteelBorderActive,
-    colorPaletteSteelForeground2: () => colorPaletteSteelForeground2,
-    colorPaletteTealBackground2: () => colorPaletteTealBackground2,
-    colorPaletteTealBorderActive: () => colorPaletteTealBorderActive,
-    colorPaletteTealForeground2: () => colorPaletteTealForeground2,
-    colorPaletteYellowBackground1: () => colorPaletteYellowBackground1,
-    colorPaletteYellowBackground2: () => colorPaletteYellowBackground2,
-    colorPaletteYellowBackground3: () => colorPaletteYellowBackground3,
-    colorPaletteYellowBorder1: () => colorPaletteYellowBorder1,
-    colorPaletteYellowBorder2: () => colorPaletteYellowBorder2,
-    colorPaletteYellowBorderActive: () => colorPaletteYellowBorderActive,
-    colorPaletteYellowForeground1: () => colorPaletteYellowForeground1,
-    colorPaletteYellowForeground2: () => colorPaletteYellowForeground2,
-    colorPaletteYellowForeground3: () => colorPaletteYellowForeground3,
-    colorPaletteYellowForegroundInverted: () => colorPaletteYellowForegroundInverted,
-    colorScrollbarOverlay: () => colorScrollbarOverlay,
-    colorStrokeFocus1: () => colorStrokeFocus1,
-    colorStrokeFocus2: () => colorStrokeFocus2,
-    colorSubtleBackground: () => colorSubtleBackground,
-    colorSubtleBackgroundHover: () => colorSubtleBackgroundHover,
-    colorSubtleBackgroundInverted: () => colorSubtleBackgroundInverted,
-    colorSubtleBackgroundInvertedHover: () => colorSubtleBackgroundInvertedHover,
-    colorSubtleBackgroundInvertedPressed: () => colorSubtleBackgroundInvertedPressed,
-    colorSubtleBackgroundInvertedSelected: () => colorSubtleBackgroundInvertedSelected,
-    colorSubtleBackgroundLightAlphaHover: () => colorSubtleBackgroundLightAlphaHover,
-    colorSubtleBackgroundLightAlphaPressed: () => colorSubtleBackgroundLightAlphaPressed,
-    colorSubtleBackgroundLightAlphaSelected: () => colorSubtleBackgroundLightAlphaSelected,
-    colorSubtleBackgroundPressed: () => colorSubtleBackgroundPressed,
-    colorSubtleBackgroundSelected: () => colorSubtleBackgroundSelected,
-    colorTransparentBackground: () => colorTransparentBackground,
-    colorTransparentBackgroundHover: () => colorTransparentBackgroundHover,
-    colorTransparentBackgroundPressed: () => colorTransparentBackgroundPressed,
-    colorTransparentBackgroundSelected: () => colorTransparentBackgroundSelected,
-    colorTransparentStroke: () => colorTransparentStroke,
-    colorTransparentStrokeDisabled: () => colorTransparentStrokeDisabled,
-    colorTransparentStrokeInteractive: () => colorTransparentStrokeInteractive,
-    curveAccelerateMax: () => curveAccelerateMax,
-    curveAccelerateMid: () => curveAccelerateMid,
-    curveAccelerateMin: () => curveAccelerateMin,
-    curveDecelerateMax: () => curveDecelerateMax,
-    curveDecelerateMid: () => curveDecelerateMid,
-    curveDecelerateMin: () => curveDecelerateMin,
-    curveEasyEase: () => curveEasyEase,
-    curveEasyEaseMax: () => curveEasyEaseMax,
-    curveLinear: () => curveLinear,
-    durationFast: () => durationFast,
-    durationFaster: () => durationFaster,
-    durationNormal: () => durationNormal,
-    durationSlow: () => durationSlow,
-    durationSlower: () => durationSlower,
-    durationUltraFast: () => durationUltraFast,
-    durationUltraSlow: () => durationUltraSlow,
-    fontFamilyBase: () => fontFamilyBase2,
-    fontFamilyMonospace: () => fontFamilyMonospace,
-    fontFamilyNumeric: () => fontFamilyNumeric,
-    fontSizeBase100: () => fontSizeBase100,
-    fontSizeBase200: () => fontSizeBase2002,
-    fontSizeBase300: () => fontSizeBase3002,
-    fontSizeBase400: () => fontSizeBase400,
-    fontSizeBase500: () => fontSizeBase500,
-    fontSizeBase600: () => fontSizeBase600,
-    fontSizeHero1000: () => fontSizeHero1000,
-    fontSizeHero700: () => fontSizeHero700,
-    fontSizeHero800: () => fontSizeHero800,
-    fontSizeHero900: () => fontSizeHero900,
-    fontWeightBold: () => fontWeightBold,
-    fontWeightMedium: () => fontWeightMedium,
-    fontWeightRegular: () => fontWeightRegular2,
-    fontWeightSemibold: () => fontWeightSemibold,
-    lineHeightBase100: () => lineHeightBase100,
-    lineHeightBase200: () => lineHeightBase2002,
-    lineHeightBase300: () => lineHeightBase3002,
-    lineHeightBase400: () => lineHeightBase400,
-    lineHeightBase500: () => lineHeightBase500,
-    lineHeightBase600: () => lineHeightBase600,
-    lineHeightHero1000: () => lineHeightHero1000,
-    lineHeightHero700: () => lineHeightHero700,
-    lineHeightHero800: () => lineHeightHero800,
-    lineHeightHero900: () => lineHeightHero900,
-    shadow16: () => shadow16,
-    shadow16Brand: () => shadow16Brand,
-    shadow2: () => shadow2,
-    shadow28: () => shadow282,
-    shadow28Brand: () => shadow28Brand,
-    shadow2Brand: () => shadow2Brand,
-    shadow4: () => shadow4,
-    shadow4Brand: () => shadow4Brand,
-    shadow64: () => shadow64,
-    shadow64Brand: () => shadow64Brand,
-    shadow8: () => shadow8,
-    shadow8Brand: () => shadow8Brand,
-    spacingHorizontalL: () => spacingHorizontalL2,
-    spacingHorizontalM: () => spacingHorizontalM2,
-    spacingHorizontalMNudge: () => spacingHorizontalMNudge,
-    spacingHorizontalNone: () => spacingHorizontalNone,
-    spacingHorizontalS: () => spacingHorizontalS2,
-    spacingHorizontalSNudge: () => spacingHorizontalSNudge,
-    spacingHorizontalXL: () => spacingHorizontalXL,
-    spacingHorizontalXS: () => spacingHorizontalXS2,
-    spacingHorizontalXXL: () => spacingHorizontalXXL,
-    spacingHorizontalXXS: () => spacingHorizontalXXS,
-    spacingHorizontalXXXL: () => spacingHorizontalXXXL,
-    spacingVerticalL: () => spacingVerticalL,
-    spacingVerticalM: () => spacingVerticalM,
-    spacingVerticalMNudge: () => spacingVerticalMNudge,
-    spacingVerticalNone: () => spacingVerticalNone,
-    spacingVerticalS: () => spacingVerticalS,
-    spacingVerticalSNudge: () => spacingVerticalSNudge,
-    spacingVerticalXL: () => spacingVerticalXL,
-    spacingVerticalXS: () => spacingVerticalXS,
-    spacingVerticalXXL: () => spacingVerticalXXL,
-    spacingVerticalXXS: () => spacingVerticalXXS,
-    spacingVerticalXXXL: () => spacingVerticalXXXL,
-    strokeWidthThick: () => strokeWidthThick,
-    strokeWidthThicker: () => strokeWidthThicker,
-    strokeWidthThickest: () => strokeWidthThickest,
-    strokeWidthThin: () => strokeWidthThin2
-  });
-  var colorNeutralForeground12 = "--colorNeutralForeground1";
-  var colorNeutralForeground1Hover = "--colorNeutralForeground1Hover";
-  var colorNeutralForeground1Pressed = "--colorNeutralForeground1Pressed";
-  var colorNeutralForeground1Selected = "--colorNeutralForeground1Selected";
-  var colorNeutralForeground2 = "--colorNeutralForeground2";
-  var colorNeutralForeground2Hover = "--colorNeutralForeground2Hover";
-  var colorNeutralForeground2Pressed = "--colorNeutralForeground2Pressed";
-  var colorNeutralForeground2Selected = "--colorNeutralForeground2Selected";
-  var colorNeutralForeground2BrandHover = "--colorNeutralForeground2BrandHover";
-  var colorNeutralForeground2BrandPressed = "--colorNeutralForeground2BrandPressed";
-  var colorNeutralForeground2BrandSelected = "--colorNeutralForeground2BrandSelected";
-  var colorNeutralForeground3 = "--colorNeutralForeground3";
-  var colorNeutralForeground3Hover = "--colorNeutralForeground3Hover";
-  var colorNeutralForeground3Pressed = "--colorNeutralForeground3Pressed";
-  var colorNeutralForeground3Selected = "--colorNeutralForeground3Selected";
-  var colorNeutralForeground3BrandHover = "--colorNeutralForeground3BrandHover";
-  var colorNeutralForeground3BrandPressed = "--colorNeutralForeground3BrandPressed";
-  var colorNeutralForeground3BrandSelected = "--colorNeutralForeground3BrandSelected";
-  var colorNeutralForeground42 = "--colorNeutralForeground4";
-  var colorNeutralForegroundDisabled = "--colorNeutralForegroundDisabled";
-  var colorBrandForegroundLink = "--colorBrandForegroundLink";
-  var colorBrandForegroundLinkHover = "--colorBrandForegroundLinkHover";
-  var colorBrandForegroundLinkPressed = "--colorBrandForegroundLinkPressed";
-  var colorBrandForegroundLinkSelected = "--colorBrandForegroundLinkSelected";
-  var colorNeutralForeground2Link = "--colorNeutralForeground2Link";
-  var colorNeutralForeground2LinkHover = "--colorNeutralForeground2LinkHover";
-  var colorNeutralForeground2LinkPressed = "--colorNeutralForeground2LinkPressed";
-  var colorNeutralForeground2LinkSelected = "--colorNeutralForeground2LinkSelected";
-  var colorCompoundBrandForeground1 = "--colorCompoundBrandForeground1";
-  var colorCompoundBrandForeground1Hover = "--colorCompoundBrandForeground1Hover";
-  var colorCompoundBrandForeground1Pressed = "--colorCompoundBrandForeground1Pressed";
-  var colorNeutralForegroundOnBrand = "--colorNeutralForegroundOnBrand";
-  var colorNeutralForegroundInverted = "--colorNeutralForegroundInverted";
-  var colorNeutralForegroundInvertedHover = "--colorNeutralForegroundInvertedHover";
-  var colorNeutralForegroundInvertedPressed = "--colorNeutralForegroundInvertedPressed";
-  var colorNeutralForegroundInvertedSelected = "--colorNeutralForegroundInvertedSelected";
-  var colorNeutralForegroundInverted2 = "--colorNeutralForegroundInverted2";
-  var colorNeutralForegroundStaticInverted = "--colorNeutralForegroundStaticInverted";
-  var colorNeutralForegroundInvertedLink = "--colorNeutralForegroundInvertedLink";
-  var colorNeutralForegroundInvertedLinkHover = "--colorNeutralForegroundInvertedLinkHover";
-  var colorNeutralForegroundInvertedLinkPressed = "--colorNeutralForegroundInvertedLinkPressed";
-  var colorNeutralForegroundInvertedLinkSelected = "--colorNeutralForegroundInvertedLinkSelected";
-  var colorNeutralForegroundInvertedDisabled = "--colorNeutralForegroundInvertedDisabled";
-  var colorBrandForeground1 = "--colorBrandForeground1";
-  var colorBrandForeground2 = "--colorBrandForeground2";
-  var colorNeutralForeground1Static = "--colorNeutralForeground1Static";
-  var colorBrandForegroundInverted = "--colorBrandForegroundInverted";
-  var colorBrandForegroundInvertedHover = "--colorBrandForegroundInvertedHover";
-  var colorBrandForegroundInvertedPressed = "--colorBrandForegroundInvertedPressed";
-  var colorBrandForegroundOnLight = "--colorBrandForegroundOnLight";
-  var colorBrandForegroundOnLightHover = "--colorBrandForegroundOnLightHover";
-  var colorBrandForegroundOnLightPressed = "--colorBrandForegroundOnLightPressed";
-  var colorBrandForegroundOnLightSelected = "--colorBrandForegroundOnLightSelected";
-  var colorNeutralBackground1 = "--colorNeutralBackground1";
-  var colorNeutralBackground1Hover = "--colorNeutralBackground1Hover";
-  var colorNeutralBackground1Pressed = "--colorNeutralBackground1Pressed";
-  var colorNeutralBackground1Selected = "--colorNeutralBackground1Selected";
-  var colorNeutralBackground2 = "--colorNeutralBackground2";
-  var colorNeutralBackground2Hover = "--colorNeutralBackground2Hover";
-  var colorNeutralBackground2Pressed = "--colorNeutralBackground2Pressed";
-  var colorNeutralBackground2Selected = "--colorNeutralBackground2Selected";
-  var colorNeutralBackground3 = "--colorNeutralBackground3";
-  var colorNeutralBackground3Hover = "--colorNeutralBackground3Hover";
-  var colorNeutralBackground3Pressed = "--colorNeutralBackground3Pressed";
-  var colorNeutralBackground3Selected = "--colorNeutralBackground3Selected";
-  var colorNeutralBackground4 = "--colorNeutralBackground4";
-  var colorNeutralBackground4Hover = "--colorNeutralBackground4Hover";
-  var colorNeutralBackground4Pressed = "--colorNeutralBackground4Pressed";
-  var colorNeutralBackground4Selected = "--colorNeutralBackground4Selected";
-  var colorNeutralBackground5 = "--colorNeutralBackground5";
-  var colorNeutralBackground5Hover = "--colorNeutralBackground5Hover";
-  var colorNeutralBackground5Pressed = "--colorNeutralBackground5Pressed";
-  var colorNeutralBackground5Selected = "--colorNeutralBackground5Selected";
-  var colorNeutralBackground6 = "--colorNeutralBackground6";
-  var colorNeutralBackgroundStatic = "--colorNeutralBackgroundStatic";
-  var colorNeutralBackgroundInverted = "--colorNeutralBackgroundInverted";
-  var colorSubtleBackground = "--colorSubtleBackground";
-  var colorSubtleBackgroundHover = "--colorSubtleBackgroundHover";
-  var colorSubtleBackgroundPressed = "--colorSubtleBackgroundPressed";
-  var colorSubtleBackgroundSelected = "--colorSubtleBackgroundSelected";
-  var colorSubtleBackgroundLightAlphaHover = "--colorSubtleBackgroundLightAlphaHover";
-  var colorSubtleBackgroundLightAlphaPressed = "--colorSubtleBackgroundLightAlphaPressed";
-  var colorSubtleBackgroundLightAlphaSelected = "--colorSubtleBackgroundLightAlphaSelected";
-  var colorSubtleBackgroundInverted = "--colorSubtleBackgroundInverted";
-  var colorSubtleBackgroundInvertedHover = "--colorSubtleBackgroundInvertedHover";
-  var colorSubtleBackgroundInvertedPressed = "--colorSubtleBackgroundInvertedPressed";
-  var colorSubtleBackgroundInvertedSelected = "--colorSubtleBackgroundInvertedSelected";
-  var colorTransparentBackground = "--colorTransparentBackground";
-  var colorTransparentBackgroundHover = "--colorTransparentBackgroundHover";
-  var colorTransparentBackgroundPressed = "--colorTransparentBackgroundPressed";
-  var colorTransparentBackgroundSelected = "--colorTransparentBackgroundSelected";
-  var colorNeutralBackgroundDisabled = "--colorNeutralBackgroundDisabled";
-  var colorNeutralBackgroundInvertedDisabled = "--colorNeutralBackgroundInvertedDisabled";
-  var colorNeutralStencil1 = "--colorNeutralStencil1";
-  var colorNeutralStencil2 = "--colorNeutralStencil2";
-  var colorNeutralStencil1Alpha = "--colorNeutralStencil1Alpha";
-  var colorNeutralStencil2Alpha = "--colorNeutralStencil2Alpha";
-  var colorBackgroundOverlay = "--colorBackgroundOverlay";
-  var colorScrollbarOverlay = "--colorScrollbarOverlay";
-  var colorBrandBackground = "--colorBrandBackground";
-  var colorBrandBackgroundHover = "--colorBrandBackgroundHover";
-  var colorBrandBackgroundPressed = "--colorBrandBackgroundPressed";
-  var colorBrandBackgroundSelected = "--colorBrandBackgroundSelected";
-  var colorCompoundBrandBackground = "--colorCompoundBrandBackground";
-  var colorCompoundBrandBackgroundHover = "--colorCompoundBrandBackgroundHover";
-  var colorCompoundBrandBackgroundPressed = "--colorCompoundBrandBackgroundPressed";
-  var colorBrandBackgroundStatic = "--colorBrandBackgroundStatic";
-  var colorBrandBackground2 = "--colorBrandBackground2";
-  var colorBrandBackgroundInverted = "--colorBrandBackgroundInverted";
-  var colorBrandBackgroundInvertedHover = "--colorBrandBackgroundInvertedHover";
-  var colorBrandBackgroundInvertedPressed = "--colorBrandBackgroundInvertedPressed";
-  var colorBrandBackgroundInvertedSelected = "--colorBrandBackgroundInvertedSelected";
-  var colorNeutralStrokeAccessible = "--colorNeutralStrokeAccessible";
-  var colorNeutralStrokeAccessibleHover = "--colorNeutralStrokeAccessibleHover";
-  var colorNeutralStrokeAccessiblePressed = "--colorNeutralStrokeAccessiblePressed";
-  var colorNeutralStrokeAccessibleSelected = "--colorNeutralStrokeAccessibleSelected";
-  var colorNeutralStroke12 = "--colorNeutralStroke1";
-  var colorNeutralStroke1Hover = "--colorNeutralStroke1Hover";
-  var colorNeutralStroke1Pressed = "--colorNeutralStroke1Pressed";
-  var colorNeutralStroke1Selected = "--colorNeutralStroke1Selected";
-  var colorNeutralStroke2 = "--colorNeutralStroke2";
-  var colorNeutralStroke3 = "--colorNeutralStroke3";
-  var colorNeutralStrokeOnBrand = "--colorNeutralStrokeOnBrand";
-  var colorNeutralStrokeOnBrand2 = "--colorNeutralStrokeOnBrand2";
-  var colorNeutralStrokeOnBrand2Hover = "--colorNeutralStrokeOnBrand2Hover";
-  var colorNeutralStrokeOnBrand2Pressed = "--colorNeutralStrokeOnBrand2Pressed";
-  var colorNeutralStrokeOnBrand2Selected = "--colorNeutralStrokeOnBrand2Selected";
-  var colorBrandStroke1 = "--colorBrandStroke1";
-  var colorBrandStroke2 = "--colorBrandStroke2";
-  var colorCompoundBrandStroke = "--colorCompoundBrandStroke";
-  var colorCompoundBrandStrokeHover = "--colorCompoundBrandStrokeHover";
-  var colorCompoundBrandStrokePressed = "--colorCompoundBrandStrokePressed";
-  var colorNeutralStrokeDisabled = "--colorNeutralStrokeDisabled";
-  var colorNeutralStrokeInvertedDisabled = "--colorNeutralStrokeInvertedDisabled";
-  var colorTransparentStroke = "--colorTransparentStroke";
-  var colorTransparentStrokeInteractive = "--colorTransparentStrokeInteractive";
-  var colorTransparentStrokeDisabled = "--colorTransparentStrokeDisabled";
-  var colorStrokeFocus1 = "--colorStrokeFocus1";
-  var colorStrokeFocus2 = "--colorStrokeFocus2";
-  var colorNeutralShadowAmbient = "--colorNeutralShadowAmbient";
-  var colorNeutralShadowKey = "--colorNeutralShadowKey";
-  var colorNeutralShadowAmbientLighter = "--colorNeutralShadowAmbientLighter";
-  var colorNeutralShadowKeyLighter = "--colorNeutralShadowKeyLighter";
-  var colorNeutralShadowAmbientDarker = "--colorNeutralShadowAmbientDarker";
-  var colorNeutralShadowKeyDarker = "--colorNeutralShadowKeyDarker";
-  var colorBrandShadowAmbient = "--colorBrandShadowAmbient";
-  var colorBrandShadowKey = "--colorBrandShadowKey";
-  var colorPaletteRedBackground1 = "--colorPaletteRedBackground1";
-  var colorPaletteRedBackground2 = "--colorPaletteRedBackground2";
-  var colorPaletteRedBackground3 = "--colorPaletteRedBackground3";
-  var colorPaletteRedBorderActive = "--colorPaletteRedBorderActive";
-  var colorPaletteRedBorder1 = "--colorPaletteRedBorder1";
-  var colorPaletteRedBorder2 = "--colorPaletteRedBorder2";
-  var colorPaletteRedForeground1 = "--colorPaletteRedForeground1";
-  var colorPaletteRedForeground2 = "--colorPaletteRedForeground2";
-  var colorPaletteRedForeground3 = "--colorPaletteRedForeground3";
-  var colorPaletteRedForegroundInverted = "--colorPaletteRedForegroundInverted";
-  var colorPaletteGreenBackground1 = "--colorPaletteGreenBackground1";
-  var colorPaletteGreenBackground2 = "--colorPaletteGreenBackground2";
-  var colorPaletteGreenBackground3 = "--colorPaletteGreenBackground3";
-  var colorPaletteGreenBorderActive = "--colorPaletteGreenBorderActive";
-  var colorPaletteGreenBorder1 = "--colorPaletteGreenBorder1";
-  var colorPaletteGreenBorder2 = "--colorPaletteGreenBorder2";
-  var colorPaletteGreenForeground1 = "--colorPaletteGreenForeground1";
-  var colorPaletteGreenForeground2 = "--colorPaletteGreenForeground2";
-  var colorPaletteGreenForeground3 = "--colorPaletteGreenForeground3";
-  var colorPaletteGreenForegroundInverted = "--colorPaletteGreenForegroundInverted";
-  var colorPaletteDarkOrangeBackground1 = "--colorPaletteDarkOrangeBackground1";
-  var colorPaletteDarkOrangeBackground2 = "--colorPaletteDarkOrangeBackground2";
-  var colorPaletteDarkOrangeBackground3 = "--colorPaletteDarkOrangeBackground3";
-  var colorPaletteDarkOrangeBorderActive = "--colorPaletteDarkOrangeBorderActive";
-  var colorPaletteDarkOrangeBorder1 = "--colorPaletteDarkOrangeBorder1";
-  var colorPaletteDarkOrangeBorder2 = "--colorPaletteDarkOrangeBorder2";
-  var colorPaletteDarkOrangeForeground1 = "--colorPaletteDarkOrangeForeground1";
-  var colorPaletteDarkOrangeForeground2 = "--colorPaletteDarkOrangeForeground2";
-  var colorPaletteDarkOrangeForeground3 = "--colorPaletteDarkOrangeForeground3";
-  var colorPaletteYellowBackground1 = "--colorPaletteYellowBackground1";
-  var colorPaletteYellowBackground2 = "--colorPaletteYellowBackground2";
-  var colorPaletteYellowBackground3 = "--colorPaletteYellowBackground3";
-  var colorPaletteYellowBorderActive = "--colorPaletteYellowBorderActive";
-  var colorPaletteYellowBorder1 = "--colorPaletteYellowBorder1";
-  var colorPaletteYellowBorder2 = "--colorPaletteYellowBorder2";
-  var colorPaletteYellowForeground1 = "--colorPaletteYellowForeground1";
-  var colorPaletteYellowForeground2 = "--colorPaletteYellowForeground2";
-  var colorPaletteYellowForeground3 = "--colorPaletteYellowForeground3";
-  var colorPaletteYellowForegroundInverted = "--colorPaletteYellowForegroundInverted";
-  var colorPaletteBerryBackground1 = "--colorPaletteBerryBackground1";
-  var colorPaletteBerryBackground2 = "--colorPaletteBerryBackground2";
-  var colorPaletteBerryBackground3 = "--colorPaletteBerryBackground3";
-  var colorPaletteBerryBorderActive = "--colorPaletteBerryBorderActive";
-  var colorPaletteBerryBorder1 = "--colorPaletteBerryBorder1";
-  var colorPaletteBerryBorder2 = "--colorPaletteBerryBorder2";
-  var colorPaletteBerryForeground1 = "--colorPaletteBerryForeground1";
-  var colorPaletteBerryForeground2 = "--colorPaletteBerryForeground2";
-  var colorPaletteBerryForeground3 = "--colorPaletteBerryForeground3";
-  var colorPaletteMarigoldBackground1 = "--colorPaletteMarigoldBackground1";
-  var colorPaletteMarigoldBackground2 = "--colorPaletteMarigoldBackground2";
-  var colorPaletteMarigoldBackground3 = "--colorPaletteMarigoldBackground3";
-  var colorPaletteMarigoldBorderActive = "--colorPaletteMarigoldBorderActive";
-  var colorPaletteMarigoldBorder1 = "--colorPaletteMarigoldBorder1";
-  var colorPaletteMarigoldBorder2 = "--colorPaletteMarigoldBorder2";
-  var colorPaletteMarigoldForeground1 = "--colorPaletteMarigoldForeground1";
-  var colorPaletteMarigoldForeground2 = "--colorPaletteMarigoldForeground2";
-  var colorPaletteMarigoldForeground3 = "--colorPaletteMarigoldForeground3";
-  var colorPaletteLightGreenBackground1 = "--colorPaletteLightGreenBackground1";
-  var colorPaletteLightGreenBackground2 = "--colorPaletteLightGreenBackground2";
-  var colorPaletteLightGreenBackground3 = "--colorPaletteLightGreenBackground3";
-  var colorPaletteLightGreenBorderActive = "--colorPaletteLightGreenBorderActive";
-  var colorPaletteLightGreenBorder1 = "--colorPaletteLightGreenBorder1";
-  var colorPaletteLightGreenBorder2 = "--colorPaletteLightGreenBorder2";
-  var colorPaletteLightGreenForeground1 = "--colorPaletteLightGreenForeground1";
-  var colorPaletteLightGreenForeground2 = "--colorPaletteLightGreenForeground2";
-  var colorPaletteLightGreenForeground3 = "--colorPaletteLightGreenForeground3";
-  var colorPaletteAnchorBackground2 = "--colorPaletteAnchorBackground2";
-  var colorPaletteAnchorBorderActive = "--colorPaletteAnchorBorderActive";
-  var colorPaletteAnchorForeground2 = "--colorPaletteAnchorForeground2";
-  var colorPaletteBeigeBackground2 = "--colorPaletteBeigeBackground2";
-  var colorPaletteBeigeBorderActive = "--colorPaletteBeigeBorderActive";
-  var colorPaletteBeigeForeground2 = "--colorPaletteBeigeForeground2";
-  var colorPaletteBlueBackground2 = "--colorPaletteBlueBackground2";
-  var colorPaletteBlueBorderActive = "--colorPaletteBlueBorderActive";
-  var colorPaletteBlueForeground2 = "--colorPaletteBlueForeground2";
-  var colorPaletteBrassBackground2 = "--colorPaletteBrassBackground2";
-  var colorPaletteBrassBorderActive = "--colorPaletteBrassBorderActive";
-  var colorPaletteBrassForeground2 = "--colorPaletteBrassForeground2";
-  var colorPaletteBrownBackground2 = "--colorPaletteBrownBackground2";
-  var colorPaletteBrownBorderActive = "--colorPaletteBrownBorderActive";
-  var colorPaletteBrownForeground2 = "--colorPaletteBrownForeground2";
-  var colorPaletteCornflowerBackground2 = "--colorPaletteCornflowerBackground2";
-  var colorPaletteCornflowerBorderActive = "--colorPaletteCornflowerBorderActive";
-  var colorPaletteCornflowerForeground2 = "--colorPaletteCornflowerForeground2";
-  var colorPaletteCranberryBackground2 = "--colorPaletteCranberryBackground2";
-  var colorPaletteCranberryBorderActive = "--colorPaletteCranberryBorderActive";
-  var colorPaletteCranberryForeground2 = "--colorPaletteCranberryForeground2";
-  var colorPaletteDarkGreenBackground2 = "--colorPaletteDarkGreenBackground2";
-  var colorPaletteDarkGreenBorderActive = "--colorPaletteDarkGreenBorderActive";
-  var colorPaletteDarkGreenForeground2 = "--colorPaletteDarkGreenForeground2";
-  var colorPaletteDarkRedBackground2 = "--colorPaletteDarkRedBackground2";
-  var colorPaletteDarkRedBorderActive = "--colorPaletteDarkRedBorderActive";
-  var colorPaletteDarkRedForeground2 = "--colorPaletteDarkRedForeground2";
-  var colorPaletteForestBackground2 = "--colorPaletteForestBackground2";
-  var colorPaletteForestBorderActive = "--colorPaletteForestBorderActive";
-  var colorPaletteForestForeground2 = "--colorPaletteForestForeground2";
-  var colorPaletteGoldBackground2 = "--colorPaletteGoldBackground2";
-  var colorPaletteGoldBorderActive = "--colorPaletteGoldBorderActive";
-  var colorPaletteGoldForeground2 = "--colorPaletteGoldForeground2";
-  var colorPaletteGrapeBackground2 = "--colorPaletteGrapeBackground2";
-  var colorPaletteGrapeBorderActive = "--colorPaletteGrapeBorderActive";
-  var colorPaletteGrapeForeground2 = "--colorPaletteGrapeForeground2";
-  var colorPaletteLavenderBackground2 = "--colorPaletteLavenderBackground2";
-  var colorPaletteLavenderBorderActive = "--colorPaletteLavenderBorderActive";
-  var colorPaletteLavenderForeground2 = "--colorPaletteLavenderForeground2";
-  var colorPaletteLightTealBackground2 = "--colorPaletteLightTealBackground2";
-  var colorPaletteLightTealBorderActive = "--colorPaletteLightTealBorderActive";
-  var colorPaletteLightTealForeground2 = "--colorPaletteLightTealForeground2";
-  var colorPaletteLilacBackground2 = "--colorPaletteLilacBackground2";
-  var colorPaletteLilacBorderActive = "--colorPaletteLilacBorderActive";
-  var colorPaletteLilacForeground2 = "--colorPaletteLilacForeground2";
-  var colorPaletteMagentaBackground2 = "--colorPaletteMagentaBackground2";
-  var colorPaletteMagentaBorderActive = "--colorPaletteMagentaBorderActive";
-  var colorPaletteMagentaForeground2 = "--colorPaletteMagentaForeground2";
-  var colorPaletteMinkBackground2 = "--colorPaletteMinkBackground2";
-  var colorPaletteMinkBorderActive = "--colorPaletteMinkBorderActive";
-  var colorPaletteMinkForeground2 = "--colorPaletteMinkForeground2";
-  var colorPaletteNavyBackground2 = "--colorPaletteNavyBackground2";
-  var colorPaletteNavyBorderActive = "--colorPaletteNavyBorderActive";
-  var colorPaletteNavyForeground2 = "--colorPaletteNavyForeground2";
-  var colorPalettePeachBackground2 = "--colorPalettePeachBackground2";
-  var colorPalettePeachBorderActive = "--colorPalettePeachBorderActive";
-  var colorPalettePeachForeground2 = "--colorPalettePeachForeground2";
-  var colorPalettePinkBackground2 = "--colorPalettePinkBackground2";
-  var colorPalettePinkBorderActive = "--colorPalettePinkBorderActive";
-  var colorPalettePinkForeground2 = "--colorPalettePinkForeground2";
-  var colorPalettePlatinumBackground2 = "--colorPalettePlatinumBackground2";
-  var colorPalettePlatinumBorderActive = "--colorPalettePlatinumBorderActive";
-  var colorPalettePlatinumForeground2 = "--colorPalettePlatinumForeground2";
-  var colorPalettePlumBackground2 = "--colorPalettePlumBackground2";
-  var colorPalettePlumBorderActive = "--colorPalettePlumBorderActive";
-  var colorPalettePlumForeground2 = "--colorPalettePlumForeground2";
-  var colorPalettePumpkinBackground2 = "--colorPalettePumpkinBackground2";
-  var colorPalettePumpkinBorderActive = "--colorPalettePumpkinBorderActive";
-  var colorPalettePumpkinForeground2 = "--colorPalettePumpkinForeground2";
-  var colorPalettePurpleBackground2 = "--colorPalettePurpleBackground2";
-  var colorPalettePurpleBorderActive = "--colorPalettePurpleBorderActive";
-  var colorPalettePurpleForeground2 = "--colorPalettePurpleForeground2";
-  var colorPaletteRoyalBlueBackground2 = "--colorPaletteRoyalBlueBackground2";
-  var colorPaletteRoyalBlueBorderActive = "--colorPaletteRoyalBlueBorderActive";
-  var colorPaletteRoyalBlueForeground2 = "--colorPaletteRoyalBlueForeground2";
-  var colorPaletteSeafoamBackground2 = "--colorPaletteSeafoamBackground2";
-  var colorPaletteSeafoamBorderActive = "--colorPaletteSeafoamBorderActive";
-  var colorPaletteSeafoamForeground2 = "--colorPaletteSeafoamForeground2";
-  var colorPaletteSteelBackground2 = "--colorPaletteSteelBackground2";
-  var colorPaletteSteelBorderActive = "--colorPaletteSteelBorderActive";
-  var colorPaletteSteelForeground2 = "--colorPaletteSteelForeground2";
-  var colorPaletteTealBackground2 = "--colorPaletteTealBackground2";
-  var colorPaletteTealBorderActive = "--colorPaletteTealBorderActive";
-  var colorPaletteTealForeground2 = "--colorPaletteTealForeground2";
-  var borderRadiusNone = "--borderRadiusNone";
-  var borderRadiusSmall2 = "--borderRadiusSmall";
-  var borderRadiusMedium2 = "--borderRadiusMedium";
-  var borderRadiusLarge = "--borderRadiusLarge";
-  var borderRadiusXLarge = "--borderRadiusXLarge";
-  var borderRadiusCircular = "--borderRadiusCircular";
-  var fontFamilyBase2 = "--fontFamilyBase";
-  var fontFamilyMonospace = "--fontFamilyMonospace";
-  var fontFamilyNumeric = "--fontFamilyNumeric";
-  var fontSizeBase100 = "--fontSizeBase100";
-  var fontSizeBase2002 = "--fontSizeBase200";
-  var fontSizeBase3002 = "--fontSizeBase300";
-  var fontSizeBase400 = "--fontSizeBase400";
-  var fontSizeBase500 = "--fontSizeBase500";
-  var fontSizeBase600 = "--fontSizeBase600";
-  var fontSizeHero700 = "--fontSizeHero700";
-  var fontSizeHero800 = "--fontSizeHero800";
-  var fontSizeHero900 = "--fontSizeHero900";
-  var fontSizeHero1000 = "--fontSizeHero1000";
-  var fontWeightRegular2 = "--fontWeightRegular";
-  var fontWeightMedium = "--fontWeightMedium";
-  var fontWeightSemibold = "--fontWeightSemibold";
-  var fontWeightBold = "--fontWeightBold";
-  var lineHeightBase100 = "--lineHeightBase100";
-  var lineHeightBase2002 = "--lineHeightBase200";
-  var lineHeightBase3002 = "--lineHeightBase300";
-  var lineHeightBase400 = "--lineHeightBase400";
-  var lineHeightBase500 = "--lineHeightBase500";
-  var lineHeightBase600 = "--lineHeightBase600";
-  var lineHeightHero700 = "--lineHeightHero700";
-  var lineHeightHero800 = "--lineHeightHero800";
-  var lineHeightHero900 = "--lineHeightHero900";
-  var lineHeightHero1000 = "--lineHeightHero1000";
-  var shadow2 = "--shadow2";
-  var shadow4 = "--shadow4";
-  var shadow8 = "--shadow8";
-  var shadow16 = "--shadow16";
-  var shadow282 = "--shadow28";
-  var shadow64 = "--shadow64";
-  var shadow2Brand = "--shadow2Brand";
-  var shadow4Brand = "--shadow4Brand";
-  var shadow8Brand = "--shadow8Brand";
-  var shadow16Brand = "--shadow16Brand";
-  var shadow28Brand = "--shadow28Brand";
-  var shadow64Brand = "--shadow64Brand";
-  var strokeWidthThin2 = "--strokeWidthThin";
-  var strokeWidthThick = "--strokeWidthThick";
-  var strokeWidthThicker = "--strokeWidthThicker";
-  var strokeWidthThickest = "--strokeWidthThickest";
-  var spacingHorizontalNone = "--spacingHorizontalNone";
-  var spacingHorizontalXXS = "--spacingHorizontalXXS";
-  var spacingHorizontalXS2 = "--spacingHorizontalXS";
-  var spacingHorizontalSNudge = "--spacingHorizontalSNudge";
-  var spacingHorizontalS2 = "--spacingHorizontalS";
-  var spacingHorizontalMNudge = "--spacingHorizontalMNudge";
-  var spacingHorizontalM2 = "--spacingHorizontalM";
-  var spacingHorizontalL2 = "--spacingHorizontalL";
-  var spacingHorizontalXL = "--spacingHorizontalXL";
-  var spacingHorizontalXXL = "--spacingHorizontalXXL";
-  var spacingHorizontalXXXL = "--spacingHorizontalXXXL";
-  var spacingVerticalNone = "--spacingVerticalNone";
-  var spacingVerticalXXS = "--spacingVerticalXXS";
-  var spacingVerticalXS = "--spacingVerticalXS";
-  var spacingVerticalSNudge = "--spacingVerticalSNudge";
-  var spacingVerticalS = "--spacingVerticalS";
-  var spacingVerticalMNudge = "--spacingVerticalMNudge";
-  var spacingVerticalM = "--spacingVerticalM";
-  var spacingVerticalL = "--spacingVerticalL";
-  var spacingVerticalXL = "--spacingVerticalXL";
-  var spacingVerticalXXL = "--spacingVerticalXXL";
-  var spacingVerticalXXXL = "--spacingVerticalXXXL";
-  var durationUltraFast = "--durationUltraFast";
-  var durationFaster = "--durationFaster";
-  var durationFast = "--durationFast";
-  var durationNormal = "--durationNormal";
-  var durationSlow = "--durationSlow";
-  var durationSlower = "--durationSlower";
-  var durationUltraSlow = "--durationUltraSlow";
-  var curveAccelerateMax = "--curveAccelerateMax";
-  var curveAccelerateMid = "--curveAccelerateMid";
-  var curveAccelerateMin = "--curveAccelerateMin";
-  var curveDecelerateMax = "--curveDecelerateMax";
-  var curveDecelerateMid = "--curveDecelerateMid";
-  var curveDecelerateMin = "--curveDecelerateMin";
-  var curveEasyEaseMax = "--curveEasyEaseMax";
-  var curveEasyEase = "--curveEasyEase";
-  var curveLinear = "--curveLinear";
-
-  // ../node_modules/@fluentui/web-components/dist/esm/text/text.js
-  var __decorate2 = function(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-      r = Reflect.decorate(decorators, target, key, desc);
-    else
-      for (var i = decorators.length - 1; i >= 0; i--)
-        if (d = decorators[i])
-          r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  var Text = class extends FASTElement {
-    constructor() {
-      super(...arguments);
-      this.nowrap = false;
-      this.truncate = false;
-      this.italic = false;
-      this.underline = false;
-      this.strikethrough = false;
-      this.block = false;
-    }
-  };
-  __decorate2([
-    attr({ mode: "boolean" })
-  ], Text.prototype, "nowrap", void 0);
-  __decorate2([
-    attr({ mode: "boolean" })
-  ], Text.prototype, "truncate", void 0);
-  __decorate2([
-    attr({ mode: "boolean" })
-  ], Text.prototype, "italic", void 0);
-  __decorate2([
-    attr({ mode: "boolean" })
-  ], Text.prototype, "underline", void 0);
-  __decorate2([
-    attr({ mode: "boolean" })
-  ], Text.prototype, "strikethrough", void 0);
-  __decorate2([
-    attr({ mode: "boolean" })
-  ], Text.prototype, "block", void 0);
-  __decorate2([
-    attr
-  ], Text.prototype, "size", void 0);
-  __decorate2([
-    attr
-  ], Text.prototype, "font", void 0);
-  __decorate2([
-    attr
-  ], Text.prototype, "weight", void 0);
-  __decorate2([
-    attr
-  ], Text.prototype, "align", void 0);
-
-  // ../node_modules/@fluentui/web-components/dist/esm/text/text.template.js
-  var template = html`<slot></slot>`;
-
-  // ../node_modules/@fluentui/web-components/dist/esm/text/text.styles.js
-  var styles = css`
-  ${display("inline")}
-
-  :host {
-    contain: content;
-  }
-
-  ::slotted(*) {
-    font-family: var(${fontFamilyBase2});
-    font-size: var(${fontSizeBase3002});
-    line-height: var(${lineHeightBase3002});
-    font-weight: var(${fontWeightRegular2});
-    text-align: start;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    margin: 0;
-    display: inline;
-  }
-
-  :host([nowrap]) ::slotted(*) {
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  :host([truncate]) ::slotted(*) {
-    text-overflow: ellipsis;
-  }
-  :host([block]),
-  :host([block]) ::slotted(*) {
-    display: block;
-  }
-  :host([italic]) ::slotted(*) {
-    font-style: italic;
-  }
-  :host([underline]) ::slotted(*) {
-    text-decoration-line: underline;
-  }
-  :host([strikethrough]) ::slotted(*) {
-    text-decoration-line: line-through;
-  }
-  :host([underline][strikethrough]) ::slotted(*) {
-    text-decoration-line: line-through underline;
-  }
-  :host([size='100']) ::slotted(*) {
-    font-size: var(${fontSizeBase100});
-    line-height: var(${lineHeightBase100});
-  }
-  :host([size='200']) ::slotted(*) {
-    font-size: var(${fontSizeBase2002});
-    line-height: var(${lineHeightBase2002});
-  }
-  :host([size='400']) ::slotted(*) {
-    font-size: var(${fontSizeBase400});
-    line-height: var(${lineHeightBase400});
-  }
-  :host([size='500']) ::slotted(*) {
-    font-size: var(${fontSizeBase500});
-    line-height: var(${lineHeightBase500});
-  }
-  :host([size='600']) ::slotted(*) {
-    font-size: var(${fontSizeBase600});
-    line-height: var(${lineHeightBase600});
-  }
-  :host([size='700']) ::slotted(*) {
-    font-size: var(${fontSizeHero700});
-    line-height: var(${lineHeightHero700});
-  }
-  :host([size='800']) ::slotted(*) {
-    font-size: var(${fontSizeHero800});
-    line-height: var(${lineHeightHero800});
-  }
-  :host([size='900']) ::slotted(*) {
-    font-size: var(${fontSizeHero900});
-    line-height: var(${lineHeightHero900});
-  }
-  :host([size='1000']) ::slotted(*) {
-    font-size: var(${fontSizeHero1000});
-    line-height: var(${lineHeightHero1000});
-  }
-  :host([font='monospace']) ::slotted(*) {
-    font-family: var(${fontFamilyMonospace});
-  }
-  :host([font='numeric']) ::slotted(*) {
-    font-family: var(${fontFamilyNumeric});
-  }
-  :host([weight='medium']) ::slotted(*) {
-    font-weight: var(${fontWeightMedium});
-  }
-  :host([weight='semibold']) ::slotted(*) {
-    font-weight: var(${fontWeightSemibold});
-  }
-  :host([weight='bold']) ::slotted(*) {
-    font-weight: var(${fontWeightBold});
-  }
-  :host([align='center']) ::slotted(*) {
-    text-align: center;
-  }
-  :host([align='end']) ::slotted(*) {
-    text-align: end;
-  }
-  :host([align='justify']) ::slotted(*) {
-    text-align: justify;
-  }
-`;
-
-  // ../node_modules/@fluentui/web-components/dist/esm/text/text.definition.js
-  var definition = Text.compose({
-    name: `${FluentDesignSystem.prefix}-text`,
-    template,
-    styles
-  });
-
-  // ../node_modules/@fluentui/web-components/dist/esm/theme/set-theme.js
-  var tokenNames = Object.keys(design_tokens_exports);
-  var setThemeFor = (element, theme) => {
+  // ../../phoenixui/packages/web-components/dist/index.esm.js
+  var setTheme = (theme, element = document.body) => {
+    const tokenNames = Object.keys(theme);
     for (const t of tokenNames) {
-      element.style.setProperty(design_tokens_exports[t], theme[t]);
+      element.style.setProperty(`--${t}`, theme[t]);
     }
   };
 
@@ -9387,80 +7506,44 @@
   var commonThemeOverrides = {
     borderRadiusSmall: "4px",
     borderRadiusMedium: "8px",
-    borderRadiusLarge: "16px"
+    borderRadiusLarge: "16px",
+    micaBackdropFilter: "blur(120px) saturate(150%)",
+    micaBackgroundBlendMode: "luminosity"
   };
   var windowsLightTheme = {
     ...webLightTheme,
-    ...commonThemeOverrides
+    ...commonThemeOverrides,
+    colorShellFillTaksbarItemPrimary: "#FFFFFFB2",
+    colorShellFillTaksbarItemSecondary: "#FFFFFF80",
+    colorShellFillTaksbarItemTeritary: "#FFFFFF4D",
+    colorShellStrokeTaskbarItemSecondary: "#0000000f",
+    colorShellStrokeTaskbarItemQuinary: "#00000005",
+    colorShellFillTaskbarItemIndicator: "#00000070",
+    colorFillAccent: "#005FB8",
+    micaBackgroundColor: "rgba(243,243,243,0.7)"
   };
   var windowsDarkTheme = {
     ...webDarkTheme,
-    ...commonThemeOverrides
+    ...commonThemeOverrides,
+    colorShellFillTaksbarItemPrimary: "#FFFFFF15",
+    colorShellFillTaksbarItemSecondary: "#FFFFFF0F",
+    colorShellFillTaksbarItemTeritary: "#FFFFFF0B",
+    colorShellStrokeTaskbarItemSecondary: "#FFFFFF1A",
+    colorShellStrokeTaskbarItemQuinary: "#FFFFFF0F",
+    colorShellFillTaskbarItemIndicator: "#FFFFFF63",
+    colorFillAccent: "#005FB8",
+    micaBackgroundColor: "rgba(32,32,32,0.7)"
   };
-  var micaBackgroundColor = DesignToken.create(
-    "micaBackgroundColor"
-  );
-  var micaBackdropFilter = DesignToken.create("micaBackdropFilter");
-  var micaBackgroundBlendMode = DesignToken.create(
-    "micaBackgroundBlendMode"
-  );
-  var colorShellFillTaksbarItemPrimary = DesignToken.create(
-    "colorShellFillTaksbarItemPrimary"
-  );
-  var colorShellFillTaksbarItemSecondary = DesignToken.create(
-    "colorShellFillTaksbarItemSecondary"
-  );
-  var colorShellFillTaksbarItemTeritary = DesignToken.create(
-    "colorShellFillTaksbarItemTeritary"
-  );
-  var colorShellStrokeTaskbarItemQuinary = DesignToken.create(
-    "colorShellStrokeTaskbarItemPrimary"
-  );
-  var colorShellStrokeTaskbarItemSecondary = DesignToken.create(
-    "colorShellStrokeTaskbarItemSecondary"
-  );
-  var colorShellFillTaskbarItemIndicator = DesignToken.create(
-    "colorShellFillTaskbarItemIndicator"
-  );
-  var colorFillAccent = DesignToken.create("colorFillAccent");
-  var shadowBaseLayer = DesignToken.create("shadowBaseLayer");
-  function setThemeFor2(element, theme) {
-    setThemeFor(
-      element,
-      theme === "dark" ? windowsDarkTheme : windowsLightTheme
-    );
-    if (theme === "dark") {
-      micaBackgroundColor.setValueFor(element, "rgba(32, 32, 32, 0.7)");
-      micaBackdropFilter.setValueFor(element, "blur(120px) saturate(150%)");
-      micaBackgroundBlendMode.setValueFor(element, "luminosity");
-      colorShellFillTaksbarItemPrimary.setValueFor(element, "#FFFFFF15");
-      colorShellFillTaksbarItemSecondary.setValueFor(element, "#FFFFFF0F");
-      colorShellFillTaksbarItemTeritary.setValueFor(element, "#FFFFFF0B");
-      colorShellStrokeTaskbarItemSecondary.setValueFor(element, "#FFFFFF1A");
-      colorShellStrokeTaskbarItemQuinary.setValueFor(element, "#FFFFFF0F");
-      colorShellFillTaskbarItemIndicator.setValueFor(element, "#FFFFFF63");
-      colorFillAccent.setValueFor(element, "#005FB8");
-      shadowBaseLayer.setValueFor(
-        element,
-        "0px 32px 64px 0px rgba(0, 0, 0, 0.48), 0px 2px 21px 0px rgba(0, 0, 0, 0.40)"
-      );
-    } else {
-      micaBackgroundColor.setValueFor(element, "rgba(243, 243, 243, 0.7)");
-      micaBackdropFilter.setValueFor(element, "blur(120px) saturate(150%)");
-      micaBackgroundBlendMode.setValueFor(element, "luminosity");
-      colorShellFillTaksbarItemPrimary.setValueFor(element, "#FFFFFFB2");
-      colorShellFillTaksbarItemSecondary.setValueFor(element, "#FFFFFF80");
-      colorShellFillTaksbarItemTeritary.setValueFor(element, "#FFFFFF4D");
-      colorShellStrokeTaskbarItemSecondary.setValueFor(element, "#0000000f");
-      colorShellStrokeTaskbarItemQuinary.setValueFor(element, "#00000005");
-      colorShellFillTaskbarItemIndicator.setValueFor(element, "#00000070");
-      colorFillAccent.setValueFor(element, "#005FB8");
-      shadowBaseLayer.setValueFor(
-        element,
-        "0px 32px 64px 0px rgba(0, 0, 0, 0.24), 0px 2px 21px 0px rgba(0, 0, 0, 0.20)"
-      );
-    }
+  function setTheme2(theme, element) {
+    setTheme(theme === "dark" ? windowsDarkTheme : windowsLightTheme, element);
   }
+  var colorShellFillTaksbarItemPrimary = "var(--colorShellFillTaksbarItemPrimary)";
+  var colorShellFillTaksbarItemSecondary = "var(--colorShellFillTaksbarItemSecondary)";
+  var colorShellFillTaksbarItemTeritary = "var(--colorShellFillTaksbarItemTeritary)";
+  var colorShellStrokeTaskbarItemQuinary = "var(--colorShellStrokeTaskbarItemQuinary)";
+  var colorShellStrokeTaskbarItemSecondary = "var(--colorShellStrokeTaskbarItemSecondary)";
+  var colorShellFillTaskbarItemIndicator = "var(--colorShellFillTaskbarItemIndicator)";
+  var colorFillAccent = "var(--colorFillAccent)";
 
   // src/services/windowsService.ts
   var WindowsService = class {
@@ -9534,12 +7617,29 @@
   ], WindowsService.prototype, "activeWindowId", 2);
 
   // src/edge/index.ts
+  var template = html`Edge`;
+  var styles = `
+  :host {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: ${micaBackgroundColor};
+    backdrop-filter: ${micaBackdropFilter};
+    background-blend-mode: ${micaBackgroundBlendMode};
+  }
+`;
   var MicrosoftEdge = class extends FASTElement {
+    connectedCallback() {
+      super.connectedCallback();
+      console.log("Microsoft Edge connected");
+      setTheme(phoenixLightThemeWin11, this);
+    }
   };
   MicrosoftEdge = __decorateClass([
     customElement({
       name: "microsoft-edge",
-      template: html`<div>Edge</div>`
+      template,
+      styles
     })
   ], MicrosoftEdge);
 
@@ -9584,9 +7684,6 @@
       lightIcon: "img/windows/settings-24.svg"
     }
   ];
-
-  // ../node_modules/@fluentui/web-components/dist/esm/text/define.js
-  definition.define(FluentDesignSystem.registry);
 
   // src/windows/controls/taskbarButton.ts
   var template2 = html`
@@ -10040,9 +8137,9 @@
     border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
     padding-inline-start: ${spacingHorizontalXS};
     /* Mica */
-    backdrop-filter: blur(120px) saturate(150%);
     background: ${micaBackgroundColor};
-    background-blend-mode: luminosity;
+    backdrop-filter: ${micaBackdropFilter};
+    background-blend-mode: ${micaBackgroundBlendMode};
     z-index: 1000;
   }
   .group {
@@ -10086,6 +8183,7 @@
     top: ${(x) => x.yPos};
     left: ${(x) => x.xPos};
     box-shadow: ${shadow28};
+    overflow: hidden;
   }
 
   :host([active]) {
@@ -10115,16 +8213,6 @@
       this.xPos = "100px";
       this.yPos = "100px";
       this.zIndex = 0;
-    }
-    connectedCallback() {
-      super.connectedCallback();
-      this.addEventListener("mousedown", this.handleMouseDown);
-    }
-    disconnectedCallback() {
-      super.disconnectedCallback();
-      this.removeEventListener("mousedown", this.handleMouseDown);
-    }
-    handleMouseDown(e) {
     }
   };
   __decorateClass([
@@ -10217,7 +8305,7 @@
   var WindowsShell = class extends FASTElement {
     connectedCallback() {
       super.connectedCallback();
-      setThemeFor2(this, this.ws.theme);
+      setTheme2(this.ws.theme, this);
       this.ws.openWindow("Microsoft Edge");
     }
     handleTaskbarButtonClick(appName) {

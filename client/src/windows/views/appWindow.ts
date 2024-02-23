@@ -1,4 +1,4 @@
-import { shadow28 } from '@phoenixui/themes';
+import { shadow28 } from '@phoenixui/web-components';
 import {
   FASTElement,
   attr,
@@ -6,8 +6,7 @@ import {
   customElement,
   html,
 } from '@microsoft/fast-element';
-import { shadowBaseLayer } from '../designSystem.js';
-import { borderRadiusMedium } from '@phoenixui/themes';
+import { borderRadiusMedium, shadowBaseLayer } from '@phoenixui/web-components';
 
 const template = html<AppWindow>`<slot></slot>`;
 
@@ -22,6 +21,7 @@ const styles = css`
     top: ${(x) => x.yPos};
     left: ${(x) => x.xPos};
     box-shadow: ${shadow28};
+    overflow: hidden;
   }
 
   :host([active]) {
@@ -55,16 +55,4 @@ export class AppWindow extends FASTElement {
   @attr xPos: string = '100px';
   @attr yPos: string = '100px';
   @attr zIndex: number = 0;
-
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.addEventListener('mousedown', this.handleMouseDown);
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.removeEventListener('mousedown', this.handleMouseDown);
-  }
-
-  handleMouseDown(e: MouseEvent) {}
 }

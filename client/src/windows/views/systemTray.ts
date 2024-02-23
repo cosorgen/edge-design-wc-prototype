@@ -4,7 +4,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   colorNeutralForeground1,
-} from '@phoenixui/themes';
+} from '@phoenixui/web-components';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,

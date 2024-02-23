@@ -1,5 +1,5 @@
 import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, strokeWidthThin } from '@phoenixui/themes';
+import { borderRadiusSmall, strokeWidthThin } from '@phoenixui/web-components';
 import {
   colorShellFillTaskbarItemIndicator,
   colorShellFillTaksbarItemPrimary,
