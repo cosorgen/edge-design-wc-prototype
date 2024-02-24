@@ -1259,19 +1259,19 @@
 
   // ../node_modules/@microsoft/fast-element/dist/esm/styles/element-styles.js
   var DefaultStyleStrategy;
-  function reduceStyles(styles15) {
-    return styles15.map((x) => x instanceof ElementStyles ? reduceStyles(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
+  function reduceStyles(styles16) {
+    return styles16.map((x) => x instanceof ElementStyles ? reduceStyles(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
   }
   var ElementStyles = class _ElementStyles {
     /**
      * Creates an instance of ElementStyles.
      * @param styles - The styles that will be associated with elements.
      */
-    constructor(styles15) {
-      this.styles = styles15;
+    constructor(styles16) {
+      this.styles = styles16;
       this.targets = /* @__PURE__ */ new WeakSet();
       this._strategy = null;
-      this.behaviors = styles15.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
+      this.behaviors = styles16.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
     }
     /**
      * Gets the StyleStrategy associated with these element styles.
@@ -1324,8 +1324,8 @@
      * @param styles - The style options to normalize.
      * @returns A singular ElementStyles instance or undefined.
      */
-    static normalize(styles15) {
-      return styles15 === void 0 ? void 0 : Array.isArray(styles15) ? new _ElementStyles(styles15) : styles15 instanceof _ElementStyles ? styles15 : new _ElementStyles([styles15]);
+    static normalize(styles16) {
+      return styles16 === void 0 ? void 0 : Array.isArray(styles16) ? new _ElementStyles(styles16) : styles16 instanceof _ElementStyles ? styles16 : new _ElementStyles([styles16]);
     }
   };
   ElementStyles.supportsAdoptedStyleSheets = Array.isArray(document.adoptedStyleSheets) && "replace" in CSSStyleSheet.prototype;
@@ -1430,7 +1430,7 @@
   var varId = 0;
   var nextCSSVariable = () => `--v${marker}${++varId}`;
   function collectStyles(strings, values) {
-    const styles15 = [];
+    const styles16 = [];
     let cssString = "";
     const behaviors = [];
     const add = (behavior) => {
@@ -1448,33 +1448,33 @@
       }
       if (value instanceof ElementStyles || value instanceof CSSStyleSheet) {
         if (cssString.trim() !== "") {
-          styles15.push(cssString);
+          styles16.push(cssString);
           cssString = "";
         }
-        styles15.push(value);
+        styles16.push(value);
       } else {
         cssString += value;
       }
     }
     cssString += strings[strings.length - 1];
     if (cssString.trim() !== "") {
-      styles15.push(cssString);
+      styles16.push(cssString);
     }
     return {
-      styles: styles15,
+      styles: styles16,
       behaviors
     };
   }
   var css = (strings, ...values) => {
-    const { styles: styles15, behaviors } = collectStyles(strings, values);
-    const elementStyles = new ElementStyles(styles15);
+    const { styles: styles16, behaviors } = collectStyles(strings, values);
+    const elementStyles = new ElementStyles(styles16);
     return behaviors.length ? elementStyles.withBehaviors(...behaviors) : elementStyles;
   };
   var CSSPartial = class {
-    constructor(styles15, behaviors) {
+    constructor(styles16, behaviors) {
       this.behaviors = behaviors;
       this.css = "";
-      const stylesheets = styles15.reduce((accumulated, current) => {
+      const stylesheets = styles16.reduce((accumulated, current) => {
         if (isString(current)) {
           this.css += current;
         } else {
@@ -1502,8 +1502,8 @@
   };
   CSSDirective.define(CSSPartial);
   css.partial = (strings, ...values) => {
-    const { styles: styles15, behaviors } = collectStyles(strings, values);
-    return new CSSPartial(styles15, behaviors);
+    const { styles: styles16, behaviors } = collectStyles(strings, values);
+    return new CSSPartial(styles16, behaviors);
   };
 
   // ../node_modules/@microsoft/fast-element/dist/esm/templating/markup.js
@@ -2226,26 +2226,26 @@
      * @public
      */
     compile(html3, factories2, policy = DOM.policy) {
-      let template14;
+      let template15;
       if (isString(html3)) {
-        template14 = document.createElement(templateTag);
-        template14.innerHTML = policy.createHTML(html3);
-        const fec = template14.content.firstElementChild;
+        template15 = document.createElement(templateTag);
+        template15.innerHTML = policy.createHTML(html3);
+        const fec = template15.content.firstElementChild;
         if (fec !== null && fec.tagName === templateTag) {
-          template14 = fec;
+          template15 = fec;
         }
       } else {
-        template14 = html3;
+        template15 = html3;
       }
-      if (!template14.content.firstChild && !template14.content.lastChild) {
-        template14.content.appendChild(document.createComment(""));
+      if (!template15.content.firstChild && !template15.content.lastChild) {
+        template15.content.appendChild(document.createComment(""));
       }
-      const fragment = document.adoptNode(template14.content);
+      const fragment = document.adoptNode(template15.content);
       const context = new CompilationContext(fragment, factories2, policy);
       compileAttributes(
         context,
         "",
-        template14,
+        template15,
         /* host */
         "h",
         0,
@@ -2593,7 +2593,7 @@
       const views = this.views;
       const bindView = this.bindView;
       const items = this.items;
-      const template14 = this.template;
+      const template15 = this.template;
       const controller = this.controller;
       const recycle = this.directive.options.recycle;
       const leftoverViews = [];
@@ -2621,7 +2621,7 @@
             }
             availableViews--;
           } else {
-            view = template14.create();
+            view = template15.create();
           }
           views.splice(addIndex, 0, view);
           bindView(view, items, addIndex, controller);
@@ -2644,7 +2644,7 @@
     }
     refreshAllViews(templateChanged = false) {
       const items = this.items;
-      const template14 = this.template;
+      const template15 = this.template;
       const location = this.location;
       const bindView = this.bindView;
       const controller = this.controller;
@@ -2658,7 +2658,7 @@
       if (viewsLength === 0) {
         this.views = views = new Array(itemsLength);
         for (let i = 0; i < itemsLength; ++i) {
-          const view = template14.create();
+          const view = template15.create();
           bindView(view, items, i, controller);
           views[i] = view;
           view.insertBefore(location);
@@ -2670,7 +2670,7 @@
             const view = views[i];
             bindView(view, items, i, controller);
           } else {
-            const view = template14.create();
+            const view = template15.create();
             bindView(view, items, i, controller);
             views.push(view);
             view.insertBefore(location);
@@ -2718,9 +2718,9 @@
     }
   };
   HTMLDirective.define(RepeatDirective);
-  function repeat(items, template14, options = defaultRepeatOptions) {
+  function repeat(items, template15, options = defaultRepeatOptions) {
     const dataBinding = normalizeBinding(items);
-    const templateBinding = normalizeBinding(template14);
+    const templateBinding = normalizeBinding(template15);
     return new RepeatDirective(dataBinding, templateBinding, Object.assign(Object.assign({}, defaultRepeatOptions), options));
   }
 
@@ -3148,18 +3148,18 @@
      * Adds styles to this element. Providing an HTMLStyleElement will attach the element instance to the shadowRoot.
      * @param styles - The styles to add.
      */
-    addStyles(styles15) {
+    addStyles(styles16) {
       var _a;
-      if (!styles15) {
+      if (!styles16) {
         return;
       }
       const source = this.source;
-      if (styles15 instanceof HTMLElement) {
+      if (styles16 instanceof HTMLElement) {
         const target = (_a = getShadowRoot(source)) !== null && _a !== void 0 ? _a : this.source;
-        target.append(styles15);
-      } else if (!styles15.isAttachedTo(source)) {
-        const sourceBehaviors = styles15.behaviors;
-        styles15.addStylesTo(source);
+        target.append(styles16);
+      } else if (!styles16.isAttachedTo(source)) {
+        const sourceBehaviors = styles16.behaviors;
+        styles16.addStylesTo(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.addBehavior(sourceBehaviors[i]);
@@ -3171,18 +3171,18 @@
      * Removes styles from this element. Providing an HTMLStyleElement will detach the element instance from the shadowRoot.
      * @param styles - the styles to remove.
      */
-    removeStyles(styles15) {
+    removeStyles(styles16) {
       var _a;
-      if (!styles15) {
+      if (!styles16) {
         return;
       }
       const source = this.source;
-      if (styles15 instanceof HTMLElement) {
+      if (styles16 instanceof HTMLElement) {
         const target = (_a = getShadowRoot(source)) !== null && _a !== void 0 ? _a : source;
-        target.removeChild(styles15);
-      } else if (styles15.isAttachedTo(source)) {
-        const sourceBehaviors = styles15.behaviors;
-        styles15.removeStylesFrom(source);
+        target.removeChild(styles16);
+      } else if (styles16.isAttachedTo(source)) {
+        const sourceBehaviors = styles16.behaviors;
+        styles16.removeStylesFrom(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.removeBehavior(sourceBehaviors[i]);
@@ -3272,7 +3272,7 @@
       }
       return false;
     }
-    renderTemplate(template14) {
+    renderTemplate(template15) {
       var _a;
       const element = this.source;
       const host = (_a = getShadowRoot(element)) !== null && _a !== void 0 ? _a : element;
@@ -3285,8 +3285,8 @@
           host.removeChild(child);
         }
       }
-      if (template14) {
-        this.view = template14.render(element, host, element);
+      if (template15) {
+        this.view = template15.render(element, host, element);
         this.view.sourceLifetime = SourceLifetime.coupled;
       }
     }
@@ -3332,9 +3332,9 @@
     }
   }
   var AdoptedStyleSheetsStrategy = class _AdoptedStyleSheetsStrategy {
-    constructor(styles15) {
+    constructor(styles16) {
       const styleSheetCache = _AdoptedStyleSheetsStrategy.styleSheetCache;
-      this.sheets = styles15.map((x) => {
+      this.sheets = styles16.map((x) => {
         if (x instanceof CSSStyleSheet) {
           return x;
         }
@@ -3361,26 +3361,26 @@
     return target === document ? document.body : target;
   }
   var StyleElementStrategy = class {
-    constructor(styles15) {
-      this.styles = styles15;
+    constructor(styles16) {
+      this.styles = styles16;
       this.styleClass = nextStyleId();
     }
     addStylesTo(target) {
       target = usableStyleTarget(normalizeStyleTarget(target));
-      const styles15 = this.styles;
+      const styles16 = this.styles;
       const styleClass = this.styleClass;
-      for (let i = 0; i < styles15.length; i++) {
+      for (let i = 0; i < styles16.length; i++) {
         const element = document.createElement("style");
-        element.innerHTML = styles15[i];
+        element.innerHTML = styles16[i];
         element.className = styleClass;
         target.append(element);
       }
     }
     removeStylesFrom(target) {
       target = usableStyleTarget(normalizeStyleTarget(target));
-      const styles15 = target.querySelectorAll(`.${this.styleClass}`);
-      for (let i = 0, ii = styles15.length; i < ii; ++i) {
-        target.removeChild(styles15[i]);
+      const styles16 = target.querySelectorAll(`.${this.styleClass}`);
+      for (let i = 0, ii = styles16.length; i < ii; ++i) {
+        target.removeChild(styles16[i]);
       }
     }
   };
@@ -5635,19 +5635,19 @@
 
   // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/styles/element-styles.js
   var DefaultStyleStrategy2;
-  function reduceStyles2(styles15) {
-    return styles15.map((x) => x instanceof ElementStyles2 ? reduceStyles2(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
+  function reduceStyles2(styles16) {
+    return styles16.map((x) => x instanceof ElementStyles2 ? reduceStyles2(x.styles) : [x]).reduce((prev, curr) => prev.concat(curr), []);
   }
   var ElementStyles2 = class _ElementStyles {
     /**
      * Creates an instance of ElementStyles.
      * @param styles - The styles that will be associated with elements.
      */
-    constructor(styles15) {
-      this.styles = styles15;
+    constructor(styles16) {
+      this.styles = styles16;
       this.targets = /* @__PURE__ */ new WeakSet();
       this._strategy = null;
-      this.behaviors = styles15.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
+      this.behaviors = styles16.map((x) => x instanceof _ElementStyles ? x.behaviors : null).reduce((prev, curr) => curr === null ? prev : prev === null ? curr : prev.concat(curr), null);
     }
     /**
      * Gets the StyleStrategy associated with these element styles.
@@ -5700,8 +5700,8 @@
      * @param styles - The style options to normalize.
      * @returns A singular ElementStyles instance or undefined.
      */
-    static normalize(styles15) {
-      return styles15 === void 0 ? void 0 : Array.isArray(styles15) ? new _ElementStyles(styles15) : styles15 instanceof _ElementStyles ? styles15 : new _ElementStyles([styles15]);
+    static normalize(styles16) {
+      return styles16 === void 0 ? void 0 : Array.isArray(styles16) ? new _ElementStyles(styles16) : styles16 instanceof _ElementStyles ? styles16 : new _ElementStyles([styles16]);
     }
   };
   ElementStyles2.supportsAdoptedStyleSheets = Array.isArray(document.adoptedStyleSheets) && "replace" in CSSStyleSheet.prototype;
@@ -5806,7 +5806,7 @@
   var varId2 = 0;
   var nextCSSVariable2 = () => `--v${marker3}${++varId2}`;
   function collectStyles2(strings, values) {
-    const styles15 = [];
+    const styles16 = [];
     let cssString = "";
     const behaviors = [];
     const add = (behavior) => {
@@ -5824,33 +5824,33 @@
       }
       if (value instanceof ElementStyles2 || value instanceof CSSStyleSheet) {
         if (cssString.trim() !== "") {
-          styles15.push(cssString);
+          styles16.push(cssString);
           cssString = "";
         }
-        styles15.push(value);
+        styles16.push(value);
       } else {
         cssString += value;
       }
     }
     cssString += strings[strings.length - 1];
     if (cssString.trim() !== "") {
-      styles15.push(cssString);
+      styles16.push(cssString);
     }
     return {
-      styles: styles15,
+      styles: styles16,
       behaviors
     };
   }
   var css2 = (strings, ...values) => {
-    const { styles: styles15, behaviors } = collectStyles2(strings, values);
-    const elementStyles = new ElementStyles2(styles15);
+    const { styles: styles16, behaviors } = collectStyles2(strings, values);
+    const elementStyles = new ElementStyles2(styles16);
     return behaviors.length ? elementStyles.withBehaviors(...behaviors) : elementStyles;
   };
   var CSSPartial2 = class {
-    constructor(styles15, behaviors) {
+    constructor(styles16, behaviors) {
       this.behaviors = behaviors;
       this.css = "";
-      const stylesheets = styles15.reduce((accumulated, current) => {
+      const stylesheets = styles16.reduce((accumulated, current) => {
         if (isString2(current)) {
           this.css += current;
         } else {
@@ -5878,8 +5878,8 @@
   };
   CSSDirective2.define(CSSPartial2);
   css2.partial = (strings, ...values) => {
-    const { styles: styles15, behaviors } = collectStyles2(strings, values);
-    return new CSSPartial2(styles15, behaviors);
+    const { styles: styles16, behaviors } = collectStyles2(strings, values);
+    return new CSSPartial2(styles16, behaviors);
   };
 
   // ../../phoenixui/node_modules/@microsoft/fast-element/dist/esm/templating/markup.js
@@ -6602,26 +6602,26 @@
      * @public
      */
     compile(html3, factories2, policy = DOM2.policy) {
-      let template14;
+      let template15;
       if (isString2(html3)) {
-        template14 = document.createElement(templateTag2);
-        template14.innerHTML = policy.createHTML(html3);
-        const fec = template14.content.firstElementChild;
+        template15 = document.createElement(templateTag2);
+        template15.innerHTML = policy.createHTML(html3);
+        const fec = template15.content.firstElementChild;
         if (fec !== null && fec.tagName === templateTag2) {
-          template14 = fec;
+          template15 = fec;
         }
       } else {
-        template14 = html3;
+        template15 = html3;
       }
-      if (!template14.content.firstChild && !template14.content.lastChild) {
-        template14.content.appendChild(document.createComment(""));
+      if (!template15.content.firstChild && !template15.content.lastChild) {
+        template15.content.appendChild(document.createComment(""));
       }
-      const fragment = document.adoptNode(template14.content);
+      const fragment = document.adoptNode(template15.content);
       const context = new CompilationContext2(fragment, factories2, policy);
       compileAttributes2(
         context,
         "",
-        template14,
+        template15,
         /* host */
         "h",
         0,
@@ -7400,18 +7400,18 @@
      * Adds styles to this element. Providing an HTMLStyleElement will attach the element instance to the shadowRoot.
      * @param styles - The styles to add.
      */
-    addStyles(styles15) {
+    addStyles(styles16) {
       var _a;
-      if (!styles15) {
+      if (!styles16) {
         return;
       }
       const source = this.source;
-      if (styles15 instanceof HTMLElement) {
+      if (styles16 instanceof HTMLElement) {
         const target = (_a = getShadowRoot2(source)) !== null && _a !== void 0 ? _a : this.source;
-        target.append(styles15);
-      } else if (!styles15.isAttachedTo(source)) {
-        const sourceBehaviors = styles15.behaviors;
-        styles15.addStylesTo(source);
+        target.append(styles16);
+      } else if (!styles16.isAttachedTo(source)) {
+        const sourceBehaviors = styles16.behaviors;
+        styles16.addStylesTo(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.addBehavior(sourceBehaviors[i]);
@@ -7423,18 +7423,18 @@
      * Removes styles from this element. Providing an HTMLStyleElement will detach the element instance from the shadowRoot.
      * @param styles - the styles to remove.
      */
-    removeStyles(styles15) {
+    removeStyles(styles16) {
       var _a;
-      if (!styles15) {
+      if (!styles16) {
         return;
       }
       const source = this.source;
-      if (styles15 instanceof HTMLElement) {
+      if (styles16 instanceof HTMLElement) {
         const target = (_a = getShadowRoot2(source)) !== null && _a !== void 0 ? _a : source;
-        target.removeChild(styles15);
-      } else if (styles15.isAttachedTo(source)) {
-        const sourceBehaviors = styles15.behaviors;
-        styles15.removeStylesFrom(source);
+        target.removeChild(styles16);
+      } else if (styles16.isAttachedTo(source)) {
+        const sourceBehaviors = styles16.behaviors;
+        styles16.removeStylesFrom(source);
         if (sourceBehaviors !== null) {
           for (let i = 0, ii = sourceBehaviors.length; i < ii; ++i) {
             this.removeBehavior(sourceBehaviors[i]);
@@ -7524,7 +7524,7 @@
       }
       return false;
     }
-    renderTemplate(template14) {
+    renderTemplate(template15) {
       var _a;
       const element = this.source;
       const host = (_a = getShadowRoot2(element)) !== null && _a !== void 0 ? _a : element;
@@ -7537,8 +7537,8 @@
           host.removeChild(child);
         }
       }
-      if (template14) {
-        this.view = template14.render(element, host, element);
+      if (template15) {
+        this.view = template15.render(element, host, element);
         this.view.sourceLifetime = SourceLifetime2.coupled;
       }
     }
@@ -7584,9 +7584,9 @@
     }
   }
   var AdoptedStyleSheetsStrategy2 = class _AdoptedStyleSheetsStrategy {
-    constructor(styles15) {
+    constructor(styles16) {
       const styleSheetCache = _AdoptedStyleSheetsStrategy.styleSheetCache;
-      this.sheets = styles15.map((x) => {
+      this.sheets = styles16.map((x) => {
         if (x instanceof CSSStyleSheet) {
           return x;
         }
@@ -7613,26 +7613,26 @@
     return target === document ? document.body : target;
   }
   var StyleElementStrategy2 = class {
-    constructor(styles15) {
-      this.styles = styles15;
+    constructor(styles16) {
+      this.styles = styles16;
       this.styleClass = nextStyleId2();
     }
     addStylesTo(target) {
       target = usableStyleTarget2(normalizeStyleTarget2(target));
-      const styles15 = this.styles;
+      const styles16 = this.styles;
       const styleClass = this.styleClass;
-      for (let i = 0; i < styles15.length; i++) {
+      for (let i = 0; i < styles16.length; i++) {
         const element = document.createElement("style");
-        element.innerHTML = styles15[i];
+        element.innerHTML = styles16[i];
         element.className = styleClass;
         target.append(element);
       }
     }
     removeStylesFrom(target) {
       target = usableStyleTarget2(normalizeStyleTarget2(target));
-      const styles15 = target.querySelectorAll(`.${this.styleClass}`);
-      for (let i = 0, ii = styles15.length; i < ii; ++i) {
-        target.removeChild(styles15[i]);
+      const styles16 = target.querySelectorAll(`.${this.styleClass}`);
+      for (let i = 0, ii = styles16.length; i < ii; ++i) {
+        target.removeChild(styles16[i]);
       }
     }
   };
@@ -7881,9 +7881,9 @@
      * @param query - The media query to operate from.
      * @param styles - The styles to coordinate with the query.
      */
-    constructor(query, styles15) {
+    constructor(query, styles16) {
       super(query);
-      this.styles = styles15;
+      this.styles = styles16;
     }
     /**
      * Defines a function to construct {@link MatchMediaStyleSheetBehavior | MatchMediaStyleSheetBehaviors} for
@@ -7916,8 +7916,8 @@
      * ```
      */
     static with(query) {
-      return (styles15) => {
-        return new _MatchMediaStyleSheetBehavior(query, styles15);
+      return (styles16) => {
+        return new _MatchMediaStyleSheetBehavior(query, styles16);
       };
     }
     /**
@@ -7926,14 +7926,14 @@
      */
     constructListener(controller) {
       let attached = false;
-      const styles15 = this.styles;
+      const styles16 = this.styles;
       return function listener() {
         const { matches } = this;
         if (matches && !attached) {
-          controller.addStyles(styles15);
+          controller.addStyles(styles16);
           attached = matches;
         } else if (!matches && attached) {
-          controller.removeStyles(styles15);
+          controller.removeStyles(styles16);
           attached = matches;
         }
       };
@@ -11408,6 +11408,7 @@
   };
   var borderRadiusSmall2 = "var(--borderRadiusSmall)";
   var borderRadiusMedium2 = "var(--borderRadiusMedium)";
+  var borderRadiusCircular2 = "var(--borderRadiusCircular)";
   var fontSizeBase2002 = "var(--fontSizeBase200)";
   var fontSizeBase3002 = "var(--fontSizeBase300)";
   var lineHeightBase2002 = "var(--lineHeightBase200)";
@@ -11415,14 +11416,20 @@
   var fontFamilyBase2 = "var(--fontFamilyBase)";
   var fontWeightRegular2 = "var(--fontWeightRegular)";
   var strokeWidthThin2 = "var(--strokeWidthThin)";
+  var spacingHorizontalXXS = "var(--spacingHorizontalXXS)";
   var spacingHorizontalXS2 = "var(--spacingHorizontalXS)";
   var spacingHorizontalS2 = "var(--spacingHorizontalS)";
+  var spacingHorizontalMNudge = "var(--spacingHorizontalMNudge)";
   var spacingHorizontalM2 = "var(--spacingHorizontalM)";
   var spacingHorizontalL2 = "var(--spacingHorizontalL)";
   var spacingVerticalXXS = "var(--spacingVerticalXXS)";
   var colorNeutralForeground12 = "var(--colorNeutralForeground1)";
   var colorNeutralForeground4 = "var(--colorNeutralForeground4)";
+  var colorSubtleBackgroundHover2 = "var(--colorSubtleBackgroundHover)";
+  var colorSubtleBackgroundPressed2 = "var(--colorSubtleBackgroundPressed)";
   var colorNeutralStroke12 = "var(--colorNeutralStroke1)";
+  var colorNeutralStroke1Hover2 = "var(--colorNeutralStroke1Hover)";
+  var colorNeutralStroke1Pressed2 = "var(--colorNeutralStroke1Pressed)";
   var shadow28 = "var(--shadow28)";
   var micaBackdropFilter = "var(--micaBackdropFilter)";
   var micaBackgroundBlendMode = "var(--micaBackgroundBlendMode)";
@@ -11587,8 +11594,89 @@
   // ../../phoenixui/packages/web-components/dist/esm/button/define.js
   definition.define(customElements);
 
-  // src/edge/views/tabBar.ts
+  // src/edge/controls/identityControl.ts
   var template2 = html`
+  <button>
+    <slot name="image">
+      <img src="img/edge/profile_guest.png" alt="Profile picture" />
+    </slot>
+    <slot>${(x) => x.appearance === "guest" ? "Guest" : ""}</slot>
+  </button>
+`;
+  var styles2 = css`
+  :host {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: ${spacingHorizontalXXS};
+  }
+
+  button {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalXS2};
+    background: none;
+    cursor: pointer;
+    border-radius: ${borderRadiusCircular2};
+    padding-block: ${strokeWidthThin2};
+    padding-inline-start: ${strokeWidthThin2};
+    padding-inline-end: ${spacingHorizontalMNudge};
+    border: ${strokeWidthThin2} solid ${colorNeutralStroke12};
+
+    /* caption1 */
+    font-family: ${fontFamilyBase2};
+    font-size: ${fontSizeBase2002};
+    line-height: ${lineHeightBase2002};
+    font-weight: ${fontWeightRegular2};
+    color: ${colorNeutralForeground12};
+  }
+
+  button:hover {
+    border: ${strokeWidthThin2} solid ${colorNeutralStroke1Hover2};
+    background-color: ${colorSubtleBackgroundHover2};
+  }
+
+  button:hover:active {
+    border: ${strokeWidthThin2} solid ${colorNeutralStroke1Pressed2};
+    background-color: ${colorSubtleBackgroundPressed2};
+  }
+
+  slot[name='image'] img,
+  slot[name='image']::slotted(*) {
+    width: 24px;
+    height: 24px;
+    border-radius: ${borderRadiusCircular2};
+  }
+`;
+  var IdentityControl = class extends FASTElement {
+    constructor() {
+      super(...arguments);
+      this.appearance = "guest";
+      this.error = null;
+      this.notify = false;
+    }
+  };
+  __decorateClass([
+    attr
+  ], IdentityControl.prototype, "appearance", 2);
+  __decorateClass([
+    attr
+  ], IdentityControl.prototype, "error", 2);
+  __decorateClass([
+    attr({ mode: "boolean" })
+  ], IdentityControl.prototype, "notify", 2);
+  IdentityControl = __decorateClass([
+    customElement({
+      name: "identity-control",
+      template: template2,
+      styles: styles2
+    })
+  ], IdentityControl);
+
+  // src/edge/views/tabBar.ts
+  var template3 = html`
   <div class="group">
     <identity-control></identity-control>
   </div>
@@ -11605,12 +11693,13 @@
     </phx-button>
   </div>
 `;
-  var styles2 = css`
+  var styles3 = css`
   :host {
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    gap: ${spacingHorizontalS2};
     height: 40px;
     padding-inline: ${spacingHorizontalXS2};
     padding-block-end: ${spacingVerticalXXS};
@@ -11631,13 +11720,13 @@
   TabBar = __decorateClass([
     customElement({
       name: "tab-bar",
-      template: template2,
-      styles: styles2
+      template: template3,
+      styles: styles3
     })
   ], TabBar);
 
   // src/edge/index.ts
-  var template3 = html`
+  var template4 = html`
   <tab-bar></tab-bar>
   <address-bar></address-bar>
   <div class="row">
@@ -11648,7 +11737,7 @@
     ${(x) => x.es.showSideBar ? html`<side-bar></side-bar>` : ""}
   </div>
 `;
-  var styles3 = css`
+  var styles4 = css`
   :host {
     display: block;
     width: 100%;
@@ -11687,8 +11776,8 @@
   MicrosoftEdge = __decorateClass([
     customElement({
       name: "microsoft-edge",
-      template: template3,
-      styles: styles3
+      template: template4,
+      styles: styles4
     })
   ], MicrosoftEdge);
 
@@ -11735,14 +11824,14 @@
   ];
 
   // src/windows/controls/taskbarButton.ts
-  var template4 = html`
+  var template5 = html`
   <button>
     <slot></slot>
     <div part="backplate"></div>
     <div part="indicator"></div>
   </button>
 `;
-  var styles4 = css`
+  var styles5 = css`
   button {
     position: relative;
     width: 44px;
@@ -11809,19 +11898,19 @@
   TaskbarButton = __decorateClass([
     customElement({
       name: "taskbar-button",
-      template: template4,
-      styles: styles4
+      template: template5,
+      styles: styles5
     })
   ], TaskbarButton);
 
   // src/windows/views/clockWidget.ts
-  var template5 = html`
+  var template6 = html`
   <button>
     <caption-1>${(x) => x.time}</caption-1>
     <caption-1>${(x) => x.date}</caption-1>
   </button>
 `;
-  var styles5 = css`
+  var styles6 = css`
   button {
     display: flex;
     flex-direction: column;
@@ -11885,13 +11974,13 @@
   ClockWidget = __decorateClass([
     customElement({
       name: "clock-widget",
-      template: template5,
-      styles: styles5
+      template: template6,
+      styles: styles6
     })
   ], ClockWidget);
 
   // src/windows/views/systemTray.ts
-  var template6 = html`
+  var template7 = html`
   <button>
     <svg width="16" height="16">
       <use href="img/windows/icons.svg#wifi" />
@@ -11904,7 +11993,7 @@
     </svg>
   </button>
 `;
-  var styles6 = css`
+  var styles7 = css`
   button {
     display: flex;
     flex-direction: row;
@@ -11934,13 +12023,13 @@
   SystemTray = __decorateClass([
     customElement({
       name: "system-tray",
-      template: template6,
-      styles: styles6
+      template: template7,
+      styles: styles7
     })
   ], SystemTray);
 
   // src/windows/controls/showDesktopButton.ts
-  var styles7 = css`
+  var styles8 = css`
   button {
     user-select: none;
     width: ${spacingHorizontalM2};
@@ -11963,19 +12052,19 @@
     customElement({
       name: "show-desktop-button",
       template: html`<button>&NonBreakingSpace;</button>`,
-      styles: styles7
+      styles: styles8
     })
   ], ShowDesktopButton);
 
   // src/windows/controls/showMoreButton.ts
-  var template7 = html`
+  var template8 = html`
   <button>
     <svg width="16" height="16">
       <use href="img/windows/icons.svg#chevron-up"></use>
     </svg>
   </button>
 `;
-  var styles8 = css`
+  var styles9 = css`
   button {
     display: flex;
     flex-direction: row;
@@ -12003,18 +12092,18 @@
   ShowMoreButton = __decorateClass([
     customElement({
       name: "show-more-button",
-      template: template7,
-      styles: styles8
+      template: template8,
+      styles: styles9
     })
   ], ShowMoreButton);
 
   // src/windows/controls/copilotButton.ts
-  var template8 = html`
+  var template9 = html`
   <button>
     <img src="img/windows/copilot-24.svg" />
   </button>
 `;
-  var styles9 = css`
+  var styles10 = css`
   button {
     display: flex;
     flex-direction: row;
@@ -12041,8 +12130,8 @@
   CopilotButton = __decorateClass([
     customElement({
       name: "copilot-button",
-      template: template8,
-      styles: styles9
+      template: template9,
+      styles: styles10
     })
   ], CopilotButton);
 
@@ -12058,7 +12147,7 @@
     "13": "img/windows/weather-cloudy-24.svg",
     "50": "img/windows/weather-cloudy-24.svg"
   };
-  var template9 = html`
+  var template10 = html`
   <button>
     ${when(
     (x) => !x.loaded,
@@ -12071,7 +12160,7 @@
   )}
   </button>
 `;
-  var styles10 = css`
+  var styles11 = css`
   button {
     display: flex;
     flex-direction: row;
@@ -12153,13 +12242,13 @@
   WeatherWidget = __decorateClass([
     customElement({
       name: "weather-widget",
-      template: template9,
-      styles: styles10
+      template: template10,
+      styles: styles11
     })
   ], WeatherWidget);
 
   // src/windows/views/taskBar.ts
-  var template10 = html`
+  var template11 = html`
   <div class="group">
     <weather-widget></weather-widget>
   </div>
@@ -12174,7 +12263,7 @@
     <show-desktop-button></show-desktop-button>
   </div>
 `;
-  var styles11 = css`
+  var styles12 = css`
   :host {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -12214,14 +12303,14 @@
   TaskBar = __decorateClass([
     customElement({
       name: "task-bar",
-      template: template10,
-      styles: styles11
+      template: template11,
+      styles: styles12
     })
   ], TaskBar);
 
   // src/windows/views/appWindow.ts
-  var template11 = html`<slot></slot>`;
-  var styles12 = css`
+  var template12 = html`<slot></slot>`;
+  var styles13 = css`
   :host {
     display: block;
     position: absolute;
@@ -12282,13 +12371,13 @@
   AppWindow = __decorateClass([
     customElement({
       name: "app-window",
-      template: template11,
-      styles: styles12
+      template: template12,
+      styles: styles13
     })
   ], AppWindow);
 
   // src/windows/index.ts
-  var styles13 = css`
+  var styles14 = css`
   :host {
     display: block;
     width: 100vw;
@@ -12313,7 +12402,7 @@
     background-position: center;
   }
 `;
-  var template12 = html`
+  var template13 = html`
   <div id="desktop"></div>
   ${repeat(
     (x) => x.ws.windows,
@@ -12382,12 +12471,12 @@
     inject(WindowsService)
   ], WindowsShell.prototype, "ws", 2);
   WindowsShell = __decorateClass([
-    customElement({ name: "windows-shell", template: template12, styles: styles13 })
+    customElement({ name: "windows-shell", template: template13, styles: styles14 })
   ], WindowsShell);
 
   // src/index.ts
-  var template13 = html` ${(x) => x.ps.os === "windows" ? html`<windows-shell></windows-shell>` : ""}`;
-  var styles14 = css`
+  var template14 = html` ${(x) => x.ps.os === "windows" ? html`<windows-shell></windows-shell>` : ""}`;
+  var styles15 = css`
   :host {
     display: block;
     width: 100vw;
@@ -12403,8 +12492,8 @@
   AppRoot = __decorateClass([
     customElement({
       name: "app-root",
-      template: template13,
-      styles: styles14
+      template: template14,
+      styles: styles15
     })
   ], AppRoot);
 })();

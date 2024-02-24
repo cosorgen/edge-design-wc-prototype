@@ -2,8 +2,10 @@ import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
 import {
   spacingHorizontalXS,
   spacingVerticalXXS,
+  spacingHorizontalS,
 } from '@phoenixui/web-components';
 import '@phoenixui/web-components/button.js';
+import '../controls/identityControl.js';
 
 const template = html<TabBar>`
   <div class="group">
@@ -29,6 +31,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    gap: ${spacingHorizontalS};
     height: 40px;
     padding-inline: ${spacingHorizontalXS};
     padding-block-end: ${spacingVerticalXXS};
