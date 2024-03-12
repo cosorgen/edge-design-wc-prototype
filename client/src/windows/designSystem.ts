@@ -1,10 +1,5 @@
 import { setTheme as PUISetTheme } from '@phoenixui/web-components';
-import {
-  BorderRadiusTokens,
-  Theme,
-  webDarkTheme,
-  webLightTheme,
-} from '@phoenixui/web-components';
+import { Theme, webDarkTheme, webLightTheme } from '@phoenixui/web-components';
 import { OSTheme } from '../services/windowsService.js';
 
 export type WindowsTokens = {
@@ -53,8 +48,8 @@ const windowsDarkTheme: WindowsTheme = {
   micaBackgroundColor: 'rgba(32,32,32,0.7)',
 };
 
-export function setTheme(theme: OSTheme, element: HTMLElement) {
-  PUISetTheme(theme === 'dark' ? windowsDarkTheme : windowsLightTheme, element);
+export function setTheme(theme: OSTheme) {
+  PUISetTheme(theme === 'dark' ? windowsDarkTheme : windowsLightTheme);
 }
 
 export const colorShellFillTaksbarItemPrimary =

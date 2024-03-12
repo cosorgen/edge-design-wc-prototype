@@ -104,7 +104,7 @@ export class WindowsShell extends FASTElement {
     super.connectedCallback();
 
     // set our theme for the OS
-    setTheme(this.ws.theme, this);
+    setTheme(this.ws.theme);
 
     // open default windows
     this.ws.openWindow('Microsoft Edge');

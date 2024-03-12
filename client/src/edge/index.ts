@@ -5,13 +5,13 @@ import {
   micaBackgroundBlendMode,
   micaBackgroundColor,
   phoenixLightThemeWin11,
-  setTheme,
   colorNeutralForeground1,
   fontFamilyBase,
   fontSizeBase300,
   fontWeightRegular,
   lineHeightBase300,
   phoenixDarkThemeWin11,
+  setTheme,
 } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import EdgeService from '#services/edgeService.js';
@@ -70,6 +70,6 @@ export class MicrosoftEdge extends FASTElement {
       this.es.theme === 'system' ? this.ws.theme : this.es.theme;
     const derivedTheme =
       selectedTheme === 'dark' ? phoenixDarkThemeWin11 : phoenixLightThemeWin11;
-    setTheme(derivedTheme, this);
+    setTheme(derivedTheme, this.shadowRoot!);
   }
 }

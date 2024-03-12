@@ -1,4 +1,8 @@
-import { shadow28 } from '@phoenixui/web-components';
+import {
+  borderRadiusMedium,
+  shadow28,
+  shadowBaseLayer,
+} from '@phoenixui/web-components';
 import {
   FASTElement,
   attr,
@@ -6,7 +10,6 @@ import {
   customElement,
   html,
 } from '@microsoft/fast-element';
-import { borderRadiusMedium, shadowBaseLayer } from '@phoenixui/web-components';
 
 const template = html<AppWindow>`<slot></slot>`;
 

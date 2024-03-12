@@ -8815,7 +8815,7 @@
   }
   var template = buttonTemplate();
 
-  // ../../phoenixui/packages/themes/dist/index.esm.js
+  // ../../phoenixui/packages/themes/dist/index.js
   var win11BorderRadius = {
     borderRadiusLayerApp: "8px",
     borderRadiusLayerBase: "8px",
@@ -11438,11 +11438,16 @@
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
   // ../../phoenixui/packages/web-components/dist/esm/theme.js
-  var setTheme = (theme, element = document.body) => {
+  var setTheme = (theme, targetDoc = document) => {
+    const sheet = new CSSStyleSheet();
     const tokenNames = Object.keys(theme);
-    for (const t of tokenNames) {
-      element.style.setProperty(`--${t}`, theme[t]);
+    const data = tokenNames.reduce((acc, name) => acc + `--${name}: ${theme[name]};`, "");
+    if (targetDoc instanceof ShadowRoot) {
+      sheet.replaceSync(`:host {${data}}`);
+    } else {
+      sheet.replaceSync(`:root {${data}}`);
     }
+    targetDoc.adoptedStyleSheets.push(sheet);
   };
 
   // ../../phoenixui/packages/web-components/dist/esm/Button/definition.js
@@ -11487,8 +11492,8 @@
     colorFillAccent: "#005FB8",
     micaBackgroundColor: "rgba(32,32,32,0.7)"
   };
-  function setTheme2(theme, element) {
-    setTheme(theme === "dark" ? windowsDarkTheme : windowsLightTheme, element);
+  function setTheme2(theme) {
+    setTheme(theme === "dark" ? windowsDarkTheme : windowsLightTheme);
   }
   var colorShellFillTaksbarItemPrimary = "var(--colorShellFillTaksbarItemPrimary)";
   var colorShellFillTaksbarItemSecondary = "var(--colorShellFillTaksbarItemSecondary)";
@@ -11764,7 +11769,7 @@
       super.connectedCallback();
       const selectedTheme = this.es.theme === "system" ? this.ws.theme : this.es.theme;
       const derivedTheme = selectedTheme === "dark" ? phoenixDarkThemeWin11 : phoenixLightThemeWin11;
-      setTheme(derivedTheme, this);
+      setTheme(derivedTheme, this.shadowRoot);
     }
   };
   __decorateClass([
@@ -12443,7 +12448,7 @@
   var WindowsShell = class extends FASTElement {
     connectedCallback() {
       super.connectedCallback();
-      setTheme2(this.ws.theme, this);
+      setTheme2(this.ws.theme);
       this.ws.openWindow("Microsoft Edge");
     }
     handleTaskbarButtonClick(appName) {
