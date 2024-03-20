@@ -11,8 +11,8 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   phoenixDarkThemeWin11,
-  setTheme,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
+import { setTheme } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import EdgeService from '#services/edgeService.js';
 import EdgeWindowService from '#services/edgeWindowService.js';

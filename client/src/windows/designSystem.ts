@@ -1,5 +1,5 @@
 import { setTheme as PUISetTheme } from '@phoenixui/web-components';
-import { Theme, webDarkTheme, webLightTheme } from '@phoenixui/web-components';
+import { Theme, webDarkTheme, webLightTheme } from '@phoenixui/themes';
 import { OSTheme } from '../services/windowsService.js';
 
 export type WindowsTokens = {

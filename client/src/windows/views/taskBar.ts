@@ -7,7 +7,7 @@ import {
   micaBackgroundColor,
   micaBackdropFilter,
   micaBackgroundBlendMode,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
 import '../controls/taskbarButton.js';
 import './clockWidget.js';
 import './systemTray.js';

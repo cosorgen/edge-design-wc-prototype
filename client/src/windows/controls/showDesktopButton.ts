@@ -2,7 +2,7 @@ import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
   spacingHorizontalM,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,

@@ -3,7 +3,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   spacingHorizontalS,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
 

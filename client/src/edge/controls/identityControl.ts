@@ -21,7 +21,7 @@ import {
   spacingHorizontalXS,
   spacingHorizontalXXS,
   strokeWidthThin,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
 
 const template = html<IdentityControl>`
   <button>

@@ -2,7 +2,7 @@ import {
   borderRadiusMedium,
   shadow28,
   shadowBaseLayer,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
 import {
   FASTElement,
   attr,

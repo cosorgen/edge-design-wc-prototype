@@ -13,7 +13,7 @@ import {
   fontWeightRegular,
   lineHeightBase200,
   spacingHorizontalS,
-} from '@phoenixui/web-components';
+} from '@phoenixui/themes';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
