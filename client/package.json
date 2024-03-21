@@ -8,8 +8,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "dev": "esbuild src/index.ts --bundle --watch --outfile=www/bundle.js",
-    "build": "esbuild src/index.ts --bundle --minify --outfile=www/bundle.js",
+    "dev": "esbuild src/index.ts --bundle --watch --outfile=www/bundle.js --format=esm",
+    "build": "esbuild src/index.ts --bundle --minify --outfile=www/bundle.js --format=esm",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
     "prettier": "prettier --write \"src/**/*.{js,ts,css,html,json}\""
