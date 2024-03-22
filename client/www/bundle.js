@@ -5078,7 +5078,6 @@
     colorLabelRoyalBlue: "#004E8C",
     colorLabelTeal: "#038387",
     colorLayerBackgroundApp: "#FFFFFF80",
-    colorLayerBackgroundBase: "#FFFFFF80",
     colorLayerBackgroundCard: "#FFFFFF80",
     colorLayerBackgroundDialog: "#FFFFFF",
     colorLayerBackgroundTooltip: "#FFFFFF",
@@ -5091,14 +5090,12 @@
     colorNeutralBackgroundFloatingPressed: "#E0E0E0",
     colorNeutralBackgroundFloatingSelected: "#F0F0F0",
     colorNeutralBackgroundTabActive: "#FFFFFFD9",
-    colorNeutralBackgroundTabHover: "#0000000D",
     colorNeutralForegroundDisabledOnBrand: "#FFFFFF85",
     colorNeutralForegroundHint: "#0000008F",
     colorNeutralForegroundOnLabel: "#FFFFFF"
   };
   var lightThemeSolidColors = {
     colorLayerBackgroundApp: "#FAFAFA",
-    colorLayerBackgroundBase: "#F0F0F0",
     colorLayerBackgroundCard: "#FFFFFF"
   };
   var lightThemeColorOverrides = {
@@ -5174,7 +5171,6 @@
     colorLabelRoyalBlue: "#4A89BA",
     colorLabelTeal: "#4CB4B7",
     colorLayerBackgroundApp: "#3A3A3A4D",
-    colorLayerBackgroundBase: "#3A3A3A5E",
     colorLayerBackgroundCard: "#FFFFFF0D",
     colorLayerBackgroundDialog: "#292929",
     colorLayerBackgroundTooltip: "#292929",
@@ -5182,7 +5178,6 @@
     colorLayerStrokeBase: "#75757566",
     colorLayerStrokeFlyout: "#00000033",
     colorNeutralBackgroundTabActive: "#FFFFFF22",
-    colorNeutralBackgroundTabHover: "#FFFFFF0F",
     colorNeutralForegroundDisabledOnBrand: "#FFFFFF3D",
     colorNeutralForegroundHint: "#FFFFFF85",
     colorNeutralForegroundOnLabel: "#000000e5",
@@ -5194,8 +5189,7 @@
   };
   var darkThemeSolidColors = {
     colorLayerBackgroundCard: "#292929",
-    colorLayerBackgroundApp: "#1F1F1F",
-    colorLayerBackgroundBase: "#0A0A0A"
+    colorLayerBackgroundApp: "#1F1F1F"
   };
   var darkThemeColorOverrides = {
     colorBrandBackground2: brandVariants[40],
@@ -5256,48 +5250,60 @@
     colorSubtleBackgroundSelected: "#FFFFFF22"
   };
   var lightThemeMaterials = {
-    acrylicBackdropFilter: "blur(30px) saturate(150%)",
-    acrylicBackgroundBlendMode: "luminosity",
-    acrylicBackgroundColor: "#F0F0F0B9",
-    acrylicBackgroundImage: "none",
-    micaBackdropFilter: "blur(120px) saturate(150%)",
-    micaBackgroundBlendMode: "luminosity",
-    micaBackgroundColor: "#F0F0F0B9",
-    micaBackgroundImage: "none",
-    micaInactiveBackgroundColor: "#E5E5E5D9"
+    acrylicBackgroundBlur: "60px",
+    acrylicBackgroundLuminosity: "#FCFCFCD9",
+    acrylicBackgroundColor: "#00000000",
+    acrylicBackgroundNormal: "#00000000",
+    tabActiveBackgroundBlur: "240px",
+    tabActiveBackgroundLuminosity: "#EBEBEB",
+    tabActiveBackgroundColor: "#EBEBEB80",
+    tabActiveBackgroundNormal: "#00000000",
+    tabBarBackgroundBlur: "240px",
+    tabBarBackgroundLuminosity: "#CECECE",
+    tabBarBackgroundColor: "#CECECE80",
+    tabBarBackgroundNormal: "#00000000"
   };
   var lightThemeSolidMaterials = {
-    acrylicBackdropFilter: "none",
-    acrylicBackgroundBlendMode: "normal",
-    acrylicBackgroundColor: "#F5F5F5",
-    acrylicBackgroundImage: "none",
-    micaBackdropFilter: "none",
-    micaBackgroundBlendMode: "normal",
-    micaBackgroundColor: "#F0F0F0",
-    micaBackgroundImage: "none",
-    micaInactiveBackgroundColor: "#F3F3F3"
+    acrylicBackgroundBlur: "0px",
+    acrylicBackgroundLuminosity: "#00000000",
+    acrylicBackgroundColor: "#00000000",
+    acrylicBackgroundNormal: "#F5F5F5",
+    tabActiveBackgroundBlur: "0px",
+    tabActiveBackgroundLuminosity: "#00000000",
+    tabActiveBackgroundColor: "#00000000",
+    tabActiveBackgroundNormal: "#F2F4F7",
+    tabBarBackgroundBlur: "0px",
+    tabBarBackgroundLuminosity: "#00000000",
+    tabBarBackgroundColor: "#00000000",
+    tabBarBackgroundNormal: "#DCDEE0"
   };
   var darkThemeMaterials = {
-    acrylicBackdropFilter: "blur(30px) saturate(150%)",
-    acrylicBackgroundBlendMode: "color, luminosity",
-    acrylicBackgroundColor: "#141414B9",
-    acrylicBackgroundImage: "linear-gradient(0deg, #2C2C2C26, #2C2C2C26), none",
-    micaBackdropFilter: "blur(120px) saturate(150%)",
-    micaBackgroundBlendMode: "color, luminosity",
-    micaBackgroundColor: "#141414B9",
-    micaBackgroundImage: "linear-gradient(0deg, #2C2C2C26, #2C2C2C26), none",
-    micaInactiveBackgroundColor: "#202020D9"
+    acrylicBackgroundBlur: "60px",
+    acrylicBackgroundLuminosity: "#2C2C2CF5",
+    acrylicBackgroundColor: "#2C2C2C26",
+    acrylicBackgroundNormal: "#00000000",
+    tabActiveBackgroundBlur: "240px",
+    tabActiveBackgroundLuminosity: "#0A0A0A",
+    tabActiveBackgroundColor: "#00000000",
+    tabActiveBackgroundNormal: "#3A3A3A73",
+    tabBarBackgroundBlur: "240px",
+    tabBarBackgroundLuminosity: "#0A0A0A",
+    tabBarBackgroundColor: "#00000000",
+    tabBarBackgroundNormal: "#00000000"
   };
   var darkThemeSolidMaterials = {
-    acrylicBackdropFilter: "none",
-    acrylicBackgroundBlendMode: "normal",
-    acrylicBackgroundColor: "#141414",
-    acrylicBackgroundImage: "none",
-    micaBackdropFilter: "none",
-    micaBackgroundBlendMode: "normal",
-    micaBackgroundColor: "#0A0A0A",
-    micaBackgroundImage: "none",
-    micaInactiveBackgroundColor: "#202020"
+    acrylicBackgroundBlur: "0px",
+    acrylicBackgroundLuminosity: "#00000000",
+    acrylicBackgroundColor: "#00000000",
+    acrylicBackgroundNormal: "#141414",
+    tabActiveBackgroundBlur: "0px",
+    tabActiveBackgroundLuminosity: "#00000000",
+    tabActiveBackgroundColor: "#00000000",
+    tabActiveBackgroundNormal: "#141414",
+    tabBarBackgroundBlur: "0px",
+    tabBarBackgroundLuminosity: "#00000000",
+    tabBarBackgroundColor: "#00000000",
+    tabBarBackgroundNormal: "#000000"
   };
   var lightThemeShadows = {
     shadowBaseX: "0px",
@@ -5596,12 +5602,12 @@
     tint60: "#fefbf4"
   };
   var yellow = {
-    primary: "#fde300",
-    shade10: "#e4cc00",
-    shade20: "#c0ad00",
-    shade30: "#817400",
-    shade40: "#4c4400",
     shade50: "#282400",
+    shade40: "#4c4400",
+    shade30: "#817400",
+    shade20: "#c0ad00",
+    shade10: "#e4cc00",
+    primary: "#fde300",
     tint10: "#fde61e",
     tint20: "#fdea3d",
     tint30: "#feee66",
@@ -6123,6 +6129,8 @@
     };
     return Object.assign(acc, statusColorTokens);
   }, {});
+  colorStatusTokens$2.colorStatusDangerBackground3Hover = mappedStatusColors[statusColorMapping.danger].shade10;
+  colorStatusTokens$2.colorStatusDangerBackground3Pressed = mappedStatusColors[statusColorMapping.danger].shade20;
   colorStatusTokens$2.colorStatusWarningForeground1 = mappedStatusColors[statusColorMapping.warning].shade20;
   colorStatusTokens$2.colorStatusWarningForeground3 = mappedStatusColors[statusColorMapping.warning].shade20;
   colorStatusTokens$2.colorStatusWarningBorder2 = mappedStatusColors[statusColorMapping.warning].shade20;
@@ -6241,10 +6249,17 @@
     colorBrandBackground2: brand[160],
     colorBrandBackground2Hover: brand[150],
     colorBrandBackground2Pressed: brand[130],
+    colorBrandBackground3Static: brand[60],
+    colorBrandBackground4Static: brand[40],
     colorBrandBackgroundInverted: white,
     colorBrandBackgroundInvertedHover: brand[160],
     colorBrandBackgroundInvertedPressed: brand[140],
     colorBrandBackgroundInvertedSelected: brand[150],
+    colorNeutralCardBackground: grey[98],
+    colorNeutralCardBackgroundHover: white,
+    colorNeutralCardBackgroundPressed: grey[96],
+    colorNeutralCardBackgroundSelected: grey[92],
+    colorNeutralCardBackgroundDisabled: grey[94],
     colorNeutralStrokeAccessible: grey[38],
     colorNeutralStrokeAccessibleHover: grey[34],
     colorNeutralStrokeAccessiblePressed: grey[30],
@@ -6518,10 +6533,17 @@
     colorBrandBackground2: "var(--colorBrandBackground2)",
     colorBrandBackground2Hover: "var(--colorBrandBackground2Hover)",
     colorBrandBackground2Pressed: "var(--colorBrandBackground2Pressed)",
+    colorBrandBackground3Static: "var(--colorBrandBackground3Static)",
+    colorBrandBackground4Static: "var(--colorBrandBackground4Static)",
     colorBrandBackgroundInverted: "var(--colorBrandBackgroundInverted)",
     colorBrandBackgroundInvertedHover: "var(--colorBrandBackgroundInvertedHover)",
     colorBrandBackgroundInvertedPressed: "var(--colorBrandBackgroundInvertedPressed)",
     colorBrandBackgroundInvertedSelected: "var(--colorBrandBackgroundInvertedSelected)",
+    colorNeutralCardBackground: "var(--colorNeutralCardBackground)",
+    colorNeutralCardBackgroundHover: "var(--colorNeutralCardBackgroundHover)",
+    colorNeutralCardBackgroundPressed: "var(--colorNeutralCardBackgroundPressed)",
+    colorNeutralCardBackgroundSelected: "var(--colorNeutralCardBackgroundSelected)",
+    colorNeutralCardBackgroundDisabled: "var(--colorNeutralCardBackgroundDisabled)",
     colorNeutralStrokeAccessible: "var(--colorNeutralStrokeAccessible)",
     colorNeutralStrokeAccessibleHover: "var(--colorNeutralStrokeAccessibleHover)",
     colorNeutralStrokeAccessiblePressed: "var(--colorNeutralStrokeAccessiblePressed)",
@@ -6775,6 +6797,8 @@
     colorStatusDangerBackground1: "var(--colorStatusDangerBackground1)",
     colorStatusDangerBackground2: "var(--colorStatusDangerBackground2)",
     colorStatusDangerBackground3: "var(--colorStatusDangerBackground3)",
+    colorStatusDangerBackground3Hover: "var(--colorStatusDangerBackground3Hover)",
+    colorStatusDangerBackground3Pressed: "var(--colorStatusDangerBackground3Pressed)",
     colorStatusDangerForeground1: "var(--colorStatusDangerForeground1)",
     colorStatusDangerForeground2: "var(--colorStatusDangerForeground2)",
     colorStatusDangerForeground3: "var(--colorStatusDangerForeground3)",
@@ -7089,7 +7113,9 @@
     };
     return Object.assign(acc, statusColorTokens);
   }, {});
-  colorStatusTokens$1.colorStatusDangerForeground3 = mappedStatusColors[statusColorMapping.danger].tint30;
+  colorStatusTokens$1.colorStatusDangerBackground3Hover = mappedStatusColors[statusColorMapping.danger].shade10;
+  colorStatusTokens$1.colorStatusDangerBackground3Pressed = mappedStatusColors[statusColorMapping.danger].shade20;
+  colorStatusTokens$1.colorStatusDangerForeground3 = mappedStatusColors[statusColorMapping.danger].tint40;
   colorStatusTokens$1.colorStatusDangerBorder2 = mappedStatusColors[statusColorMapping.danger].tint30;
   colorStatusTokens$1.colorStatusSuccessForeground3 = mappedStatusColors[statusColorMapping.success].tint40;
   colorStatusTokens$1.colorStatusSuccessBorder2 = mappedStatusColors[statusColorMapping.success].tint40;
@@ -7141,6 +7167,8 @@
     };
     return Object.assign(acc, statusColorTokens);
   }, {});
+  colorStatusTokens.colorStatusDangerBackground3Hover = hcHighlight;
+  colorStatusTokens.colorStatusDangerBackground3Pressed = hcHighlight;
   var webLightTheme$1 = createLightTheme(brandWeb);
   var generateColorTokens = (brand) => ({
     colorNeutralForeground1: white,
@@ -7257,10 +7285,17 @@
     colorBrandBackground2: brand[20],
     colorBrandBackground2Hover: brand[40],
     colorBrandBackground2Pressed: brand[10],
+    colorBrandBackground3Static: brand[60],
+    colorBrandBackground4Static: brand[40],
     colorBrandBackgroundInverted: white,
     colorBrandBackgroundInvertedHover: brand[160],
     colorBrandBackgroundInvertedPressed: brand[140],
     colorBrandBackgroundInvertedSelected: brand[150],
+    colorNeutralCardBackground: grey[20],
+    colorNeutralCardBackgroundHover: grey[24],
+    colorNeutralCardBackgroundPressed: grey[18],
+    colorNeutralCardBackgroundSelected: grey[22],
+    colorNeutralCardBackgroundDisabled: grey[8],
     colorNeutralStrokeAccessible: grey[68],
     colorNeutralStrokeAccessibleHover: grey[74],
     colorNeutralStrokeAccessiblePressed: grey[70],
@@ -7616,9 +7651,7 @@
   var colorNeutralStroke1Hover = "var(--colorNeutralStroke1Hover)";
   var colorNeutralStroke1Pressed = "var(--colorNeutralStroke1Pressed)";
   var shadow28 = "var(--shadow28)";
-  var micaBackdropFilter = "var(--micaBackdropFilter)";
-  var micaBackgroundBlendMode = "var(--micaBackgroundBlendMode)";
-  var micaBackgroundColor = "var(--micaBackgroundColor)";
+  var tabBarBackgroundBlur = "var(--tabBarBackgroundBlur)";
   var shadowBaseLayer = "var(--shadowBaseLayer)";
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
@@ -11539,6 +11572,9 @@
   var colorShellStrokeTaskbarItemSecondary = "var(--colorShellStrokeTaskbarItemSecondary)";
   var colorShellFillTaskbarItemIndicator = "var(--colorShellFillTaskbarItemIndicator)";
   var colorFillAccent = "var(--colorFillAccent)";
+  var micaBackdropFilter = "var(--micaBackdropFilter)";
+  var micaBackgroundBlendMode = "var(--micaBackgroundBlendMode)";
+  var micaBackgroundColor = "var(--micaBackgroundColor)";
 
   // src/services/windowsService.ts
   var WindowsService = class {
@@ -12847,6 +12883,9 @@
     height: 40px;
     padding-inline: ${spacingHorizontalXS};
     padding-block-end: ${spacingVerticalXXS};
+
+    /* Tab bar material */
+    backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
   }
 
   .group {
@@ -12886,9 +12925,6 @@
     display: block;
     width: 100%;
     height: 100%;
-    background: ${micaBackgroundColor};
-    backdrop-filter: ${micaBackdropFilter};
-    background-blend-mode: ${micaBackgroundBlendMode};
     color: ${colorNeutralForeground1};
     fill: currentColor;
 

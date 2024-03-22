@@ -1,9 +1,6 @@
 import { FASTElement, customElement, html, css } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
-  micaBackdropFilter,
-  micaBackgroundBlendMode,
-  micaBackgroundColor,
   phoenixLightThemeWin11,
   colorNeutralForeground1,
   fontFamilyBase,
@@ -38,9 +35,6 @@ const styles = css`
     display: block;
     width: 100%;
     height: 100%;
-    background: ${micaBackgroundColor};
-    backdrop-filter: ${micaBackdropFilter};
-    background-blend-mode: ${micaBackgroundBlendMode};
     color: ${colorNeutralForeground1};
     fill: currentColor;
 

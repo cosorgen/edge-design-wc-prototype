@@ -10,6 +10,9 @@ export type WindowsTokens = {
   colorShellStrokeTaskbarItemSecondary: string;
   colorShellFillTaskbarItemIndicator: string;
   colorFillAccent: string;
+  micaBackdropFilter?: string;
+  micaBackgroundBlendMode?: string;
+  micaBackgroundColor?: string;
 };
 
 export type WindowsTheme = Theme & WindowsTokens;
@@ -65,3 +68,6 @@ export const colorShellStrokeTaskbarItemSecondary =
 export const colorShellFillTaskbarItemIndicator =
   'var(--colorShellFillTaskbarItemIndicator)';
 export const colorFillAccent = 'var(--colorFillAccent)';
+export const micaBackdropFilter = 'var(--micaBackdropFilter)';
+export const micaBackgroundBlendMode = 'var(--micaBackgroundBlendMode)';
+export const micaBackgroundColor = 'var(--micaBackgroundColor)';

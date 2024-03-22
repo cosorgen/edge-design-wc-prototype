@@ -3,6 +3,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   spacingHorizontalS,
+  tabBarBackgroundBlur,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
@@ -35,6 +36,9 @@ const styles = css`
     height: 40px;
     padding-inline: ${spacingHorizontalXS};
     padding-block-end: ${spacingVerticalXXS};
+
+    /* Tab bar material */
+    backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
   }
 
   .group {

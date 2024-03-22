@@ -4,10 +4,12 @@ import {
   colorNeutralStroke1,
   strokeWidthThin,
   spacingHorizontalXS,
+} from '@phoenixui/themes';
+import {
   micaBackgroundColor,
   micaBackdropFilter,
   micaBackgroundBlendMode,
-} from '@phoenixui/themes';
+} from '../designSystem.js';
 import '../controls/taskbarButton.js';
 import './clockWidget.js';
 import './systemTray.js';
