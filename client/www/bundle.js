@@ -7643,6 +7643,7 @@
   var spacingHorizontalM = "var(--spacingHorizontalM)";
   var spacingHorizontalL = "var(--spacingHorizontalL)";
   var spacingVerticalXXS = "var(--spacingVerticalXXS)";
+  var spacingVerticalSNudge = "var(--spacingVerticalSNudge)";
   var colorNeutralForeground1 = "var(--colorNeutralForeground1)";
   var colorNeutralForeground4 = "var(--colorNeutralForeground4)";
   var colorSubtleBackgroundHover = "var(--colorSubtleBackgroundHover)";
@@ -7652,6 +7653,9 @@
   var colorNeutralStroke1Pressed = "var(--colorNeutralStroke1Pressed)";
   var shadow28 = "var(--shadow28)";
   var tabBarBackgroundBlur = "var(--tabBarBackgroundBlur)";
+  var tabBarBackgroundLuminosity = "var(--tabBarBackgroundLuminosity)";
+  var tabBarBackgroundColor = "var(--tabBarBackgroundColor)";
+  var tabBarBackgroundNormal = "var(--tabBarBackgroundNormal)";
   var shadowBaseLayer = "var(--shadowBaseLayer)";
   var tokens = themeToTokensObject(phoenixLightThemeWin11);
 
@@ -12857,35 +12861,79 @@
 
   // src/edge/views/tabBar.ts
   var template4 = html`
-  <div class="group">
-    <identity-control></identity-control>
-  </div>
-  <div class="group">
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#layer-diagonal-20-regular"></use>
-      </svg>
-    </phx-button>
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#tab-position-horizontal-20-regular"></use>
-      </svg>
-    </phx-button>
+  <div class="material-layer" id="image"></div>
+  <div class="material-layer" id="blur"></div>
+  <div class="material-layer" id="luminosity"></div>
+  <div class="material-layer" id="color"></div>
+  <div class="material-layer" id="normal"></div>
+  <div id="content">
+    <div class="group">
+      <identity-control></identity-control>
+    </div>
+    <div class="group">
+      <phx-button appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#layer-diagonal-20-regular"></use>
+        </svg>
+      </phx-button>
+      <phx-button appearance="subtle" icon-only>
+        <svg>
+          <use
+            href="img/edge/icons.svg#tab-position-horizontal-20-regular"
+          ></use>
+        </svg>
+      </phx-button>
+    </div>
   </div>
 `;
   var styles4 = css`
   :host {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .material-layer {
+    position: absolute;
+    inset: 0;
+  }
+
+  #image {
+    width: 100vw;
+    height: 100vh;
+    background: ${(x) => x.ws.theme === "dark" ? "url(img/windows/desktopDark.jpg)" : "url(img/windows/desktopLight.jpg)"};
+    background-size: cover;
+    background-position: center;
+  }
+
+  #blur {
+    backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
+  }
+
+  #luminosity {
+    background-color: ${tabBarBackgroundLuminosity};
+    mix-blend-mode: luminosity;
+  }
+
+  #color {
+    background-color: ${tabBarBackgroundColor};
+    mix-blend-mode: color;
+  }
+
+  #normal {
+    background-color: ${tabBarBackgroundNormal};
+  }
+
+  #content {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     gap: ${spacingHorizontalS};
-    height: 40px;
     padding-inline: ${spacingHorizontalXS};
+    padding-block-start: ${spacingVerticalSNudge};
     padding-block-end: ${spacingVerticalXXS};
-
-    /* Tab bar material */
-    backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
   }
 
   .group {
@@ -12896,10 +12944,39 @@
   }
 `;
   var TabBar = class extends FASTElement {
+    constructor() {
+      super(...arguments);
+      this.yPos = 0;
+      this.xPos = 0;
+      this.width = 0;
+      this.height = 0;
+    }
     connectedCallback() {
       super.connectedCallback();
+      this.positionMicaLayers();
+    }
+    positionMicaLayers() {
+      const { top, left } = this.getBoundingClientRect();
+      const imgEl = this.shadowRoot?.getElementById("image");
+      imgEl.style.top = `-${top}px`;
+      imgEl.style.left = `-${left}px`;
     }
   };
+  __decorateClass([
+    inject(WindowsService)
+  ], TabBar.prototype, "ws", 2);
+  __decorateClass([
+    observable
+  ], TabBar.prototype, "yPos", 2);
+  __decorateClass([
+    observable
+  ], TabBar.prototype, "xPos", 2);
+  __decorateClass([
+    observable
+  ], TabBar.prototype, "width", 2);
+  __decorateClass([
+    observable
+  ], TabBar.prototype, "height", 2);
   TabBar = __decorateClass([
     customElement({
       name: "tab-bar",
