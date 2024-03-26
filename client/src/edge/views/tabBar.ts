@@ -1,10 +1,4 @@
-import {
-  customElement,
-  FASTElement,
-  html,
-  css,
-  observable,
-} from '@microsoft/fast-element';
+import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
 import {
   spacingHorizontalXS,
   spacingVerticalXXS,
@@ -115,10 +109,6 @@ const styles = css`
 })
 export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService; // for theme
-  @observable yPos = 0;
-  @observable xPos = 0;
-  @observable width = 0;
-  @observable height = 0;
 
   connectedCallback() {
     super.connectedCallback();
@@ -126,8 +116,8 @@ export class TabBar extends FASTElement {
   }
 
   positionMicaLayers() {
-    const { top, left } = this.getBoundingClientRect();
-    const imgEl = this.shadowRoot?.getElementById('image') as HTMLElement;
+    const imgEl = this.shadowRoot!.getElementById('image') as HTMLElement;
+    const { top, left } = imgEl.getBoundingClientRect();
     imgEl.style.top = `-${top}px`;
     imgEl.style.left = `-${left}px`;
   }

@@ -1,6 +1,7 @@
 import { observable } from '@microsoft/fast-element';
 
 export type OSTheme = 'light' | 'dark';
+export type OSTransparency = 'reduced' | 'normal';
 export type App = {
   name: string;
   lightIcon: string;
@@ -21,9 +22,36 @@ export type Window = {
 };
 
 export default class WindowsService {
-  @observable theme: OSTheme = 'light';
+  @observable theme: OSTheme;
+  @observable transparency: OSTransparency;
   @observable windows: Window[] = [];
   @observable activeWindowId: string | null = null;
+
+  constructor() {
+    // Set theme and transparency based on system preferences
+    this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+
+    this.transparency = window.matchMedia(
+      '(prefers-reduced-transparency: reduce)',
+    ).matches
+      ? 'reduced'
+      : 'normal';
+
+    // Update when system preference changes
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        this.theme = e.matches ? 'dark' : 'light';
+      });
+
+    window
+      .matchMedia('(prefers-reduced-transparency: reduce)')
+      .addEventListener('change', (e) => {
+        this.transparency = e.matches ? 'reduced' : 'normal';
+      });
+  }
 
   openWindow(appName: string) {
     const id = crypto.randomUUID();
@@ -87,5 +115,9 @@ export default class WindowsService {
     this.windows = this.windows.map((w) =>
       w.id === id ? { ...w, maximized: true } : w,
     );
+  }
+
+  getActiveWindow() {
+    return this.windows.find((w) => w.id === this.activeWindowId);
   }
 }
