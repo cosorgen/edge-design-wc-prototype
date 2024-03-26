@@ -1,0 +1,28 @@
+{
+  "name": "@edge-design-wc-prototype/client",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "description": "A web component based prototype for the Edge browser",
+  "main": "src/index.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "dev": "esbuild src/index.ts --bundle --watch --outfile=www/bundle.js --format=esm",
+    "build": "esbuild src/index.ts --bundle --minify --outfile=www/bundle.js --format=esm",
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "prettier": "prettier --write \"src/**/*.{js,ts,css,html,json}\""
+  },
+  "dependencies": {
+    "@microsoft/fast-element": "^2.0.0-beta.26",
+    "@phoenixui/themes": "0.1.0",
+    "@phoenixui/web-components": "0.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0"
+  },
+  "imports": {
+    "#services*": "./src/services/*"
+  }
+}
