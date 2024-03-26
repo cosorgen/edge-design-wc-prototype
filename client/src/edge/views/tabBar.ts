@@ -1,39 +1,102 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
+import {
+  customElement,
+  FASTElement,
+  html,
+  css,
+  observable,
+} from '@microsoft/fast-element';
 import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   spacingHorizontalS,
+  tabBarBackgroundBlur,
+  tabBarBackgroundLuminosity,
+  spacingVerticalSNudge,
+  tabBarBackgroundColor,
+  tabBarBackgroundNormal,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import WindowsService from '../../services/windowsService.js';
 
 const template = html<TabBar>`
-  <div class="group">
-    <identity-control></identity-control>
-  </div>
-  <div class="group">
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#layer-diagonal-20-regular"></use>
-      </svg>
-    </phx-button>
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#tab-position-horizontal-20-regular"></use>
-      </svg>
-    </phx-button>
+  <div class="material-layer" id="image"></div>
+  <div class="material-layer" id="blur"></div>
+  <div class="material-layer" id="luminosity"></div>
+  <div class="material-layer" id="color"></div>
+  <div class="material-layer" id="normal"></div>
+  <div id="content">
+    <div class="group">
+      <identity-control></identity-control>
+    </div>
+    <div class="group">
+      <phx-button appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#layer-diagonal-20-regular"></use>
+        </svg>
+      </phx-button>
+      <phx-button appearance="subtle" icon-only>
+        <svg>
+          <use
+            href="img/edge/icons.svg#tab-position-horizontal-20-regular"
+          ></use>
+        </svg>
+      </phx-button>
+    </div>
   </div>
 `;
 
 const styles = css`
   :host {
+    position: relative;
+    display: block;
+    overflow: hidden;
+  }
+
+  .material-layer {
+    position: absolute;
+    inset: 0;
+  }
+
+  #image {
+    width: 100vw;
+    height: 100vh;
+    background: ${(x) =>
+      x.ws.theme === 'dark'
+        ? 'url(img/windows/desktopDark.jpg)'
+        : 'url(img/windows/desktopLight.jpg)'};
+    background-size: cover;
+    background-position: center;
+  }
+
+  #blur {
+    backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
+  }
+
+  #luminosity {
+    background-color: ${tabBarBackgroundLuminosity};
+    mix-blend-mode: luminosity;
+  }
+
+  #color {
+    background-color: ${tabBarBackgroundColor};
+    mix-blend-mode: color;
+  }
+
+  #normal {
+    background-color: ${tabBarBackgroundNormal};
+  }
+
+  #content {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: flex-end;
     gap: ${spacingHorizontalS};
-    height: 40px;
     padding-inline: ${spacingHorizontalXS};
+    padding-block-start: ${spacingVerticalSNudge};
     padding-block-end: ${spacingVerticalXXS};
   }
 
@@ -51,7 +114,21 @@ const styles = css`
   styles,
 })
 export class TabBar extends FASTElement {
+  @inject(WindowsService) ws!: WindowsService; // for theme
+  @observable yPos = 0;
+  @observable xPos = 0;
+  @observable width = 0;
+  @observable height = 0;
+
   connectedCallback() {
     super.connectedCallback();
+    this.positionMicaLayers();
+  }
+
+  positionMicaLayers() {
+    const { top, left } = this.getBoundingClientRect();
+    const imgEl = this.shadowRoot?.getElementById('image') as HTMLElement;
+    imgEl.style.top = `-${top}px`;
+    imgEl.style.left = `-${left}px`;
   }
 }
