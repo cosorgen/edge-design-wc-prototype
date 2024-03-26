@@ -18,6 +18,7 @@
     "build",
     "storybook-build",
     "node_modules",
-    "**/*.html"
+    "**/*.html",
+    "bundle.js"
   ]
 }
