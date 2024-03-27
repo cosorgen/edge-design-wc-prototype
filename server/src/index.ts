@@ -7,7 +7,7 @@ dotenv.config(); // Load .env file for keys
 
 const PORT = process.env.PORT || 4000;
 const app = express();
-const pathToApp = path.resolve(__dirname, '../../client/www');
+const pathToApp = path.resolve(__dirname, './www');
 
 // Have Node serve the files for our built React app
 app.use(express.static(pathToApp));
