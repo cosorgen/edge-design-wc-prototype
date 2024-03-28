@@ -1,8 +1,5 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
-import {
-  borderRadiusSmall,
-  colorNeutralForeground1,
-} from '@phoenixui/themes';
+import { borderRadiusSmall, colorNeutralForeground1 } from '@phoenixui/themes';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
