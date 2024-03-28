@@ -12,7 +12,6 @@ const serverAppContext = await esbuild.context({
 });
 
 const copyClientStaticFiles = () => {
-  console.log('Copying static files from client/www to dist/www...');
   fs.cpSync('./client/www', './dist/www', { recursive: true }, (err) => {
     if (err) {
       console.error('An error occurred while copying the folder.');
@@ -33,7 +32,7 @@ const serve = () => {
   import('./dist/index.js');
 };
 
-console.log('Starting server and client watch mode...');
+console.log('Starting server and client watch mode...\n');
 serverAppContext.watch();
 copyClientStaticFiles();
 clientAppContext.watch();

@@ -35,14 +35,24 @@ const buildClientApp = async () => {
 
 console.log('Cleaning up the dist folder...');
 fs.rmSync('./dist', { recursive: true, force: true });
-console.log('Building...');
+console.log('Done.\n');
+
+console.log('Building server app...');
 let result = await buildServerApp();
 let meta = await esbuild.analyzeMetafile(result.metafile);
-console.log('Server app built.');
 console.log(meta);
+console.log('Done.\n');
+
+console.log('Building client app...');
 result = await buildClientApp();
 meta = await esbuild.analyzeMetafile(result.metafile);
-console.log('Client app built.');
 console.log(meta);
-fs.rmSync('./dist/metafile.json', { force: true }); // Remove the metafile
-console.log('Done. Find the built files in the dist folder.');
+console.log('Done.\n');
+
+// Remove the metafile
+fs.rmSync('./dist/metafile.json', { force: true });
+
+console.log(
+  '%cBuild successful. Find the built files at ./dist\n',
+  'color: green; font-weight: bold;',
+);
