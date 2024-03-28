@@ -2,7 +2,7 @@
 
 ## Setup
 
-You need to add a .env file to the root of the server folder with the following:
+You need to add a .env file to the root of the project with the following:
 
 ```bash
 BING_APP_ID="ID"
@@ -13,9 +13,7 @@ Then run the following
 
 ```bash
 npm install
-npm run dev:server
-npm run dev:client
-npm run serve
+npm run dev
 ```
 
-Then navigate to http://localhost:4000 to see your work
+http://localhost:4000 should automatically open and refresh to see your work.
