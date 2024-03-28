@@ -11,9 +11,9 @@
     "server"
   ],
   "scripts": {
-    "dev": "node dev.mjs",
-    "build": "node build.mjs",
-    "clean": "node clean.mjs",
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "clean": "node scripts/clean.mjs",
     "lint": "eslint ./client/src ./server/src",
     "lint:fix": "eslint ./client/src ./server/src --fix",
     "prettier": "prettier --write ./client/src ./server/src"
