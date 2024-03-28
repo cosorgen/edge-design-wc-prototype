@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
 import * as esbuild from 'esbuild';
+import { spawn } from 'child_process';
 import open from 'open';
+import fs from 'fs';
 
 const serverAppContext = await esbuild.context({
   entryPoints: ['./server/src/index.ts'],
@@ -17,16 +19,31 @@ const clientAppContext = await esbuild.context({
   format: 'esm',
 });
 
-function serve() {
-  import('./dist/index.js');
-  // eslint-disable-next-line no-undef
-  const PORT = process.env.PORT || 4000;
-  open(`http://localhost:${PORT}`);
+function copyStaticFiles() {
+  fs.cpSync('./client/www', './dist/www', { recursive: true }, (err) => {
+    if (err) {
+      console.error('An error occurred while copying the static files.');
+      return console.error(err);
+    }
+  });
 }
 
 console.log('Starting server and client watch mode...\n');
+copyStaticFiles();
 await clientAppContext.watch();
 console.log('Watching client for changes...\n');
 await serverAppContext.watch();
-console.log('.\n');
-serve();
+console.log('Watching server for changes...\n');
+
+const server = spawn('node', ['./dist/index.js'], {});
+server.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`);
+});
+server.stderr.on('data', (data) => {
+  console.error(`stderr: ${data}`);
+});
+server.on('close', (code) => {
+  console.log(`child process exited with code ${code}`);
+});
+console.log('Server started...\n');
+open('http://localhost:4000');
