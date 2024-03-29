@@ -28,22 +28,17 @@ function copyStaticFiles() {
   });
 }
 
-console.log('Starting server and client watch mode...\n');
+console.log('Building server and client...\n');
 copyStaticFiles();
+await serverAppContext.rebuild();
+await clientAppContext.rebuild();
+
 await clientAppContext.watch();
 console.log('Watching client for changes...\n');
 await serverAppContext.watch();
 console.log('Watching server for changes...\n');
 
 const server = spawn('node', ['./dist/index.js'], {});
-server.stdout.on('data', (data) => {
-  console.log(`stdout: ${data}`);
-});
-server.stderr.on('data', (data) => {
-  console.error(`stderr: ${data}`);
-});
-server.on('close', (code) => {
-  console.log(`child process exited with code ${code}`);
-});
-console.log('Server started...\n');
+server.stdout.on('data', (data) => console.log(`${data}`));
+server.stderr.on('data', (data) => console.error(`${data}`));
 open('http://localhost:4000');
