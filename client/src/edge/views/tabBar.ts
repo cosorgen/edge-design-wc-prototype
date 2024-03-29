@@ -8,11 +8,13 @@ import {
   spacingVerticalSNudge,
   tabBarBackgroundColor,
   tabBarBackgroundNormal,
+  shadow2,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import '../controls/identityControl.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '../../services/windowsService.js';
+import '../controls/identityControl.js';
+import '../controls/horizontal-tab.js';
 
 const template = html<TabBar>`
   <div class="material-layer" id="image"></div>
@@ -20,6 +22,7 @@ const template = html<TabBar>`
   <div class="material-layer" id="luminosity"></div>
   <div class="material-layer" id="color"></div>
   <div class="material-layer" id="normal"></div>
+  <div id="shadow"></div>
   <div id="content">
     <div class="group">
       <identity-control></identity-control>
@@ -37,6 +40,9 @@ const template = html<TabBar>`
           ></use>
         </svg>
       </phx-button>
+    </div>
+    <div>
+      <horizontal-tab></horizontal-tab>
     </div>
   </div>
 `;
@@ -99,6 +105,14 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalXS};
+  }
+
+  #shadow {
+    position: absolute;
+    inset-inline: 0;
+    bottom: -2px;
+    height: 2px;
+    box-shadow: ${shadow2};
   }
 `;
 
