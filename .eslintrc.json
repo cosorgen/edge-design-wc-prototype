@@ -13,12 +13,5 @@
   "plugins": ["@typescript-eslint"],
   "root": true,
   "rules": {},
-  "ignorePatterns": [
-    "dist",
-    "build",
-    "storybook-build",
-    "node_modules",
-    "**/*.html",
-    "bundle.js"
-  ]
+  "ignorePatterns": ["node_modules"]
 }
