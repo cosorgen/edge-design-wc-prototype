@@ -21,6 +21,7 @@ import WindowsService from '#services/windowsService.js';
 import EdgeService from '#services/edgeService.js';
 import EdgeWindowService from '#services/edgeWindowService.js';
 import './views/tabBar.js';
+import { desktopBackground } from '../windows/designSystem.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
@@ -77,10 +78,7 @@ const styles = css`
   #image {
     width: 100vw;
     height: 100vh;
-    background: ${(x) =>
-      x.ws.theme === 'dark'
-        ? 'url(img/windows/desktopDark.jpg)'
-        : 'url(img/windows/desktopLight.jpg)'};
+    background: ${desktopBackground};
     background-size: cover;
     background-position: center;
   }

@@ -13,7 +13,7 @@ import {
   lineHeightBase300,
   colorNeutralForeground1,
 } from '@phoenixui/themes';
-import { setTheme } from './designSystem.js';
+import { setTheme, desktopBackground } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/taskBar.js';
@@ -40,10 +40,7 @@ const styles = css`
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-image: ${(x) =>
-      x.ws.theme === 'dark'
-        ? "url('/img/windows/desktopDark.jpg')"
-        : "url('/img/windows/desktopLight.jpg')"};
+    background-image: ${desktopBackground};
     background-size: cover;
     background-position: center;
   }

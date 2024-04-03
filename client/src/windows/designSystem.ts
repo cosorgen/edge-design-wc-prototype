@@ -13,6 +13,7 @@ export type WindowsTokens = {
   micaBackdropFilter?: string;
   micaBackgroundBlendMode?: string;
   micaBackgroundColor?: string;
+  desktopBackground?: string;
 };
 
 export type WindowsTheme = Theme & WindowsTokens;
@@ -36,6 +37,7 @@ const windowsLightTheme: WindowsTheme = {
   colorShellFillTaskbarItemIndicator: '#00000070',
   colorFillAccent: '#005FB8',
   micaBackgroundColor: 'rgba(243,243,243,0.7)',
+  desktopBackground: 'url(img/windows/desktopLight.jpg)',
 };
 
 const windowsDarkTheme: WindowsTheme = {
@@ -49,6 +51,7 @@ const windowsDarkTheme: WindowsTheme = {
   colorShellFillTaskbarItemIndicator: '#FFFFFF63',
   colorFillAccent: '#005FB8',
   micaBackgroundColor: 'rgba(32,32,32,0.7)',
+  desktopBackground: 'url(img/windows/desktopDark.jpg)',
 };
 
 export function setTheme(theme: OSTheme) {
@@ -71,3 +74,4 @@ export const colorFillAccent = 'var(--colorFillAccent)';
 export const micaBackdropFilter = 'var(--micaBackdropFilter)';
 export const micaBackgroundBlendMode = 'var(--micaBackgroundBlendMode)';
 export const micaBackgroundColor = 'var(--micaBackgroundColor)';
+export const desktopBackground = 'var(--desktopBackground)';

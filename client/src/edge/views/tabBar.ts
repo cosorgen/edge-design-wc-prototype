@@ -11,10 +11,9 @@ import {
   shadow2,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '../../services/windowsService.js';
 import '../controls/identityControl.js';
 import '../controls/horizontal-tab.js';
+import { desktopBackground } from '../../windows/designSystem.js';
 
 const template = html<TabBar>`
   <div class="material-layer" id="image"></div>
@@ -62,10 +61,7 @@ const styles = css`
   #image {
     width: 100vw;
     height: 100vh;
-    background: ${(x) =>
-      x.ws.theme === 'dark'
-        ? 'url(img/windows/desktopDark.jpg)'
-        : 'url(img/windows/desktopLight.jpg)'};
+    background: ${desktopBackground};
     background-size: cover;
     background-position: center;
   }
@@ -122,8 +118,6 @@ const styles = css`
   styles,
 })
 export class TabBar extends FASTElement {
-  @inject(WindowsService) ws!: WindowsService; // for theme
-
   connectedCallback() {
     super.connectedCallback();
     this.positionMicaLayers();
