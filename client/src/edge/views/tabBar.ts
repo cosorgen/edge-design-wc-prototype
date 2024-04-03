@@ -1,4 +1,11 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
+import {
+  customElement,
+  FASTElement,
+  html,
+  css,
+  repeat,
+} from '@microsoft/fast-element';
+import { inject } from '@microsoft/fast-element/di.js';
 import {
   spacingHorizontalXS,
   spacingVerticalXXS,
@@ -9,11 +16,13 @@ import {
   tabBarBackgroundColor,
   tabBarBackgroundNormal,
   shadow2,
+  spacingHorizontalXXS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
 import '../controls/horizontal-tab.js';
 import { desktopBackground } from '../../windows/designSystem.js';
+import { Tab, TabService } from '#services/tabService.js';
 
 const template = html<TabBar>`
   <div class="material-layer" id="image"></div>
@@ -40,8 +49,18 @@ const template = html<TabBar>`
         </svg>
       </phx-button>
     </div>
-    <div>
-      <horizontal-tab></horizontal-tab>
+    <div id="tabs">
+      ${repeat(
+        (x) => x.ts.tabs,
+        html<Tab>` <horizontal-tab
+          ?active="${(x) => x.active}"
+          @activate="${(x, c) => c.parent.activateTab(x.id)}"
+          @close="${(x, c) => c.parent.closeTab(x.id)}"
+        >
+          ${(x) => x.title}
+          <img slot="favicon" src="${(x) => x.favicon}" />
+        </horizontal-tab>`,
+      )}
     </div>
   </div>
 `;
@@ -110,6 +129,12 @@ const styles = css`
     height: 2px;
     box-shadow: ${shadow2};
   }
+
+  #tabs {
+    display: flex;
+    flex-direction: row;
+    gap: ${spacingHorizontalXXS};
+  }
 `;
 
 @customElement({
@@ -118,6 +143,8 @@ const styles = css`
   styles,
 })
 export class TabBar extends FASTElement {
+  @inject(TabService) ts!: TabService;
+
   connectedCallback() {
     super.connectedCallback();
     this.positionMicaLayers();
@@ -128,5 +155,13 @@ export class TabBar extends FASTElement {
     const { top, left } = imgEl.getBoundingClientRect();
     imgEl.style.top = `-${top}px`;
     imgEl.style.left = `-${left}px`;
+  }
+
+  activateTab(tabId: string) {
+    this.ts.activateTab(tabId);
+  }
+
+  closeTab(tabId: string) {
+    this.ts.removeTab(tabId);
   }
 }
