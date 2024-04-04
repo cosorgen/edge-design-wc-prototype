@@ -9,28 +9,20 @@ import {
   lineHeightBase300,
   phoenixDarkThemeWin11,
   spacingVerticalS,
-  tabActiveBackgroundBlur,
-  tabActiveBackgroundLuminosity,
-  tabActiveBackgroundColor,
-  tabActiveBackgroundNormal,
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
 } from '@phoenixui/themes';
 import { setTheme } from '@phoenixui/web-components';
-import { desktopBackground } from '../windows/designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
+import './controls/mica-material.js';
 import './views/tabBar.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
   <div id="activeTab">
-    <div class="material-layer" id="image"></div>
-    <div class="material-layer" id="blur"></div>
-    <div class="material-layer" id="luminosity"></div>
-    <div class="material-layer" id="color"></div>
-    <div class="material-layer" id="normal"></div>
+    <mica-material></mica-material>
     <div id="content">
       <address-bar></address-bar>
       <div class="row">
@@ -68,37 +60,6 @@ const styles = css`
     width: 100%;
     height: 100%;
     overflow: hidden;
-  }
-
-  .material-layer {
-    position: absolute;
-    inset: 0;
-  }
-
-  #image {
-    width: 100vw;
-    height: 100vh;
-    background: ${desktopBackground};
-    background-size: cover;
-    background-position: center;
-  }
-
-  #blur {
-    backdrop-filter: blur(calc(${tabActiveBackgroundBlur} / 2));
-  }
-
-  #luminosity {
-    background: ${tabActiveBackgroundLuminosity};
-    mix-blend-mode: luminosity;
-  }
-
-  #color {
-    background: ${tabActiveBackgroundColor};
-    mix-blend-mode: color;
-  }
-
-  #normal {
-    background: ${tabActiveBackgroundNormal};
   }
 
   #content {
@@ -161,7 +122,9 @@ export class MicrosoftEdge extends FASTElement {
   }
 
   positionMaterialImage() {
-    const imgEl = this.shadowRoot!.getElementById('image') as HTMLElement;
+    const imgEl = this.shadowRoot!.querySelector(
+      'mica-material',
+    ) as HTMLElement;
     const { top, left } = imgEl.getBoundingClientRect();
     imgEl.style.top = `-${top}px`;
     imgEl.style.left = `-${left}px`;

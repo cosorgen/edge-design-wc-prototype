@@ -10,26 +10,18 @@ import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   spacingHorizontalS,
-  tabBarBackgroundBlur,
-  tabBarBackgroundLuminosity,
   spacingVerticalSNudge,
-  tabBarBackgroundColor,
-  tabBarBackgroundNormal,
   shadow2,
   spacingHorizontalXXS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
 import '../controls/horizontal-tab.js';
-import { desktopBackground } from '../../windows/designSystem.js';
+import '../controls/mica-material.js';
 import { Tab, TabService } from '#services/tabService.js';
 
 const template = html<TabBar>`
-  <div class="material-layer" id="image"></div>
-  <div class="material-layer" id="blur"></div>
-  <div class="material-layer" id="luminosity"></div>
-  <div class="material-layer" id="color"></div>
-  <div class="material-layer" id="normal"></div>
+  <mica-material appearance="tabBar"></mica-material>
   <div id="shadow"></div>
   <div id="content">
     <div class="group">
@@ -70,37 +62,6 @@ const styles = css`
     position: relative;
     display: block;
     overflow: hidden;
-  }
-
-  .material-layer {
-    position: absolute;
-    inset: 0;
-  }
-
-  #image {
-    width: 100vw;
-    height: 100vh;
-    background: ${desktopBackground};
-    background-size: cover;
-    background-position: center;
-  }
-
-  #blur {
-    backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
-  }
-
-  #luminosity {
-    background-color: ${tabBarBackgroundLuminosity};
-    mix-blend-mode: luminosity;
-  }
-
-  #color {
-    background-color: ${tabBarBackgroundColor};
-    mix-blend-mode: color;
-  }
-
-  #normal {
-    background-color: ${tabBarBackgroundNormal};
   }
 
   #content {
@@ -151,7 +112,9 @@ export class TabBar extends FASTElement {
   }
 
   positionMicaLayers() {
-    const imgEl = this.shadowRoot!.getElementById('image') as HTMLElement;
+    const imgEl = this.shadowRoot!.querySelector(
+      'mica-material',
+    ) as HTMLElement;
     const { top, left } = imgEl.getBoundingClientRect();
     imgEl.style.top = `-${top}px`;
     imgEl.style.left = `-${left}px`;
