@@ -20,7 +20,7 @@ import './controls/mica-material.js';
 import './views/tabBar.js';
 
 const template = html<MicrosoftEdge>`
-  <tab-bar></tab-bar>
+  <!-- <tab-bar></tab-bar> -->
   <div id="activeTab">
     <mica-material></mica-material>
     <div id="content">

@@ -1,4 +1,10 @@
-import { FASTElement, customElement, html, css } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  html,
+  css,
+  attr,
+} from '@microsoft/fast-element';
 import { desktopBackground } from '../../windows/designSystem.js';
 import {
   tabActiveBackgroundBlur,
@@ -13,29 +19,23 @@ import {
 
 const template = html<MicaMaterial>`
   <div id="image"></div>
-  <div id="blur"></div>
-  <div id="luminosity"></div>
+  <!-- <div id="blur"></div>
+  <div id="luminosity"></div> -->
   <div id="color"></div>
   <div id="normal"></div>
 `;
 
-const styles = css<MicaMaterial>`
-  :host {
-    display: block;
-    position: absolute;
-    width: 100vw;
-    height: 100vh;
-  }
-
+const styles = css`
   div {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    inset: 0;
   }
 
   #image {
     background: ${desktopBackground};
-    background-size: cover;
-    background-position: center;
+    background-size: 100vw 56.25vw; /* 16:9 */
+    background-position: ${(x) => x.leftOffset} ${(x) => x.topOffset};
   }
 
   #blur {
@@ -74,4 +74,7 @@ const styles = css<MicaMaterial>`
 `;
 
 @customElement({ name: 'mica-material', template, styles })
-export class MicaMaterial extends FASTElement {}
+export class MicaMaterial extends FASTElement {
+  @attr({ attribute: 'top-offset' }) topOffset = '0px';
+  @attr({ attribute: 'left-offset' }) leftOffset = '0px';
+}

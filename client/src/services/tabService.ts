@@ -15,7 +15,7 @@ export class TabService {
       title: 'Google',
       url: 'https://www.google.com',
       favicon: 'https://www.google.com/favicon.ico',
-      active: true,
+      active: false,
     },
     {
       id: '2',
@@ -29,7 +29,7 @@ export class TabService {
       title: 'Microsoft',
       url: 'https://www.microsoft.com',
       favicon: 'https://www.microsoft.com/favicon.ico?v2',
-      active: false,
+      active: true,
     },
   ];
 

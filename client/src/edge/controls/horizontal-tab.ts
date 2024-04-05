@@ -11,8 +11,10 @@ import {
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '../controls/mica-material.js';
 
 const template = html<HorizontalTab>`
+  <mica-material></mica-material>
   <button @click="${(x, c) => x.activate(c.event)}">
     <div id="favicon" part="favicon">
       <slot name="favicon">
@@ -43,6 +45,7 @@ const styles = css`
   }
 
   button {
+    position: relative;
     background: none;
     border: none;
     cursor: pointer;
@@ -63,8 +66,12 @@ const styles = css`
     background-color: ${colorSubtleBackgroundHover};
   }
 
-  :host([active]) button {
-    background-color: ${colorSubtleBackgroundHover};
+  :host([active]) button:hover {
+    background-color: transparent;
+  }
+
+  :host([active]) mica-material {
+    display: block;
   }
 
   #title,
@@ -103,6 +110,10 @@ const styles = css`
     min-height: 16px;
     padding: 0;
   }
+
+  mica-material {
+    display: none;
+  }
 `;
 
 @customElement({
@@ -111,6 +122,21 @@ const styles = css`
   styles,
 })
 export class HorizontalTab extends FASTElement {
+  connectedCallback(): void {
+    super.connectedCallback();
+    // on next render frame position mica material
+    window.requestAnimationFrame(() => this.positionMicaMaterial());
+  }
+
+  positionMicaMaterial() {
+    const el = this.shadowRoot?.querySelector('mica-material') as HTMLElement;
+    if (el) {
+      const { top, left } = el.getBoundingClientRect();
+      el.setAttribute('top-offset', `-${top}px`);
+      el.setAttribute('left-offset', `-${left}px`);
+    }
+  }
+
   activate(e: Event) {
     e.stopPropagation();
     this.$emit('activate');
