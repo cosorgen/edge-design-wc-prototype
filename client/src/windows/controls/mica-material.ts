@@ -21,9 +21,8 @@ const template = html<MicaMaterial>`
 
 const styles = css`
   div {
-    width: 100%;
-    height: 100%;
     position: absolute;
+    inset: 0;
   }
 
   #image {

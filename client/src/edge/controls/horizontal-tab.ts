@@ -2,11 +2,19 @@ import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusLarge,
   colorNeutralForeground1,
+  colorNeutralShadowAmbient,
+  colorNeutralShadowKey,
   colorSubtleBackgroundHover,
   fontFamilyBase,
   fontSizeBase200,
   fontWeightRegular,
   lineHeightBase200,
+  shadow2BaseBlur,
+  shadow2BaseY,
+  shadow2DiffuseBlur,
+  shadow2DiffuseY,
+  shadowBaseX,
+  shadowDiffuseX,
   spacingHorizontalS,
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
@@ -14,7 +22,9 @@ import '@phoenixui/web-components/button.js';
 import '../../windows/controls/mica-material.js';
 
 const template = html<HorizontalTab>`
-  <mica-material></mica-material>
+  <mica-material id="bg"></mica-material>
+  <mica-material id="left-wing"></mica-material>
+  <mica-material id="right-wing"></mica-material>
   <button @click="${(x, c) => x.activate(c.event)}">
     <div id="favicon" part="favicon">
       <slot name="favicon">
@@ -44,6 +54,17 @@ const styles = css`
     position: relative;
   }
 
+  :host([active]) {
+    filter: drop-shadow(
+        ${shadowBaseX} ${shadow2BaseY} ${shadow2BaseBlur}
+          ${colorNeutralShadowAmbient}
+      )
+      drop-shadow(
+        ${shadowDiffuseX} ${shadow2DiffuseY} ${shadow2DiffuseBlur}
+          ${colorNeutralShadowKey}
+      );
+  }
+
   button {
     position: relative;
     background: none;
@@ -70,8 +91,10 @@ const styles = css`
     background-color: transparent;
   }
 
-  :host([active]) mica-material {
-    display: block;
+  :host([active]) #bg,
+  :host([active]) #left-wing,
+  :host([active]) #right-wing {
+    visibility: visible;
   }
 
   #title,
@@ -111,8 +134,35 @@ const styles = css`
     padding: 0;
   }
 
-  mica-material {
-    display: none;
+  #bg,
+  #left-wing,
+  #right-wing {
+    visibility: hidden;
+    position: absolute;
+    overflow: hidden;
+  }
+
+  #bg {
+    inset: 0;
+    bottom: -2px;
+    border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
+  }
+
+  #left-wing,
+  #right-wing {
+    width: 10px;
+    height: 10px;
+    bottom: -2px;
+    clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
+  }
+
+  #left-wing {
+    left: -10px;
+  }
+
+  #right-wing {
+    right: -10px;
+    transform: rotate(90deg);
   }
 `;
 
@@ -122,21 +172,6 @@ const styles = css`
   styles,
 })
 export class HorizontalTab extends FASTElement {
-  connectedCallback(): void {
-    super.connectedCallback();
-    // on next render frame position mica material
-    window.requestAnimationFrame(() => this.positionMicaMaterial());
-  }
-
-  positionMicaMaterial() {
-    const el = this.shadowRoot?.querySelector('mica-material') as HTMLElement;
-    if (el) {
-      const { top, left } = el.getBoundingClientRect();
-      el.setAttribute('top-offset', `-${top}px`);
-      el.setAttribute('left-offset', `-${left}px`);
-    }
-  }
-
   activate(e: Event) {
     e.stopPropagation();
     this.$emit('activate');
