@@ -16,11 +16,11 @@ import { setTheme } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
-import './controls/mica-material.js';
+import '../windows/controls/mica-material.js';
 import './views/tabBar.js';
 
 const template = html<MicrosoftEdge>`
-  <!-- <tab-bar></tab-bar> -->
+  <tab-bar></tab-bar>
   <div id="activeTab">
     <mica-material></mica-material>
     <div id="content">

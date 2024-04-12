@@ -1,5 +1,9 @@
 import { setTheme as PUISetTheme } from '@phoenixui/web-components';
-import { Theme, webDarkTheme, webLightTheme } from '@phoenixui/themes';
+import {
+  Theme,
+  phoenixDarkThemeWin11,
+  phoenixLightThemeWin11,
+} from '@phoenixui/themes';
 import { OSTheme } from '../services/windowsService.js';
 
 export type WindowsTokens = {
@@ -27,7 +31,7 @@ const commonThemeOverrides: Partial<WindowsTheme> = {
 };
 
 const windowsLightTheme: WindowsTheme = {
-  ...webLightTheme,
+  ...phoenixLightThemeWin11,
   ...commonThemeOverrides,
   colorShellFillTaksbarItemPrimary: '#FFFFFFB2',
   colorShellFillTaksbarItemSecondary: '#FFFFFF80',
@@ -41,7 +45,7 @@ const windowsLightTheme: WindowsTheme = {
 };
 
 const windowsDarkTheme: WindowsTheme = {
-  ...webDarkTheme,
+  ...phoenixDarkThemeWin11,
   ...commonThemeOverrides,
   colorShellFillTaksbarItemPrimary: '#FFFFFF15',
   colorShellFillTaksbarItemSecondary: '#FFFFFF0F',

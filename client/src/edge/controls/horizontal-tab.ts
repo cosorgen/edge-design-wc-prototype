@@ -11,7 +11,7 @@ import {
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import '../controls/mica-material.js';
+import '../../windows/controls/mica-material.js';
 
 const template = html<HorizontalTab>`
   <mica-material></mica-material>

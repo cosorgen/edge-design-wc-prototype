@@ -17,7 +17,7 @@ import {
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
 import '../controls/horizontal-tab.js';
-import '../controls/mica-material.js';
+import '../../windows/controls/mica-material.js';
 import { Tab, TabService } from '#services/tabService.js';
 
 const template = html<TabBar>`
