@@ -16,5 +16,9 @@
             xmlns="http://www.w3.org/2000/svg" id="dismiss-16-regular">
             <path d="m4.089 4.216.057-.07a.5.5 0 0 1 .638-.057l.07.057L8 7.293l3.146-3.147a.5.5 0 0 1 .708.708L8.707 8l3.147 3.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.638.057l-.07-.057L8 8.707l-3.146 3.147a.5.5 0 0 1-.708-.708L7.293 8 4.146 4.854a.5.5 0 0 1-.057-.638l.057-.07-.057.07Z" fill="currentcolor"/>
         </symbol>
+        <symbol width="20" height="20"
+            xmlns="http://www.w3.org/2000/svg" id="add-20-regular">
+            <path d="M10 2.5a.5.5 0 0 0-1 0V9H2.5a.5.5 0 0 0 0 1H9v6.5a.5.5 0 0 0 1 0V10h6.5a.5.5 0 0 0 0-1H10V2.5Z" fill="currentcolor"/>
+        </symbol>
     </defs>
 </svg>

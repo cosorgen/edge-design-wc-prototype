@@ -13,6 +13,7 @@ import {
   spacingVerticalSNudge,
   shadow2,
   spacingHorizontalXXS,
+  spacingHorizontalSNudge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/identityControl.js';
@@ -54,6 +55,11 @@ const template = html<TabBar>`
         </horizontal-tab>`,
       )}
     </div>
+    <phx-button appearance="subtle" icon-only id="add">
+      <svg>
+        <use href="img/edge/icons.svg#add-20-regular"></use>
+      </svg>
+    </phx-button>
   </div>
 `;
 
@@ -95,6 +101,10 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalXXS};
+  }
+
+  #add {
+    margin-inline-start: calc(0px - ${spacingHorizontalSNudge});
   }
 `;
 
