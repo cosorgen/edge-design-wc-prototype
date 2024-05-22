@@ -18,6 +18,7 @@ import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/taskBar.js';
 import './controls/taskbarButton.js';
+import './controls/mica-material.js';
 import './views/appWindow.js';
 
 const styles = css`
@@ -40,17 +41,11 @@ const styles = css`
     position: absolute;
     width: 100vw;
     height: 100vh;
-    background-image: ${(x) =>
-      x.ws.theme === 'dark'
-        ? "url('/img/windows/desktopDark.jpg')"
-        : "url('/img/windows/desktopLight.jpg')"};
-    background-size: cover;
-    background-position: center;
   }
 `;
 
 const template = html<WindowsShell>`
-  <div id="desktop"></div>
+  <mica-material id="desktop" image-only></mica-material>
   ${repeat(
     (x) => x.ws.windows,
     html`

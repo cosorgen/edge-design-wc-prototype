@@ -1,24 +1,21 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   spacingHorizontalL,
-  colorNeutralStroke1,
   strokeWidthThin,
   spacingHorizontalXS,
+  colorNeutralStroke3,
 } from '@phoenixui/themes';
-import {
-  micaBackgroundColor,
-  micaBackdropFilter,
-  micaBackgroundBlendMode,
-} from '../designSystem.js';
 import '../controls/taskbarButton.js';
 import './clockWidget.js';
 import './systemTray.js';
 import '../controls/showDesktopButton.js';
 import '../controls/showMoreButton.js';
 import '../controls/copilotButton.js';
+import '../controls/mica-material.js';
 import './weatherWidget.js';
 
 const template = html<TaskBar>`
+  <mica-material></mica-material>
   <div class="group">
     <weather-widget></weather-widget>
   </div>
@@ -36,6 +33,7 @@ const template = html<TaskBar>`
 
 const styles = css`
   :host {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: ${spacingHorizontalL};
@@ -43,14 +41,19 @@ const styles = css`
     position: absolute;
     bottom: 0;
     inset-inline: 0;
-    border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
     padding-inline-start: ${spacingHorizontalXS};
-    /* Mica */
-    background: ${micaBackgroundColor};
-    backdrop-filter: ${micaBackdropFilter};
-    background-blend-mode: ${micaBackgroundBlendMode};
     z-index: 1000;
+    border-top: ${strokeWidthThin} solid ${colorNeutralStroke3};
+    overflow: hidden;
   }
+
+  mica-material {
+    position: absolute;
+    inset: 0;
+    top: calc(1-${strokeWidthThin});
+    z-index: -1;
+  }
+
   .group {
     height: 100%;
     display: flex;

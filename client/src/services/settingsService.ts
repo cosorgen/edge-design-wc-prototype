@@ -1,7 +1,7 @@
 import { observable } from '@microsoft/fast-element';
 
 // Global state for the Edge browser
-export default class EdgeSerivce {
+export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'new tab' | 'never' = 'always';
   @observable showSideBar = true;
