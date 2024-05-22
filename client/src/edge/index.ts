@@ -18,13 +18,14 @@ import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
 import '../windows/controls/mica-material.js';
 import './views/tabBar.js';
+import './views/toolBar.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
+  <tool-bar></tool-bar>
   <div id="activeTab">
     <mica-material></mica-material>
     <div id="content">
-      <address-bar></address-bar>
       <div class="row">
         <div class="column">
           ${(x) =>
