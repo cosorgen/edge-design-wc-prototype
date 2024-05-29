@@ -65,17 +65,29 @@ const template = html<TabBar>`
     <div class="group" id="caption-controls">
       <phx-button size="large" appearance="subtle" shape="square" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#minimize-16-regular" x="4" y="4"></use>
+          <use
+            href="img/edge/icons.svg#chrome-minimize-20-regular"
+            x="2"
+            y="2"
+          ></use>
         </svg>
       </phx-button>
       <phx-button size="large" appearance="subtle" shape="square" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#maximize-16-regular" x="4" y="4"></use>
+          <use
+            href="img/edge/icons.svg#chrome-maximize-20-regular"
+            x="2"
+            y="2"
+          ></use>
         </svg>
       </phx-button>
       <phx-button size="large" appearance="subtle" shape="square" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#dismiss-16-regular" x="4" y="4"></use>
+          <use
+            href="img/edge/icons.svg#chrome-close-20-regular"
+            x="2"
+            y="2"
+          ></use>
         </svg>
       </phx-button>
     </div>
