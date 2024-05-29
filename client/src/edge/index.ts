@@ -12,7 +12,7 @@ import {
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
 } from '@phoenixui/themes';
-import { setTheme } from '@phoenixui/web-components';
+import { setThemeFor } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
@@ -98,7 +98,6 @@ export class MicrosoftEdge extends FASTElement {
   connectedCallback() {
     super.connectedCallback();
     this.setTheme();
-    this.positionMaterialImage();
 
     // Set up window state
     const container = DI.getOrCreateDOMContainer(this);
@@ -119,15 +118,6 @@ export class MicrosoftEdge extends FASTElement {
     };
     const selectedTheme =
       this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    setTheme(themes[this.ws.transparency][selectedTheme], this.shadowRoot!);
-  }
-
-  positionMaterialImage() {
-    const imgEl = this.shadowRoot!.querySelector(
-      'mica-material',
-    ) as HTMLElement;
-    const { top, left } = imgEl.getBoundingClientRect();
-    imgEl.style.top = `-${top}px`;
-    imgEl.style.left = `-${left}px`;
+    setThemeFor(this.shadowRoot!, themes[this.ws.transparency][selectedTheme]);
   }
 }
