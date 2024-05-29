@@ -30,39 +30,25 @@ const template = html<Toolbar>`
       </phx-button>
       <phx-button size="medium" appearance="subtle" icon-only>
         <svg>
-          <use
-            href="img/edge/icons.svg#arrow-clockwise-20-regular"
-          ></use>
+          <use href="img/edge/icons.svg#arrow-clockwise-20-regular"></use>
         </svg>
       </phx-button>
     </div>
     <address-bar></address-bar>
     <div class="group">
-    <phx-button
-    size="medium"
-    appearance="subtle"
-    icon-only
-  >
-    <svg>
-      <use href="img/edge/icons.svg#star-list-horizontal-20-regular"></use>
-    </svg>
-  </phx-button>
-    <phx-button
-    size="medium"
-    appearance="subtle"
-    icon-only
-  >
-    <svg>
-      <use href="img/edge/icons.svg#more-horizontal-20-regular"></use>
-    </svg>
-  </phx-button>
-    <phx-button
-      size="medium"
-      appearance="subtle"
-      icon-only
-    >
-      <img src="img/edge/copilot-icon.svg">
-    </phx-button>
+      <phx-button size="medium" appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#star-list-horizontal-20-regular"></use>
+        </svg>
+      </phx-button>
+      <phx-button size="medium" appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#more-horizontal-20-regular"></use>
+        </svg>
+      </phx-button>
+      <phx-button size="medium" appearance="subtle" icon-only>
+        <img src="img/edge/copilot-icon.svg" />
+      </phx-button>
     </div>
   </div>
 `;
@@ -84,7 +70,8 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding-inline: ${spacingHorizontalXS};
     padding-block-start: ${spacingVerticalSNudge};
-    padding-block-end: ${spacingVerticalXXS};  }
+    padding-block-end: ${spacingVerticalXXS};
+  }
 
   .group {
     display: flex;
@@ -114,7 +101,6 @@ const styles = css`
   styles,
 })
 export class Toolbar extends FASTElement {
-
   connectedCallback() {
     super.connectedCallback();
     this.positionMicaLayers();

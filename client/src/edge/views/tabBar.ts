@@ -63,33 +63,21 @@ const template = html<TabBar>`
       </phx-button>
     </div>
     <div class="group">
-    <phx-button
-    size="large"
-    appearance="subtle"
-    icon-only
-  >
-    <svg>
-      <use href="img/edge/icons.svg#minimize-16-regular" x="4" y="4"></use>
-    </svg>
-  </phx-button>
-    <phx-button
-    size="large"
-    appearance="subtle"
-    icon-only
-  >
-    <svg>
-      <use href="img/edge/icons.svg#maximize-16-regular"  x="4" y="4"></use>
-    </svg>
-  </phx-button>
-    <phx-button
-    size="large"
-    appearance="subtle"
-    icon-only
-  >
-    <svg>
-      <use href="img/edge/icons.svg#dismiss-16-regular" x="4" y="4"></use>
-    </svg>
-  </phx-button>
+      <phx-button size="large" appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#minimize-16-regular" x="4" y="4"></use>
+        </svg>
+      </phx-button>
+      <phx-button size="large" appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#maximize-16-regular" x="4" y="4"></use>
+        </svg>
+      </phx-button>
+      <phx-button size="large" appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#dismiss-16-regular" x="4" y="4"></use>
+        </svg>
+      </phx-button>
     </div>
   </div>
 `;
