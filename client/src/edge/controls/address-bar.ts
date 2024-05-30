@@ -1,4 +1,14 @@
 import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
+import {
+  borderRadiusCircular,
+  colorNeutralBackground1,
+  fontFamilyBase,
+  fontSizeBase300,
+  fontWeightRegular,
+  lineHeightBase300,
+  spacingHorizontalS,
+  spacingVerticalXS,
+} from '@phoenixui/themes';
 
 const template = html<AddressBar>`
   <input
@@ -14,18 +24,21 @@ const styles = css`
   :host {
     display: flex;
     align-items: center;
-    padding: 0 8px;
-    background-color: white;
+    padding: 0 ${spacingHorizontalS};
+    background-color: ${colorNeutralBackground1};
     width: 100%;
-    border-radius: 16px;
+    border-radius: ${borderRadiusCircular};
   }
 
   input {
     flex: 1;
     border: none;
-    font-size: 14px;
-    line-height: 20px;
-    padding: 4px 8px;
+    /* body1 */
+    font-family: ${fontFamilyBase};
+    font-size: ${fontSizeBase300};
+    line-height: ${lineHeightBase300};
+    font-weight: ${fontWeightRegular};
+    padding: ${spacingVerticalXS} ${spacingHorizontalS};
     background-color: transparent;
     outline: none;
   }
