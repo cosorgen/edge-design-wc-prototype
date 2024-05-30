@@ -16,14 +16,13 @@ import {
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import '../controls/identityControl.js';
+import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
 import '../../windows/controls/mica-material.js';
 import { Tab, TabService } from '#services/tabService.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
-  colorShellFillTaksbarItemPrimary,
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '../../windows/designSystem.js';
@@ -125,6 +124,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: relative;
   }
 
   .group {
@@ -170,20 +170,6 @@ const styles = css`
 })
 export class TabBar extends FASTElement {
   @inject(TabService) ts!: TabService;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.positionMicaLayers();
-  }
-
-  positionMicaLayers() {
-    const imgEl = this.shadowRoot!.querySelector(
-      'mica-material',
-    ) as HTMLElement;
-    const { top, left } = imgEl.getBoundingClientRect();
-    imgEl.style.top = `-${top}px`;
-    imgEl.style.left = `-${left}px`;
-  }
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);

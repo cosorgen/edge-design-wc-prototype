@@ -17,15 +17,15 @@ import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
 import '../windows/controls/mica-material.js';
-import './views/tabBar.js';
-import './views/toolBar.js';
+import './views/tab-bar.js';
+import './views/tool-bar.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
-  <tool-bar></tool-bar>
   <div id="activeTab">
     <mica-material></mica-material>
     <div id="content">
+      <tool-bar></tool-bar>
       <div class="row">
         <div class="column">
           ${(x) =>
@@ -65,6 +65,7 @@ const styles = css`
 
   #content {
     box-sizing: border-box;
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
