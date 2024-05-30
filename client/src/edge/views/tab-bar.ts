@@ -4,6 +4,7 @@ import {
   html,
   css,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -56,12 +57,21 @@ const template = html<TabBar>`
             @activate="${(x, c) => c.parent.activateTab(x.id)}"
             @close="${(x, c) => c.parent.closeTab(x.id)}"
           >
-            ${(x) => x.title}
-            <img slot="favicon" src="${(x) => x.favicon}" />
+            ${(x) =>
+              x.favicon
+                ? html`<img slot="favicon" src="${x.favicon}" />`
+                : null}
+            ${(x) =>
+              x.title ? html`<span slot="title">${x.title}</span>` : null}
           </horizontal-tab>`,
         )}
       </div>
-      <phx-button appearance="subtle" icon-only id="add">
+      <phx-button
+        appearance="subtle"
+        icon-only
+        id="add"
+        @click="${(x) => x.addTab()}"
+      >
         <svg>
           <use href="img/edge/icons.svg#add-20-regular" />
         </svg>
@@ -185,8 +195,14 @@ const styles = css`
   styles,
 })
 export class TabBar extends FASTElement {
-  @inject(TabService) ts!: TabService;
   @inject(WindowsService) ws!: WindowsService;
+  @inject(TabService) ts!: TabService;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    // open window with a new tab
+    this.ts.addTab();
+  }
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -194,6 +210,13 @@ export class TabBar extends FASTElement {
 
   closeTab(tabId: string) {
     this.ts.removeTab(tabId);
+    if (this.ts.tabs.length === 0) {
+      this.closeWindow();
+    }
+  }
+
+  addTab() {
+    this.ts.addTab();
   }
 
   closeWindow() {

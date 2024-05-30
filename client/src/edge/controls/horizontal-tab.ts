@@ -34,7 +34,7 @@ const template = html<HorizontalTab>`
       </slot>
     </div>
     <div id="title" part="title">
-      <slot>New tab</slot>
+      <slot name="title">New tab</slot>
     </div>
   </button>
   <phx-button

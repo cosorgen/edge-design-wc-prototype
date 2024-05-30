@@ -96,13 +96,15 @@ export class MicrosoftEdge extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(settingsService) ss!: settingsService;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.setTheme();
-
+  constructor() {
+    super();
     // Set up window state
     const container = DI.getOrCreateDOMContainer(this);
-    container.register(Registration.instance(TabService, new TabService()));
+    const ts = new TabService();
+    container.register(Registration.instance(TabService, ts));
+
+    // set up theme
+    this.setTheme();
   }
 
   setTheme() {

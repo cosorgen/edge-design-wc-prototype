@@ -9,40 +9,37 @@ export type Tab = {
 };
 
 export class TabService {
-  @observable private tabs_: Tab[] = [
-    {
-      id: '1',
-      title: 'Google',
-      url: 'https://www.google.com',
-      favicon: 'https://www.google.com/favicon.ico',
-      active: false,
-    },
-    {
-      id: '2',
-      title: 'YouTube',
-      url: 'https://www.youtube.com',
-      favicon: 'https://www.youtube.com/favicon.ico',
-      active: false,
-    },
-    {
-      id: '3',
-      title: 'Microsoft',
-      url: 'https://www.microsoft.com',
-      favicon: 'https://www.microsoft.com/favicon.ico?v2',
-      active: true,
-    },
-  ];
+  @observable private tabs_: Tab[] = [];
 
   get tabs() {
     return this.tabs_;
   }
 
-  addTab(tab: Tab) {
+  addTab(tab?: Tab) {
+    if (!tab) {
+      tab = {
+        id: window.crypto.randomUUID(),
+        url: 'edge://newtab',
+        active: true,
+      };
+    }
+
+    if (tab.active) this.deactivateTabs();
     this.tabs_.push(tab);
   }
 
   removeTab(tabId: string) {
+    const tabIndex = this.tabs_.findIndex((tab) => tab.id === tabId);
+    const prevTabId =
+      this.tabs_[tabIndex - 1]?.id ||
+      this.tabs_[tabIndex + 1]?.id ||
+      this.tabs_[this.tabs_.length - 1]?.id;
+
     this.tabs_ = this.tabs_.filter((tab) => tab.id !== tabId);
+
+    if (this.tabs_.length !== 0) {
+      this.activateTab(prevTabId);
+    }
   }
 
   activateTab(tabId: string) {
