@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global console */
 
 import * as esbuild from 'esbuild';
 import * as fs from 'fs';
@@ -8,7 +9,8 @@ const buildServerApp = async () =>
     entryPoints: ['./server/src/index.ts'],
     bundle: true,
     platform: 'node',
-    outfile: './dist/index.js',
+    format: 'cjs',
+    outfile: './dist/index.cjs',
     minify: true,
     metafile: true,
   });

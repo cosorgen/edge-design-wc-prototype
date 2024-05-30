@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* global console */
 
 import * as esbuild from 'esbuild';
 import { spawn } from 'child_process';
@@ -9,7 +10,8 @@ const serverAppContext = await esbuild.context({
   entryPoints: ['./server/src/index.ts'],
   bundle: true,
   platform: 'node',
-  outfile: './dist/index.js',
+  format: 'cjs',
+  outfile: './dist/index.cjs',
 });
 
 const clientAppContext = await esbuild.context({
@@ -38,7 +40,7 @@ console.log('Watching client for changes...\n');
 await serverAppContext.watch();
 console.log('Watching server for changes...\n');
 
-const server = spawn('node', ['./dist/index.js'], {});
+const server = spawn('node', ['./dist/index.cjs'], {});
 server.stdout.on('data', (data) => console.log(`${data}`));
 server.stderr.on('data', (data) => console.error(`${data}`));
 open('http://localhost:4000');
