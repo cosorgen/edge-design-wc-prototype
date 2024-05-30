@@ -52,6 +52,10 @@ const template = html<HorizontalTab>`
 const styles = css`
   :host {
     position: relative;
+    display: block;
+    width: 260px;
+    min-width: 16px;
+    height: 32px;
   }
 
   :host([active]) {
@@ -66,7 +70,8 @@ const styles = css`
   }
 
   button {
-    position: relative;
+    position: absolute;
+    inset: 0;
     background: none;
     border: none;
     cursor: pointer;
@@ -76,9 +81,6 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding-inline: ${spacingHorizontalS};
     padding-block: ${spacingHorizontalSNudge};
-    width: 260px;
-    min-width: 16px;
-    height: 32px;
     color: ${colorNeutralForeground1};
     border-radius: ${borderRadiusLarge};
   }

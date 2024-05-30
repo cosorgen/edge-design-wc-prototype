@@ -4,16 +4,16 @@ import {
   html,
   css,
   repeat,
-  when,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   spacingHorizontalS,
-  spacingVerticalSNudge,
   shadow2,
   spacingHorizontalXXS,
+  spacingVerticalMNudge,
+  spacingVerticalSNudge,
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
@@ -33,50 +33,46 @@ const template = html<TabBar>`
   <mica-material appearance="tabBar"></mica-material>
   <div id="shadow"></div>
   <div id="content">
-    <div id="left-aligned-container">
-      <div class="group">
-        <identity-control></identity-control>
-      </div>
-      <div class="group">
-        <phx-button appearance="subtle" icon-only>
-          <svg>
-            <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
-          </svg>
-        </phx-button>
-        <phx-button appearance="subtle" icon-only>
-          <svg>
-            <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
-          </svg>
-        </phx-button>
-      </div>
-      <div id="tabs">
-        ${repeat(
-          (x) => x.ts.tabs,
-          html<Tab>` <horizontal-tab
-            ?active="${(x) => x.active}"
-            @activate="${(x, c) => c.parent.activateTab(x.id)}"
-            @close="${(x, c) => c.parent.closeTab(x.id)}"
-          >
-            ${(x) =>
-              x.favicon
-                ? html`<img slot="favicon" src="${x.favicon}" />`
-                : null}
-            ${(x) =>
-              x.title ? html`<span slot="title">${x.title}</span>` : null}
-          </horizontal-tab>`,
-        )}
-      </div>
-      <phx-button
-        appearance="subtle"
-        icon-only
-        id="add"
-        @click="${(x) => x.addTab()}"
-      >
+    <div class="group">
+      <identity-control></identity-control>
+    </div>
+    <div class="group">
+      <phx-button appearance="subtle" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#add-20-regular" />
+          <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
+        </svg>
+      </phx-button>
+      <phx-button appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
         </svg>
       </phx-button>
     </div>
+    <div id="tabs">
+      ${repeat(
+        (x) => x.ts.tabs,
+        html<Tab>` <horizontal-tab
+          ?active="${(x) => x.active}"
+          @activate="${(x, c) => c.parent.activateTab(x.id)}"
+          @close="${(x, c) => c.parent.closeTab(x.id)}"
+        >
+          ${(x) =>
+            x.favicon ? html`<img slot="favicon" src="${x.favicon}" />` : null}
+          ${(x) =>
+            x.title ? html`<span slot="title">${x.title}</span>` : null}
+        </horizontal-tab>`,
+      )}
+    </div>
+    <phx-button
+      appearance="subtle"
+      icon-only
+      id="add"
+      @click="${(x) => x.addTab()}"
+    >
+      <svg>
+        <use href="img/edge/icons.svg#add-20-regular" />
+      </svg>
+    </phx-button>
     <div class="group" id="caption-controls">
       <phx-button
         size="large"
@@ -128,29 +124,22 @@ const template = html<TabBar>`
 
 const styles = css`
   :host {
-    position: relative;
     display: block;
     overflow: hidden;
   }
 
-  #left-aligned-container {
+  #content {
     position: relative;
     box-sizing: border-box;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: flex-end;
     gap: ${spacingHorizontalS};
-    padding-inline: ${spacingHorizontalXS};
-    padding-block-start: ${spacingVerticalSNudge};
-    padding-block-end: ${spacingVerticalXXS};
-  }
-
-  #content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
+    padding: ${spacingVerticalSNudge} 156px ${spacingVerticalXXS}
+      ${spacingHorizontalXS};
+    overflow: hidden;
   }
 
   .group {
@@ -172,10 +161,19 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalXXS};
+    overflow: hidden;
+    padding: 10px;
+    margin: -10px; /* for wings to not clip */
   }
 
   #add {
     margin-inline-start: calc(0px - ${spacingHorizontalSNudge});
+  }
+
+  #caption-controls {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block: 0;
   }
 
   #caption-controls phx-button:nth-child(3):hover::part(control) {
