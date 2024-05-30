@@ -8,12 +8,12 @@ const template = html<Toolbar>`
   <div class="group">
     <phx-button appearance="subtle" icon-only>
       <svg>
-        <use href="img/edge/icons.svg#back-20-regular"></use>
+        <use href="img/edge/icons.svg#back-20-regular" />
       </svg>
     </phx-button>
     <phx-button appearance="subtle" icon-only>
       <svg>
-        <use href="img/edge/icons.svg#arrow-clockwise-20-regular"></use>
+        <use href="img/edge/icons.svg#arrow-clockwise-20-regular" />
       </svg>
     </phx-button>
   </div>
@@ -21,12 +21,12 @@ const template = html<Toolbar>`
   <div class="group">
     <phx-button appearance="subtle" icon-only>
       <svg>
-        <use href="img/edge/icons.svg#star-list-horizontal-20-regular"></use>
+        <use href="img/edge/icons.svg#star-list-horizontal-20-regular" />
       </svg>
     </phx-button>
     <phx-button appearance="subtle" icon-only>
       <svg>
-        <use href="img/edge/icons.svg#more-horizontal-20-regular"></use>
+        <use href="img/edge/icons.svg#more-horizontal-20-regular" />
       </svg>
     </phx-button>
     <phx-button id="copilot" appearance="subtle" icon-only>

@@ -20,6 +20,7 @@ import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
 import '../../windows/controls/mica-material.js';
 import { Tab, TabService } from '#services/tabService.js';
+import WindowsService, { Window } from '#services/windowsService.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -38,14 +39,12 @@ const template = html<TabBar>`
       <div class="group">
         <phx-button appearance="subtle" icon-only>
           <svg>
-            <use href="img/edge/icons.svg#layer-diagonal-20-regular"></use>
+            <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
           </svg>
         </phx-button>
         <phx-button appearance="subtle" icon-only>
           <svg>
-            <use
-              href="img/edge/icons.svg#tab-position-horizontal-20-regular"
-            ></use>
+            <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
           </svg>
         </phx-button>
       </div>
@@ -64,36 +63,53 @@ const template = html<TabBar>`
       </div>
       <phx-button appearance="subtle" icon-only id="add">
         <svg>
-          <use href="img/edge/icons.svg#add-20-regular"></use>
+          <use href="img/edge/icons.svg#add-20-regular" />
         </svg>
       </phx-button>
     </div>
     <div class="group" id="caption-controls">
-      <phx-button size="large" appearance="subtle" shape="square" icon-only>
+      <phx-button
+        size="large"
+        appearance="subtle"
+        shape="square"
+        icon-only
+        @click="${(x) => x.minimizeWindow()}"
+      >
         <svg>
           <use
             href="img/edge/icons.svg#chrome-minimize-20-regular"
             x="2"
             y="2"
-          ></use>
+          />
         </svg>
       </phx-button>
-      <phx-button size="large" appearance="subtle" shape="square" icon-only>
+      <phx-button
+        size="large"
+        appearance="subtle"
+        shape="square"
+        icon-only
+        @click="${(x) => x.maximizeWindow()}"
+      >
         <svg>
           <use
-            href="img/edge/icons.svg#chrome-maximize-20-regular"
+            href="${(x) =>
+              x.windowIsMaximized()
+                ? 'img/edge/icons.svg#chrome-restore-20-regular'
+                : 'img/edge/icons.svg#chrome-maximize-20-regular'}"
             x="2"
             y="2"
-          ></use>
+          />
         </svg>
       </phx-button>
-      <phx-button size="large" appearance="subtle" shape="square" icon-only>
+      <phx-button
+        size="large"
+        appearance="subtle"
+        shape="square"
+        icon-only
+        @click="${(x) => x.closeWindow()}"
+      >
         <svg>
-          <use
-            href="img/edge/icons.svg#chrome-close-20-regular"
-            x="2"
-            y="2"
-          ></use>
+          <use href="img/edge/icons.svg#chrome-close-20-regular" x="2" y="2" />
         </svg>
       </phx-button>
     </div>
@@ -170,6 +186,7 @@ const styles = css`
 })
 export class TabBar extends FASTElement {
   @inject(TabService) ts!: TabService;
+  @inject(WindowsService) ws!: WindowsService;
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -177,5 +194,26 @@ export class TabBar extends FASTElement {
 
   closeTab(tabId: string) {
     this.ts.removeTab(tabId);
+  }
+
+  closeWindow() {
+    this.ws.closeWindow(this.ws.activeWindowId);
+  }
+
+  minimizeWindow() {
+    this.ws.minimizeWindow(this.ws.activeWindowId);
+  }
+
+  windowIsMaximized() {
+    const window = this.ws.getActiveWindow() as Window;
+    return window.maximized;
+  }
+
+  maximizeWindow() {
+    if (this.windowIsMaximized()) {
+      this.ws.restoreWindow(this.ws.activeWindowId);
+    } else {
+      this.ws.maximizeWindow(this.ws.activeWindowId);
+    }
   }
 }
