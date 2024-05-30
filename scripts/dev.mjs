@@ -11,7 +11,7 @@ const serverAppContext = await esbuild.context({
   bundle: true,
   platform: 'node',
   format: 'cjs',
-  outfile: './dist/index.cjs',
+  outfile: './dist/index.js',
 });
 
 const clientAppContext = await esbuild.context({
@@ -40,7 +40,7 @@ console.log('Watching client for changes...\n');
 await serverAppContext.watch();
 console.log('Watching server for changes...\n');
 
-const server = spawn('node', ['./dist/index.cjs'], {});
+const server = spawn('node', ['./dist/index.js'], { platform: 'node' });
 server.stdout.on('data', (data) => console.log(`${data}`));
 server.stderr.on('data', (data) => console.error(`${data}`));
 open('http://localhost:4000');

@@ -1,7 +1,6 @@
 {
   "name": "edge-design-wc-prototype",
   "private": true,
-  "type": "module",
   "version": "0.0.1",
   "description": "A web component based prototype for the Edge browser",
   "main": "src/index.js",
@@ -12,9 +11,9 @@
     "server"
   ],
   "scripts": {
-    "dev": "node scripts/dev.js",
-    "build": "node scripts/build.js",
-    "clean": "node scripts/clean.js",
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "clean": "node scripts/clean.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",

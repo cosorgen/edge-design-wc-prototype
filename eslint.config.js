@@ -1,8 +1,10 @@
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
-import prettierConfig from 'eslint-config-prettier';
+'use strict';
 
-export default [
+const eslint = require('@eslint/js');
+const tseslint = require('typescript-eslint');
+const prettierConfig = require('eslint-config-prettier');
+
+module.exports = [
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -12,10 +14,11 @@ export default [
       '**/storybook-static/*',
       '**/node_modules/*',
       '**/!.storybook/*',
+      '**/eslint.config.js',
     ],
   },
   {
-    files: ['*.ts', '*.tsx'],
+    files: ['*.ts', '*.tsx', '*.js'],
   },
   prettierConfig,
 ];
