@@ -20,6 +20,13 @@ import '../controls/identityControl.js';
 import '../controls/horizontal-tab.js';
 import '../../windows/controls/mica-material.js';
 import { Tab, TabService } from '#services/tabService.js';
+import {
+  colorShellFillCaptionControlPrimaryHover,
+  colorShellFillCaptionControlPrimaryPressed,
+  colorShellFillTaksbarItemPrimary,
+  colorShellForegroundCaptionControlPrimaryHover,
+  colorShellForegroundCaptionControlPrimaryPressed,
+} from '../../windows/designSystem.js';
 
 const template = html<TabBar>`
   <mica-material appearance="tabBar"></mica-material>
@@ -145,7 +152,14 @@ const styles = css`
     margin-inline-start: calc(0px - ${spacingHorizontalSNudge});
   }
 
-  #caption-controls phx-button:hover {
+  #caption-controls phx-button:nth-child(3):hover::part(control) {
+    background-color: ${colorShellFillCaptionControlPrimaryHover};
+    color: ${colorShellForegroundCaptionControlPrimaryHover};
+  }
+
+  #caption-controls phx-button:nth-child(3):active::part(control) {
+    background-color: ${colorShellFillCaptionControlPrimaryPressed};
+    color: ${colorShellForegroundCaptionControlPrimaryPressed};
   }
 `;
 
