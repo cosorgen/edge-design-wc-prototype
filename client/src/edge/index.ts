@@ -8,7 +8,7 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   phoenixDarkThemeWin11,
-  spacingVerticalS,
+  spacingVerticalXS,
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
 } from '@phoenixui/themes';
@@ -53,7 +53,7 @@ const styles = css`
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase300};
 
-    --edge-frame-spacing: ${spacingVerticalS};
+    --edge-frame-spacing: ${spacingVerticalXS};
   }
 
   #activeTab {
