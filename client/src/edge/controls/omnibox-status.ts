@@ -8,7 +8,7 @@ import {
 import {
   borderRadiusCircular,
   colorNeutralForeground2,
-  colorNeutralStroke1,
+  colorNeutralStroke2,
   colorSubtleBackgroundHover,
   colorSubtleBackgroundPressed,
   colorSubtleBackgroundSelected,
@@ -74,7 +74,7 @@ const styles = css`
   div {
     width: ${strokeWidthThin};
     height: 100%;
-    background: ${colorNeutralStroke1};
+    background: ${colorNeutralStroke2};
     margin: ${spacingHorizontalXS};
   }
 
