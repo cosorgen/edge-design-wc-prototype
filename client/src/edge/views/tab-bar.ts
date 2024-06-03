@@ -12,7 +12,6 @@ import {
   spacingHorizontalS,
   shadow2,
   spacingHorizontalXXS,
-  spacingVerticalMNudge,
   spacingVerticalSNudge,
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
@@ -126,6 +125,7 @@ const styles = css`
   :host {
     display: block;
     overflow: hidden;
+    user-select: none;
   }
 
   #content {

@@ -40,6 +40,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
+    user-select: none;
   }
 
   .group {
