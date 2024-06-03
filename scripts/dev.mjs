@@ -6,12 +6,31 @@ import { spawn } from 'child_process';
 import open from 'open';
 import fs from 'fs';
 
+let copyStaticFiles = {
+  name: 'copyStaticFiles',
+  setup(build) {
+    build.onEnd((result) => {
+      if (result.errors.length > 0) {
+        console.error('An error occurred while building the project.');
+        return console.error(result.errors);
+      }
+      fs.cpSync('./client/www', './dist/www', { recursive: true }, (err) => {
+        if (err) {
+          console.error('An error occurred while copying the static files.');
+          return console.error(err);
+        }
+      });
+    });
+  },
+};
+
 const serverAppContext = await esbuild.context({
   entryPoints: ['./server/src/index.ts'],
   bundle: true,
   platform: 'node',
   format: 'cjs',
   outfile: './dist/index.js',
+  plugins: [copyStaticFiles],
 });
 
 const clientAppContext = await esbuild.context({
@@ -19,19 +38,10 @@ const clientAppContext = await esbuild.context({
   bundle: true,
   outfile: './dist/www/bundle.js',
   format: 'esm',
+  plugins: [copyStaticFiles],
 });
 
-function copyStaticFiles() {
-  fs.cpSync('./client/www', './dist/www', { recursive: true }, (err) => {
-    if (err) {
-      console.error('An error occurred while copying the static files.');
-      return console.error(err);
-    }
-  });
-}
-
 console.log('Building server and client...\n');
-copyStaticFiles();
 await serverAppContext.rebuild();
 await clientAppContext.rebuild();
 

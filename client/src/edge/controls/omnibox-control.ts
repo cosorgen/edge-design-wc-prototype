@@ -10,8 +10,12 @@ import {
   spacingHorizontalXXS,
   spacingVerticalXS,
 } from '@phoenixui/themes';
+import './omnibox-status.js';
 
-const template = html<OmniboxControl>` <input part="input" type="text" /> `;
+const template = html<OmniboxControl>`
+  <omnibox-status icon-only></omnibox-status>
+  <input part="input" type="text" />
+`;
 const styles = css`
   :host {
     flex: 1;
