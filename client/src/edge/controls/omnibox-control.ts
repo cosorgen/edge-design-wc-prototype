@@ -4,16 +4,15 @@ import {
   colorBrandStroke1,
   colorNeutralBackground1,
   colorNeutralForegroundHint,
-  fontFamilyBase,
-  fontSizeBase300,
-  fontWeightRegular,
-  lineHeightBase300,
+  colorNeutralStroke1,
   spacingHorizontalXS,
-  spacingVerticalXS,
+  spacingHorizontalXXS,
   spacingVerticalXXS,
   strokeWidthThick,
+  strokeWidthThin,
 } from '@phoenixui/themes';
 import './omnibox-status.js';
+import './omnibox-input.js';
 import '@phoenixui/web-components/button.js';
 
 const template = html<OmniboxControl>`
@@ -23,14 +22,7 @@ const template = html<OmniboxControl>`
         <use href="img/edge/icons.svg#search-20-regular" />
       </svg>
     </omnibox-status>
-    <div
-      part="input"
-      contenteditable
-      autocapitalize="off"
-      autocorrect="off"
-      spellcheck="false"
-      placeholder="Search or enter web address"
-    ></div>
+    <omnibox-input></omnibox-input>
     <div id="actions">
       <phx-button size="small" appearance="subtle" shape="circular" icon-only>
         <svg>
@@ -43,6 +35,8 @@ const template = html<OmniboxControl>`
 const styles = css`
   :host {
     flex: 1;
+    overflow: hidden;
+    --stroke-diff: calc(${strokeWidthThick} - ${strokeWidthThin});
   }
 
   [part='container'] {
@@ -50,32 +44,17 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: ${spacingVerticalXS} ${spacingHorizontalXS};
+    padding: calc(${spacingVerticalXXS} + var(--stroke-diff))
+      calc(${spacingHorizontalXXS} + var(--stroke-diff));
     gap: ${spacingHorizontalXS};
     background-color: ${colorNeutralBackground1};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
     border-radius: ${borderRadiusCircular};
   }
 
-  [part='container']:has([part='input']:focus-visible) {
-    outline: ${strokeWidthThick} solid ${colorBrandStroke1};
-    padding: ${spacingVerticalXXS} ${spacingHorizontalXS};
-    margin-block: ${spacingVerticalXXS};
-  }
-
-  [part='input'] {
-    flex: 1;
-    /* body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    line-height: ${lineHeightBase300};
-    font-weight: ${fontWeightRegular};
-    cursor: text;
-    outline: none;
-
-    &:empty::before {
-      content: attr(placeholder);
-      color: ${colorNeutralForegroundHint};
-    }
+  [part='container']:has(omnibox-input:focus-within) {
+    padding: ${spacingVerticalXXS} ${spacingHorizontalXXS};
+    border: ${strokeWidthThick} solid ${colorBrandStroke1};
   }
 
   #actions {

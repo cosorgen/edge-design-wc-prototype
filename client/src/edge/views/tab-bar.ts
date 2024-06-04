@@ -72,7 +72,7 @@ const template = html<TabBar>`
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
     </phx-button>
-    <div class="group" id="caption-controls">
+    <div class="group" id="caption-controls" style="gap: 0;">
       <phx-button
         size="large"
         appearance="subtle"
