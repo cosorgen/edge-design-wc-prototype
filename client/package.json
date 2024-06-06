@@ -9,8 +9,8 @@
   "license": "MIT",
   "dependencies": {
     "@microsoft/fast-element": "^2.0.0-beta.26",
-    "@phoenixui/themes": "0.3.5",
-    "@phoenixui/web-components": "0.3.7"
+    "@phoenixui/themes": "0.3.6",
+    "@phoenixui/web-components": "0.3.8"
   },
   "imports": {
     "#services*": "./src/services/*"
