@@ -16,6 +16,7 @@ import {
   spacingHorizontalSNudge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/divider.js';
 import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
 import '../../windows/controls/mica-material.js';
@@ -51,15 +52,21 @@ const template = html<TabBar>`
       ${repeat(
         (x) => x.ts.tabs,
         html<Tab>` <horizontal-tab
-          ?active="${(x) => x.active}"
-          @activate="${(x, c) => c.parent.activateTab(x.id)}"
-          @close="${(x, c) => c.parent.closeTab(x.id)}"
-        >
-          ${(x) =>
-            x.favicon ? html`<img slot="favicon" src="${x.favicon}" />` : null}
-          ${(x) =>
-            x.title ? html`<span slot="title">${x.title}</span>` : null}
-        </horizontal-tab>`,
+            ?active="${(x) => x.active}"
+            @activate="${(x, c) => c.parent.activateTab(x.id)}"
+            @close="${(x, c) => c.parent.closeTab(x.id)}"
+          >
+            ${(x) =>
+              x.favicon
+                ? html`<img slot="favicon" src="${x.favicon}" />`
+                : null}
+            ${(x) =>
+              x.title ? html`<span slot="title">${x.title}</span>` : null}
+          </horizontal-tab>
+          <phx-divider
+            orientation="vertical"
+            appearance="strong"
+          ></phx-divider>`,
       )}
     </div>
     <phx-button
@@ -176,14 +183,34 @@ const styles = css`
     inset-block: 0;
   }
 
-  #caption-controls phx-button:nth-child(3):hover::part(control) {
+  #caption-controls phx-button:nth-child(3):hover {
     background-color: ${colorShellFillCaptionControlPrimaryHover};
     color: ${colorShellForegroundCaptionControlPrimaryHover};
   }
 
-  #caption-controls phx-button:nth-child(3):active::part(control) {
+  #caption-controls phx-button:nth-child(3):active {
     background-color: ${colorShellFillCaptionControlPrimaryPressed};
     color: ${colorShellForegroundCaptionControlPrimaryPressed};
+  }
+
+  phx-divider,
+  phx-divider:before,
+  phx-divider:after {
+    min-height: unset;
+    height: unset;
+  }
+
+  phx-divider {
+    margin-block: ${spacingVerticalSNudge};
+    margin-inline: calc(0px - ${spacingHorizontalXXS});
+  }
+
+  horizontal-tab[active] + phx-divider,
+  phx-divider:has(+ horizontal-tab[active]),
+  horizontal-tab:hover + phx-divider,
+  phx-divider:has(+ horizontal-tab:hover),
+  #tabs:has(+ #add:hover) > phx-divider:last-of-type {
+    visibility: hidden;
   }
 `;
 
@@ -199,6 +226,9 @@ export class TabBar extends FASTElement {
   connectedCallback(): void {
     super.connectedCallback();
     // open window with a new tab
+    this.ts.addTab();
+    this.ts.addTab();
+    this.ts.addTab();
     this.ts.addTab();
   }
 
