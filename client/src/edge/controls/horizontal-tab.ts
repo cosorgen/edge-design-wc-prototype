@@ -128,7 +128,7 @@ const styles = css`
   }
 
   phx-button svg,
-  phx-button::part(control) {
+  phx-button {
     width: 16px;
     height: 16px;
     min-width: 16px;
