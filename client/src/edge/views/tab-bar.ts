@@ -227,9 +227,6 @@ export class TabBar extends FASTElement {
     super.connectedCallback();
     // open window with a new tab
     this.ts.addTab();
-    this.ts.addTab();
-    this.ts.addTab();
-    this.ts.addTab();
   }
 
   activateTab(tabId: string) {
