@@ -1,4 +1,10 @@
-import { FASTElement, customElement, html, css } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  html,
+  css,
+  when,
+} from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
   phoenixLightThemeWin11,
@@ -19,6 +25,7 @@ import { TabService } from '#services/tabService.js';
 import '../windows/controls/mica-material.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
+import './views/web-content.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
@@ -26,15 +33,15 @@ const template = html<MicrosoftEdge>`
     <mica-material></mica-material>
     <div id="content">
       <tool-bar></tool-bar>
-      <div class="row">
-        <div class="column">
-          ${(x) =>
-            x.ss.showFavoritesBar === 'always'
-              ? html`<favorites-bar></favorites-bar>`
-              : ''}
+      <div class="row" style="flex: 1;">
+        <div class="column" style="flex: 1;">
+          ${when(
+            (x) => x.ss.showFavoritesBar === 'always',
+            html`<favorites-bar></favorites-bar>`,
+          )}
           <web-content></web-content>
         </div>
-        ${(x) => (x.ss.showSideBar ? html`<side-bar></side-bar>` : '')}
+        ${when((x) => x.ss.showSideBar, html`<side-bar></side-bar>`)}
       </div>
     </div>
   </div>
@@ -42,8 +49,10 @@ const template = html<MicrosoftEdge>`
 
 const styles = css`
   :host {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
     color: ${colorNeutralForeground1};
     fill: currentColor;
 
@@ -58,8 +67,7 @@ const styles = css`
 
   #activeTab {
     position: relative;
-    width: 100%;
-    height: 100%;
+    flex: 1;
     overflow: hidden;
   }
 

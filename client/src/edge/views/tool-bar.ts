@@ -6,7 +6,7 @@ import '../../windows/controls/mica-material.js';
 
 const template = html<Toolbar>`
   <div class="group">
-    <phx-button appearance="subtle" icon-only>
+    <phx-button appearance="subtle" icon-only disabled>
       <svg>
         <use href="img/edge/icons.svg#back-20-regular" />
       </svg>
