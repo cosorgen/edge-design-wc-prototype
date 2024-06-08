@@ -18,6 +18,10 @@ export type WindowsTokens = {
   micaBackgroundBlendMode?: string;
   micaBackgroundColor?: string;
   desktopBackground?: string;
+  colorShellFillCaptionControlPrimaryHover: string;
+  colorShellFillCaptionControlPrimaryPressed: string;
+  colorShellForegroundCaptionControlPrimaryHover: string;
+  colorShellForegroundCaptionControlPrimaryPressed: string;
 };
 
 export type WindowsTheme = Theme & WindowsTokens;
@@ -42,6 +46,10 @@ const windowsLightTheme: WindowsTheme = {
   colorFillAccent: '#005FB8',
   micaBackgroundColor: 'rgba(243,243,243,0.7)',
   desktopBackground: 'url(img/windows/desktopLight.jpg)',
+  colorShellFillCaptionControlPrimaryHover: '#C42B1C',
+  colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
+  colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
+  colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
 };
 
 const windowsDarkTheme: WindowsTheme = {
@@ -56,6 +64,10 @@ const windowsDarkTheme: WindowsTheme = {
   colorFillAccent: '#005FB8',
   micaBackgroundColor: 'rgba(32,32,32,0.7)',
   desktopBackground: 'url(img/windows/desktopDark.jpg)',
+  colorShellFillCaptionControlPrimaryHover: '#C42B1C',
+  colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
+  colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
+  colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
 };
 
 export function setTheme(theme: OSTheme) {
@@ -79,3 +91,11 @@ export const micaBackdropFilter = 'var(--micaBackdropFilter)';
 export const micaBackgroundBlendMode = 'var(--micaBackgroundBlendMode)';
 export const micaBackgroundColor = 'var(--micaBackgroundColor)';
 export const desktopBackground = 'var(--desktopBackground)';
+export const colorShellFillCaptionControlPrimaryHover =
+  'var(--colorShellFillCaptionControlPrimaryHover)';
+export const colorShellFillCaptionControlPrimaryPressed =
+  'var(--colorShellFillCaptionControlPrimaryPressed)';
+export const colorShellForegroundCaptionControlPrimaryHover =
+  'var(--colorShellForegroundCaptionControlPrimaryHover)';
+export const colorShellForegroundCaptionControlPrimaryPressed =
+  'var(--colorShellForegroundCaptionControlPrimaryPressed)';

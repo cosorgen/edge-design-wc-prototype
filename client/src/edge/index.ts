@@ -1,4 +1,10 @@
-import { FASTElement, customElement, html, css } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  html,
+  css,
+  when,
+} from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
   phoenixLightThemeWin11,
@@ -8,32 +14,34 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   phoenixDarkThemeWin11,
-  spacingVerticalS,
+  spacingVerticalXS,
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
 } from '@phoenixui/themes';
-import { setTheme } from '@phoenixui/web-components';
+import { setThemeFor } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
 import '../windows/controls/mica-material.js';
-import './views/tabBar.js';
+import './views/tab-bar.js';
+import './views/tool-bar.js';
+import './views/web-content.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
   <div id="activeTab">
     <mica-material></mica-material>
     <div id="content">
-      <address-bar></address-bar>
-      <div class="row">
-        <div class="column">
-          ${(x) =>
-            x.ss.showFavoritesBar === 'always'
-              ? html`<favorites-bar></favorites-bar>`
-              : ''}
+      <tool-bar></tool-bar>
+      <div class="row" style="flex: 1;">
+        <div class="column" style="flex: 1;">
+          ${when(
+            (x) => x.ss.showFavoritesBar === 'always',
+            html`<favorites-bar></favorites-bar>`,
+          )}
           <web-content></web-content>
         </div>
-        ${(x) => (x.ss.showSideBar ? html`<side-bar></side-bar>` : '')}
+        ${when((x) => x.ss.showSideBar, html`<side-bar></side-bar>`)}
       </div>
     </div>
   </div>
@@ -41,8 +49,10 @@ const template = html<MicrosoftEdge>`
 
 const styles = css`
   :host {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
     color: ${colorNeutralForeground1};
     fill: currentColor;
 
@@ -52,18 +62,18 @@ const styles = css`
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase300};
 
-    --edge-frame-spacing: ${spacingVerticalS};
+    --edge-frame-spacing: ${spacingVerticalXS};
   }
 
   #activeTab {
     position: relative;
-    width: 100%;
-    height: 100%;
+    flex: 1;
     overflow: hidden;
   }
 
   #content {
     box-sizing: border-box;
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -94,14 +104,15 @@ export class MicrosoftEdge extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(settingsService) ss!: settingsService;
 
-  connectedCallback() {
-    super.connectedCallback();
-    this.setTheme();
-    this.positionMaterialImage();
-
+  constructor() {
+    super();
     // Set up window state
     const container = DI.getOrCreateDOMContainer(this);
-    container.register(Registration.instance(TabService, new TabService()));
+    const ts = new TabService();
+    container.register(Registration.instance(TabService, ts));
+
+    // set up theme
+    this.setTheme();
   }
 
   setTheme() {
@@ -118,15 +129,6 @@ export class MicrosoftEdge extends FASTElement {
     };
     const selectedTheme =
       this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    setTheme(themes[this.ws.transparency][selectedTheme], this.shadowRoot!);
-  }
-
-  positionMaterialImage() {
-    const imgEl = this.shadowRoot!.querySelector(
-      'mica-material',
-    ) as HTMLElement;
-    const { top, left } = imgEl.getBoundingClientRect();
-    imgEl.style.top = `-${top}px`;
-    imgEl.style.left = `-${left}px`;
+    setThemeFor(this.shadowRoot!, themes[this.ws.transparency][selectedTheme]);
   }
 }

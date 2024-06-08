@@ -83,7 +83,6 @@ export class MicaMaterial extends FASTElement {
     if (imageElement) {
       const { innerWidth: width, innerHeight: height } = window;
       const { top, left } = imageElement.getBoundingClientRect();
-      console.log(width, height, top, left);
       const aspectRatio = width / height;
       let newWidth = width;
       let newHeight = height;
