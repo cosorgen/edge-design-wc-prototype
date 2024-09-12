@@ -6,6 +6,7 @@ export type Tab = {
   url: string;
   favicon?: string;
   active: boolean;
+  loading?: boolean;
 };
 
 export class TabService {
@@ -58,6 +59,33 @@ export class TabService {
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
       active: false,
+    }));
+  }
+
+  navigate(url: string) {
+    // Set tab to loading state
+    this.tabs_ = this.tabs_.map((tab) => ({
+      ...tab,
+      title: tab.active ? url : tab.title,
+      loading: tab.active,
+    }));
+
+    // Get metadata for the new query
+    fetch(`/api/metadata?url=${url}`)
+      .then((res) => res.json())
+      .then((metadata) => {
+        this.tabs_ = this.tabs_.map((tab) => ({
+          ...tab,
+          title: tab.active ? metadata.title : tab.title,
+          favicon: tab.active ? metadata.favicon : tab.favicon,
+          loading: false,
+        }));
+      });
+
+    // Set the URL of the active tab to the query
+    this.tabs_ = this.tabs_.map((tab) => ({
+      ...tab,
+      url: tab.active ? url : tab.url,
     }));
   }
 }

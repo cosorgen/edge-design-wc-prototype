@@ -50,8 +50,11 @@ export class WebPage extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   @observable page = '';
 
-  connectedCallback() {
-    super.connectedCallback();
+  urlChanged() {
+    this.loadWebPage();
+  }
+
+  loadWebPage() {
     if (this.url.search('edge://') !== 0) {
       fetch(`/api/proxy?url=${this.url}`)
         .then((res) => res.text())

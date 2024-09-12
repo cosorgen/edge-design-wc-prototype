@@ -1,8 +1,16 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
+import {
+  customElement,
+  FASTElement,
+  html,
+  css,
+  repeat,
+} from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/omnibox-control.js';
 import '../../windows/controls/mica-material.js';
+import { TabService } from '#servicestabService.js';
+import { inject } from '@microsoft/fast-element/di.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -17,7 +25,15 @@ const template = html<Toolbar>`
       </svg>
     </phx-button>
   </div>
-  <omnibox-control></omnibox-control>
+  ${repeat(
+    (x) => x.ts.tabs,
+    html`
+      <omnibox-control
+        ?active="${(x) => x.active}"
+        @navigate="${(x, c) => c.parent.handleNavigate(c.event as CustomEvent)}"
+      ></omnibox-control>
+    `,
+  )}
   <div class="group">
     <phx-button appearance="subtle" icon-only>
       <svg>
@@ -61,4 +77,11 @@ const styles = css`
   template,
   styles,
 })
-export class Toolbar extends FASTElement {}
+export class Toolbar extends FASTElement {
+  @inject(TabService) ts!: TabService;
+
+  handleNavigate(e: CustomEvent) {
+    // TODO: make sure e.detail is a valid URL
+    this.ts.navigate(e.detail);
+  }
+}

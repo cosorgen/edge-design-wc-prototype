@@ -1,4 +1,10 @@
-import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
+import {
+  attr,
+  css,
+  customElement,
+  FASTElement,
+  html,
+} from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
   colorBrandStroke1,
@@ -22,7 +28,9 @@ const template = html<OmniboxControl>`
         <use href="img/edge/icons.svg#search-20-regular" />
       </svg>
     </omnibox-status>
-    <omnibox-input></omnibox-input>
+    <omnibox-input
+      @submit="${(x, c) => x.handleSubmit(c.event as CustomEvent)}"
+    ></omnibox-input>
     <div id="actions">
       <phx-button size="small" appearance="subtle" shape="circular" icon-only>
         <svg>
@@ -35,8 +43,13 @@ const template = html<OmniboxControl>`
 const styles = css`
   :host {
     flex: 1;
+    display: none;
     overflow: hidden;
     --stroke-diff: calc(${strokeWidthThick} - ${strokeWidthThin});
+  }
+
+  :host([active]) {
+    display: block;
   }
 
   [part='container'] {
@@ -68,4 +81,10 @@ const styles = css`
 `;
 
 @customElement({ name: 'omnibox-control', template, styles })
-export class OmniboxControl extends FASTElement {}
+export class OmniboxControl extends FASTElement {
+  @attr({ mode: 'boolean' }) active = false;
+
+  handleSubmit(e: CustomEvent) {
+    this.$emit('navigate', e.detail);
+  }
+}

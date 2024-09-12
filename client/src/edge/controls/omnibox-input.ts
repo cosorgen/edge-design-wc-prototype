@@ -82,7 +82,7 @@ export class OmniboxInput extends FASTElement {
     }
 
     // Alert parent component that the input has changed.
-    this.$emit('onChange', this.input?.innerText);
+    this.$emit('change', this.input?.innerText);
 
     // Save the caret position.
     const selection = this.saveSelection(this.input);
@@ -103,7 +103,7 @@ export class OmniboxInput extends FASTElement {
     }
     if (event.key === 'Enter') {
       event.preventDefault();
-      this.$emit('onSubmit', this.input?.innerText);
+      this.$emit('submit', this.input?.innerText);
       this.input?.blur();
     }
     if (event.key === 'Escape') {
@@ -111,11 +111,11 @@ export class OmniboxInput extends FASTElement {
     }
     if (event.key === 'ArrowUp') {
       event.preventDefault();
-      this.$emit('onArrowUp');
+      this.$emit('arrowUp');
     }
     if (event.key === 'ArrowDown') {
       event.preventDefault();
-      this.$emit('onArrowDown');
+      this.$emit('arrowDown');
     }
 
     return true; // Allow default behavior.

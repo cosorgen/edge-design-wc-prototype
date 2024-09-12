@@ -17,6 +17,7 @@ import {
   shadowDiffuseX,
   spacingHorizontalS,
   spacingHorizontalSNudge,
+  spacingVerticalXXS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../../windows/controls/mica-material.js';
@@ -79,7 +80,8 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalS};
-    padding-inline: ${spacingHorizontalS};
+    padding-inline-start: ${spacingHorizontalS};
+    padding-inline-end: calc(${spacingHorizontalS} + 16px);
     padding-block: ${spacingHorizontalSNudge};
     color: ${colorNeutralForeground1};
     border-radius: ${borderRadiusLarge};
@@ -101,24 +103,22 @@ const styles = css`
 
   #title,
   [name='title']::slotted(*) {
-    display: flex;
-    flex-direction: column;
-
     /* Caption1 */
     font-family: ${fontFamilyBase};
     font-size: ${fontSizeBase200};
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase200};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    margin-block-end: ${spacingVerticalXXS};
   }
 
   #favicon,
   [name='favicon']::slotted(*) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 16px;
     height: 16px;
-    overflow: hidden;
   }
 
   phx-button {
