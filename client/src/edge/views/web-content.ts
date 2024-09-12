@@ -1,37 +1,28 @@
+import { TabService } from '#servicestabService.js';
 import {
   FASTElement,
   customElement,
   html,
   css,
-  observable,
+  repeat,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusLayerBase,
-  colorLayerBackgroundBase,
-  shadow2,
-} from '@phoenixui/themes';
+import { inject } from '@microsoft/fast-element/di.js';
+import '../controls/web-page.js';
 
 const template = html<WebContent>`
-  <iframe
-    sandbox="allow-same-origin allow-scripts"
-    srcdoc="${(x) => x.page}"
-  ></iframe>
+  ${repeat(
+    (x) => x.ts.tabs,
+    html`<web-page
+      url="${(x) => x.url}"
+      ?active="${(x) => x.active}"
+    ></web-page>`,
+  )}
 `;
 
 const styles = css`
   :host {
     flex: 1;
-    display: block;
-    background: ${colorLayerBackgroundBase};
-    border-radius: ${borderRadiusLayerBase};
-    box-shadow: ${shadow2};
-    overflow: hidden;
-  }
-
-  iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
+    display: flex;
   }
 `;
 
@@ -41,15 +32,5 @@ const styles = css`
   styles,
 })
 export class WebContent extends FASTElement {
-  url = 'https://www.microsoft.com';
-  @observable page = '';
-
-  connectedCallback() {
-    super.connectedCallback();
-    if (this.url.search('edge://') !== 0) {
-      fetch(`/api/proxy?url=${this.url}`)
-        .then((res) => res.text())
-        .then((text) => (this.page = text));
-    }
-  }
+  @inject(TabService) ts!: TabService;
 }
