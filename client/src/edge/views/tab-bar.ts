@@ -53,6 +53,7 @@ const template = html<TabBar>`
         (x) => x.ts.tabs,
         html<Tab>` <horizontal-tab
             ?active="${(x) => x.active}"
+            ?loading="${(x) => x.loading}"
             @activate="${(x, c) => c.parent.activateTab(x.id)}"
             @close="${(x, c) => c.parent.closeTab(x.id)}"
           >

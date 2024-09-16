@@ -1,4 +1,11 @@
-import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
+import {
+  attr,
+  css,
+  customElement,
+  FASTElement,
+  html,
+  when,
+} from '@microsoft/fast-element';
 import {
   borderRadiusLarge,
   colorNeutralForeground1,
@@ -20,6 +27,7 @@ import {
   spacingVerticalXXS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/spinner.js';
 import '../../windows/controls/mica-material.js';
 
 const template = html<HorizontalTab>`
@@ -28,11 +36,17 @@ const template = html<HorizontalTab>`
   <mica-material id="right-wing"></mica-material>
   <button @click="${(x, c) => x.activate(c.event)}">
     <div id="favicon" part="favicon">
-      <slot name="favicon">
-        <svg width="16" height="16">
-          <use href="img/edge/icons.svg#tab-desktop-new-page-16-regular"></use>
-        </svg>
-      </slot>
+      ${when(
+        (x) => x.loading,
+        html`<phx-spinner size="tiny"></phx-spinner>`,
+        html`<slot name="favicon">
+          <svg width="16" height="16">
+            <use
+              href="img/edge/icons.svg#tab-desktop-new-page-16-regular"
+            ></use>
+          </svg>
+        </slot>`,
+      )}
     </div>
     <div id="title" part="title">
       <slot name="title">New tab</slot>
@@ -166,6 +180,10 @@ const styles = css`
     right: -10px;
     transform: rotate(90deg);
   }
+
+  phx-spinner {
+    --size: 16px;
+  }
 `;
 
 @customElement({
@@ -174,6 +192,8 @@ const styles = css`
   styles,
 })
 export class HorizontalTab extends FASTElement {
+  @attr({ mode: 'boolean' }) active = false;
+  @attr({ mode: 'boolean' }) loading = false;
   activate(e: Event) {
     e.stopPropagation();
     this.$emit('activate');
