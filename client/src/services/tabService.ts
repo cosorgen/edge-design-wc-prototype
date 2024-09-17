@@ -120,7 +120,10 @@ export class TabService {
 
   generateSuggestions(query: string) {
     fetch(`/api/suggest?q=${query}&enhance=true`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(res.statusText);
+        return res.json();
+      })
       .then((res) => {
         this.suggestions_ = res.suggestions;
       });

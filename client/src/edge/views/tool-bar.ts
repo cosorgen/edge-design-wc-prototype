@@ -4,13 +4,11 @@ import {
   html,
   css,
   repeat,
-  observable,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/omnibox-control.js';
-import '../controls/omnibox-input.js';
-import '../controls/omnibox-dropdown.js';
+import '../controls/omnibox-suggestion.js';
 import '../../windows/controls/mica-material.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -28,37 +26,33 @@ const template = html<Toolbar>`
       </svg>
     </phx-button>
   </div>
-  <div id="omnibox">
-    ${repeat(
-      (x) => x.ts.tabs,
-      html`
-        <omnibox-control
-          ?active="${(x, c) => x.active && !c.parent.dropdownActive}"
-        >
-          <omnibox-input
-            initialValue="${(x, c) => c.parent.omniboxValue}"
-            @submit="${(x, c) =>
-              c.parent.handleOmniboxSubmit(c.event as CustomEvent)}"
-            @change="${(x, c) =>
-              c.parent.handleOmniboxChange(c.event as CustomEvent)}"
-            @click="${(x, c) => c.parent.handleOmniBoxClick()}"
-          ></omnibox-input>
-        </omnibox-control>
-      `,
-    )}
-    <omnibox-dropdown ?active="${(x) => x.dropdownActive}">
-      <omnibox-input
-        slot="input"
-        initialValue="${(x) => x.omniboxValue}"
-        @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
-        @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
-      ></omnibox-input>
-      ${repeat(
-        (x) => x.ts.suggestions,
-        html` <omnibox-suggestion></omnibox-suggestion> `,
-      )}
-    </omnibox-dropdown>
-  </div>
+  ${repeat(
+    (x) => x.ts.tabs,
+    html`
+      <omnibox-control
+        ?active="${(x) => x.active}"
+        @submit="${(x, c) =>
+          c.parent.handleOmniboxSubmit(c.event as CustomEvent)}"
+        @change="${(x, c) =>
+          c.parent.handleOmniboxChange(c.event as CustomEvent)}"
+      >
+        <div slot="suggestions">
+          ${repeat(
+            (x, c) => c.parent.ts.suggestions,
+            html`
+              <omnibox-suggestion
+                title="${(x) => x.title}"
+                value="${(x) => x.value}"
+                type="${(x) => x.type}"
+                entity-image="${(x) => x.entityImage}"
+                subtitle2="${(x) => x.subtitle2}"
+              ></omnibox-suggestion>
+            `,
+          )}
+        </div>
+      </omnibox-control>
+    `,
+  )}
   <div class="group">
     <phx-button appearance="subtle" icon-only>
       <svg>
@@ -95,11 +89,6 @@ const styles = css`
     width: 24px;
     height: 24px;
   }
-
-  #omnibox {
-    flex: 1;
-    position: relative;
-  }
 `;
 
 @customElement({
@@ -109,8 +98,6 @@ const styles = css`
 })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
-  @observable dropdownActive = false;
-  @observable omniboxValue = '';
 
   handleOmniboxSubmit(e: CustomEvent) {
     // TODO: make sure e.detail is a valid URL
@@ -118,19 +105,6 @@ export class Toolbar extends FASTElement {
   }
 
   handleOmniboxChange(e: CustomEvent) {
-    if (e.detail === this.omniboxValue) {
-      return;
-    }
-
-    this.omniboxValue = e.detail;
-
     this.ts.generateSuggestions(e.detail);
-    if (!this.dropdownActive) {
-      this.dropdownActive = true;
-    }
-  }
-
-  handleOmniBoxClick() {
-    this.dropdownActive = true;
   }
 }
