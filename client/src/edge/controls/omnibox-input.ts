@@ -75,6 +75,12 @@ export class OmniboxInput extends FASTElement {
     }
   }
 
+  initialValueChanged() {
+    if (this.input) {
+      this.input.innerText = this.initialValue;
+    }
+  }
+
   handleKeyUp(event: KeyboardEvent) {
     // Register input if it's not already registered.
     if (!this.input) {

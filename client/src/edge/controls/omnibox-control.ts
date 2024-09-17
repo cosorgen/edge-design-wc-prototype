@@ -28,9 +28,7 @@ const template = html<OmniboxControl>`
         <use href="img/edge/icons.svg#search-20-regular" />
       </svg>
     </omnibox-status>
-    <omnibox-input
-      @submit="${(x, c) => x.handleSubmit(c.event as CustomEvent)}"
-    ></omnibox-input>
+    <slot></slot>
     <div id="actions">
       <phx-button size="small" appearance="subtle" shape="circular" icon-only>
         <svg>
@@ -39,10 +37,12 @@ const template = html<OmniboxControl>`
       </phx-button>
     </div>
   </div>
+  <div part="dropdown">
+    <slot name="suggestions"></slot>
+  </div>
 `;
 const styles = css`
   :host {
-    flex: 1;
     display: none;
     overflow: hidden;
     --stroke-diff: calc(${strokeWidthThick} - ${strokeWidthThin});
@@ -65,7 +65,7 @@ const styles = css`
     border-radius: ${borderRadiusCircular};
   }
 
-  [part='container']:has(omnibox-input:focus-within) {
+  [part='container']:has(:focus-within) {
     padding: ${spacingVerticalXXS} ${spacingHorizontalXXS};
     border: ${strokeWidthThick} solid ${colorBrandStroke1};
   }
@@ -83,8 +83,4 @@ const styles = css`
 @customElement({ name: 'omnibox-control', template, styles })
 export class OmniboxControl extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
-
-  handleSubmit(e: CustomEvent) {
-    this.$emit('navigate', e.detail);
-  }
 }

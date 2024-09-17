@@ -9,11 +9,40 @@ export type Tab = {
   loading?: boolean;
 };
 
+export type Suggestion = {
+  type: 'search' | 'entity' | 'history' | 'site' | 'label';
+  title: string;
+  value: string;
+  entityImage?: string;
+  subtitle2?: string;
+};
+
 export class TabService {
   @observable private tabs_: Tab[] = [];
+  @observable private suggestions_: Suggestion[] = [
+    {
+      type: 'search',
+      title: 'How to make a website',
+      value: 'https://www.bing.com?q=how+to+make+a+website',
+    },
+    {
+      type: 'search',
+      title: 'How to start a business',
+      value: 'https://www.bing.com?q=how+to+start+a+business',
+    },
+    {
+      type: 'search',
+      title: 'What is an IPO',
+      value: 'https://www.bing.com?q=what+is+an+ipo',
+    },
+  ];
 
   get tabs() {
     return this.tabs_;
+  }
+
+  get suggestions() {
+    return this.suggestions_;
   }
 
   addTab(tab?: Tab) {
@@ -87,5 +116,13 @@ export class TabService {
       ...tab,
       url: tab.active ? url : tab.url,
     }));
+  }
+
+  generateSuggestions(query: string) {
+    fetch(`/api/suggest?q=${query}&enhance=true`)
+      .then((res) => res.json())
+      .then((res) => {
+        this.suggestions_ = res.suggestions;
+      });
   }
 }
