@@ -19,23 +19,12 @@ export type Suggestion = {
 
 export class TabService {
   @observable private tabs_: Tab[] = [];
-  @observable private suggestions_: Suggestion[] = [
-    {
-      type: 'search',
-      title: 'How to make a website',
-      value: 'https://www.bing.com?q=how+to+make+a+website',
-    },
-    {
-      type: 'search',
-      title: 'How to start a business',
-      value: 'https://www.bing.com?q=how+to+start+a+business',
-    },
-    {
-      type: 'search',
-      title: 'What is an IPO',
-      value: 'https://www.bing.com?q=what+is+an+ipo',
-    },
-  ];
+  @observable private suggestions_: Suggestion[] = [];
+
+  constructor() {
+    this.addTab();
+    this.generateSuggestions('');
+  }
 
   get tabs() {
     return this.tabs_;
@@ -92,6 +81,11 @@ export class TabService {
   }
 
   navigate(url: string) {
+    // Validate URL
+    if (!url.startsWith('http')) {
+      url = `https://www.bing.com/search?q=${url}`;
+    }
+
     // Set tab to loading state
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
@@ -116,6 +110,9 @@ export class TabService {
       ...tab,
       url: tab.active ? url : tab.url,
     }));
+
+    // Clear suggestions
+    this.suggestions_ = [];
   }
 
   generateSuggestions(query: string) {

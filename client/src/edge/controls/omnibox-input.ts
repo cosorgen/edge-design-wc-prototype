@@ -33,10 +33,14 @@ const template = html<OmniboxInput>`
 const styles = css`
   :host {
     flex: 1;
+    overflow: hidden;
   }
 
   [part='input'] {
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     /* body1 */
     font-family: ${fontFamilyBase};
     font-size: ${fontSizeBase300};
@@ -70,15 +74,17 @@ export class OmniboxInput extends FASTElement {
     this.input = this.shadowRoot?.querySelector('[part="input"]');
 
     if (this.input) {
-      this.input.innerText = this.initialValue;
+      if (this.initialValue === 'edge://newtab') this.initialValue = '';
+      this.input.innerHTML = this.formatUrl(this.initialValue);
       this.input.focus(); // Focus the input when it's created.
+      this.selectAll(this.input);
     }
   }
 
   initialValueChanged() {
-    if (this.input) {
-      this.input.innerText = this.initialValue;
-    }
+    if (!this.input) return;
+    if (this.initialValue === 'edge://newtab') this.initialValue = '';
+    this.input.innerHTML = this.formatUrl(this.initialValue);
   }
 
   handleKeyUp(event: KeyboardEvent) {

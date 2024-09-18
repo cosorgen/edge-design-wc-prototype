@@ -4,18 +4,19 @@ import {
   customElement,
   FASTElement,
   html,
-  observable,
 } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
   borderRadiusLayerDialog,
   colorBrandStroke1,
-  colorNeutralBackground1,
+  colorLayerBackgroundDialog,
   colorNeutralForegroundHint,
   colorNeutralStroke1,
   shadow28,
+  spacingHorizontalS,
   spacingHorizontalXS,
   spacingHorizontalXXS,
+  spacingVerticalS,
   spacingVerticalXXS,
   strokeWidthThick,
   strokeWidthThin,
@@ -33,8 +34,8 @@ const template = html<OmniboxControl>`
         </svg>
       </omnibox-status>
       <omnibox-input
-        @click="${(x) => (x.expanded = true)}"
-        @blur="${(x) => (x.expanded = false)}"
+        initialValue="${(x) => x.initialValue}"
+        @click="${(x) => x.$emit('input-click')}"
       ></omnibox-input>
       <div id="actions">
         <phx-button size="small" appearance="subtle" shape="circular" icon-only>
@@ -50,6 +51,7 @@ const template = html<OmniboxControl>`
 const styles = css`
   :host {
     flex: 1;
+    min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     display: none;
     height: 32px;
@@ -64,14 +66,14 @@ const styles = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: ${colorNeutralBackground1};
+    background-color: ${colorLayerBackgroundDialog};
     border: ${strokeWidthThin} solid ${colorNeutralStroke1};
     border-radius: ${borderRadiusCircular};
     padding: calc(${spacingVerticalXXS} + var(--stroke-diff))
       calc(${spacingHorizontalXXS} + var(--stroke-diff));
   }
 
-  [part='container']:has(omnibox-input:focus-within) {
+  [part='container']:has(omnibox-input:focus-within):not([expanded]) {
     padding: ${spacingVerticalXXS} ${spacingHorizontalXXS};
     border: ${strokeWidthThick} solid ${colorBrandStroke1};
   }
@@ -87,6 +89,11 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalXS};
+  }
+
+  :host([expanded]) #top-row {
+    padding: ${spacingVerticalS} ${spacingHorizontalXS};
+    gap: ${spacingHorizontalS};
   }
 
   slot[name='suggestions']::slotted(*) {
@@ -106,10 +113,15 @@ const styles = css`
       color: ${colorNeutralForegroundHint};
     }
   }
+
+  :host([expanded]) #actions {
+    display: none;
+  }
 `;
 
 @customElement({ name: 'omnibox-control', template, styles })
 export class OmniboxControl extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
-  @observable expanded = false;
+  @attr({ mode: 'boolean' }) expanded = false;
+  @attr initialValue = '';
 }

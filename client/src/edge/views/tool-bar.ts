@@ -4,6 +4,7 @@ import {
   html,
   css,
   repeat,
+  observable,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
@@ -31,10 +32,14 @@ const template = html<Toolbar>`
     html`
       <omnibox-control
         ?active="${(x) => x.active}"
+        initialValue="${(x) => x.url}"
+        ?expanded="${(x, c) => c.parent.omniboxExpanded && x.active}"
         @submit="${(x, c) =>
           c.parent.handleOmniboxSubmit(c.event as CustomEvent)}"
         @change="${(x, c) =>
           c.parent.handleOmniboxChange(c.event as CustomEvent)}"
+        @input-click="${(x, c) => (c.parent.omniboxExpanded = true)}"
+        @blur="${(x, c) => c.parent.collapseOmnibox()}"
       >
         <div slot="suggestions">
           ${repeat(
@@ -42,10 +47,18 @@ const template = html<Toolbar>`
             html`
               <omnibox-suggestion
                 title="${(x) => x.title}"
-                value="${(x) => x.value}"
                 type="${(x) => x.type}"
                 entity-image="${(x) => x.entityImage}"
                 subtitle2="${(x) => x.subtitle2}"
+                @click="${(x, c) => {
+                  c.event.preventDefault();
+                  c.parentContext.parent.handleOmniboxSubmit({
+                    ...c.event,
+                    detail: x.value,
+                  } as CustomEvent);
+                }}"
+                role="button"
+                z-index="0"
               ></omnibox-suggestion>
             `,
           )}
@@ -98,13 +111,31 @@ const styles = css`
 })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
+  @observable omniboxExpanded = false;
+  omniboxValue = '';
 
   handleOmniboxSubmit(e: CustomEvent) {
-    // TODO: make sure e.detail is a valid URL
+    this.collapseOmnibox();
     this.ts.navigate(e.detail);
   }
 
   handleOmniboxChange(e: CustomEvent) {
-    this.ts.generateSuggestions(e.detail);
+    if (e.detail !== this.omniboxValue) {
+      this.expandOmnibox();
+      if (!this.omniboxExpanded) this.omniboxExpanded = true;
+      this.ts.generateSuggestions(e.detail);
+    }
+  }
+
+  expandOmnibox() {
+    this.omniboxExpanded = true;
+  }
+
+  collapseOmnibox() {
+    // Delay is needed to capture the click event on the suggestion.
+    window.setTimeout(() => {
+      this.omniboxExpanded = false;
+      this.ts.generateSuggestions(''); // Clear suggestions when the omnibox is collapsed.
+    }, 100);
   }
 }

@@ -224,12 +224,6 @@ export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    // open window with a new tab
-    this.ts.addTab();
-  }
-
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
   }
