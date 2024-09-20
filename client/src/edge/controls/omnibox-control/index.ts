@@ -29,6 +29,11 @@ export class OmniboxControl extends FASTElement {
   }
 
   initialValueChanged() {
+    if (this.initialValue === 'edge://newtab') {
+      // Don't display the address of the new tab page
+      this.initialValue = '';
+    }
+
     if (this.inputValue !== this.initialValue) {
       // Got a new initial value, update the input value
       this.inputValue = this.initialValue;
@@ -64,8 +69,8 @@ export class OmniboxControl extends FASTElement {
 
   handleInputBlur() {
     this.dropdownOpen = false;
-    this.dropdownSelectedIndex = -1;
-    this.inputValue = this.initialValue;
+    this.dropdownSelectedIndex = -1; // Reset to initial value
+    this.inputValue = this.initialValue; // Reset to initial value
   }
 
   setDropdownSelection(step: number) {

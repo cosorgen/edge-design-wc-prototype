@@ -20,7 +20,7 @@ export const template = html`
       ></omnibox-icon>
       <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
       <omnibox-input
-        initialValue="${(x) => x.initialValue}"
+        value="${(x) => x.inputValue}"
         @click="${(x) => x.handleInputClick()}"
         @submit="${(x) => x.handleInputSubmit()}"
         @change="${(x, c) => x.handleInputChange(c.event as CustomEvent)}"

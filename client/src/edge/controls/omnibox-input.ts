@@ -13,18 +13,6 @@ import {
   lineHeightBase300,
 } from '@phoenixui/themes';
 
-const nonChangingKeys = [
-  'ArrowUp',
-  'ArrowDown',
-  'Enter',
-  'Escape',
-  'Tab',
-  'Shift',
-  'Control',
-  'Alt',
-  'Meta',
-];
-
 const template = html<OmniboxInput>`
   <div
     part="input"
@@ -33,7 +21,7 @@ const template = html<OmniboxInput>`
     autocorrect="off"
     spellcheck="false"
     placeholder="Search or enter web address"
-    @keyup="${(x, c) => x.handleKeyUp(c.event as KeyboardEvent)}"
+    @keyup="${(x) => x.handleKeyUp()}"
     @keydown="${(x, c) => x.handleKeyDown(c.event as KeyboardEvent)}"
     @blur="${(x) => x.handleBlur()}"
     @focus="${(x) => x.handleFocus()}"
@@ -78,61 +66,54 @@ const styles = css`
   styles,
 })
 export class OmniboxInput extends FASTElement {
-  @attr 'initial-value': string = '';
+  @attr value = '';
   input?: HTMLDivElement | null;
 
   connectedCallback(): void {
     super.connectedCallback();
     this.input = this.shadowRoot?.querySelector('[part="input"]');
-
-    if (this.input) {
-      if (this['initial-value'] === 'edge://newtab') this['initial-value'] = '';
-      this.input.innerHTML = this.formatUrl(this['initial-value']);
-      this.input.focus(); // Focus the input when it's created.
-      this.selectAll(this.input);
-    }
+    if (!this.input) throw new Error('Input element not found');
+    this.input.focus(); // Focus the input when it's created.
   }
 
-  initialValueChanged() {
+  valueChanged() {
     if (!this.input) return;
-    if (this['initial-value'] === 'edge://newtab') this['initial-value'] = '';
-    this.input.innerHTML = this.formatUrl(this['initial-value']);
+
+    if (this.input.innerText !== this.value) {
+      this.input.innerHTML = this.formatUrl(this.value);
+      this.selectAll(this.input); // Highlight new value for easy editing.
+    }
   }
 
-  handleKeyUp(event: KeyboardEvent) {
-    // Register input if it's not already registered.
-    if (!this.input) {
-      this.input = event.target as HTMLDivElement;
-    }
+  handleKeyUp() {
+    if (!this.input) throw new Error('Input element not found');
 
     // Alert parent component that the input has changed.
-    if (!nonChangingKeys.includes(event.key)) {
+    if (this.input.innerText !== this.value) {
       this.$emit('change', this.input?.innerText);
+
+      // Save the caret position.
+      const selection = this.saveSelection(this.input);
+
+      // Format the input text.
+      this.input.innerHTML = this.formatUrl(this.input.innerText);
+
+      // Restore the caret position.
+      this.restoreSelection(this.input, selection);
     }
-
-    // Save the caret position.
-    const selection = this.saveSelection(this.input);
-
-    // Format the input text.
-    this.input.innerHTML = this.formatUrl(this.input.innerText);
-
-    // Restore the caret position.
-    this.restoreSelection(this.input, selection);
 
     return true; // Allow default behavior.
   }
 
   handleKeyDown(event: KeyboardEvent) {
-    // Register input if it's not already registered.
-    if (!this.input) {
-      this.input = event.target as HTMLDivElement;
-    }
+    if (!this.input) throw new Error('Input element not found');
+
     if (event.key === 'Enter') {
       this.$emit('submit', this.input?.innerText);
-      this.input?.blur();
+      this.input.blur();
     }
     if (event.key === 'Escape') {
-      this.input?.blur();
+      this.input.blur();
     }
     if (event.key === 'ArrowUp') {
       this.$emit('arrow-up');
@@ -146,14 +127,13 @@ export class OmniboxInput extends FASTElement {
 
   handleBlur() {
     this.disselectAll();
-    if (this.input) {
-      this.input.innerHTML = this.formatUrl(this['initial-value']);
-    }
     return true; // Allow default behavior.
   }
 
   handleFocus() {
-    this.selectAll(this.input as HTMLElement);
+    if (!this.input) throw new Error('Input element not found');
+
+    this.selectAll(this.input);
     return true; // Allow default behavior.
   }
 
@@ -161,13 +141,15 @@ export class OmniboxInput extends FASTElement {
     const range = document.createRange();
     range.selectNodeContents(el);
     const sel = window.getSelection();
-    sel?.removeAllRanges();
-    sel?.addRange(range);
+    if (sel === null) throw new Error('Selection is null');
+    sel.removeAllRanges();
+    sel.addRange(range);
   }
 
   disselectAll() {
     const sel = window.getSelection();
-    sel?.removeAllRanges();
+    if (sel === null) throw new Error('Selection is null');
+    sel.removeAllRanges();
   }
 
   recursiveFindTextNodes(
