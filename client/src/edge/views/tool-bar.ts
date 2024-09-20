@@ -45,21 +45,7 @@ const template = html<Toolbar>`
       ></omnibox-control>
     `,
   )}
-  <div class="group">
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#star-list-horizontal-20-regular" />
-      </svg>
-    </phx-button>
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-      </svg>
-    </phx-button>
-    <phx-button id="copilot" appearance="subtle" icon-only>
-      <img src="img/edge/copilot-icon.svg" />
-    </phx-button>
-  </div>
+  <div class="group"><!-- This is where pinned stuff goes --></div>
 `;
 
 const styles = css`
@@ -67,10 +53,12 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
+    padding: 0 ${spacingHorizontalXS};
     user-select: none;
   }
 
   .group {
+    flex: 1;
     display: flex;
     flex-direction: row;
     align-items: center;

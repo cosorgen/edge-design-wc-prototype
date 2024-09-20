@@ -1,11 +1,11 @@
 import { css } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
-  borderRadiusLayerDialog,
   colorBrandStroke1,
   colorLayerBackgroundDialog,
+  colorNeutralBackground3,
+  colorNeutralBackground3Hover,
   colorNeutralForegroundHint,
-  colorNeutralStroke1,
   shadow28,
   spacingHorizontalNone,
   spacingHorizontalXS,
@@ -18,7 +18,7 @@ import {
 
 export const styles = css`
   :host {
-    flex: 1;
+    width: 1024px;
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     display: none;
@@ -34,8 +34,8 @@ export const styles = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: ${colorLayerBackgroundDialog};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    background-color: ${colorNeutralBackground3};
+    border: ${strokeWidthThin} solid transparent;
     border-radius: ${borderRadiusCircular};
     padding: calc(${spacingVerticalXXS} + var(--stroke-diff))
       calc(${spacingHorizontalXXS} + var(--stroke-diff));
@@ -47,8 +47,13 @@ export const styles = css`
   }
 
   [part='container'][dropdown-open] {
-    border-radius: ${borderRadiusLayerDialog};
+    background-color: ${colorLayerBackgroundDialog};
+    border-radius: 16px; /* Override from design system to make radius match pill */
     box-shadow: ${shadow28};
+  }
+
+  [part='container']:not([dropdown-open]):hover {
+    background-color: ${colorNeutralBackground3Hover};
   }
 
   #top-row {

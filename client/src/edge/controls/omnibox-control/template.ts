@@ -31,7 +31,7 @@ export const template = html`
       <div id="actions">
         <phx-button size="small" appearance="subtle" shape="circular" icon-only>
           <svg>
-            <use href="img/edge/icons.svg#star-add-20-regular" />
+            <use href="img/edge/icons.svg#star-20-regular" />
           </svg>
         </phx-button>
       </div>
