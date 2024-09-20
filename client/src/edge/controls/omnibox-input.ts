@@ -135,6 +135,9 @@ export class OmniboxInput extends FASTElement {
 
   handleBlur() {
     this.disselectAll();
+    if (this.input) {
+      this.input.innerHTML = this.formatUrl(this.initialValue);
+    }
     return true; // Allow default behavior.
   }
 

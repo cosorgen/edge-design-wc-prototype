@@ -4,34 +4,49 @@ import {
   html,
   css,
   attr,
+  observable,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusCircular,
-  colorNeutralForeground2,
-  colorNeutralStroke2,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  colorSubtleBackgroundSelected,
-  fontFamilyBase,
-  fontSizeBase200,
-  fontWeightRegular,
-  lineHeightBase200,
-  spacingHorizontalS,
-  spacingHorizontalXS,
-  spacingVerticalXXS,
-  strokeWidthThin,
-} from '@phoenixui/themes';
+import { colorNeutralForeground3 } from '@phoenixui/themes';
+import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/divider.js';
+
+/**
+ * omnibox-status is a presentational component that renders
+ * a button for the address bar that shows the status of the
+ * current page.
+ *
+ * The type of button is determined by the URL of the current page.
+ */
+
+const labels = {
+  search: '',
+  'not-secure': 'Not secure',
+  secure: '',
+  file: 'File',
+  edge: 'Edge',
+};
+
+const iconIds = {
+  search: 'search-20-regular',
+  'not-secure': 'lock-open-20-regular',
+  secure: 'lock-closed-20-regular',
+  file: 'file-20-regular',
+  edge: 'edge-20-regular',
+};
 
 const template = html<OmniboxStatus>`
-  <button>
-    <slot>
-      <svg>
-        <use href="img/edge/icons.svg#lock-closed-20-regular" />
-      </svg>
-    </slot>
-    <slot name="label">Secure</slot>
-  </button>
-  <div></div>
+  <phx-button
+    appearance="subtle"
+    size="small"
+    shape="circular"
+    ?icon-only="${(x) => labels[x.type] === ''}"
+  >
+    <svg ?slot="${(x) => (labels[x.type] !== '' ? 'icon' : null)}">
+      <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}" />
+    </svg>
+    <div part="label">${(x) => labels[x.type]}</div>
+    <phx-divider orientation="vertical"></phx-divider>
+  </phx-button>
 `;
 
 const styles = css`
@@ -42,59 +57,17 @@ const styles = css`
     height: 100%;
   }
 
-  button {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: ${spacingHorizontalXS};
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    border-radius: ${borderRadiusCircular};
-    padding: ${spacingVerticalXXS} ${spacingHorizontalS};
-    /* caption1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase200};
-    color: ${colorNeutralForeground2};
-
-    &:hover {
-      background: ${colorSubtleBackgroundHover};
-    }
-    &:active {
-      background: ${colorSubtleBackgroundPressed};
-    }
+  phx-button {
+    color: ${colorNeutralForeground3};
   }
 
-  :host([selected]) button {
-    background: ${colorSubtleBackgroundSelected};
-  }
-
-  div {
-    width: ${strokeWidthThin};
-    height: 100%;
-    background: ${colorNeutralStroke2};
-    margin: ${spacingHorizontalXS};
-  }
-
-  slot::slotted(*),
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  :host([icon-only]) div,
-  :host([icon-only]) [name='label'] {
+  [icon-only] phx-divider {
     display: none;
   }
 
-  :host(:hover) div,
-  :host(:active) div,
-  button:focus-visible + div,
-  :host([selected]) div {
-    display: none;
-  }
+  phx-divider {
+    min-height: 1px;
+    height: unset;
 `;
 
 @customElement({
@@ -103,6 +76,30 @@ const styles = css`
   styles,
 })
 export class OmniboxStatus extends FASTElement {
-  @attr({ mode: 'boolean' }) 'icon-only' = false;
-  @attr({ mode: 'boolean' }) selected = false;
+  @attr value: string | null = '';
+  @observable type: 'search' | 'not-secure' | 'secure' | 'file' | 'edge' =
+    'search';
+
+  valueChanged() {
+    this.updateType();
+  }
+
+  updateType() {
+    if (typeof this.value !== 'string') return;
+
+    if (this.value.startsWith('http://')) {
+      this.type = 'not-secure';
+    } else if (this.value.startsWith('https://')) {
+      this.type = 'secure';
+    } else if (
+      this.value.startsWith('edge://') &&
+      this.value !== 'edge://newtab'
+    ) {
+      this.type = 'edge';
+    } else if (this.value.startsWith('file://')) {
+      this.type = 'file';
+    } else {
+      this.type = 'search';
+    }
+  }
 }

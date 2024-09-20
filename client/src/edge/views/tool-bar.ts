@@ -8,11 +8,16 @@ import {
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import '../controls/omnibox-control.js';
+import { OmniboxControl } from '../controls/omnibox-control/index.js';
+import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
 import '../../windows/controls/mica-material.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
+import {
+  Suggestion,
+  generateSuggestions,
+} from '#servicesautoSuggestService.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -33,37 +38,11 @@ const template = html<Toolbar>`
       <omnibox-control
         ?active="${(x) => x.active}"
         initialValue="${(x) => x.url}"
-        ?expanded="${(x, c) => c.parent.omniboxExpanded && x.active}"
         @submit="${(x, c) =>
           c.parent.handleOmniboxSubmit(c.event as CustomEvent)}"
         @change="${(x, c) =>
           c.parent.handleOmniboxChange(c.event as CustomEvent)}"
-        @input-click="${(x, c) => (c.parent.omniboxExpanded = true)}"
-        @blur="${(x, c) => c.parent.collapseOmnibox()}"
-      >
-        <div slot="suggestions">
-          ${repeat(
-            (x, c) => c.parent.ts.suggestions,
-            html`
-              <omnibox-suggestion
-                title="${(x) => x.title}"
-                type="${(x) => x.type}"
-                entity-image="${(x) => x.entityImage}"
-                subtitle2="${(x) => x.subtitle2}"
-                @click="${(x, c) => {
-                  c.event.preventDefault();
-                  c.parentContext.parent.handleOmniboxSubmit({
-                    ...c.event,
-                    detail: x.value,
-                  } as CustomEvent);
-                }}"
-                role="button"
-                z-index="0"
-              ></omnibox-suggestion>
-            `,
-          )}
-        </div>
-      </omnibox-control>
+      ></omnibox-control>
     `,
   )}
   <div class="group">
@@ -111,31 +90,30 @@ const styles = css`
 })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
-  @observable omniboxExpanded = false;
-  omniboxValue = '';
+  @observable suggestions: Suggestion[] = [];
+  omniboxControl?: OmniboxControl | null = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.omniboxControl = this.shadowRoot?.querySelector('omnibox-control');
+    generateSuggestions('').then((res) => {
+      this.suggestions = res.suggestions;
+    });
+  }
+
+  suggestionsChanged() {
+    if (this.omniboxControl && this.omniboxControl instanceof OmniboxControl) {
+      this.omniboxControl.suggestions = this.suggestions;
+    }
+  }
 
   handleOmniboxSubmit(e: CustomEvent) {
-    this.collapseOmnibox();
     this.ts.navigate(e.detail);
   }
 
   handleOmniboxChange(e: CustomEvent) {
-    if (e.detail !== this.omniboxValue) {
-      this.expandOmnibox();
-      if (!this.omniboxExpanded) this.omniboxExpanded = true;
-      this.ts.generateSuggestions(e.detail);
-    }
-  }
-
-  expandOmnibox() {
-    this.omniboxExpanded = true;
-  }
-
-  collapseOmnibox() {
-    // Delay is needed to capture the click event on the suggestion.
-    window.setTimeout(() => {
-      this.omniboxExpanded = false;
-      this.ts.generateSuggestions(''); // Clear suggestions when the omnibox is collapsed.
-    }, 100);
+    generateSuggestions(e.detail).then((res) => {
+      this.suggestions = res.suggestions;
+    });
   }
 }

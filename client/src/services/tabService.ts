@@ -9,29 +9,15 @@ export type Tab = {
   loading?: boolean;
 };
 
-export type Suggestion = {
-  type: 'search' | 'entity' | 'history' | 'site' | 'label';
-  title: string;
-  value: string;
-  entityImage?: string;
-  subtitle2?: string;
-};
-
 export class TabService {
   @observable private tabs_: Tab[] = [];
-  @observable private suggestions_: Suggestion[] = [];
 
   constructor() {
     this.addTab();
-    this.generateSuggestions('');
   }
 
   get tabs() {
     return this.tabs_;
-  }
-
-  get suggestions() {
-    return this.suggestions_;
   }
 
   addTab(tab?: Tab) {
@@ -110,19 +96,5 @@ export class TabService {
       ...tab,
       url: tab.active ? url : tab.url,
     }));
-
-    // Clear suggestions
-    this.suggestions_ = [];
-  }
-
-  generateSuggestions(query: string) {
-    fetch(`/api/suggest?q=${query}&enhance=true`)
-      .then((res) => {
-        if (!res.ok) throw new Error(res.statusText);
-        return res.json();
-      })
-      .then((res) => {
-        this.suggestions_ = res.suggestions;
-      });
   }
 }
