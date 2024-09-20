@@ -131,6 +131,7 @@ const template = html<TabBar>`
 const styles = css`
   :host {
     display: block;
+    width: 100%;
     user-select: none;
     position: relative; /* for positioning shadow */
   }
@@ -144,7 +145,7 @@ const styles = css`
     flex-direction: row;
     align-items: flex-end;
     gap: var(--edge-frame-spacing);
-    padding-inline-end: 224px;
+    padding-inline-end: 208px;
   }
 
   .group {

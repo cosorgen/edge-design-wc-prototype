@@ -7,20 +7,23 @@ import {
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
-  phoenixLightThemeWin11,
   colorNeutralForeground1,
   fontFamilyBase,
   fontSizeBase300,
   fontWeightRegular,
   lineHeightBase300,
-  phoenixDarkThemeWin11,
-  spacingVerticalXS,
-  phoenixLightThemeSolidWin11,
-  phoenixDarkThemeSolidWin11,
   colorLayerBackgroundDialog,
   borderRadiusLarge,
   shadow2,
+  colorLayerBackgroundApp,
 } from '@phoenixui/themes';
+import {
+  edgeLightTheme,
+  edgeDarkTheme,
+  edgeDarkThemeSolid,
+  edgeLightThemeSolid,
+  spacingFrame,
+} from './designSystem.js';
 import { setThemeFor } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
@@ -28,6 +31,7 @@ import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
+import './views/copilot-composer.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
@@ -46,23 +50,21 @@ const template = html<MicrosoftEdge>`
       </div>
     </div>
   </div>
+  <copilot-composer></copilot-composer>
 `;
 
 const styles = css`
   :host {
-    --new-frame-color: #dde2e8;
-    --edge-frame-spacing: ${spacingVerticalXS};
-    --pill-menu-background: #ffffff80;
-
     position: absolute;
     inset: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--edge-frame-spacing);
+    align-items: center;
+    gap: ${spacingFrame};
     color: ${colorNeutralForeground1};
     fill: currentColor;
-    background-color: var(--new-frame-color);
-    padding: var(--edge-frame-spacing);
+    background-color: ${colorLayerBackgroundApp};
+    padding: ${spacingFrame};
 
     /* body1 */
     font-family: ${fontFamilyBase};
@@ -71,15 +73,9 @@ const styles = css`
     line-height: ${lineHeightBase300};
   }
 
-  @media (prefers-color-scheme: dark) {
-    :host {
-      --new-frame-color: #000;
-      --pill-menu-background: 2C2C2C;
-    }
-  }
-
   #activeTab {
     position: relative;
+    width: 100%;
     flex: 1;
     overflow: hidden;
     padding: 0 2px 2px 2px; /* for shadow */
@@ -93,8 +89,8 @@ const styles = css`
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--edge-frame-spacing);
-    padding-block-start: var(--edge-frame-spacing);
+    gap: ${spacingFrame};
+    padding-block-start: ${spacingFrame};
     background-color: ${colorLayerBackgroundDialog};
     border-radius: ${borderRadiusLarge};
     box-shadow: ${shadow2};
@@ -104,13 +100,13 @@ const styles = css`
   .row {
     display: flex;
     flex-direction: row;
-    gap: var(--edge-frame-spacing);
+    gap: ${spacingFrame};
   }
 
   .column {
     display: flex;
     flex-direction: column;
-    gap: var(--edge-frame-spacing);
+    gap: ${spacingFrame};
   }
 `;
 
@@ -138,12 +134,12 @@ export class MicrosoftEdge extends FASTElement {
     // Set up edge design system
     const themes = {
       reduced: {
-        light: phoenixLightThemeSolidWin11,
-        dark: phoenixDarkThemeSolidWin11,
+        light: edgeLightThemeSolid,
+        dark: edgeDarkThemeSolid,
       },
       normal: {
-        light: phoenixLightThemeWin11,
-        dark: phoenixDarkThemeWin11,
+        light: edgeLightTheme,
+        dark: edgeDarkTheme,
       },
     };
     const selectedTheme =
