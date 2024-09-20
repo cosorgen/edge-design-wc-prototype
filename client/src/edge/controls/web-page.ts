@@ -6,11 +6,7 @@ import {
   attr,
   observable,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusLayerBase,
-  colorLayerBackgroundBase,
-  shadow2,
-} from '@phoenixui/themes';
+import { colorLayerBackgroundDialog } from '@phoenixui/themes';
 
 const template = html<WebPage>`
   <iframe
@@ -23,9 +19,7 @@ const styles = css`
   :host {
     flex: 1;
     display: none;
-    background: ${colorLayerBackgroundBase};
-    border-radius: ${borderRadiusLayerBase};
-    box-shadow: ${shadow2};
+    background: ${colorLayerBackgroundDialog};
     overflow: hidden;
   }
 

@@ -17,12 +17,14 @@ import {
   spacingVerticalXS,
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
+  colorLayerBackgroundDialog,
+  borderRadiusLarge,
+  shadow2,
 } from '@phoenixui/themes';
 import { setThemeFor } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
 import settingsService from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
-import '../windows/controls/mica-material.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
@@ -30,7 +32,6 @@ import './views/web-content.js';
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
   <div id="activeTab">
-    <mica-material></mica-material>
     <div id="content">
       <tool-bar></tool-bar>
       <div class="row" style="flex: 1;">
@@ -49,26 +50,40 @@ const template = html<MicrosoftEdge>`
 
 const styles = css`
   :host {
+    --new-frame-color: #dde2e8;
+    --edge-frame-spacing: ${spacingVerticalXS};
+    --pill-menu-background: #ffffff80;
+
     position: absolute;
     inset: 0;
     display: flex;
     flex-direction: column;
+    gap: var(--edge-frame-spacing);
     color: ${colorNeutralForeground1};
     fill: currentColor;
+    background-color: var(--new-frame-color);
+    padding: var(--edge-frame-spacing);
 
     /* body1 */
     font-family: ${fontFamilyBase};
     font-size: ${fontSizeBase300};
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase300};
+  }
 
-    --edge-frame-spacing: ${spacingVerticalXS};
+  @media (prefers-color-scheme: dark) {
+    :host {
+      --new-frame-color: #000;
+      --pill-menu-background: 2C2C2C;
+    }
   }
 
   #activeTab {
     position: relative;
     flex: 1;
     overflow: hidden;
+    padding: 0 2px 2px 2px; /* for shadow */
+    margin: 0 -2px -2px -2px; /* for shadow */
   }
 
   #content {
@@ -79,7 +94,11 @@ const styles = css`
     display: flex;
     flex-direction: column;
     gap: var(--edge-frame-spacing);
-    padding: var(--edge-frame-spacing);
+    padding-block-start: var(--edge-frame-spacing);
+    background-color: ${colorLayerBackgroundDialog};
+    border-radius: ${borderRadiusLarge};
+    box-shadow: ${shadow2};
+    overflow: hidden;
   }
 
   .row {

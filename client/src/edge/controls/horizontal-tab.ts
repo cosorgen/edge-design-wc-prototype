@@ -8,6 +8,7 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusLarge,
+  colorLayerBackgroundDialog,
   colorNeutralForeground1,
   colorNeutralShadowAmbient,
   colorNeutralShadowKey,
@@ -31,9 +32,9 @@ import '@phoenixui/web-components/spinner.js';
 import '../../windows/controls/mica-material.js';
 
 const template = html<HorizontalTab>`
-  <mica-material id="bg"></mica-material>
-  <mica-material id="left-wing"></mica-material>
-  <mica-material id="right-wing"></mica-material>
+  <div class="tab-background" id="bg"></div>
+  <div class="tab-background" id="left-wing"></div>
+  <div class="tab-background" id="right-wing"></div>
   <button @click="${(x, c) => x.activate(c.event)}">
     <div id="favicon" part="favicon">
       ${when(
@@ -150,6 +151,10 @@ const styles = css`
     padding: 0;
   }
 
+  .tab-background {
+    background-color: ${colorLayerBackgroundDialog};
+  }
+
   #bg,
   #left-wing,
   #right-wing {
@@ -160,7 +165,7 @@ const styles = css`
 
   #bg {
     inset: 0;
-    bottom: -2px;
+    bottom: -4px;
     border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
   }
 
@@ -168,7 +173,7 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: -2px;
+    bottom: -4px;
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 

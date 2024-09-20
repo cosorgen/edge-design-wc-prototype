@@ -1,8 +1,4 @@
-import {
-  borderRadiusMedium,
-  shadow28,
-  shadowBaseLayer,
-} from '@phoenixui/themes';
+import { shadow28, shadowBaseLayer } from '@phoenixui/themes';
 import {
   FASTElement,
   attr,
@@ -17,7 +13,7 @@ const styles = css`
   :host {
     display: block;
     position: absolute;
-    border-radius: ${borderRadiusMedium};
+    border-radius: 12px; /* override from the frame sprint */
     z-index: ${(x) => x.zIndex};
     width: ${(x) => x.width};
     height: ${(x) => x.height};

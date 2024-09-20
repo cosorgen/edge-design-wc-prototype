@@ -8,18 +8,17 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import {
   spacingHorizontalXS,
-  spacingVerticalXXS,
-  spacingHorizontalS,
   shadow2,
   spacingHorizontalXXS,
   spacingVerticalSNudge,
-  spacingHorizontalSNudge,
+  borderRadiusLarge,
+  borderRadiusCircular,
+  spacingHorizontalS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
-import '../../windows/controls/mica-material.js';
 import { Tab, TabService } from '#services/tabService.js';
 import WindowsService, { Window } from '#services/windowsService.js';
 import {
@@ -30,21 +29,12 @@ import {
 } from '../../windows/designSystem.js';
 
 const template = html<TabBar>`
-  <mica-material appearance="tabBar"></mica-material>
   <div id="shadow"></div>
   <div id="content">
     <div class="group">
-      <identity-control></identity-control>
-    </div>
-    <div class="group">
-      <phx-button appearance="subtle" icon-only>
+      <phx-button class="toolbar" appearance="subtle" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
-        </svg>
-      </phx-button>
-      <phx-button appearance="subtle" icon-only>
-        <svg>
-          <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
+          <use href="img/edge/icons.svg#panel-left-text-20-regular" />
         </svg>
       </phx-button>
     </div>
@@ -74,6 +64,7 @@ const template = html<TabBar>`
       appearance="subtle"
       icon-only
       id="add"
+      class="toolbar"
       @click="${(x) => x.addTab()}"
     >
       <svg>
@@ -81,6 +72,14 @@ const template = html<TabBar>`
       </svg>
     </phx-button>
     <div class="group" id="caption-controls" style="gap: 0;">
+      <div class="group" id="pill-menu">
+        <phx-button size="small" appearance="subtle" shape="circular" icon-only>
+          <svg>
+            <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+          </svg>
+        </phx-button>
+        <identity-control appearance="signedIn"></identity-control>
+      </div>
       <phx-button
         size="large"
         appearance="subtle"
@@ -132,8 +131,8 @@ const template = html<TabBar>`
 const styles = css`
   :host {
     display: block;
-    overflow: hidden;
     user-select: none;
+    position: relative; /* for positioning shadow */
   }
 
   #content {
@@ -144,10 +143,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: ${spacingHorizontalS};
-    padding: ${spacingVerticalSNudge} 156px ${spacingVerticalXXS}
-      ${spacingHorizontalXS};
-    overflow: hidden;
+    gap: var(--edge-frame-spacing);
+    padding-inline-end: 224px;
   }
 
   .group {
@@ -159,8 +156,8 @@ const styles = css`
 
   #shadow {
     position: absolute;
-    inset-inline: 0;
-    bottom: -2px;
+    inset-inline: 8px;
+    bottom: -6px;
     height: 2px;
     box-shadow: ${shadow2};
   }
@@ -175,7 +172,15 @@ const styles = css`
   }
 
   #add {
-    margin-inline-start: calc(0px - ${spacingHorizontalSNudge});
+    margin-inline-start: ${spacingHorizontalXXS};
+  }
+
+  #pill-menu {
+    margin-right: ${spacingHorizontalS};
+    padding: ${spacingHorizontalXXS};
+    gap: ${spacingHorizontalXS};
+    border-radius: ${borderRadiusCircular};
+    background-color: var(--pill-menu-background);
   }
 
   #caption-controls {
@@ -192,6 +197,10 @@ const styles = css`
   #caption-controls phx-button:nth-child(3):active {
     background-color: ${colorShellFillCaptionControlPrimaryPressed};
     color: ${colorShellForegroundCaptionControlPrimaryPressed};
+  }
+
+  phx-button.toolbar {
+    border-radius: ${borderRadiusLarge};
   }
 
   phx-divider,
