@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import NodeCache from 'node-cache';
 import NodeCron from 'node-cron';
