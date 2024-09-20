@@ -13,6 +13,18 @@ import {
   lineHeightBase300,
 } from '@phoenixui/themes';
 
+const nonChangingKeys = [
+  'ArrowUp',
+  'ArrowDown',
+  'Enter',
+  'Escape',
+  'Tab',
+  'Shift',
+  'Control',
+  'Alt',
+  'Meta',
+];
+
 const template = html<OmniboxInput>`
   <div
     part="input"
@@ -66,7 +78,7 @@ const styles = css`
   styles,
 })
 export class OmniboxInput extends FASTElement {
-  @attr initialValue: string = '';
+  @attr 'initial-value': string = '';
   input?: HTMLDivElement | null;
 
   connectedCallback(): void {
@@ -74,8 +86,8 @@ export class OmniboxInput extends FASTElement {
     this.input = this.shadowRoot?.querySelector('[part="input"]');
 
     if (this.input) {
-      if (this.initialValue === 'edge://newtab') this.initialValue = '';
-      this.input.innerHTML = this.formatUrl(this.initialValue);
+      if (this['initial-value'] === 'edge://newtab') this['initial-value'] = '';
+      this.input.innerHTML = this.formatUrl(this['initial-value']);
       this.input.focus(); // Focus the input when it's created.
       this.selectAll(this.input);
     }
@@ -83,8 +95,8 @@ export class OmniboxInput extends FASTElement {
 
   initialValueChanged() {
     if (!this.input) return;
-    if (this.initialValue === 'edge://newtab') this.initialValue = '';
-    this.input.innerHTML = this.formatUrl(this.initialValue);
+    if (this['initial-value'] === 'edge://newtab') this['initial-value'] = '';
+    this.input.innerHTML = this.formatUrl(this['initial-value']);
   }
 
   handleKeyUp(event: KeyboardEvent) {
@@ -94,7 +106,9 @@ export class OmniboxInput extends FASTElement {
     }
 
     // Alert parent component that the input has changed.
-    this.$emit('change', this.input?.innerText);
+    if (!nonChangingKeys.includes(event.key)) {
+      this.$emit('change', this.input?.innerText);
+    }
 
     // Save the caret position.
     const selection = this.saveSelection(this.input);
@@ -114,7 +128,6 @@ export class OmniboxInput extends FASTElement {
       this.input = event.target as HTMLDivElement;
     }
     if (event.key === 'Enter') {
-      event.preventDefault();
       this.$emit('submit', this.input?.innerText);
       this.input?.blur();
     }
@@ -122,12 +135,10 @@ export class OmniboxInput extends FASTElement {
       this.input?.blur();
     }
     if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      this.$emit('arrowUp');
+      this.$emit('arrow-up');
     }
     if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      this.$emit('arrowDown');
+      this.$emit('arrow-down');
     }
 
     return true; // Allow default behavior.
@@ -136,7 +147,7 @@ export class OmniboxInput extends FASTElement {
   handleBlur() {
     this.disselectAll();
     if (this.input) {
-      this.input.innerHTML = this.formatUrl(this.initialValue);
+      this.input.innerHTML = this.formatUrl(this['initial-value']);
     }
     return true; // Allow default behavior.
   }

@@ -46,7 +46,7 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
-  @attr url = '';
+  @attr url = 'edge://newtab';
   @attr({ mode: 'boolean' }) active = false;
   @observable page = '';
 

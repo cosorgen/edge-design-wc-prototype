@@ -5,6 +5,7 @@ export type Suggestion = {
   entityImage?: string;
   subtitle?: string;
   subtitle2?: string;
+  attribution?: string;
 };
 
 export const generateSuggestions = (query: string) => {

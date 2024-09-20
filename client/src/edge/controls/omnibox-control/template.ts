@@ -25,9 +25,8 @@ export const template = html`
         @submit="${(x) => x.handleInputSubmit()}"
         @change="${(x, c) => x.handleInputChange(c.event as CustomEvent)}"
         @blur="${(x) => x.handleInputBlur()}"
-        @arrowUp="${(x) => x.setDropdownSelection(-1)}"
-        @arrowDown="${(x) => x.setDropdownSelection(1)}"
-        ?valueSelected="${(x) => x.dropdownSelectedIndex >= 0}"
+        @arrow-up="${(x) => x.setDropdownSelection(-1)}"
+        @arrow-down="${(x) => x.setDropdownSelection(1)}"
       ></omnibox-input>
       <div id="actions">
         <phx-button size="small" appearance="subtle" shape="circular" icon-only>
@@ -38,8 +37,9 @@ export const template = html`
       </div>
     </div>
     <omnibox-dropdown
-      selectedIndex="${(x) => x.dropdownSelectedIndex}"
-      @click="${(x, c) => x.handleSuggestionClick(c.event as CustomEvent)}"
+      selected-index="${(x) => x.dropdownSelectedIndex}"
+      @suggestion-click="${(x, c) =>
+        x.handleSuggestionClick(c.event as CustomEvent)}"
     ></omnibox-dropdown>
   </div>
 `;

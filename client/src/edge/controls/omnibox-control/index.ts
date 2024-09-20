@@ -54,26 +54,21 @@ export class OmniboxControl extends FASTElement {
   }
 
   handleInputChange(e: CustomEvent) {
-    console.log(e);
     const newValue = e.detail;
     if (this.inputValue !== newValue) {
-      console.log('handleInputChange', this.inputValue, newValue);
       this.inputValue = newValue;
-      this.dropdownOpen = true;
+      if (!this.dropdownOpen) this.dropdownOpen = true;
       this.dropdownSelectedIndex = -1;
     }
   }
 
   handleInputBlur() {
-    window.setTimeout(() => {
-      this.dropdownOpen = false;
-      this.dropdownSelectedIndex = -1;
-      this.inputValue = this.initialValue;
-    }, 100); // slight delay to allow for dropdown click
+    this.dropdownOpen = false;
+    this.dropdownSelectedIndex = -1;
+    this.inputValue = this.initialValue;
   }
 
   setDropdownSelection(step: number) {
-    console.log('setDropdownSelection', step);
     if (this.dropdownOpen) {
       this.dropdownSelectedIndex = mod(
         this.dropdownSelectedIndex + step,
@@ -84,10 +79,9 @@ export class OmniboxControl extends FASTElement {
   }
 
   handleSuggestionClick(e: CustomEvent) {
-    console.log('handleSuggestionClick', e.detail);
     this.dropdownOpen = false;
     this.dropdownSelectedIndex = -1;
-    this.inputValue = this.suggestions[e.detail].value;
-    this.$emit('submit', this.suggestions[e.detail].value);
+    this.inputValue = e.detail;
+    this.$emit('submit', e.detail);
   }
 }

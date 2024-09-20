@@ -139,6 +139,8 @@ export class OmniboxSuggestion extends FASTElement {
   @attr value = '';
   @attr type: 'search' | 'entity' | 'history' | 'site' | 'label' = 'search';
   @attr 'entity-image' = '';
+  @attr subtitle = '';
   @attr subtitle2 = '';
+  @attr attribution = '';
   @attr({ mode: 'boolean' }) selected = false;
 }
