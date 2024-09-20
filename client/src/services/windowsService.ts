@@ -33,11 +33,12 @@ export default class WindowsService {
       ? 'dark'
       : 'light';
 
-    this.transparency = window.matchMedia(
-      '(prefers-reduced-transparency: reduce)',
-    ).matches
-      ? 'reduced'
-      : 'normal';
+    // this.transparency = window.matchMedia(
+    //   '(prefers-reduced-transparency: reduce)',
+    // ).matches
+    //   ? 'reduced'
+    //   : 'normal';
+    this.transparency = 'reduced';
 
     // Update when system preference changes
     window
