@@ -27,6 +27,7 @@ import {
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '../../windows/designSystem.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>
@@ -186,16 +187,16 @@ const styles = css`
 
   #caption-controls {
     position: absolute;
-    inset-inline-end: 0;
+    inset-inline-end: calc(0px - ${spacingFrame});
     inset-block: 0;
   }
 
-  #caption-controls phx-button:nth-child(3):hover {
+  #caption-controls phx-button:nth-child(4):hover {
     background-color: ${colorShellFillCaptionControlPrimaryHover};
     color: ${colorShellForegroundCaptionControlPrimaryHover};
   }
 
-  #caption-controls phx-button:nth-child(3):active {
+  #caption-controls phx-button:nth-child(4):active {
     background-color: ${colorShellFillCaptionControlPrimaryPressed};
     color: ${colorShellForegroundCaptionControlPrimaryPressed};
   }
