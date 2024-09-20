@@ -1,8 +1,23 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
+import {
+  customElement,
+  FASTElement,
+  html,
+  css,
+  repeat,
+  observable,
+} from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import '../controls/omnibox-control.js';
+import { OmniboxControl } from '../controls/omnibox-control/index.js';
+import '../controls/omnibox-control/index.js';
+import '../controls/omnibox-suggestion.js';
 import '../../windows/controls/mica-material.js';
+import { TabService } from '#servicestabService.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import {
+  Suggestion,
+  generateSuggestions,
+} from '#servicesautoSuggestService.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -17,7 +32,19 @@ const template = html<Toolbar>`
       </svg>
     </phx-button>
   </div>
-  <omnibox-control></omnibox-control>
+  ${repeat(
+    (x) => x.ts.tabs,
+    html`
+      <omnibox-control
+        ?active="${(x) => x.active}"
+        initialValue="${(x) => x.url}"
+        @submit="${(x, c) =>
+          c.parent.handleOmniboxSubmit(c.event as CustomEvent)}"
+        @change="${(x, c) =>
+          c.parent.handleOmniboxChange(c.event as CustomEvent)}"
+      ></omnibox-control>
+    `,
+  )}
   <div class="group">
     <phx-button appearance="subtle" icon-only>
       <svg>
@@ -61,4 +88,32 @@ const styles = css`
   template,
   styles,
 })
-export class Toolbar extends FASTElement {}
+export class Toolbar extends FASTElement {
+  @inject(TabService) ts!: TabService;
+  @observable suggestions: Suggestion[] = [];
+  omniboxControl?: OmniboxControl | null = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.omniboxControl = this.shadowRoot?.querySelector('omnibox-control');
+    generateSuggestions('').then((res) => {
+      this.suggestions = res.suggestions;
+    });
+  }
+
+  suggestionsChanged() {
+    if (this.omniboxControl && this.omniboxControl instanceof OmniboxControl) {
+      this.omniboxControl.suggestions = this.suggestions;
+    }
+  }
+
+  handleOmniboxSubmit(e: CustomEvent) {
+    this.ts.navigate(e.detail);
+  }
+
+  handleOmniboxChange(e: CustomEvent) {
+    generateSuggestions(e.detail).then((res) => {
+      this.suggestions = res.suggestions;
+    });
+  }
+}
