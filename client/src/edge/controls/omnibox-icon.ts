@@ -3,9 +3,9 @@ import {
   FASTElement,
   html,
   css,
-  observable,
-  when,
+  attr,
 } from '@microsoft/fast-element';
+import { borderRadiusSmall } from '@phoenixui/themes';
 
 /**
  * The icon component for the Omnibox dropdown item.
@@ -13,28 +13,30 @@ import {
  * Displays either an icon or an image depending on the type of item.
  */
 
+const iconIds = {
+  search: 'search',
+  entity: 'entity',
+  history: 'history',
+  site: 'page',
+  profile: 'profile',
+};
+
 const template = html<OmniboxIcon>`
-  ${when(
-    (x) => x['entity-image'] !== '',
-    html`
-      <img
-        id="${(x) => x.type}"
-        src="${(x) => x['entity-image']}"
-        alt="${(x) => x.type}"
-      />
-    `,
-    html`
-      <svg>
-        <use href="img/edge/icons.svg#${(x) => x.type}-20-regular" />
-      </svg>
-    `,
-  )}
+  <img
+    width="20"
+    id="${(x) => x.type}"
+    src="${(x) => x['entity-image']}"
+    alt="${(x) => x.type}"
+  />
+  <svg>
+    <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}-20-regular" />
+  </svg>
 `;
 
 const styles = css`
   :host {
     width: 48px;
-    height: 100%;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,6 +46,29 @@ const styles = css`
     width: 20px;
     height: 20px;
   }
+
+  img {
+    display: none;
+    width: 20px;
+    height: 20px;
+    margin-inline-start: 12px;
+    object-fit: cover;
+    border-radius: ${borderRadiusSmall};
+  }
+
+  #entity {
+    border-radius: ${borderRadiusSmall};
+    width: 32px;
+    height: 32px;
+    margin-inline-start: 8px;
+    margin-block: -12px;
+  }
+
+  :host([type='entity']) img,
+  :host([type='profile']) img,
+  :host([type='site']) img {
+    display: block;
+  }
 `;
 
 @customElement({
@@ -52,7 +77,6 @@ const styles = css`
   styles,
 })
 export class OmniboxIcon extends FASTElement {
-  @observable type: 'search' | 'entity' | 'history' | 'site' | 'profile' =
-    'search';
-  @observable 'entity-image' = '';
+  @attr type: 'search' | 'entity' | 'history' | 'site' | 'profile' = 'search';
+  @attr 'entity-image' = '';
 }
