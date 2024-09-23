@@ -30,6 +30,7 @@ const template = html<CopilotComposer>` <div
     @mouseover="${(x) => x.activate()}"
     }
   ></div>
+  <div id="click-catcher" @click="${(x) => x.deactivate()}"></div>
   <div part="composer">
     <phx-button appearance="subtle" size="large" icon-only>
       <img src="img/edge/copilot-icon.svg" />
@@ -125,6 +126,17 @@ const styles = css`
   [part='composer'] input:empty::placeholder {
     color: ${colorNeutralForegroundHint};
   }
+
+  #click-catcher {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: transparent;
+  }
+
+  :host([active]) #click-catcher {
+    display: block;
+  }
 `;
 
 @customElement({
@@ -144,7 +156,7 @@ export class CopilotComposer extends FASTElement {
   activate() {
     this.active = true;
     setTimeout(() => this.composerInput?.focus(), 400); // wait for the animation to finish
-    this.composerInput?.addEventListener('blur', () => this.deactivate());
+    // this.composerInput?.addEventListener('blur', () => this.deactivate());
   }
 
   deactivate() {

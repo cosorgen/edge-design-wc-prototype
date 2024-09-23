@@ -4,6 +4,7 @@ import {
   html,
   css,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -16,9 +17,11 @@ import {
   spacingHorizontalS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
+import '../controls/more-menu.js';
 import { Tab, TabService } from '#services/tabService.js';
 import WindowsService, { Window } from '#services/windowsService.js';
 import {
@@ -28,6 +31,7 @@ import {
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '../../windows/designSystem.js';
 import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>
@@ -74,11 +78,18 @@ const template = html<TabBar>`
     </phx-button>
     <div class="group" id="caption-controls" style="gap: 0;">
       <div class="group" id="pill-menu">
-        <phx-button size="small" appearance="subtle" shape="circular" icon-only>
+        <phx-toggle-button
+          size="small"
+          appearance="subtle"
+          shape="circular"
+          icon-only
+          @click="${(x) => x.toggleMoreMenu()}"
+          pressed="${(x) => x.ews.moreMenuOpen}"
+        >
           <svg>
             <use href="img/edge/icons.svg#more-horizontal-20-regular" />
           </svg>
-        </phx-button>
+        </phx-toggle-button>
         <identity-control appearance="signedIn"></identity-control>
       </div>
       <phx-button
@@ -127,6 +138,11 @@ const template = html<TabBar>`
       </phx-button>
     </div>
   </div>
+  ${when(
+    (x) => x.ews.moreMenuOpen,
+    html`<div id="click-catcher" @click="${(x) => x.toggleMoreMenu()}"></div>
+      <more-menu></more-menu>`,
+  )}
 `;
 
 const styles = css`
@@ -224,6 +240,12 @@ const styles = css`
   #tabs:has(+ #add:hover) > phx-divider:last-of-type {
     visibility: hidden;
   }
+
+  #click-catcher {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+  }
 `;
 
 @customElement({
@@ -234,6 +256,7 @@ const styles = css`
 export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -269,5 +292,9 @@ export class TabBar extends FASTElement {
     } else {
       this.ws.maximizeWindow(this.ws.activeWindowId);
     }
+  }
+
+  toggleMoreMenu() {
+    this.ews.moreMenuOpen = !this.ews.moreMenuOpen;
   }
 }

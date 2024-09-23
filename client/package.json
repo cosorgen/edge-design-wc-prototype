@@ -10,7 +10,7 @@
   "dependencies": {
     "@microsoft/fast-element": "^2.0.0-beta.26",
     "@phoenixui/themes": "0.3.8",
-    "@phoenixui/web-components": "0.3.11"
+    "@phoenixui/web-components": "0.3.13"
   },
   "imports": {
     "#services*": "./src/services/*"
