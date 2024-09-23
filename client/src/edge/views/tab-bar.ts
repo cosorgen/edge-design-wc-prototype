@@ -27,7 +27,7 @@ import {
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '../../windows/designSystem.js';
-import { spacingFrame } from '../designSystem.js';
+import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>
@@ -145,7 +145,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: var(--edge-frame-spacing);
+    gap: ${spacingFrame};
     padding-inline-end: 208px;
   }
 
@@ -182,7 +182,7 @@ const styles = css`
     padding: ${spacingHorizontalXXS};
     gap: ${spacingHorizontalXS};
     border-radius: ${borderRadiusCircular};
-    background-color: var(--pill-menu-background);
+    background-color: ${colorLayerBackgroundPillMenu};
   }
 
   #caption-controls {
