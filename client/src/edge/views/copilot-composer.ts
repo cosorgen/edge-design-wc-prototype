@@ -13,9 +13,7 @@ import {
   colorNeutralForegroundHint,
   colorScrollbarForeground,
   colorScrollbarForegroundHover,
-  curveDecelerateMax,
-  curveEasyEaseMax,
-  durationFast,
+  durationSlow,
   shadow28,
   spacingHorizontalS,
   spacingHorizontalXL,
@@ -24,6 +22,8 @@ import {
   strokeWidthThin,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+
+const curveEasyEaseMax = 'cubic-bezier(0.6, 0, 0.3, 1)';
 
 const template = html<CopilotComposer>` <div
     part="grabber"
@@ -53,7 +53,7 @@ const styles = css`
     display: flex;
     justify-content: center;
 
-    transition: all ${durationFast} ${curveEasyEaseMax};
+    transition: all ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([active]) {
@@ -67,14 +67,13 @@ const styles = css`
     height: ${spacingVerticalXS};
     background-color: ${colorScrollbarForeground};
     border-radius: ${borderRadiusCircular};
-    cursor: pointer;
 
-    transition: all ${durationFast} ${curveDecelerateMax};
+    transition: all ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([active]) [part='grabber'] {
     background-color: ${colorScrollbarForegroundHover};
-    transform: translateY(-32px);
+    transform: translateY(-68px);
     opacity: 0;
   }
 
@@ -93,7 +92,7 @@ const styles = css`
     box-shadow: ${shadow28};
     overflow: hidden;
 
-    transition: all ${durationFast} ${curveDecelerateMax};
+    transition: all ${durationSlow} ${curveEasyEaseMax};
     transform: translateY(8px);
     opacity: 0;
   }
@@ -144,7 +143,7 @@ export class CopilotComposer extends FASTElement {
 
   activate() {
     this.active = true;
-    setTimeout(() => this.composerInput?.focus(), 150); // wait for the animation to finish
+    setTimeout(() => this.composerInput?.focus(), 400); // wait for the animation to finish
     this.composerInput?.addEventListener('blur', () => this.deactivate());
   }
 
