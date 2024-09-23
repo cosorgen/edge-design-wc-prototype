@@ -26,7 +26,8 @@ import {
 } from './designSystem.js';
 import { setThemeFor } from '@phoenixui/web-components';
 import WindowsService from '#services/windowsService.js';
-import settingsService from '#services/settingsService.js';
+import EdgeSettingsService from '#services/settingsService.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
@@ -116,14 +117,17 @@ const styles = css`
 })
 export class MicrosoftEdge extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
-  @inject(settingsService) ss!: settingsService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsService) ss!: EdgeSettingsService;
 
   constructor() {
     super();
     // Set up window state
     const container = DI.getOrCreateDOMContainer(this);
     const ts = new TabService();
+    const ews = new EdgeWindowService();
     container.register(Registration.instance(TabService, ts));
+    container.register(Registration.instance(EdgeWindowService, ews));
 
     // set up theme
     this.setTheme();
