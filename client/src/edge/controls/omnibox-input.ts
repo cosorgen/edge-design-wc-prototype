@@ -32,7 +32,6 @@ const template = html<OmniboxInput>`
 
 const styles = css`
   :host {
-    flex: 1;
     overflow: hidden;
   }
 
@@ -290,5 +289,10 @@ export class OmniboxInput extends FASTElement {
       sel?.removeAllRanges();
       sel?.addRange(range);
     }
+  }
+
+  focus() {
+    if (!this.input) return;
+    this.input.focus();
   }
 }

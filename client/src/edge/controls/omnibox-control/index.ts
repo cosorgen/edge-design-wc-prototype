@@ -50,6 +50,11 @@ export class OmniboxControl extends FASTElement {
   }
 
   handleInputClick() {
+    const input = this.shadowRoot?.querySelector(
+      'omnibox-input',
+    ) as HTMLElement;
+    console.log(input);
+    if (input) input.focus();
     this.dropdownOpen = true;
   }
 

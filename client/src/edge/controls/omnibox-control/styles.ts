@@ -10,7 +10,7 @@ import {
   spacingHorizontalNone,
   spacingHorizontalXS,
   spacingHorizontalXXS,
-  spacingVerticalS,
+  spacingVerticalXS,
   spacingVerticalXXS,
   strokeWidthThick,
   strokeWidthThin,
@@ -61,16 +61,41 @@ export const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalXS};
+
+    #status,
+    #actions {
+      flex: 1;
+    }
   }
 
   [dropdown-open] #top-row {
-    padding: ${spacingVerticalS} ${spacingHorizontalNone};
+    padding: ${spacingVerticalXS} ${spacingHorizontalNone};
     gap: ${spacingHorizontalNone};
+
+    #status {
+      flex: 0;
+    }
+    omnibox-input {
+      flex: 1;
+    }
+  }
+
+  #status {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  #top-row:has([value='']) {
+    #status {
+      justify-content: flex-end;
+    }
   }
 
   #actions {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
 
     phx-button::part(content) {
       color: ${colorNeutralForegroundHint};

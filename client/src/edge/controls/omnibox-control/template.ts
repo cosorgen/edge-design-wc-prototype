@@ -8,17 +8,22 @@ import '@phoenixui/web-components/button.js';
 export const template = html`
   <div part="container" ?dropdown-open="${(x) => x.dropdownOpen}">
     <div id="top-row">
-      <omnibox-icon
-        type="${(x) =>
-          x.dropdownSelectedIndex >= 0
-            ? x.suggestions[x.dropdownSelectedIndex].type
-            : 'search'}"
-        entity-image="${(x) =>
-          x.dropdownSelectedIndex >= 0
-            ? x.suggestions[x.dropdownSelectedIndex].entityImage
-            : ''}"
-      ></omnibox-icon>
-      <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
+      <div
+        id="status"
+        @click="${(x) => (!x.dropdownOpen ? x.handleInputClick() : null)}"
+      >
+        <omnibox-icon
+          type="${(x) =>
+            x.dropdownSelectedIndex >= 0
+              ? x.suggestions[x.dropdownSelectedIndex].type
+              : 'search'}"
+          entity-image="${(x) =>
+            x.dropdownSelectedIndex >= 0
+              ? x.suggestions[x.dropdownSelectedIndex].entityImage
+              : ''}"
+        ></omnibox-icon>
+        <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
+      </div>
       <omnibox-input
         value="${(x) => x.inputValue}"
         @click="${(x) => x.handleInputClick()}"
@@ -28,7 +33,10 @@ export const template = html`
         @arrow-up="${(x) => x.setDropdownSelection(-1)}"
         @arrow-down="${(x) => x.setDropdownSelection(1)}"
       ></omnibox-input>
-      <div id="actions">
+      <div
+        id="actions"
+        @click="${(x) => (!x.dropdownOpen ? x.handleInputClick() : null)}"
+      >
         <phx-button size="small" appearance="subtle" shape="circular" icon-only>
           <svg>
             <use href="img/edge/icons.svg#star-20-regular" />
