@@ -116,20 +116,9 @@ const styles = css`
     visibility: visible;
   }
 
-  #title,
-  [name='title']::slotted(*) {
-    width: 100%;
-    /* Caption1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase200};
-    text-align: start;
-    white-space: nowrap;
-    overflow: hidden;
-
+  #title {
+    flex: 1;
     margin-block-end: ${spacingVerticalXXS};
-
     mask-image: linear-gradient(
       90deg,
       white,
@@ -139,7 +128,16 @@ const styles = css`
     );
   }
 
-  #title {
+  #title,
+  [name='title']::slotted(*) {
+    /* Caption1 */
+    font-family: ${fontFamilyBase};
+    font-size: ${fontSizeBase200};
+    font-weight: ${fontWeightRegular};
+    line-height: ${lineHeightBase200};
+    text-align: start;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   #favicon,
