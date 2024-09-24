@@ -3,7 +3,6 @@ import {
   FASTElement,
   html,
   css,
-  repeat,
   observable,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
@@ -32,19 +31,18 @@ const template = html<Toolbar>`
       </svg>
     </phx-button>
   </div>
-  ${repeat(
-    (x) => x.ts.tabs,
-    html`
-      <omnibox-control
-        ?active="${(x) => x.active}"
-        initialValue="${(x) => x.url}"
-        @submit="${(x, c) =>
-          c.parent.handleOmniboxSubmit(c.event as CustomEvent)}"
-        @change="${(x, c) =>
-          c.parent.handleOmniboxChange(c.event as CustomEvent)}"
-      ></omnibox-control>
-    `,
-  )}
+  <omnibox-control
+    id="omnibox_${(x) => x.ts.getActiveTab()?.id}"
+    ?active="${(x) => x.ts.getActiveTab()?.active}"
+    initialValue="${(x) => x.ts.getActiveTab()?.url}"
+    @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
+    @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
+    @blur="${(x, c) =>
+      x.handleOmniboxChange({
+        ...c.event,
+        detail: ' ',
+      } as CustomEvent)}"
+  ></omnibox-control>
   <div class="group"><!-- This is where pinned stuff goes --></div>
 `;
 

@@ -96,7 +96,7 @@ const styles = css`
     align-items: center;
     gap: ${spacingHorizontalS};
     padding-inline-start: ${spacingHorizontalS};
-    padding-inline-end: calc(${spacingHorizontalS} + 16px);
+    padding-inline-end: calc(${spacingHorizontalS} + /*16px*/ 0px);
     padding-block: ${spacingHorizontalSNudge};
     color: ${colorNeutralForeground1};
     border-radius: ${borderRadiusLarge};
@@ -125,9 +125,24 @@ const styles = css`
     line-height: ${lineHeightBase200};
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
 
     margin-block-end: ${spacingVerticalXXS};
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 48px;
+      inset-inline-end: 0;
+      inset-block: 0;
+      border-radius: 0 ${borderRadiusLarge} 0 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        ${colorLayerBackgroundDialog},
+        ${colorLayerBackgroundDialog}
+      );
+    }
   }
 
   #favicon,

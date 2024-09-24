@@ -59,8 +59,7 @@ export class OmniboxControl extends FASTElement {
   }
 
   handleInputSubmit() {
-    this.dropdownOpen = false;
-    this.dropdownSelectedIndex = -1;
+    (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).blur();
   }
 
   handleInputChange(e: CustomEvent) {
@@ -89,8 +88,7 @@ export class OmniboxControl extends FASTElement {
   }
 
   handleSuggestionClick(e: CustomEvent) {
-    this.dropdownOpen = false;
-    this.dropdownSelectedIndex = -1;
+    (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).blur();
     this.inputValue = e.detail;
     this.$emit('submit', e.detail);
   }

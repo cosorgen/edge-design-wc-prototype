@@ -65,6 +65,7 @@ export const styles = css`
     #status,
     #actions {
       flex: 1;
+      min-width: 256px;
     }
   }
 
@@ -74,6 +75,7 @@ export const styles = css`
 
     #status {
       flex: 0;
+      min-width: unset;
     }
     omnibox-input {
       flex: 1;

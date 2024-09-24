@@ -80,7 +80,6 @@ export class OmniboxInput extends FASTElement {
 
     if (this.input.innerText !== this.value) {
       this.input.innerHTML = this.formatUrl(this.value);
-      this.selectAll(this.input); // Highlight new value for easy editing.
     }
   }
 
