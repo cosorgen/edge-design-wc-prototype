@@ -4,6 +4,8 @@ import {
   html,
   css,
   attr,
+  when,
+  observable,
 } from '@microsoft/fast-element';
 import {
   acrylicBackgroundBlur,
@@ -31,19 +33,22 @@ const template = html<CopilotComposer>` <div
     }
   ></div>
   <div id="click-catcher" @click="${(x) => x.deactivate()}"></div>
-  <div part="composer">
-    <phx-button appearance="subtle" size="large" icon-only>
-      <img src="img/edge/copilot-icon.svg" />
-    </phx-button>
-    <input type="text" placeholder="Talk about your page" />
-    <div>
+  ${when(
+    (x) => x.renderComposer,
+    html` <div part="composer">
       <phx-button appearance="subtle" size="large" icon-only>
-        <svg>
-          <use href="img/edge/icons.svg#cast-20-regular" />
-        </svg>
+        <img src="img/edge/copilot-icon.svg" />
       </phx-button>
-    </div>
-  </div>`;
+      <input type="text" placeholder="Talk about your page" />
+      <div>
+        <phx-button appearance="subtle" size="large" icon-only>
+          <svg>
+            <use href="img/edge/icons.svg#cast-20-regular" />
+          </svg>
+        </phx-button>
+      </div>
+    </div>`,
+  )}`;
 
 const styles = css`
   :host {
@@ -146,20 +151,32 @@ const styles = css`
 })
 export class CopilotComposer extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
-  composerInput?: HTMLInputElement | null = null;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.composerInput = this.shadowRoot?.querySelector('input');
-  }
+  @observable renderComposer = false;
 
   activate() {
-    this.active = true;
-    setTimeout(() => this.composerInput?.focus(), 400); // wait for the animation to finish
-    // this.composerInput?.addEventListener('blur', () => this.deactivate());
+    this.renderComposer = true;
+
+    // Wait for the element to be rendered before focusing
+    const interval = setInterval(() => {
+      const composer = this.shadowRoot?.querySelector('[part=composer]');
+      if (composer) {
+        clearInterval(interval);
+        this.active = true;
+        const onTransitionEnd = () => {
+          composer.querySelector('input')?.focus();
+          composer.removeEventListener('transitionend', onTransitionEnd);
+        };
+        composer.addEventListener('transitionend', onTransitionEnd);
+      }
+    }, 10);
   }
 
   deactivate() {
     this.active = false;
+    const onTransitionEnd = () => {
+      this.renderComposer = false;
+      this.removeEventListener('transitionend', onTransitionEnd);
+    };
+    this.addEventListener('transitionend', onTransitionEnd);
   }
 }
