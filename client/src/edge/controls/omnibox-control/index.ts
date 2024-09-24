@@ -32,6 +32,7 @@ export class OmniboxControl extends FASTElement {
     if (this.initialValue === 'edge://newtab') {
       // Don't display the address of the new tab page
       this.initialValue = '';
+      (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).focus();
     }
 
     if (this.inputValue !== this.initialValue) {
@@ -44,7 +45,7 @@ export class OmniboxControl extends FASTElement {
     if (
       this.dropdownComponent &&
       this.dropdownComponent instanceof OmniboxDropdown
-    ) {
+    ) { 
       this.dropdownComponent.suggestions = this.suggestions;
     }
   }
