@@ -118,31 +118,28 @@ const styles = css`
 
   #title,
   [name='title']::slotted(*) {
+    width: 100%;
     /* Caption1 */
     font-family: ${fontFamilyBase};
     font-size: ${fontSizeBase200};
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase200};
+    text-align: start;
     white-space: nowrap;
     overflow: hidden;
 
     margin-block-end: ${spacingVerticalXXS};
 
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 48px;
-      inset-inline-end: 0;
-      inset-block: 0;
-      border-radius: 0 ${borderRadiusLarge} 0 0;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        ${colorLayerBackgroundDialog},
-        ${colorLayerBackgroundDialog}
-      );
-    }
+    mask-image: linear-gradient(
+      90deg,
+      white,
+      white 80%,
+      transparent 92%,
+      transparent
+    );
+  }
+
+  #title {
   }
 
   #favicon,
