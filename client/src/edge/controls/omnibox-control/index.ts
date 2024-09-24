@@ -32,7 +32,10 @@ export class OmniboxControl extends FASTElement {
     if (this.initialValue === 'edge://newtab') {
       // Don't display the address of the new tab page
       this.initialValue = '';
-      (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).focus();
+      const input = this.shadowRoot?.querySelector(
+        'omnibox-input',
+      ) as HTMLElement;
+      if (input) input.focus();
     }
 
     if (this.inputValue !== this.initialValue) {
@@ -45,7 +48,7 @@ export class OmniboxControl extends FASTElement {
     if (
       this.dropdownComponent &&
       this.dropdownComponent instanceof OmniboxDropdown
-    ) { 
+    ) {
       this.dropdownComponent.suggestions = this.suggestions;
     }
   }
@@ -54,7 +57,6 @@ export class OmniboxControl extends FASTElement {
     const input = this.shadowRoot?.querySelector(
       'omnibox-input',
     ) as HTMLElement;
-    console.log(input);
     if (input) input.focus();
     this.dropdownOpen = true;
   }
@@ -84,7 +86,7 @@ export class OmniboxControl extends FASTElement {
         this.dropdownSelectedIndex + step,
         this.suggestions.length,
       );
-      this.inputValue = this.suggestions[this.dropdownSelectedIndex].value;
+      this.inputValue = this.suggestions[this.dropdownSelectedIndex].title;
     }
   }
 

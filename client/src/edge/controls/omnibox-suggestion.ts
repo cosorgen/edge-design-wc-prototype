@@ -8,6 +8,7 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
+  borderRadiusLayerApp,
   borderRadiusMedium,
   colorBrandStroke,
   colorNeutralForegroundHint,
@@ -17,7 +18,7 @@ import {
   fontSizeBase300,
   fontWeightRegular,
   spacingHorizontalM,
-  spacingVerticalSNudge,
+  spacingVerticalMNudge,
   strokeWidthThickest,
 } from '@phoenixui/themes';
 
@@ -51,7 +52,7 @@ const styles = css`
     align-items: center;
     gap: ${spacingHorizontalM};
     height: 40px;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${borderRadiusLayerApp}; /* Fit in the corner of the omnibox */
   }
 
   :host(:hover) {
@@ -83,7 +84,7 @@ const styles = css`
     display: none;
     position: absolute;
     width: ${strokeWidthThickest};
-    inset-block: ${spacingVerticalSNudge};
+    inset-block: ${spacingVerticalMNudge};
     inset-inline-start: 0;
     background-color: ${colorBrandStroke};
     border-radius: ${borderRadiusCircular};

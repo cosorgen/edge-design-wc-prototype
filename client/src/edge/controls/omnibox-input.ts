@@ -131,13 +131,15 @@ export class OmniboxInput extends FASTElement {
   handleFocus() {
     if (!this.input) throw new Error('Input element not found');
 
-    this.selectAll(this.input);
+    this.selectAll();
     return true; // Allow default behavior.
   }
 
-  selectAll(el: HTMLElement) {
+  selectAll() {
+    if (!this.input) return;
+
     const range = document.createRange();
-    range.selectNodeContents(el);
+    range.selectNodeContents(this.input);
     const sel = window.getSelection();
     if (sel === null) throw new Error('Selection is null');
     sel.removeAllRanges();

@@ -113,7 +113,7 @@ export const styles = css`
   }
 
   [dropdown-open] omnibox-dropdown {
-    display: inherit;
+    display: unset;
   }
 
   omnibox-icon {
@@ -121,7 +121,7 @@ export const styles = css`
   }
 
   [dropdown-open] omnibox-icon {
-    display: inherit;
+    display: unset;
   }
 
   [dropdown-open] omnibox-status {
