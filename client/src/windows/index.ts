@@ -16,10 +16,10 @@ import {
 import { setTheme } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
-import './views/taskBar.js';
-import './controls/taskbarButton.js';
+import './views/task-bar.js';
+import './controls/taskbar-button.js';
 import './controls/mica-material.js';
-import './views/appWindow.js';
+import './controls/app-window.js';
 
 const styles = css`
   :host {
