@@ -44,14 +44,15 @@ const styles = css`
   }
 
   svg {
+    display: none;
     width: 20px;
     height: 20px;
   }
 
   img {
     display: none;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     object-fit: cover;
   }
 
@@ -63,8 +64,10 @@ const styles = css`
 
   :host([type='entity']) img,
   :host([type='profile']) img,
-  :host([type='site']) img {
-    display: unset;
+  :host([type='site']) img,
+  :host([type='history']) svg,
+  :host([type='search']) svg {
+    display: block;
   }
 `;
 
