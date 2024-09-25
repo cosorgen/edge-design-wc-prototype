@@ -9,6 +9,8 @@ import {
 export type NewTokens = {
   colorLayerBackgroundPillMenu: string;
   spacingFrame: string;
+  colorLayerOmniboxBackground: string;
+  colorLayerOmniboxBackgroundHover: string;
 };
 
 export type EdgeTheme = Theme & NewTokens;
@@ -23,6 +25,8 @@ export const edgeLightTheme: EdgeTheme = {
   ...commonThemeOverrides,
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#dde2e8',
+  colorLayerOmniboxBackground: '#F1F3F6',
+  colorLayerOmniboxBackgroundHover: '#F1F3F6',
 };
 
 export const edgeLightThemeSolid: EdgeTheme = {
@@ -30,6 +34,8 @@ export const edgeLightThemeSolid: EdgeTheme = {
   ...commonThemeOverrides,
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#dde2e8',
+  colorLayerOmniboxBackground: '#F1F3F6',
+  colorLayerOmniboxBackgroundHover: '#F1F3F6',
 };
 
 export const edgeDarkTheme: EdgeTheme = {
@@ -37,6 +43,8 @@ export const edgeDarkTheme: EdgeTheme = {
   ...commonThemeOverrides,
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#000',
+  colorLayerOmniboxBackground: '#F1F3F6',
+  colorLayerOmniboxBackgroundHover: '#F1F3F6',
 };
 
 export const edgeDarkThemeSolid: EdgeTheme = {
@@ -44,8 +52,13 @@ export const edgeDarkThemeSolid: EdgeTheme = {
   ...commonThemeOverrides,
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#000',
+  colorLayerOmniboxBackground: '#F1F3F6',
+  colorLayerOmniboxBackgroundHover: '#F1F3F6',
 };
 
 export const colorLayerBackgroundPillMenu =
   'var(--colorLayerBackgroundPillMenu)';
 export const spacingFrame = 'var(--spacingFrame)';
+export const colorLayerOmniboxBackground = 'var(--colorLayerOmniboxBackground)';
+export const colorLayerOmniboxBackgroundHover =
+  'var(--colorLayerOmniboxBackgroundHover)';

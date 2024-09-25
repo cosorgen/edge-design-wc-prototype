@@ -4,8 +4,6 @@ import {
   borderRadiusLayerDialog,
   colorBrandStroke1,
   colorLayerBackgroundDialog,
-  colorNeutralBackground3,
-  colorNeutralBackground3Hover,
   colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalNone,
@@ -16,6 +14,10 @@ import {
   strokeWidthThick,
   strokeWidthThin,
 } from '@phoenixui/themes';
+import {
+  colorLayerOmniboxBackground,
+  colorLayerOmniboxBackgroundHover,
+} from '../../designSystem.js';
 
 export const styles = css`
   :host {
@@ -35,7 +37,7 @@ export const styles = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: ${colorNeutralBackground3};
+    background-color: ${colorLayerOmniboxBackground};
     border: ${strokeWidthThin} solid transparent;
     border-radius: ${borderRadiusCircular};
     padding: calc(${spacingVerticalXXS} + var(--stroke-diff))
@@ -54,7 +56,7 @@ export const styles = css`
   }
 
   [part='container']:not([dropdown-open]):hover {
-    background-color: ${colorNeutralBackground3Hover};
+    background-color: ${colorLayerOmniboxBackgroundHover};
   }
 
   #top-row {
