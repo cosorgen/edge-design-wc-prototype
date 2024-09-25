@@ -8,7 +8,7 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import { colorNeutralStroke1, strokeWidthThin } from '@phoenixui/themes';
+import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 
 const template = html<WebContent>`
   ${repeat(
@@ -26,7 +26,7 @@ const styles = css`
   :host {
     flex: 1;
     display: flex;
-    border-top: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
   }
 `;
 

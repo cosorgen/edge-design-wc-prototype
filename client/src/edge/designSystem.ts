@@ -26,7 +26,7 @@ export const edgeLightTheme: EdgeTheme = {
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#dde2e8',
   colorLayerOmniboxBackground: '#F1F3F6',
-  colorLayerOmniboxBackgroundHover: '#F1F3F6',
+  colorLayerOmniboxBackgroundHover: '#EBEEF1',
 };
 
 export const edgeLightThemeSolid: EdgeTheme = {
@@ -35,7 +35,7 @@ export const edgeLightThemeSolid: EdgeTheme = {
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#dde2e8',
   colorLayerOmniboxBackground: '#F1F3F6',
-  colorLayerOmniboxBackgroundHover: '#F1F3F6',
+  colorLayerOmniboxBackgroundHover: '#EBEEF1',
 };
 
 export const edgeDarkTheme: EdgeTheme = {
@@ -43,8 +43,8 @@ export const edgeDarkTheme: EdgeTheme = {
   ...commonThemeOverrides,
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#000',
-  colorLayerOmniboxBackground: '#F1F3F6',
-  colorLayerOmniboxBackgroundHover: '#F1F3F6',
+  colorLayerOmniboxBackground: '#0E0E0E',
+  colorLayerOmniboxBackgroundHover: '#000000',
 };
 
 export const edgeDarkThemeSolid: EdgeTheme = {
@@ -52,8 +52,8 @@ export const edgeDarkThemeSolid: EdgeTheme = {
   ...commonThemeOverrides,
   colorLayerBackgroundPillMenu: '#ffffff80',
   colorLayerBackgroundApp: '#000',
-  colorLayerOmniboxBackground: '#F1F3F6',
-  colorLayerOmniboxBackgroundHover: '#F1F3F6',
+  colorLayerOmniboxBackground: '#0E0E0E',
+  colorLayerOmniboxBackgroundHover: '#000000',
 };
 
 export const colorLayerBackgroundPillMenu =
