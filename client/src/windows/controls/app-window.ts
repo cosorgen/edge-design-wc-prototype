@@ -28,10 +28,6 @@ const styles = css`
     left: ${(x) => x.xPos};
   }
 
-  :host([active]) {
-    box-shadow: ${shadowBaseLayer};
-  }
-
   :host([minimized]) {
     display: none;
   }
@@ -43,11 +39,10 @@ const styles = css`
     bottom: 48px;
     width: auto;
     height: auto;
-    border-radius: 0;
-    box-shadow: none;
   }
 
   #content {
+    position: relative; /* required for the grabbers and clipping */
     display: block;
     width: 100%;
     height: 100%;
@@ -56,18 +51,81 @@ const styles = css`
     box-shadow: ${shadow28};
   }
 
+  :host([active]) #content {
+    box-shadow: ${shadowBaseLayer};
+  }
+
+  :host([maximized]) #content {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .grabber {
     position: absolute;
-    width: 16px;
-    height: 16px;
-    background: red;
-    cursor: pointer;
   }
 
   #top {
     top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
+    height: 8px;
+    left: 0;
+    right: 0;
+    cursor: ns-resize;
+  }
+
+  #top-right {
+    top: -8px;
+    right: -8px;
+    width: 8px;
+    height: 8px;
+    cursor: nesw-resize;
+  }
+
+  #right {
+    top: 0;
+    right: -8px;
+    bottom: 0;
+    width: 8px;
+    cursor: ew-resize;
+  }
+
+  #bottom-right {
+    bottom: -8px;
+    right: -8px;
+    width: 8px;
+    height: 8px;
+    cursor: nwse-resize;
+  }
+
+  #bottom {
+    left: 0;
+    bottom: -8px;
+    height: 8px;
+    right: 0;
+    cursor: ns-resize;
+  }
+
+  #bottom-left {
+    bottom: -8px;
+    left: -8px;
+    width: 8px;
+    height: 8px;
+    cursor: nesw-resize;
+  }
+
+  #left {
+    top: 0;
+    left: -8px;
+    bottom: 0;
+    width: 8px;
+    cursor: ew-resize;
+  }
+
+  #top-left {
+    top: -8px;
+    left: -8px;
+    width: 8px;
+    height: 8px;
+    cursor: nwse-resize;
   }
 `;
 

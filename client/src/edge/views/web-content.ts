@@ -14,9 +14,11 @@ const template = html<WebContent>`
   ${repeat(
     (x) => x.ts.tabs,
     html`<web-page
+      id="${(x) => x.id}"
       url="${(x) => x.url}"
       ?active="${(x) => x.active}"
     ></web-page>`,
+    { positioning: true },
   )}
 `;
 
