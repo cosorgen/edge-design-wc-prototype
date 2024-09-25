@@ -85,9 +85,14 @@ export const styles = css`
     }
   }
 
-  #status {
+  #status,
+  #actions {
     display: flex;
     flex-direction: row;
+    cursor: text;
+  }
+
+  #status {
     justify-content: flex-start;
   }
 
@@ -98,8 +103,6 @@ export const styles = css`
   }
 
   #actions {
-    display: flex;
-    flex-direction: row;
     justify-content: flex-end;
 
     phx-button::part(content) {

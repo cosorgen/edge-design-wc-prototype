@@ -75,14 +75,15 @@ const styles = css`
     background-color: ${colorScrollbarForeground};
     border-radius: ${borderRadiusCircular};
     cursor: pointer;
-
-    transition: all ${durationSlow} ${curveEasyEaseMax};
+    transition:
+      transform ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax};
   }
 
   [part='grabber']:hover {
     background-color: ${colorScrollbarForegroundHover};
     height: calc(${spacingVerticalXS} + ${spacingVerticalXXS});
-    transform: translateY(calc(0px - ${spacingVerticalXXS} / 2));
+    margin-block-start: calc(0px - ${spacingVerticalXXS} / 2);
   }
 
   :host([active]) [part='grabber'] {
