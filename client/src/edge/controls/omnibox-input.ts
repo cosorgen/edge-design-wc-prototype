@@ -80,6 +80,10 @@ export class OmniboxInput extends FASTElement {
 
     if (this.input.innerText !== this.value) {
       this.input.innerHTML = this.formatUrl(this.value);
+      if (this.matches('[dropdown-open] *')) {
+        // If the dropdown is open and we get a new value, we need to reselect the text.
+        this.selectAll();
+      }
     }
   }
 
@@ -295,5 +299,10 @@ export class OmniboxInput extends FASTElement {
   focus() {
     if (!this.input) return;
     this.input.focus();
+  }
+
+  blur() {
+    if (!this.input) return;
+    this.input.blur();
   }
 }

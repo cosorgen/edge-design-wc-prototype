@@ -75,19 +75,25 @@ export class TabService {
 
   navigate(url: string) {
     // Validate URL
-    if (!url.startsWith('http')) {
-      url = `https://www.bing.com/search?q=${url}`;
+    let validUrl = url;
+    if (!validUrl.startsWith('edge://')) {
+      // see if we just need to add https://
+      if (!validUrl.match(/^.+:\/\/.+\..+$/)) validUrl = `https://${url}`;
+      // if not, search bing
+      if (!validUrl.match(/^.+:\/\/.+\..+$/))
+        validUrl = `https://www.bing.com/search?q=${encodeURIComponent(url)}`;
     }
 
     // Set tab to loading state
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
       title: tab.active ? url : tab.title,
+      url: tab.active ? validUrl : tab.url,
       loading: tab.active,
     }));
 
     // Get metadata for the new query
-    fetch(`/api/metadata?url=${url}`)
+    fetch(`/api/metadata?url=${validUrl}`)
       .then((res) => res.json())
       .then((metadata) => {
         this.tabs_ = this.tabs_.map((tab) => ({
@@ -101,7 +107,7 @@ export class TabService {
     // Set the URL of the active tab to the query
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
-      url: tab.active ? url : tab.url,
+      url: tab.active ? validUrl : tab.url,
     }));
   }
 }

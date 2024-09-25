@@ -106,6 +106,10 @@ const styles = css`
     background-color: ${colorSubtleBackgroundHover};
   }
 
+  :host([active]) button {
+    cursor: default;
+  }
+
   :host([active]) button:hover {
     background-color: transparent;
   }

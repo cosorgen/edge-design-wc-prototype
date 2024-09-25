@@ -1,6 +1,7 @@
 import { css } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
+  borderRadiusLayerDialog,
   colorBrandStroke1,
   colorLayerBackgroundDialog,
   colorNeutralBackground3,
@@ -48,7 +49,7 @@ export const styles = css`
 
   [part='container'][dropdown-open] {
     background-color: ${colorLayerBackgroundDialog};
-    border-radius: 16px; /* Override from design system to make radius match pill */
+    border-radius: ${borderRadiusLayerDialog};
     box-shadow: ${shadow28};
   }
 
