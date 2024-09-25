@@ -21,6 +21,7 @@ import {
   spacingHorizontalXL,
   spacingHorizontalXS,
   spacingVerticalXS,
+  spacingVerticalXXS,
   strokeWidthThin,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
@@ -29,7 +30,7 @@ const curveEasyEaseMax = 'cubic-bezier(0.6, 0, 0.3, 1)';
 
 const template = html<CopilotComposer>` <div
     part="grabber"
-    @mouseover="${(x) => x.activate()}"
+    @click="${(x) => x.activate()}"
     }
   ></div>
   <div id="click-catcher" @click="${(x) => x.deactivate()}"></div>
@@ -73,8 +74,15 @@ const styles = css`
     height: ${spacingVerticalXS};
     background-color: ${colorScrollbarForeground};
     border-radius: ${borderRadiusCircular};
+    cursor: pointer;
 
     transition: all ${durationSlow} ${curveEasyEaseMax};
+  }
+
+  [part='grabber']:hover {
+    background-color: ${colorScrollbarForegroundHover};
+    height: calc(${spacingVerticalXS} + ${spacingVerticalXXS});
+    transform: translateY(calc(0px - ${spacingVerticalXXS} / 2));
   }
 
   :host([active]) [part='grabber'] {
