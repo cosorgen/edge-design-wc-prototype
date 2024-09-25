@@ -21,21 +21,14 @@ import {
   spacingVerticalMNudge,
   strokeWidthThickest,
 } from '@phoenixui/themes';
+import './omnibox-icon.js';
 
 const template = html<OmniboxSuggestion>` <div id="start">
     <div id="indicator"></div>
-    <div id="icon">
-      ${when(
-        (x) => x.type === 'search',
-        html`<svg>
-          <use href="img/edge/icons.svg#search-20-regular"></use>
-        </svg>`,
-      )}
-      ${when(
-        (x) => x.type === 'site' || x.type === 'entity',
-        html`<img src="${(x) => x['entity-image']}" alt="" />`,
-      )}
-    </div>
+    <omnibox-icon
+      type="${(x) => x.type}"
+      entity-image="${(x) => x.entityImage}"
+    ></omnibox-icon>
     <div id="title">${(x) => x.title}</div>
     ${when(
       (x) => x.subtitle2 && x.subtitle2 !== '',
@@ -139,7 +132,7 @@ export class OmniboxSuggestion extends FASTElement {
   @attr title = '';
   @attr value = '';
   @attr type: 'search' | 'entity' | 'history' | 'site' | 'label' = 'search';
-  @attr 'entity-image' = '';
+  @attr({ attribute: 'entity-image' }) entityImage = '';
   @attr subtitle = '';
   @attr subtitle2 = '';
   @attr attribution = '';
