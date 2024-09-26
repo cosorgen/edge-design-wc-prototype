@@ -120,4 +120,16 @@ export default class WindowsService {
   getActiveWindow() {
     return this.windows.find((w) => w.id === this.activeWindowId);
   }
+
+  moveWindow(
+    id: string,
+    width: number,
+    height: number,
+    xPos: number,
+    yPos: number,
+  ) {
+    this.windows = this.windows.map((w) =>
+      w.id === id ? { ...w, xPos, yPos, width, height } : w,
+    );
+  }
 }

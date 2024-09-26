@@ -6,17 +6,59 @@ import {
   customElement,
   html,
   observable,
+  ValueConverter,
 } from '@microsoft/fast-element';
 
+const NumberConverter: ValueConverter = {
+  toView(value: number): string {
+    return value.toString();
+  },
+  fromView(value: string): number {
+    return parseInt(value);
+  },
+};
+
 const template = html<AppWindow>` <div id="content"><slot></slot></div>
-  <div class="grabber" id="top"></div>
-  <div class="grabber" id="top-right"></div>
-  <div class="grabber" id="right"></div>
-  <div class="grabber" id="bottom-right"></div>
-  <div class="grabber" id="bottom"></div>
-  <div class="grabber" id="bottom-left"></div>
-  <div class="grabber" id="left"></div>
-  <div class="grabber" id="top-left"></div>`;
+  <div
+    class="grabber"
+    id="top"
+    @mousedown="${(x) => x.mouseDown(0, -1, 0, 1)}"
+  ></div>
+  <div
+    class="grabber"
+    id="top-right"
+    @mousedown="${(x) => x.mouseDown(1, -1, 0, 1)}"
+  ></div>
+  <div
+    class="grabber"
+    id="right"
+    @mousedown="${(x) => x.mouseDown(1, 0, 0, 0)}"
+  ></div>
+  <div
+    class="grabber"
+    id="bottom-right"
+    @mousedown="${(x) => x.mouseDown(1, 1, 0, 0)}"
+  ></div>
+  <div
+    class="grabber"
+    id="bottom"
+    @mousedown="${(x) => x.mouseDown(0, 1, 0, 0)}"
+  ></div>
+  <div
+    class="grabber"
+    id="bottom-left"
+    @mousedown="${(x) => x.mouseDown(-1, 1, 1, 0)}"
+  ></div>
+  <div
+    class="grabber"
+    id="left"
+    @mousedown="${(x) => x.mouseDown(-1, 0, 1, 0)}"
+  ></div>
+  <div
+    class="grabber"
+    id="top-left"
+    @mousedown="${(x) => x.mouseDown(-1, -1, 1, 1)}"
+  ></div>`;
 
 const styles = css`
   :host {
@@ -140,5 +182,74 @@ export class AppWindow extends FASTElement {
   @attr xPos = '100px';
   @attr yPos = '100px';
   @attr zIndex = 0;
+  @attr({ attribute: 'min-width', converter: NumberConverter }) minWidth = 400;
+  @attr({ attribute: 'min-height', converter: NumberConverter }) minHeight =
+    400;
   @observable dragging = false;
+
+  mouseDown(widthAmp: number, heightAmp: number, xAmp: number, yAmp: number) {
+    const mouseMove = (e: MouseEvent) =>
+      this.mouseMove(e, widthAmp, heightAmp, xAmp, yAmp);
+    const mouseUp = () => {
+      this.mouseUp();
+      window.removeEventListener('mousemove', mouseMove);
+      window.removeEventListener('mouseup', mouseUp);
+    };
+
+    window.addEventListener('mousemove', mouseMove);
+    window.addEventListener('mouseup', mouseUp);
+    this.dragging = true;
+    // disable pointer events on iFrame so we hear onMouseUp
+    const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
+    if (content) content.style.pointerEvents = 'none';
+  }
+
+  mouseUp() {
+    const curWidth = parseInt(this.width, 10);
+    const curHeight = parseInt(this.height, 10);
+    const curX = parseInt(this.xPos, 10);
+    const curY = parseInt(this.yPos, 10);
+
+    this.$emit('windowmove', {
+      windowId: this.id,
+      width: curWidth,
+      height: curHeight,
+      xPos: curX,
+      yPos: curY,
+    });
+
+    this.dragging = false;
+    // re-enable pointer events on iFrame
+    const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
+    if (content) content.style.pointerEvents = 'unset';
+  }
+
+  mouseMove(
+    e: MouseEvent,
+    widthAmp: number,
+    heightAmp: number,
+    xAmp: number,
+    yAmp: number,
+  ) {
+    const { movementX, movementY } = e;
+    const curWidth = parseInt(this.width, 10);
+    const curHeight = parseInt(this.height, 10);
+    const curX = parseInt(this.xPos, 10);
+    const curY = parseInt(this.yPos, 10);
+
+    let newWidth = curWidth + movementX * widthAmp;
+    let newHeight = curHeight + movementY * heightAmp;
+    let newX = curX + movementX * xAmp;
+    let newY = curY + movementY * yAmp;
+
+    newWidth = Math.max(this.minWidth, newWidth);
+    if (newWidth === this.minWidth && movementX > 0) newX = curX;
+    newHeight = Math.max(this.minHeight, newHeight);
+    if (newHeight === this.minHeight && movementY > 0) newY = curY;
+
+    this.width = `${newWidth}px`;
+    this.height = `${newHeight}px`;
+    this.xPos = `${newX}px`;
+    this.yPos = `${newY}px`;
+  }
 }

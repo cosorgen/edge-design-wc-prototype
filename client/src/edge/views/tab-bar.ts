@@ -5,6 +5,7 @@ import {
   css,
   repeat,
   when,
+  observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -76,6 +77,7 @@ const template = html<TabBar>`
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
     </phx-button>
+    <div id="window-grabber" @mousedown="${(x) => x.mouseDown()}"></div>
     <div class="group" id="caption-controls" style="gap: 0;">
       <div class="group" id="pill-menu">
         <phx-toggle-button
@@ -162,7 +164,6 @@ const styles = css`
     flex-direction: row;
     align-items: flex-end;
     gap: ${spacingFrame};
-    padding-inline-end: 208px;
   }
 
   .group {
@@ -191,6 +192,12 @@ const styles = css`
 
   #add {
     margin-inline-start: ${spacingHorizontalXXS};
+  }
+
+  #window-grabber {
+    flex: 1;
+    height: 100%;
+    min-width: 208px;
   }
 
   #pill-menu {
@@ -257,6 +264,7 @@ export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @observable dragging = false;
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -319,5 +327,9 @@ export class TabBar extends FASTElement {
       moreMenu.removeAttribute('active');
       moreMenu.addEventListener('transitionend', onTransitionEnd);
     }
+  }
+
+  mouseDown() {
+    console.log('mouse down');
   }
 }

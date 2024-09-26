@@ -50,6 +50,7 @@ const template = html<WindowsShell>`
     (x) => x.ws.windows,
     html`
       <app-window
+        id="${(x) => x.id}"
         width="${(x) => x.width}px"
         height="${(x) => x.height}px"
         xPos="${(x) => x.xPos}px"
@@ -58,6 +59,8 @@ const template = html<WindowsShell>`
         ?minimized="${(x) => x.minimized}"
         ?maximized="${(x) => x.maximized}"
         ?active="${(x, c) => x.id === c.parent.ws.activeWindowId}"
+        @windowmove="${(x, c) =>
+          c.parent.handleWindowMove(c.event as CustomEvent)}"
       >
         ${(x) =>
           installedApps.filter((app) => app.name === x.appName)[0].element ||
@@ -134,5 +137,10 @@ export class WindowsShell extends FASTElement {
 
     // if there are multiple windows open
     return;
+  }
+
+  handleWindowMove(e: CustomEvent) {
+    const { id, width, height, xPos, yPos } = e.detail;
+    this.ws.moveWindow(id, width, height, xPos, yPos);
   }
 }
