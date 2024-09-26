@@ -13,8 +13,6 @@ import {
   acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
   colorNeutralForegroundHint,
-  curveDecelerateMax,
-  durationFast,
   shadow28,
   spacingHorizontalXS,
   spacingVerticalS,
@@ -84,16 +82,6 @@ const styles = css`
     border-radius: ${borderRadiusLayerFlyout};
     box-shadow: ${shadow28};
     overflow: hidden;
-
-    /* Animation */
-    opacity: 0;
-    transform: translateY(-24px);
-    transition: all ${durationFast} ${curveDecelerateMax};
-  }
-
-  :host([active]) {
-    opacity: 1;
-    transform: translateY(0);
   }
 
   #menu-items {
@@ -212,5 +200,4 @@ export default class MoreMenu extends FASTElement {
     },
   ];
   @attr({ mode: 'boolean' }) managedByOrganization = false;
-  @attr({ mode: 'boolean' }) active = false;
 }

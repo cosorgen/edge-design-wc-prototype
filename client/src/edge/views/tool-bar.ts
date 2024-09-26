@@ -52,6 +52,7 @@ const template = html<Toolbar>`
       (x) => x.ews.favoritesOpen,
       html` <flyout-menu
         @flyoutdismiss="${(x) => (x.ews.favoritesOpen = false)}"
+        open
       >
         <phx-toggle-button
           appearance="subtle"

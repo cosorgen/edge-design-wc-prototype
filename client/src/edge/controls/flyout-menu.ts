@@ -1,4 +1,10 @@
-import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
+import {
+  attr,
+  css,
+  customElement,
+  FASTElement,
+  html,
+} from '@microsoft/fast-element';
 
 const flyoutAnimationKeyframes: Keyframe[] = [
   {
@@ -18,8 +24,7 @@ const flyoutAnimationOptions: KeyframeAnimationOptions = {
 
 const template = html<FlyoutMenu>`<div
     id="click-catcher"
-    @click="${(x) => x.handleDismiss()}"
-    @mousedown="${(x) => x.handleDismiss()}"
+    @click="${(x) => x.toggleOpen()}"
   ></div>
   <slot name="trigger"></slot>
   <slot id="content"></slot>`;
@@ -29,10 +34,15 @@ const styles = css`
     position: relative;
   }
 
-  #click-catcher {
+  #click-catcher,
+  #content {
+    display: none;
+  }
+
+  :host([open]) #click-catcher {
+    display: block;
     position: fixed;
     inset: 0;
-    z-index: 999;
   }
 `;
 
@@ -42,6 +52,7 @@ const styles = css`
   styles,
 })
 export class FlyoutMenu extends FASTElement {
+  @attr({ mode: 'boolean' }) open = false;
   flyoutContent: HTMLElement | null = null;
   triggerContent: HTMLElement | null = null;
 
@@ -50,7 +61,7 @@ export class FlyoutMenu extends FASTElement {
     setTimeout(() => {
       if (!this.flyoutContent || !this.triggerContent)
         this.getSlottedElements();
-      this.handleShow();
+      if (this.open) this.handleShow();
     }, 10); // wait for render to finish?
   }
 
@@ -70,8 +81,31 @@ export class FlyoutMenu extends FASTElement {
       })[0] as HTMLElement;
 
       this.triggerContent?.addEventListener('click', () => {
-        this.handleDismiss();
+        this.toggleOpen();
       });
+    }
+  }
+
+  toggleOpen() {
+    this.open = !this.open;
+    if (this.open) {
+      this.handleShow();
+    } else {
+      this.handleDismiss();
+    }
+  }
+
+  handleShow() {
+    if (this.flyoutContent && this.triggerContent) {
+      const triggerRect = this.triggerContent.getClientRects()[0] as DOMRect;
+      this.flyoutContent.style.top = `${triggerRect.bottom}px`;
+      this.flyoutContent.style.right = `${window.innerWidth - triggerRect.right}px`;
+      this.flyoutContent.style.zIndex = '1000';
+      document.body.appendChild(this.flyoutContent);
+      this.flyoutContent.animate(
+        flyoutAnimationKeyframes,
+        flyoutAnimationOptions,
+      );
     }
   }
 
@@ -87,20 +121,6 @@ export class FlyoutMenu extends FASTElement {
         this.$emit('flyoutdismiss');
       };
       animation.play();
-    }
-  }
-
-  handleShow() {
-    if (this.flyoutContent && this.triggerContent) {
-      const triggerRect = this.triggerContent.getClientRects()[0] as DOMRect;
-      this.flyoutContent.style.top = `${triggerRect.bottom}px`;
-      this.flyoutContent.style.right = `${window.innerWidth - triggerRect.right}px`;
-      this.flyoutContent.style.zIndex = '1000';
-      document.body.appendChild(this.flyoutContent);
-      this.flyoutContent.animate(
-        flyoutAnimationKeyframes,
-        flyoutAnimationOptions,
-      );
     }
   }
 }

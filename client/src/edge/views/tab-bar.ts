@@ -4,7 +4,6 @@ import {
   html,
   css,
   repeat,
-  when,
   observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -22,6 +21,7 @@ import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
+import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import { Tab, TabService } from '#services/tabService.js';
 import WindowsService, { Window } from '#services/windowsService.js';
@@ -77,21 +77,30 @@ const template = html<TabBar>`
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
     </phx-button>
-    <div id="window-grabber" @mousedown="${(x) => x.mouseDown()}"></div>
+    <div
+      id="window-grabber"
+      @mousedown="${(x) => x.handleTitleBarMouseDown()}"
+    ></div>
     <div class="group" id="caption-controls" style="gap: 0;">
       <div class="group" id="pill-menu">
-        <phx-toggle-button
-          size="small"
-          appearance="subtle"
-          shape="circular"
-          icon-only
-          @click="${(x) => x.toggleMoreMenu()}"
-          pressed="${(x) => x.ews.moreMenuOpen}"
-        >
-          <svg>
-            <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-          </svg>
-        </phx-toggle-button>
+        <flyout-menu @flyoutdismiss="${(x) => (x.ews.moreMenuOpen = false)}">
+          <phx-toggle-button
+            size="small"
+            appearance="subtle"
+            shape="circular"
+            icon-only
+            slot="trigger"
+            ?pressed="${(x) => x.ews.moreMenuOpen}"
+          >
+            <svg>
+              <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+            </svg>
+          </phx-toggle-button>
+          <more-menu
+            @moreaction="${(x, c) =>
+              x.handleMoreAction(c.event as CustomEvent)}"
+          ></more-menu>
+        </flyout-menu>
         <identity-control appearance="signedIn"></identity-control>
       </div>
       <phx-button
@@ -140,13 +149,6 @@ const template = html<TabBar>`
       </phx-button>
     </div>
   </div>
-  ${when(
-    (x) => x.ews.moreMenuOpen,
-    html`<div id="click-catcher" @click="${(x) => x.toggleMoreMenu()}"></div>
-      <more-menu
-        @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
-      ></more-menu>`,
-  )}
 `;
 
 const styles = css`
@@ -249,12 +251,6 @@ const styles = css`
   #tabs:has(+ #add:hover) > phx-divider:last-of-type {
     visibility: hidden;
   }
-
-  #click-catcher {
-    position: fixed;
-    inset: 0;
-    z-index: 999;
-  }
 `;
 
 @customElement({
@@ -331,7 +327,7 @@ export class TabBar extends FASTElement {
     }
   }
 
-  mouseDown() {
+  handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
   }
 
