@@ -41,7 +41,7 @@ export const edgeLightThemeSolid: EdgeTheme = {
 export const edgeDarkTheme: EdgeTheme = {
   ...phoenixDarkThemeWin11,
   ...commonThemeOverrides,
-  colorLayerBackgroundPillMenu: '#ffffff80',
+  colorLayerBackgroundPillMenu: '#2C2C2C',
   colorLayerBackgroundApp: '#000',
   colorLayerOmniboxBackground: '#0E0E0E',
   colorLayerOmniboxBackgroundHover: '#000000',
@@ -50,7 +50,7 @@ export const edgeDarkTheme: EdgeTheme = {
 export const edgeDarkThemeSolid: EdgeTheme = {
   ...phoenixDarkThemeSolidWin11,
   ...commonThemeOverrides,
-  colorLayerBackgroundPillMenu: '#ffffff80',
+  colorLayerBackgroundPillMenu: '#2C2C2C',
   colorLayerBackgroundApp: '#000',
   colorLayerOmniboxBackground: '#0E0E0E',
   colorLayerOmniboxBackgroundHover: '#000000',
