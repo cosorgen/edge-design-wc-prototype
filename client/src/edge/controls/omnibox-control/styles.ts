@@ -68,7 +68,7 @@ export const styles = css`
     #status,
     #actions {
       flex: 1;
-      min-width: 256px;
+      min-width: 25%;
     }
   }
 
