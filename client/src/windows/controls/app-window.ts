@@ -6,17 +6,8 @@ import {
   customElement,
   html,
   observable,
-  ValueConverter,
+  nullableNumberConverter,
 } from '@microsoft/fast-element';
-
-const NumberConverter: ValueConverter = {
-  toView(value: number): string {
-    return value.toString();
-  },
-  fromView(value: string): number {
-    return parseInt(value);
-  },
-};
 
 const template = html<AppWindow>` <div id="content"><slot></slot></div>
   <div
@@ -64,10 +55,10 @@ const styles = css`
   :host {
     position: absolute;
     z-index: ${(x) => x.zIndex};
-    width: ${(x) => x.width};
-    height: ${(x) => x.height};
-    top: ${(x) => x.yPos};
-    left: ${(x) => x.xPos};
+    width: ${(x) => x.width + 'px'};
+    height: ${(x) => x.height + 'px'};
+    top: ${(x) => x.yPos + 'px'};
+    left: ${(x) => x.xPos + 'px'};
   }
 
   :host([minimized]) {
@@ -177,14 +168,15 @@ const styles = css`
   styles,
 })
 export class AppWindow extends FASTElement {
-  @attr width = '800px';
-  @attr height = '600px';
-  @attr xPos = '100px';
-  @attr yPos = '100px';
-  @attr zIndex = 0;
-  @attr({ attribute: 'min-width', converter: NumberConverter }) minWidth = 400;
-  @attr({ attribute: 'min-height', converter: NumberConverter }) minHeight =
-    400;
+  @attr({ converter: nullableNumberConverter }) width = 800;
+  @attr({ converter: nullableNumberConverter }) height = 600;
+  @attr({ converter: nullableNumberConverter }) xPos = 100;
+  @attr({ converter: nullableNumberConverter }) yPos = 100;
+  @attr({ converter: nullableNumberConverter }) zIndex = 0;
+  @attr({ attribute: 'min-width', converter: nullableNumberConverter })
+  minWidth = 400;
+  @attr({ attribute: 'min-height', converter: nullableNumberConverter })
+  minHeight = 400;
   @observable dragging = false;
 
   mouseDown(widthAmp: number, heightAmp: number, xAmp: number, yAmp: number) {
@@ -205,17 +197,12 @@ export class AppWindow extends FASTElement {
   }
 
   mouseUp() {
-    const curWidth = parseInt(this.width, 10);
-    const curHeight = parseInt(this.height, 10);
-    const curX = parseInt(this.xPos, 10);
-    const curY = parseInt(this.yPos, 10);
-
     this.$emit('windowmove', {
       windowId: this.id,
-      width: curWidth,
-      height: curHeight,
-      xPos: curX,
-      yPos: curY,
+      width: this.width,
+      height: this.height,
+      xPos: this.xPos,
+      yPos: this.yPos,
     });
 
     this.dragging = false;
@@ -232,24 +219,20 @@ export class AppWindow extends FASTElement {
     yAmp: number,
   ) {
     const { movementX, movementY } = e;
-    const curWidth = parseInt(this.width, 10);
-    const curHeight = parseInt(this.height, 10);
-    const curX = parseInt(this.xPos, 10);
-    const curY = parseInt(this.yPos, 10);
 
-    let newWidth = curWidth + movementX * widthAmp;
-    let newHeight = curHeight + movementY * heightAmp;
-    let newX = curX + movementX * xAmp;
-    let newY = curY + movementY * yAmp;
+    let newWidth = this.width + movementX * widthAmp;
+    let newHeight = this.height + movementY * heightAmp;
+    let newX = this.xPos + movementX * xAmp;
+    let newY = this.yPos + movementY * yAmp;
 
     newWidth = Math.max(this.minWidth, newWidth);
-    if (newWidth === this.minWidth && movementX > 0) newX = curX;
+    if (newWidth === this.minWidth && movementX > 0) newX = this.xPos;
     newHeight = Math.max(this.minHeight, newHeight);
-    if (newHeight === this.minHeight && movementY > 0) newY = curY;
+    if (newHeight === this.minHeight && movementY > 0) newY = this.yPos;
 
-    this.width = `${newWidth}px`;
-    this.height = `${newHeight}px`;
-    this.xPos = `${newX}px`;
-    this.yPos = `${newY}px`;
+    this.width = newWidth;
+    this.height = newHeight;
+    this.xPos = newX;
+    this.yPos = newY;
   }
 }

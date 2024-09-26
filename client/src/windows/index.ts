@@ -51,10 +51,10 @@ const template = html<WindowsShell>`
     html`
       <app-window
         id="${(x) => x.id}"
-        width="${(x) => x.width}px"
-        height="${(x) => x.height}px"
-        xPos="${(x) => x.xPos}px"
-        yPos="${(x) => x.yPos}px"
+        width="${(x) => x.width}"
+        height="${(x) => x.height}"
+        xPos="${(x) => x.xPos}"
+        yPos="${(x) => x.yPos}"
         zIndex="${(x) => x.zIndex}"
         ?minimized="${(x) => x.minimized}"
         ?maximized="${(x) => x.maximized}"
