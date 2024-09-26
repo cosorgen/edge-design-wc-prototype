@@ -4,19 +4,22 @@ import {
   html,
   css,
   observable,
+  when,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/toggle-button.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
-import '../../windows/controls/mica-material.js';
+import '../controls/favorites-menu.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
   Suggestion,
   generateSuggestions,
 } from '#servicesautoSuggestService.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -43,7 +46,25 @@ const template = html<Toolbar>`
         detail: ' ',
       } as CustomEvent)}"
   ></omnibox-control>
-  <div class="group"><!-- This is where pinned stuff goes --></div>
+  <div class="group right">
+    ${when(
+      (x) => x.ews.favoritesOpen,
+      html` <favorites-menu
+        @favoritesdismiss="${(x) => (x.ews.favoritesOpen = false)}"
+      >
+        <phx-toggle-button
+          appearance="subtle"
+          icon-only
+          ?pressed="${(x) => x.ews.favoritesOpen}"
+          slot="trigger"
+        >
+          <svg>
+            <use href="img/edge/icons.svg#star-20-regular" />
+          </svg>
+        </phx-toggle-button>
+      </favorites-menu>`,
+    )}
+  </div>
 `;
 
 const styles = css`
@@ -63,6 +84,10 @@ const styles = css`
     gap: ${spacingHorizontalXS};
   }
 
+  .right {
+    justify-content: flex-end;
+  }
+
   #copilot::part(content) {
     width: 24px;
     height: 24px;
@@ -76,6 +101,7 @@ const styles = css`
 })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
   @observable suggestions: Suggestion[] = [];
   omniboxControl?: OmniboxControl | null = null;
 

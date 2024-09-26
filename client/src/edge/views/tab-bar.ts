@@ -143,7 +143,9 @@ const template = html<TabBar>`
   ${when(
     (x) => x.ews.moreMenuOpen,
     html`<div id="click-catcher" @click="${(x) => x.toggleMoreMenu()}"></div>
-      <more-menu></more-menu>`,
+      <more-menu
+        @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
+      ></more-menu>`,
   )}
 `;
 
@@ -331,5 +333,25 @@ export class TabBar extends FASTElement {
 
   mouseDown() {
     this.$emit('windowmovestart');
+  }
+
+  handleMoreAction(e: CustomEvent) {
+    const action = e.detail;
+    switch (action) {
+      case 'New tab':
+        this.addTab();
+        break;
+      case 'New window':
+        this.ws.openWindow('Microsoft Edge');
+        break;
+      case 'Print':
+        window.print(); // maybe see if we can print the current tab iframe?
+        break;
+      case 'Favorites':
+        this.ews.favoritesOpen = true;
+        break;
+    }
+
+    this.toggleMoreMenu();
   }
 }
