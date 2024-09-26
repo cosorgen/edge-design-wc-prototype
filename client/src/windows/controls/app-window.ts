@@ -95,6 +95,7 @@ const styles = css`
 
   .grabber {
     position: absolute;
+    z-index: ${(x) => x.zIndex};
   }
 
   #top {

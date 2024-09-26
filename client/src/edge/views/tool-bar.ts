@@ -12,6 +12,7 @@ import '@phoenixui/web-components/toggle-button.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
+import '../controls/flyout-menu.js';
 import '../controls/favorites-menu.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -49,8 +50,8 @@ const template = html<Toolbar>`
   <div class="group right">
     ${when(
       (x) => x.ews.favoritesOpen,
-      html` <favorites-menu
-        @favoritesdismiss="${(x) => (x.ews.favoritesOpen = false)}"
+      html` <flyout-menu
+        @flyoutdismiss="${(x) => (x.ews.favoritesOpen = false)}"
       >
         <phx-toggle-button
           appearance="subtle"
@@ -62,7 +63,8 @@ const template = html<Toolbar>`
             <use href="img/edge/icons.svg#star-20-regular" />
           </svg>
         </phx-toggle-button>
-      </favorites-menu>`,
+        <favorites-menu></favorites-menu>
+      </flyout-menu>`,
     )}
   </div>
 `;
