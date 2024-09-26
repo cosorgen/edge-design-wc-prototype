@@ -330,6 +330,6 @@ export class TabBar extends FASTElement {
   }
 
   mouseDown() {
-    console.log('mouse down');
+    this.$emit('windowmovestart');
   }
 }

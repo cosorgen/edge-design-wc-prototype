@@ -179,6 +179,14 @@ export class AppWindow extends FASTElement {
   minHeight = 400;
   @observable dragging = false;
 
+  connectedCallback() {
+    super.connectedCallback();
+    // Listen for window move events from child app
+    this.addEventListener('windowmovestart', () => {
+      this.mouseDown(0, 0, 1, 1);
+    });
+  }
+
   mouseDown(widthAmp: number, heightAmp: number, xAmp: number, yAmp: number) {
     const mouseMove = (e: MouseEvent) =>
       this.mouseMove(e, widthAmp, heightAmp, xAmp, yAmp);
