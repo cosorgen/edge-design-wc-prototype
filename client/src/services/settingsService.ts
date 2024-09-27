@@ -16,9 +16,7 @@ export default class EdgeSettingsSerivce {
       (url.searchParams.get('theme') as 'light' | 'dark' | 'system') ||
       'system';
     this.showFavoritesBar =
-      (url.searchParams.get('showFavoritesBar') as
-        | 'always'
-        | 'newtab'
-        | 'never') || 'never';
+      (url.searchParams.get('favoritesbar') as 'always' | 'newtab' | 'never') ||
+      'never';
   }
 }

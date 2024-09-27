@@ -1,5 +1,10 @@
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
-import { spacingHorizontalS, spacingHorizontalXXS } from '@phoenixui/themes';
+import {
+  colorNeutralForeground1,
+  spacingHorizontalS,
+  spacingHorizontalXXS,
+  typographyStyles,
+} from '@phoenixui/themes';
 
 const template = html<MoreMenuZoom>`
   <div part="label">Zoom</div>
@@ -28,6 +33,12 @@ const styles = css`
     align-items: center;
     gap: ${spacingHorizontalXXS};
     padding-inline-start: ${spacingHorizontalS};
+
+    font-family: ${typographyStyles.body1.fontFamily};
+    font-size: ${typographyStyles.body1.fontSize};
+    line-height: ${typographyStyles.body1.lineHeight};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    color: ${colorNeutralForeground1};
   }
 
   [part='label'] {

@@ -4,6 +4,7 @@ import {
   html,
   css,
   when,
+  observable,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
@@ -33,21 +34,18 @@ import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
 import './views/copilot-composer.js';
+import './views/favorites-bar.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
   <div id="activeTab">
     <div id="content">
       <tool-bar></tool-bar>
-      <div class="row" style="flex: 1;">
-        <div class="column" style="flex: 1;">
-          ${when(
-            (x) => x.ss.showFavoritesBar === 'always',
-            html`<favorites-bar></favorites-bar>`,
-          )}
-          <web-content></web-content>
-        </div>
-      </div>
+      ${when(
+        (x) => x.shouldFavoritesBarRender(),
+        html`<favorites-bar></favorites-bar>`,
+      )}
+      <web-content></web-content>
     </div>
   </div>
   <copilot-composer></copilot-composer>
@@ -116,17 +114,18 @@ const styles = css`
 })
 export class MicrosoftEdge extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
-  @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
+  @observable ts!: TabService;
+  @observable ews!: EdgeWindowService;
 
   constructor() {
     super();
     // Set up window state
     const container = DI.getOrCreateDOMContainer(this);
-    const ts = new TabService();
-    const ews = new EdgeWindowService();
-    container.register(Registration.instance(TabService, ts));
-    container.register(Registration.instance(EdgeWindowService, ews));
+    this.ts = new TabService();
+    this.ews = new EdgeWindowService();
+    container.register(Registration.instance(TabService, this.ts));
+    container.register(Registration.instance(EdgeWindowService, this.ews));
 
     // set up theme
     this.setTheme();
@@ -147,5 +146,13 @@ export class MicrosoftEdge extends FASTElement {
     const selectedTheme =
       this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
     setThemeFor(this.shadowRoot!, themes[this.ws.transparency][selectedTheme]);
+  }
+
+  shouldFavoritesBarRender() {
+    return (
+      this.ss.showFavoritesBar === 'always' ||
+      (this.ss.showFavoritesBar === 'newtab' &&
+        this.ts.getActiveTab()?.url === 'edge://newtab')
+    );
   }
 }
