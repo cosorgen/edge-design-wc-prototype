@@ -133,4 +133,17 @@ export const styles = css`
   [dropdown-open] omnibox-status {
     display: none;
   }
+
+  #rest-input {
+    display: none;
+    cursor: text;
+  }
+
+  [truncate-on-rest]:not([dropdown-open]) #rest-input {
+    display: block;
+  }
+
+  [truncate-on-rest]:not([dropdown-open]) omnibox-input:not([value='']) {
+    display: none;
+  }
 `;

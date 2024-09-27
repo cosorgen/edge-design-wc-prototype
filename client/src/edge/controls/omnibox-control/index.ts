@@ -21,21 +21,23 @@ export class OmniboxControl extends FASTElement {
   @observable dropdownSelectedIndex = -1;
   @observable inputValue = '';
   @observable suggestions: Suggestion[] = [];
+  @observable truncateOnRest = false;
   dropdownComponent?: OmniboxDropdown | null = null;
+  inputComponent?: HTMLElement | null = null;
 
   connectedCallback() {
     super.connectedCallback();
     this.dropdownComponent = this.shadowRoot?.querySelector('omnibox-dropdown');
+    this.inputComponent = this.shadowRoot?.querySelector('omnibox-input');
+    this.truncateOnRest =
+      new URL(window.location.href).searchParams.get('truncateurl') === 'true';
   }
 
   initialValueChanged() {
     if (this.initialValue === 'edge://newtab') {
       // Don't display the address of the new tab page
       this.initialValue = '';
-      const input = this.shadowRoot?.querySelector(
-        'omnibox-input',
-      ) as HTMLElement;
-      if (input) input.focus();
+      if (this.inputComponent) this.inputComponent.focus();
     }
 
     if (this.inputValue !== this.initialValue) {
@@ -54,10 +56,9 @@ export class OmniboxControl extends FASTElement {
   }
 
   handleInputClick() {
-    const input = this.shadowRoot?.querySelector(
-      'omnibox-input',
-    ) as HTMLElement;
-    if (input) input.focus();
+    setTimeout(() => {
+      if (this.inputComponent) this.inputComponent.focus();
+    }, 50); // wait for render incase input is display: none
     this.dropdownOpen = true;
   }
 
@@ -94,5 +95,17 @@ export class OmniboxControl extends FASTElement {
     (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).blur();
     this.inputValue = e.detail;
     this.$emit('submit', e.detail);
+  }
+
+  truncatedInputValue() {
+    if (
+      this.inputValue &&
+      this.inputValue !== 'edge://newtab' &&
+      this.truncateOnRest
+    ) {
+      const url = new URL(this.inputValue);
+      return url.hostname;
+    }
+    return '';
   }
 }
