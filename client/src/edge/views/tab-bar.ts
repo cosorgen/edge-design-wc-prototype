@@ -83,14 +83,17 @@ const template = html<TabBar>`
     ></div>
     <div class="group" id="caption-controls" style="gap: 0;">
       <div class="group" id="pill-menu">
-        <flyout-menu @flyoutdismiss="${(x) => (x.ews.moreMenuOpen = false)}">
+        <flyout-menu
+          @flyoutclose="${(x) => (x.ews.moreMenuOpen = false)}"
+          @flyoutopen="${(x) => (x.ews.moreMenuOpen = true)}"
+        >
           <phx-toggle-button
             size="small"
             appearance="subtle"
             shape="circular"
             icon-only
             slot="trigger"
-            ?pressed="${(x) => x.ews.moreMenuOpen}"
+            pressed="${(x) => x.ews.moreMenuOpen}"
           >
             <svg>
               <use href="img/edge/icons.svg#more-horizontal-20-regular" />
@@ -300,33 +303,6 @@ export class TabBar extends FASTElement {
     }
   }
 
-  toggleMoreMenu() {
-    const open = !this.ews.moreMenuOpen;
-
-    if (open) {
-      this.ews.moreMenuOpen = open;
-      // Wait for the more menu to render before setting it to active
-      const interval = setInterval(() => {
-        const moreMenu = this.shadowRoot?.querySelector('more-menu');
-        if (moreMenu) {
-          moreMenu.setAttribute('active', '');
-          clearInterval(interval);
-        }
-      }, 10 /* wait for rerender */);
-    } else {
-      const moreMenu = this.shadowRoot?.querySelector('more-menu');
-      if (!moreMenu) return;
-
-      // Need to decalre this function outside of the event listener so we can remove it.
-      const onTransitionEnd = () => {
-        moreMenu.removeEventListener('transitionend', onTransitionEnd);
-        this.ews.moreMenuOpen = open;
-      };
-      moreMenu.removeAttribute('active');
-      moreMenu.addEventListener('transitionend', onTransitionEnd);
-    }
-  }
-
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
   }
@@ -347,7 +323,5 @@ export class TabBar extends FASTElement {
         this.ews.favoritesOpen = true;
         break;
     }
-
-    this.toggleMoreMenu();
   }
 }

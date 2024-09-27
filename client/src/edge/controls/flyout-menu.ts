@@ -5,9 +5,10 @@ import {
   FASTElement,
   html,
 } from '@microsoft/fast-element';
+import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
 const template = html<FlyoutMenu>` <slot name="trigger"></slot>
-  <div popover id="menu-popover">
+  <div popover>
     <slot></slot>
   </div>`;
 
@@ -16,7 +17,7 @@ const styles = css`
     anchor-name: --menu-trigger;
   }
 
-  [popover]:popover-open {
+  [popover] {
     border: none;
     overflow: visible;
     position-area: block-end span-inline-start;
@@ -25,6 +26,25 @@ const styles = css`
     background: transparent;
     position-anchor: --menu-trigger;
     position-try-options: flip-block;
+
+    transform: translateY(-24px);
+    opacity: 0;
+    /* 10ms delay to allow for transitionend fire */
+    transition:
+      transform ${durationFast} ${curveDecelerateMax},
+      opacity ${durationFast} ${curveDecelerateMax},
+      display ${durationFast} ${curveDecelerateMax} 10ms allow-discrete,
+      overlay ${durationFast} ${curveDecelerateMax} 10ms allow-discrete;
+  }
+
+  [popover]:popover-open {
+    transform: translateY(0px);
+    opacity: 1;
+
+    @starting-style {
+      transform: translateY(-24px);
+      opacity: 0;
+    }
   }
 `;
 
@@ -34,19 +54,23 @@ const styles = css`
   styles,
 })
 export class FlyoutMenu extends FASTElement {
-  @attr({ mode: 'boolean' }) open = false;
+  @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   popoverElement: HTMLElement | null = null;
   triggerElement: HTMLElement | null = null;
+  open: boolean = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.getSlottedElements();
     this.setEventListeners();
+    if (this.initOpen && this.popoverElement) {
+      this.popoverElement?.showPopover();
+    }
   }
 
   getSlottedElements() {
     this.popoverElement = this.shadowRoot?.querySelector(
-      '#menu-popover',
+      '[popover]',
     ) as HTMLDivElement;
     const triggerSlot = this.shadowRoot?.querySelector(
       'slot[name="trigger"]',
@@ -59,25 +83,43 @@ export class FlyoutMenu extends FASTElement {
   setEventListeners() {
     if (this.popoverElement && this.triggerElement) {
       this.triggerElement?.addEventListener('click', () =>
-        this.toggleMenu(this.open ? 'closed' : 'open'),
+        this.handleTriggerClick(),
       );
 
       // @ts-expect-error - Baseline 2024
       this.popoverElement.addEventListener('toggle', (e: ToggleEvent) =>
-        this.toggleMenu(e.newState),
+        this.handleToggleChange(e),
       );
     }
   }
 
-  toggleMenu(newState: string = 'open') {
-    if (this.popoverElement) {
-      if (newState === 'open') {
-        this.popoverElement.showPopover();
+  handleTriggerClick() {
+    this.open
+      ? this.popoverElement?.hidePopover()
+      : this.popoverElement?.showPopover();
+  }
+
+  handleToggleChange(e: ToggleEvent) {
+    if (e.newState === 'open') {
+      const transitionEnd = () => {
         this.open = true;
-      } else {
+        this.$emit('flyoutopen');
+        this.popoverElement?.removeEventListener(
+          'transitionend',
+          transitionEnd,
+        );
+      };
+      this.popoverElement?.addEventListener('transitionend', transitionEnd);
+    } else {
+      const transitionEnd = () => {
         this.open = false;
-        this.popoverElement.hidePopover();
-      }
+        this.$emit('flyoutclose');
+        this.popoverElement?.removeEventListener(
+          'transitionend',
+          transitionEnd,
+        );
+      };
+      this.popoverElement?.addEventListener('transitionend', transitionEnd);
     }
   }
 }
