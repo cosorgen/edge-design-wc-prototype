@@ -90,6 +90,10 @@ export class FlyoutMenu extends FASTElement {
       this.popoverElement.addEventListener('toggle', (e: ToggleEvent) =>
         this.handleToggleChange(e),
       );
+
+      this.addEventListener('close', () => {
+        this.popoverElement?.hidePopover();
+      });
     }
   }
 

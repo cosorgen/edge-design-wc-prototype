@@ -41,7 +41,7 @@ const template = html<MoreMenu>`
       ${when(
         (x) => x.type === 'action',
         html` <more-menu-item
-          @click="${(x, c) => c.parent.$emit('moreaction', x.title)}"
+          @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
         >
           <span class="text-only" slot="start">${(x) => x.title}</span>
           <span class="text-only hint" slot="end">${(x) => x.shortcut}</span>
@@ -196,4 +196,9 @@ export default class MoreMenu extends FASTElement {
     },
   ];
   @attr({ mode: 'boolean' }) managedByOrganization = false;
+
+  handleMenuItemClick(title: string) {
+    this.$emit('moreaction', title);
+    this.$emit('close');
+  }
 }

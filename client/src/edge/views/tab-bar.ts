@@ -64,6 +64,7 @@ const template = html<TabBar>`
             orientation="vertical"
             appearance="strong"
           ></phx-divider>`,
+        { positioning: true },
       )}
     </div>
     <phx-button

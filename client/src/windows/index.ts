@@ -67,6 +67,7 @@ const template = html<WindowsShell>`
           ''}
       </app-window>
     `,
+    { positioning: true },
   )}
   <task-bar>
     ${repeat(

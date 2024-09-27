@@ -1,3 +1,4 @@
+import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   customElement,
   FASTElement,
@@ -6,6 +7,7 @@ import {
   attr,
   observable,
 } from '@microsoft/fast-element';
+import { inject } from '@microsoft/fast-element/di.js';
 import { colorLayerBackgroundDialog } from '@phoenixui/themes';
 
 const template = html<WebPage>`
@@ -31,6 +33,8 @@ const styles = css`
     width: 100%;
     height: 100%;
     border: none;
+    pointer-events: ${(x) =>
+      x.ews.moreMenuOpen || x.ews.favoritesOpen ? 'none' : 'unset'};
   }
 `;
 
@@ -40,6 +44,7 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
   @attr url = 'edge://newtab';
   @attr({ mode: 'boolean' }) active = false;
   @observable page = '';
