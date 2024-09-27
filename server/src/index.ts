@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 const pathToApp = path.resolve(__dirname, './www');
 
-// Have Node serve the files for our built React app
+// Have Node serve the files for our built app
 app.use(express.static(pathToApp));
 
 // Handle GET requests
@@ -18,7 +18,7 @@ app.get('/api/suggest', suggest);
 app.get('/api/proxy', proxy);
 app.get('/api/metadata', metadata);
 
-// All other GET requests not handled before will return our React app
+// All other GET requests not handled before will return our app
 app.get('*', (req, res) => {
   res.sendFile(pathToApp + '/index.html');
 });
