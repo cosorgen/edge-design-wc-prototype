@@ -66,10 +66,6 @@ const template = html<MoreMenu>`
 
 const styles = css`
   :host {
-    position: absolute;
-    z-index: 1000;
-    inset-inline-end: 156px;
-    inset-block-start: 28px;
     min-width: 200px;
     max-width: 512px;
     display: flex;

@@ -14,7 +14,6 @@ const template = html<FavoritesMenu>` <img
 
 const styles = css`
   :host {
-    position: absolute;
     display: block;
     min-width: 200px;
     min-height: 200px;

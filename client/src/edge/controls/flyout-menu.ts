@@ -6,43 +6,25 @@ import {
   html,
 } from '@microsoft/fast-element';
 
-const flyoutAnimationKeyframes: Keyframe[] = [
-  {
-    transform: 'translateY(-24px)',
-    opacity: 0,
-  },
-  {
-    transform: 'translateY(0)',
-    opacity: 1,
-  },
-];
-const flyoutAnimationOptions: KeyframeAnimationOptions = {
-  duration: 150,
-  easing: 'cubic-bezier(0, 0, 1, 1)',
-  fill: 'both',
-};
-
-const template = html<FlyoutMenu>`<div
-    id="click-catcher"
-    @click="${(x) => x.toggleOpen()}"
-  ></div>
-  <slot name="trigger"></slot>
-  <slot id="content"></slot>`;
+const template = html<FlyoutMenu>` <slot name="trigger"></slot>
+  <div popover id="menu-popover">
+    <slot></slot>
+  </div>`;
 
 const styles = css`
-  :host {
-    position: relative;
+  ::slotted([slot='trigger']) {
+    anchor-name: --menu-trigger;
   }
 
-  #click-catcher,
-  #content {
-    display: none;
-  }
-
-  :host([open]) #click-catcher {
-    display: block;
-    position: fixed;
-    inset: 0;
+  [popover]:popover-open {
+    border: none;
+    overflow: visible;
+    position-area: block-end span-inline-start;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    position-anchor: --menu-trigger;
+    position-try-options: flip-block;
   }
 `;
 
@@ -53,74 +35,49 @@ const styles = css`
 })
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean' }) open = false;
-  flyoutContent: HTMLElement | null = null;
-  triggerContent: HTMLElement | null = null;
+  popoverElement: HTMLElement | null = null;
+  triggerElement: HTMLElement | null = null;
 
   connectedCallback() {
     super.connectedCallback();
-    setTimeout(() => {
-      if (!this.flyoutContent || !this.triggerContent)
-        this.getSlottedElements();
-      if (this.open) this.handleShow();
-    }, 10); // wait for render to finish?
+    this.getSlottedElements();
+    this.setEventListeners();
   }
 
   getSlottedElements() {
-    const contentSlot = this.shadowRoot?.querySelector(
-      '#content',
-    ) as HTMLSlotElement;
+    this.popoverElement = this.shadowRoot?.querySelector(
+      '#menu-popover',
+    ) as HTMLDivElement;
     const triggerSlot = this.shadowRoot?.querySelector(
       'slot[name="trigger"]',
     ) as HTMLSlotElement;
-    if (contentSlot && triggerSlot) {
-      this.triggerContent = triggerSlot.assignedElements({
-        flatten: true,
-      })[0] as HTMLElement;
-      this.flyoutContent = contentSlot.assignedElements({
-        flatten: true,
-      })[0] as HTMLElement;
-
-      this.triggerContent?.addEventListener('click', () => {
-        this.toggleOpen();
-      });
+    if (triggerSlot) {
+      this.triggerElement = triggerSlot.assignedElements()[0] as HTMLElement;
     }
   }
 
-  toggleOpen() {
-    this.open = !this.open;
-    if (this.open) {
-      this.handleShow();
-    } else {
-      this.handleDismiss();
-    }
-  }
+  setEventListeners() {
+    if (this.popoverElement && this.triggerElement) {
+      this.triggerElement?.addEventListener('click', () =>
+        this.toggleMenu(this.open ? 'closed' : 'open'),
+      );
 
-  handleShow() {
-    if (this.flyoutContent && this.triggerContent) {
-      const triggerRect = this.triggerContent.getClientRects()[0] as DOMRect;
-      this.flyoutContent.style.top = `${triggerRect.bottom}px`;
-      this.flyoutContent.style.right = `${window.innerWidth - triggerRect.right}px`;
-      this.flyoutContent.style.zIndex = '1000';
-      document.body.appendChild(this.flyoutContent);
-      this.flyoutContent.animate(
-        flyoutAnimationKeyframes,
-        flyoutAnimationOptions,
+      // @ts-expect-error - Baseline 2024
+      this.popoverElement.addEventListener('toggle', (e: ToggleEvent) =>
+        this.toggleMenu(e.newState),
       );
     }
   }
 
-  handleDismiss() {
-    if (this.flyoutContent) {
-      const animation = this.flyoutContent.animate(flyoutAnimationKeyframes, {
-        ...flyoutAnimationOptions,
-        direction: 'reverse',
-      });
-      animation.pause();
-      animation.onfinish = () => {
-        document.body.removeChild(this.flyoutContent as Node);
-        this.$emit('flyoutdismiss');
-      };
-      animation.play();
+  toggleMenu(newState: string = 'open') {
+    if (this.popoverElement) {
+      if (newState === 'open') {
+        this.popoverElement.showPopover();
+        this.open = true;
+      } else {
+        this.open = false;
+        this.popoverElement.hidePopover();
+      }
     }
   }
 }
