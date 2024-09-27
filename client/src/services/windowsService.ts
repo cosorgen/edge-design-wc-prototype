@@ -51,6 +51,13 @@ export default class WindowsService {
       .addEventListener('change', (e) => {
         this.transparency = e.matches ? 'reduced' : 'normal';
       });
+
+    // Override theme and transparency from URL
+    const url = new URL(window.location.href);
+    this.theme = (url.searchParams.get('theme') as OSTheme) || this.theme;
+    this.transparency =
+      (url.searchParams.get('transparency') as OSTransparency) ||
+      this.transparency;
   }
 
   openWindow(appName: string) {

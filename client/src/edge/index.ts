@@ -47,7 +47,6 @@ const template = html<MicrosoftEdge>`
           )}
           <web-content></web-content>
         </div>
-        ${when((x) => x.ss.showSideBar, html`<side-bar></side-bar>`)}
       </div>
     </div>
   </div>
