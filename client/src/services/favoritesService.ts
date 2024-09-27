@@ -30,9 +30,9 @@ export default class FavoritesService {
     },
     {
       type: 'site',
-      url: 'https://www.outlook.com',
-      title: 'Outlook',
-      favicon: 'https://www.outlook.com/favicon.ico',
+      url: 'https://www.microsoft.com',
+      title: 'Microsoft',
+      favicon: 'https://www.microsoft.com/favicon.ico?v2',
     },
     {
       type: 'site',
@@ -54,9 +54,9 @@ export default class FavoritesService {
     },
     {
       type: 'site',
-      url: 'https://www.netflix.com',
-      title: 'Netflix',
-      favicon: 'https://www.netflix.com/favicon.ico',
+      url: 'https://www.nike.com',
+      title: 'Nike',
+      favicon: 'https://www.nike.com/favicon.ico?v=1',
     },
     {
       type: 'folder',
