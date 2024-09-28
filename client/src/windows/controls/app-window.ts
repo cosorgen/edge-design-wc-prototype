@@ -1,4 +1,9 @@
-import { shadow28, shadowBaseLayer } from '@phoenixui/themes';
+import {
+  curveDecelerateMax,
+  durationSlow,
+  shadow28,
+  shadowBaseLayer,
+} from '@phoenixui/themes';
 import {
   FASTElement,
   attr,
@@ -53,25 +58,28 @@ const template = html<AppWindow>` <div id="content"><slot></slot></div>
 
 const styles = css`
   :host {
+    display: block;
     position: absolute;
     z-index: ${(x) => x.zIndex};
     width: ${(x) => x.width + 'px'};
     height: ${(x) => x.height + 'px'};
     top: ${(x) => x.yPos + 'px'};
     left: ${(x) => x.xPos + 'px'};
+
+    transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
   :host([minimized]) {
-    display: none;
+    visibility: hidden;
+    transform: scale(0.9) translateY(64px);
+    opacity: 0;
   }
 
   :host([maximized]) {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 48px;
-    width: auto;
-    height: auto;
+    top: 0px;
+    left: 0px;
+    width: ${() => window.innerWidth + 'px'};
+    height: ${() => window.innerHeight - 48 + 'px'};
   }
 
   #content {

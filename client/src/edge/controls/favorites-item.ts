@@ -25,7 +25,7 @@ const template = html<FavoritesItem>`<button @click="${(x) => x.handleClick()}">
     (x) => x.type === 'site',
     html`<img src="${(x) => x.favicon}" alt="${(x) => x.title}" />`,
     html`<img
-      src="/img/edge/folder-16-filled-yellow.svg"
+      src="./img/edge/folder-16-filled-yellow.svg"
       alt="${(x) => x.title}"
     />`,
   )}

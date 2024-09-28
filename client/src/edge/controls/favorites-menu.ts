@@ -7,7 +7,7 @@ import {
 } from '@phoenixui/themes';
 
 const template = html<FavoritesMenu>` <img
-  src="/img/edge/favorites.png"
+  src="./img/edge/favorites.png"
   width="368px"
   height="600px"
 />`;
