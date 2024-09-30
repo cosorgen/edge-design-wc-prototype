@@ -14,6 +14,8 @@ import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
 import '../controls/flyout-menu.js';
 import '../controls/favorites-menu.js';
+import '../controls/context-menu.js';
+import '../controls/menu-item.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -66,6 +68,11 @@ const template = html<Toolbar>`
           </svg>
         </phx-toggle-button>
         <favorites-menu></favorites-menu>
+        <context-menu slot="context">
+          <menu-item>
+            <span slot="start">Always show favorites in toolbar</span>
+          </menu-item>
+        </context-menu>
       </flyout-menu>`,
     )}
   </div>

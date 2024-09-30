@@ -18,8 +18,8 @@ import {
   spacingVerticalS,
   spacingVerticalXS,
 } from '@phoenixui/themes';
-import { MoreMenuEntry } from './more-menu-item.js';
-import './more-menu-item.js';
+import { MoreMenuEntry } from './menu-item.js';
+import './menu-item.js';
 import './more-menu-zoom.js';
 import '@phoenixui/web-components/divider.js';
 import '@phoenixui/web-components/button.js';
@@ -40,21 +40,21 @@ const template = html<MoreMenu>`
       )}
       ${when(
         (x) => x.type === 'action',
-        html` <more-menu-item
+        html` <menu-item
           @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
         >
           <span class="text-only" slot="start">${(x) => x.title}</span>
           <span class="text-only hint" slot="end">${(x) => x.shortcut}</span>
-        </more-menu-item>`,
+        </menu-item>`,
       )}
       ${when(
         (x) => x.type === 'sub-menu',
-        html` <more-menu-item>
+        html` <menu-item>
           <span class="text-only" slot="start">${(x) => x.title}</span>
           <svg slot="end">
             <use href="img/edge/icons.svg#chevron-right-20-regular" />
           </svg>
-        </more-menu-item>`,
+        </menu-item>`,
       )}
       ${when(
         (x) => x.type === 'zoom',

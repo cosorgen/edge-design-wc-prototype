@@ -10,6 +10,9 @@ import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 const template = html<FlyoutMenu>` <slot name="trigger"></slot>
   <div popover>
     <slot></slot>
+    <div popover>
+      <slot name="context"></slot>
+    </div>
   </div>`;
 
 const styles = css`
@@ -56,6 +59,7 @@ const styles = css`
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   popoverElement: HTMLElement | null = null;
+  contextPopoverElement: HTMLElement | null = null;
   triggerElement: HTMLElement | null = null;
   open: boolean = false;
 
@@ -72,6 +76,9 @@ export class FlyoutMenu extends FASTElement {
     this.popoverElement = this.shadowRoot?.querySelector(
       '[popover]',
     ) as HTMLDivElement;
+    this.contextPopoverElement = this.shadowRoot?.querySelector(
+      '[popover] > div',
+    ) as HTMLDivElement;
     const triggerSlot = this.shadowRoot?.querySelector(
       'slot[name="trigger"]',
     ) as HTMLSlotElement;
@@ -85,6 +92,12 @@ export class FlyoutMenu extends FASTElement {
       this.triggerElement?.addEventListener('click', () =>
         this.handleTriggerClick(),
       );
+
+      this.triggerElement?.addEventListener('contextmenu', (e: MouseEvent) =>
+        this.handleTriggerContext(e),
+      );
+
+      this.triggerElement?.setAttribute('popovertarget', 'true');
 
       // @ts-expect-error - Baseline 2024
       this.popoverElement.addEventListener('toggle', (e: ToggleEvent) =>
@@ -101,6 +114,13 @@ export class FlyoutMenu extends FASTElement {
     this.open
       ? this.popoverElement?.hidePopover()
       : this.popoverElement?.showPopover();
+  }
+
+  handleTriggerContext(e: MouseEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    this.popoverElement?.setAttribute('popover', 'manual');
+    this.contextPopoverElement?.showPopover();
   }
 
   handleToggleChange(e: ToggleEvent) {

@@ -15,7 +15,7 @@ export type MoreMenuEntry = {
   shortcut?: string;
 };
 
-const template = html<MoreMenuItem>` <button>
+const template = html<MenuItem>` <button>
     <slot name="start">Menu item</slot>
     <slot name="end"></slot>
   </button>
@@ -62,8 +62,8 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'more-menu-item',
+  name: 'menu-item',
   template,
   styles,
 })
-export default class MoreMenuItem extends FASTElement {}
+export default class MenuItem extends FASTElement {}
