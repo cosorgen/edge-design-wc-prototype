@@ -293,7 +293,7 @@ export class TabBar extends FASTElement {
 
   windowIsMaximized() {
     const window = this.ws.getActiveWindow() as Window;
-    return window.maximized;
+    return window?.maximized || false;
   }
 
   maximizeWindow() {

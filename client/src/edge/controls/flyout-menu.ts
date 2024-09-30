@@ -33,8 +33,8 @@ const styles = css`
     transition:
       transform ${durationFast} ${curveDecelerateMax},
       opacity ${durationFast} ${curveDecelerateMax},
-      display ${durationFast} ${curveDecelerateMax} 10ms allow-discrete,
-      overlay ${durationFast} ${curveDecelerateMax} 10ms allow-discrete;
+      display ${durationFast} ${curveDecelerateMax} 50ms allow-discrete,
+      overlay ${durationFast} ${curveDecelerateMax} 50ms allow-discrete;
   }
 
   [popover]:popover-open {

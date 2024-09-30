@@ -10,7 +10,6 @@ import {
   css,
   customElement,
   html,
-  observable,
   nullableNumberConverter,
 } from '@microsoft/fast-element';
 
@@ -69,6 +68,10 @@ const styles = css`
     transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
+  :host([dragging]) {
+    transition: none;
+  }
+
   :host([minimized]) {
     visibility: hidden;
     transform: scale(0.9) translateY(64px);
@@ -99,6 +102,10 @@ const styles = css`
   :host([maximized]) #content {
     border-radius: 0;
     box-shadow: none;
+  }
+
+  :host([dragging]) #content {
+    pointer-events: none;
   }
 
   .grabber {
@@ -186,7 +193,7 @@ export class AppWindow extends FASTElement {
   minWidth = 400;
   @attr({ attribute: 'min-height', converter: nullableNumberConverter })
   minHeight = 400;
-  @observable dragging = false;
+  @attr({ mode: 'boolean' }) dragging = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -208,14 +215,11 @@ export class AppWindow extends FASTElement {
     window.addEventListener('mousemove', mouseMove);
     window.addEventListener('mouseup', mouseUp);
     this.dragging = true;
-    // disable pointer events on iFrame so we hear onMouseUp
-    const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
-    if (content) content.style.pointerEvents = 'none';
   }
 
   mouseUp() {
     this.$emit('windowmove', {
-      windowId: this.id,
+      id: this.id,
       width: this.width,
       height: this.height,
       xPos: this.xPos,
@@ -223,9 +227,6 @@ export class AppWindow extends FASTElement {
     });
 
     this.dragging = false;
-    // re-enable pointer events on iFrame
-    const content = this.shadowRoot?.querySelector('#content') as HTMLElement;
-    if (content) content.style.pointerEvents = 'unset';
   }
 
   mouseMove(

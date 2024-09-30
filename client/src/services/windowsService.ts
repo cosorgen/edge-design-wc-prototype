@@ -124,7 +124,7 @@ export default class WindowsService {
     );
   }
 
-  getActiveWindow() {
+  getActiveWindow(): Window | undefined {
     return this.windows.find((w) => w.id === this.activeWindowId);
   }
 
