@@ -33,8 +33,7 @@ const styles = css`
     width: 100%;
     height: 100%;
     border: none;
-    pointer-events: ${(x) =>
-      x.ews.moreMenuOpen || x.ews.favoritesOpen ? 'none' : 'unset'};
+    pointer-events: ${(x) => (x.ews.disableWebview ? 'none' : 'unset')};
   }
 `;
 

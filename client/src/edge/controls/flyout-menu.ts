@@ -11,9 +11,9 @@ const template = html<FlyoutMenu>`
   <slot name="trigger"></slot>
   <div popover="manual" id="flyout">
     <slot></slot>
-    <div popover="manual" id="context">
-      <slot name="context"></slot>
-    </div>
+  </div>
+  <div popover="manual" id="context">
+    <slot name="context"></slot>
   </div>
 `;
 
@@ -22,15 +22,23 @@ const styles = css`
     anchor-name: --menu-trigger;
   }
 
+  @position-try --flip-inline {
+    position-area: block-end span-inline-start;
+  }
+
+  @position-try --flip-block {
+    position-area: block-start span-inline-end;
+  }
+
   [popover] {
     border: none;
     overflow: visible;
-    position-area: block-end span-inline-start;
+    position-area: block-end span-inline-end;
     margin: 0;
     padding: 0;
     background: transparent;
     position-anchor: --menu-trigger;
-    position-try-options: flip-block;
+    position-try-fallbacks: --flip-inline, --flip-block;
 
     transform: translateY(-24px);
     opacity: 0;
@@ -70,23 +78,18 @@ export class FlyoutMenu extends FASTElement {
     super.connectedCallback();
     this.getSlottedElements();
     this.setEventListeners();
-    if (this.initOpen && this.popoverElement) {
-      this.toggleFlyout(true);
-    }
-  }
-
-  initOpenChanged() {
-    if (this.initOpen && this.popoverElement) {
-      this.toggleFlyout(true);
+    if (this.initOpen) {
+      console.log('init open', this.initOpen);
+      this.handleTriggerClick();
     }
   }
 
   getSlottedElements() {
     this.popoverElement = this.shadowRoot?.querySelector(
-      '[popover]',
+      '#flyout',
     ) as HTMLDivElement;
     this.contextPopoverElement = this.shadowRoot?.querySelector(
-      '[popover] > div',
+      '#context',
     ) as HTMLDivElement;
     const triggerSlot = this.shadowRoot?.querySelector(
       'slot[name="trigger"]',
@@ -98,19 +101,40 @@ export class FlyoutMenu extends FASTElement {
 
   setEventListeners() {
     if (this.popoverElement && this.triggerElement) {
-      this.triggerElement?.addEventListener('mouseup', () =>
-        this.handleTriggerClick(),
-      );
-
       // Listen for content of flyout to close it
-      this.addEventListener('close', () => {
+      this.addEventListener('closemenu', (e) => {
+        e.stopPropagation();
         this.toggleFlyout(false);
         this.toggleContext(false);
       });
 
-      // Allow clicks inside the popover to not close it
+      // Trigger events
+      this.triggerElement?.addEventListener('click', () => {
+        this.handleTriggerClick();
+      });
+
+      this.triggerElement?.addEventListener('contextmenu', (e: MouseEvent) =>
+        this.handleContextClick(e),
+      );
+
+      this.triggerElement?.addEventListener('mousedown', (e) => {
+        if (this.open || this.contextOpen) e.stopPropagation(); // don't fire close if open
+      });
+
+      // Popover events
       this.popoverElement?.addEventListener('mousedown', (e) => {
-        e.stopPropagation();
+        e.stopPropagation(); // prevent close on click
+      });
+      this.contextPopoverElement?.addEventListener('mousedown', (e) => {
+        e.stopPropagation(); // prevent close on click
+      });
+
+      this.popoverElement?.addEventListener('transitionend', () => {
+        this.open ? this.$emit('flyoutopen') : this.$emit('flyoutclose');
+      });
+
+      this.contextPopoverElement?.addEventListener('transitionend', () => {
+        this.open ? this.$emit('contextopen') : this.$emit('contextclose');
       });
     }
   }
@@ -119,47 +143,62 @@ export class FlyoutMenu extends FASTElement {
     this.toggleFlyout(!this.open);
   }
 
+  handleContextClick(e: MouseEvent) {
+    e.preventDefault(); // don't show context menu
+    this.toggleContext(!this.contextOpen);
+  }
+
   toggleFlyout(newState = true) {
+    if (this.open === newState) return; // do not toggle if already in desired state
     this.open = newState;
 
     if (this.open) {
       // Set up event listeners to close the popover
-      const closeEvent = (e: MouseEvent | KeyboardEvent) => {
-        if (e instanceof KeyboardEvent && e.key !== 'Escape') {
-          return; // Only close on escape key
-        }
-        this.toggleFlyout(false);
-      };
-      const transitionEnd = () => {
-        this.$emit('flyoutopen');
-      };
-      this.popoverElement?.addEventListener('transitionend', transitionEnd, {
-        once: true,
-      });
-      document.addEventListener('mousedown', closeEvent, {
-        once: true,
-      });
-      document.addEventListener('keydown', closeEvent, {
-        once: true,
-      });
+      // const closeEvent = (e: MouseEvent | KeyboardEvent) => {
+      //   if (e instanceof KeyboardEvent && e.key !== 'Escape') {
+      //     return; // Only close on escape key
+      //   }
+      //   this.toggleFlyout(false);
+      // };
+      // document.addEventListener('mousedown', closeEvent, {
+      //   once: true,
+      // });
+      // document.addEventListener('keydown', closeEvent, {
+      //   once: true,
+      // });
 
       // Show the popover
       this.popoverElement?.showPopover();
     } else {
-      // Set up event listeners to close
-      const transitionEnd = () => {
-        this.$emit('flyoutclose');
-      };
-      this.popoverElement?.addEventListener('transitionend', transitionEnd, {
-        once: true,
-      });
-
       // Hide the popover
       this.popoverElement?.hidePopover();
     }
   }
 
   toggleContext(newState = true) {
-    return newState;
+    if (this.contextOpen === newState) return; // do not toggle if already in desired state
+    this.contextOpen = newState;
+
+    if (this.contextOpen) {
+      // Set up event listeners to close the popover
+      // const closeEvent = (e: MouseEvent | KeyboardEvent) => {
+      //   if (e instanceof KeyboardEvent && e.key !== 'Escape') {
+      //     return; // Only close on escape key
+      //   }
+      //   this.toggleContext(false);
+      // };
+      // document.addEventListener('mousedown', closeEvent, {
+      //   once: true,
+      // });
+      // document.addEventListener('keydown', closeEvent, {
+      //   once: true,
+      // });
+
+      // Show the popover
+      this.contextPopoverElement?.showPopover();
+    } else {
+      // Hide the popover
+      this.contextPopoverElement?.hidePopover();
+    }
   }
 }

@@ -85,8 +85,8 @@ const template = html<TabBar>`
     <div class="group" id="caption-controls" style="gap: 0;">
       <div class="group" id="pill-menu">
         <flyout-menu
-          @flyoutclose="${(x) => (x.ews.moreMenuOpen = false)}"
-          @flyoutopen="${(x) => (x.ews.moreMenuOpen = true)}"
+          @flyoutclose="${(x) => x.ews.toggleMoreMenuOpen(false)}"
+          @flyoutopen="${(x) => x.ews.toggleMoreMenuOpen(true)}"
         >
           <phx-toggle-button
             size="small"

@@ -35,7 +35,7 @@ const template = html<HorizontalTab>`
   <div class="tab-background" id="bg"></div>
   <div class="tab-background" id="left-wing"></div>
   <div class="tab-background" id="right-wing"></div>
-  <button @click="${(x, c) => x.activate(c.event)}">
+  <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">
     <div id="favicon" part="favicon">
       ${when(
         (x) => x.loading,
@@ -213,9 +213,14 @@ const styles = css`
 export class HorizontalTab extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) loading = false;
-  activate(e: Event) {
+  handleClick(e: MouseEvent) {
     e.stopPropagation();
-    this.$emit('activate');
+
+    if (e.button === 0) {
+      this.$emit('activate');
+    } else if (e.button === 1) {
+      this.$emit('close');
+    }
   }
 
   close(e: Event) {

@@ -42,15 +42,16 @@ const template = html<MoreMenu>`
         (x) => x.type === 'action',
         html` <menu-item
           @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
+          end-slot
         >
-          <span class="text-only" slot="start">${(x) => x.title}</span>
+          <span class="text-only">${(x) => x.title}</span>
           <span class="text-only hint" slot="end">${(x) => x.shortcut}</span>
         </menu-item>`,
       )}
       ${when(
         (x) => x.type === 'sub-menu',
-        html` <menu-item>
-          <span class="text-only" slot="start">${(x) => x.title}</span>
+        html` <menu-item end-slot>
+          <span class="text-only">${(x) => x.title}</span>
           <svg slot="end">
             <use href="img/edge/icons.svg#chevron-right-20-regular" />
           </svg>
@@ -199,6 +200,5 @@ export default class MoreMenu extends FASTElement {
 
   handleMenuItemClick(title: string) {
     this.$emit('moreaction', title);
-    this.$emit('close');
   }
 }

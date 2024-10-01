@@ -15,9 +15,12 @@ export type MoreMenuEntry = {
   shortcut?: string;
 };
 
-const template = html<MenuItem>` <button>
-    <slot name="start">Menu item</slot>
-    <slot name="end"></slot>
+const template = html<MenuItem>` <button
+    @click="${(x) => x.$emit('closemenu')}"
+  >
+    <div id="start"><slot name="start"></slot></div>
+    <div id="content"><slot>Menu item</slot></div>
+    <div id="end"><slot name="end"></slot></div>
   </button>
   <slot name="end-action"></slot>`;
 
@@ -51,9 +54,21 @@ const styles = css`
     background: ${colorSubtleBackgroundHover};
   }
 
-  [name='start']::slotted(*) {
+  #start,
+  #end {
+    display: none;
+  }
+
+  :host([start-slot]) #start,
+  :host([end-slot]) #end {
+    display: block;
+  }
+
+  #content {
     flex: 1;
     text-align: start;
+    white-space: nowrap;
+    overflow: hidden;
   }
 
   button:has(::slotted(phx-button)) {

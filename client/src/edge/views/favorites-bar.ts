@@ -4,6 +4,7 @@ import {
   css,
   FASTElement,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import FavoritesService, {
@@ -11,19 +12,41 @@ import FavoritesService, {
   FavoriteFolder,
 } from '#services/favoritesService.js';
 import '../controls/favorites-item.js';
+import '../controls/flyout-menu.js';
+import '../controls/context-menu.js';
+import '../controls/menu-item.js';
 import { spacingHorizontalS } from '@phoenixui/themes';
 import { TabService } from '#servicestabService.js';
 
 const template = html`
   ${repeat(
     (x) => x.fs.favorites,
-    html`<favorites-item
-      type=${(x) => x.type}
-      title=${(x) => x.title}
-      favicon=${(x) => x.favicon}
-      @click=${(x, c) => c.parent.handleItemClick(x)}
-    >
-    </favorites-item>`,
+    html`${when(
+      (x) => x.type === 'site',
+      html` <favorites-item
+        type=${(x) => x.type}
+        title=${(x) => x.title}
+        favicon=${(x) => x.favicon}
+        @click=${(x, c) => c.parent.handleItemClick(x)}
+        slot="trigger"
+      >
+      </favorites-item>`,
+      html`<flyout-menu>
+        <favorites-item
+          type=${(x) => x.type}
+          title=${(x) => x.title}
+          favicon=${(x) => x.favicon}
+          @click=${(x, c) => c.parent.handleItemClick(x)}
+          slot="trigger"
+        >
+        </favorites-item>
+        <context-menu>
+          <menu-item type="action">Item 1</menu-item>
+          <menu-item type="action">Item 2</menu-item>
+          <menu-item type="action">Item 3</menu-item>
+        </context-menu>
+      </flyout-menu>`,
+    )}`,
   )}
 `;
 

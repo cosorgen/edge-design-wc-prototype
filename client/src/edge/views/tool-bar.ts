@@ -53,8 +53,10 @@ const template = html<Toolbar>`
     ${when(
       (x) => x.ews.favoritesOpen,
       html` <flyout-menu
-        @flyoutclose="${(x) => (x.ews.favoritesOpen = false)}"
-        @flyoutopen="${(x) => (x.ews.favoritesOpen = true)}"
+        @flyoutclose="${(x) => x.ews.toggleFavoritesOpen(false)}"
+        @flyoutopen="${(x) => x.ews.toggleFavoritesOpen(true)}"
+        @contextclose="${(x) => x.ews.toggleDisableWebview(false)}"
+        @contextopen="${(x) => x.ews.toggleDisableWebview(true)}"
         initially-open
       >
         <phx-toggle-button
@@ -69,8 +71,8 @@ const template = html<Toolbar>`
         </phx-toggle-button>
         <favorites-menu></favorites-menu>
         <context-menu slot="context">
-          <menu-item>
-            <span slot="start">Always show favorites in toolbar</span>
+          <menu-item @click="${() => console.log('Aways show')}">
+            Always show favorites in toolbar
           </menu-item>
         </context-menu>
       </flyout-menu>`,
