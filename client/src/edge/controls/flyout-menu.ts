@@ -7,13 +7,15 @@ import {
 } from '@microsoft/fast-element';
 import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
-const template = html<FlyoutMenu>` <slot name="trigger"></slot>
-  <div popover>
+const template = html<FlyoutMenu>`
+  <slot name="trigger"></slot>
+  <div popover="manual" id="flyout">
     <slot></slot>
-    <div popover>
+    <div popover="manual" id="context">
       <slot name="context"></slot>
     </div>
-  </div>`;
+  </div>
+`;
 
 const styles = css`
   ::slotted([slot='trigger']) {
@@ -61,14 +63,21 @@ export class FlyoutMenu extends FASTElement {
   popoverElement: HTMLElement | null = null;
   contextPopoverElement: HTMLElement | null = null;
   triggerElement: HTMLElement | null = null;
-  open: boolean = false;
+  open = false;
+  contextOpen = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.getSlottedElements();
     this.setEventListeners();
     if (this.initOpen && this.popoverElement) {
-      this.popoverElement?.showPopover();
+      this.toggleFlyout(true);
+    }
+  }
+
+  initOpenChanged() {
+    if (this.initOpen && this.popoverElement) {
+      this.toggleFlyout(true);
     }
   }
 
@@ -89,61 +98,68 @@ export class FlyoutMenu extends FASTElement {
 
   setEventListeners() {
     if (this.popoverElement && this.triggerElement) {
-      this.triggerElement?.addEventListener('click', () =>
+      this.triggerElement?.addEventListener('mouseup', () =>
         this.handleTriggerClick(),
       );
 
-      this.triggerElement?.addEventListener('contextmenu', (e: MouseEvent) =>
-        this.handleTriggerContext(e),
-      );
-
-      this.triggerElement?.setAttribute('popovertarget', 'true');
-
-      // @ts-expect-error - Baseline 2024
-      this.popoverElement.addEventListener('toggle', (e: ToggleEvent) =>
-        this.handleToggleChange(e),
-      );
-
+      // Listen for content of flyout to close it
       this.addEventListener('close', () => {
-        this.popoverElement?.hidePopover();
+        this.toggleFlyout(false);
+        this.toggleContext(false);
+      });
+
+      // Allow clicks inside the popover to not close it
+      this.popoverElement?.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
       });
     }
   }
 
   handleTriggerClick() {
-    this.open
-      ? this.popoverElement?.hidePopover()
-      : this.popoverElement?.showPopover();
+    this.toggleFlyout(!this.open);
   }
 
-  handleTriggerContext(e: MouseEvent) {
-    e.preventDefault();
-    e.stopPropagation();
-    this.popoverElement?.setAttribute('popover', 'manual');
-    this.contextPopoverElement?.showPopover();
-  }
+  toggleFlyout(newState = true) {
+    this.open = newState;
 
-  handleToggleChange(e: ToggleEvent) {
-    if (e.newState === 'open') {
+    if (this.open) {
+      // Set up event listeners to close the popover
+      const closeEvent = (e: MouseEvent | KeyboardEvent) => {
+        if (e instanceof KeyboardEvent && e.key !== 'Escape') {
+          return; // Only close on escape key
+        }
+        this.toggleFlyout(false);
+      };
       const transitionEnd = () => {
-        this.open = true;
         this.$emit('flyoutopen');
-        this.popoverElement?.removeEventListener(
-          'transitionend',
-          transitionEnd,
-        );
       };
-      this.popoverElement?.addEventListener('transitionend', transitionEnd);
+      this.popoverElement?.addEventListener('transitionend', transitionEnd, {
+        once: true,
+      });
+      document.addEventListener('mousedown', closeEvent, {
+        once: true,
+      });
+      document.addEventListener('keydown', closeEvent, {
+        once: true,
+      });
+
+      // Show the popover
+      this.popoverElement?.showPopover();
     } else {
+      // Set up event listeners to close
       const transitionEnd = () => {
-        this.open = false;
         this.$emit('flyoutclose');
-        this.popoverElement?.removeEventListener(
-          'transitionend',
-          transitionEnd,
-        );
       };
-      this.popoverElement?.addEventListener('transitionend', transitionEnd);
+      this.popoverElement?.addEventListener('transitionend', transitionEnd, {
+        once: true,
+      });
+
+      // Hide the popover
+      this.popoverElement?.hidePopover();
     }
+  }
+
+  toggleContext(newState = true) {
+    return newState;
   }
 }
