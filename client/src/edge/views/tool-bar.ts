@@ -59,12 +59,7 @@ const template = html<Toolbar>`
         @contextopen="${(x) => x.ews.toggleDisableWebview(true)}"
         initially-open
       >
-        <phx-toggle-button
-          appearance="subtle"
-          icon-only
-          ?pressed="${(x) => x.ews.favoritesOpen}"
-          slot="trigger"
-        >
+        <phx-toggle-button appearance="subtle" icon-only slot="trigger">
           <svg>
             <use href="img/edge/icons.svg#star-20-regular" />
           </svg>

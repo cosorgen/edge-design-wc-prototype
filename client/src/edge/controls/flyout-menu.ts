@@ -9,15 +9,15 @@ import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
 const template = html<FlyoutMenu>`
   <slot name="trigger"></slot>
-  <div popover="manual" id="flyout">
+  <div popover id="flyout">
     <slot></slot>
   </div>
-  <div popover="manual" id="context">
+  <div popover id="context">
     <slot name="context"></slot>
   </div>
 `;
 
-const styles = css`
+const styles = css<FlyoutMenu>`
   ::slotted([slot='trigger']) {
     anchor-name: --menu-trigger;
   }
@@ -71,26 +71,44 @@ export class FlyoutMenu extends FASTElement {
   popoverElement: HTMLElement | null = null;
   contextPopoverElement: HTMLElement | null = null;
   triggerElement: HTMLElement | null = null;
-  open = false;
-  contextOpen = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.getSlottedElements();
     this.setEventListeners();
     if (this.initOpen) {
-      console.log('init open', this.initOpen);
-      this.handleTriggerClick();
+      this.popoverElement?.showPopover();
     }
   }
 
   getSlottedElements() {
-    this.popoverElement = this.shadowRoot?.querySelector(
-      '#flyout',
-    ) as HTMLDivElement;
-    this.contextPopoverElement = this.shadowRoot?.querySelector(
-      '#context',
-    ) as HTMLDivElement;
+    // Flyout menu
+    const flyoutSlot = this.shadowRoot?.querySelectorAll(
+      'slot',
+    )[1] as HTMLSlotElement;
+    if (flyoutSlot) {
+      const flyoutElement = flyoutSlot.assignedElements()[0] as HTMLElement;
+      if (flyoutElement) {
+        this.popoverElement = this.shadowRoot?.querySelector(
+          '#flyout',
+        ) as HTMLDivElement;
+      }
+    }
+
+    // Context menu
+    const contextSlot = this.shadowRoot?.querySelector(
+      '[name="context"]',
+    ) as HTMLSlotElement;
+    if (contextSlot) {
+      const contextElement = contextSlot.assignedElements()[0] as HTMLElement;
+      if (contextElement) {
+        this.contextPopoverElement = this.shadowRoot?.querySelector(
+          '#context',
+        ) as HTMLDivElement;
+      }
+    }
+
+    // Trigger element
     const triggerSlot = this.shadowRoot?.querySelector(
       'slot[name="trigger"]',
     ) as HTMLSlotElement;
@@ -104,101 +122,49 @@ export class FlyoutMenu extends FASTElement {
       // Listen for content of flyout to close it
       this.addEventListener('closemenu', (e) => {
         e.stopPropagation();
-        this.toggleFlyout(false);
-        this.toggleContext(false);
+        this.popoverElement?.hidePopover();
+        this.contextPopoverElement?.hidePopover();
       });
 
       // Trigger events
       this.triggerElement?.addEventListener('click', () => {
-        this.handleTriggerClick();
+        this.popoverElement?.togglePopover();
       });
 
-      this.triggerElement?.addEventListener('contextmenu', (e: MouseEvent) =>
-        this.handleContextClick(e),
-      );
-
-      this.triggerElement?.addEventListener('mousedown', (e) => {
-        if (this.open || this.contextOpen) e.stopPropagation(); // don't fire close if open
+      this.triggerElement?.addEventListener('contextmenu', (e: MouseEvent) => {
+        e.preventDefault(); // don't show context menu
+        this.contextPopoverElement?.togglePopover();
       });
 
       // Popover events
-      this.popoverElement?.addEventListener('mousedown', (e) => {
-        e.stopPropagation(); // prevent close on click
-      });
-      this.contextPopoverElement?.addEventListener('mousedown', (e) => {
-        e.stopPropagation(); // prevent close on click
-      });
+      this.popoverElement?.addEventListener(
+        'toggle',
+        // @ts-expect-error - custom event
+        (e: ToggleEvent) => {
+          e.newState === 'open'
+            ? this.$emit('flyoutopen')
+            : this.$emit('flyoutclose');
+          this.triggerElement?.setAttribute(
+            'pressed',
+            e.newState === 'open' ? 'true' : 'false',
+          );
+        },
+      );
 
-      this.popoverElement?.addEventListener('transitionend', () => {
-        this.open ? this.$emit('flyoutopen') : this.$emit('flyoutclose');
-      });
-
-      this.contextPopoverElement?.addEventListener('transitionend', () => {
-        this.open ? this.$emit('contextopen') : this.$emit('contextclose');
-      });
-    }
-  }
-
-  handleTriggerClick() {
-    this.toggleFlyout(!this.open);
-  }
-
-  handleContextClick(e: MouseEvent) {
-    e.preventDefault(); // don't show context menu
-    this.toggleContext(!this.contextOpen);
-  }
-
-  toggleFlyout(newState = true) {
-    if (this.open === newState) return; // do not toggle if already in desired state
-    this.open = newState;
-
-    if (this.open) {
-      // Set up event listeners to close the popover
-      // const closeEvent = (e: MouseEvent | KeyboardEvent) => {
-      //   if (e instanceof KeyboardEvent && e.key !== 'Escape') {
-      //     return; // Only close on escape key
-      //   }
-      //   this.toggleFlyout(false);
-      // };
-      // document.addEventListener('mousedown', closeEvent, {
-      //   once: true,
-      // });
-      // document.addEventListener('keydown', closeEvent, {
-      //   once: true,
-      // });
-
-      // Show the popover
-      this.popoverElement?.showPopover();
-    } else {
-      // Hide the popover
-      this.popoverElement?.hidePopover();
-    }
-  }
-
-  toggleContext(newState = true) {
-    if (this.contextOpen === newState) return; // do not toggle if already in desired state
-    this.contextOpen = newState;
-
-    if (this.contextOpen) {
-      // Set up event listeners to close the popover
-      // const closeEvent = (e: MouseEvent | KeyboardEvent) => {
-      //   if (e instanceof KeyboardEvent && e.key !== 'Escape') {
-      //     return; // Only close on escape key
-      //   }
-      //   this.toggleContext(false);
-      // };
-      // document.addEventListener('mousedown', closeEvent, {
-      //   once: true,
-      // });
-      // document.addEventListener('keydown', closeEvent, {
-      //   once: true,
-      // });
-
-      // Show the popover
-      this.contextPopoverElement?.showPopover();
-    } else {
-      // Hide the popover
-      this.contextPopoverElement?.hidePopover();
+      // Context events
+      this.contextPopoverElement?.addEventListener(
+        'toggle',
+        // @ts-expect-error - custom event
+        (e: ToggleEvent) => {
+          e.newState === 'open'
+            ? this.$emit('contextopen')
+            : this.$emit('contexttextclose');
+          this.triggerElement?.setAttribute(
+            'pressed',
+            e.newState === 'open' ? 'true' : 'false',
+          );
+        },
+      );
     }
   }
 }

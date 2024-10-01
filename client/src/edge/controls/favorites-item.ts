@@ -59,7 +59,7 @@ const styles = css`
     background: ${colorSubtleBackgroundPressed};
   }
 
-  :host([selected]) button {
+  :host([pressed='true']) button {
     background: ${colorSubtleBackgroundSelected};
   }
 
@@ -77,9 +77,9 @@ export class FavoritesItem extends FASTElement {
   @attr type: 'site' | 'folder' = 'site';
   @attr title = 'Favorite item';
   @attr favicon = '';
-  @attr({ mode: 'boolean' }) selected = false;
+  @attr({ mode: 'boolean' }) pressed = false;
 
   handleClick() {
-    if (this.type === 'folder') this.selected = !this.selected;
+    if (this.type === 'folder') this.pressed = !this.pressed;
   }
 }
