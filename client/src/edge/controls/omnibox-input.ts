@@ -54,6 +54,10 @@ const styles = css`
     }
   }
 
+  [part='input']:focus {
+    text-overflow: unset;
+  }
+
   .metadata {
     color: ${colorNeutralForegroundHint};
   }

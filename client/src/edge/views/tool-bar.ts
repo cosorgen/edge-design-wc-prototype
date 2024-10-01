@@ -53,10 +53,10 @@ const template = html<Toolbar>`
     ${when(
       (x) => x.ews.favoritesOpen,
       html` <flyout-menu
-        @flyoutclose="${(x) => x.ews.toggleFavoritesOpen(false)}"
-        @flyoutopen="${(x) => x.ews.toggleFavoritesOpen(true)}"
-        @contextclose="${(x) => x.ews.toggleDisableWebview(false)}"
-        @contextopen="${(x) => x.ews.toggleDisableWebview(true)}"
+        @flyoutclose="${(x) => x.handleFavoriteStateChange(false)}"
+        @flyoutopen="${(x) => x.handleFavoriteStateChange(true)}"
+        @contextclose="${(x) => x.handleFavoriteStateChange(false)}"
+        @contextopen="${(x) => x.handleFavoriteStateChange(true)}"
         initially-open
       >
         <phx-toggle-button appearance="subtle" icon-only slot="trigger">
@@ -112,6 +112,7 @@ export class Toolbar extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @observable suggestions: Suggestion[] = [];
   omniboxControl?: OmniboxControl | null = null;
+  favTimer: NodeJS.Timeout | null = null;
 
   connectedCallback() {
     super.connectedCallback();
@@ -135,5 +136,12 @@ export class Toolbar extends FASTElement {
     generateSuggestions(e.detail).then((res) => {
       this.suggestions = res.suggestions;
     });
+  }
+
+  handleFavoriteStateChange(open: boolean) {
+    clearTimeout(this.favTimer as NodeJS.Timeout);
+    this.favTimer = setTimeout(() => {
+      this.ews.toggleFavoritesOpen(open);
+    }, 100); // Delay updating state to leave open if conditionally rendered and showing context menu
   }
 }

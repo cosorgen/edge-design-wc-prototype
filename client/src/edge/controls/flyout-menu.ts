@@ -158,7 +158,7 @@ export class FlyoutMenu extends FASTElement {
         (e: ToggleEvent) => {
           e.newState === 'open'
             ? this.$emit('contextopen')
-            : this.$emit('contexttextclose');
+            : this.$emit('contextclose');
           this.triggerElement?.setAttribute(
             'pressed',
             e.newState === 'open' ? 'true' : 'false',
