@@ -6,10 +6,10 @@ import {
   shadow28,
 } from '@phoenixui/themes';
 
-const template = html<FavoritesMenu>` <img
-  src="./img/edge/favorites.png"
-  width="368px"
-  height="600px"
+const template = html<ExtensionsHub>` <img
+  src="./img/edge/extensions.png"
+  width="308px"
+  height="249px"
 />`;
 
 const styles = css`
@@ -26,8 +26,8 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'favorites-menu',
+  name: 'extensions-hub',
   template,
   styles,
 })
-export class FavoritesMenu extends FASTElement {}
+export class ExtensionsHub extends FASTElement {}

@@ -81,6 +81,12 @@ export class FlyoutMenu extends FASTElement {
     }
   }
 
+  initOpenChanged() {
+    if (this.initOpen) {
+      this.popoverElement?.showPopover();
+    }
+  }
+
   getSlottedElements() {
     // Flyout menu
     const flyoutSlot = this.shadowRoot?.querySelectorAll(
@@ -127,8 +133,12 @@ export class FlyoutMenu extends FASTElement {
       });
 
       // Trigger events
-      this.triggerElement?.addEventListener('click', () => {
-        this.popoverElement?.togglePopover();
+      this.triggerElement?.addEventListener('click', (e: MouseEvent) => {
+        if (e.button === 0) this.popoverElement?.togglePopover();
+        else if (e.button === 2) {
+          e.preventDefault();
+          this.contextPopoverElement?.togglePopover();
+        }
       });
 
       this.triggerElement?.addEventListener('contextmenu', (e: MouseEvent) => {

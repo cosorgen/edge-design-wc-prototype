@@ -19,7 +19,7 @@ const template = html<ContextMenu>`
 
 const styles = css`
   :host {
-    min-width: 200px;
+    min-width: 96px;
     max-width: 512px;
     display: flex;
     flex-direction: column;

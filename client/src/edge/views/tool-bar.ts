@@ -4,18 +4,14 @@ import {
   html,
   css,
   observable,
-  when,
+  repeat,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/toggle-button.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
-import '../controls/flyout-menu.js';
-import '../controls/favorites-menu.js';
-import '../controls/context-menu.js';
-import '../controls/menu-item.js';
+import '../controls/toolbar-item.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -50,27 +46,18 @@ const template = html<Toolbar>`
       } as CustomEvent)}"
   ></omnibox-control>
   <div class="group right">
-    ${when(
-      (x) => x.ews.favoritesOpen,
-      html` <flyout-menu
-        @flyoutclose="${(x) => x.handleFavoriteStateChange(false)}"
-        @flyoutopen="${(x) => x.handleFavoriteStateChange(true)}"
-        @contextclose="${(x) => x.handleFavoriteStateChange(false)}"
-        @contextopen="${(x) => x.handleFavoriteStateChange(true)}"
-        initially-open
-      >
-        <phx-toggle-button appearance="subtle" icon-only slot="trigger">
-          <svg>
-            <use href="img/edge/icons.svg#star-20-regular" />
-          </svg>
-        </phx-toggle-button>
-        <favorites-menu></favorites-menu>
-        <context-menu slot="context">
-          <menu-item @click="${() => console.log('Aways show')}">
-            Always show favorites in toolbar
-          </menu-item>
-        </context-menu>
-      </flyout-menu>`,
+    ${repeat(
+      (x) => x.ews.toolbarItems.filter((i) => i.pinned || i.open),
+      html`<toolbar-item
+        id="${(x) => x.id}"
+        @opentoolbaritem="${(x, c) => c.parent.ews.openToolbarItem(x.id)}"
+        @closetoolbaritem="${(x, c) => c.parent.ews.closeToolbarItem(x.id)}"
+        @pintoolbaritem="${(x, c) => c.parent.ews.pinToolbarItem(x.id, true)}"
+        @unpintoolbaritem="${(x, c) =>
+          c.parent.ews.pinToolbarItem(x.id, false)}"
+        ?initially-open="${(x) => x.open}"
+        pinned="${(x) => x.pinned}"
+      ></toolbar-item>`,
     )}
   </div>
 `;
@@ -112,7 +99,6 @@ export class Toolbar extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @observable suggestions: Suggestion[] = [];
   omniboxControl?: OmniboxControl | null = null;
-  favTimer: NodeJS.Timeout | null = null;
 
   connectedCallback() {
     super.connectedCallback();
@@ -136,12 +122,5 @@ export class Toolbar extends FASTElement {
     generateSuggestions(e.detail).then((res) => {
       this.suggestions = res.suggestions;
     });
-  }
-
-  handleFavoriteStateChange(open: boolean) {
-    clearTimeout(this.favTimer as NodeJS.Timeout);
-    this.favTimer = setTimeout(() => {
-      this.ews.toggleFavoritesOpen(open);
-    }, 100); // Delay updating state to leave open if conditionally rendered and showing context menu
   }
 }
