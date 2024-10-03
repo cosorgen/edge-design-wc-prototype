@@ -7,6 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
+// Popovers need to be manually controlled so that we can use context menus with trackpads
 const template = html<FlyoutMenu>`
   <slot name="trigger"></slot>
   <div popover="manual" id="flyout">
@@ -176,6 +177,11 @@ export class FlyoutMenu extends FASTElement {
         once: true,
       });
     }
+
+    // Toggle doesn't bubble, so we need to dispatch a custom event
+    this.dispatchEvent(
+      new ToggleEvent('toggle', { newState: e.newState, oldState: e.oldState }),
+    );
   };
 
   toggleContextHandler = (e: Event) => {
@@ -202,6 +208,11 @@ export class FlyoutMenu extends FASTElement {
         once: true,
       });
     }
+
+    // Toggle doesn't bubble, so we need to dispatch a custom event
+    this.dispatchEvent(
+      new ToggleEvent('toggle', { newState: e.newState, oldState: e.oldState }),
+    );
   };
 
   eventTargetIsTriggerOrPopover(e: Event) {

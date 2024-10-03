@@ -19,6 +19,7 @@ import {
   generateSuggestions,
 } from '#servicesautoSuggestService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -47,16 +48,15 @@ const template = html<Toolbar>`
   ></omnibox-control>
   <div class="group right">
     ${repeat(
-      (x) => x.ews.toolbarItems.filter((i) => i.pinned || i.open),
+      (x) => x.ews.toolbarItems,
       html`<toolbar-item
         id="${(x) => x.id}"
         @opentoolbaritem="${(x, c) => c.parent.ews.openToolbarItem(x.id)}"
         @closetoolbaritem="${(x, c) => c.parent.ews.closeToolbarItem(x.id)}"
-        @pintoolbaritem="${(x, c) => c.parent.ews.pinToolbarItem(x.id, true)}"
-        @unpintoolbaritem="${(x, c) =>
-          c.parent.ews.pinToolbarItem(x.id, false)}"
-        ?initially-open="${(x) => x.open}"
-        pinned="${(x) => x.pinned}"
+        @pintoolbaritem="${(x, c) => c.parent.ews.pinToolbarItem(x.id)}"
+        @unpintoolbaritem="${(x, c) => c.parent.ews.unpinToolbarItem(x.id)}"
+        ?pinned="${(x) => x.pinned}"
+        ?open="${(x) => x.open}"
       ></toolbar-item>`,
     )}
   </div>
@@ -97,6 +97,7 @@ const styles = css`
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable suggestions: Suggestion[] = [];
   omniboxControl?: OmniboxControl | null = null;
 

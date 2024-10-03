@@ -84,10 +84,7 @@ const template = html<TabBar>`
     ></div>
     <div class="group" id="caption-controls" style="gap: 0;">
       <div class="group" id="pill-menu">
-        <flyout-menu
-          @flyoutclose="${(x) => (x.ews.disableWebview = false)}"
-          @flyoutopen="${(x) => (x.ews.disableWebview = true)}"
-        >
+        <flyout-menu @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}">
           <phx-toggle-button
             size="small"
             appearance="subtle"
@@ -305,6 +302,11 @@ export class TabBar extends FASTElement {
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
+  }
+
+  handleFlyoutToggle(e: Event) {
+    if (!(e instanceof ToggleEvent)) return;
+    this.ews.disableWebview = e.newState === 'open';
   }
 
   handleMoreAction(e: CustomEvent) {

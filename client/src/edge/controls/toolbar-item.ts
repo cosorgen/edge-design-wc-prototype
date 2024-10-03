@@ -33,10 +33,7 @@ const apps: Record<string, ToolbarApp> = {
 
 const template = html<ToolbarItem>`
   <flyout-menu
-    @flyoutclose="${(x) => x.handleFlyoutChange(false)}"
-    @flyoutopen="${(x) => x.handleFlyoutChange(true)}"
-    @contextclose="${(x) => x.handleFlyoutChange(false)}"
-    @contextopen="${(x) => x.handleFlyoutChange(true)}"
+    @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
     ?initially-open="${(x) => x.initOpen}"
   >
     <phx-toggle-button appearance="subtle" icon-only slot="trigger">
@@ -75,17 +72,19 @@ const styles = css`
   styles,
 })
 export class ToolbarItem extends FASTElement {
-  @attr id: string = 'favorites';
+  @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   @attr({ mode: 'boolean' }) pinned = false;
-  favTimer: NodeJS.Timeout | null = null;
+  _openFlyoutCount = 0;
 
-  handleFlyoutChange(open: boolean) {
-    clearTimeout(this.favTimer as NodeJS.Timeout);
-    this.favTimer = setTimeout(() => {
-      if (!open) this.$emit('closetoolbaritem', this.id);
-      else this.$emit('opentoolbaritem', this.id);
-    }, 100); // Delay updating state to leave open if conditionally rendered and showing context menu
+  handleFlyoutToggle(e: Event) {
+    if (!(e instanceof ToggleEvent)) return;
+
+    const open = e.newState === 'open';
+    if (this._openFlyoutCount === 0 && open) this.$emit('opentoolbaritem');
+    if (this._openFlyoutCount === 1 && !open) this.$emit('closetoolbaritem');
+
+    this._openFlyoutCount += open ? 1 : -1;
   }
 
   pinItem(pin: boolean) {

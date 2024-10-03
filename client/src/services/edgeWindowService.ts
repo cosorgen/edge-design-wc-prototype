@@ -8,15 +8,10 @@ export type ToolbarItem = {
 
 export default class EdgeWindowService {
   @observable disableWebview = false;
-  @observable toolbarItems: ToolbarItem[] = [
-    { id: 'favorites', open: false, pinned: false },
-    { id: 'extensions', open: false, pinned: false },
-  ];
+  @observable toolbarItems: ToolbarItem[] = [];
 
   openToolbarItem(id: string) {
-    if (this.toolbarItems.some((i) => i.id === id && i.open)) {
-      return;
-    }
+    if (this.toolbarItems.some((i) => i.id === id && i.open)) return;
 
     if (!this.toolbarItems.some((i) => i.id === id)) {
       // add to list if not already there
@@ -37,6 +32,7 @@ export default class EdgeWindowService {
   }
 
   closeToolbarItem(id: string) {
+    console.log('closeToolbarItem', id);
     // close toolbar item by id
     this.toolbarItems = this.toolbarItems.map((i) => ({
       ...i,
@@ -47,11 +43,19 @@ export default class EdgeWindowService {
     this.disableWebview = false;
   }
 
-  pinToolbarItem(id: string, pinned: boolean) {
+  pinToolbarItem(id: string) {
     // pin toolbar item by id
     this.toolbarItems = this.toolbarItems.map((i) => ({
       ...i,
-      pinned: i.id === id ? pinned : i.pinned,
+      pinned: i.id === id ? true : i.pinned,
+    }));
+  }
+
+  unpinToolbarItem(id: string) {
+    // unpin toolbar item by id
+    this.toolbarItems = this.toolbarItems.map((i) => ({
+      ...i,
+      pinned: i.id === id ? false : i.pinned,
     }));
   }
 }
