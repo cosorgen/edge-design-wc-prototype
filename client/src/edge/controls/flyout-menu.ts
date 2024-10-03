@@ -9,10 +9,10 @@ import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
 const template = html<FlyoutMenu>`
   <slot name="trigger"></slot>
-  <div popover id="flyout">
+  <div popover="manual" id="flyout">
     <slot></slot>
   </div>
-  <div popover id="context">
+  <div popover="manual" id="context">
     <slot name="context"></slot>
   </div>
 `;
@@ -71,6 +71,8 @@ export class FlyoutMenu extends FASTElement {
   popoverElement: HTMLElement | null = null;
   contextPopoverElement: HTMLElement | null = null;
   triggerElement: HTMLElement | null = null;
+  open = false;
+  contextOpen = false;
 
   connectedCallback() {
     super.connectedCallback();
@@ -156,15 +158,33 @@ export class FlyoutMenu extends FASTElement {
         'toggle',
         // @ts-expect-error - custom event
         (e: ToggleEvent) => {
-          e.newState === 'open'
-            ? this.$emit('contextopen')
-            : this.$emit('contextclose');
+          const open = e.newState === 'open';
+          this.contextOpen = open;
           this.triggerElement?.setAttribute(
             'pressed',
             e.newState === 'open' ? 'true' : 'false',
           );
+          document.addEventListener('click', this.documentClickHandler, {
+            once: true,
+          });
         },
       );
+    }
+  }
+
+  documentClickHandler(e: MouseEvent) {
+    if (
+      e
+        .composedPath()
+        .some(
+          (el) =>
+            el === this.triggerElement ||
+            el === this.popoverElement ||
+            el === this.contextPopoverElement,
+        )
+    ) {
+      this.popoverElement?.hidePopover();
+      this.contextPopoverElement?.hidePopover();
     }
   }
 }
