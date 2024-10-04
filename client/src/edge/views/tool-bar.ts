@@ -49,32 +49,16 @@ const template = html<Toolbar>`
   <div class="group right">
     ${repeat(
       (x) => x.ews.toolbarItems.filter((i) => i.pinned || i.open),
-      html`<toolbar-item id="${(x) => x.id}"></toolbar-item>`,
+      html`<toolbar-item
+        id="${(x) => x.id}"
+        ?pinned="${(x) => x.pinned}"
+        initially-open="${(x) => x.open}"
+        @opentoolbaritem="${(x, c) => c.parent.ews.openToolbarItem(x.id)}"
+        @closetoolbaritem="${(x, c) => c.parent.ews.closeToolbarItem(x.id)}"
+        @pintoolbaritem="${(x, c) => c.parent.ews.pinToolbarItem(x.id)}"
+        @unpintoolbaritem="${(x, c) => c.parent.ews.unpinToolbarItem(x.id)}"
+      ></toolbar-item>`,
     )}
-    <button @click="${(x) => x.ews.openToolbarItem('favorites')}">
-      Open favorites
-    </button>
-    <button @click="${(x) => x.ews.closeToolbarItem('favorites')}">
-      Close favorites
-    </button>
-    <button @click="${(x) => x.ews.pinToolbarItem('favorites')}">
-      Pin favorites
-    </button>
-    <button @click="${(x) => x.ews.unpinToolbarItem('favorites')}">
-      Unpin favorites
-    </button>
-    <button @click="${(x) => x.ews.openToolbarItem('extensions')}">
-      Open extensions
-    </button>
-    <button @click="${(x) => x.ews.closeToolbarItem('extensions')}">
-      Close extensions
-    </button>
-    <button @click="${(x) => x.ews.pinToolbarItem('extensions')}">
-      Pin extensions
-    </button>
-    <button @click="${(x) => x.ews.unpinToolbarItem('extensions')}">
-      Unpin extensions
-    </button>
   </div>
 `;
 
