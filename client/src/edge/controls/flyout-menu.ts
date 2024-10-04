@@ -145,10 +145,20 @@ export class FlyoutMenu extends FASTElement {
         this.toggleFlyoutHandler,
       );
 
+      this._popoverElement?.addEventListener(
+        'transitionend',
+        this.transitionEndFlyoutHandler,
+      );
+
       // Context events
       this._contextPopoverElement?.addEventListener(
         'toggle',
         this.toggleContextHandler,
+      );
+
+      this._contextPopoverElement?.addEventListener(
+        'transitionend',
+        this.transitionEndContextHandler,
       );
     }
   }
@@ -177,11 +187,14 @@ export class FlyoutMenu extends FASTElement {
         once: true,
       });
     }
+  };
 
-    // Toggle doesn't bubble, so we need to dispatch a custom event
-    this.dispatchEvent(
-      new ToggleEvent('toggle', { newState: e.newState, oldState: e.oldState }),
-    );
+  transitionEndFlyoutHandler = (e: TransitionEvent) => {
+    if (e.propertyName === 'opacity' && e.target === this._popoverElement) {
+      const newState = this._open ? 'open' : 'closed';
+      const oldState = this._open ? 'closed' : 'open';
+      this.dispatchEvent(new ToggleEvent('toggle', { newState, oldState }));
+    }
   };
 
   toggleContextHandler = (e: Event) => {
@@ -208,11 +221,17 @@ export class FlyoutMenu extends FASTElement {
         once: true,
       });
     }
+  };
 
-    // Toggle doesn't bubble, so we need to dispatch a custom event
-    this.dispatchEvent(
-      new ToggleEvent('toggle', { newState: e.newState, oldState: e.oldState }),
-    );
+  transitionEndContextHandler = (e: TransitionEvent) => {
+    if (
+      e.propertyName === 'opacity' &&
+      e.target === this._contextPopoverElement
+    ) {
+      const newState = this._contextOpen ? 'open' : 'closed';
+      const oldState = this._contextOpen ? 'closed' : 'open';
+      this.dispatchEvent(new ToggleEvent('toggle', { newState, oldState }));
+    }
   };
 
   eventTargetIsTriggerOrPopover(e: Event) {
