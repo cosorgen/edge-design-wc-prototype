@@ -8,31 +8,33 @@ export type ToolbarItem = {
 
 export default class EdgeWindowService {
   @observable disableWebview = false;
-  @observable toolbarItems: ToolbarItem[] = [];
+  @observable toolbarItems: ToolbarItem[] = [
+    {
+      id: 'favorites',
+      open: false,
+      pinned: false,
+    },
+    {
+      id: 'extensions',
+      open: false,
+      pinned: false,
+    },
+  ];
 
   openToolbarItem(id: string) {
     if (this.toolbarItems.some((i) => i.id === id && i.open)) return;
 
-    if (!this.toolbarItems.some((i) => i.id === id)) {
-      // add to list if not already there
-      this.toolbarItems = [
-        ...this.toolbarItems,
-        { id, open: true, pinned: false },
-      ];
-    } else {
-      // open if already there
-      this.toolbarItems = this.toolbarItems.map((i) => ({
-        ...i,
-        open: i.id === id ? true : i.open,
-      }));
-    }
+    // open if already there
+    this.toolbarItems = this.toolbarItems.map((i) => ({
+      ...i,
+      open: i.id === id ? true : i.open,
+    }));
 
     // disable webview when toolbar item is open
     this.disableWebview = true;
   }
 
   closeToolbarItem(id: string) {
-    console.log('closeToolbarItem', id);
     // close toolbar item by id
     this.toolbarItems = this.toolbarItems.map((i) => ({
       ...i,

@@ -310,6 +310,7 @@ export class TabBar extends FASTElement {
   }
 
   handleMoreAction(e: CustomEvent) {
+    console.log('handleMoreAction', e.detail);
     const action = e.detail;
     switch (action) {
       case 'New tab':
