@@ -60,7 +60,7 @@ const template = html<HorizontalTab>`
     @click="${(x, c) => x.close(c.event)}"
   >
     <svg>
-      <use href="img/edge/icons.svg#dismiss-16-regular"></use>
+      <use href="img/edge/icons.svg#dismiss-12-regular"></use>
     </svg>
   </phx-button>
 `;

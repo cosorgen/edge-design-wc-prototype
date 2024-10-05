@@ -5,6 +5,7 @@ import {
   css,
   observable,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
@@ -20,6 +21,7 @@ import {
 } from '#servicesautoSuggestService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -59,6 +61,19 @@ const template = html<Toolbar>`
         @unpintoolbaritem="${(x, c) => c.parent.ews.unpinToolbarItem(x.id)}"
       ></toolbar-item>`,
     )}
+    ${when(
+      (x) => x.showLegacyCopliot,
+      html`
+        <phx-toggle-button
+          appearance="subtle"
+          icon-only
+          @click="${(x) => x.handleShowLegacyCopilot()}"
+          ?pressed="${(x) => x.ews.sidepaneAppId === 'copilot'}"
+        >
+          <img id="copilot" src="img/edge/copilot-icon.svg" />
+        </phx-toggle-button>
+      `,
+    )}
   </div>
 `;
 
@@ -67,7 +82,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
-    padding: 0 ${spacingHorizontalXS};
+    padding: ${spacingFrame} ${spacingHorizontalXS};
     user-select: none;
   }
 
@@ -99,6 +114,7 @@ export class Toolbar extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable suggestions: Suggestion[] = [];
+  @observable showLegacyCopliot = false;
   omniboxControl?: OmniboxControl | null = null;
 
   connectedCallback() {
@@ -107,6 +123,11 @@ export class Toolbar extends FASTElement {
     generateSuggestions('').then((res) => {
       this.suggestions = res.suggestions;
     });
+
+    // Get the showLegacyCopilot flag from URL
+    const url = new URL(window.location.href);
+    this.showLegacyCopliot =
+      url.searchParams.get('showLegacyCopilot') === 'true';
   }
 
   suggestionsChanged() {
@@ -123,5 +144,10 @@ export class Toolbar extends FASTElement {
     generateSuggestions(e.detail).then((res) => {
       this.suggestions = res.suggestions;
     });
+  }
+
+  handleShowLegacyCopilot() {
+    this.ews.sidepaneAppId =
+      this.ews.sidepaneAppId === 'copilot' ? null : 'copilot';
   }
 }

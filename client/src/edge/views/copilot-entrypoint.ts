@@ -8,27 +8,21 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   borderRadiusCircular,
-  colorLayerBackgroundDialog,
-  colorNeutralForegroundHint,
   colorScrollbarForeground,
   colorScrollbarForegroundHover,
   durationSlow,
-  shadow28,
-  spacingHorizontalS,
-  spacingHorizontalXL,
-  spacingHorizontalXS,
   spacingVerticalXS,
   spacingVerticalXXS,
-  strokeWidthThin,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '../controls/copilot-composer.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const curveEasyEaseMax = 'cubic-bezier(0.6, 0, 0.3, 1)';
 
-const template = html<CopilotComposer>` <div
+const template = html<CopilotEntrypoint>` <div
     part="grabber"
     @click="${(x) => x.activate()}"
     }
@@ -36,19 +30,22 @@ const template = html<CopilotComposer>` <div
   <div id="click-catcher" @click="${(x) => x.deactivate()}"></div>
   ${when(
     (x) => x.renderComposer,
-    html` <div part="composer">
-      <phx-button appearance="subtle" size="large" icon-only>
+    html` <copilot-composer>
+      <phx-button
+        appearance="subtle"
+        size="large"
+        icon-only
+        @click="${(x) => x.deactivate(true)}"
+        slot="start"
+      >
         <img src="img/edge/copilot-icon.svg" />
       </phx-button>
-      <input type="text" placeholder="Talk about your page" />
-      <div>
-        <phx-button appearance="subtle" size="large" icon-only>
-          <svg>
-            <use href="img/edge/icons.svg#cast-20-regular" />
-          </svg>
-        </phx-button>
-      </div>
-    </div>`,
+      <phx-button appearance="subtle" size="large" icon-only slot="end">
+        <svg>
+          <use href="img/edge/icons.svg#cast-20-regular" />
+        </svg>
+      </phx-button>
+    </copilot-composer>`,
   )}`;
 
 const styles = css`
@@ -92,53 +89,17 @@ const styles = css`
     opacity: 0;
   }
 
-  [part='composer'] {
+  copilot-composer {
     position: absolute;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: ${spacingHorizontalXS};
-    padding: ${spacingHorizontalS};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
-    border-radius: 28px;
-    box-shadow: ${shadow28};
-    overflow: hidden;
 
     transition: all ${durationSlow} ${curveEasyEaseMax};
     transform: translateY(8px);
     opacity: 0;
   }
 
-  :host([active]) [part='composer'] {
+  :host([active]) copilot-composer {
     transform: translateY(-68px);
     opacity: 1;
-  }
-
-  [part='composer'] input {
-    box-sizing: border-box;
-    height: 48px;
-    min-width: 384px;
-    border: none;
-    background: ${colorLayerBackgroundDialog};
-    border-radius: 20px;
-    color: inherit;
-    padding: ${spacingHorizontalXS};
-    padding-inline-start: ${spacingHorizontalXL};
-    box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
-
-    font-size: 18px;
-    line-height: 26px;
-  }
-
-  [part='composer'] input:focus {
-    outline: none;
-  }
-
-  [part='composer'] input:empty::placeholder {
-    color: ${colorNeutralForegroundHint};
   }
 
   #click-catcher {
@@ -154,38 +115,63 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'copilot-composer',
+  name: 'copilot-entrypoint',
   template,
   styles,
 })
-export class CopilotComposer extends FASTElement {
+export class CopilotEntrypoint extends FASTElement {
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
   @attr({ mode: 'boolean' }) active = false;
   @observable renderComposer = false;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListeners();
+  }
+
+  addEventListeners() {
+    this.addEventListener('close', () => {
+      this.deactivate();
+    });
+
+    this.addEventListener('submit', () => {
+      this.deactivate(true);
+    });
+
+    this.addEventListener('home', () => {
+      this.deactivate(true);
+    });
+  }
 
   activate() {
     this.renderComposer = true;
 
     // Wait for the element to be rendered before focusing
     const interval = setInterval(() => {
-      const composer = this.shadowRoot?.querySelector('[part=composer]');
+      const composer = this.shadowRoot?.querySelector('copilot-composer');
       if (composer) {
         clearInterval(interval);
         this.active = true;
-        const onTransitionEnd = () => {
-          composer.querySelector('input')?.focus();
-          composer.removeEventListener('transitionend', onTransitionEnd);
-        };
-        composer.addEventListener('transitionend', onTransitionEnd);
+        composer.addEventListener(
+          'transitionend',
+          () => {
+            composer.querySelector('input')?.focus();
+          },
+          { once: true },
+        );
       }
     }, 10);
   }
 
-  deactivate() {
+  deactivate(openSidepane = false) {
     this.active = false;
-    const onTransitionEnd = () => {
-      this.renderComposer = false;
-      this.removeEventListener('transitionend', onTransitionEnd);
-    };
-    this.addEventListener('transitionend', onTransitionEnd);
+    this.addEventListener(
+      'transitionend',
+      () => {
+        this.renderComposer = false;
+        this.ews.sidepaneAppId = openSidepane ? 'copilot' : null;
+      },
+      { once: true },
+    );
   }
 }

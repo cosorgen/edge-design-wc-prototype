@@ -8,6 +8,7 @@ export type ToolbarItem = {
 
 export default class EdgeWindowService {
   @observable disableWebview = false;
+  @observable sidepaneAppId: string | null = null;
   @observable toolbarItems: ToolbarItem[] = [
     {
       id: 'favorites',

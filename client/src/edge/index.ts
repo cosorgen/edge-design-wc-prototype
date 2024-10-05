@@ -33,22 +33,34 @@ import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
-import './views/copilot-composer.js';
+import './views/copilot-entrypoint.js';
 import './views/favorites-bar.js';
+import './views/copilot-sidepane.js';
 
 const template = html<MicrosoftEdge>`
   <tab-bar></tab-bar>
-  <div id="activeTab">
-    <div id="content">
-      <tool-bar></tool-bar>
+  <div class="row">
+    <div class="column">
+      <div id="activeTab">
+        <div id="content">
+          <tool-bar></tool-bar>
+          ${when(
+            (x) => x.shouldFavoritesBarRender(),
+            html`<favorites-bar></favorites-bar>`,
+          )}
+          <web-content></web-content>
+        </div>
+      </div>
       ${when(
-        (x) => x.shouldFavoritesBarRender(),
-        html`<favorites-bar></favorites-bar>`,
+        (x) => !x.showLegacyCopliot && !(x.ews.sidepaneAppId === 'copilot'),
+        html`<copilot-entrypoint></copilot-entrypoint>`,
       )}
-      <web-content></web-content>
     </div>
+    ${when(
+      (x) => x.ews.sidepaneAppId !== null,
+      html`<copilot-sidepane></copilot-sidepane>`,
+    )}
   </div>
-  <copilot-composer></copilot-composer>
 `;
 
 const styles = css`
@@ -86,8 +98,6 @@ const styles = css`
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap: ${spacingFrame};
-    padding-block-start: ${spacingFrame};
     background-color: ${colorLayerBackgroundDialog};
     border-radius: ${borderRadiusLarge};
     box-shadow: ${shadow2};
@@ -98,12 +108,16 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingFrame};
+    height: 100%;
+    min-height: 0px;
   }
 
   .column {
     display: flex;
     flex-direction: column;
     gap: ${spacingFrame};
+    width: 100%;
+    min-width: 0px;
   }
 `;
 
@@ -117,6 +131,7 @@ export class MicrosoftEdge extends FASTElement {
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
   @observable ts!: TabService;
   @observable ews!: EdgeWindowService;
+  @observable showLegacyCopliot = false;
 
   constructor() {
     super();
@@ -129,6 +144,11 @@ export class MicrosoftEdge extends FASTElement {
 
     // set up theme
     this.setTheme();
+
+    // Get the showLegacyCopilot flag from URL
+    const url = new URL(window.location.href);
+    this.showLegacyCopliot =
+      url.searchParams.get('showLegacyCopilot') === 'true';
   }
 
   setTheme() {
