@@ -1,12 +1,7 @@
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  borderRadiusLayerBase,
-  shadow2,
-  spacingHorizontalXXL,
-  spacingVerticalXXL,
-} from '@phoenixui/themes';
+import { spacingHorizontalXXL, spacingVerticalXXL } from '@phoenixui/themes';
 import '../controls/sidepane-header.js';
 import '../controls/copilot-composer.js';
 
@@ -31,11 +26,10 @@ const template = html`
 
 const styles = css`
   :host {
-    position: relative;
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 376px;
+    width: 100%;
     background: linear-gradient(
       180deg,
       #fcf9f6 0%,
@@ -43,9 +37,6 @@ const styles = css`
       #fbebe0 99%,
       #fde5cd 100%
     );
-    border-radius: ${borderRadiusLayerBase};
-    box-shadow: ${shadow2};
-    overflow: hidden;
   }
 
   #content {

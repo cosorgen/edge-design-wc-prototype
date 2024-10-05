@@ -35,12 +35,13 @@ import './views/tool-bar.js';
 import './views/web-content.js';
 import './views/copilot-entrypoint.js';
 import './views/favorites-bar.js';
+import './views/side-pane.js';
 import './views/copilot-sidepane.js';
 
 const template = html<MicrosoftEdge>`
-  <tab-bar></tab-bar>
   <div class="row">
     <div class="column">
+      <tab-bar></tab-bar>
       <div id="activeTab">
         <div id="content">
           <tool-bar></tool-bar>
@@ -58,7 +59,7 @@ const template = html<MicrosoftEdge>`
     </div>
     ${when(
       (x) => x.ews.sidepaneAppId !== null,
-      html`<copilot-sidepane></copilot-sidepane>`,
+      html`<side-pane app-id="${(x) => x.ews.sidepaneAppId}"></side-pane>`,
     )}
   </div>
 `;
