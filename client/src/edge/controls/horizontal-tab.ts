@@ -30,6 +30,7 @@ import {
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/spinner.js';
 import '../../windows/controls/mica-material.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<HorizontalTab>`
   <div class="tab-background" id="bg"></div>
@@ -179,7 +180,7 @@ const styles = css`
 
   #bg {
     inset: 0;
-    bottom: -4px;
+    bottom: calc(0px - ${spacingFrame});
     border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
   }
 
@@ -187,7 +188,7 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: -4px;
+    bottom: calc(0px - ${spacingFrame});
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 

@@ -4,7 +4,7 @@ import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService, { Window } from '#serviceswindowsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { colorLayerBackgroundPillMenu } from '../designSystem.js';
+import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -86,13 +86,20 @@ const template = html` <div
 
 const styles = css`
   :host {
+    --caption-controls-height: calc(
+      32px + 2 * ${spacingFrame}
+    ); /* height of a button + gaps */
     display: flex;
     flex-direction: row;
     align-items: center;
     position: absolute;
-    inset-inline-end: 0;
+    inset-inline-end: max(
+      /* equal spacing top and right */
+        calc((var(--caption-controls-height) - 40px) / 2),
+      0px
+    );
     inset-block-start: 0;
-    height: 40px;
+    height: var(--caption-controls-height);
     width: ${(x) => (x.ews.sidepaneAppId !== null ? '384px' : '186px')};
   }
 

@@ -35,7 +35,7 @@ import './views/tool-bar.js';
 import './views/web-content.js';
 import './views/copilot-entrypoint.js';
 import './views/favorites-bar.js';
-import './views/side-pane.js';
+import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 

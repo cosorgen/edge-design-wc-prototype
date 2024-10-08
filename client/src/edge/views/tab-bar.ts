@@ -10,7 +10,6 @@ import { inject } from '@microsoft/fast-element/di.js';
 import {
   spacingHorizontalXS,
   shadow2,
-  spacingHorizontalXXS,
   spacingVerticalSNudge,
   borderRadiusLarge,
 } from '@phoenixui/themes';
@@ -30,7 +29,7 @@ const template = html<TabBar>`
   <div id="shadow"></div>
   <div id="content">
     <div class="group">
-      <phx-button class="toolbar" appearance="subtle" icon-only>
+      <phx-button appearance="subtle" icon-only>
         <svg>
           <use href="img/edge/icons.svg#panel-left-text-20-regular" />
         </svg>
@@ -63,7 +62,6 @@ const template = html<TabBar>`
       appearance="subtle"
       icon-only
       id="add"
-      class="toolbar"
       @click="${(x) => x.addTab()}"
     >
       <svg>
@@ -108,7 +106,7 @@ const styles = css`
   #shadow {
     position: absolute;
     inset-inline: 8px;
-    bottom: -6px;
+    bottom: calc(-2px - ${spacingFrame});
     height: 2px;
     box-shadow: ${shadow2};
   }
@@ -116,14 +114,10 @@ const styles = css`
   #tabs {
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalXXS};
+    gap: ${spacingFrame};
     overflow: hidden;
-    padding: 10px;
-    margin: -10px; /* for wings to not clip */
-  }
-
-  #add {
-    margin-inline-start: ${spacingHorizontalXXS};
+    padding: max(10px, ${spacingFrame});
+    margin: min(-10px, calc(0px - ${spacingFrame})); /* for wings to not clip */
   }
 
   #window-grabber {
@@ -133,7 +127,7 @@ const styles = css`
     min-width: ${(x) => (x.ews.sidepaneAppId !== null ? '0px' : '24px')};
   }
 
-  phx-button.toolbar {
+  phx-button {
     border-radius: ${borderRadiusLarge};
   }
 
@@ -146,7 +140,7 @@ const styles = css`
 
   phx-divider {
     margin-block: ${spacingVerticalSNudge};
-    margin-inline: calc(0px - ${spacingHorizontalXXS});
+    margin-inline: calc(0px - (${spacingFrame} / 2));
   }
 
   horizontal-tab[active] + phx-divider,

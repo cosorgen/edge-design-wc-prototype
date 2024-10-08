@@ -82,7 +82,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
-    padding: ${spacingFrame} ${spacingHorizontalXS};
+    padding: ${spacingFrame};
     user-select: none;
   }
 

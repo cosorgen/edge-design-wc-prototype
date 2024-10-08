@@ -4,13 +4,12 @@ import {
   acrylicBackgroundLuminosity,
   borderRadiusLayerBase,
   colorNeutralStroke2,
-  spacingHorizontalM,
   spacingHorizontalS,
-  spacingVerticalS,
   strokeWidthThin,
   typographyStyles,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">
@@ -45,8 +44,8 @@ const styles = css`
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
     backdrop-filter: blur(${acrylicBackgroundBlur});
-    padding: ${spacingVerticalS};
-    padding-inline-start: ${spacingHorizontalM};
+    padding: calc(4px + ${spacingFrame});
+    padding-inline-start: calc(8px + ${spacingFrame});
     border-bottom: ${strokeWidthThin} solid ${colorNeutralStroke2};
     border-radius: ${borderRadiusLayerBase} ${borderRadiusLayerBase} 0 0;
   }
