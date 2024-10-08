@@ -8,7 +8,26 @@ import '../controls/copilot-composer.js';
 const template = html`
   <sidepane-header>Copilot</sidepane-header>
   <div id="content">
-    <img src="img/edge/copilot-sidepane.png" />
+    <div class="user message">Create a summary for this page</div>
+    <div class="bot message">
+      Here are the key points about the Boox Palma from the article:<br /><br />
+
+      <b>Smartphone-Sized E-Reader:</b> The Boox Palma is a compact e-reader
+      with a 6.1-inch E Ink screen, running Android, and capable of downloading
+      apps from the Play Store.<br /><br />
+
+      <b>Battery Life and Usability:</b> Its E Ink screen ensures a battery life
+      of 4-7 days and makes it ideal for reading, though it’s not great for
+      video or high-refresh activities.<br /><br />
+
+      <b>Enhanced Reading Experience:</b> Users appreciate its ability to reduce
+      distractions, making it easier to focus on reading and listening to music
+      or podcasts. <br /><br />
+
+      <b>Limitations:</b> The device has some hardware and software limitations,
+      including a plastic body, outdated Android version, and occasional screen
+      responsiveness issues.
+    </div>
     <copilot-composer placeholder="Message Copilot">
       <phx-button appearance="subtle" size="large" icon-only slot="start">
         <svg>
@@ -42,8 +61,12 @@ const styles = css`
   #content {
     flex: 1;
     position: relative;
+    display: flex;
+    flex-direction: column;
     padding: ${spacingVerticalXXL};
     min-height: 0px;
+    gap: ${spacingVerticalXXL};
+    overflow-y: auto;
   }
 
   img {
@@ -55,6 +78,14 @@ const styles = css`
     position: absolute;
     bottom: ${spacingVerticalXXL};
     inset-inline: ${spacingHorizontalXXL};
+  }
+
+  .user {
+    background-color: #fee5ce;
+    padding: 14px 20px;
+    width: fit-content;
+    border-radius: 12px;
+    align-self: flex-end;
   }
 `;
 
