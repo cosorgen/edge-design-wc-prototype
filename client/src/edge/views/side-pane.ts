@@ -25,7 +25,8 @@ const styles = css`
     display: flex;
     flex-direction: column;
     height: calc(100% - 36px);
-    width: 376px;
+    min-width: 376px;
+    max-width: 376px;
     background: ${colorLayerBackgroundDialog};
     border-radius: ${borderRadiusLayerBase};
     box-shadow: ${shadow2};

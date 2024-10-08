@@ -37,9 +37,11 @@ import './views/copilot-entrypoint.js';
 import './views/favorites-bar.js';
 import './views/side-pane.js';
 import './views/copilot-sidepane.js';
+import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
   <div class="row">
+    <caption-controls></caption-controls>
     <div class="column">
       <tab-bar></tab-bar>
       <div id="activeTab">
