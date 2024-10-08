@@ -7,7 +7,6 @@ export type ToolbarItem = {
 };
 
 export default class EdgeWindowService {
-  @observable disableWebview = false;
   @observable sidepaneAppId: string | null = null;
   @observable toolbarItems: ToolbarItem[] = [
     {
@@ -30,9 +29,6 @@ export default class EdgeWindowService {
       ...i,
       open: i.id === id ? true : i.open,
     }));
-
-    // disable webview when toolbar item is open
-    this.disableWebview = true;
   }
 
   closeToolbarItem(id: string) {
@@ -41,9 +37,6 @@ export default class EdgeWindowService {
       ...i,
       open: i.id === id ? false : i.open,
     }));
-
-    // enable webview when no toolbar items are open
-    this.disableWebview = false;
   }
 
   pinToolbarItem(id: string) {

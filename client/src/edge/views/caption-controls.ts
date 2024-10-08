@@ -24,7 +24,7 @@ const template = html` <div
     @mousedown="${(x) => x.handleTitleBarMouseDown()}"
   ></div>
   <div class="group" id="pill-menu">
-    <flyout-menu @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}">
+    <flyout-menu>
       <phx-toggle-button
         size="small"
         appearance="subtle"
@@ -153,11 +153,6 @@ export class CaptionControls extends FASTElement {
     } else {
       this.ws.maximizeWindow(this.ws.activeWindowId);
     }
-  }
-
-  handleFlyoutToggle(e: Event) {
-    if (!(e instanceof ToggleEvent)) return;
-    this.ews.disableWebview = e.newState === 'open';
   }
 
   handleMoreAction(e: CustomEvent) {
