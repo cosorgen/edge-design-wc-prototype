@@ -79,6 +79,7 @@ const styles = css`
 })
 export class CopilotComposer extends FASTElement {
   @attr placeholder = 'Talk about your page';
+
   handleKeydown(e: Event) {
     if (!(e instanceof KeyboardEvent)) return;
 

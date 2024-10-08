@@ -88,7 +88,9 @@ const styles = css`
   copilot-composer {
     position: absolute;
 
-    transition: all ${durationSlow} ${curveEasyEaseMax};
+    transition:
+      transform ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax};
     transform: translateY(8px);
     opacity: 0;
   }
@@ -161,7 +163,10 @@ export class CopilotEntrypoint extends FASTElement {
 
   deactivate(openSidepane = false) {
     this.active = false;
-    this.addEventListener(
+    const composer = this.shadowRoot?.querySelector('copilot-composer');
+    if (!composer) return;
+
+    composer.addEventListener(
       'transitionend',
       () => {
         this.renderComposer = false;
