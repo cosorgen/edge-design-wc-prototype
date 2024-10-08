@@ -19,6 +19,7 @@ import '@phoenixui/web-components/button.js';
 import '../controls/copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const curveEasyEaseMax = 'cubic-bezier(0.6, 0, 0.3, 1)';
 
@@ -50,18 +51,12 @@ const template = html<CopilotEntrypoint>` <div
 
 const styles = css`
   :host {
+    position: relative;
     width: 100%;
     height: ${spacingVerticalXS};
-    position: relative;
-    bottom: 0;
+    margin-block: calc(0px - (${spacingFrame} / 2));
     display: flex;
     justify-content: center;
-
-    transition: all ${durationSlow} ${curveEasyEaseMax};
-  }
-
-  :host([active]) {
-    margin-block-start: -8px;
   }
 
   [part='grabber'] {
@@ -72,6 +67,7 @@ const styles = css`
     background-color: ${colorScrollbarForeground};
     border-radius: ${borderRadiusCircular};
     cursor: pointer;
+
     transition:
       transform ${durationSlow} ${curveEasyEaseMax},
       opacity ${durationSlow} ${curveEasyEaseMax};
@@ -98,7 +94,7 @@ const styles = css`
   }
 
   :host([active]) copilot-composer {
-    transform: translateY(-68px);
+    transform: translateY(-66px);
     opacity: 1;
   }
 
