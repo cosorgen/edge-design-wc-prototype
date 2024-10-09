@@ -18,17 +18,9 @@ const template = html<FlyoutMenu>`
   </div>
 `;
 
-const styles = css<FlyoutMenu>`
+const styles = css`
   ::slotted([slot='trigger']) {
     anchor-name: --menu-trigger;
-  }
-
-  @position-try --flip-inline {
-    position-area: block-end span-inline-start;
-  }
-
-  @position-try --flip-block {
-    position-area: block-start span-inline-end;
   }
 
   [popover] {
@@ -39,7 +31,7 @@ const styles = css<FlyoutMenu>`
     padding: 0;
     background: transparent;
     position-anchor: --menu-trigger;
-    position-try-fallbacks: --flip-inline, --flip-block;
+    position-try-fallbacks: flip-inline, flip-block;
 
     transform: translateY(-24px);
     opacity: 0;
