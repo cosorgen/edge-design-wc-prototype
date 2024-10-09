@@ -30,7 +30,7 @@ export class OmniboxControl extends FASTElement {
     this.dropdownComponent = this.shadowRoot?.querySelector('omnibox-dropdown');
     this.inputComponent = this.shadowRoot?.querySelector('omnibox-input');
     this.truncateOnRest =
-      new URL(window.location.href).searchParams.get('truncateurl') === 'true';
+      new URL(window.location.href).searchParams.get('truncateURL') === 'true';
   }
 
   initialValueChanged() {

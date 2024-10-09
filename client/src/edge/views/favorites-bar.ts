@@ -17,6 +17,7 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import { spacingHorizontalS } from '@phoenixui/themes';
 import { TabService } from '#servicestabService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html`
   ${repeat(
@@ -57,6 +58,7 @@ const styles = css`
     align-items: center;
     justify-content: center;
     gap: ${spacingHorizontalS};
+    padding-block-end: ${spacingFrame};
   }
 `;
 
