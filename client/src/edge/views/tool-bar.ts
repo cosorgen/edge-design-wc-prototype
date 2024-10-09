@@ -50,15 +50,15 @@ const template = html<Toolbar>`
   ></omnibox-control>
   <div class="group right">
     ${repeat(
-      (x) => x.ews.toolbarItems.filter((i) => i.pinned || i.open),
+      (x) => x.getDerivedToolbarItems(),
       html`<toolbar-item
-        id="${(x) => x.id}"
-        ?pinned="${(x) => x.pinned}"
-        initially-open="${(x) => x.open}"
-        @opentoolbaritem="${(x, c) => c.parent.ews.openToolbarItem(x.id)}"
-        @closetoolbaritem="${(x, c) => c.parent.ews.closeToolbarItem(x.id)}"
-        @pintoolbaritem="${(x, c) => c.parent.ews.pinToolbarItem(x.id)}"
-        @unpintoolbaritem="${(x, c) => c.parent.ews.unpinToolbarItem(x.id)}"
+        id="${(x) => x}"
+        ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
+        ?initially-open="${(x, c) => x === c.parent.ews.activeToolbarItemId}"
+        @opentoolbaritem="${(x, c) => c.parent.ews.openToolbarItem(x)}"
+        @closetoolbaritem="${(x, c) => c.parent.ews.closeToolbarItem()}"
+        @pintoolbaritem="${(x, c) => c.parent.ess.pinToolbarItem(x)}"
+        @unpintoolbaritem="${(x, c) => c.parent.ess.unpinToolbarItem(x)}"
       ></toolbar-item>`,
     )}
     ${when(
@@ -149,5 +149,17 @@ export class Toolbar extends FASTElement {
   handleShowLegacyCopilot() {
     this.ews.sidepaneAppId =
       this.ews.sidepaneAppId === 'copilot' ? null : 'copilot';
+  }
+
+  getDerivedToolbarItems() {
+    const toolbarItems = [...this.ess.pinnedToolbarItems];
+    if (
+      this.ews.activeToolbarItemId &&
+      !toolbarItems.includes(this.ews.activeToolbarItemId)
+    ) {
+      toolbarItems.push(this.ews.activeToolbarItemId);
+    }
+
+    return toolbarItems;
   }
 }

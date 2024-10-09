@@ -4,6 +4,7 @@ import { observable } from '@microsoft/fast-element';
 export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
+  @observable pinnedToolbarItems: string[] = [];
 
   constructor() {
     // Load settings from local storage
@@ -20,5 +21,13 @@ export default class EdgeSettingsSerivce {
         | 'always'
         | 'newtab'
         | 'never') || 'never';
+  }
+
+  pinToolbarItem(id: string) {
+    this.pinnedToolbarItems = [...this.pinnedToolbarItems, id];
+  }
+
+  unpinToolbarItem(id: string) {
+    this.pinnedToolbarItems = this.pinnedToolbarItems.filter((i) => i !== id);
   }
 }

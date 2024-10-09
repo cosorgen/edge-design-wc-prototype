@@ -75,16 +75,24 @@ export class ToolbarItem extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   @attr({ mode: 'boolean' }) pinned = false;
-  _openFlyoutCount = 0;
+  _flyoutCounter = 0;
+  _flyoutTimer?: NodeJS.Timeout;
 
+  // It's possible for the flyout-menu to send multiple toggle events in quick
+  // succession. We debounce these events to ensure that we only open the
+  // toolbar when the last event has been processed.
   handleFlyoutToggle(e: Event) {
     if (!(e instanceof ToggleEvent)) return;
 
     const open = e.newState === 'open';
-    if (this._openFlyoutCount === 0 && open) this.$emit('opentoolbaritem');
-    if (this._openFlyoutCount === 1 && !open) this.$emit('closetoolbaritem');
+    this._flyoutCounter += open ? 1 : -1;
 
-    this._openFlyoutCount += open ? 1 : -1;
+    clearTimeout(this._flyoutTimer);
+    this._flyoutTimer = setTimeout(() => {
+      this._flyoutCounter > 0
+        ? this.$emit('opentoolbaritem')
+        : this.$emit('closetoolbaritem');
+    }, 150);
   }
 
   pinItem(pin: boolean) {
