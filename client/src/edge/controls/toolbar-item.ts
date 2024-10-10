@@ -11,7 +11,6 @@ import '@phoenixui/web-components/toggle-button.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import './favorites-hub.js';
 import '../views/extensions-hub.js';
 import {
   acrylicBackgroundBlur,
@@ -23,21 +22,46 @@ import {
 } from '@phoenixui/themes';
 
 export type ToolbarApp = {
-  type: 'flyout' | 'sidebar';
+  type: 'flyout' | 'sidebar' | 'fullpage';
   template?: ViewTemplate;
   iconId?: string;
 };
 
 const apps: Record<string, ToolbarApp> = {
-  favorites: {
+  Favorites: {
     type: 'flyout',
-    template: html`<favorites-hub></favorites-hub>`,
+    template: html`<div class="flyout-menu">Favorites</div>`,
     iconId: 'star-20-regular',
   },
-  extensions: {
+  History: {
+    type: 'flyout',
+    template: html`<div class="flyout-menu">History</div>`,
+    iconId: 'history-20-regular',
+  },
+  Shopping: {
+    type: 'flyout',
+    template: html`<div class="flyout-menu">Shopping</div>`,
+    iconId: 'tag-20-regular',
+  },
+  Downloads: {
+    type: 'flyout',
+    template: html`<div class="flyout-menu">Downloads</div>`,
+    iconId: 'arrow-download-20-regular',
+  },
+  Extensions: {
     type: 'flyout',
     template: html`<extensions-hub></extensions-hub>`,
     iconId: 'puzzle-piece-20-regular',
+  },
+  'Browser Essentials': {
+    type: 'flyout',
+    template: html`<div class="flyout-menu">Browser Essentials</div>`,
+    iconId: 'heart-pulse-20-regular',
+  },
+  Passwords: {
+    type: 'flyout',
+    template: html`<div class="flyout-menu">Passwords</div>`,
+    iconId: 'key-20-regular',
   },
   Search: {
     type: 'sidebar',

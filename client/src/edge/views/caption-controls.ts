@@ -174,11 +174,13 @@ export class CaptionControls extends FASTElement {
       case 'Print':
         window.print(); // maybe see if we can print the current tab iframe?
         break;
-      case 'Favorites':
-        this.ews.openToolbarItem('favorites');
+      case 'Settings':
+      case 'Find on page':
+      case 'Screenshot':
+      case 'New InPrivate window':
         break;
-      case 'Extensions':
-        this.ews.openToolbarItem('extensions');
+      default:
+        this.ews.openToolbarItem(action);
         break;
     }
   }
