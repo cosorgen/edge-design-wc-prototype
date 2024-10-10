@@ -12,7 +12,7 @@ import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
 import './favorites-hub.js';
-import './extensions-hub.js';
+import '../views/extensions-hub.js';
 import { colorNeutralForeground1 } from '@phoenixui/themes';
 
 export type ToolbarApp = {

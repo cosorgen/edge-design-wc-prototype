@@ -7,6 +7,7 @@ import {
   fontSizeBase300,
   lineHeightBase300,
   spacingHorizontalL,
+  spacingHorizontalS,
 } from '@phoenixui/themes';
 
 export type MoreMenuEntry = {
@@ -37,7 +38,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalL};
+    gap: ${spacingHorizontalS};
     border: none;
     background: transparent;
     cursor: pointer;
@@ -57,11 +58,25 @@ const styles = css`
   #start,
   #end {
     display: none;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #start ::slotted(*) {
+    width: 20px;
+    height: 20px;
+    line-height: 0;
+    object-fit: contain;
+  }
+
+  #end {
+    margin-inline-start: ${spacingHorizontalL};
   }
 
   :host([start-slot]) #start,
   :host([end-slot]) #end {
-    display: block;
+    display: flex;
   }
 
   #content {
