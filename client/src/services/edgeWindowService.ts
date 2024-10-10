@@ -7,7 +7,7 @@ export type ToolbarItem = {
 
 export default class EdgeWindowService {
   @observable sidepaneAppId: string | null = null;
-  @observable activeToolbarItemId: string | null = null;
+  @observable activeToolbarItemId: string | null = 'extensions';
 
   openToolbarItem(id: string) {
     this.activeToolbarItemId = id;

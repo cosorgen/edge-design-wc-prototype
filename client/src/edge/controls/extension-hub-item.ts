@@ -1,44 +1,80 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
+import {
+  customElement,
+  FASTElement,
+  html,
+  css,
+  attr,
+} from '@microsoft/fast-element';
 import {
   borderRadiusMedium,
   colorSubtleBackgroundHover,
+  colorSubtleBackgroundPressed,
   spacingHorizontalM,
   spacingHorizontalS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 
-const template = html<ExtensionHubItem>` <div id="start">
-    <slot name="start"></slot>
-  </div>
-  <div id="main">
-    <slot></slot>
-  </div>
+const template = html<ExtensionHubItem>` <button tabindex="0">
+    <div id="start">
+      <slot name="start"></slot>
+    </div>
+    <div id="main">
+      <slot></slot>
+    </div>
+  </button>
   <div id="end">
-    <phx-button appearance="subtle" icon-only>
+    <phx-button
+      appearance="subtle"
+      icon-only
+      @click="${(x, c) => x.handlePinClick(c.event)}"
+    >
       <svg>
-        <use href="img/edge/icons.svg#pin-20-regular" />
+        <use
+          href="./img/edge/icons.svg#${(x) =>
+            x.pinned ? 'pin-off' : 'pin'}-20-regular"
+        />
       </svg>
     </phx-button>
-    <phx-button appearance="subtle" icon-only>
+    <phx-button
+      appearance="subtle"
+      icon-only
+      @click="${(x, c) => {
+        c.event.stopPropagation();
+        return false;
+      }}"
+    >
       <svg>
-        <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+        <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
       </svg>
     </phx-button>
   </div>`;
 
 const styles = css`
   :host {
+    position: relative;
+  }
+
+  button {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalS};
-    padding-inline-start: ${spacingHorizontalS};
+    padding: 0;
+    padding-inline: ${spacingHorizontalS} 72px;
+    height: 32px;
     cursor: pointer;
     border-radius: ${borderRadiusMedium};
+    border: none;
+    background-color: transparent;
+    width: 100%;
   }
 
-  :host(:hover) {
+  button:hover {
     background-color: ${colorSubtleBackgroundHover};
+  }
+
+  button:active {
+    background-color: ${colorSubtleBackgroundPressed};
   }
 
   #start ::slotted(*) {
@@ -56,6 +92,9 @@ const styles = css`
   }
 
   #end {
+    position: absolute;
+    right: 0;
+    top: 0;
     margin-inline-start: ${spacingHorizontalM};
   }
 
@@ -76,4 +115,12 @@ const styles = css`
   template,
   styles,
 })
-export class ExtensionHubItem extends FASTElement {}
+export class ExtensionHubItem extends FASTElement {
+  @attr({ mode: 'boolean' }) pinned = false;
+
+  handlePinClick(e: Event) {
+    e.stopPropagation();
+    this.$emit('pin');
+    return false;
+  }
+}

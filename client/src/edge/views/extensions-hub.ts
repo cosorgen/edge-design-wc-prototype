@@ -5,6 +5,7 @@ import {
   html,
   observable,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import {
   acrylicBackgroundBlur,
@@ -20,24 +21,50 @@ import {
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/extension-hub-item.js';
+import '../controls/context-menu.js';
 import '../controls/menu-item.js';
+import '../controls/flyout-menu.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>
-    <phx-button size="small" appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-      </svg>
-    </phx-button>
+    <flyout-menu>
+      <phx-button size="small" appearance="subtle" icon-only slot="trigger">
+        <svg>
+          <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
+        </svg>
+      </phx-button>
+      <context-menu>
+        ${when(
+          (x) => x.ess.pinnedToolbarItems.includes('extensions'),
+          html` <menu-item
+            @click="${(x) => x.ess.unpinToolbarItem('extensions')}"
+          >
+            Hide extensions menu in toolbar
+          </menu-item>`,
+          html` <menu-item
+            @click="${(x) => x.ess.pinToolbarItem('extensions')}"
+          >
+            Show extensions menu in toolbar
+          </menu-item>`,
+        )}
+      </context-menu>
+    </flyout-menu>
   </div>
   <phx-divider appearance="strong"></phx-divider>
   <div id="content">
     ${repeat(
       (x) => x.extensions,
-      html`<extension-hub-item>
+      html` <extension-hub-item
+        @click="${(x, c) => c.parent.handleExtensionClick(x)}"
+        @pin="${(x, c) => c.parent.handleExtensionPin(c.event, x)}"
+        ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
+      >
         <img
           slot="start"
-          src="/img/edge/${(x) => x.toLowerCase()}AppLight.png"
+          src="./img/edge/${(x) => x.toLowerCase()}AppLight.png"
           alt="Search icon"
         />
         ${(x) => x}
@@ -46,13 +73,13 @@ const template = html<ExtensionsHub>` <div id="header">
     <phx-divider></phx-divider>
     <menu-item start-slot>
       <svg slot="start">
-        <use href="/img/edge/icons.svg#puzzle-piece-20-regular" />
+        <use href="./img/edge/icons.svg#puzzle-piece-20-regular" />
       </svg>
       Manage extensions
     </menu-item>
     <menu-item start-slot>
       <svg slot="start">
-        <use href="/img/edge/icons.svg#store-microsoft-20-regular" />
+        <use href="./img/edge/icons.svg#store-microsoft-20-regular" />
       </svg>
       More extensions from Microsoft
     </menu-item>
@@ -104,5 +131,21 @@ const styles = css`
   styles,
 })
 export class ExtensionsHub extends FASTElement {
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable extensions = ['Search', 'Grammarly', 'AdBlocker', 'Tools'];
+
+  handleExtensionClick(extension: string) {
+    this.ews.activeToolbarItemId = extension;
+  }
+
+  handleExtensionPin(event: Event, extension: string) {
+    event.stopPropagation();
+
+    this.ess.pinnedToolbarItems.includes(extension)
+      ? this.ess.unpinToolbarItem(extension)
+      : this.ess.pinToolbarItem(extension);
+
+    return false;
+  }
 }

@@ -24,7 +24,7 @@ export default class EdgeSettingsSerivce {
   }
 
   pinToolbarItem(id: string) {
-    this.pinnedToolbarItems = [...this.pinnedToolbarItems, id];
+    this.pinnedToolbarItems = [id, ...this.pinnedToolbarItems];
   }
 
   unpinToolbarItem(id: string) {

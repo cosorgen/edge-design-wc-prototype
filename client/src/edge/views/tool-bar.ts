@@ -6,6 +6,7 @@ import {
   observable,
   repeat,
   when,
+  volatile,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
@@ -50,7 +51,7 @@ const template = html<Toolbar>`
   ></omnibox-control>
   <div class="group right">
     ${repeat(
-      (x) => x.getDerivedToolbarItems(),
+      (x) => x.derivedToolbarItems,
       html`<toolbar-item
         id="${(x) => x}"
         ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
@@ -60,6 +61,7 @@ const template = html<Toolbar>`
         @pintoolbaritem="${(x, c) => c.parent.ess.pinToolbarItem(x)}"
         @unpintoolbaritem="${(x, c) => c.parent.ess.unpinToolbarItem(x)}"
       ></toolbar-item>`,
+      { positioning: true },
     )}
     ${when(
       (x) => x.showLegacyCopliot,
@@ -115,6 +117,7 @@ export class Toolbar extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable suggestions: Suggestion[] = [];
   @observable showLegacyCopliot = false;
+  _derivedToolbarItems: string[] = [];
   omniboxControl?: OmniboxControl | null = null;
 
   connectedCallback() {
@@ -128,6 +131,19 @@ export class Toolbar extends FASTElement {
     const url = new URL(window.location.href);
     this.showLegacyCopliot =
       url.searchParams.get('showLegacyCopilot') === 'true';
+  }
+
+  @volatile
+  get derivedToolbarItems() {
+    this._derivedToolbarItems = [...this.ess.pinnedToolbarItems];
+    if (
+      this.ews.activeToolbarItemId &&
+      !this._derivedToolbarItems.includes(this.ews.activeToolbarItemId)
+    ) {
+      this._derivedToolbarItems.unshift(this.ews.activeToolbarItemId);
+    }
+
+    return this._derivedToolbarItems;
   }
 
   suggestionsChanged() {
@@ -149,17 +165,5 @@ export class Toolbar extends FASTElement {
   handleShowLegacyCopilot() {
     this.ews.sidepaneAppId =
       this.ews.sidepaneAppId === 'copilot' ? null : 'copilot';
-  }
-
-  getDerivedToolbarItems() {
-    const toolbarItems = [...this.ess.pinnedToolbarItems];
-    if (
-      this.ews.activeToolbarItemId &&
-      !toolbarItems.includes(this.ews.activeToolbarItemId)
-    ) {
-      toolbarItems.push(this.ews.activeToolbarItemId);
-    }
-
-    return toolbarItems;
   }
 }
