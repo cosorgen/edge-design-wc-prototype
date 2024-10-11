@@ -81,7 +81,7 @@ const styles = css`
     user-select: none;
     position: relative; /* for positioning shadow */
     width: calc(
-      100% - ${(x) => (x.ews.sidepaneAppId !== null ? '0px' : '186px')}
+      100% - ${(x) => (x.ews.activeSidepaneAppId !== null ? '0px' : '186px')}
     );
   }
 
@@ -124,7 +124,7 @@ const styles = css`
     flex: 1;
     height: calc(100% + (2 * ${spacingFrame}));
     margin-block-end: calc(0px - ${spacingFrame});
-    min-width: ${(x) => (x.ews.sidepaneAppId !== null ? '0px' : '24px')};
+    min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
   phx-button {

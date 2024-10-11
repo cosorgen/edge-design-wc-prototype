@@ -55,13 +55,16 @@ const template = html<MicrosoftEdge>`
         </div>
       </div>
       ${when(
-        (x) => !x.showLegacyCopliot && !(x.ews.sidepaneAppId === 'copilot'),
+        (x) =>
+          !x.ss.showLegacyCopilot && !(x.ews.activeSidepaneAppId !== 'Copilot'),
         html`<copilot-entrypoint></copilot-entrypoint>`,
       )}
     </div>
     ${when(
-      (x) => x.ews.sidepaneAppId !== null,
-      html`<side-pane app-id="${(x) => x.ews.sidepaneAppId}"></side-pane>`,
+      (x) => x.ews.activeSidepaneAppId !== null,
+      html`<side-pane
+        app-id="${(x) => x.ews.activeSidepaneAppId}"
+      ></side-pane>`,
     )}
   </div>
 `;
@@ -134,7 +137,6 @@ export class MicrosoftEdge extends FASTElement {
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
   @observable ts!: TabService;
   @observable ews!: EdgeWindowService;
-  @observable showLegacyCopliot = false;
 
   constructor() {
     super();
@@ -147,11 +149,6 @@ export class MicrosoftEdge extends FASTElement {
 
     // set up theme
     this.setTheme();
-
-    // Get the showLegacyCopilot flag from URL
-    const url = new URL(window.location.href);
-    this.showLegacyCopliot =
-      url.searchParams.get('showLegacyCopilot') === 'true';
   }
 
   setTheme() {

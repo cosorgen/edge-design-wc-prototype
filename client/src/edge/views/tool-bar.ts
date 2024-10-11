@@ -5,7 +5,6 @@ import {
   css,
   observable,
   repeat,
-  when,
   volatile,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
@@ -55,26 +54,15 @@ const template = html<Toolbar>`
       html`<toolbar-item
         id="${(x) => x}"
         ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
-        ?initially-open="${(x, c) => x === c.parent.ews.activeToolbarItemId}"
-        @opentoolbaritem="${(x, c) => c.parent.ews.openToolbarItem(x)}"
-        @closetoolbaritem="${(x, c) => c.parent.ews.closeToolbarItem()}"
+        ?initially-open="${(x, c) =>
+          x === c.parent.ews.activeToolbarItemId ||
+          x === c.parent.ews.activeSidepaneAppId}"
+        @toggleflyout="${(x, c) => c.parent.toggleFlyout(x, c.event)}"
+        @togglesidepane="${(x, c) => c.parent.toggleSidepane(x, c.event)}"
         @pintoolbaritem="${(x, c) => c.parent.ess.pinToolbarItem(x)}"
         @unpintoolbaritem="${(x, c) => c.parent.ess.unpinToolbarItem(x)}"
       ></toolbar-item>`,
       { positioning: true },
-    )}
-    ${when(
-      (x) => x.showLegacyCopliot,
-      html`
-        <phx-toggle-button
-          appearance="subtle"
-          icon-only
-          @click="${(x) => x.handleShowLegacyCopilot()}"
-          ?pressed="${(x) => x.ews.sidepaneAppId === 'copilot'}"
-        >
-          <img id="copilot" src="img/edge/copilot-icon.svg" />
-        </phx-toggle-button>
-      `,
     )}
   </div>
 `;
@@ -116,7 +104,6 @@ export class Toolbar extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable suggestions: Suggestion[] = [];
-  @observable showLegacyCopliot = false;
   _derivedToolbarItems: string[] = [];
   omniboxControl?: OmniboxControl | null = null;
 
@@ -126,11 +113,6 @@ export class Toolbar extends FASTElement {
     generateSuggestions('').then((res) => {
       this.suggestions = res.suggestions;
     });
-
-    // Get the showLegacyCopilot flag from URL
-    const url = new URL(window.location.href);
-    this.showLegacyCopliot =
-      url.searchParams.get('showLegacyCopilot') === 'true';
   }
 
   @volatile
@@ -162,8 +144,20 @@ export class Toolbar extends FASTElement {
     });
   }
 
-  handleShowLegacyCopilot() {
-    this.ews.sidepaneAppId =
-      this.ews.sidepaneAppId === 'copilot' ? null : 'copilot';
+  toggleFlyout(id: string, event: Event) {
+    if (!(event instanceof CustomEvent)) return;
+
+    const open = event.detail;
+    open
+      ? id !== this.ews.activeToolbarItemId && this.ews.openToolbarItem(id)
+      : this.ews.closeToolbarItem();
+  }
+
+  toggleSidepane(id: string, event: Event) {
+    id !== this.ews.activeSidepaneAppId
+      ? this.ews.openSidepaneApp(id)
+      : this.ews.closeSidepaneApp();
+
+    this.toggleFlyout(id, event);
   }
 }

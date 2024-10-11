@@ -4,6 +4,7 @@ import { observable } from '@microsoft/fast-element';
 export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
+  @observable showLegacyCopilot = false;
   @observable pinnedToolbarItems: string[] = [];
 
   constructor() {
@@ -21,6 +22,9 @@ export default class EdgeSettingsSerivce {
         | 'always'
         | 'newtab'
         | 'never') || 'never';
+
+    this.showLegacyCopilot = url.searchParams.has('showLegacyCopilot');
+    this.showLegacyCopilot && this.pinToolbarItem('Copilot');
   }
 
   pinToolbarItem(id: string) {

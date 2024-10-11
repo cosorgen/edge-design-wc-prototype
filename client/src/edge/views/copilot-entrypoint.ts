@@ -170,7 +170,9 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       () => {
         this.renderComposer = false;
-        this.ews.sidepaneAppId = openSidepane ? 'copilot' : null;
+        openSidepane
+          ? this.ews.openSidepaneApp('Copilot')
+          : this.ews.closeSidepaneApp();
       },
       { once: true },
     );

@@ -48,6 +48,7 @@ const styles = css`
   }
 
   input {
+    flex: 1;
     box-sizing: border-box;
     height: 48px;
     min-width: 156px;

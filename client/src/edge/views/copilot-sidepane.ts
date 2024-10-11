@@ -103,8 +103,6 @@ export class CopilotSidepane extends FASTElement {
   }
 
   addEventListeners() {
-    this.addEventListener('close', () => {
-      this.ews.sidepaneAppId = null;
-    });
+    this.addEventListener('close', () => this.ews.closeSidepaneApp());
   }
 }

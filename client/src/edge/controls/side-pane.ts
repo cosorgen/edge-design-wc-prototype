@@ -4,7 +4,6 @@ import {
   FASTElement,
   customElement,
   attr,
-  ViewTemplate,
 } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
 import {
@@ -13,12 +12,9 @@ import {
   shadow2,
 } from '@phoenixui/themes';
 import { spacingFrame } from '../designSystem.js';
+import apps from '../installedApps.js';
 
-const appsById: Record<string, ViewTemplate> = {
-  copilot: html`<copilot-sidepane></copilot-sidepane>`,
-};
-
-const template = html<SidePane>`${(x) => appsById[x.appId]}`;
+const template = html<SidePane>`${(x) => apps[x.appId].template}`;
 
 const styles = css`
   :host {

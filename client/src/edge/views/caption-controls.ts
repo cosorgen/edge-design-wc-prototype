@@ -100,7 +100,7 @@ const styles = css`
     );
     inset-block-start: 0;
     height: var(--caption-controls-height);
-    width: ${(x) => (x.ews.sidepaneAppId !== null ? '384px' : '186px')};
+    width: ${(x) => (x.ews.activeSidepaneAppId ? '384px' : '186px')};
   }
 
   #close:hover {

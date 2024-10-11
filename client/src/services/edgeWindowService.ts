@@ -6,7 +6,7 @@ export type ToolbarItem = {
 };
 
 export default class EdgeWindowService {
-  @observable sidepaneAppId: string | null = null;
+  @observable activeSidepaneAppId: string | null = null;
   @observable activeToolbarItemId: string | null = null;
 
   openToolbarItem(id: string) {
@@ -15,5 +15,13 @@ export default class EdgeWindowService {
 
   closeToolbarItem() {
     this.activeToolbarItemId = null;
+  }
+
+  openSidepaneApp(id: string) {
+    this.activeSidepaneAppId = id;
+  }
+
+  closeSidepaneApp() {
+    this.activeSidepaneAppId = null;
   }
 }

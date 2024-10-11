@@ -5,13 +5,11 @@ import {
   css,
   attr,
   when,
-  ViewTemplate,
 } from '@microsoft/fast-element';
 import '@phoenixui/web-components/toggle-button.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import '../views/extensions-hub.js';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
@@ -20,99 +18,80 @@ import {
   shadow28,
   spacingHorizontalL,
 } from '@phoenixui/themes';
-
-export type ToolbarApp = {
-  type: 'flyout' | 'sidebar' | 'fullpage';
-  template?: ViewTemplate;
-  iconId?: string;
-};
-
-const apps: Record<string, ToolbarApp> = {
-  Favorites: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Favorites</div>`,
-    iconId: 'star-20-regular',
-  },
-  History: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">History</div>`,
-    iconId: 'history-20-regular',
-  },
-  Shopping: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Shopping</div>`,
-    iconId: 'tag-20-regular',
-  },
-  Downloads: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Downloads</div>`,
-    iconId: 'arrow-download-20-regular',
-  },
-  Extensions: {
-    type: 'flyout',
-    template: html`<extensions-hub></extensions-hub>`,
-    iconId: 'puzzle-piece-20-regular',
-  },
-  'Browser Essentials': {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Browser Essentials</div>`,
-    iconId: 'heart-pulse-20-regular',
-  },
-  Passwords: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Passwords</div>`,
-    iconId: 'key-20-regular',
-  },
-  Search: {
-    type: 'sidebar',
-  },
-  Grammarly: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Grammarly</div>`,
-  },
-  AdBlocker: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">AdBlocker</div>`,
-  },
-  Tools: {
-    type: 'sidebar',
-  },
-};
+import apps from '../installedApps.js';
 
 const template = html<ToolbarItem>`
-  <flyout-menu
-    @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
-    ?initially-open="${(x) => x.initOpen}"
-  >
-    <phx-toggle-button appearance="subtle" icon-only slot="trigger">
-      ${when(
-        (x) => apps[x.id].iconId,
-        html`<svg>
-          <use href="./img/edge/icons.svg#${(x) => apps[x.id].iconId}" />
-        </svg>`,
-        html`<img
-          width="20px"
-          src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
-        />`,
-      )}
-    </phx-toggle-button>
-    ${(x) => apps[x.id].template}
-    <context-menu slot="context">
-      ${when(
-        (x) => x.pinned,
-        html`
-          <menu-item @click="${(x) => x.pinItem(false)}">
-            Hide from toolbar
-          </menu-item>
-        `,
-        html`
-          <menu-item @click="${(x) => x.pinItem(true)}">
-            Always show in toolbar
-          </menu-item>
-        `,
-      )}
-    </context-menu>
-  </flyout-menu>
+  ${when(
+    (x) => apps[x.id].type === 'flyout',
+    html`<flyout-menu
+      @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
+      ?initially-open="${(x) => x.initOpen}"
+    >
+      <phx-toggle-button appearance="subtle" icon-only slot="trigger">
+        ${when(
+          (x) => apps[x.id].iconId,
+          html`<svg>
+            <use href="./img/edge/icons.svg#${(x) => apps[x.id].iconId}" />
+          </svg>`,
+          html`<img
+            width="20px"
+            src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
+          />`,
+        )}
+      </phx-toggle-button>
+      ${(x) => apps[x.id].template}
+      <context-menu slot="context">
+        ${when(
+          (x) => x.pinned,
+          html`
+            <menu-item @click="${(x) => x.pinItem(false)}">
+              Hide from toolbar
+            </menu-item>
+          `,
+          html`
+            <menu-item @click="${(x) => x.pinItem(true)}">
+              Always show in toolbar
+            </menu-item>
+          `,
+        )}
+      </context-menu>
+    </flyout-menu>`,
+    html`<flyout-menu>
+      <phx-toggle-button
+        appearance="subtle"
+        icon-only
+        slot="trigger"
+        @click="${(x) => x.handleSidepaneToggle()}"
+        ?pressed="${(x) => x.initOpen}"
+      >
+        ${when(
+          (x) => apps[x.id].iconId,
+          html`<svg>
+            <use href="./img/edge/icons.svg#${(x) => apps[x.id].iconId}" />
+          </svg>`,
+          html`<img
+            width="20px"
+            src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
+          />`,
+        )}
+      </phx-toggle-button>
+      <context-menu slot="context">
+        ${when(
+          (x) => x.pinned,
+          html`
+            <menu-item @click="${(x) => x.pinItem(false)}">
+              Hide from toolbar
+            </menu-item>
+          `,
+          html`
+            <menu-item @click="${(x) => x.pinItem(true)}">
+              Always show in toolbar
+            </menu-item>
+          `,
+        )}
+      </context-menu>
+    </flyout-menu>`,
+  )}
 `;
 
 const styles = css`
@@ -146,14 +125,14 @@ export class ToolbarItem extends FASTElement {
   handleFlyoutToggle(e: Event) {
     if (!(e instanceof ToggleEvent)) return;
 
-    e.newState === 'open'
-      ? this.$emit('opentoolbaritem')
-      : this.$emit('closetoolbaritem');
+    this.$emit('toggleflyout', e.newState === 'open');
   }
 
   pinItem(pin: boolean) {
-    pin
-      ? this.$emit('pintoolbaritem', this.id)
-      : this.$emit('unpintoolbaritem', this.id);
+    pin ? this.$emit('pintoolbaritem') : this.$emit('unpintoolbaritem');
+  }
+
+  handleSidepaneToggle() {
+    this.$emit('togglesidepane', this.initOpen);
   }
 }

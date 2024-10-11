@@ -27,6 +27,7 @@ import '../controls/flyout-menu.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
+import apps from '../installedApps.js';
 
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>
@@ -58,7 +59,7 @@ const template = html<ExtensionsHub>` <div id="header">
     ${repeat(
       (x) => x.extensions,
       html` <extension-hub-item
-        @click="${(x, c) => c.parent.handleExtensionClick(x)}"
+        @click="${(x, c) => c.parent.handleExtensionClick(x, apps[x].type)}"
         @pin="${(x, c) => c.parent.handleExtensionPin(c.event, x)}"
         ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
       >
@@ -135,8 +136,12 @@ export class ExtensionsHub extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable extensions = ['Search', 'Grammarly', 'AdBlocker', 'Tools'];
 
-  handleExtensionClick(extension: string) {
-    this.ews.activeToolbarItemId = extension;
+  handleExtensionClick(id: string, type: 'flyout' | 'sidebar') {
+    if (type === 'sidebar') {
+      this.ews.openSidepaneApp(id);
+    }
+
+    this.ews.openToolbarItem(id);
   }
 
   handleExtensionPin(event: Event, extension: string) {
@@ -146,6 +151,6 @@ export class ExtensionsHub extends FASTElement {
       ? this.ess.unpinToolbarItem(extension)
       : this.ess.pinToolbarItem(extension);
 
-    return false;
+    return false; // Prevent the click event from bubbling up
   }
 }
