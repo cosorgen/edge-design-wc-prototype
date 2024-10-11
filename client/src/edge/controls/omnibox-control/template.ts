@@ -7,11 +7,7 @@ import '@phoenixui/web-components/button.js';
 import { OmniboxControl } from './index.js';
 
 export const template = html<OmniboxControl>`
-  <div
-    part="container"
-    ?dropdown-open="${(x) => x.dropdownOpen}"
-    ?truncate-on-rest="${(x) => x.truncateOnRest}"
-  >
+  <div part="container">
     <div id="top-row">
       <div
         id="status"

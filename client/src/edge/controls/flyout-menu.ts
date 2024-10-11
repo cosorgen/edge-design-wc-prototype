@@ -71,9 +71,7 @@ export class FlyoutMenu extends FASTElement {
     super.connectedCallback();
     this.getSlottedElements();
     this.addEventListeners();
-    if (this.initOpen && !this._open && !this._contextOpen) {
-      this._popoverElement?.showPopover();
-    }
+    this.initOpenChanged();
   }
 
   disconnectedCallback() {
@@ -83,7 +81,12 @@ export class FlyoutMenu extends FASTElement {
   }
 
   initOpenChanged() {
-    if (this.initOpen && !this._open && !this._contextOpen) {
+    if (
+      this.initOpen &&
+      !this._open &&
+      !this._contextOpen &&
+      this._popoverElement
+    ) {
       this._popoverElement?.showPopover();
     }
   }
@@ -138,10 +141,6 @@ export class FlyoutMenu extends FASTElement {
         'click',
         this.triggerClickListener,
       );
-      this._triggerElement?.addEventListener(
-        'contextmenu',
-        this.triggerContextMenuListener,
-      );
 
       this._popoverElement?.addEventListener(
         'toggle',
@@ -150,6 +149,16 @@ export class FlyoutMenu extends FASTElement {
       this._popoverElement?.addEventListener(
         'transitionend',
         this.transitionEndFlyoutHandler,
+      );
+    }
+
+    if (this._contextPopoverElement && this._triggerElement) {
+      if (!this._popoverElement)
+        this.addEventListener('closemenu', this.closeMenuListener);
+
+      this._triggerElement?.addEventListener(
+        'contextmenu',
+        this.triggerContextMenuListener,
       );
 
       this._contextPopoverElement?.addEventListener(
@@ -164,36 +173,37 @@ export class FlyoutMenu extends FASTElement {
   }
 
   removeEventListeners() {
-    if (this._popoverElement && this._triggerElement) {
-      this.removeEventListener('closemenu', this.closeMenuListener);
+    this.removeEventListener('closemenu', this.closeMenuListener);
 
-      this._triggerElement?.removeEventListener(
-        'click',
-        this.triggerClickListener,
-      );
-      this._triggerElement?.removeEventListener(
-        'contextmenu',
-        this.triggerContextMenuListener,
-      );
+    this._triggerElement?.removeEventListener(
+      'click',
+      this.triggerClickListener,
+    );
+    this._triggerElement?.removeEventListener(
+      'contextmenu',
+      this.triggerContextMenuListener,
+    );
 
-      this._popoverElement?.removeEventListener(
-        'toggle',
-        this.toggleFlyoutHandler,
-      );
-      this._popoverElement?.removeEventListener(
-        'transitionend',
-        this.transitionEndFlyoutHandler,
-      );
+    this._popoverElement?.removeEventListener(
+      'toggle',
+      this.toggleFlyoutHandler,
+    );
+    this._popoverElement?.removeEventListener(
+      'transitionend',
+      this.transitionEndFlyoutHandler,
+    );
 
-      this._contextPopoverElement?.removeEventListener(
-        'toggle',
-        this.toggleContextHandler,
-      );
-      this._contextPopoverElement?.removeEventListener(
-        'transitionend',
-        this.transitionEndContextHandler,
-      );
-    }
+    this._contextPopoverElement?.removeEventListener(
+      'toggle',
+      this.toggleContextHandler,
+    );
+    this._contextPopoverElement?.removeEventListener(
+      'transitionend',
+      this.transitionEndContextHandler,
+    );
+
+    document.removeEventListener('mouseup', this.documentClickHandler);
+    document.removeEventListener('keydown', this.documentKeydownHandler);
   }
 
   closeMenuListener = (e: Event) => {
@@ -215,10 +225,8 @@ export class FlyoutMenu extends FASTElement {
     if (!(e instanceof ToggleEvent)) return;
 
     this._open = e.newState === 'open';
-    this._triggerElement?.setAttribute(
-      'pressed',
-      this._open || this._contextOpen ? 'true' : 'false',
-    );
+
+    this._triggerElement?.setAttribute('pressed', this._open.toString());
 
     if (this._open) {
       // Listen for close events
@@ -228,6 +236,9 @@ export class FlyoutMenu extends FASTElement {
       document.addEventListener('keydown', this.documentKeydownHandler, {
         once: true,
       });
+    } else {
+      document.removeEventListener('mouseup', this.documentClickHandler);
+      document.removeEventListener('keydown', this.documentKeydownHandler);
     }
 
     // Close context menu if open && flyout menu is opening
@@ -250,10 +261,8 @@ export class FlyoutMenu extends FASTElement {
     if (!(e instanceof ToggleEvent)) return;
 
     this._contextOpen = e.newState === 'open';
-    this._triggerElement?.setAttribute(
-      'pressed',
-      this._open || this._contextOpen ? 'true' : 'false',
-    );
+
+    this._triggerElement?.setAttribute('pressed', this._open.toString());
 
     if (this._contextOpen) {
       // Listen for close events
@@ -263,6 +272,9 @@ export class FlyoutMenu extends FASTElement {
       document.addEventListener('keydown', this.documentKeydownHandler, {
         once: true,
       });
+    } else {
+      document.removeEventListener('mouseup', this.documentClickHandler);
+      document.removeEventListener('keydown', this.documentKeydownHandler);
     }
 
     // Close flyout menu if open and context menu is open

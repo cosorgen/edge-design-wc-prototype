@@ -3,7 +3,7 @@ import './views/extensions-hub.js';
 import './views/copilot-sidepane.js';
 
 export type ToolbarApp = {
-  type: 'flyout' | 'sidebar';
+  type: 'flyout' | 'sidepane';
   template?: ViewTemplate;
   iconId?: string;
 };
@@ -45,8 +45,8 @@ export default {
     iconId: 'key-20-regular',
   },
   Search: {
-    type: 'sidebar',
-    template: html`<div>Search</div>`,
+    type: 'sidepane',
+    template: html`<div style="padding: 8px;">Search</div>`,
   },
   Grammarly: {
     type: 'flyout',
@@ -57,11 +57,11 @@ export default {
     template: html`<div class="flyout-menu">AdBlocker</div>`,
   },
   Tools: {
-    type: 'sidebar',
-    template: html`<div>Tools</div>`,
+    type: 'sidepane',
+    template: html`<div style="padding: 8px;">Tools</div>`,
   },
   Copilot: {
-    type: 'sidebar',
+    type: 'sidepane',
     template: html`<copilot-sidepane></copilot-sidepane>`,
   },
 } as Record<string, ToolbarApp>;

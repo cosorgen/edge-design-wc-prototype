@@ -5,6 +5,7 @@ export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
   @observable showLegacyCopilot = false;
+  @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
 
   constructor() {
@@ -25,6 +26,8 @@ export default class EdgeSettingsSerivce {
 
     this.showLegacyCopilot = url.searchParams.has('showLegacyCopilot');
     this.showLegacyCopilot && this.pinToolbarItem('Copilot');
+
+    this.truncateURL = url.searchParams.has('truncateURL');
   }
 
   pinToolbarItem(id: string) {

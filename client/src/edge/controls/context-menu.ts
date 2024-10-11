@@ -3,6 +3,7 @@ import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
+  colorNeutralForeground1,
   colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalXS,
@@ -31,6 +32,7 @@ const styles = css`
     border-radius: ${borderRadiusLayerFlyout};
     box-shadow: ${shadow28};
     overflow: hidden;
+    color: ${colorNeutralForeground1};
   }
 
   #menu-items {

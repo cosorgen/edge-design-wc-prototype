@@ -16,12 +16,12 @@ const mod = (n: number, m: number) => ((n % m) + m) % m; // handle negative inde
 @customElement({ name: 'omnibox-control', template, styles })
 export class OmniboxControl extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
+  @attr({ mode: 'boolean', attribute: 'truncate-url' }) truncateURL = false;
+  @attr({ mode: 'boolean', attribute: 'dropdown-open' }) dropdownOpen = false;
   @attr initialValue = '';
-  @observable dropdownOpen = false;
   @observable dropdownSelectedIndex = -1;
   @observable inputValue = '';
   @observable suggestions: Suggestion[] = [];
-  @observable truncateOnRest = false;
   dropdownComponent?: OmniboxDropdown | null = null;
   inputComponent?: HTMLElement | null = null;
 
@@ -29,8 +29,6 @@ export class OmniboxControl extends FASTElement {
     super.connectedCallback();
     this.dropdownComponent = this.shadowRoot?.querySelector('omnibox-dropdown');
     this.inputComponent = this.shadowRoot?.querySelector('omnibox-input');
-    this.truncateOnRest =
-      new URL(window.location.href).searchParams.get('truncateURL') === 'true';
   }
 
   initialValueChanged() {
@@ -101,7 +99,8 @@ export class OmniboxControl extends FASTElement {
     if (
       this.inputValue &&
       this.inputValue !== 'edge://newtab' &&
-      this.truncateOnRest
+      !this.dropdownOpen &&
+      this.truncateURL
     ) {
       const url = new URL(this.inputValue);
       return url.hostname;

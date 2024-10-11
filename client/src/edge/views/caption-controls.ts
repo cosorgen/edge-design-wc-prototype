@@ -18,6 +18,11 @@ import {
   spacingHorizontalXXS,
   strokeWidthThin,
 } from '@phoenixui/themes';
+import '../controls/context-menu.js';
+import '../controls/flyout-menu.js';
+import '../controls/more-menu.js';
+import '../controls/identity-control.js';
+import '@phoenixui/web-components/toggle-button.js';
 
 const template = html` <div
     id="window-grabber"
@@ -40,7 +45,12 @@ const template = html` <div
         @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
       ></more-menu>
     </flyout-menu>
-    <identity-control appearance="signedIn"></identity-control>
+    <flyout-menu>
+      <identity-control appearance="signedIn" slot="trigger"></identity-control>
+      <context-menu>
+        <div style="padding: 8px;">Profile goes here...</div>
+      </context-menu>
+    </flyout-menu>
   </div>
   <phx-button
     size="large"

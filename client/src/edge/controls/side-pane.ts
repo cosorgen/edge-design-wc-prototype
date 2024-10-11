@@ -1,10 +1,4 @@
-import {
-  css,
-  html,
-  FASTElement,
-  customElement,
-  attr,
-} from '@microsoft/fast-element';
+import { css, html, FASTElement, customElement } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
 import {
   borderRadiusLayerBase,
@@ -14,7 +8,7 @@ import {
 import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
 
-const template = html<SidePane>`${(x) => apps[x.appId].template}`;
+const template = html<SidePane>`${(x) => apps[x.id].template}`;
 
 const styles = css`
   :host {
@@ -40,6 +34,4 @@ const styles = css`
   template,
   styles,
 })
-export class SidePane extends FASTElement {
-  @attr({ attribute: 'app-id' }) appId = '';
-}
+export class SidePane extends FASTElement {}

@@ -39,6 +39,7 @@ const template = html<Toolbar>`
   <omnibox-control
     id="omnibox_${(x) => x.ts.getActiveTab()?.id}"
     ?active="${(x) => x.ts.getActiveTab()?.active}"
+    ?truncate-url="${(x) => x.ess.truncateURL}"
     initialValue="${(x) => x.ts.getActiveTab()?.url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
@@ -59,8 +60,8 @@ const template = html<Toolbar>`
           x === c.parent.ews.activeSidepaneAppId}"
         @toggleflyout="${(x, c) => c.parent.toggleFlyout(x, c.event)}"
         @togglesidepane="${(x, c) => c.parent.toggleSidepane(x, c.event)}"
-        @pintoolbaritem="${(x, c) => c.parent.ess.pinToolbarItem(x)}"
-        @unpintoolbaritem="${(x, c) => c.parent.ess.unpinToolbarItem(x)}"
+        @togglepintoolbaritem="${(x, c) =>
+          c.parent.togglePinToolbarItem(x, c.event)}"
       ></toolbar-item>`,
       { positioning: true },
     )}
@@ -146,18 +147,16 @@ export class Toolbar extends FASTElement {
 
   toggleFlyout(id: string, event: Event) {
     if (!(event instanceof CustomEvent)) return;
-
-    const open = event.detail;
-    open
-      ? id !== this.ews.activeToolbarItemId && this.ews.openToolbarItem(id)
-      : this.ews.closeToolbarItem();
+    event.detail ? this.ews.openToolbarItem(id) : this.ews.closeToolbarItem();
   }
 
   toggleSidepane(id: string, event: Event) {
-    id !== this.ews.activeSidepaneAppId
-      ? this.ews.openSidepaneApp(id)
-      : this.ews.closeSidepaneApp();
+    if (!(event instanceof CustomEvent)) return;
+    event.detail ? this.ews.openSidepaneApp(id) : this.ews.closeSidepaneApp();
+  }
 
-    this.toggleFlyout(id, event);
+  togglePinToolbarItem(id: string, event: Event) {
+    if (!(event instanceof CustomEvent)) return;
+    event.detail ? this.ess.pinToolbarItem(id) : this.ess.unpinToolbarItem(id);
   }
 }

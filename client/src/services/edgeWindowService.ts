@@ -10,7 +10,9 @@ export default class EdgeWindowService {
   @observable activeToolbarItemId: string | null = null;
 
   openToolbarItem(id: string) {
-    this.activeToolbarItemId = id;
+    if (this.activeToolbarItemId !== id) {
+      this.activeToolbarItemId = id;
+    }
   }
 
   closeToolbarItem() {
@@ -18,10 +20,14 @@ export default class EdgeWindowService {
   }
 
   openSidepaneApp(id: string) {
-    this.activeSidepaneAppId = id;
+    if (this.activeSidepaneAppId !== id) {
+      this.activeSidepaneAppId = id;
+      this.openToolbarItem(id);
+    }
   }
 
   closeSidepaneApp() {
     this.activeSidepaneAppId = null;
+    this.closeToolbarItem();
   }
 }

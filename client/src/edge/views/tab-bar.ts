@@ -16,10 +16,7 @@ import {
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
-import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
-import '../controls/flyout-menu.js';
-import '../controls/more-menu.js';
 import { Tab, TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';

@@ -5,6 +5,7 @@ import {
   css,
   attr,
   when,
+  ViewTemplate,
 } from '@microsoft/fast-element';
 import '@phoenixui/web-components/toggle-button.js';
 import './flyout-menu.js';
@@ -21,77 +22,49 @@ import {
 import apps from '../installedApps.js';
 
 const template = html<ToolbarItem>`
-  ${when(
-    (x) => apps[x.id].type === 'flyout',
-    html`<flyout-menu
-      @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
-      ?initially-open="${(x) => x.initOpen}"
+  <flyout-menu
+    @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
+    ?initially-open="${(x) => x.initOpen}"
+  >
+    <phx-toggle-button
+      appearance="subtle"
+      icon-only
+      slot="trigger"
+      @click="${(x) =>
+        apps[x.id].type === 'sidepane' && x.handleSidepaneToggle()}"
+      ?pressed="${(x) => x.initOpen}"
     >
-      <phx-toggle-button appearance="subtle" icon-only slot="trigger">
-        ${when(
-          (x) => apps[x.id].iconId,
-          html`<svg>
-            <use href="./img/edge/icons.svg#${(x) => apps[x.id].iconId}" />
-          </svg>`,
-          html`<img
-            width="20px"
-            src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
-          />`,
-        )}
-      </phx-toggle-button>
-      ${(x) => apps[x.id].template}
-      <context-menu slot="context">
-        ${when(
-          (x) => x.pinned,
-          html`
-            <menu-item @click="${(x) => x.pinItem(false)}">
-              Hide from toolbar
-            </menu-item>
-          `,
-          html`
-            <menu-item @click="${(x) => x.pinItem(true)}">
-              Always show in toolbar
-            </menu-item>
-          `,
-        )}
-      </context-menu>
-    </flyout-menu>`,
-    html`<flyout-menu>
-      <phx-toggle-button
-        appearance="subtle"
-        icon-only
-        slot="trigger"
-        @click="${(x) => x.handleSidepaneToggle()}"
-        ?pressed="${(x) => x.initOpen}"
-      >
-        ${when(
-          (x) => apps[x.id].iconId,
-          html`<svg>
-            <use href="./img/edge/icons.svg#${(x) => apps[x.id].iconId}" />
-          </svg>`,
-          html`<img
-            width="20px"
-            src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
-          />`,
-        )}
-      </phx-toggle-button>
-      <context-menu slot="context">
-        ${when(
-          (x) => x.pinned,
-          html`
-            <menu-item @click="${(x) => x.pinItem(false)}">
-              Hide from toolbar
-            </menu-item>
-          `,
-          html`
-            <menu-item @click="${(x) => x.pinItem(true)}">
-              Always show in toolbar
-            </menu-item>
-          `,
-        )}
-      </context-menu>
-    </flyout-menu>`,
-  )}
+      ${when(
+        (x) => apps[x.id].iconId,
+        html`<svg>
+          <use href="./img/edge/icons.svg#${(x) => apps[x.id].iconId}" />
+        </svg>`,
+        html`<img
+          width="20px"
+          src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
+        />`,
+      )}
+    </phx-toggle-button>
+    ${when(
+      (x) => apps[x.id].type !== 'sidepane',
+      (x) => apps[x.id].template as ViewTemplate,
+    )}
+    <context-menu slot="context">
+      ${when(
+        (x) => x.pinned,
+        html`
+          <menu-item @click="${(x) => x.pinItem(false)}">
+            Hide from toolbar
+          </menu-item>
+        `,
+        html`
+          <menu-item @click="${(x) => x.pinItem(true)}">
+            Always show in toolbar
+          </menu-item>
+        `,
+      )}
+    </context-menu>
+  </flyout-menu>
 `;
 
 const styles = css`
@@ -129,10 +102,10 @@ export class ToolbarItem extends FASTElement {
   }
 
   pinItem(pin: boolean) {
-    pin ? this.$emit('pintoolbaritem') : this.$emit('unpintoolbaritem');
+    this.$emit('togglepintoolbaritem', pin);
   }
 
   handleSidepaneToggle() {
-    this.$emit('togglesidepane', this.initOpen);
+    this.$emit('togglesidepane', !this.initOpen);
   }
 }

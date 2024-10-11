@@ -44,18 +44,19 @@ export const styles = css`
       calc(${spacingHorizontalXXS} + var(--stroke-diff));
   }
 
-  [part='container']:has(omnibox-input:focus-within):not([dropdown-open]) {
+  :host(:not([dropdown-open]))
+    [part='container']:has(omnibox-input:focus-within) {
     padding: ${spacingVerticalXXS} ${spacingHorizontalXXS};
     border: ${strokeWidthThick} solid ${colorBrandStroke1};
   }
 
-  [part='container'][dropdown-open] {
+  :host([dropdown-open]) [part='container'] {
     background-color: ${colorLayerBackgroundDialog};
     border-radius: ${borderRadiusLayerDialog};
     box-shadow: ${shadow28};
   }
 
-  [part='container']:not([dropdown-open]):hover {
+  :host(:not([dropdown-open])) [part='container']:hover {
     background-color: ${colorLayerOmniboxBackgroundHover};
   }
 
@@ -72,7 +73,7 @@ export const styles = css`
     }
   }
 
-  [dropdown-open] #top-row {
+  :host([dropdown-open]) #top-row {
     padding: ${spacingVerticalXS} ${spacingHorizontalNone};
     gap: ${spacingHorizontalNone};
 
@@ -110,7 +111,7 @@ export const styles = css`
     }
   }
 
-  [dropdown-open] #actions {
+  :host([dropdown-open]) #actions {
     display: none;
   }
 
@@ -118,7 +119,7 @@ export const styles = css`
     display: none;
   }
 
-  [dropdown-open] omnibox-dropdown {
+  :host([dropdown-open]) omnibox-dropdown {
     display: unset;
   }
 
@@ -126,11 +127,11 @@ export const styles = css`
     display: none;
   }
 
-  [dropdown-open] omnibox-icon {
+  :host([dropdown-open]) omnibox-icon {
     display: unset;
   }
 
-  [dropdown-open] omnibox-status {
+  :host([dropdown-open]) omnibox-status {
     display: none;
   }
 
@@ -139,11 +140,11 @@ export const styles = css`
     cursor: text;
   }
 
-  [truncate-on-rest]:not([dropdown-open]) #rest-input {
+  :host([truncate-url]:not([dropdown-open])) #rest-input {
     display: block;
   }
 
-  [truncate-on-rest]:not([dropdown-open]) omnibox-input:not([value='']) {
+  :host([truncate-url]:not([dropdown-open])) omnibox-input:not([value='']) {
     display: none;
   }
 `;

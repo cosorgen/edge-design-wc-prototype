@@ -27,7 +27,7 @@ import '../controls/flyout-menu.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
-import apps from '../installedApps.js';
+import apps, { ToolbarApp } from '../installedApps.js';
 
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>
@@ -136,12 +136,10 @@ export class ExtensionsHub extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @observable extensions = ['Search', 'Grammarly', 'AdBlocker', 'Tools'];
 
-  handleExtensionClick(id: string, type: 'flyout' | 'sidebar') {
-    if (type === 'sidebar') {
-      this.ews.openSidepaneApp(id);
-    }
-
-    this.ews.openToolbarItem(id);
+  handleExtensionClick(id: string, type: ToolbarApp['type']) {
+    type === 'sidepane'
+      ? this.ews.openSidepaneApp(id)
+      : this.ews.openToolbarItem(id);
   }
 
   handleExtensionPin(event: Event, extension: string) {

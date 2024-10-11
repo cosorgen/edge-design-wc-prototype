@@ -56,15 +56,13 @@ const template = html<MicrosoftEdge>`
       </div>
       ${when(
         (x) =>
-          !x.ss.showLegacyCopilot && !(x.ews.activeSidepaneAppId !== 'Copilot'),
+          !x.ss.showLegacyCopilot && x.ews.activeSidepaneAppId !== 'Copilot',
         html`<copilot-entrypoint></copilot-entrypoint>`,
       )}
     </div>
     ${when(
-      (x) => x.ews.activeSidepaneAppId !== null,
-      html`<side-pane
-        app-id="${(x) => x.ews.activeSidepaneAppId}"
-      ></side-pane>`,
+      (x) => x.ews.activeSidepaneAppId,
+      html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
     )}
   </div>
 `;
