@@ -5,7 +5,6 @@ import {
   css,
   attr,
   when,
-  ViewTemplate,
 } from '@microsoft/fast-element';
 import '@phoenixui/web-components/toggle-button.js';
 import './flyout-menu.js';
@@ -21,19 +20,12 @@ import {
 } from '@phoenixui/themes';
 import apps from '../installedApps.js';
 
-const template = html<ToolbarItem>`
+const template = html<ToolbarFlyoutItem>`
   <flyout-menu
     @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
     ?initially-open="${(x) => x.initOpen}"
   >
-    <phx-toggle-button
-      appearance="subtle"
-      icon-only
-      slot="trigger"
-      @click="${(x) =>
-        apps[x.id].type === 'sidepane' && x.handleSidepaneToggle()}"
-      ?pressed="${(x) => x.initOpen}"
-    >
+    <phx-toggle-button appearance="subtle" icon-only slot="trigger">
       ${when(
         (x) => apps[x.id].iconId,
         html`<svg>
@@ -45,10 +37,7 @@ const template = html<ToolbarItem>`
         />`,
       )}
     </phx-toggle-button>
-    ${when(
-      (x) => apps[x.id].type !== 'sidepane',
-      (x) => apps[x.id].template as ViewTemplate,
-    )}
+    ${(x) => apps[x.id].template}
     <context-menu slot="context">
       ${when(
         (x) => x.pinned,
@@ -86,11 +75,11 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'toolbar-item',
+  name: 'toolbar-flyout-item',
   template,
   styles,
 })
-export class ToolbarItem extends FASTElement {
+export class ToolbarFlyoutItem extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   @attr({ mode: 'boolean' }) pinned = false;
@@ -103,9 +92,5 @@ export class ToolbarItem extends FASTElement {
 
   pinItem(pin: boolean) {
     this.$emit('togglepintoolbaritem', pin);
-  }
-
-  handleSidepaneToggle() {
-    this.$emit('togglesidepane', !this.initOpen);
   }
 }

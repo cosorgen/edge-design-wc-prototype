@@ -226,9 +226,12 @@ export class FlyoutMenu extends FASTElement {
 
     this._open = e.newState === 'open';
 
-    this._triggerElement?.setAttribute('pressed', this._open.toString());
+    this._triggerElement?.setAttribute(
+      'pressed',
+      (this._open || this._contextOpen).toString(),
+    );
 
-    if (this._open) {
+    if (this._open || this._contextOpen) {
       // Listen for close events
       document.addEventListener('mouseup', this.documentClickHandler, {
         once: true,
@@ -262,9 +265,12 @@ export class FlyoutMenu extends FASTElement {
 
     this._contextOpen = e.newState === 'open';
 
-    this._triggerElement?.setAttribute('pressed', this._open.toString());
+    this._triggerElement?.setAttribute(
+      'pressed',
+      (this._open || this._contextOpen).toString(),
+    );
 
-    if (this._contextOpen) {
+    if (this._contextOpen || this._open) {
       // Listen for close events
       document.addEventListener('mouseup', this.documentClickHandler, {
         once: true,

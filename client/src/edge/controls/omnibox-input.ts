@@ -84,7 +84,7 @@ export class OmniboxInput extends FASTElement {
 
     if (this.input.innerText !== this.value) {
       this.input.innerHTML = this.formatUrl(this.value);
-      if (this.matches('[dropdown-open] *')) {
+      if (this.matches(':host([dropdown-open]) *')) {
         // If the dropdown is open and we get a new value, we need to reselect the text.
         this.selectAll();
       }

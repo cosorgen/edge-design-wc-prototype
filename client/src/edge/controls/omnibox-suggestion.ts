@@ -45,6 +45,7 @@ const styles = css`
     gap: ${spacingHorizontalM};
     height: 40px;
     border-radius: ${borderRadiusMedium};
+    overflow: hidden;
   }
 
   :host(:hover) {
@@ -70,6 +71,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    min-width: 16px;
   }
 
   #indicator {

@@ -1,4 +1,10 @@
-import { css, html, FASTElement, customElement } from '@microsoft/fast-element';
+import {
+  css,
+  html,
+  FASTElement,
+  customElement,
+  attr,
+} from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
 import {
   borderRadiusLayerBase,
@@ -34,4 +40,6 @@ const styles = css`
   template,
   styles,
 })
-export class SidePane extends FASTElement {}
+export class SidePane extends FASTElement {
+  @attr id: string = '';
+}

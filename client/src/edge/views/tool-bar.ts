@@ -6,13 +6,15 @@ import {
   observable,
   repeat,
   volatile,
+  when,
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
-import '../controls/toolbar-item.js';
+import '../controls/toolbar-flyout-item.js';
+import '../controls/toolbar-sidepane-item.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -22,6 +24,7 @@ import {
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { spacingFrame } from '../designSystem.js';
+import apps from '../installedApps.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -52,17 +55,25 @@ const template = html<Toolbar>`
   <div class="group right">
     ${repeat(
       (x) => x.derivedToolbarItems,
-      html`<toolbar-item
-        id="${(x) => x}"
-        ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
-        ?initially-open="${(x, c) =>
-          x === c.parent.ews.activeToolbarItemId ||
-          x === c.parent.ews.activeSidepaneAppId}"
-        @toggleflyout="${(x, c) => c.parent.toggleFlyout(x, c.event)}"
-        @togglesidepane="${(x, c) => c.parent.toggleSidepane(x, c.event)}"
-        @togglepintoolbaritem="${(x, c) =>
-          c.parent.togglePinToolbarItem(x, c.event)}"
-      ></toolbar-item>`,
+      html`${when(
+        (x) => apps[x].type === 'sidepane',
+        html`<toolbar-sidepane-item
+          id="${(x) => x}"
+          ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
+          ?pressed="${(x, c) => x === c.parent.ews.activeSidepaneAppId}"
+          @togglesidepane="${(x, c) => c.parent.toggleSidepane(x, c.event)}"
+          @togglepintoolbaritem="${(x, c) =>
+            c.parent.togglePinToolbarItem(x, c.event)}"
+        ></toolbar-sidepane-item>`,
+        html`<toolbar-flyout-item
+          id="${(x) => x}"
+          ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
+          ?initially-open="${(x, c) => x === c.parent.ews.activeToolbarItemId}"
+          @toggleflyout="${(x, c) => c.parent.toggleFlyout(x, c.event)}"
+          @togglepintoolbaritem="${(x, c) =>
+            c.parent.togglePinToolbarItem(x, c.event)}"
+        ></toolbar-flyout-item>`,
+      )}`,
       { positioning: true },
     )}
   </div>
@@ -87,11 +98,6 @@ const styles = css`
 
   .right {
     justify-content: flex-end;
-  }
-
-  #copilot::part(content) {
-    width: 24px;
-    height: 24px;
   }
 `;
 
@@ -118,13 +124,43 @@ export class Toolbar extends FASTElement {
 
   @volatile
   get derivedToolbarItems() {
-    this._derivedToolbarItems = [...this.ess.pinnedToolbarItems];
+    // Look for missing pinned items
+    this.ess.pinnedToolbarItems.forEach((id) => {
+      if (!this._derivedToolbarItems.includes(id)) {
+        this._derivedToolbarItems.push(id); // Add pinned to the beginning
+      }
+    });
+
+    // Look for missing active items
     if (
       this.ews.activeToolbarItemId &&
       !this._derivedToolbarItems.includes(this.ews.activeToolbarItemId)
     ) {
-      this._derivedToolbarItems.unshift(this.ews.activeToolbarItemId);
+      this._derivedToolbarItems.unshift(this.ews.activeToolbarItemId); // Add temp to the end
     }
+
+    // Look for missing active sidepane items
+    if (
+      this.ews.activeSidepaneAppId &&
+      !this._derivedToolbarItems.includes(this.ews.activeSidepaneAppId)
+    ) {
+      this._derivedToolbarItems.unshift(this.ews.activeSidepaneAppId); // Add temp to the end
+    }
+
+    //remove items that are not pinned or active
+    this._derivedToolbarItems = this._derivedToolbarItems.filter((id) => {
+      return (
+        this.ess.pinnedToolbarItems.includes(id) ||
+        id === this.ews.activeToolbarItemId ||
+        id === this.ews.activeSidepaneAppId
+      );
+    });
+
+    // Remove copilot if it's disabled
+    if (!this.ess.showLegacyCopilot)
+      this._derivedToolbarItems = this._derivedToolbarItems.filter(
+        (id) => id !== 'Copilot',
+      );
 
     return this._derivedToolbarItems;
   }
