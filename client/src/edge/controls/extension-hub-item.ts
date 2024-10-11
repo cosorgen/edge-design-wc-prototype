@@ -7,6 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusMedium,
+  colorNeutralForeground1,
   colorSubtleBackgroundHover,
   colorSubtleBackgroundPressed,
   spacingHorizontalM,
@@ -52,6 +53,7 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
 const styles = css`
   :host {
     position: relative;
+    color: ${colorNeutralForeground1};
   }
 
   button {
@@ -67,6 +69,7 @@ const styles = css`
     border: none;
     background-color: transparent;
     width: 100%;
+    color: inherit;
   }
 
   button:hover {

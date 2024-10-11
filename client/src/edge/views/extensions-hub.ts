@@ -38,14 +38,14 @@ const template = html<ExtensionsHub>` <div id="header">
       </phx-button>
       <context-menu>
         ${when(
-          (x) => x.ess.pinnedToolbarItems.includes('extensions'),
+          (x) => x.ess.pinnedToolbarItems.includes('Extensions'),
           html` <menu-item
-            @click="${(x) => x.ess.unpinToolbarItem('extensions')}"
+            @click="${(x) => x.ess.unpinToolbarItem('Extensions')}"
           >
             Hide extensions menu in toolbar
           </menu-item>`,
           html` <menu-item
-            @click="${(x) => x.ess.pinToolbarItem('extensions')}"
+            @click="${(x) => x.ess.pinToolbarItem('Extensions')}"
           >
             Show extensions menu in toolbar
           </menu-item>`,

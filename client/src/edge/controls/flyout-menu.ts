@@ -239,8 +239,9 @@ export class FlyoutMenu extends FASTElement {
 
   transitionEndFlyoutHandler = (e: TransitionEvent) => {
     if (e.propertyName === 'opacity' && e.target === this._popoverElement) {
-      const newState = this._open ? 'open' : 'closed';
-      const oldState = this._open ? 'closed' : 'open';
+      const isOpen = this._open || this._contextOpen;
+      const newState = isOpen ? 'open' : 'closed';
+      const oldState = !isOpen ? 'closed' : 'open';
       this.dispatchEvent(new ToggleEvent('toggle', { newState, oldState }));
     }
   };
@@ -276,8 +277,9 @@ export class FlyoutMenu extends FASTElement {
       e.propertyName === 'opacity' &&
       e.target === this._contextPopoverElement
     ) {
-      const newState = this._contextOpen ? 'open' : 'closed';
-      const oldState = this._contextOpen ? 'closed' : 'open';
+      const isOpen = this._open || this._contextOpen;
+      const newState = isOpen ? 'open' : 'closed';
+      const oldState = !isOpen ? 'closed' : 'open';
       this.dispatchEvent(new ToggleEvent('toggle', { newState, oldState }));
     }
   };

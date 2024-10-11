@@ -139,4 +139,9 @@ export default class WindowsService {
       w.id === id ? { ...w, xPos, yPos, width, height } : w,
     );
   }
+
+  closeAllWindows() {
+    this.windows = [];
+    this.activeWindowId = null;
+  }
 }

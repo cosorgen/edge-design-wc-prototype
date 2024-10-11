@@ -195,6 +195,13 @@ export default class MoreMenu extends FASTElement {
       title: 'Help and feedback',
       type: 'sub-menu',
     },
+    {
+      type: 'divider',
+    },
+    {
+      title: 'Close Microsoft Edge',
+      type: 'action',
+    },
   ];
   @attr({ mode: 'boolean' }) managedByOrganization = false;
 

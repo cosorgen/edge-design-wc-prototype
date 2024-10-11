@@ -28,19 +28,19 @@ const template = html`
       including a plastic body, outdated Android version, and occasional screen
       responsiveness issues.
     </div>
-    <copilot-composer placeholder="Message Copilot">
-      <phx-button appearance="subtle" size="large" icon-only slot="start">
-        <svg>
-          <use x="2px" y="2px" href="img/edge/icons.svg#history-20-regular" />
-        </svg>
-      </phx-button>
-      <phx-button appearance="subtle" size="large" icon-only slot="end">
-        <svg>
-          <use x="2px" y="2px" href="img/edge/icons.svg#mic-new-20-regular" />
-        </svg>
-      </phx-button>
-    </copilot-composer>
   </div>
+  <copilot-composer placeholder="Message Copilot">
+    <phx-button appearance="subtle" size="large" icon-only slot="start">
+      <svg>
+        <use x="2px" y="2px" href="img/edge/icons.svg#history-20-regular" />
+      </svg>
+    </phx-button>
+    <phx-button appearance="subtle" size="large" icon-only slot="end">
+      <svg>
+        <use x="2px" y="2px" href="img/edge/icons.svg#mic-new-20-regular" />
+      </svg>
+    </phx-button>
+  </copilot-composer>
 `;
 
 const styles = css`

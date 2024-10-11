@@ -179,6 +179,9 @@ export class CaptionControls extends FASTElement {
       case 'Screenshot':
       case 'New InPrivate window':
         break;
+      case 'Close Microsoft Edge':
+        this.ws.closeAllWindows();
+        break;
       default:
         this.ews.openToolbarItem(action);
         break;
