@@ -13,10 +13,7 @@ import {
   nullableNumberConverter,
 } from '@microsoft/fast-element';
 
-const template = html<AppWindow>` <div
-    id="content"
-    @mousedown="${(x) => x.$emit('activate')}"
-  >
+const template = html<AppWindow>` <div id="content">
     <slot></slot>
   </div>
   <div
@@ -205,6 +202,11 @@ export class AppWindow extends FASTElement {
     // Listen for window move events from child app
     this.addEventListener('windowmovestart', () => {
       this.mouseDown(0, 0, 1, 1);
+    });
+
+    // Listen for clicks on the window to bring it to the front
+    this.addEventListener('click', () => {
+      this.$emit('activate');
     });
 
     // Get slotted element and give it an id
