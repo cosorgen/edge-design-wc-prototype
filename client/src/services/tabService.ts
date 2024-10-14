@@ -12,17 +12,6 @@ export type Tab = {
 export class TabService {
   @observable private tabs_: Tab[] = [];
 
-  constructor() {
-    this.addTab(/*{
-      id: window.crypto.randomUUID(),
-      url: 'https://microsoft.com',
-      active: true,
-      title:
-        'Microsoft – AI, Cloud, Productivity, Computing, Gaming & AppsYour Privacy Choices Opt-Out Icon',
-      favicon: 'https://microsoft.com/favicon.ico',
-    }*/);
-  }
-
   get tabs() {
     return this.tabs_;
   }

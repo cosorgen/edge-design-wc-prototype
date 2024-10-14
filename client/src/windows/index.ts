@@ -61,6 +61,7 @@ const template = html<WindowsShell>`
         ?active="${(x, c) => x.id === c.parent.ws.activeWindowId}"
         @windowmove="${(x, c) =>
           c.parent.handleWindowMove(c.event as CustomEvent)}"
+        @activate="${(x, c) => c.parent.ws.activateWindow(x.id)}"
       >
         ${(x) =>
           installedApps.filter((app) => app.name === x.appName)[0].element ||
@@ -106,7 +107,8 @@ export class WindowsShell extends FASTElement {
     setTheme(this.ws.theme);
 
     // open default windows
-    this.ws.openWindow('Microsoft Edge');
+    // this.ws.openWindow('Microsoft Edge');
+    this.ws.openWindow('Settings');
   }
 
   handleTaskbarButtonClick(appName: string) {

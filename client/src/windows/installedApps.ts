@@ -1,5 +1,6 @@
 import { html } from '@microsoft/fast-element';
 import '../edge/index.js';
+import '../settings/index.js';
 
 export default [
   {
@@ -39,5 +40,6 @@ export default [
   {
     name: 'Settings',
     lightIcon: 'img/windows/settings-24.svg',
+    element: html`<windows-settings></windows-settings>`,
   },
 ];

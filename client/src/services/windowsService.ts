@@ -24,8 +24,8 @@ export type Window = {
 export default class WindowsService {
   @observable theme: OSTheme;
   @observable transparency: OSTransparency;
-  @observable windows: Window[] = [];
   @observable activeWindowId: string | null = null;
+  @observable windows: Window[] = [];
 
   constructor() {
     // Set theme and transparency based on system preferences
@@ -95,12 +95,29 @@ export default class WindowsService {
 
   activateWindow(id: string | null) {
     this.activeWindowId = id;
+
+    // Update z-index
+    this.windows = this.windows.map((w, i) =>
+      w.id === id
+        ? { ...w, zIndex: this.windows.length + 1 }
+        : {
+            ...w,
+            zIndex: i + 1,
+          },
+    );
   }
 
   activateNextWindow(id: string | null) {
     if (this.activeWindowId === id) {
       this.activeWindowId =
         this.windows.find((win) => win.id !== id && !win.minimized)?.id || null;
+    } else if (this.windows.length > 0) {
+      // activate the window with the highest z-index that is not minimized
+      this.activeWindowId = this.windows
+        .filter((win) => !win.minimized)
+        .sort((a, b) => a.zIndex - b.zIndex)[0].id;
+    } else {
+      this.activeWindowId = null;
     }
   }
 
@@ -140,8 +157,8 @@ export default class WindowsService {
     );
   }
 
-  closeAllWindows() {
-    this.windows = [];
-    this.activeWindowId = null;
+  closeAllWindows(appName: string) {
+    this.windows = this.windows.filter((w) => w.appName !== appName);
+    this.activateNextWindow(null);
   }
 }

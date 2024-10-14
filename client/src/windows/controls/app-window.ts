@@ -13,7 +13,12 @@ import {
   nullableNumberConverter,
 } from '@microsoft/fast-element';
 
-const template = html<AppWindow>` <div id="content"><slot></slot></div>
+const template = html<AppWindow>` <div
+    id="content"
+    @mousedown="${(x) => x.$emit('activate')}"
+  >
+    <slot></slot>
+  </div>
   <div
     class="grabber"
     id="top"
