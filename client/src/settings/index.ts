@@ -1,5 +1,9 @@
 import { css, html, FASTElement, customElement } from '@microsoft/fast-element';
-import { spacingHorizontalL, typographyStyles } from '@phoenixui/themes';
+import {
+  spacingHorizontalL,
+  spacingHorizontalS,
+  typographyStyles,
+} from '@phoenixui/themes';
 import '../windows/controls/mica-material.js';
 import '@phoenixui/web-components/button.js';
 import {
@@ -66,6 +70,30 @@ const template = html<WindowsSettings>`
         </phx-button>
       </div>
     </div>
+    <div id="main">
+      <div class="entry">
+        <label for="theme">Theme</label>
+        <select id="theme">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
+      <div class="entry">
+        <label for="transparency">Transparency</label>
+        <select id="transparency">
+          <option value="normal">Normal</option>
+          <option value="reduced">Reduced</option>
+        </select>
+      </div>
+      <div class="entry">
+        <label for="favorites-bar">Show favorites bar</label>
+        <select id="favorites-bar">
+          <option value="always">Always</option>
+          <option value="never">Never</option>
+          <option value="newtab">On new tab</option>
+        </select>
+      </div>
+    </div>
   </div>
 `;
 
@@ -98,6 +126,20 @@ const styles = css`
   #close:active {
     background-color: ${colorShellFillCaptionControlPrimaryPressed};
     color: ${colorShellForegroundCaptionControlPrimaryPressed};
+  }
+
+  #main {
+    display: flex;
+    flex-direction: column;
+    padding: ${spacingHorizontalL};
+  }
+
+  .entry {
+    display: flex;
+    flex-direction: row;
+    gap: ${spacingHorizontalS};
+    align-items: center;
+    padding-block: ${spacingHorizontalS};
   }
 `;
 
