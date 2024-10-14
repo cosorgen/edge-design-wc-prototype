@@ -98,6 +98,7 @@ const template = html<WindowsShell>`
       `,
     )}
   </task-bar>
+  ${(x) => x.setTheme()}
 `;
 
 @customElement({ name: 'windows-shell', template, styles })
@@ -107,12 +108,13 @@ export class WindowsShell extends FASTElement {
   connectedCallback() {
     super.connectedCallback();
 
-    // set our theme for the OS
-    setTheme(this.ws.theme);
-
     // open default windows
     // this.ws.openWindow('Microsoft Edge');
     this.ws.openWindow('Settings');
+  }
+
+  setTheme() {
+    setTheme(this.ws.theme);
   }
 
   handleTaskbarButtonClick(appName: string) {

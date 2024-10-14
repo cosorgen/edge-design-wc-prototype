@@ -15,12 +15,9 @@ export type NewTokens = {
 
 export type EdgeTheme = Theme & NewTokens;
 
-const spacingFrameFromURL =
-  new URLSearchParams(window.location.search).get('frameSpacing') || '4px';
-
 const commonThemeOverrides = {
   borderRadiusLayerApp: '12px',
-  spacingFrame: spacingFrameFromURL,
+  spacingFrame: '4px',
 };
 
 export const edgeLightTheme: EdgeTheme = {

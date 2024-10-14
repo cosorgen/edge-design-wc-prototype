@@ -12,6 +12,10 @@ export type Tab = {
 export class TabService {
   @observable private tabs_: Tab[] = [];
 
+  constructor() {
+    this.addTab();
+  }
+
   get tabs() {
     return this.tabs_;
   }

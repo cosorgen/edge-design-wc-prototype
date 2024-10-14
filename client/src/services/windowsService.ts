@@ -53,11 +53,33 @@ export default class WindowsService {
       });
 
     // Override theme and transparency from URL
+    this.getSettingsFromURL();
+  }
+
+  getSettingsFromURL() {
     const url = new URL(window.location.href);
     this.theme = (url.searchParams.get('theme') as OSTheme) || this.theme;
     this.transparency =
       (url.searchParams.get('transparency') as OSTransparency) ||
       this.transparency;
+  }
+
+  setSettingsInURL() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('theme', this.theme);
+    url.searchParams.set('transparency', this.transparency);
+
+    window.history.pushState({}, '', url.toString());
+  }
+
+  setTheme(theme: OSTheme) {
+    this.theme = theme;
+    this.setSettingsInURL();
+  }
+
+  setTransparency(transparency: OSTransparency) {
+    this.transparency = transparency;
+    this.setSettingsInURL();
   }
 
   openWindow(appName: string) {

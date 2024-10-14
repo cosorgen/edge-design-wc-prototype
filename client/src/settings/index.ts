@@ -1,11 +1,13 @@
 import { css, html, FASTElement, customElement } from '@microsoft/fast-element';
-import {
-  spacingHorizontalL,
-  spacingHorizontalS,
-  typographyStyles,
-} from '@phoenixui/themes';
+import { spacingHorizontalL, typographyStyles } from '@phoenixui/themes';
 import '../windows/controls/mica-material.js';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/label.js';
+import '@phoenixui/web-components/radio-group.js';
+import '@phoenixui/web-components/radio.js';
+import '@phoenixui/web-components/text-input.js';
+import '@phoenixui/web-components/switch.js';
+import '@phoenixui/web-components/field.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -14,12 +16,15 @@ import {
 } from '../windows/designSystem.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
+import { Checkbox } from '@phoenixui/web-components';
 
 const template = html<WindowsSettings>`
   <mica-material></mica-material>
   <div id="content">
     <div id="nav">
       <h1>Settings</h1>
+      <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
         <phx-button
           size="large"
@@ -73,37 +78,87 @@ const template = html<WindowsSettings>`
     <div id="main">
       <div class="entry">
         <label for="theme">Theme</label>
-        <select id="theme">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
+        <select id="theme" @change="${(x) => x.updateTheme()}">
+          <option value="light" ?selected="${(x) => x.ws.theme === 'light'}">
+            Light
+          </option>
+          <option value="dark" ?selected="${(x) => x.ws.theme === 'dark'}">
+            Dark
+          </option>
         </select>
       </div>
       <div class="entry">
         <label for="transparency">Transparency</label>
-        <select id="transparency">
-          <option value="normal">Normal</option>
-          <option value="reduced">Reduced</option>
+        <select id="transparency" @change="${(x) => x.updateTransparency()}">
+          <option
+            value="normal"
+            ?selected="${(x) => x.ws.transparency === 'normal'}"
+          >
+            Normal
+          </option>
+          <option
+            value="reduced"
+            ?selected="${(x) => x.ws.transparency === 'reduced'}"
+          >
+            Reduced
+          </option>
         </select>
       </div>
       <div class="entry">
         <label for="favorites-bar">Show favorites bar</label>
-        <select id="favorites-bar">
-          <option value="always">Always</option>
-          <option value="never">Never</option>
-          <option value="newtab">On new tab</option>
+        <select
+          id="favorites-bar"
+          @change="${(x) => x.updateShowFavoritesBar()}"
+          value="${(x) => x.ss.showFavoritesBar}"
+        >
+          <option
+            value="always"
+            ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
+          >
+            Always
+          </option>
+          <option
+            value="never"
+            ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
+          >
+            Never
+          </option>
+          <option
+            value="newtab"
+            ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
+          >
+            On new tab
+          </option>
         </select>
       </div>
       <div class="entry">
         <label for="truncate-url">Truncate URL</label>
-        <input id="truncate-url" type="checkbox" />
+        <phx-switch
+          slot="input"
+          id="truncate-url"
+          ?checked="${(x) => x.ss.truncateURL}"
+          @change="${(x) => x.toggleTruncateUrl()}"
+        ></phx-switch>
       </div>
       <div class="entry">
-        <label for="legacy-copilot">Show legacy copilot</label>
-        <input id="legacy-copilot" type="checkbox" />
+        <label for="legacy-copilot"> Show legacy copilot </label>
+        <phx-switch
+          slot="input"
+          id="legacy-copilot"
+          ?checked=${(x) => x.ss.showLegacyCopilot}
+          @change="${(x) => x.toggleShowLegacyCopilot()}"
+        ></phx-switch>
       </div>
       <div class="entry">
         <label for="frame-spacing">Frame spacing</label>
-        <input id="frame-spacing" type="number" value="4" />
+        <phx-text-input
+          id="frame-spacing"
+          type="number"
+          value="${(x) => parseInt(x.ss.frameSpacing)}"
+          slot="input"
+          @change="${(x) => x.updateFrameSpacing()}"
+        >
+        </phx-text-input>
       </div>
     </div>
   </div>
@@ -117,7 +172,6 @@ const styles = css`
 
   #nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     padding-inline-start: ${spacingHorizontalL};
   }
@@ -140,6 +194,11 @@ const styles = css`
     color: ${colorShellForegroundCaptionControlPrimaryPressed};
   }
 
+  #grabber {
+    flex: 1;
+    height: 40px;
+  }
+
   #main {
     display: flex;
     flex-direction: column;
@@ -149,15 +208,20 @@ const styles = css`
   .entry {
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalS};
+    min-height: 32px;
     align-items: center;
-    padding-block: ${spacingHorizontalS};
+    gap: ${spacingHorizontalL};
+
+    label {
+      min-width: 120px;
+    }
   }
 `;
 
 @customElement({ name: 'windows-settings', template, styles })
 export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
+  @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
@@ -177,5 +241,49 @@ export class WindowsSettings extends FASTElement {
 
   maximizeWindow() {
     this.ws.maximizeWindow(this.ws.activeWindowId, !this.windowIsMaximized());
+  }
+
+  updateFrameSpacing() {
+    this.ss.setFrameSpacing(
+      `${
+        (this.shadowRoot?.getElementById('frame-spacing') as HTMLInputElement)
+          ?.value || '0'
+      }px`,
+    );
+  }
+
+  toggleShowLegacyCopilot() {
+    this.ss.setShowLegacyCopilot(
+      (this.shadowRoot?.querySelector('#legacy-copilot') as Checkbox)
+        ?.checked || false,
+    );
+  }
+
+  toggleTruncateUrl() {
+    this.ss.setTruncateURL(
+      (this.shadowRoot?.querySelector('#truncate-url') as Checkbox)?.checked ||
+        false,
+    );
+  }
+
+  updateShowFavoritesBar() {
+    this.ss.setShowFavoritesBar(
+      ((this.shadowRoot?.querySelector('#favorites-bar') as HTMLSelectElement)
+        ?.value as 'always' | 'never' | 'newtab') || 'never',
+    );
+  }
+
+  updateTheme() {
+    this.ws.setTheme(
+      ((this.shadowRoot?.querySelector('#theme') as HTMLSelectElement)
+        ?.value as 'light' | 'dark') || 'light',
+    );
+  }
+
+  updateTransparency() {
+    this.ws.setTransparency(
+      ((this.shadowRoot?.querySelector('#transparency') as HTMLSelectElement)
+        ?.value as 'normal' | 'reduced') || 'normal',
+    );
   }
 }

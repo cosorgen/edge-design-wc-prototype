@@ -7,27 +7,41 @@ export default class EdgeSettingsSerivce {
   @observable showLegacyCopilot = false;
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
+  @observable frameSpacing = '4px';
 
   constructor() {
     // Load settings from local storage
-    this.setSettingsFromURL();
+    this.getSettingsFromURL();
   }
 
-  setSettingsFromURL() {
+  getSettingsFromURL() {
     const url = new URL(window.location.href);
-    this.theme =
-      (url.searchParams.get('theme') as 'light' | 'dark' | 'system') ||
-      'system';
     this.showFavoritesBar =
       (url.searchParams.get('showFavoritesBar') as
         | 'always'
         | 'newtab'
         | 'never') || 'never';
 
-    this.showLegacyCopilot = url.searchParams.has('showLegacyCopilot');
+    this.showLegacyCopilot =
+      url.searchParams.get('showLegacyCopilot') === 'true';
     this.showLegacyCopilot && this.pinToolbarItem('Copilot');
 
-    this.truncateURL = url.searchParams.has('truncateURL');
+    this.truncateURL = url.searchParams.get('truncateURL') === 'true';
+
+    this.frameSpacing = url.searchParams.get('frameSpacing') || '4px';
+  }
+
+  setSettingsInURL() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('showFavoritesBar', this.showFavoritesBar);
+    url.searchParams.set(
+      'showLegacyCopilot',
+      this.showLegacyCopilot.toString(),
+    );
+    url.searchParams.set('truncateURL', this.truncateURL.toString());
+    url.searchParams.set('frameSpacing', this.frameSpacing);
+
+    window.history.pushState({}, '', url.toString());
   }
 
   pinToolbarItem(id: string) {
@@ -36,5 +50,31 @@ export default class EdgeSettingsSerivce {
 
   unpinToolbarItem(id: string) {
     this.pinnedToolbarItems = this.pinnedToolbarItems.filter((i) => i !== id);
+  }
+
+  setTruncateURL(truncate: boolean) {
+    this.truncateURL = truncate;
+    this.setSettingsInURL();
+  }
+
+  setShowLegacyCopilot(show: boolean) {
+    this.showLegacyCopilot = show;
+    show ? this.pinToolbarItem('Copilot') : this.unpinToolbarItem('Copilot');
+    this.setSettingsInURL();
+  }
+
+  setTheme(theme: 'light' | 'dark' | 'system') {
+    this.theme = theme;
+    this.setSettingsInURL();
+  }
+
+  setShowFavoritesBar(show: 'always' | 'newtab' | 'never') {
+    this.showFavoritesBar = show;
+    this.setSettingsInURL();
+  }
+
+  setFrameSpacing(spacing: string) {
+    this.frameSpacing = spacing;
+    this.setSettingsInURL();
   }
 }

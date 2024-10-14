@@ -40,7 +40,7 @@ import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
-  <div class="row">
+  <div class="row" style="--spacingFrame: ${(x) => x.ss.frameSpacing}">
     <caption-controls></caption-controls>
     <div class="column">
       <tab-bar></tab-bar>
@@ -65,6 +65,7 @@ const template = html<MicrosoftEdge>`
       html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
     )}
   </div>
+  ${(x) => x.setTheme()}
 `;
 
 const styles = css`
@@ -151,9 +152,6 @@ export class MicrosoftEdge extends FASTElement {
 
     // Set id for edge window
     this.ews.id = this.id;
-
-    // set up theme
-    this.setTheme();
   }
 
   setTheme() {
@@ -168,9 +166,13 @@ export class MicrosoftEdge extends FASTElement {
         dark: edgeDarkTheme,
       },
     };
-    const selectedTheme =
+    const themeKey =
       this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    setThemeFor(this.shadowRoot!, themes[this.ws.transparency][selectedTheme]);
+
+    const selectedTheme = themes[this.ws.transparency][themeKey];
+    selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
+
+    setThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   shouldFavoritesBarRender() {
