@@ -93,6 +93,18 @@ const template = html<WindowsSettings>`
           <option value="newtab">On new tab</option>
         </select>
       </div>
+      <div class="entry">
+        <label for="truncate-url">Truncate URL</label>
+        <input id="truncate-url" type="checkbox" />
+      </div>
+      <div class="entry">
+        <label for="legacy-copilot">Show legacy copilot</label>
+        <input id="legacy-copilot" type="checkbox" />
+      </div>
+      <div class="entry">
+        <label for="frame-spacing">Frame spacing</label>
+        <input id="frame-spacing" type="number" value="4" />
+      </div>
     </div>
   </div>
 `;
