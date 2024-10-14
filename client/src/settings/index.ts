@@ -8,30 +8,65 @@ import {
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '../windows/designSystem.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import WindowsService from '#serviceswindowsService.js';
 
 const template = html<WindowsSettings>`
   <mica-material></mica-material>
   <div id="content">
-    <nav>
+    <div id="nav">
       <h1>Settings</h1>
-      <div id="caption">
-        <phx-button size="large" shape="square" appearance="subtle" icon-only>
-            <svg>
-                <use x="2" y="2" href="./img/edge/icons.svg#chrome-minimize-20-regular" />
-            </svg>
+      <div>
+        <phx-button
+          size="large"
+          shape="square"
+          appearance="subtle"
+          icon-only
+          @click="${(x) => x.minimizeWindow()}"
+        >
+          <svg>
+            <use
+              x="2"
+              y="2"
+              href="./img/edge/icons.svg#chrome-minimize-20-regular"
+            />
+          </svg>
         </phx-button>
-      <phx-button size="large" shape="square" appearance="subtle" icon-only>
-            <svg>
-                <use x="2" y="2" href="./img/edge/icons.svg#chrome-maximize-20-regular" />
-            </svg>
-        </phx-button>  
-      <phx-button size="large" shape="square" appearance="subtle" icon-only id="close">
-            <svg>
-                <use x="2" y="2" href="./img/edge/icons.svg#chrome-close-20-regular" />
-            </svg>
+        <phx-button
+          size="large"
+          shape="square"
+          appearance="subtle"
+          icon-only
+          @click="${(x) => x.maximizeWindow()}"
+        >
+          <svg>
+            <use
+              x="2"
+              y="2"
+              href="./img/edge/icons.svg#chrome-${(x) =>
+                x.windowIsMaximized() ? 'restore' : 'maximize'}-20-regular"
+            />
+          </svg>
         </phx-button>
-    </nav>
-</div>
+        <phx-button
+          size="large"
+          shape="square"
+          appearance="subtle"
+          icon-only
+          id="close"
+          @click="${(x) => x.ws.closeWindow(x.id)}"
+        >
+          <svg>
+            <use
+              x="2"
+              y="2"
+              href="./img/edge/icons.svg#chrome-close-20-regular"
+            />
+          </svg>
+        </phx-button>
+      </div>
+    </div>
+  </div>
 `;
 
 const styles = css`
@@ -40,7 +75,7 @@ const styles = css`
     inset: 0;
   }
 
-  nav {
+  #nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,4 +102,26 @@ const styles = css`
 `;
 
 @customElement({ name: 'windows-settings', template, styles })
-export class WindowsSettings extends FASTElement {}
+export class WindowsSettings extends FASTElement {
+  @inject(WindowsService) ws!: WindowsService;
+
+  handleTitleBarMouseDown() {
+    this.$emit('windowmovestart');
+  }
+
+  closeWindow() {
+    this.ws.closeWindow(this.ws.activeWindowId);
+  }
+
+  minimizeWindow() {
+    this.ws.minimizeWindow(this.ws.activeWindowId);
+  }
+
+  windowIsMaximized() {
+    return this.ws.getWindowById(this.id)?.maximized || false;
+  }
+
+  maximizeWindow() {
+    this.ws.maximizeWindow(this.ws.activeWindowId, !this.windowIsMaximized());
+  }
+}

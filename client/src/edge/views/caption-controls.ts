@@ -1,7 +1,7 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '@phoenixui/web-components/button.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService, { Window } from '#serviceswindowsService.js';
+import WindowsService from '#serviceswindowsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
@@ -152,24 +152,19 @@ export class CaptionControls extends FASTElement {
   }
 
   closeWindow() {
-    this.ws.closeWindow(this.ws.activeWindowId);
+    this.ws.closeWindow(this.ews.id);
   }
 
   minimizeWindow() {
-    this.ws.minimizeWindow(this.ws.activeWindowId);
+    this.ws.minimizeWindow(this.ews.id);
   }
 
   windowIsMaximized() {
-    const window = this.ws.getActiveWindow() as Window;
-    return window?.maximized || false;
+    return this.ws.getWindowById(this.ews.id)?.maximized || false;
   }
 
   maximizeWindow() {
-    if (this.windowIsMaximized()) {
-      this.ws.restoreWindow(this.ws.activeWindowId);
-    } else {
-      this.ws.maximizeWindow(this.ws.activeWindowId);
-    }
+    this.ws.maximizeWindow(this.ews.id, !this.windowIsMaximized());
   }
 
   handleMoreAction(e: CustomEvent) {
@@ -190,7 +185,7 @@ export class CaptionControls extends FASTElement {
       case 'New InPrivate window':
         break;
       case 'Close Microsoft Edge':
-        this.ws.closeAllWindows();
+        this.ws.closeAllWindows('Microsoft Edge');
         break;
       default:
         this.ews.openToolbarItem(action);

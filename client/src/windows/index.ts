@@ -45,7 +45,11 @@ const styles = css`
 `;
 
 const template = html<WindowsShell>`
-  <mica-material id="desktop" image-only></mica-material>
+  <mica-material
+    id="desktop"
+    image-only
+    @click="${(x) => x.ws.activateWindow(null)}"
+  ></mica-material>
   ${repeat(
     (x) => x.ws.windows,
     html`
@@ -125,7 +129,7 @@ export class WindowsShell extends FASTElement {
     if (windows.length === 1) {
       // if it's minimized, restore it
       if (windows[0].minimized) {
-        this.ws.restoreWindow(windows[0].id);
+        this.ws.minimizeWindow(windows[0].id, false);
         return;
       }
       // if it's not active, activate it

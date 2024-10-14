@@ -144,6 +144,13 @@ export class MicrosoftEdge extends FASTElement {
     this.ews = new EdgeWindowService();
     container.register(Registration.instance(TabService, this.ts));
     container.register(Registration.instance(EdgeWindowService, this.ews));
+  }
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    // Set id for edge window
+    this.ews.id = this.id;
 
     // set up theme
     this.setTheme();

@@ -206,6 +206,14 @@ export class AppWindow extends FASTElement {
     this.addEventListener('windowmovestart', () => {
       this.mouseDown(0, 0, 1, 1);
     });
+
+    // Get slotted element and give it an id
+    const slottedElement = this.shadowRoot
+      ?.querySelector('slot')
+      ?.assignedElements()[0];
+    if (slottedElement) {
+      slottedElement.id = this.id;
+    }
   }
 
   mouseDown(widthAmp: number, heightAmp: number, xAmp: number, yAmp: number) {
