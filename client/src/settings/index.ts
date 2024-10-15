@@ -1,5 +1,17 @@
 import { css, html, FASTElement, customElement } from '@microsoft/fast-element';
-import { spacingHorizontalL, typographyStyles } from '@phoenixui/themes';
+import {
+  borderRadiusMedium,
+  colorBrandStroke,
+  colorNeutralForeground1,
+  colorNeutralStroke2,
+  colorNeutralStrokeAccessible,
+  spacingHorizontalL,
+  spacingHorizontalS,
+  spacingVerticalXS,
+  strokeWidthThick,
+  strokeWidthThin,
+  typographyStyles,
+} from '@phoenixui/themes';
 import '../windows/controls/mica-material.js';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/label.js';
@@ -213,14 +225,31 @@ const styles = css`
   .entry {
     display: flex;
     flex-direction: row;
-    min-height: 32px;
+    min-height: 40px;
     align-items: center;
     gap: ${spacingHorizontalL};
 
     label {
-      min-width: 120px;
+      min-width: 128px;
     }
   }
+
+  select {
+    padding: ${spacingVerticalXS} ${spacingHorizontalS};
+    border-radius: ${borderRadiusMedium};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke2};
+    border-bottom: ${strokeWidthThin} solid ${colorNeutralStrokeAccessible};
+
+    font-family: ${typographyStyles.body1.fontFamily};
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
+    color: ${colorNeutralForeground1};
+  }
+
+  select:focus, select:focus-visible {
+    border-bottom: ${strokeWidthThick} solid ${colorBrandStroke};
+    outline: none;
 `;
 
 @customElement({ name: 'windows-settings', template, styles })

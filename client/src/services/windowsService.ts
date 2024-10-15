@@ -57,7 +57,7 @@ export default class WindowsService {
     this.getSettingsFromURL();
 
     // open default window
-    this.openWindow('Microsoft Edge');
+    this.openWindow('Settings');
   }
 
   getSettingsFromURL() {
