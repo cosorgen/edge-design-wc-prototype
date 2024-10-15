@@ -73,10 +73,7 @@ const template = html<Toolbar>`
               html`
                 <menu-item
                   start-slot
-                  @click="${(x, c) => {
-                    c.event.stopPropagation();
-                    return false;
-                  }}"
+                  @click="${(x, c) => c.event.stopPropagation()}"
                 >
                   <span slot="start">
                     <svg>

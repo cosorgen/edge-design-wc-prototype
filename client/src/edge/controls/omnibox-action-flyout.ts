@@ -73,6 +73,5 @@ export class OmniboxActionFlyout extends FASTElement {
 
   handleTriggrClick(e: Event) {
     e.stopPropagation();
-    return false;
   }
 }

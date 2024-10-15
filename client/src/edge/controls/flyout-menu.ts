@@ -19,6 +19,15 @@ const template = html<FlyoutMenu>`
 `;
 
 const styles = css`
+  :host {
+    /* Need for collapse */
+    overflow: hidden;
+
+    /* Don't clip focus outline */
+    margin: -2px;
+    padding: 2px;
+  }
+
   ::slotted([slot='trigger']) {
     anchor-name: --menu-trigger;
   }

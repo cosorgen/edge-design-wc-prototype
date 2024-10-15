@@ -18,6 +18,9 @@ export class TabService {
 
   constructor() {
     this.addTab();
+    this.navigate(
+      'https://www.nike.com/t/sportswear-essential-womens-quilted-anorak-jacket-wgWFp0/FZ7364-338',
+    );
   }
 
   get tabs() {

@@ -1,4 +1,8 @@
 import { html, ViewTemplate } from '@microsoft/fast-element';
+import './controls/omnibox-action-flyout.js';
+import './controls/shopping-button.ts';
+import './controls/flyout-menu.js';
+import './controls/shopping-flyout.js';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -11,7 +15,7 @@ export const overflowItems = {
   },
   shopping: {
     title: 'Shopping',
-    iconId: 'tag-20-regular',
+    iconId: 'shopping-20-regular',
   },
   'read-aloud': {
     title: 'Read aloud',
@@ -34,12 +38,13 @@ export default {
     </svg>
     <div class="flyout-menu">${overflowItems.favorite.title}</div>
   </omnibox-action-flyout>`,
-  shopping: html`<omnibox-action-flyout id="shopping" slot="actions">
-    <svg slot="trigger-content">
-      <use href="img/edge/icons.svg#${overflowItems.shopping.iconId}" />
-    </svg>
-    <div class="flyout-menu">${overflowItems.shopping.title}</div>
-  </omnibox-action-flyout>`,
+  shopping: html`<flyout-menu slot="actions">
+    <shopping-button
+      slot="trigger"
+      @click="${(x, c) => c.event.stopPropagation()}"
+    ></shopping-button>
+    <shopping-flyout></shopping-flyout>
+  </flyout-menu>`,
   'read-aloud': html`<omnibox-action-flyout id="read-aloud" slot="actions">
     <svg slot="trigger-content">
       <use href="img/edge/icons.svg#${overflowItems['read-aloud'].iconId}" />
