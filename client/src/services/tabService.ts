@@ -7,6 +7,10 @@ export type Tab = {
   favicon?: string;
   active: boolean;
   loading?: boolean;
+  actionIds?: {
+    top: string;
+    overflow?: string[];
+  };
 };
 
 export class TabService {
@@ -94,6 +98,7 @@ export class TabService {
           title: tab.active ? metadata.title : tab.title,
           favicon: tab.active ? metadata.favicon : tab.favicon,
           loading: false,
+          actionIds: tab.active ? this.getActionsForURL(validUrl) : undefined,
         }));
       });
 
@@ -102,5 +107,15 @@ export class TabService {
       ...tab,
       url: tab.active ? validUrl : tab.url,
     }));
+  }
+
+  getActionsForURL(url: string) {
+    let top = 'favorite';
+    const overflow = ['limit-cookies', 'read-aloud', 'install', 'share'];
+    if (url.startsWith('https://www.nike.com/t/')) {
+      overflow.unshift('favorite');
+      top = 'shopping';
+    }
+    return { top, overflow };
   }
 }

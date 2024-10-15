@@ -15,6 +15,9 @@ import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
 import '../controls/toolbar-flyout-item.js';
 import '../controls/toolbar-sidepane-item.js';
+import '../controls/omnibox-action-flyout.js';
+import '../controls/context-menu.js';
+import '../controls/menu-item.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -25,6 +28,7 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
+import omniboxActions, { overflowItems } from '../omniboxActions.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -51,7 +55,46 @@ const template = html<Toolbar>`
         ...c.event,
         detail: ' ',
       } as CustomEvent)}"
-  ></omnibox-control>
+  >
+    ${when(
+      (x) => x.ts.getActiveTab()?.actionIds?.top,
+      (x) => omniboxActions[x.ts.getActiveTab()!.actionIds!.top!],
+    )}
+    ${when(
+      (x) => x.ts.getActiveTab()?.actionIds?.overflow,
+      html`
+        <omnibox-action-flyout id="more" slot="actions">
+          <svg slot="trigger-content">
+            <use href="img/edge/icons.svg#more-circle-20-regular" />
+          </svg>
+          <context-menu>
+            ${repeat(
+              (x) => x.ts.getActiveTab()!.actionIds!.overflow!,
+              html`
+                <menu-item
+                  start-slot
+                  @click="${(x, c) => {
+                    c.event.stopPropagation();
+                    return false;
+                  }}"
+                >
+                  <span slot="start">
+                    <svg>
+                      <use
+                        href="img/edge/icons.svg#${(x) =>
+                          overflowItems[x].iconId}"
+                      />
+                    </svg>
+                  </span>
+                  ${(x) => overflowItems[x].title}
+                </menu-item>
+              `,
+            )}
+          </context-menu>
+        </omnibox-action-flyout>
+      `,
+    )}
+  </omnibox-control>
   <div class="group right">
     ${repeat(
       (x) => x.derivedToolbarItems,
@@ -194,5 +237,11 @@ export class Toolbar extends FASTElement {
   togglePinToolbarItem(id: string, event: Event) {
     if (!(event instanceof CustomEvent)) return;
     event.detail ? this.ess.pinToolbarItem(id) : this.ess.unpinToolbarItem(id);
+  }
+
+  handleOmniboxActionClick(id: string, e: Event) {
+    e.stopPropagation();
+    console.log(id, 'clicked');
+    return false;
   }
 }

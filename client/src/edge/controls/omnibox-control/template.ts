@@ -41,11 +41,7 @@ export const template = html<OmniboxControl>`
         id="actions"
         @click="${(x) => (!x.dropdownOpen ? x.handleInputClick() : null)}"
       >
-        <phx-button size="small" appearance="subtle" shape="circular" icon-only>
-          <svg>
-            <use href="img/edge/icons.svg#star-20-regular" />
-          </svg>
-        </phx-button>
+        <slot name="actions"></slot>
       </div>
     </div>
     <omnibox-dropdown

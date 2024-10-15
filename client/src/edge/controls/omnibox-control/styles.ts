@@ -91,6 +91,8 @@ export const styles = css`
     display: flex;
     flex-direction: row;
     cursor: text;
+    min-height: 24px;
+    gap: ${spacingHorizontalXXS};
   }
 
   #status {
@@ -105,10 +107,10 @@ export const styles = css`
 
   #actions {
     justify-content: flex-end;
+  }
 
-    phx-button::part(content) {
-      color: ${colorNeutralForegroundHint};
-    }
+  [name='actions']::slotted(phx-button) {
+    color: ${colorNeutralForegroundHint};
   }
 
   :host([dropdown-open]) #actions {

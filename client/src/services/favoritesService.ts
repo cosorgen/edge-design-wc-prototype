@@ -54,8 +54,8 @@ export default class FavoritesService {
     },
     {
       type: 'site',
-      url: 'https://www.nike.com',
-      title: 'Nike',
+      url: 'https://www.nike.com/t/sportswear-essential-womens-quilted-anorak-jacket-wgWFp0/FZ7364-338',
+      title: 'Nike jacket',
       favicon: 'https://www.nike.com/favicon.ico?v=1',
     },
     {
