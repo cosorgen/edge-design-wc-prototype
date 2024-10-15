@@ -5,6 +5,8 @@ import {
   colorBrandBackground2Hover,
   colorBrandBackground2Pressed,
   colorNeutralForeground1,
+  curveDecelerateMax,
+  durationFast,
   spacingHorizontalS,
   spacingHorizontalXS,
   spacingVerticalXXS,
@@ -37,6 +39,17 @@ const styles = css`
     /* Need for collapse */
     min-width: 24px;
     overflow: hidden;
+
+    /* Animation on load */
+    width: 40px;
+    transform: translateX(100%);
+    transition:
+      width ${durationFast} ${curveDecelerateMax} 0.25s,
+      transform ${durationFast} ${curveDecelerateMax} 0.25s;
+  }
+
+  :host([expanded]) button {
+    transform: translateX(0px);
     width: 100%;
   }
 
@@ -74,4 +87,11 @@ const styles = css`
   template,
   styles,
 })
-export class ShoppingButton extends FASTElement {}
+export class ShoppingButton extends FASTElement {
+  connectedCallback() {
+    super.connectedCallback();
+    requestAnimationFrame(() => {
+      this.setAttribute('expanded', 'true');
+    }); // wait for render
+  }
+}
