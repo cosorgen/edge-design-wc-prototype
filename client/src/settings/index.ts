@@ -2,6 +2,8 @@ import { css, html, FASTElement, customElement } from '@microsoft/fast-element';
 import {
   borderRadiusMedium,
   colorBrandStroke,
+  colorLayerBackgroundDialog,
+  colorNeutralBackground1,
   colorNeutralForeground1,
   colorNeutralStroke2,
   colorNeutralStrokeAccessible,
@@ -239,6 +241,7 @@ const styles = css`
     border-radius: ${borderRadiusMedium};
     border: ${strokeWidthThin} solid ${colorNeutralStroke2};
     border-bottom: ${strokeWidthThin} solid ${colorNeutralStrokeAccessible};
+    background-color: ${colorNeutralBackground1};
 
     font-family: ${typographyStyles.body1.fontFamily};
     font-size: ${typographyStyles.body1.fontSize};
@@ -247,9 +250,16 @@ const styles = css`
     color: ${colorNeutralForeground1};
   }
 
-  select:focus, select:focus-visible {
+  select:focus,
+  select:focus-visible {
     border-bottom: ${strokeWidthThick} solid ${colorBrandStroke};
     outline: none;
+  }
+
+  select option {
+    background-color: ${colorLayerBackgroundDialog};
+    color: ${colorNeutralForeground1};
+  }
 `;
 
 @customElement({ name: 'windows-settings', template, styles })
