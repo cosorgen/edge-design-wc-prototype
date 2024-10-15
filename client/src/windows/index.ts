@@ -4,6 +4,7 @@ import {
   html,
   css,
   repeat,
+  Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -98,12 +99,28 @@ const template = html<WindowsShell>`
       `,
     )}
   </task-bar>
-  ${(x) => x.setTheme()}
 `;
 
 @customElement({ name: 'windows-shell', template, styles })
 export class WindowsShell extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setTheme();
+    Observable.getNotifier(this.ws).subscribe(this);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    Observable.getNotifier(this.ws).unsubscribe(this);
+  }
+
+  handleChange(source: unknown, propertyName: string) {
+    if (propertyName === 'theme' || propertyName === 'transparency') {
+      this.setTheme();
+    }
+  }
 
   setTheme() {
     setTheme(this.ws.theme);

@@ -8,7 +8,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@microsoft/fast-element": "^2.0.0-beta.26",
+    "@microsoft/fast-element": "^2.0.0",
     "@phoenixui/themes": "0.3.8",
     "@phoenixui/web-components": "^0.3.15"
   },

@@ -5,6 +5,7 @@ import {
   css,
   when,
   observable,
+  Observable,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
@@ -65,7 +66,6 @@ const template = html<MicrosoftEdge>`
       html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
     )}
   </div>
-  ${(x) => x.setTheme()}
 `;
 
 const styles = css`
@@ -152,6 +152,21 @@ export class MicrosoftEdge extends FASTElement {
 
     // Set id for edge window
     this.ews.id = this.id;
+
+    // Set up theme and subscribe to changes
+    this.setTheme();
+    Observable.getNotifier(this.ws).subscribe(this);
+  }
+
+  handleChange(source: unknown, propertyName: string) {
+    if (propertyName === 'theme' || propertyName === 'transparency') {
+      this.setTheme();
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    Observable.getNotifier(this.ws).unsubscribe(this);
   }
 
   setTheme() {
@@ -166,8 +181,7 @@ export class MicrosoftEdge extends FASTElement {
         dark: edgeDarkTheme,
       },
     };
-    const themeKey =
-      this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
+    const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
 
     const selectedTheme = themes[this.ws.transparency][themeKey];
     selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
