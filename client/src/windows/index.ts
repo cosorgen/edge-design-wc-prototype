@@ -105,14 +105,6 @@ const template = html<WindowsShell>`
 export class WindowsShell extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    // open default windows
-    // this.ws.openWindow('Microsoft Edge');
-    this.ws.openWindow('Settings');
-  }
-
   setTheme() {
     setTheme(this.ws.theme);
   }

@@ -54,6 +54,9 @@ export default class WindowsService {
 
     // Override theme and transparency from URL
     this.getSettingsFromURL();
+
+    // open default window
+    this.openWindow('Microsoft Edge');
   }
 
   getSettingsFromURL() {
