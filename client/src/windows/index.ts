@@ -123,7 +123,7 @@ export class WindowsShell extends FASTElement {
   }
 
   setTheme() {
-    setTheme(this.ws.theme);
+    setTheme(this.ws.theme, this.ws.transparency);
   }
 
   handleTaskbarButtonClick(appName: string) {

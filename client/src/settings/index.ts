@@ -20,7 +20,10 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { Checkbox } from '@phoenixui/web-components';
 
 const template = html<WindowsSettings>`
-  <mica-material></mica-material>
+  <mica-material
+    top="${(x) => x.ws.getWindowById(x.id)?.yPos}"
+    left="${(x) => x.ws.getWindowById(x.id)?.xPos}"
+  ></mica-material>
   <div id="content">
     <div id="nav">
       <h1>Settings</h1>
@@ -182,6 +185,7 @@ const styles = css`
     font-weight: ${typographyStyles.subtitle2.fontWeight};
     line-height: ${typographyStyles.subtitle2.lineHeight};
     margin: 0;
+    user-select: none;
   }
 
   #close:hover {

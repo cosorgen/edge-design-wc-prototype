@@ -1,4 +1,11 @@
-import { FASTElement, customElement, html, css } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  html,
+  css,
+  attr,
+  nullableNumberConverter,
+} from '@microsoft/fast-element';
 import { desktopBackground } from '../designSystem.js';
 import {
   tabActiveBackgroundBlur,
@@ -78,11 +85,36 @@ const styles = css`
 
 @customElement({ name: 'mica-material', template, styles })
 export class MicaMaterial extends FASTElement {
-  private resizeBackgroundImage(): void {
+  @attr({ converter: nullableNumberConverter }) top = 0;
+  @attr({ converter: nullableNumberConverter }) left = 0;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+
+    // Set event listener for window resize
+    window.addEventListener('resize', this.resizeBackgroundImage);
+
+    window.requestAnimationFrame(() => {
+      // Set initial background image position
+      const imageElement = this.shadowRoot?.getElementById('image');
+      if (imageElement) {
+        const { top, left } = imageElement.getBoundingClientRect();
+        this.top = top;
+        this.left = left;
+        this.resizeBackgroundImage();
+      }
+    }); // needed for bounding client rect
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this.resizeBackgroundImage);
+  }
+
+  resizeBackgroundImage = () => {
     const imageElement = this.shadowRoot?.getElementById('image');
     if (imageElement) {
       const { innerWidth: width, innerHeight: height } = window;
-      const { top, left } = imageElement.getBoundingClientRect();
       const aspectRatio = width / height;
       let newWidth = width;
       let newHeight = height;
@@ -94,19 +126,19 @@ export class MicaMaterial extends FASTElement {
         newWidth = height * imageAspectRatio;
       }
       imageElement.style.backgroundSize = `${newWidth}px ${newHeight}px`;
-      imageElement.style.backgroundPosition = `${(width - newWidth) / 2 - left}px ${(height - newHeight) / 2 - top}px`;
+      imageElement.style.backgroundPosition = `${(width - newWidth) / 2 - this.left}px ${(height - newHeight) / 2 - this.top}px`;
+    }
+  };
+
+  topChanged() {
+    if (this.$fastController.isConnected) {
+      this.resizeBackgroundImage();
     }
   }
 
-  connectedCallback(): void {
-    super.connectedCallback();
-    this.resizeBackgroundImage();
-    window.requestAnimationFrame(() => this.resizeBackgroundImage()); // needed for bounding client rect
-    window.addEventListener('resize', this.resizeBackgroundImage.bind(this));
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    window.removeEventListener('resize', this.resizeBackgroundImage.bind(this));
+  leftChanged() {
+    if (this.$fastController.isConnected) {
+      this.resizeBackgroundImage();
+    }
   }
 }
