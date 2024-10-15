@@ -98,7 +98,9 @@ export class TabService {
           title: tab.active ? metadata.title : tab.title,
           favicon: tab.active ? metadata.favicon : tab.favicon,
           loading: false,
-          actionIds: tab.active ? this.getActionsForURL(validUrl) : undefined,
+          actionIds: tab.active
+            ? this.getActionsForURL(validUrl)
+            : tab.actionIds,
         }));
       });
 
