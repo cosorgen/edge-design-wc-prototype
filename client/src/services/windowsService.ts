@@ -1,4 +1,5 @@
 import { observable } from '@microsoft/fast-element';
+import installedApps from '../windows/installedApps.js';
 
 export type OSTheme = 'light' | 'dark';
 export type OSTransparency = 'reduced' | 'normal';
@@ -86,11 +87,11 @@ export default class WindowsService {
   }
 
   openWindow(appName: string) {
+    const app = installedApps.find((a) => a.name === appName);
     const id = crypto.randomUUID();
-
-    const width = Math.min(window.innerWidth - 48, 1920); // 48px for padding
-    let height = width * 0.75; // 4:3 aspect ratio
-    height = Math.min(height, window.innerHeight - 96); // 48px for taskbar + padding
+    const width = app?.width || Math.min(window.innerWidth - 48, 1920); // 48px for padding
+    let height = app?.height || width * 0.75; // 4:3 aspect ratio
+    height = Math.min(height, window.innerHeight - 48 - 48); // 48px for taskbar
 
     this.windows = [
       ...this.windows,
@@ -99,16 +100,16 @@ export default class WindowsService {
         appName,
         height,
         maximized: false,
-        minHeight: 200,
+        minHeight: app?.minHeight || 300,
         minimized: false,
-        minWidth: 300,
+        minWidth: app?.minWidth || 300,
         width,
-        xPos: window.innerWidth - width - 24 + 24 * this.windows.length,
+        xPos: (window.innerWidth - width) / 2 + 24 * this.windows.length,
         yPos: (window.innerHeight - 48 - height) / 2 + 24 * this.windows.length,
-        zIndex: this.windows.length + 1,
+        zIndex: 1 + this.windows.length,
       },
     ];
-    this.activeWindowId = id;
+    this.activateWindow(id);
 
     return id;
   }

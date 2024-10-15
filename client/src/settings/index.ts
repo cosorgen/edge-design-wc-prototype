@@ -201,6 +201,7 @@ const styles = css`
   #grabber {
     flex: 1;
     height: 40px;
+    user-select: none;
   }
 
   #main {

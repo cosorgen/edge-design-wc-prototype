@@ -156,10 +156,15 @@ export class MicrosoftEdge extends FASTElement {
     // Set up theme and subscribe to changes
     this.setTheme();
     Observable.getNotifier(this.ws).subscribe(this);
+    Observable.getNotifier(this.ss).subscribe(this);
   }
 
   handleChange(source: unknown, propertyName: string) {
-    if (propertyName === 'theme' || propertyName === 'transparency') {
+    if (
+      propertyName === 'theme' ||
+      propertyName === 'transparency' ||
+      propertyName === 'frameSpacing'
+    ) {
       this.setTheme();
     }
   }

@@ -5,6 +5,7 @@ import {
   css,
   repeat,
   Observable,
+  ViewTemplate,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -21,6 +22,13 @@ import './views/task-bar.js';
 import './controls/taskbar-button.js';
 import './controls/mica-material.js';
 import './controls/app-window.js';
+import '../edge/index.js';
+import '../settings/index.js';
+
+const appTemplates: Record<string, ViewTemplate> = {
+  'Microsoft Edge': html`<microsoft-edge></microsoft-edge>`,
+  Settings: html`<windows-settings></windows-settings>`,
+};
 
 const styles = css`
   :host {
@@ -68,9 +76,7 @@ const template = html<WindowsShell>`
           c.parent.handleWindowMove(c.event as CustomEvent)}"
         @activate="${(x, c) => c.parent.ws.activateWindow(x.id)}"
       >
-        ${(x) =>
-          installedApps.filter((app) => app.name === x.appName)[0].element ||
-          ''}
+        ${(x) => appTemplates[x.appName] || ''}
       </app-window>
     `,
     { positioning: true },
@@ -87,7 +93,9 @@ const template = html<WindowsShell>`
               (win) => win.id === c.parent.ws.activeWindowId,
             )?.appName === x.name}"
           @click="${(x, c) =>
-            x.element ? c.parent.handleTaskbarButtonClick(x.name) : ''}"
+            appTemplates[x.name]
+              ? c.parent.handleTaskbarButtonClick(x.name)
+              : ''}"
         >
           <img
             src="${(x, c) =>
@@ -129,9 +137,11 @@ export class WindowsShell extends FASTElement {
   handleTaskbarButtonClick(appName: string) {
     // find app windows
     const windows = this.ws.windows.filter((w) => w.appName === appName);
+    console.log('windows', windows);
 
     // if no windows are open, open it
     if (windows.length === 0) {
+      console.log('open window', appName);
       this.ws.openWindow(appName);
       return;
     }
