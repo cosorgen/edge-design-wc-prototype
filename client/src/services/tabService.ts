@@ -118,7 +118,8 @@ export class TabService {
     const overflow = ['limit-cookies', 'read-aloud', 'install', 'share'];
     if (
       url.startsWith(this.shoppingTriggerURL) ||
-      url.replace('www.', '').startsWith(this.shoppingTriggerURL)
+      url.replace('www.', '').startsWith(this.shoppingTriggerURL) ||
+      url.startsWith(this.shoppingTriggerURL.replace('www.', ''))
     ) {
       overflow.unshift('favorite');
       top = 'shopping';
