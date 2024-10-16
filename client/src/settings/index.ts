@@ -349,7 +349,7 @@ export class WindowsSettings extends FASTElement {
       this.shadowRoot?.querySelector('#shopping-trigger') as HTMLInputElement
     ).value;
     if (newTrigger && newTrigger !== '') {
-      this.ts.shoppingTriggerURL = newTrigger;
+      this.ts.updateShoppingTriggerURL(newTrigger);
     }
   }
 }

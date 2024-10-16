@@ -15,9 +15,10 @@ export type Tab = {
 
 export class TabService {
   @observable private tabs_: Tab[] = [];
-  @observable shoppingTriggerURL = 'https://www.nike.com/t/';
+  @observable shoppingTriggerURL = 'https://www.nike.com';
 
   constructor() {
+    this.getSettingsFromURL();
     this.addTab();
   }
 
@@ -115,10 +116,36 @@ export class TabService {
   getActionsForURL(url: string) {
     let top = 'favorite';
     const overflow = ['limit-cookies', 'read-aloud', 'install', 'share'];
-    if (url.startsWith(this.shoppingTriggerURL)) {
+    if (
+      url.startsWith(this.shoppingTriggerURL) ||
+      url.replace('www.', '').startsWith(this.shoppingTriggerURL)
+    ) {
       overflow.unshift('favorite');
       top = 'shopping';
     }
     return { top, overflow };
+  }
+
+  updateShoppingTriggerURL(url: string) {
+    this.shoppingTriggerURL = url;
+    this.setSettingsInURL();
+  }
+
+  setSettingsInURL() {
+    // Set state in url
+    const url = new URL(window.location.href);
+    url.searchParams.set(
+      'shoppingTriggerURL',
+      encodeURIComponent(this.shoppingTriggerURL),
+    );
+    window.history.pushState({}, '', url.toString());
+  }
+
+  getSettingsFromURL() {
+    // Get state from url
+    const url = new URL(window.location.href);
+    this.shoppingTriggerURL = decodeURIComponent(
+      url.searchParams.get('shoppingTriggerURL') || this.shoppingTriggerURL,
+    );
   }
 }
