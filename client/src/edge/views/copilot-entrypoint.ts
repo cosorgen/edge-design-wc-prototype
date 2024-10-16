@@ -14,6 +14,7 @@ import {
   shadow16,
   strokeWidthThin,
   curveEasyEaseMax,
+  colorLayerBackgroundDialog,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/copilot-composer.js';
@@ -25,13 +26,16 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
   <div id="hint-target"></div>
   <div popover="manual">
-    <copilot-composer>
+    <copilot-composer
+      @close="${(x) => x.toggleActive()}"
+      @submit="${(x) => x.openSidebar()}"
+    >
       <phx-button
         appearance="subtle"
         size="large"
         icon-only
-        @click="${(x) => x.deactivate(true)}"
         slot="start"
+        @click="${(x) => x.openSidebar()}"
       >
         <img src="img/edge/copilot-icon.svg" />
       </phx-button>
@@ -49,67 +53,102 @@ const styles = css`
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-block-start: calc(0px - ${spacingFrame}); /* Take no space  */
+    margin-block: calc(0px - ${spacingFrame} / 2); /* Take no space  */
+
+    --bottom-of-frame: calc(0px - ${spacingFrame} / 2);
+    anchor-name: --composer-anchor;
   }
 
   #hint-target {
     position: absolute;
-    bottom: calc(0px - ${spacingFrame});
+    bottom: var(--bottom-of-frame);
     width: 256px;
-    height: 56px;
+    height: 48px;
     cursor: pointer;
+  }
+
+  :host([hidden]) #hint-target {
+    display: none;
   }
 
   #grabber {
     position: absolute;
-    width: 128px;
     height: 4px;
-    top: calc((${spacingFrame} - 4px) / 2);
     border-radius: ${borderRadiusCircular};
     background-color: ${colorScrollbarForeground};
 
-    transition: all ${durationSlow} ${curveEasyEaseMax};
-  }
-
-  #hint-composer {
-    position: absolute;
-    bottom: calc(-64px - ${spacingFrame});
-    width: 64px;
-    height: 64px;
-    border-radius: ${borderRadiusCircular};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border: ${strokeWidthThin} solid rgba(255, 255, 255, 0.1);
-    box-shadow: ${shadow16};
-
+    width: 128px;
+    bottom: -2px; /* Center the grabber */
+    opacity: 1;
     transition: all ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #grabber {
     opacity: 0.4;
     width: 64px;
-    top: -16px;
+    bottom: calc(var(--bottom-of-frame) + 16px - 2px);
+  }
+
+  :host([active]) #grabber {
+    opacity: 0;
+    bottom: calc(var(--bottom-of-frame) + 66px - 2px);
+  }
+
+  :host([hidden]) #grabber {
+    bottom: calc(var(--bottom-of-frame) - 4px);
+  }
+
+  #hint-composer {
+    position: absolute;
+    height: 64px;
+    border-radius: ${borderRadiusCircular};
+    background: ${acrylicBackgroundLuminosity};
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(${acrylicBackgroundBlur});
+    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
+    box-shadow: ${shadow16};
+
+    width: 64px;
+    bottom: calc(var(--bottom-of-frame) - 32px);
+    opacity: 0;
+    transition: all ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #hint-composer {
     width: 160px;
-    bottom: calc(-32px - ${spacingFrame});
+    opacity: 1;
   }
 
-  copilot-composer {
-    position: absolute;
-
-    transition:
-      transform ${durationSlow} ${curveEasyEaseMax},
-      opacity ${durationSlow} ${curveEasyEaseMax};
-    transform: translateY(8px);
+  :host([active]) #hint-composer {
+    width: 349px;
+    bottom: 0px;
     opacity: 0;
   }
 
-  :host([active]) copilot-composer {
-    transform: translateY(-66px);
+  [popover] {
+    position-area: block-start center;
+    position-anchor: --composer-anchor;
+    border: none;
+    overflow: visible;
+    margin: 0;
+    padding: 0;
+    background: none;
+
+    opacity: 0;
+    transform: translateY(66px);
+    transition:
+      all ${durationSlow} ${curveEasyEaseMax} allow-discrete,
+      display ${durationSlow} ${curveEasyEaseMax} 50ms allow-discrete;
+  }
+
+  [popover]:popover-open {
     opacity: 1;
+    transform: translateY(0);
+
+    @starting-style {
+      opacity: 0;
+      transform: translateY(66px);
+    }
   }
 `;
 
@@ -172,28 +211,56 @@ export class CopilotEntrypoint extends FASTElement {
 
   removeEventListeners(): void {
     this._hintTargetElement?.removeEventListener(
-      'pointerdown',
+      'mouseover',
       this.handleMouseOverHintTarget,
     );
     this._hintTargetElement?.removeEventListener(
       'mouseout',
       this.handleMouseOverHintTarget,
     );
+    this._hintTargetElement?.removeEventListener(
+      'click',
+      this.handleClickHintTarget,
+    );
   }
 
   handleMouseOverHintTarget = (e: Event): void => {
-    console.log('handleMouseOverHintTarget');
-    if (e.type === 'mouseover') {
+    if (e.type === 'mouseover' && !this.hint) {
       this.hint = true;
-    } else {
+    } else if (this.hint) {
       this.hint = false;
     }
   };
 
   handleClickHintTarget = (): void => {
+    this.toggleActive();
+  };
+
+  openSidebar(): void {
+    this._popoverElement?.addEventListener(
+      'transitionend',
+      this.handleTransitionToSidebar,
+      { once: true },
+    );
+    this.toggleActive();
+  }
+
+  handleTransitionToSidebar = (e: TransitionEvent) => {
+    if (e.propertyName !== 'opacity') {
+      this._popoverElement?.addEventListener(
+        'transitionend',
+        this.handleTransitionToSidebar,
+        { once: true },
+      );
+      return;
+    }
+    this.ews.openSidepaneApp('Copilot');
+  };
+
+  toggleActive(): void {
     this.active = !this.active;
     this.setPopoverState();
-  };
+  }
 
   setPopoverState(): void {
     this.active

@@ -53,9 +53,10 @@ const template = html<MicrosoftEdge>`
         </div>
       </div>
       ${when(
-        (x) =>
-          !x.ss.showLegacyCopilot && x.ews.activeSidepaneAppId !== 'Copilot',
-        html`<copilot-entrypoint></copilot-entrypoint>`,
+        (x) => !x.ss.showLegacyCopilot,
+        html`<copilot-entrypoint
+          ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+        ></copilot-entrypoint>`,
       )}
     </div>
     ${when(

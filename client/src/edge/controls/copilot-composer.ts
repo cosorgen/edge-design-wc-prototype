@@ -98,8 +98,4 @@ export class CopilotComposer extends FASTElement {
 
     return true;
   }
-
-  handleHome() {
-    this.$emit('home');
-  }
 }
