@@ -15,12 +15,10 @@ export type Tab = {
 
 export class TabService {
   @observable private tabs_: Tab[] = [];
+  @observable shoppingTriggerURL = 'https://www.nike.com/t/';
 
   constructor() {
     this.addTab();
-    this.navigate(
-      'https://www.nike.com/t/sportswear-essential-womens-quilted-anorak-jacket-wgWFp0/FZ7364-338',
-    );
   }
 
   get tabs() {
@@ -117,7 +115,7 @@ export class TabService {
   getActionsForURL(url: string) {
     let top = 'favorite';
     const overflow = ['limit-cookies', 'read-aloud', 'install', 'share'];
-    if (url.startsWith('https://www.nike.com/t/')) {
+    if (url.startsWith(this.shoppingTriggerURL)) {
       overflow.unshift('favorite');
       top = 'shopping';
     }

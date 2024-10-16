@@ -238,7 +238,6 @@ export class Toolbar extends FASTElement {
 
   handleOmniboxActionClick(id: string, e: Event) {
     e.stopPropagation();
-    console.log(id, 'clicked');
     return false;
   }
 }

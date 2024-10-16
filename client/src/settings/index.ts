@@ -32,6 +32,7 @@ import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { Checkbox } from '@phoenixui/web-components';
+import { TabService } from '#servicestabService.js';
 
 const template = html<WindowsSettings>`
   <mica-material
@@ -177,6 +178,17 @@ const template = html<WindowsSettings>`
         >
         </phx-text-input>
       </div>
+      <div class="entry">
+        <label for="shopping-trigger">Shopping trigger URL</label>
+        <phx-text-input
+          id="shopping-trigger"
+          type="text"
+          value="${(x) => x.ts.shoppingTriggerURL}"
+          slot="input"
+          @blur="${(x) => x.updateShoppingTrigger()}"
+        >
+        </phx-text-input>
+      </div>
     </div>
   </div>
 `;
@@ -232,7 +244,7 @@ const styles = css`
     gap: ${spacingHorizontalL};
 
     label {
-      min-width: 128px;
+      min-width: 160px;
     }
   }
 
@@ -266,6 +278,7 @@ const styles = css`
 export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
+  @inject(TabService) ts!: TabService;
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
@@ -329,5 +342,14 @@ export class WindowsSettings extends FASTElement {
       ((this.shadowRoot?.querySelector('#transparency') as HTMLSelectElement)
         ?.value as 'normal' | 'reduced') || 'normal',
     );
+  }
+
+  updateShoppingTrigger() {
+    const newTrigger = (
+      this.shadowRoot?.querySelector('#shopping-trigger') as HTMLInputElement
+    ).value;
+    if (newTrigger && newTrigger !== '') {
+      this.ts.shoppingTriggerURL = newTrigger;
+    }
   }
 }

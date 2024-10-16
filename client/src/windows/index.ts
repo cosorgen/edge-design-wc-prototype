@@ -137,11 +137,9 @@ export class WindowsShell extends FASTElement {
   handleTaskbarButtonClick(appName: string) {
     // find app windows
     const windows = this.ws.windows.filter((w) => w.appName === appName);
-    console.log('windows', windows);
 
     // if no windows are open, open it
     if (windows.length === 0) {
-      console.log('open window', appName);
       this.ws.openWindow(appName);
       return;
     }
