@@ -10,14 +10,11 @@ import {
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
   colorNeutralForeground1,
-  fontFamilyBase,
-  fontSizeBase300,
-  fontWeightRegular,
-  lineHeightBase300,
   colorLayerBackgroundDialog,
   borderRadiusLarge,
   shadow2,
   colorLayerBackgroundApp,
+  typographyStyles,
 } from '@phoenixui/themes';
 import {
   edgeLightTheme,
@@ -80,11 +77,10 @@ const styles = css`
     background-color: ${colorLayerBackgroundApp};
     padding: ${spacingFrame};
 
-    /* body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase300};
+    font-family: ${typographyStyles.body1.fontFamily};
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
   }
 
   #activeTab {
@@ -94,6 +90,19 @@ const styles = css`
     overflow: hidden;
     padding: 0 2px 2px 2px; /* for shadow */
     margin: 0 -2px -2px -2px; /* for shadow */
+  }
+
+  #activeTab[hint] {
+    clip-path: polygon(
+      0% 0%,
+      100% 0%,
+      100% 100%,
+      calc(50% + 108px) 100%,
+      calc(50% + 108px) calc(100% - 8px),
+      calc(50% - 108px) calc(100% - 8px),
+      calc(50% - 108px) 100%,
+      0% 100%
+    );
   }
 
   #content {
@@ -136,6 +145,8 @@ export class MicrosoftEdge extends FASTElement {
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
   @observable ts!: TabService;
   @observable ews!: EdgeWindowService;
+  _activeTabElement: HTMLElement | null = null;
+  _copilotHandleElement: HTMLElement | null = null;
 
   constructor() {
     super();
@@ -149,15 +160,65 @@ export class MicrosoftEdge extends FASTElement {
 
   connectedCallback(): void {
     super.connectedCallback();
-
-    // Set id for edge window
     this.ews.id = this.id;
-
-    // Set up theme and subscribe to changes
     this.setTheme();
+    this.setElements();
+    this.setEventListeners();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListeners();
+    this.removeElements();
+    Observable.getNotifier(this.ws).unsubscribe(this);
+  }
+
+  setElements() {
+    this._copilotHandleElement =
+      this.shadowRoot?.querySelector('copilot-entrypoint') || null;
+    this._activeTabElement =
+      this.shadowRoot?.getElementById('activeTab') || null;
+  }
+
+  removeElements() {
+    this._copilotHandleElement = null;
+    this._activeTabElement = null;
+  }
+
+  setEventListeners() {
+    // Subscribe to changes in theme, transparency, and frame spacing
     Observable.getNotifier(this.ws).subscribe(this);
     Observable.getNotifier(this.ss).subscribe(this);
+
+    // Listen for mouse move to show copilot hint
+    window.addEventListener('mousemove', this.handleMouseMove);
   }
+
+  removeEventListeners() {
+    Observable.getNotifier(this.ws).unsubscribe(this);
+    Observable.getNotifier(this.ss).unsubscribe(this);
+    window.removeEventListener('mousemove', this.handleMouseMove);
+  }
+
+  handleMouseMove = (e: MouseEvent) => {
+    if (this._copilotHandleElement && this._activeTabElement) {
+      const distance = 25;
+      const rect = this._copilotHandleElement.getBoundingClientRect();
+      const copilotHint = this._activeTabElement.hasAttribute('hint');
+      if (
+        e.clientX > rect.left - distance &&
+        e.clientX < rect.right + distance &&
+        e.clientY > rect.top - distance &&
+        e.clientY < rect.bottom + distance
+      ) {
+        this._activeTabElement.setAttribute('hint', '');
+        this._copilotHandleElement.setAttribute('hint', '');
+      } else if (copilotHint) {
+        this._activeTabElement.removeAttribute('hint');
+        this._copilotHandleElement.removeAttribute('hint');
+      }
+    }
+  };
 
   handleChange(source: unknown, propertyName: string) {
     if (
@@ -167,11 +228,6 @@ export class MicrosoftEdge extends FASTElement {
     ) {
       this.setTheme();
     }
-  }
-
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    Observable.getNotifier(this.ws).unsubscribe(this);
   }
 
   setTheme() {
