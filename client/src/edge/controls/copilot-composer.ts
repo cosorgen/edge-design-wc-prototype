@@ -98,4 +98,9 @@ export class CopilotComposer extends FASTElement {
 
     return true;
   }
+
+  focus() {
+    const input = this.shadowRoot?.querySelector('input');
+    if (input) input.focus();
+  }
 }

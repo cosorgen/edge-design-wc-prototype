@@ -165,6 +165,7 @@ export class CopilotEntrypoint extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   _hintTargetElement: HTMLElement | null = null;
   _popoverElement: HTMLElement | null = null;
+  _composerElement: HTMLElement | null = null;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -190,10 +191,16 @@ export class CopilotEntrypoint extends FASTElement {
     this._popoverElement = this.shadowRoot?.querySelector(
       '[popover]',
     ) as HTMLElement;
+
+    this._composerElement = this.shadowRoot?.querySelector(
+      'copilot-composer',
+    ) as HTMLElement;
   }
 
   unsetElements(): void {
     this._hintTargetElement = null;
+    this._popoverElement = null;
+    this._composerElement = null;
   }
 
   addEventListeners(): void {
@@ -262,6 +269,7 @@ export class CopilotEntrypoint extends FASTElement {
   toggleActive(): void {
     this.active = !this.active;
     this.setPopoverState();
+    if (this.active) this._composerElement?.focus();
   }
 
   setPopoverState(): void {
