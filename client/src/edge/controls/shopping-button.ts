@@ -6,7 +6,7 @@ import {
   colorBrandBackground2Pressed,
   colorNeutralForeground1,
   curveDecelerateMax,
-  durationFast,
+  durationSlow,
   spacingHorizontalS,
   spacingHorizontalXS,
   spacingVerticalXXS,
@@ -34,23 +34,18 @@ const styles = css`
     align-items: center;
     justify-content: center;
     gap: ${spacingHorizontalXS};
-    padding: ${spacingVerticalXXS} ${spacingHorizontalS};
 
     /* Need for collapse */
     min-width: 24px;
     overflow: hidden;
 
     /* Animation on load */
-    width: 40px;
-    transform: translateX(100%);
-    transition:
-      width ${durationFast} ${curveDecelerateMax} 0.25s,
-      transform ${durationFast} ${curveDecelerateMax} 0.25s;
+    padding: ${spacingVerticalXXS};
+    transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
   :host([expanded]) button {
-    transform: translateX(0px);
-    width: 100%;
+    padding: ${spacingVerticalXXS} ${spacingHorizontalS};
   }
 
   button:hover {
@@ -79,6 +74,14 @@ const styles = css`
     white-space: nowrap;
     overflow: hidden;
     min-width: 0px;
+
+    /* Animation on load */
+    width: 0px;
+    transition: all ${durationSlow} ${curveDecelerateMax};
+  }
+
+  :host([expanded]) div {
+    width: var(--max-label-width);
   }
 `;
 
@@ -90,8 +93,14 @@ const styles = css`
 export class ShoppingButton extends FASTElement {
   connectedCallback() {
     super.connectedCallback();
-    requestAnimationFrame(() => {
-      this.setAttribute('expanded', 'true');
-    }); // wait for render
+    setTimeout(() => {
+      this.setAttribute(
+        'style',
+        '--max-label-width: ' +
+          this.shadowRoot?.querySelector('div')?.scrollWidth +
+          'px',
+      );
+      this.setAttribute('expanded', '');
+    }, 1000); // delay for animation
   }
 }
