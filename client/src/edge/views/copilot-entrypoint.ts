@@ -4,16 +4,11 @@ import {
   html,
   css,
   attr,
-  when,
-  observable,
 } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
   colorScrollbarForeground,
-  colorScrollbarForegroundHover,
   durationSlow,
-  spacingVerticalXS,
-  spacingVerticalXXS,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/copilot-composer.js';
@@ -23,66 +18,55 @@ import { spacingFrame } from '../designSystem.js';
 
 const curveEasyEaseMax = 'cubic-bezier(0.6, 0, 0.3, 1)';
 
-const template = html<CopilotEntrypoint>` <div
-    part="grabber"
-    @click="${(x) => x.activate()}"
-    }
-  ></div>
-  <div id="click-catcher" @click="${(x) => x.deactivate()}"></div>
-  ${when(
-    (x) => x.renderComposer,
-    html` <copilot-composer>
-      <phx-button
-        appearance="subtle"
-        size="large"
-        icon-only
-        @click="${(x) => x.deactivate(true)}"
-        slot="start"
-      >
-        <img src="img/edge/copilot-icon.svg" />
-      </phx-button>
-      <phx-button appearance="subtle" size="large" icon-only slot="end">
-        <svg>
-          <use href="img/edge/icons.svg#cast-20-regular" />
-        </svg>
-      </phx-button>
-    </copilot-composer>`,
-  )}`;
+// const template = html<CopilotEntrypoint>`<copilot-composer>
+//   <phx-button
+//     appearance="subtle"
+//     size="large"
+//     icon-only
+//     @click="${(x) => x.deactivate(true)}"
+//     slot="start"
+//   >
+//     <img src="img/edge/copilot-icon.svg" />
+//   </phx-button>
+//   <phx-button appearance="subtle" size="large" icon-only slot="end">
+//     <svg>
+//       <use href="img/edge/icons.svg#cast-20-regular" />
+//     </svg>
+//   </phx-button>
+// </copilot-composer>`;
+
+const template = html<CopilotEntrypoint>` <div id="grabber"></div>
+  <div id="hint-target"></div>`;
 
 const styles = css`
   :host {
     position: relative;
     width: 100%;
-    height: ${spacingVerticalXS};
-    margin-block: calc(0px - (${spacingFrame} / 2));
     display: flex;
     justify-content: center;
+    margin-block-start: calc(0px - ${spacingFrame}); /* Take no space  */
   }
 
-  [part='grabber'] {
+  #hint-target {
     position: absolute;
-    width: 100%;
-    max-width: 160px;
-    height: ${spacingVerticalXS};
-    background-color: ${colorScrollbarForeground};
-    border-radius: ${borderRadiusCircular};
+    bottom: calc(0px - ${spacingFrame});
+    width: 256px;
+    height: 56px;
     cursor: pointer;
-
-    transition:
-      transform ${durationSlow} ${curveEasyEaseMax},
-      opacity ${durationSlow} ${curveEasyEaseMax};
   }
 
-  [part='grabber']:hover {
-    background-color: ${colorScrollbarForegroundHover};
-    height: calc(${spacingVerticalXS} + ${spacingVerticalXXS});
-    margin-block-start: calc(0px - ${spacingVerticalXXS} / 2);
+  #grabber {
+    position: absolute;
+    width: 128px;
+    height: 4px;
+    top: calc((${spacingFrame} - 4px) / 2);
+    border-radius: ${borderRadiusCircular};
+    background-color: ${colorScrollbarForeground};
   }
 
-  :host([active]) [part='grabber'] {
-    background-color: ${colorScrollbarForegroundHover};
-    transform: translateY(-68px);
-    opacity: 0;
+  :host([hint]) #grabber {
+    opacity: 0.4;
+    width: 64px;
   }
 
   copilot-composer {
@@ -99,17 +83,6 @@ const styles = css`
     transform: translateY(-66px);
     opacity: 1;
   }
-
-  #click-catcher {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: transparent;
-  }
-
-  :host([active]) #click-catcher {
-    display: block;
-  }
 `;
 
 @customElement({
@@ -119,62 +92,60 @@ const styles = css`
 })
 export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
-  @observable renderComposer = false;
+  _hintTargetElement: HTMLElement | null = null;
 
-  connectedCallback() {
+  connectedCallback(): void {
     super.connectedCallback();
+    this.setElements();
     this.addEventListeners();
   }
 
-  addEventListeners() {
-    this.addEventListener('close', () => {
-      this.deactivate();
-    });
-
-    this.addEventListener('submit', () => {
-      this.deactivate(true);
-    });
-
-    this.addEventListener('home', () => {
-      this.deactivate(true);
-    });
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.unsetElements();
+    this.removeEventListeners();
   }
 
-  activate() {
-    this.renderComposer = true;
-
-    // Wait for the element to be rendered before focusing
-    const interval = setInterval(() => {
-      const composer = this.shadowRoot?.querySelector('copilot-composer');
-      if (composer) {
-        clearInterval(interval);
-        this.active = true;
-        composer.addEventListener(
-          'transitionend',
-          () => {
-            composer.querySelector('input')?.focus();
-          },
-          { once: true },
-        );
-      }
-    }, 10);
+  setElements(): void {
+    this._hintTargetElement = this.shadowRoot?.querySelector(
+      '#hint-target',
+    ) as HTMLElement;
   }
 
-  deactivate(openSidepane = false) {
-    this.active = false;
-    const composer = this.shadowRoot?.querySelector('copilot-composer');
-    if (!composer) return;
+  unsetElements(): void {
+    this._hintTargetElement = null;
+  }
 
-    composer.addEventListener(
-      'transitionend',
-      () => {
-        this.renderComposer = false;
-        openSidepane
-          ? this.ews.openSidepaneApp('Copilot')
-          : this.ews.closeSidepaneApp();
-      },
-      { once: true },
+  addEventListeners(): void {
+    this._hintTargetElement?.addEventListener(
+      'mouseover',
+      this.handleMouseOverHintTarget,
+    );
+    this._hintTargetElement?.addEventListener(
+      'mouseout',
+      this.handleMouseOverHintTarget,
     );
   }
+
+  removeEventListeners(): void {
+    this._hintTargetElement?.removeEventListener(
+      'pointerdown',
+      this.handleMouseOverHintTarget,
+    );
+    this._hintTargetElement?.removeEventListener(
+      'mouseout',
+      this.handleMouseOverHintTarget,
+    );
+  }
+
+  handleMouseOverHintTarget = (e: Event): void => {
+    console.log('handleMouseOverHintTarget');
+    if (e.type === 'mouseover') {
+      this.hint = true;
+    } else {
+      this.hint = false;
+    }
+  };
 }

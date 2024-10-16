@@ -92,19 +92,6 @@ const styles = css`
     margin: 0 -2px -2px -2px; /* for shadow */
   }
 
-  #activeTab[hint] {
-    clip-path: polygon(
-      0% 0%,
-      100% 0%,
-      100% 100%,
-      calc(50% + 108px) 100%,
-      calc(50% + 108px) calc(100% - 8px),
-      calc(50% - 108px) calc(100% - 8px),
-      calc(50% - 108px) 100%,
-      0% 100%
-    );
-  }
-
   #content {
     box-sizing: border-box;
     position: relative;
@@ -189,36 +176,12 @@ export class MicrosoftEdge extends FASTElement {
     // Subscribe to changes in theme, transparency, and frame spacing
     Observable.getNotifier(this.ws).subscribe(this);
     Observable.getNotifier(this.ss).subscribe(this);
-
-    // Listen for mouse move to show copilot hint
-    window.addEventListener('mousemove', this.handleMouseMove);
   }
 
   removeEventListeners() {
     Observable.getNotifier(this.ws).unsubscribe(this);
     Observable.getNotifier(this.ss).unsubscribe(this);
-    window.removeEventListener('mousemove', this.handleMouseMove);
   }
-
-  handleMouseMove = (e: MouseEvent) => {
-    if (this._copilotHandleElement && this._activeTabElement) {
-      const distance = 25;
-      const rect = this._copilotHandleElement.getBoundingClientRect();
-      const copilotHint = this._activeTabElement.hasAttribute('hint');
-      if (
-        e.clientX > rect.left - distance &&
-        e.clientX < rect.right + distance &&
-        e.clientY > rect.top - distance &&
-        e.clientY < rect.bottom + distance
-      ) {
-        this._activeTabElement.setAttribute('hint', '');
-        this._copilotHandleElement.setAttribute('hint', '');
-      } else if (copilotHint) {
-        this._activeTabElement.removeAttribute('hint');
-        this._copilotHandleElement.removeAttribute('hint');
-      }
-    }
-  };
 
   handleChange(source: unknown, propertyName: string) {
     if (
