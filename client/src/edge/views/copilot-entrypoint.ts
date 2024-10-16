@@ -21,6 +21,7 @@ import '../controls/copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { spacingFrame } from '../designSystem.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
@@ -53,7 +54,7 @@ const styles = css`
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-block: calc(0px - ${spacingFrame} / 2); /* Take no space  */
+    margin-block: ${(x) => x.calcMarginForMinHeight()}; /* Take no space  */
 
     --bottom-of-frame: calc(0px - ${spacingFrame} / 2);
     anchor-name: --composer-anchor;
@@ -159,6 +160,7 @@ const styles = css`
 })
 export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
   _hintTargetElement: HTMLElement | null = null;
@@ -266,5 +268,13 @@ export class CopilotEntrypoint extends FASTElement {
     this.active
       ? this._popoverElement?.showPopover()
       : this._popoverElement?.hidePopover();
+  }
+
+  calcMarginForMinHeight(): string {
+    const frameSpacing = parseInt(this.ess.frameSpacing);
+    const minHeight = 6;
+    let margin = -1 * (frameSpacing / 2);
+    if (frameSpacing < minHeight) margin += (minHeight - frameSpacing) / 2;
+    return `${margin}px`;
   }
 }
