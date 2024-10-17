@@ -196,7 +196,7 @@ const template = html<MoreMenu>`
       ${when(
         (x) => x.type === 'sub-menu',
         html` <menu-item end-slot>
-          <span class="text-only">${(x) => x.title}</span>
+          ${(x, c) => c.parent.formatTitle(x.title)}
           <svg slot="end">
             <use href="img/edge/icons.svg#chevron-right-20-regular" />
           </svg>
@@ -409,18 +409,13 @@ export default class MoreMenu extends FASTElement {
   formatTitle(title?: string) {
     if (this.searchValue === '' || !title) return html`${title || ''}`;
 
-    // Wrap all matches of this.searchValue in a span with the class "bold"
-    const matches = title.match(new RegExp(this.searchValue, 'gi'));
-    if (!matches) return html`${title}`;
+    const formattedTitle = title.replaceAll(
+      new RegExp(this.searchValue, 'gi'),
+      (match) => `<span class="regular">${match}</span>`,
+    );
 
-    let formattedTitle = `<span class="bold">${title}</span>`;
-    for (const match of matches) {
-      formattedTitle = formattedTitle.replace(
-        match,
-        `<span class="regular">${match}</span>`,
-      );
-    }
-
-    return new ViewTemplate(formattedTitle);
+    return html`<span class="bold">
+      ${new ViewTemplate(formattedTitle)}
+    </span>`;
   }
 }
