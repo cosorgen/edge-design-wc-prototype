@@ -9,6 +9,7 @@ import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
   colorLayerBackgroundDialog,
+  colorNeutralForeground1,
   colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalS,
@@ -55,13 +56,13 @@ const styles = css`
     border: none;
     background: ${colorLayerBackgroundDialog};
     border-radius: 20px;
-    color: inherit;
     padding: ${spacingHorizontalXS};
     padding-inline-start: ${spacingHorizontalXL};
     box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
 
     font-size: 18px;
     line-height: 26px;
+    color: ${colorNeutralForeground1};
   }
 
   input:focus {

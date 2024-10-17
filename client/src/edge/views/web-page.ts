@@ -9,7 +9,6 @@ import {
   when,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { colorLayerBackgroundDialog } from '@phoenixui/themes';
 
 const template = html<WebPage>`
   ${when(
@@ -28,7 +27,7 @@ const styles = css`
   :host {
     flex: 1;
     display: none;
-    background: ${colorLayerBackgroundDialog};
+    background: white;
     overflow: hidden;
   }
 
