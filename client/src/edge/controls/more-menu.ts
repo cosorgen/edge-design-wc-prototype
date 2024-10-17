@@ -7,16 +7,25 @@ import {
   repeat,
   attr,
   when,
+  ViewTemplate,
 } from '@microsoft/fast-element';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
+  borderRadiusMedium,
+  colorBrandBackground2,
+  colorNeutralForeground1,
+  colorNeutralForeground2,
   colorNeutralForegroundHint,
+  colorSubtleBackgroundHover,
+  colorSubtleBackgroundPressed,
   shadow28,
+  spacingHorizontalSNudge,
   spacingHorizontalXS,
   spacingVerticalS,
   spacingVerticalXS,
+  typographyStyles,
 } from '@phoenixui/themes';
 import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
@@ -24,6 +33,7 @@ import './more-menu-zoom.js';
 import '@phoenixui/web-components/divider.js';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/text-input.js';
+import '@phoenixui/web-components/link.js';
 
 const defaultItems: MoreMenuEntry[] = [
   {
@@ -73,6 +83,7 @@ const defaultItems: MoreMenuEntry[] = [
     title: 'Favorites',
     type: 'action',
     shortcut: 'Ctrl+Shift+O',
+    keywords: ['bookmarks'],
   },
   {
     title: 'History',
@@ -105,6 +116,34 @@ const defaultItems: MoreMenuEntry[] = [
   {
     title: 'Settings',
     type: 'action',
+    keywords: [
+      'appearance',
+      'profiles',
+      'privacy',
+      'security',
+      'search',
+      'services',
+      'copilot',
+      'sidebar',
+      'start',
+      'home',
+      'tabs',
+      'downloads',
+      'cookies',
+      'permissions',
+      'share',
+      'copy',
+      'paste',
+      'safety',
+      'family',
+      'printers',
+      'system',
+      'update',
+      'reset',
+      'phone',
+      'accessibility',
+      'about',
+    ],
   },
   {
     title: 'Help and feedback',
@@ -123,12 +162,19 @@ const template = html<MoreMenu>`
   <phx-text-input
     appearance="filled-darker"
     placeholder="Search"
-    @change="${(x, c) => x.filterItems(c.event as KeyboardEvent)}"
-    @keyup="${(x, c) => x.filterItems(c.event as KeyboardEvent)}"
+    @keyup="${(x, c) => x.handleInputKeyUp(c.event as KeyboardEvent)}"
   >
     <svg slot="start">
       <use href="img/edge/icons.svg#search-20-regular" />
     </svg>
+    ${when(
+      (x) => x.searchValue !== '',
+      html` <button slot="end" @click="${(x) => x.clearSearch()}">
+        <svg>
+          <use href="img/edge/icons.svg#dismiss-16-regular" />
+        </svg>
+      </button>`,
+    )}
   </phx-text-input>
   <div id="menu-items">
     ${repeat(
@@ -143,8 +189,8 @@ const template = html<MoreMenu>`
           @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
           end-slot
         >
-          <span class="text-only">${(x) => x.title}</span>
-          <span class="text-only hint" slot="end">${(x) => x.shortcut}</span>
+          ${(x, c) => c.parent.formatTitle(x.title)}
+          <span class="hint" slot="end">${(x) => x.shortcut}</span>
         </menu-item>`,
       )}
       ${when(
@@ -159,7 +205,23 @@ const template = html<MoreMenu>`
       ${when(
         (x) => x.type === 'zoom',
         html` <more-menu-zoom></more-menu-zoom>`,
+      )}
+      ${when(
+        (x) => x.type === 'label',
+        html` <div class="label">${(x) => x.title}</div>`,
       )}`,
+    )}
+    ${when(
+      (x) => x.additionalSettings(),
+      html`<phx-divider></phx-divider>
+        <div class="label" id="additional">
+          Also ${(x) => x.additionalSettings()} results found in
+          <phx-link inline>Settings</phx-link>
+        </div> `,
+    )}
+    ${when(
+      (x) => x.searchValue === '',
+      html`<div class="label" id="managed">Managed by your organization</div>`,
     )}
   </div>
 `;
@@ -201,6 +263,67 @@ const styles = css`
   phx-divider {
     margin-block: ${spacingVerticalXS};
   }
+
+  .label {
+    padding: ${spacingHorizontalSNudge};
+    border-radius: ${borderRadiusMedium};
+
+    font-family: ${typographyStyles.body1.fontFamily};
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
+    color: ${colorNeutralForeground1};
+    user-select: none;
+  }
+
+  #managed {
+    background-color: ${colorBrandBackground2};
+    user-select: none;
+
+    display: none;
+  }
+
+  :host([managed]) #managed {
+    display: block;
+  }
+
+  #additional {
+    font-family: ${typographyStyles.caption1.fontFamily};
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+    color: ${colorNeutralForeground2};
+  }
+
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    border-radius: ${borderRadiusMedium};
+  }
+
+  button:hover {
+    background: ${colorSubtleBackgroundHover};
+  }
+
+  button:active {
+    background: ${colorSubtleBackgroundPressed};
+  }
+
+  .bold {
+    font-family: ${typographyStyles.body1Strong.fontFamily};
+    font-weight: ${typographyStyles.body1Strong.fontWeight};
+    line-height: ${typographyStyles.body1Strong.lineHeight};
+    font-size: ${typographyStyles.body1Strong.fontSize};
+  }
+
+  .regular {
+    font-family: ${typographyStyles.body1.fontFamily};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
+    font-size: ${typographyStyles.body1.fontSize};
+  }
 `;
 
 @customElement({
@@ -209,8 +332,9 @@ const styles = css`
   styles,
 })
 export default class MoreMenu extends FASTElement {
+  @attr({ mode: 'boolean' }) managed = false;
   @observable items: MoreMenuEntry[] = [...defaultItems];
-  @attr({ mode: 'boolean' }) managedByOrganization = false;
+  @observable searchValue = '';
   _inputElement: HTMLInputElement | null = null;
 
   connectedCallback() {
@@ -237,28 +361,66 @@ export default class MoreMenu extends FASTElement {
     this.$emit('moreaction', title);
   }
 
-  filterItems(e: KeyboardEvent) {
+  handleInputKeyUp(e: KeyboardEvent) {
     if (!this._inputElement) return;
 
+    this.searchValue = (e.target as HTMLInputElement).value || '';
+    this._inputElement.value = (e.target as HTMLInputElement).value || '';
+
     if (e.key === 'Escape') {
-      this._inputElement.value = '';
-      this.items = [...defaultItems];
-      this._inputElement.blur();
+      this.clearSearch();
       this.$emit('closemenu');
-      return;
     }
 
-    if (this._inputElement.value === '') {
-      this.items = [...defaultItems];
-      return;
-    }
+    this.filterItems();
+  }
 
+  clearSearch() {
+    this.searchValue = '';
+    this._inputElement!.value = '';
+    this.items = [...defaultItems];
+  }
+
+  filterItems() {
     this.items = defaultItems.filter(
       (item) =>
-        item.title &&
-        item.title
-          .toLowerCase()
-          .includes(this._inputElement!.value.toLowerCase()),
+        (item.title &&
+          item.title.toLowerCase().includes(this.searchValue.toLowerCase())) ||
+        (item.keywords &&
+          item.title !== 'Settings' &&
+          item.keywords.some((k) =>
+            k.includes(this.searchValue.toLowerCase()),
+          )),
     );
+
+    if (this.searchValue === '') this.items = [...defaultItems];
+    if (this.items.length === 0)
+      this.items = [{ title: 'No results', type: 'label' }];
+  }
+
+  additionalSettings() {
+    if (this.searchValue === '') return 0;
+    return defaultItems
+      .find((i) => i.title === 'Settings')
+      ?.keywords?.filter((k) => k.includes(this.searchValue.toLowerCase()))
+      .length;
+  }
+
+  formatTitle(title?: string) {
+    if (this.searchValue === '' || !title) return html`${title || ''}`;
+
+    // Wrap all matches of this.searchValue in a span with the class "bold"
+    const matches = title.match(new RegExp(this.searchValue, 'gi'));
+    if (!matches) return html`${title}`;
+
+    let formattedTitle = `<span class="bold">${title}</span>`;
+    for (const match of matches) {
+      formattedTitle = formattedTitle.replace(
+        match,
+        `<span class="regular">${match}</span>`,
+      );
+    }
+
+    return new ViewTemplate(formattedTitle);
   }
 }

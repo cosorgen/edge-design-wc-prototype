@@ -42,6 +42,7 @@ const template = html` <div
         </svg>
       </phx-toggle-button>
       <more-menu
+        managed
         @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
       ></more-menu>
     </flyout-menu>

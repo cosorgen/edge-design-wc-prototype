@@ -12,8 +12,9 @@ import {
 
 export type MoreMenuEntry = {
   title?: string;
-  type: 'action' | 'sub-menu' | 'divider' | 'zoom';
+  type: 'action' | 'sub-menu' | 'divider' | 'zoom' | 'label';
   shortcut?: string;
+  keywords?: string[];
 };
 
 const template = html<MenuItem>` <button
