@@ -25,8 +25,107 @@ import '@phoenixui/web-components/divider.js';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/text-input.js';
 
+const defaultItems: MoreMenuEntry[] = [
+  {
+    title: 'New tab',
+    type: 'action',
+    shortcut: 'Ctrl+T',
+  },
+  {
+    title: 'New window',
+    type: 'action',
+    shortcut: 'Ctrl+N',
+  },
+  {
+    title: 'New InPrivate window',
+    type: 'action',
+    shortcut: 'Ctrl+Shift+N',
+  },
+  {
+    title: 'Print',
+    type: 'action',
+    shortcut: 'Ctrl+P',
+  },
+  {
+    title: 'Screenshot',
+    type: 'action',
+    shortcut: 'Ctrl+Shift+S',
+  },
+  {
+    title: 'Find on page',
+    type: 'action',
+    shortcut: 'Ctrl+F',
+  },
+  {
+    title: 'More tools',
+    type: 'sub-menu',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    type: 'zoom',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    title: 'Favorites',
+    type: 'action',
+    shortcut: 'Ctrl+Shift+O',
+  },
+  {
+    title: 'History',
+    type: 'action',
+    shortcut: 'Ctrl+H',
+  },
+  {
+    title: 'Shopping',
+    type: 'action',
+  },
+  {
+    title: 'Downloads',
+    type: 'action',
+  },
+  {
+    title: 'Extensions',
+    type: 'action',
+  },
+  {
+    title: 'Browser Essentials',
+    type: 'action',
+  },
+  {
+    title: 'Passwords',
+    type: 'action',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    title: 'Settings',
+    type: 'action',
+  },
+  {
+    title: 'Help and feedback',
+    type: 'sub-menu',
+  },
+  {
+    type: 'divider',
+  },
+  {
+    title: 'Close Microsoft Edge',
+    type: 'action',
+  },
+];
+
 const template = html<MoreMenu>`
-  <phx-text-input appearance="filled-darker" placeholder="Search">
+  <phx-text-input
+    appearance="filled-darker"
+    placeholder="Search"
+    @change="${(x, c) => x.filterItems(c.event as KeyboardEvent)}"
+    @keyup="${(x, c) => x.filterItems(c.event as KeyboardEvent)}"
+  >
     <svg slot="start">
       <use href="img/edge/icons.svg#search-20-regular" />
     </svg>
@@ -110,102 +209,56 @@ const styles = css`
   styles,
 })
 export default class MoreMenu extends FASTElement {
-  @observable items: MoreMenuEntry[] = [
-    {
-      title: 'New tab',
-      type: 'action',
-      shortcut: 'Ctrl+T',
-    },
-    {
-      title: 'New window',
-      type: 'action',
-      shortcut: 'Ctrl+N',
-    },
-    {
-      title: 'New InPrivate window',
-      type: 'action',
-      shortcut: 'Ctrl+Shift+N',
-    },
-    {
-      title: 'Print',
-      type: 'action',
-      shortcut: 'Ctrl+P',
-    },
-    {
-      title: 'Screenshot',
-      type: 'action',
-      shortcut: 'Ctrl+Shift+S',
-    },
-    {
-      title: 'Find on page',
-      type: 'action',
-      shortcut: 'Ctrl+F',
-    },
-    {
-      title: 'More tools',
-      type: 'sub-menu',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      type: 'zoom',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      title: 'Favorites',
-      type: 'action',
-      shortcut: 'Ctrl+Shift+O',
-    },
-    {
-      title: 'History',
-      type: 'action',
-      shortcut: 'Ctrl+H',
-    },
-    {
-      title: 'Shopping',
-      type: 'action',
-    },
-    {
-      title: 'Downloads',
-      type: 'action',
-    },
-    {
-      title: 'Extensions',
-      type: 'action',
-    },
-    {
-      title: 'Browser Essentials',
-      type: 'action',
-    },
-    {
-      title: 'Passwords',
-      type: 'action',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      title: 'Settings',
-      type: 'action',
-    },
-    {
-      title: 'Help and feedback',
-      type: 'sub-menu',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      title: 'Close Microsoft Edge',
-      type: 'action',
-    },
-  ];
+  @observable items: MoreMenuEntry[] = [...defaultItems];
   @attr({ mode: 'boolean' }) managedByOrganization = false;
+  _inputElement: HTMLInputElement | null = null;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.setElements();
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.unsetElements();
+  }
+
+  setElements() {
+    this._inputElement = this.shadowRoot?.querySelector(
+      'phx-text-input',
+    ) as HTMLInputElement;
+  }
+
+  unsetElements() {
+    this._inputElement = null;
+  }
 
   handleMenuItemClick(title: string) {
     this.$emit('moreaction', title);
+  }
+
+  filterItems(e: KeyboardEvent) {
+    if (!this._inputElement) return;
+
+    if (e.key === 'Escape') {
+      this._inputElement.value = '';
+      this.items = [...defaultItems];
+      this._inputElement.blur();
+      this.$emit('closemenu');
+      return;
+    }
+
+    if (this._inputElement.value === '') {
+      this.items = [...defaultItems];
+      return;
+    }
+
+    this.items = defaultItems.filter(
+      (item) =>
+        item.title &&
+        item.title
+          .toLowerCase()
+          .includes(this._inputElement!.value.toLowerCase()),
+    );
   }
 }
