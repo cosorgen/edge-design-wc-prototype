@@ -364,8 +364,8 @@ export default class MoreMenu extends FASTElement {
   handleInputKeyUp(e: KeyboardEvent) {
     if (!this._inputElement) return;
 
-    this.searchValue = (e.target as HTMLInputElement).value || '';
-    this._inputElement.value = (e.target as HTMLInputElement).value || '';
+    this.searchValue = this._inputElement.value || '';
+    this._inputElement.value = this._inputElement.value || '';
 
     if (e.key === 'Escape') {
       this.clearSearch();
