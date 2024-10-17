@@ -7,7 +7,7 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import './web-page.js';
+import '../controls/web-page.js';
 import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 
 const template = html<WebContent>`

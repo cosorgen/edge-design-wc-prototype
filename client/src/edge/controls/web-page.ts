@@ -1,4 +1,3 @@
-import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   customElement,
   FASTElement,
@@ -8,7 +7,6 @@ import {
   observable,
   when,
 } from '@microsoft/fast-element';
-import { inject } from '@microsoft/fast-element/di.js';
 
 const template = html<WebPage>`
   ${when(
@@ -39,7 +37,6 @@ const styles = css`
     width: 100%;
     height: 100%;
     border: none;
-    pointer-events: ${(x) => (x.ews.disableWebview ? 'none' : 'unset')};
   }
 `;
 
@@ -49,7 +46,6 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
-  @inject(EdgeWindowService) ews!: EdgeWindowService;
   @attr url = 'edge://newtab';
   @attr({ mode: 'boolean' }) active = false;
   @observable page = '';
