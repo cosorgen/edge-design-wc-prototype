@@ -26,27 +26,25 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
   <div id="hint-target"></div>
-  <div popover="manual">
-    <copilot-composer
-      @close="${(x) => x.toggleActive()}"
-      @submit="${(x) => x.openSidebar()}"
+  <copilot-composer
+    @close="${(x) => x.toggleActive()}"
+    @submit="${(x) => x.openSidebar()}"
+  >
+    <phx-button
+      appearance="subtle"
+      size="large"
+      icon-only
+      slot="start"
+      @click="${(x) => x.openSidebar()}"
     >
-      <phx-button
-        appearance="subtle"
-        size="large"
-        icon-only
-        slot="start"
-        @click="${(x) => x.openSidebar()}"
-      >
-        <img src="img/edge/copilot-icon.svg" />
-      </phx-button>
-      <phx-button appearance="subtle" size="large" icon-only slot="end">
-        <svg>
-          <use href="img/edge/icons.svg#cast-20-regular" />
-        </svg>
-      </phx-button>
-    </copilot-composer>
-  </div>`;
+      <img src="img/edge/copilot-icon.svg" />
+    </phx-button>
+    <phx-button appearance="subtle" size="large" icon-only slot="end">
+      <svg>
+        <use href="img/edge/icons.svg#cast-20-regular" />
+      </svg>
+    </phx-button>
+  </copilot-composer>`;
 
 const styles = css`
   :host {
@@ -56,8 +54,7 @@ const styles = css`
     justify-content: center;
     margin-block: ${(x) => x.calcMarginForMinHeight()}; /* Take no space  */
 
-    --bottom-of-frame: calc(0px - ${spacingFrame} / 2);
-    anchor-name: --composer-anchor;
+    --bottom-of-frame: calc(0px - max(${spacingFrame}, 6px) / 2);
   }
 
   #hint-target {
@@ -126,28 +123,30 @@ const styles = css`
     opacity: 0;
   }
 
-  [popover] {
-    position-area: block-start center;
-    position-anchor: --composer-anchor;
-    border: none;
-    overflow: visible;
-    margin: 0;
-    padding: 0;
-    background: none;
+  copilot-composer {
+    position: absolute;
+    bottom: 0;
 
+    display: none;
     opacity: 0;
     transform: translateY(66px);
+    width: 160px;
     transition:
-      all ${durationSlow} ${curveEasyEaseMax} allow-discrete,
-      display ${durationSlow} ${curveEasyEaseMax} 50ms allow-discrete;
+      all ${durationSlow} ${curveEasyEaseMax},
+      display ${durationSlow} 50ms allow-discrete;
   }
 
-  [popover]:popover-open {
+  copilot-composer[expanded] {
+    display: flex;
     opacity: 1;
-    transform: translateY(0);
+    width: 349px;
+    transform: translateY(0px);
+  }
 
-    @starting-style {
+  @starting-style {
+    copilot-composer[expanded] {
       opacity: 0;
+      width: 160px;
       transform: translateY(66px);
     }
   }
@@ -164,7 +163,6 @@ export class CopilotEntrypoint extends FASTElement {
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
   _hintTargetElement: HTMLElement | null = null;
-  _popoverElement: HTMLElement | null = null;
   _composerElement: HTMLElement | null = null;
 
   connectedCallback(): void {
@@ -188,10 +186,6 @@ export class CopilotEntrypoint extends FASTElement {
       '#hint-target',
     ) as HTMLElement;
 
-    this._popoverElement = this.shadowRoot?.querySelector(
-      '[popover]',
-    ) as HTMLElement;
-
     this._composerElement = this.shadowRoot?.querySelector(
       'copilot-composer',
     ) as HTMLElement;
@@ -199,7 +193,6 @@ export class CopilotEntrypoint extends FASTElement {
 
   unsetElements(): void {
     this._hintTargetElement = null;
-    this._popoverElement = null;
     this._composerElement = null;
   }
 
@@ -216,6 +209,10 @@ export class CopilotEntrypoint extends FASTElement {
       'click',
       this.handleClickHintTarget,
     );
+    this._composerElement?.addEventListener(
+      'transitionend',
+      this.handleComposerTransitionEnd,
+    );
   }
 
   removeEventListeners(): void {
@@ -230,6 +227,10 @@ export class CopilotEntrypoint extends FASTElement {
     this._hintTargetElement?.removeEventListener(
       'click',
       this.handleClickHintTarget,
+    );
+    this._composerElement?.removeEventListener(
+      'transitionend',
+      this.handleComposerTransitionEnd,
     );
   }
 
@@ -246,7 +247,7 @@ export class CopilotEntrypoint extends FASTElement {
   };
 
   openSidebar(): void {
-    this._popoverElement?.addEventListener(
+    this._composerElement?.addEventListener(
       'transitionend',
       this.handleTransitionToSidebar,
       { once: true },
@@ -254,9 +255,14 @@ export class CopilotEntrypoint extends FASTElement {
     this.toggleActive();
   }
 
+  handleComposerTransitionEnd = (e: TransitionEvent) => {
+    if (e.propertyName !== 'opacity') return;
+    this.active && this._composerElement?.focus();
+  };
+
   handleTransitionToSidebar = (e: TransitionEvent) => {
     if (e.propertyName !== 'opacity') {
-      this._popoverElement?.addEventListener(
+      this._composerElement?.addEventListener(
         'transitionend',
         this.handleTransitionToSidebar,
         { once: true },
@@ -269,13 +275,13 @@ export class CopilotEntrypoint extends FASTElement {
   toggleActive(): void {
     this.active = !this.active;
     this.setPopoverState();
-    if (this.active) this._composerElement?.focus();
+    // if (this.active) this._composerElement?.focus();
   }
 
   setPopoverState(): void {
     this.active
-      ? this._popoverElement?.showPopover()
-      : this._popoverElement?.hidePopover();
+      ? this._composerElement?.setAttribute('expanded', '')
+      : this._composerElement?.removeAttribute('expanded');
   }
 
   calcMarginForMinHeight(): string {
