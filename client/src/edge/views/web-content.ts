@@ -39,6 +39,7 @@ const styles = css`
     display: flex;
     border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
     overflow: hidden;
+    z-index: 0; /* ensure content is under omnibox */
 
     * {
       display: none;

@@ -14,6 +14,7 @@ const template = html`<slot name="hero"></slot>
 
 const styles = css`
   :host {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: ${spacingVerticalM};
@@ -26,7 +27,6 @@ const styles = css`
   [name='hero']::slotted(img),
   img {
     width: 100%;
-    aspect-ratio: 16 / 9;
     border-radius: 16px;
     border: none;
     background-color: gray;

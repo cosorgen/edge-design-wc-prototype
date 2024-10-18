@@ -6,6 +6,7 @@ import '../controls/newtab-card.js';
 import '../controls/newtab-chip.js';
 import '../controls/newtab-composer.js';
 import '../controls/newtab-feed-card.js';
+import '../controls/newtab-feed-list.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -42,7 +43,7 @@ const template = html<EdgeNewTab>`
         Make the most of your lunch break
       </div>
       <div id="cards">
-        <div id="news">
+        <div id="news" class="card-in" style="--index: 1">
           <h1>
             Tonight’s perfect for <a href="">Halloumi Tacos</a>—picky eater
             approved! <a href="">Grab ingredients</a> on the way home.
@@ -52,15 +53,25 @@ const template = html<EdgeNewTab>`
             <newtab-chip>Recipes using ingredients I have</newtab-chip>
           </div>
         </div>
-        <newtab-card style="--index: 0;">
-          <img slot="hero" src="img/edge/newtab/529plan.jpg" alt="" />
+        <newtab-card class="card-in" style="--index: 2;">
+          <img
+            load="pre"
+            slot="hero"
+            src="img/edge/newtab/529plan.jpg"
+            alt=""
+          />
           <h2 slot="heading">Continue researching 529 college plans</h2>
           <newtab-card-item>Learn about the tax advantages</newtab-card-item>
           <newtab-card-item>Set up a plan now</newtab-card-item>
           <newtab-card-item>Explore covered expenses</newtab-card-item>
         </newtab-card>
-        <newtab-card style="--index: 1;">
-          <img slot="hero" src="img/edge/newtab/heretic.jpg" alt="" />
+        <newtab-card class="card-in" style="--index: 3;">
+          <img
+            load="pre"
+            slot="hero"
+            src="img/edge/newtab/heretic.jpg"
+            alt=""
+          />
           <h2 slot="heading">
             Have you seen the new trailer for Heretic by A24? It looks
             spine-chilling!
@@ -68,8 +79,13 @@ const template = html<EdgeNewTab>`
           <newtab-card-item>Watch the trailer</newtab-card-item>
           <newtab-card-item>Remind me when it releases</newtab-card-item>
         </newtab-card>
-        <newtab-card style="--index: 2;">
-          <img slot="hero" src="img/edge/newtab/weather.jpg" alt="" />
+        <newtab-card class="card-in" style="--index: 4;">
+          <img
+            load="pre"
+            slot="hero"
+            src="img/edge/newtab/weather.jpg"
+            alt=""
+          />
           <h2 slot="heading">Heatwave intensifies around the Puget Sound</h2>
           <newtab-card-item>Cool down at beaches near you</newtab-card-item>
           <newtab-card-item>Plan a walk for the evening</newtab-card-item>
@@ -80,7 +96,7 @@ const template = html<EdgeNewTab>`
       </div>
     </div>
     <div id="feed">
-      <newtab-feed-card>
+      <newtab-feed-card class="card-in" style="--index: 5;">
         <img slot="hero" src="img/edge/newtab/wwdc.jpg" alt="" />
         <img
           slot="publisher-icon"
@@ -92,6 +108,102 @@ const template = html<EdgeNewTab>`
         <h3 slot="heading">Apple stock soars after WWDC announcements</h3>
         Apple's stock soars to record high after WWDC · Investors hope that AI
         features will boost sales
+      </newtab-feed-card>
+      <newtab-feed-card class="card-in" style="--index: 6;">
+        <img slot="hero" src="img/edge/newtab/mariners.jpg" alt="" />
+        <img
+          slot="publisher-icon"
+          src="https://s.yimg.com/rz/l/favicon.ico"
+          alt=""
+        />
+        <span slot="publisher">NBC</span>
+        <span slot="time">4d</span>
+        <h3 slot="heading">Mariners shut out Rangers 5-0 for series sweep</h3>
+        Mariners beat the Texas Rangers 5-0 with Gilbert pitching and Locklear
+        with a home run.
+      </newtab-feed-card>
+      <newtab-feed-list class="card-in" style="--index: 7;">
+        <newtab-feed-list-item>
+          <img
+            slot="publisher-icon"
+            src="img/edge/newtab/sources/cnn.png"
+            alt=""
+          />
+          <span slot="time">4d</span>
+          Downtown Seattle’s New Seafood Bar Finds Inspiration in the Historic
+          Oyster Bars of NYC
+          <img slot="hero" src="img/edge/newtab/oysters.jpg" alt="" />
+        </newtab-feed-list-item>
+        <newtab-feed-list-item>
+          <img
+            slot="publisher-icon"
+            src="img/edge/newtab/sources/people.png"
+            alt=""
+          />
+          <span slot="time">1d</span>
+          Beyoncé and Destiny's Child Giggle Over JAY-Z in Blooper Reel from MTV
+          Spring Break 2000 Top 20 Countdown
+          <img slot="hero" src="img/edge/newtab/yonce.jpg" alt="" />
+        </newtab-feed-list-item>
+        <newtab-feed-list-item>
+          <img
+            slot="publisher-icon"
+            src="img/edge/newtab/sources/abc.png"
+            alt=""
+          />
+          <span slot="time">4d</span>
+          Tutoring as a new strategy to combat learning loss in elementary
+          schools Oyster Bars of NYC
+          <img slot="hero" src="img/edge/newtab/tutor.jpg" alt="" />
+        </newtab-feed-list-item>
+        <newtab-feed-list-item>
+          <img
+            slot="publisher-icon"
+            src="img/edge/newtab/sources/usa.png"
+            alt=""
+          />
+          <span slot="time">1d</span>
+          School choice in different states: a primer on education policy
+          <img slot="hero" src="img/edge/newtab/school.jpg" alt="" />
+        </newtab-feed-list-item>
+        <newtab-feed-list-item>
+          <img
+            slot="publisher-icon"
+            src="img/edge/newtab/sources/cnn.png"
+            alt=""
+          />
+          <span slot="time">4d</span>
+          Downtown Seattle’s New Seafood Bar Finds Inspiration in the Historic
+          Oyster Bars of NYC
+          <img slot="hero" src="img/edge/newtab/oysters.jpg" alt="" />
+        </newtab-feed-list-item>
+      </newtab-feed-list>
+      <newtab-feed-card class="card-in" style="--index: 8;">
+        <img slot="hero" src="img/edge/newtab/food.jpg" alt="" />
+        <img
+          slot="publisher-icon"
+          src="https://s.yimg.com/rz/l/favicon.ico"
+          alt=""
+        />
+        <span slot="publisher">Forbes</span>
+        <span slot="time">4d</span>
+        <h3 slot="heading">
+          Healthy Meal Prep Recipe Ideas That’ll Make Your Life So Much Easier
+        </h3>
+        Save time and money with meal prep ideas.
+      </newtab-feed-card>
+      <newtab-feed-card class="card-in" style="--index: 9;">
+        <img slot="hero" src="img/edge/newtab/bikes.jpg" alt="" />
+        <img
+          slot="publisher-icon"
+          src="https://s.yimg.com/rz/l/favicon.ico"
+          alt=""
+        />
+        <span slot="publisher">The New York Times</span>
+        <span slot="time">4d</span>
+        <h3 slot="heading">Are balance bikes worth it? Experts say yes.</h3>
+        A balance bike may be a little kid’s first introduction to zipping
+        around on their own.
       </newtab-feed-card>
     </div>
   </div>
@@ -116,16 +228,7 @@ const styles = css`
     padding: 96px;
     gap: 96px;
     overflow-y: auto;
-  }
-
-  #main {
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: ${spacingVerticalXXL};
-    min-width: 320px;
-    padding: ${spacingHorizontalL};
+    overflow-x: hidden;
   }
 
   #composer-placeholder {
@@ -149,7 +252,7 @@ const styles = css`
 
   #composer-backdrop {
     z-index: 1;
-    min-height: 256px;
+    min-height: 224px;
     backdrop-filter: blur(8px);
     mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   }
@@ -163,6 +266,15 @@ const styles = css`
     max-width: 512px;
     margin-inline: auto;
     pointer-events: auto;
+  }
+
+  #main {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: ${spacingVerticalXXL};
+    min-width: 320px;
   }
 
   #header {
@@ -226,18 +338,37 @@ const styles = css`
     }
   }
 
-  newtab-card {
+  .card-in {
     transform: translateY(0px);
     opacity: 1;
-    transition: all ${durationUltraSlow} ${curveDecelerateMax}
-      calc(var(--index) * 50ms);
+    transition:
+      transform ${durationUltraSlow} ${curveDecelerateMax}
+        calc(var(--index) * 50ms),
+      opacity ${durationUltraSlow} ${curveDecelerateMax}
+        calc(var(--index) * 50ms);
   }
 
   @starting-style {
-    newtab-card {
+    .card-in {
       transform: translateY(-40px);
       opacity: 0;
     }
+  }
+
+  #feed {
+    width: 100%;
+    max-width: calc(256px * 4 + ${spacingHorizontalL} * 3);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: ${spacingHorizontalL};
+    grid-template-areas:
+      '. . list'
+      '. . list';
+  }
+
+  newtab-feed-list {
+    grid-area: list;
   }
 `;
 
