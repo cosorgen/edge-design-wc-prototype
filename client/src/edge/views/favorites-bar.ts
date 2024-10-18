@@ -73,7 +73,7 @@ export class FavoritesBar extends FASTElement {
 
   handleItemClick(item: Favorite | FavoriteFolder) {
     if (item.type === 'site') {
-      this.ts.navigate(item.url);
+      this.ts.navigateActiveTab(item.url);
     }
   }
 }

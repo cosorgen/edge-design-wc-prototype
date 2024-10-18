@@ -5,20 +5,14 @@ import {
   css,
   attr,
   observable,
-  when,
 } from '@microsoft/fast-element';
 
 const template = html<WebPage>`
-  ${when(
-    (x) => x.page !== '',
-    html`
-      <iframe
-        sandbox="allow-same-origin allow-scripts"
-        srcdoc="${(x) => x.page}"
-        @load="${(x) => x.addEventListenersToWebview()}"
-      ></iframe>
-    `,
-  )}
+  <iframe
+    sandbox="allow-same-origin allow-scripts"
+    srcdoc="${(x) => x.page}"
+    @load="${(x) => x.handlePageLoad()}"
+  ></iframe>
 `;
 
 const styles = css`
@@ -41,33 +35,99 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
-  @attr url = 'edge://newtab';
+  @attr url = '';
   @observable page = '';
+  _iframeDocumentBody: HTMLBodyElement | null = null;
+
+  setElements() {
+    const iframe = this.shadowRoot?.querySelector(
+      'iframe',
+    ) as HTMLIFrameElement;
+
+    if (!iframe) return;
+    this._iframeDocumentBody = iframe.contentWindow?.document
+      .body as HTMLBodyElement;
+  }
+
+  unsetElements() {
+    this._iframeDocumentBody = null;
+  }
+
+  addEventListeners() {
+    this._iframeDocumentBody!.addEventListener('click', this.handleIframeEvent);
+    this._iframeDocumentBody!.addEventListener(
+      'mouseup',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener(
+      'mousedown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener(
+      'keydown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener('keyup', this.handleIframeEvent);
+  }
+
+  removeEventListeners() {
+    this._iframeDocumentBody!.removeEventListener(
+      'click',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'mouseup',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'mousedown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'keydown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'keyup',
+      this.handleIframeEvent,
+    );
+  }
 
   urlChanged() {
     this.loadWebPage();
   }
 
   loadWebPage() {
-    if (this.url.search('edge://') !== 0) {
-      fetch(`/api/proxy?url=${this.url}`)
-        .then((res) => res.text())
-        .then((text) => (this.page = text));
-    } else {
-      this.page = '';
-    }
+    if (!this.url) return;
+    if (this.page) this.handlePageUnload();
+
+    fetch(`/api/proxy?url=${this.url}`, { cache: 'no-cache' })
+      .then((res) => {
+        if (!res.ok) this.handlePageError(res);
+        return res.text();
+      })
+      .then((text) => (this.page = text));
   }
 
-  addEventListenersToWebview() {
-    const iframeBody =
-      this.shadowRoot?.querySelector('iframe')?.contentWindow?.document.body;
-    if (!iframeBody) return;
+  handlePageUnload() {
+    this.$emit('pageunload');
+    this.removeEventListeners();
+    this.unsetElements();
+  }
 
-    iframeBody.addEventListener('click', this.handleIframeEvent);
-    iframeBody.addEventListener('mouseup', this.handleIframeEvent);
-    iframeBody.addEventListener('mousedown', this.handleIframeEvent);
-    iframeBody.addEventListener('keydown', this.handleIframeEvent);
-    iframeBody.addEventListener('keyup', this.handleIframeEvent);
+  handlePageLoad() {
+    if (!this.page) return;
+
+    this.$emit('pageload');
+    setTimeout(() => {
+      this.setElements();
+      this.addEventListeners();
+    }, 500);
+  }
+
+  handlePageError(res: Response) {
+    this.$emit('pageerror');
+    throw new Error(`Error fetching page: ${res.text()}`);
   }
 
   handleIframeEvent = (event: Event) => {

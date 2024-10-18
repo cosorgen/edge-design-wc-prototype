@@ -213,7 +213,7 @@ export class Toolbar extends FASTElement {
   }
 
   handleOmniboxSubmit(e: CustomEvent) {
-    this.ts.navigate(e.detail);
+    this.ts.navigateActiveTab(e.detail);
   }
 
   handleOmniboxChange(e: CustomEvent) {

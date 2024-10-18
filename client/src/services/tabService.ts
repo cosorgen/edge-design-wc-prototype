@@ -72,7 +72,7 @@ export class TabService {
     }));
   }
 
-  navigate(url: string) {
+  navigateActiveTab(url: string) {
     // Validate URL
     let validUrl = url;
     if (!validUrl.startsWith('edge://')) {
@@ -99,10 +99,6 @@ export class TabService {
           ...tab,
           title: tab.active ? metadata.title : tab.title,
           favicon: tab.active ? metadata.favicon : tab.favicon,
-          loading: false,
-          actionIds: tab.active
-            ? this.getActionsForURL(validUrl)
-            : tab.actionIds,
         }));
       });
 
@@ -110,6 +106,14 @@ export class TabService {
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
       url: tab.active ? validUrl : tab.url,
+    }));
+  }
+
+  tabDidLoad(tabId: string) {
+    this.tabs_ = this.tabs_.map((tab) => ({
+      ...tab,
+      loading: tab.id === tabId ? false : tab.loading,
+      actionIds: tab.active ? this.getActionsForURL(tab.url) : tab.actionIds,
     }));
   }
 

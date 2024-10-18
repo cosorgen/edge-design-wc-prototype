@@ -11,7 +11,11 @@ import {
 
 const template = html`
   <div id="start"></div>
-  <input type="text" placeholder="Search or chat with Copilot" />
+  <input
+    type="text"
+    placeholder="Search or chat with Copilot"
+    @keydown="${(x, c) => x.handleKeydown(c.event)}"
+  />
   <div id="end">
     <slot name="end">
       <phx-button appearance="subtle" size="large" icon-only>
@@ -78,5 +82,13 @@ export class NewtabComposer extends FASTElement {
   focus() {
     const input = this.shadowRoot?.querySelector('input');
     if (input) input.focus();
+  }
+
+  handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'Enter') {
+      this.$emit('submit', (e.target as HTMLInputElement)?.value || '');
+    }
+
+    return true; // allow event to continue bubbling
   }
 }

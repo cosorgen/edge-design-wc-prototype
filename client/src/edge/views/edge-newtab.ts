@@ -23,6 +23,7 @@ import {
   spacingVerticalXXL,
   typographyStyles,
 } from '@phoenixui/themes';
+import { TabService } from '#servicestabService.js';
 
 const template = html<EdgeNewTab>`
   <mica-material
@@ -31,7 +32,9 @@ const template = html<EdgeNewTab>`
   ></mica-material>
   <div class="composer-positioning" id="composer-backdrop"></div>
   <div class="composer-positioning" id="composer-wrapper">
-    <newtab-composer></newtab-composer>
+    <newtab-composer
+      @submit="${(x, c) => x.handleComposerSubmit(c.event)}"
+    ></newtab-composer>
   </div>
   <div id="content">
     <div id="composer-placeholder"></div>
@@ -45,12 +48,32 @@ const template = html<EdgeNewTab>`
       <div id="cards">
         <div id="news" class="card-in" style="--index: 1">
           <h1>
-            Tonight’s perfect for <a href="">Halloumi Tacos</a>—picky eater
-            approved! <a href="">Grab ingredients</a> on the way home.
+            Tonight’s perfect for
+            <a href="" @click="${(x) => x.handleLinkClick('halloumi tacos')}"
+              >Halloumi Tacos</a
+            >—picky eater approved!
+            <a
+              href=""
+              @click="${(x) => x.handleLinkClick('halloumi taco ingredients')}"
+              >Grab ingredients</a
+            >
+            on the way home.
           </h1>
           <div id="chips">
-            <newtab-chip>Veggie hacks for picky eaters</newtab-chip>
-            <newtab-chip>Recipes using ingredients I have</newtab-chip>
+            <newtab-chip
+              @click="${(x) =>
+                x.handleLinkClick(
+                  'https://pickyeaterblog.com/the-best-of-the-picky-eater-my-top-10-most-popular-recipes/',
+                )}"
+              >Veggie hacks for picky eaters</newtab-chip
+            >
+            <newtab-chip
+              @click="${(x) =>
+                x.handleLinkClick(
+                  'https://recipeland.com/recipe/v/bob-s-crock-pot-pizza-1582',
+                )}"
+              >Recipes using ingredients I have</newtab-chip
+            >
           </div>
         </div>
         <newtab-card class="card-in" style="--index: 2;">
@@ -380,6 +403,7 @@ const styles = css`
 export class EdgeNewTab extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(TabService) ts!: TabService;
   _contentElement: HTMLDivElement | null = null;
   _composerWrapperElement: HTMLDivElement | null = null;
 
@@ -428,4 +452,13 @@ export class EdgeNewTab extends FASTElement {
 
     this.style.setProperty('--scroll-progress', scrollProgress.toString());
   };
+
+  handleComposerSubmit(e: Event): void {
+    if (!(e instanceof CustomEvent)) return;
+    this.ts.navigateActiveTab(e.detail);
+  }
+
+  handleLinkClick(url: string): void {
+    this.ts.navigateActiveTab(url);
+  }
 }

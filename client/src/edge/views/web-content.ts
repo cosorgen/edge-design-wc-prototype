@@ -27,6 +27,8 @@ const template = html<WebContent>`
         id="${(x) => x.id}"
         url="${(x) => x.url}"
         ?active="${(x) => x.active}"
+        @pageload="${(x, c) => c.parent.handleTabLoad(x.id)}"
+        @pageerror="${(x, c) => c.parent.handleTabLoadError(x.id)}"
       ></web-page>`,
     )}`,
     { positioning: true },
@@ -62,5 +64,13 @@ export class WebContent extends FASTElement {
   getHostname(url: string): string {
     const urlObj = new URL(url);
     return urlObj.hostname;
+  }
+
+  handleTabLoad(id: string): void {
+    this.ts.tabDidLoad(id);
+  }
+
+  handleTabLoadError(id: string): void {
+    // this.ts.tabDidLoadError(id);
   }
 }
