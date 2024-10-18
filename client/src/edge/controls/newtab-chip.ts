@@ -1,6 +1,7 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
+  colorBrandBackground2Hover,
   colorNeutralBackground1,
   colorNeutralForeground1,
   colorNeutralStroke3,
@@ -26,6 +27,11 @@ const styles = css`
     font-size: ${typographyStyles.body1.fontSize};
     font-weight: ${typographyStyles.body1.fontWeight};
     line-height: ${typographyStyles.body1.lineHeight};
+  }
+
+  :host(:hover) {
+    cursor: pointer;
+    background-color: ${colorBrandBackground2Hover};
   }
 `;
 

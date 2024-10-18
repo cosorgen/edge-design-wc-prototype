@@ -1,9 +1,6 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import {
-  colorBrandForegroundLink,
   colorNeutralCardBackground,
-  colorNeutralForegroundHint,
-  spacingHorizontalL,
   spacingVerticalM,
   spacingVerticalS,
   typographyStyles,
@@ -48,45 +45,5 @@ const styles = css`
   }
 `;
 
-@customElement({ name: 'newtab-card', template, styles })
-export class NewTabCard extends FASTElement {}
-
-const template2 = html`<span><slot></slot></span>
-  <svg><use href="img/edge/icons.svg#chevron-right-20-regular"></use></svg>`;
-
-const styles2 = css`
-  :host {
-    display: flex;
-    flex-direction: row;
-    gap: ${spacingHorizontalL};
-    justify-content: space-between;
-
-    color: ${colorNeutralForegroundHint};
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
-  }
-
-  :host(:hover) {
-    color: ${colorBrandForegroundLink};
-    cursor: pointer;
-  }
-
-  svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  span {
-    flex: 1;
-    min-width: 0px;
-  }
-`;
-
-@customElement({
-  name: 'newtab-card-item',
-  template: template2,
-  styles: styles2,
-})
-export class NewTabCardItem extends FASTElement {}
+@customElement({ name: 'newtab-feed-card', template, styles })
+export class NewtabFeedCard extends FASTElement {}

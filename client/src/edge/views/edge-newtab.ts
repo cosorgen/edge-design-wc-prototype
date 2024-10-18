@@ -4,6 +4,8 @@ import '../controls/copilot-composer.js';
 import '@phoenixui/web-components/button.js';
 import '../controls/newtab-card.js';
 import '../controls/newtab-chip.js';
+import '../controls/newtab-composer.js';
+import '../controls/newtab-feed-card.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -11,9 +13,12 @@ import {
   colorBrandForegroundLink,
   colorBrandForegroundLinkHover,
   colorNeutralForegroundHint,
+  curveDecelerateMax,
+  durationUltraSlow,
   spacingHorizontalL,
   spacingHorizontalS,
   spacingHorizontalSNudge,
+  spacingVerticalL,
   spacingVerticalXXL,
   typographyStyles,
 } from '@phoenixui/themes';
@@ -23,19 +28,12 @@ const template = html<EdgeNewTab>`
     top="${(x) => x.ws.getWindowById(x.ews.id)?.yPos}"
     left="${(x) => x.ws.getWindowById(x.ews.id)?.xPos}"
   ></mica-material>
+  <div class="composer-positioning" id="composer-backdrop"></div>
+  <div class="composer-positioning" id="composer-wrapper">
+    <newtab-composer></newtab-composer>
+  </div>
   <div id="content">
-    <copilot-composer placeholder="Search or chat with Copilot">
-      <phx-button appearance="subtle" size="large" icon-only slot="end">
-        <svg>
-          <use x="2" y="2" href="img/edge/icons.svg#add-20-regular" />
-        </svg>
-      </phx-button>
-      <phx-button appearance="subtle" size="large" icon-only slot="end">
-        <svg>
-          <use x="2" y="2" href="img/edge/icons.svg#mic-new-20-regular" />
-        </svg>
-      </phx-button>
-    </copilot-composer>
+    <div id="composer-placeholder"></div>
     <div id="main">
       <div id="header">
         <svg>
@@ -54,25 +52,55 @@ const template = html<EdgeNewTab>`
             <newtab-chip>Recipes using ingredients I have</newtab-chip>
           </div>
         </div>
-        <newtab-card>
+        <newtab-card style="--index: 0;">
+          <img slot="hero" src="img/edge/newtab/529plan.jpg" alt="" />
           <h2 slot="heading">Continue researching 529 college plans</h2>
+          <newtab-card-item>Learn about the tax advantages</newtab-card-item>
+          <newtab-card-item>Set up a plan now</newtab-card-item>
+          <newtab-card-item>Explore covered expenses</newtab-card-item>
         </newtab-card>
-        <newtab-card>
+        <newtab-card style="--index: 1;">
+          <img slot="hero" src="img/edge/newtab/heretic.jpg" alt="" />
           <h2 slot="heading">
             Have you seen the new trailer for Heretic by A24? It looks
             spine-chilling!
           </h2>
+          <newtab-card-item>Watch the trailer</newtab-card-item>
+          <newtab-card-item>Remind me when it releases</newtab-card-item>
         </newtab-card>
-        <newtab-card>
+        <newtab-card style="--index: 2;">
+          <img slot="hero" src="img/edge/newtab/weather.jpg" alt="" />
           <h2 slot="heading">Heatwave intensifies around the Puget Sound</h2>
+          <newtab-card-item>Cool down at beaches near you</newtab-card-item>
+          <newtab-card-item>Plan a walk for the evening</newtab-card-item>
+          <newtab-card-item>
+            Target Circle Week: Explore savings on fans and sunscreen
+          </newtab-card-item>
         </newtab-card>
       </div>
+    </div>
+    <div id="feed">
+      <newtab-feed-card>
+        <img slot="hero" src="img/edge/newtab/wwdc.jpg" alt="" />
+        <img
+          slot="publisher-icon"
+          src="https://s.yimg.com/rz/l/favicon.ico"
+          alt=""
+        />
+        <span slot="publisher">Yahoo News</span>
+        <span slot="time">4d</span>
+        <h3 slot="heading">Apple stock soars after WWDC announcements</h3>
+        Apple's stock soars to record high after WWDC · Investors hope that AI
+        features will boost sales
+      </newtab-feed-card>
     </div>
   </div>
 `;
 
 const styles = css`
   :host {
+    --scroll-progress: 0;
+
     display: block;
     position: relative;
     width: 100%;
@@ -87,6 +115,7 @@ const styles = css`
     align-items: center;
     padding: 96px;
     gap: 96px;
+    overflow-y: auto;
   }
 
   #main {
@@ -95,14 +124,45 @@ const styles = css`
     flex-direction: column;
     align-items: center;
     gap: ${spacingVerticalXXL};
-    width: 100%;
     min-width: 320px;
     padding: ${spacingHorizontalL};
   }
 
-  copilot-composer {
+  #composer-placeholder {
+    display: block;
+    width: 100%;
+    min-height: 64px;
+  }
+
+  .composer-positioning {
+    position: absolute;
+    box-sizing: border-box;
+    top: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 16px; /* scrollbar */
+    padding-block: max(32px, calc((1 - var(--scroll-progress)) * 96px));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+
+  #composer-backdrop {
+    z-index: 1;
+    min-height: 256px;
+    backdrop-filter: blur(8px);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+
+  #composer-wrapper {
+    z-index: 2;
+  }
+
+  newtab-composer {
     width: 100%;
     max-width: 512px;
+    margin-inline: auto;
+    pointer-events: auto;
   }
 
   #header {
@@ -129,19 +189,22 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalL};
-
-    * {
-      flex: 1;
-    }
   }
 
   #news {
+    max-width: 256px;
+    display: flex;
+    flex-direction: column;
+    gap: ${spacingVerticalL};
+
     h1 {
       font-family: 'Lora', serif;
       font-weight: 400;
       font-size: 32px;
       line-height: 1.3;
       margin: 0;
+      white-space: normal;
+      text-wrap: pretty;
 
       a {
         font-style: italic;
@@ -160,7 +223,20 @@ const styles = css`
       display: flex;
       flex-direction: column;
       gap: ${spacingHorizontalS};
-      margin-top: ${spacingHorizontalL};
+    }
+  }
+
+  newtab-card {
+    transform: translateY(0px);
+    opacity: 1;
+    transition: all ${durationUltraSlow} ${curveDecelerateMax}
+      calc(var(--index) * 50ms);
+  }
+
+  @starting-style {
+    newtab-card {
+      transform: translateY(-40px);
+      opacity: 0;
     }
   }
 `;
@@ -173,4 +249,52 @@ const styles = css`
 export class EdgeNewTab extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  _contentElement: HTMLDivElement | null = null;
+  _composerWrapperElement: HTMLDivElement | null = null;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.setElements();
+    this.addEventListeners();
+  }
+
+  disconnectedCallback(): void {
+    super.disconnectedCallback();
+    this.removeEventListeners();
+    this.unsetElements();
+  }
+
+  setElements(): void {
+    this._contentElement = this.shadowRoot?.querySelector('#content') || null;
+    this._composerWrapperElement =
+      this.shadowRoot?.querySelector('#composer-backdrop') || null;
+  }
+
+  unsetElements(): void {
+    this._contentElement = null;
+    this._composerWrapperElement = null;
+  }
+
+  addEventListeners(): void {
+    this._contentElement?.addEventListener('scroll', this.handleContentScroll);
+  }
+
+  removeEventListeners(): void {
+    this._contentElement?.removeEventListener(
+      'scroll',
+      this.handleContentScroll,
+    );
+  }
+
+  handleContentScroll = (): void => {
+    if (!this._contentElement) return;
+
+    const transitionEnd = 256;
+    const scrollProgress = Math.min(
+      1,
+      (this._contentElement.scrollTop || 0) / transitionEnd,
+    );
+
+    this.style.setProperty('--scroll-progress', scrollProgress.toString());
+  };
 }
