@@ -24,13 +24,8 @@ const template = html<WebPage>`
 const styles = css`
   :host {
     flex: 1;
-    display: none;
     background: white;
     overflow: hidden;
-  }
-
-  :host([active]) {
-    display: block;
   }
 
   iframe {
@@ -47,7 +42,6 @@ const styles = css`
 })
 export class WebPage extends FASTElement {
   @attr url = 'edge://newtab';
-  @attr({ mode: 'boolean' }) active = false;
   @observable page = '';
 
   urlChanged() {

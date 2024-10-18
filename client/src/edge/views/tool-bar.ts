@@ -126,6 +126,7 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding: ${spacingFrame};
     user-select: none;
+    z-index: 1; /* for omnibox to be over web content */
   }
 
   .group {

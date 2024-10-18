@@ -27,6 +27,14 @@ const template = html<MicaMaterial>`
 `;
 
 const styles = css`
+  :host {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(0px); /* Fix for overflow:hidden */
+  }
+
   div {
     position: absolute;
     inset: 0;
