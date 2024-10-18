@@ -3,6 +3,7 @@ import '../../windows/controls/mica-material.js';
 import '../controls/copilot-composer.js';
 import '@phoenixui/web-components/button.js';
 import '../controls/newtab-card.js';
+import '../controls/newtab-chip.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -11,6 +12,7 @@ import {
   colorBrandForegroundLinkHover,
   colorNeutralForegroundHint,
   spacingHorizontalL,
+  spacingHorizontalS,
   spacingHorizontalSNudge,
   spacingVerticalXXL,
   typographyStyles,
@@ -22,19 +24,19 @@ const template = html<EdgeNewTab>`
     left="${(x) => x.ws.getWindowById(x.ews.id)?.xPos}"
   ></mica-material>
   <div id="content">
+    <copilot-composer placeholder="Search or chat with Copilot">
+      <phx-button appearance="subtle" size="large" icon-only slot="end">
+        <svg>
+          <use x="2" y="2" href="img/edge/icons.svg#add-20-regular" />
+        </svg>
+      </phx-button>
+      <phx-button appearance="subtle" size="large" icon-only slot="end">
+        <svg>
+          <use x="2" y="2" href="img/edge/icons.svg#mic-new-20-regular" />
+        </svg>
+      </phx-button>
+    </copilot-composer>
     <div id="main">
-      <copilot-composer placeholder="Search or chat with Copilot">
-        <phx-button appearance="subtle" size="large" icon-only slot="end">
-          <svg>
-            <use x="2" y="2" href="img/edge/icons.svg#add-20-regular" />
-          </svg>
-        </phx-button>
-        <phx-button appearance="subtle" size="large" icon-only slot="end">
-          <svg>
-            <use x="2" y="2" href="img/edge/icons.svg#mic-new-20-regular" />
-          </svg>
-        </phx-button>
-      </copilot-composer>
       <div id="header">
         <svg>
           <use href="img/edge/icons.svg#copilot-20-regular" />
@@ -47,9 +49,22 @@ const template = html<EdgeNewTab>`
             Tonight’s perfect for <a href="">Halloumi Tacos</a>—picky eater
             approved! <a href="">Grab ingredients</a> on the way home.
           </h1>
+          <div id="chips">
+            <newtab-chip>Veggie hacks for picky eaters</newtab-chip>
+            <newtab-chip>Recipes using ingredients I have</newtab-chip>
+          </div>
         </div>
         <newtab-card>
-          <h1>Weather</h1>
+          <h2 slot="heading">Continue researching 529 college plans</h2>
+        </newtab-card>
+        <newtab-card>
+          <h2 slot="heading">
+            Have you seen the new trailer for Heretic by A24? It looks
+            spine-chilling!
+          </h2>
+        </newtab-card>
+        <newtab-card>
+          <h2 slot="heading">Heatwave intensifies around the Puget Sound</h2>
         </newtab-card>
       </div>
     </div>
@@ -69,8 +84,9 @@ const styles = css`
     inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    padding: 96px;
+    gap: 96px;
   }
 
   #main {
@@ -80,7 +96,6 @@ const styles = css`
     align-items: center;
     gap: ${spacingVerticalXXL};
     width: 100%;
-    max-width: 1024px;
     min-width: 320px;
     padding: ${spacingHorizontalL};
   }
@@ -139,6 +154,13 @@ const styles = css`
           color: ${colorBrandForegroundLinkHover};
         }
       }
+    }
+
+    #chips {
+      display: flex;
+      flex-direction: column;
+      gap: ${spacingHorizontalS};
+      margin-top: ${spacingHorizontalL};
     }
   }
 `;
