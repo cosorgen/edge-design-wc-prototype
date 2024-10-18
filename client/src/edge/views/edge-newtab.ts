@@ -84,9 +84,21 @@ const template = html<EdgeNewTab>`
             alt=""
           />
           <h2 slot="heading">Continue researching 529 college plans</h2>
-          <newtab-card-item>Learn about the tax advantages</newtab-card-item>
-          <newtab-card-item>Set up a plan now</newtab-card-item>
-          <newtab-card-item>Explore covered expenses</newtab-card-item>
+          <newtab-card-item
+            @click="${(x) =>
+              x.handleLinkClick('529 college savings plan tax advantages')}"
+            >Learn about the tax advantages</newtab-card-item
+          >
+          <newtab-card-item
+            @click="${(x) =>
+              x.handleLinkClick('Open 529 college savings plan')}"
+            >Set up a plan now</newtab-card-item
+          >
+          <newtab-card-item
+            @click="${(x) =>
+              x.handleLinkClick('529 college savings plan covered expenses')}"
+            >Explore covered expenses</newtab-card-item
+          >
         </newtab-card>
         <newtab-card class="card-in" style="--index: 3;">
           <img
@@ -99,8 +111,14 @@ const template = html<EdgeNewTab>`
             Have you seen the new trailer for Heretic by A24? It looks
             spine-chilling!
           </h2>
-          <newtab-card-item>Watch the trailer</newtab-card-item>
-          <newtab-card-item>Remind me when it releases</newtab-card-item>
+          <newtab-card-item
+            @click="${(x) => x.handleLinkClick('Heretic by A24 trailer')}"
+            >Watch the trailer</newtab-card-item
+          >
+          <newtab-card-item
+            @click="${(x) => x.handleLinkClick('Heretic by A24 release date')}"
+            >Remind me when it releases</newtab-card-item
+          >
         </newtab-card>
         <newtab-card class="card-in" style="--index: 4;">
           <img
@@ -110,16 +128,34 @@ const template = html<EdgeNewTab>`
             alt=""
           />
           <h2 slot="heading">Heatwave intensifies around the Puget Sound</h2>
-          <newtab-card-item>Cool down at beaches near you</newtab-card-item>
-          <newtab-card-item>Plan a walk for the evening</newtab-card-item>
-          <newtab-card-item>
+          <newtab-card-item
+            @click="${(x) =>
+              x.handleLinkClick('Beaches near me for a heatwave')}"
+            >Cool down at beaches near you</newtab-card-item
+          >
+          <newtab-card-item
+            @click="${(x) =>
+              x.handleLinkClick('Evening walk in the park for a heatwave')}"
+            >Plan a walk for the evening</newtab-card-item
+          >
+          <newtab-card-item
+            @click="${(x) =>
+              x.handleLinkClick('Fans and sunscreen for a heatwave at Target')}"
+          >
             Target Circle Week: Explore savings on fans and sunscreen
           </newtab-card-item>
         </newtab-card>
       </div>
     </div>
     <div id="feed">
-      <newtab-feed-card class="card-in" style="--index: 5;">
+      <newtab-feed-card
+        @click="${(x) =>
+          x.handleLinkClick(
+            'https://markets.businessinsider.com/news/stocks/apple-stock-price-soars-new-record-high-ai-focused-wwdc-2024-6#:~:text=Apple%20stock%20soared%20as%20much%20as%207%25%20on,falling%202%25%20on%20Monday%20following%20the%20WWDC%20event',
+          )}"
+        class="card-in"
+        style="--index: 5;"
+      >
         <img slot="hero" src="img/edge/newtab/wwdc.jpg" alt="" />
         <img
           slot="publisher-icon"
@@ -130,9 +166,14 @@ const template = html<EdgeNewTab>`
         <span slot="time">4d</span>
         <h3 slot="heading">Apple stock soars after WWDC announcements</h3>
         Apple's stock soars to record high after WWDC · Investors hope that AI
-        features will boost sales
+        features will boost s ales
       </newtab-feed-card>
-      <newtab-feed-card class="card-in" style="--index: 6;">
+      <newtab-feed-card
+        @click="${(x) =>
+          x.handleLinkClick('https://www.espn.com/mlb/recap?gameId=401569551')}"
+        class="card-in"
+        style="--index: 6;"
+      >
         <img slot="hero" src="img/edge/newtab/mariners.jpg" alt="" />
         <img
           slot="publisher-icon"
@@ -146,7 +187,12 @@ const template = html<EdgeNewTab>`
         with a home run.
       </newtab-feed-card>
       <newtab-feed-list class="card-in" style="--index: 7;">
-        <newtab-feed-list-item>
+        <newtab-feed-list-item
+          @click="${(x) =>
+            x.handleLinkClick(
+              'https://seattle.eater.com/2024/5/15/24156807/oyster-cellars-opening-chef-brendan-mcgillF',
+            )}"
+        >
           <img
             slot="publisher-icon"
             src="img/edge/newtab/sources/cnn.png"
@@ -157,7 +203,12 @@ const template = html<EdgeNewTab>`
           Oyster Bars of NYC
           <img slot="hero" src="img/edge/newtab/oysters.jpg" alt="" />
         </newtab-feed-list-item>
-        <newtab-feed-list-item>
+        <newtab-feed-list-item
+          @click="${(x) =>
+            x.handleLinkClick(
+              'https://people.com/beyonce-destinys-child-giggle-over-jay-z-mtv-blooper-reel-8625028',
+            )}"
+        >
           <img
             slot="publisher-icon"
             src="img/edge/newtab/sources/people.png"
@@ -168,7 +219,12 @@ const template = html<EdgeNewTab>`
           Spring Break 2000 Top 20 Countdown
           <img slot="hero" src="img/edge/newtab/yonce.jpg" alt="" />
         </newtab-feed-list-item>
-        <newtab-feed-list-item>
+        <newtab-feed-list-item
+          @click="${(x) =>
+            x.handleLinkClick(
+              'https://www.nytimes.com/2022/10/06/education/learning/tutoring-learning-loss.html',
+            )}"
+        >
           <img
             slot="publisher-icon"
             src="img/edge/newtab/sources/abc.png"
@@ -179,7 +235,12 @@ const template = html<EdgeNewTab>`
           schools Oyster Bars of NYC
           <img slot="hero" src="img/edge/newtab/tutor.jpg" alt="" />
         </newtab-feed-list-item>
-        <newtab-feed-list-item>
+        <newtab-feed-list-item
+          @click="${(x) =>
+            x.handleLinkClick(
+              'https://www.usnews.com/education/k12/articles/what-school-choice-is-and-how-it-works',
+            )}"
+        >
           <img
             slot="publisher-icon"
             src="img/edge/newtab/sources/usa.png"
@@ -189,7 +250,12 @@ const template = html<EdgeNewTab>`
           School choice in different states: a primer on education policy
           <img slot="hero" src="img/edge/newtab/school.jpg" alt="" />
         </newtab-feed-list-item>
-        <newtab-feed-list-item>
+        <newtab-feed-list-item
+          @click="${(x) =>
+            x.handleLinkClick(
+              'https://seattle.eater.com/2024/5/15/24156807/oyster-cellars-opening-chef-brendan-mcgillF',
+            )}"
+        >
           <img
             slot="publisher-icon"
             src="img/edge/newtab/sources/cnn.png"
@@ -201,7 +267,14 @@ const template = html<EdgeNewTab>`
           <img slot="hero" src="img/edge/newtab/oysters.jpg" alt="" />
         </newtab-feed-list-item>
       </newtab-feed-list>
-      <newtab-feed-card class="card-in" style="--index: 8;">
+      <newtab-feed-card
+        @click="${(x) =>
+          x.handleLinkClick(
+            'https://www.realsimple.com/healthy-meal-prep-recipes-8664774',
+          )}"
+        class="card-in"
+        style="--index: 8;"
+      >
         <img slot="hero" src="img/edge/newtab/food.jpg" alt="" />
         <img
           slot="publisher-icon"
@@ -215,7 +288,14 @@ const template = html<EdgeNewTab>`
         </h3>
         Save time and money with meal prep ideas.
       </newtab-feed-card>
-      <newtab-feed-card class="card-in" style="--index: 9;">
+      <newtab-feed-card
+        @click="${(x) =>
+          x.handleLinkClick(
+            'https://bikesinsight.com/is-a-balance-bike-worth-it/#:~:text=A%20balance%20bike%20is%20worth%20it%20because%20it,your%20kid%20can%20also%20use%20it%20for%20exercise.',
+          )}"
+        class="card-in"
+        style="--index: 9;"
+      >
         <img slot="hero" src="img/edge/newtab/bikes.jpg" alt="" />
         <img
           slot="publisher-icon"

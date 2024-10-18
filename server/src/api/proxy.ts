@@ -26,7 +26,9 @@ export default async (req: Request, res: Response) => {
     // to the head of the document to ensure that relative URLs
     // are resolved correctly.
     const $ = cheerio.load(html);
-    $('head').prepend(`<base href="${url}">`);
+    $('head').prepend(
+      `<base href="${jsUrl.protocol + '//' + jsUrl.hostname}">`,
+    );
 
     // Set the cache control header to cache the page for one day
     res.set('Cache-Control', 'public, max-age=86400');

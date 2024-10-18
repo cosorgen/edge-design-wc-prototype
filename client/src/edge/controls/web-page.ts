@@ -101,7 +101,7 @@ export class WebPage extends FASTElement {
     if (!this.url) return;
     if (this.page) this.handlePageUnload();
 
-    fetch(`/api/proxy?url=${this.url}`, { cache: 'no-cache' })
+    fetch(`/api/proxy?url=${this.url}`)
       .then((res) => {
         if (!res.ok) this.handlePageError(res);
         return res.text();

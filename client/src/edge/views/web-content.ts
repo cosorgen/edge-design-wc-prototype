@@ -71,6 +71,6 @@ export class WebContent extends FASTElement {
   }
 
   handleTabLoadError(id: string): void {
-    // this.ts.tabDidLoadError(id);
+    this.ts.tabLoadError(id);
   }
 }

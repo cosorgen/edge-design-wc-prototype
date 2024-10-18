@@ -117,6 +117,14 @@ export class TabService {
     }));
   }
 
+  tabLoadError(tabId: string) {
+    this.tabs_ = this.tabs_.map((tab) => ({
+      ...tab,
+      url: tab.id === tabId ? 'edge://error' : tab.url,
+      loading: tab.id === tabId ? false : tab.loading,
+    }));
+  }
+
   getActionsForURL(url: string) {
     let top = 'favorite';
     const overflow = ['limit-cookies', 'read-aloud', 'install', 'share'];
