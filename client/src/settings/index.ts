@@ -168,6 +168,15 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
+        <label for="legacy-newtab"> Show legacy new tab page </label>
+        <phx-switch
+          slot="input"
+          id="legacy-newtab"
+          ?checked=${(x) => x.ss.showLegacyNewTab}
+          @change="${(x) => x.toggleShowLegacyNewTab()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
         <label for="frame-spacing">Frame spacing</label>
         <phx-text-input
           id="frame-spacing"
@@ -319,6 +328,13 @@ export class WindowsSettings extends FASTElement {
   toggleTruncateUrl() {
     this.ss.setTruncateURL(
       (this.shadowRoot?.querySelector('#truncate-url') as Checkbox)?.checked ||
+        false,
+    );
+  }
+
+  toggleShowLegacyNewTab() {
+    this.ss.setShowLegacyNewTab(
+      (this.shadowRoot?.querySelector('#legacy-newtab') as Checkbox)?.checked ||
         false,
     );
   }
