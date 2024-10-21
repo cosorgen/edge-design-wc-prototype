@@ -22,7 +22,10 @@ export default async (req: Request, res: Response) => {
     } else {
       // Call proxy API to get the page html
       await fetch(
-        `https://puppeteer-proxy-c3s1.onrender.com/?url=${encodeURIComponent(url)}&key=${process.env.PROXY_API_KEY}`,
+        `https://puppeteer-proxy-c3s1.onrender.com/?url=${encodeURIComponent(
+          url,
+        )}&key=${process.env.PROXY_API_KEY}`,
+        { signal: AbortSignal.timeout(60000) }, // 60 second timeout
       )
         .then((res) => res.text())
         .then((page) => {

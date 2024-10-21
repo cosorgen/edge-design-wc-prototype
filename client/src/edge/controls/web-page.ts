@@ -113,9 +113,15 @@ export class WebPage extends FASTElement {
       });
 
     // Try loading a better version of the page in parallel
-    // Don't error out if it doesn't work.
+    // Don't error out if it doesn't work. Instead just say the page is loaded
     fetch(`/api/proxy?url=${this.url}`)
-      .then((res) => res.text())
+      .then((res) => {
+        if (!res.ok) {
+          this._fullPageLoaded = true;
+          this.handlePageLoad();
+        }
+        return res.text();
+      })
       .then((text) => {
         this._fullPageLoaded = true;
         if (text) this.page = text;
