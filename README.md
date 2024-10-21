@@ -5,8 +5,9 @@
 You need to add a .env file to the root of the project with the following:
 
 ```bash
-BING_APP_ID="ID"
-WEATHER_APP_ID="ID"
+BING_APP_ID=ID
+WEATHER_APP_ID=ID
+PROXY_API_KEY=KEY
 ```
 
 Then run the following

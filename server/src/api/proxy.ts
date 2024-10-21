@@ -1,10 +1,8 @@
-import * as cheerio from 'cheerio';
 import throwServerError, { ServerError } from './utils.js';
 import { Request, Response } from 'express';
-import puppeteer from 'puppeteer';
+import * as cheerio from 'cheerio';
 
 export default async (req: Request, res: Response) => {
-  let browser;
   try {
     const url = req.query.url as string;
     if (url === undefined) throwServerError('Missing URL', 400);
@@ -14,13 +12,23 @@ export default async (req: Request, res: Response) => {
     if (jsUrl.protocol !== 'http:' && jsUrl.protocol !== 'https:')
       throwServerError('Invalid URL', 400);
 
-    // Puppeteer is a headless browser that can render web pages
-    // and resolves a lot of issues with javascript and weird
-    // web pages.
-    browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(url, { waitUntil: 'networkidle2' });
-    const html = await page.content();
+    let html = '';
+    if (req.query.fast === 'true') {
+      await fetch(url)
+        .then((res) => res.text())
+        .then((page) => {
+          html = page;
+        });
+    } else {
+      // Call proxy API to get the page html
+      await fetch(
+        `https://puppeteer-proxy-c3s1.onrender.com/?url=${encodeURIComponent(url)}&key=${process.env.PROXY_API_KEY}`,
+      )
+        .then((res) => res.text())
+        .then((page) => {
+          html = page;
+        });
+    }
 
     // Using cherrio to manipulate the DOM, we add a base tag
     // to the head of the document to ensure that relative URLs
@@ -32,6 +40,7 @@ export default async (req: Request, res: Response) => {
 
     // Set the cache control header to cache the page for one day
     res.set('Cache-Control', 'public, max-age=86400');
+
     return res.send($.html());
   } catch (err) {
     console.error(err);
@@ -39,7 +48,5 @@ export default async (req: Request, res: Response) => {
     if (serverError instanceof ServerError) {
       return res.sendStatus(serverError.statusCode || 500);
     }
-  } finally {
-    if (browser) await browser.close();
   }
 };

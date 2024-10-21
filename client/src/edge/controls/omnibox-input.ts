@@ -77,6 +77,7 @@ export class OmniboxInput extends FASTElement {
     this.input = this.shadowRoot?.querySelector('[part="input"]');
     if (!this.input) throw new Error('Input element not found');
     this.input.focus(); // Focus the input when it's created.
+    this.valueChanged(); // Set the initial value.
   }
 
   valueChanged() {

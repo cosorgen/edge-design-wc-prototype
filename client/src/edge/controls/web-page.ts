@@ -38,6 +38,7 @@ export class WebPage extends FASTElement {
   @attr url = '';
   @observable page = '';
   _iframeDocumentBody: HTMLBodyElement | null = null;
+  _fullPageLoaded = false;
 
   setElements() {
     const iframe = this.shadowRoot?.querySelector(
@@ -101,12 +102,24 @@ export class WebPage extends FASTElement {
     if (!this.url) return;
     if (this.page) this.handlePageUnload();
 
-    fetch(`/api/proxy?url=${this.url}`, { cache: 'no-cache' })
+    fetch(`/api/proxy?url=${this.url}&fast=true`)
       .then((res) => {
         if (!res.ok) this.handlePageError(res);
         return res.text();
       })
-      .then((text) => (this.page = text));
+      .then((text) => {
+        this._fullPageLoaded = false;
+        this.page = text;
+      });
+
+    // Try loading a better version of the page in parallel
+    // Don't error out if it doesn't work.
+    fetch(`/api/proxy?url=${this.url}`)
+      .then((res) => res.text())
+      .then((text) => {
+        this._fullPageLoaded = true;
+        if (text) this.page = text;
+      });
   }
 
   handlePageUnload() {
@@ -118,11 +131,12 @@ export class WebPage extends FASTElement {
   handlePageLoad() {
     if (!this.page) return;
 
-    this.$emit('pageload');
     setTimeout(() => {
       this.setElements();
       this.addEventListeners();
     }, 500);
+
+    if (this._fullPageLoaded) this.$emit('pageload');
   }
 
   handlePageError(res: Response) {
