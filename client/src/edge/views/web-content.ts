@@ -13,10 +13,12 @@ import '../controls/web-page.js';
 import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 import './edge-newtab.js';
 import './edge-newtab-legacy.js';
+import './copilot-newtab.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
-  newtab: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
+  newtab: html`<copilot-newtab ?active="${(x) => x.active}"></copilot-newtab>`,
+  newtabEdge: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
   newtabLegacy: html`<edge-newtab-legacy
     ?active="${(x) => x.active}"
   ></edge-newtab-legacy>`,

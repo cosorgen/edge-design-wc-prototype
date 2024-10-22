@@ -7,7 +7,7 @@ export default class EdgeSettingsSerivce {
   @observable showLegacyCopilot = false;
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
-  @observable frameSpacing = '4px';
+  @observable frameSpacing = '8px';
   @observable showLegacyNewTab = false;
 
   constructor() {
@@ -21,16 +21,21 @@ export default class EdgeSettingsSerivce {
       (url.searchParams.get('showFavoritesBar') as
         | 'always'
         | 'newtab'
-        | 'never') || 'never';
+        | 'never') || this.showFavoritesBar;
 
     this.showLegacyCopilot =
-      url.searchParams.get('showLegacyCopilot') === 'true';
-    this.showLegacyNewTab = url.searchParams.get('showLegacyNewTab') === 'true';
+      url.searchParams.get('showLegacyCopilot') === 'true' ||
+      this.showLegacyCopilot;
+    this.showLegacyNewTab =
+      url.searchParams.get('showLegacyNewTab') === 'true' ||
+      this.showLegacyNewTab;
     this.showLegacyCopilot && this.pinToolbarItem('Copilot');
 
-    this.truncateURL = url.searchParams.get('truncateURL') === 'true';
+    this.truncateURL =
+      url.searchParams.get('truncateURL') === 'true' || this.truncateURL;
 
-    this.frameSpacing = url.searchParams.get('frameSpacing') || '4px';
+    this.frameSpacing =
+      url.searchParams.get('frameSpacing') || this.frameSpacing;
   }
 
   setSettingsInURL() {

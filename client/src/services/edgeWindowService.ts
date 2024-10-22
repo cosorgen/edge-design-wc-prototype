@@ -9,6 +9,7 @@ export default class EdgeWindowService {
   @observable id: string | null = null;
   @observable activeSidepaneAppId: string | null = null;
   @observable activeToolbarItemId: string | null = null;
+  @observable composerActive = false;
 
   openToolbarItem(id: string) {
     if (this.activeToolbarItemId !== id) {

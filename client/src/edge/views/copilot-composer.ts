@@ -17,10 +17,13 @@ import {
   spacingHorizontalXS,
   strokeWidthThin,
 } from '@phoenixui/themes';
+import '@phoenixui/web-components/button.js';
 
 const template = html`
   <div id="start">
-    <slot name="start"></slot>
+    <phx-button appearance="subtle" size="large" icon-only>
+      <img src="img/edge/copilot-icon.svg" />
+    </phx-button>
   </div>
   <input
     type="text"
@@ -28,7 +31,27 @@ const template = html`
     @keydown="${(x, c) => x.handleKeydown(c.event)}"
   />
   <div id="end">
-    <slot name="end"></slot>
+    <phx-button appearance="subtle" size="large" icon-only slot="end">
+      <svg>
+        <use x="2" y="2" href="img/edge/icons.svg#add-24-regular" />
+      </svg>
+    </phx-button>
+    <phx-button appearance="subtle" size="large" icon-only slot="end">
+      <svg>
+        <use x="2" y="2" href="img/edge/icons.svg#mic-new-24-regular" />
+      </svg>
+    </phx-button>
+    <phx-button
+      appearance="subtle"
+      size="large"
+      icon-only
+      slot="end"
+      @click="${(x) => x.$emit('close')}"
+    >
+      <svg>
+        <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
+      </svg>
+    </phx-button>
   </div>
 `;
 
@@ -52,7 +75,7 @@ const styles = css`
     flex: 1;
     box-sizing: border-box;
     height: 48px;
-    min-width: 156px;
+    min-width: 206px;
     border: none;
     background: ${colorLayerBackgroundDialog};
     border-radius: 20px;
@@ -72,6 +95,13 @@ const styles = css`
   input:empty::placeholder {
     color: ${colorNeutralForegroundHint};
   }
+
+  #start,
+  #end {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+  }
 `;
 
 @customElement({
@@ -80,7 +110,7 @@ const styles = css`
   styles,
 })
 export class CopilotComposer extends FASTElement {
-  @attr placeholder = 'Talk about your page';
+  @attr placeholder = 'Message Copilot';
 
   handleKeydown(e: Event) {
     if (!(e instanceof KeyboardEvent)) return;

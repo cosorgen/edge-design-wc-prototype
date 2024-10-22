@@ -16,8 +16,7 @@ import {
   curveEasyEaseMax,
   colorLayerBackgroundDialog,
 } from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import '../controls/copilot-composer.js';
+import './copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { spacingFrame } from '../designSystem.js';
@@ -26,25 +25,7 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
   <div id="hint-target"></div>
-  <copilot-composer
-    @close="${(x) => x.toggleActive()}"
-    @submit="${(x) => x.openSidebar()}"
-  >
-    <phx-button
-      appearance="subtle"
-      size="large"
-      icon-only
-      slot="start"
-      @click="${(x) => x.openSidebar()}"
-    >
-      <img src="img/edge/copilot-icon.svg" />
-    </phx-button>
-    <phx-button appearance="subtle" size="large" icon-only slot="end">
-      <svg>
-        <use href="img/edge/icons.svg#cast-20-regular" />
-      </svg>
-    </phx-button>
-  </copilot-composer>`;
+  <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>`;
 
 const styles = css`
   :host {
@@ -125,7 +106,7 @@ const styles = css`
 
   copilot-composer {
     position: absolute;
-    bottom: 0;
+    bottom: calc(${spacingFrame} / 2 + 32px);
 
     display: none;
     opacity: 0;
@@ -139,7 +120,7 @@ const styles = css`
   copilot-composer[expanded] {
     display: flex;
     opacity: 1;
-    width: 349px;
+    width: 374px;
     transform: translateY(0px);
   }
 
@@ -169,6 +150,11 @@ export class CopilotEntrypoint extends FASTElement {
     super.connectedCallback();
     this.setElements();
     this.addEventListeners();
+    if (this.active) {
+      setTimeout(() => {
+        this.setPopoverState();
+      }, 500);
+    }
   }
 
   disconnectedCallback(): void {
@@ -274,6 +260,7 @@ export class CopilotEntrypoint extends FASTElement {
 
   toggleActive(): void {
     this.active = !this.active;
+    this.ews.composerActive = this.active;
     this.setPopoverState();
     // if (this.active) this._composerElement?.focus();
   }

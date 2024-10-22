@@ -16,7 +16,7 @@ import {
   spacingVerticalXXL,
 } from '@phoenixui/themes';
 import '../controls/sidepane-header.js';
-import '../controls/copilot-composer.js';
+import './copilot-composer.js';
 import { setThemeFor } from '@phoenixui/web-components';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import WindowsService from '#serviceswindowsService.js';
