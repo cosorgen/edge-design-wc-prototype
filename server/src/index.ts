@@ -1,7 +1,13 @@
 import * as dotenv from 'dotenv';
 import path from 'path';
 import express from 'express';
-import { suggest, proxy, metadata, weather } from './api/index.js';
+import {
+  suggest,
+  proxy,
+  metadata,
+  weather,
+  imageOfTheDay,
+} from './api/index.js';
 
 dotenv.config(); // Load .env file for keys
 
@@ -17,6 +23,7 @@ app.get('/api/weather', weather);
 app.get('/api/suggest', suggest);
 app.get('/api/proxy', proxy);
 app.get('/api/metadata', metadata);
+app.get('/api/image-of-the-day', imageOfTheDay);
 
 // All other GET requests not handled before will return our app
 app.get('*', (req, res) => {
