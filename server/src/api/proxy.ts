@@ -16,7 +16,7 @@ export default async (req: Request, res: Response) => {
     if (req.query.enhanced === 'true') {
       // Call proxy API to get the page html
       await fetch(
-        `https://puppeteer-proxy-c3s1.onrender.com/?url=${encodeURIComponent(
+        `https://puppeteer-proxy.yellowwater-aef54d0d.westus2.azurecontainerapps.io/?url=${encodeURIComponent(
           url,
         )}&key=${process.env.PROXY_API_KEY}`,
         { signal: AbortSignal.timeout(60000) }, // 60 second timeout
