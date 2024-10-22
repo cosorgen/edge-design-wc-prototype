@@ -18,50 +18,61 @@ import {
   strokeWidthThin,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '../controls/copilot-chat-entry.js';
 
 const template = html`
-  <div id="start">
-    <phx-button appearance="subtle" size="large" icon-only>
-      <img src="img/edge/copilot-icon.svg" />
-    </phx-button>
+  <div id="chat">
+    <copilot-chat-entry bot>
+      <span class="bold">
+        Sure thing! Here's a quick summary of some uplifting news today:
+      </span>
+      A couple celebrated their engagement in the aisles of an Aldi store, where
+      they had their first date Meanwhile, a college student became a trusted
+      source of information during Hurricane Helene, helping many stay safe Can
+      I help you with anything else?
+    </copilot-chat-entry>
   </div>
-  <input
-    type="text"
-    placeholder="${(x) => x.placeholder}"
-    @keydown="${(x, c) => x.handleKeydown(c.event)}"
-  />
-  <div id="end">
-    <phx-button appearance="subtle" size="large" icon-only slot="end">
-      <svg>
-        <use x="2" y="2" href="img/edge/icons.svg#add-24-regular" />
-      </svg>
-    </phx-button>
-    <phx-button appearance="subtle" size="large" icon-only slot="end">
-      <svg>
-        <use x="2" y="2" href="img/edge/icons.svg#mic-new-24-regular" />
-      </svg>
-    </phx-button>
-    <phx-button
-      appearance="subtle"
-      size="large"
-      icon-only
-      slot="end"
-      @click="${(x) => x.$emit('close')}"
-    >
-      <svg>
-        <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
-      </svg>
-    </phx-button>
+  <div id="input-row">
+    <div id="start">
+      <phx-button appearance="subtle" size="large" icon-only>
+        <img src="img/edge/copilot-icon.svg" />
+      </phx-button>
+    </div>
+    <input
+      type="text"
+      placeholder="${(x) => x.placeholder}"
+      @keydown="${(x, c) => x.handleKeydown(c.event)}"
+    />
+    <div id="end">
+      <phx-button appearance="subtle" size="large" icon-only slot="end">
+        <svg>
+          <use x="2" y="2" href="img/edge/icons.svg#add-24-regular" />
+        </svg>
+      </phx-button>
+      <phx-button appearance="subtle" size="large" icon-only slot="end">
+        <svg>
+          <use x="2" y="2" href="img/edge/icons.svg#mic-new-24-regular" />
+        </svg>
+      </phx-button>
+      <phx-button
+        appearance="subtle"
+        size="large"
+        icon-only
+        slot="end"
+        @click="${(x) => x.$emit('close')}"
+      >
+        <svg>
+          <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
+        </svg>
+      </phx-button>
+    </div>
   </div>
 `;
 
 const styles = css`
   :host {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: ${spacingHorizontalXS};
-    padding: ${spacingHorizontalS};
+    flex-direction: column;
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
     backdrop-filter: blur(${acrylicBackgroundBlur});
@@ -69,6 +80,18 @@ const styles = css`
     border-radius: 28px;
     box-shadow: ${shadow28};
     overflow: hidden;
+  }
+
+  #input-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalXS};
+    padding: ${spacingHorizontalS};
+  }
+
+  #chat {
+    display: none;
   }
 
   input {
@@ -100,7 +123,6 @@ const styles = css`
   #end {
     display: flex;
     flex-direction: row;
-    overflow: hidden;
   }
 `;
 

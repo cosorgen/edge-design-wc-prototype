@@ -36,6 +36,7 @@ const styles = css`
     margin-block: ${(x) => x.calcMarginForMinHeight()}; /* Take no space  */
 
     --bottom-of-frame: calc(0px - max(${spacingFrame}, 6px) / 2);
+    --composer-width: 512px;
   }
 
   #hint-target {
@@ -120,7 +121,7 @@ const styles = css`
   copilot-composer[expanded] {
     display: flex;
     opacity: 1;
-    width: 374px;
+    width: var(--composer-width, 512px);
     transform: translateY(0px);
   }
 

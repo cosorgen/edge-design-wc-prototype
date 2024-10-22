@@ -56,6 +56,7 @@ const template = html<MicrosoftEdge>`
         (x) => !x.ss.showLegacyCopilot,
         html`<copilot-entrypoint
           ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+          active
         ></copilot-entrypoint>`,
       )}
     </div>
