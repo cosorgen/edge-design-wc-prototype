@@ -38,7 +38,6 @@ export class WebPage extends FASTElement {
   @attr url = '';
   @observable page = '';
   _iframeDocumentBody: HTMLBodyElement | null = null;
-  _fullPageLoaded = false;
 
   setElements() {
     const iframe = this.shadowRoot?.querySelector(
@@ -108,22 +107,17 @@ export class WebPage extends FASTElement {
         return res.text();
       })
       .then((text) => {
-        this._fullPageLoaded = false;
         this.page = text;
       });
 
     // Try loading a better version of the page in parallel
-    // Don't error out if it doesn't work. Instead just say the page is loaded
+    // Don't error out if it doesn't work. Fail silently.
     fetch(`/api/proxy?url=${this.url}&enhanced=true`)
       .then((res) => {
-        if (!res.ok) {
-          this._fullPageLoaded = true;
-          this.handlePageLoad();
-        }
+        if (!res.ok) return;
         return res.text();
       })
       .then((text) => {
-        this._fullPageLoaded = true;
         if (text) this.page = text;
       });
   }
@@ -142,7 +136,7 @@ export class WebPage extends FASTElement {
       this.addEventListeners();
     }, 500);
 
-    if (this._fullPageLoaded) this.$emit('pageload');
+    this.$emit('pageload');
   }
 
   handlePageError(res: Response) {
