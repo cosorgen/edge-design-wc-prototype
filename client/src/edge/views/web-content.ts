@@ -11,12 +11,11 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
 import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
-import './edge-newtab.js';
+// import './edge-newtab.js';
 import './edge-newtab-legacy.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
-  newtab: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
+  // newtab: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
   newtabLegacy: html`<edge-newtab-legacy
     ?active="${(x) => x.active}"
   ></edge-newtab-legacy>`,
@@ -65,15 +64,13 @@ const styles = css`
 })
 export class WebContent extends FASTElement {
   @inject(TabService) ts!: TabService;
-  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
-
-    if (this.ess.showLegacyNewTab) {
-      if (urlObj.hostname === 'newtab') {
-        return 'newtabLegacy';
-      }
+    
+    // Always return the legacy new tab
+    if (urlObj.hostname === 'newtab') {
+      return 'newtabLegacy';
     }
 
     return urlObj.hostname;

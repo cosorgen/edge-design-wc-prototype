@@ -30,60 +30,28 @@ export default class WindowsService {
 
   constructor() {
     // Set theme and transparency based on system preferences
-    this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-
-    this.transparency = window.matchMedia(
-      '(prefers-reduced-transparency: reduce)',
-    ).matches
-      ? 'reduced'
-      : 'normal';
+    this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    this.transparency = window.matchMedia('(prefers-reduced-transparency: reduce)').matches ? 'reduced' : 'normal';
 
     // Update when system preference changes
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', (e) => {
-        this.theme = e.matches ? 'dark' : 'light';
-      });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      this.theme = e.matches ? 'dark' : 'light';
+    });
 
-    window
-      .matchMedia('(prefers-reduced-transparency: reduce)')
-      .addEventListener('change', (e) => {
-        this.transparency = e.matches ? 'reduced' : 'normal';
-      });
+    window.matchMedia('(prefers-reduced-transparency: reduce)').addEventListener('change', (e) => {
+      this.transparency = e.matches ? 'reduced' : 'normal';
+    });
 
-    // Override theme and transparency from URL
-    this.getSettingsFromURL();
-
-    // open default window
+    // Open default window
     this.openWindow('Microsoft Edge');
-  }
-
-  getSettingsFromURL() {
-    const url = new URL(window.location.href);
-    this.theme = (url.searchParams.get('theme') as OSTheme) || this.theme;
-    this.transparency =
-      (url.searchParams.get('transparency') as OSTransparency) ||
-      this.transparency;
-  }
-
-  setSettingsInURL() {
-    const url = new URL(window.location.href);
-    url.searchParams.set('theme', this.theme);
-    url.searchParams.set('transparency', this.transparency);
-
-    window.history.pushState({}, '', url.toString());
   }
 
   setTheme(theme: OSTheme) {
     this.theme = theme;
-    this.setSettingsInURL();
   }
 
   setTransparency(transparency: OSTransparency) {
     this.transparency = transparency;
-    this.setSettingsInURL();
   }
 
   openWindow(appName: string) {

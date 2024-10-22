@@ -52,12 +52,12 @@ const template = html<MicrosoftEdge>`
           <web-content></web-content>
         </div>
       </div>
-      ${when(
+      <!-- ${when(
         (x) => !x.ss.showLegacyCopilot,
         html`<copilot-entrypoint
           ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
         ></copilot-entrypoint>`,
-      )}
+      )} -->
     </div>
     ${when(
       (x) => x.ews.activeSidepaneAppId,

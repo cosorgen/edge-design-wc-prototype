@@ -23,11 +23,10 @@ import './controls/taskbar-button.js';
 import './controls/mica-material.js';
 import './controls/app-window.js';
 import '../edge/index.js';
-import '../settings/index.js';
-
+// import '../settings/index.js';
 const appTemplates: Record<string, ViewTemplate> = {
   'Microsoft Edge': html`<microsoft-edge></microsoft-edge>`,
-  Settings: html`<windows-settings></windows-settings>`,
+  // Settings: html`<windows-settings></windows-settings>`,
 };
 
 const styles = css`
