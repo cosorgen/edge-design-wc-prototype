@@ -20,6 +20,20 @@ export default async (req: Request, res: Response) => {
         return `https://www.bing.com${data.images[0].url}`;
       });
 
+    // Calculate cache time
+    const now = new Date();
+    const startOfDay = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+    );
+    const timeSinceStartOfDay = now.getTime() - startOfDay.getTime();
+    const cacheTime = 24 * 60 * 60 * 1000 - timeSinceStartOfDay;
+
+    // Set cache headers
+    res.setHeader('Cache-Control', `public, max-age=${cacheTime / 1000}`);
+
+    // Return
     return res.send(imageURL);
   } catch (err) {
     console.error(err);

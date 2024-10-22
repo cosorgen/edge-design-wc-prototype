@@ -4,6 +4,7 @@ import {
   FASTElement,
   customElement,
   observable,
+  repeat,
 } from '@microsoft/fast-element';
 import '@phoenixui/web-components/button.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -12,20 +13,75 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#servicestabService.js';
 import {
   borderRadiusCircular,
+  borderRadiusLarge,
   colorBackgroundOverlay,
+  colorBrandForeground1,
+  colorBrandForeground1Hover,
   colorLayerBackgroundDialog,
+  colorNeutralCardBackground,
+  colorNeutralCardBackgroundHover,
   colorNeutralForeground1,
+  colorNeutralForeground2,
   colorNeutralForegroundStaticInverted,
+  colorNeutralStroke1,
   colorSubtleBackgroundHover,
   shadow8,
   spacingHorizontalL,
   spacingHorizontalM,
   spacingHorizontalS,
+  spacingHorizontalXL,
+  spacingHorizontalXS,
   spacingVerticalL,
   spacingVerticalM,
+  spacingVerticalMNudge,
+  spacingVerticalS,
   spacingVerticalXXXL,
+  strokeWidthThin,
   typographyStyles,
 } from '@phoenixui/themes';
+
+const topSites = [
+  {
+    title: 'YouTube',
+    url: 'https://www.youtube.com',
+    icon: 'img/edge/newtab/youtube.png',
+  },
+  {
+    title: 'Netflix',
+    url: 'https://www.netflix.com',
+    icon: 'img/edge/newtab/netflix.png',
+  },
+  {
+    title: 'Instagram',
+    url: 'https://www.instagram.com',
+    icon: 'img/edge/newtab/instagram.png',
+  },
+  {
+    title: 'The New York Times',
+    url: 'https://www.nytimes.com',
+    icon: 'img/edge/newtab/nytimes.png',
+  },
+  {
+    title: 'Target',
+    url: 'https://www.target.com',
+    icon: 'img/edge/newtab/target.png',
+  },
+  {
+    title: 'Spotify',
+    url: 'https://www.spotify.com',
+    icon: 'img/edge/newtab/spotify.png',
+  },
+  {
+    title: 'Yahoo!',
+    url: 'https://www.yahoo.com',
+    icon: 'img/edge/newtab/yahoo.png',
+  },
+  {
+    title: 'Medium',
+    url: 'https://www.medium.com',
+    icon: 'img/edge/newtab/medium.png',
+  },
+];
 
 const template = html<EdgeNewTab>`<img
     id="of-the-day"
@@ -73,9 +129,62 @@ const template = html<EdgeNewTab>`<img
           <img src="img/edge/copilot-icon.svg" alt="Voice search" />
         </button>
       </div>
-      <div id="top-sites"></div>
+      <div id="top-sites">
+        ${repeat(
+          topSites,
+          html`
+            <div
+              class="top-site"
+              @click="${(x, c) => c.parent.handleLinkClick(x.url)}"
+              role="button"
+            >
+              <img src="${(x) => x.icon}" alt="${(x) => x.title}" />
+              <div>${(x) => x.title}</div>
+            </div>
+          `,
+        )}
+        <div class="top-site" role="button">
+          <img src="img/edge/newtab/add.png" alt="add" />
+          <div>Add</div>
+        </div>
+      </div>
     </div>
-    <div id="widgets"></div>
+    <div id="feed">
+      <div id="feed-switch">
+        <div active>Discover</div>
+        <div>Following</div>
+      </div>
+      <div id="headings">
+        <a href="">News</a>
+        <a href="">Sports</a>
+        <a href="">Play</a>
+        <a href="">Money</a>
+        <a href="">Gaming</a>
+        <a href="">Weather</a>
+        <a href="">Watch</a>
+        <a href="">Learning</a>
+        <a href="">Shopping</a>
+        <a href="">Health</a>
+        <a href="">Travel</a>
+        <a href="">Traffic</a>
+        <a href="">Autos</a>
+        <a href="">Real Estate</a>
+      </div>
+      <div id="feed-actions">
+        <phx-button shape="circular">
+          <svg slot="start" width="20px" height="20px">
+            <use href="img/edge/icons.svg#star-edit-20-regular"></use>
+          </svg>
+          Personalize
+        </phx-button>
+        <phx-button shape="circular">
+          <svg slot="start" width="20px" height="20px">
+            <use href="img/edge/icons.svg#options-20-regular"></use>
+          </svg>
+          Feed layout
+        </phx-button>
+      </div>
+    </div>
   </div>`;
 
 const styles = css`
@@ -116,6 +225,7 @@ const styles = css`
     align-items: center;
     justify-content: center;
     gap: ${spacingVerticalL};
+    max-width: 1024px;
   }
 
   #logo {
@@ -149,7 +259,7 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding: ${spacingVerticalXXXL};
 
-    phx-button{
+    phx-button {
       color: ${colorNeutralForegroundStaticInverted};
     }
   }
@@ -164,12 +274,13 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding: ${spacingVerticalXXXL};
 
-    phx-button{
+    phx-button {
       color: ${colorNeutralForegroundStaticInverted};
     }
   }
 
   #searchbox {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: ${spacingHorizontalS};
@@ -222,12 +333,115 @@ const styles = css`
       img {
         width: 32px;
         height: 32px;
+      }
     }
 
     button:hover {
       background-color: ${colorSubtleBackgroundHover};
     }
   }
+
+  #top-sites {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .top-site {
+    flex: 1;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: ${spacingVerticalS};
+    padding: ${spacingVerticalS} ${spacingHorizontalXS};
+    color: ${colorNeutralForegroundStaticInverted};
+    cursor: pointer;
+
+    &:hover {
+      img {
+        background-color: ${colorNeutralCardBackgroundHover};
+      }
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+      padding: ${spacingVerticalS};
+      background-color: ${colorNeutralCardBackground};
+      border-radius: ${borderRadiusLarge};
+    }
+
+    div {
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  #feed {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: ${spacingVerticalL};
+    background-color: ${colorNeutralCardBackground};
+    padding: ${spacingVerticalMNudge} ${spacingHorizontalXL};
+    border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
+    color: ${colorNeutralForeground2};
+  }
+
+  #feed-switch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalM};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    border-radius: ${borderRadiusLarge};
+    padding: ${spacingVerticalS} ${spacingHorizontalL};
+
+    [active] {
+      color: ${colorBrandForeground1};
+      font-weight: ${typographyStyles.body1Strong.fontWeight};
+    }
+  }
+
+  #headings {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalL};
+    overflow-x: auto;
+
+    a {
+      text-decoration: none;
+      color: ${colorNeutralForeground2};
+    }
+
+    a:hover {
+      color: ${colorBrandForeground1Hover};
+    }
+  }
+
+  #feed-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalM};
+
+    phx-button {
+      color: ${colorNeutralForeground2};
+    }
 `;
 
 @customElement({
