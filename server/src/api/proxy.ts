@@ -13,13 +13,7 @@ export default async (req: Request, res: Response) => {
       throwServerError('Invalid URL', 400);
 
     let html = '';
-    if (req.query.fast === 'true') {
-      await fetch(url)
-        .then((res) => res.text())
-        .then((page) => {
-          html = page;
-        });
-    } else {
+    if (req.query.enhanced === 'true') {
       // Call proxy API to get the page html
       await fetch(
         `https://puppeteer-proxy-c3s1.onrender.com/?url=${encodeURIComponent(
@@ -27,6 +21,12 @@ export default async (req: Request, res: Response) => {
         )}&key=${process.env.PROXY_API_KEY}`,
         { signal: AbortSignal.timeout(60000) }, // 60 second timeout
       )
+        .then((res) => res.text())
+        .then((page) => {
+          html = page;
+        });
+    } else {
+      await fetch(url)
         .then((res) => res.text())
         .then((page) => {
           html = page;
