@@ -30,6 +30,11 @@ import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<CopilotComposer>`
   <copilot-design-provider>
+    <phx-button appearance="subtle" icon-only>
+      <svg>
+        <use href="img/edge/icons.svg#thumb-like-20-regular"></use>
+      </svg>
+    </phx-button>
     <div id="chat"></div>
     <div id="input-row">
       <div id="start">
@@ -231,22 +236,7 @@ export class CopilotComposer extends FASTElement {
 
   handleChange(subject: unknown, key: string) {
     if (key === 'threadsById') {
-      if (this._threadId && this._chatElement) {
-        const messages = this.cs.threadsById[this._threadId].messages;
-        this._chatElement.innerHTML = '';
-        for (const messageId in messages) {
-          const message = messages[messageId];
-          const entry = document.createElement(
-            'copilot-chat-entry',
-          ) as CopilotChatEntry;
-
-          entry.innerText = message.tokens.join('');
-          if (message.author === 'system') entry.setAttribute('system', '');
-          entry.setAttribute('inline', '');
-
-          this._chatElement.appendChild(entry);
-        }
-      }
+      this.updateChat();
     }
   }
 
@@ -280,6 +270,26 @@ export class CopilotComposer extends FASTElement {
   handleClose() {
     this.clearChat();
     this.$emit('close');
+  }
+
+  updateChat() {
+    if (this._threadId && this._chatElement) {
+      const messages = this.cs.threadsById[this._threadId].messages;
+      this._chatElement.innerHTML = '';
+      for (const messageId in messages) {
+        const message = messages[messageId];
+        const entry = document.createElement(
+          'copilot-chat-entry',
+        ) as CopilotChatEntry;
+
+        entry.innerText = message.tokens.join('');
+        if (message.author === 'system') entry.setAttribute('system', '');
+        if (message.status === 'pending') entry.setAttribute('pending', '');
+        entry.setAttribute('inline', '');
+
+        this._chatElement.appendChild(entry);
+      }
+    }
   }
 
   clearChat() {

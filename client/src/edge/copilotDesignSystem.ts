@@ -24,7 +24,7 @@ export const copilotDarkTheme = {
   backgroundGradient:
     '180deg, rgba(16, 21, 36, 0.8) 0%, rgba(16, 21, 36, 0.8) 80%, rgba(16, 21, 36, 0.8) 100%',
   colorNeutralForeground1: '#F2DDCC',
-  colorNeutralCardBackground: '#333333',
+  colorNeutralCardBackground: '#1D2439',
   colorBrandBackground: '#455172',
   colorBrandBackgroundHover: '#505B7B',
   colorBrandBackgroundPressed: '#313A52',
