@@ -14,12 +14,14 @@ import {
   durationNormal,
   spacingHorizontalL,
   spacingHorizontalXS,
+  spacingVerticalM,
   spacingVerticalMNudge,
-  spacingVerticalS,
+  spacingVerticalXXS,
   typographyStyles,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/spinner.js';
+import { colorLoadingSpinner } from '../copilotDesignSystem.js';
 
 const template = html`<div id="message">
     <slot></slot>
@@ -37,14 +39,16 @@ const template = html`<div id="message">
       </svg>
     </phx-button>
   </div>
-  <phx-spinner></phx-spinner>`;
+  <div id="loading"></div>`;
 
 const styles = css`
   :host {
+    --text-transition-duration: 2s;
+
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: ${spacingVerticalS};
+    gap: ${spacingVerticalXXS};
     align-items: center;
   }
 
@@ -76,6 +80,22 @@ const styles = css`
     align-self: flex-start;
     padding: 0;
     text-align: start;
+
+    mask: linear-gradient(165deg, black, black 50%, transparent 75%);
+    mask-position: 200% 200%;
+    mask-size: 200% 200%;
+    mask-repeat: no-repeat;
+    transition: mask-position var(--text-transition-duration);
+  }
+
+  :host([system]:not([pending])) #message {
+    mask-position: 0 0;
+  }
+
+  @starting-style {
+    :host([system]:not([pending])) #message {
+      mask-position: 200% 200%;
+    }
   }
 
   :host([inline][system]) #message {
@@ -95,14 +115,16 @@ const styles = css`
     font-weight: ${typographyStyles.caption1.fontWeight};
     color: ${colorNeutralForegroundHint};
 
+    opacity: 0;
+    transition: opacity ${durationNormal};
+
     phx-button {
       color: ${colorNeutralForegroundHint};
     }
   }
 
-  :host([pending]) #actions,
-  :host(:not([system])) #actions {
-    display: none;
+  :host(:hover:is([system]):not([pending])) #actions {
+    opacity: 1;
   }
 
   :host([pending]) #message {
@@ -110,12 +132,24 @@ const styles = css`
     opacity: 0;
   }
 
-  phx-spinner {
+  #loading {
     display: none;
+    width: 64px;
+    height: 64px;
+    background-color: ${colorLoadingSpinner};
+    mask: url(img/edge/copilotLoading.gif);
+    mask-size: cover;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    margin-block-end: ${spacingVerticalM};
   }
 
-  :host([pending]) phx-spinner {
+  :host([pending]) #loading {
     display: block;
+  }
+
+  :host([pending]) #actions {
+    display: none;
   }
 `;
 

@@ -19,7 +19,6 @@ import {
   spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
-  spacingVerticalM,
   spacingVerticalXXL,
   strokeWidthThin,
   typographyStyles,
@@ -115,10 +114,9 @@ const styles = css`
 
   #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
-    padding-block-end: ${spacingVerticalM};
+    padding-block-end: 0;
     display: flex;
     flex-direction: column;
-    gap: ${spacingVerticalXXL};
     max-height: 50vh;
     overflow-y: auto;
     scrollbar-color: ${colorScrollbarForeground} transparent;
@@ -299,7 +297,6 @@ export class CopilotComposer extends FASTElement {
           ) as CopilotChatEntry;
           entry.setAttribute('id', message.id);
           entry.setAttribute('inline', '');
-          entry.setAttribute('time', moment(message.timestamp).fromNow());
           if (message.author === 'system') entry.setAttribute('system', '');
           this._chatElement.appendChild(entry);
         }
@@ -309,6 +306,15 @@ export class CopilotComposer extends FASTElement {
         } else {
           entry.innerText = message.tokens.join('');
           entry.removeAttribute('pending');
+          entry.setAttribute(
+            'style',
+            `--text-transition-duration: ${message.tokens.length * 100}ms`,
+          );
+        }
+
+        const timeMessage = moment(message.timestamp).fromNow();
+        if (entry.getAttribute('time') !== timeMessage) {
+          entry.setAttribute('time', timeMessage);
         }
 
         if (this._lockChatScroll)
