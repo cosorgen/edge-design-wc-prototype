@@ -12,6 +12,7 @@ import {
   colorNeutralForegroundHint,
   curveDecelerateMax,
   durationNormal,
+  durationUltraSlow,
   spacingHorizontalL,
   spacingHorizontalXS,
   spacingVerticalM,
@@ -55,24 +56,27 @@ const styles = css`
   #message {
     display: flex;
     flex-direction: column;
-    padding: ${spacingVerticalMNudge} ${spacingHorizontalL};
-    border-radius: ${borderRadiusLarge};
-    background: ${colorNeutralCardBackground};
-    max-width: 80%;
-    align-self: flex-end;
-    text-align: end;
 
     font-family: ${typographyStyles.body2.fontFamily};
     font-size: ${typographyStyles.body2.fontSize};
     line-height: ${typographyStyles.body2.lineHeight};
     font-weight: ${typographyStyles.body2.fontWeight};
     color: ${colorNeutralForeground1};
+  }
+
+  :host(:not([system])) #message {
+    padding: ${spacingVerticalMNudge} ${spacingHorizontalL};
+    border-radius: ${borderRadiusLarge};
+    background: ${colorNeutralCardBackground};
+    align-self: flex-end;
+    text-align: end;
+    max-width: 80%;
 
     transform: translateY(0px);
     opacity: 1;
     transition:
-      transform ${durationNormal} ${curveDecelerateMax},
-      opacity ${durationNormal} ${curveDecelerateMax};
+      transform ${durationUltraSlow} ${curveDecelerateMax},
+      opacity ${durationUltraSlow} ${curveDecelerateMax};
   }
 
   :host([system]) #message {
@@ -90,16 +94,6 @@ const styles = css`
 
   :host([system]:not([pending])) #message {
     mask-position: 0 0;
-  }
-
-  @starting-style {
-    :host([system]:not([pending])) #message {
-      mask-position: 200% 200%;
-    }
-  }
-
-  :host([inline][system]) #message {
-    max-width: none;
   }
 
   #actions {
@@ -142,6 +136,9 @@ const styles = css`
     mask-repeat: no-repeat;
     mask-position: center;
     margin-block-end: ${spacingVerticalM};
+
+    opacity: 1;
+    transition: opacity ${durationUltraSlow} ${curveDecelerateMax} 250ms;
   }
 
   :host([pending]) #loading {
@@ -150,6 +147,21 @@ const styles = css`
 
   :host([pending]) #actions {
     display: none;
+  }
+
+  @starting-style {
+    :host([system]:not([pending])) #message {
+      mask-position: 200% 200%;
+    }
+
+    :host(:not([system])) #message {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+
+    #loading {
+      opacity: 0;
+    }
   }
 `;
 

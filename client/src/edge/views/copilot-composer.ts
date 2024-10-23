@@ -15,6 +15,7 @@ import {
   colorScrollbarForeground,
   curveEasyEaseMax,
   durationNormal,
+  durationUltraSlow,
   shadow28,
   spacingHorizontalS,
   spacingHorizontalXL,
@@ -112,11 +113,17 @@ const styles = css`
     padding: ${spacingHorizontalS};
   }
 
+  #chat {
+    height: 0px;
+    transition: height ${durationUltraSlow} ${curveEasyEaseMax};
+  }
+
   #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
     padding-block-end: 0;
     display: flex;
     flex-direction: column;
+    height: fit-content;
     max-height: 50vh;
     overflow-y: auto;
     scrollbar-color: ${colorScrollbarForeground} transparent;
@@ -269,6 +276,7 @@ export class CopilotComposer extends FASTElement {
   handleSubmit() {
     if (!this._inputElement) return;
     const message = this._inputElement.value;
+    if (!message) return;
     if (!this._threadId) this._threadId = this.cs.newThread();
     this.cs.send(message, this._threadId);
     this._inputElement.value = '';
