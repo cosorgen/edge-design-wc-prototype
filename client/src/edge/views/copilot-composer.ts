@@ -4,6 +4,7 @@ import {
   FASTElement,
   customElement,
   attr,
+  Observable,
 } from '@microsoft/fast-element';
 import {
   acrylicBackgroundBlur,
@@ -23,24 +24,12 @@ import {
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/copilot-chat-entry.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<CopilotComposer>`
   <copilot-design-provider>
-    <div id="chat">
-      <copilot-chat-entry bot>
-        <span class="bold">
-          Sure thing! Here's a quick summary of some uplifting news today:
-        </span>
-        <br /><br />
-        A couple celebrated their engagement in the aisles of an Aldi store,
-        where they had their first date
-        <br /><br />
-        Meanwhile, a college student became a trusted source of information
-        during Hurricane Helene, helping many stay safe
-        <br /><br />
-        Can I help you with anything else?
-      </copilot-chat-entry>
-    </div>
+    <div id="chat"></div>
     <div id="input-row">
       <div id="start">
         <phx-button appearance="subtle" size="large" icon-only>
@@ -120,14 +109,8 @@ const styles = css`
     padding: ${spacingHorizontalS};
   }
 
-  #chat {
+  #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
-    .bold {
-      font-weight: ${typographyStyles.body1Strong.fontWeight};
-      font-family: ${typographyStyles.body1Strong.fontFamily};
-      font-size: ${typographyStyles.body1Strong.fontSize};
-      line-height: ${typographyStyles.body1Strong.lineHeight};
-    }
   }
 
   #input-wrapper {
@@ -142,6 +125,7 @@ const styles = css`
     position: absolute;
     right: 6px;
     border-radius: 14px;
+    color: ${colorNeutralForeground1};
 
     display: none;
     transform: translateY(8px);
@@ -203,16 +187,20 @@ const styles = css`
   styles,
 })
 export class CopilotComposer extends FASTElement {
+  @inject(CopilotService) cs!: CopilotService;
   @attr placeholder = 'Message Copilot';
   _inputElement: HTMLInputElement | null = null;
+  _threadId?: string;
 
   connectedCallback(): void {
     super.connectedCallback();
     this.setElements();
+    this.addEventListeners();
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
+    this.removeEventListeners();
     this.unsestElements();
   }
 
@@ -226,14 +214,25 @@ export class CopilotComposer extends FASTElement {
     this._inputElement = null;
   }
 
+  addEventListeners() {
+    Observable.getNotifier(this.cs).subscribe(this, 'threadsById');
+  }
+
+  removeEventListeners() {
+    Observable.getNotifier(this.cs).unsubscribe(this, 'threadsById');
+  }
+
+  handleChange(subject: unknown, key: string) {
+    if (key === 'threadsById') {
+      console.log('threadsById changed', this.cs.threadsById[this._threadId!]);
+    }
+  }
+
   handleKeydown(e: Event) {
     if (!(e instanceof KeyboardEvent)) return;
 
-    const input = this.shadowRoot?.querySelector('input');
-
     if (e.key === 'Enter') {
-      this.$emit('submit', input?.value);
-      if (input) input.value = '';
+      this.handleSubmit();
       return;
     }
     if (e.key === 'Escape') {
@@ -245,13 +244,13 @@ export class CopilotComposer extends FASTElement {
   }
 
   focus() {
-    const input = this.shadowRoot?.querySelector('input');
-    if (input) input.focus();
+    this._inputElement?.focus();
   }
 
   handleSubmit() {
     if (!this._inputElement) return;
-
+    const message = this._inputElement.value;
+    this._threadId = this.cs.send(message, this._threadId);
     this._inputElement.value = '';
   }
 }
