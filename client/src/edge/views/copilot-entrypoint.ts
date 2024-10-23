@@ -60,7 +60,10 @@ const styles = css`
     width: 128px;
     bottom: -2px; /* Center the grabber */
     opacity: 1;
-    transition: all ${durationSlow} ${curveEasyEaseMax};
+    transition:
+      width ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax},
+      bottom ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #grabber {
@@ -87,16 +90,18 @@ const styles = css`
     backdrop-filter: blur(${acrylicBackgroundBlur});
     border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
     box-shadow: ${shadow16};
+    width: 160px;
 
-    width: 64px;
-    bottom: calc(var(--bottom-of-frame) - 32px);
-    opacity: 0;
-    transition: all ${durationSlow} ${curveEasyEaseMax};
+    bottom: calc(var(--bottom-of-frame) - 66px);
+    opacity: 1;
+    transition:
+      bottom ${durationSlow} ${curveEasyEaseMax},
+      width ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #hint-composer {
-    width: 160px;
-    opacity: 1;
+    bottom: calc(var(--bottom-of-frame) - 32px);
   }
 
   :host([active]) #hint-composer {
