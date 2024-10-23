@@ -24,6 +24,7 @@ import {
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '../controls/copilot-chat-entry.js';
+import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 
@@ -70,7 +71,7 @@ const template = html<CopilotComposer>`
           size="large"
           icon-only
           slot="end"
-          @click="${(x) => x.$emit('close')}"
+          @click="${(x) => x.handleClose()}"
         >
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
@@ -111,6 +112,9 @@ const styles = css`
 
   #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
+    display: flex;
+    flex-direction: column;
+    gap: ${spacingVerticalXXL};
   }
 
   #input-wrapper {
@@ -190,6 +194,7 @@ export class CopilotComposer extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @attr placeholder = 'Message Copilot';
   _inputElement: HTMLInputElement | null = null;
+  _chatElement: HTMLElement | null = null;
   _threadId?: string;
 
   connectedCallback(): void {
@@ -208,10 +213,12 @@ export class CopilotComposer extends FASTElement {
     this._inputElement = this.shadowRoot?.querySelector(
       'input',
     ) as HTMLInputElement;
+    this._chatElement = this.shadowRoot?.querySelector('#chat') as HTMLElement;
   }
 
   unsestElements() {
     this._inputElement = null;
+    this._chatElement = null;
   }
 
   addEventListeners() {
@@ -224,7 +231,22 @@ export class CopilotComposer extends FASTElement {
 
   handleChange(subject: unknown, key: string) {
     if (key === 'threadsById') {
-      console.log('threadsById changed', this.cs.threadsById[this._threadId!]);
+      if (this._threadId && this._chatElement) {
+        const messages = this.cs.threadsById[this._threadId].messages;
+        this._chatElement.innerHTML = '';
+        for (const messageId in messages) {
+          const message = messages[messageId];
+          const entry = document.createElement(
+            'copilot-chat-entry',
+          ) as CopilotChatEntry;
+
+          entry.innerText = message.tokens.join('');
+          if (message.author === 'system') entry.setAttribute('system', '');
+          entry.setAttribute('inline', '');
+
+          this._chatElement.appendChild(entry);
+        }
+      }
     }
   }
 
@@ -236,7 +258,7 @@ export class CopilotComposer extends FASTElement {
       return;
     }
     if (e.key === 'Escape') {
-      this.$emit('close');
+      this.handleClose();
       return;
     }
 
@@ -250,7 +272,19 @@ export class CopilotComposer extends FASTElement {
   handleSubmit() {
     if (!this._inputElement) return;
     const message = this._inputElement.value;
-    this._threadId = this.cs.send(message, this._threadId);
+    if (!this._threadId) this._threadId = this.cs.newThread();
+    this.cs.send(message, this._threadId);
     this._inputElement.value = '';
+  }
+
+  handleClose() {
+    this.clearChat();
+    this.$emit('close');
+  }
+
+  clearChat() {
+    if (!this._chatElement) return;
+    this._chatElement.innerHTML = '';
+    this._threadId = undefined;
   }
 }

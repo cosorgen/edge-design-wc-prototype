@@ -13,7 +13,7 @@ export type Thread = {
   messages: Record<string, Message>;
 };
 
-const MAX_TOKEN_COUNT = 100;
+const MAX_TOKEN_COUNT = 25;
 const MAX_INTERVAL_BETWEEN_TOKENS = 1000;
 const MAX_WORDS_IN_TOKEN = 3;
 const words = [
@@ -93,45 +93,35 @@ export class CopilotService {
   @observable threadsById: Record<string, Thread> = {};
   _tokenCount: number = 0;
 
-  send(message: string, threadId?: string) {
-    const messageId = crypto.randomUUID();
-
-    if (!threadId) {
-      threadId = crypto.randomUUID();
-      this.threadIds.push(threadId);
-      this.threadsById = {
-        ...this.threadsById,
-        [threadId]: {
-          id: threadId,
-          messages: {
-            [messageId]: {
-              id: messageId,
-              tokens: [message],
-              timestamp: Date.now(),
-              author: 'user',
-              status: 'complete',
-            },
-          },
-        },
-      };
-    } else {
-      const thread = this.threadsById[threadId];
-      thread.messages = {
-        ...thread.messages,
-        [messageId]: {
-          id: messageId,
-          tokens: [message],
-          timestamp: Date.now(),
-          author: 'user',
-          status: 'complete',
-        },
-      };
-      this.threadsById = { ...this.threadsById, thread };
-    }
-
-    this.listenForResponse(threadId);
+  newThread() {
+    const threadId = crypto.randomUUID();
+    this.threadIds.push(threadId);
+    this.threadsById = {
+      ...this.threadsById,
+      [threadId]: {
+        id: threadId,
+        messages: {},
+      },
+    };
 
     return threadId;
+  }
+
+  send(message: string, threadId: string) {
+    const messageId = crypto.randomUUID();
+    const thread = this.threadsById[threadId];
+    thread.messages = {
+      ...thread.messages,
+      [messageId]: {
+        id: messageId,
+        tokens: [message],
+        timestamp: Date.now(),
+        author: 'user',
+        status: 'complete',
+      },
+    };
+    this.threadsById = { ...this.threadsById, thread };
+    this.listenForResponse(threadId);
   }
 
   recieve(token: string, threadId: string, messageId: string) {
