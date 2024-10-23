@@ -94,7 +94,7 @@ export class CopilotService {
   _tokenCount: number = 0;
 
   newThread() {
-    const threadId = crypto.randomUUID();
+    const threadId = 'thread-' + crypto.randomUUID();
     this.threadIds.push(threadId);
     this.threadsById = {
       ...this.threadsById,
@@ -108,7 +108,7 @@ export class CopilotService {
   }
 
   send(message: string, threadId: string) {
-    const messageId = crypto.randomUUID();
+    const messageId = 'message' + crypto.randomUUID();
     const thread = this.threadsById[threadId];
     thread.messages = {
       ...thread.messages,
@@ -135,7 +135,7 @@ export class CopilotService {
 
     // Set up the response
     let thread = this.threadsById[threadId];
-    const responseId = crypto.randomUUID();
+    const responseId = 'message' + crypto.randomUUID();
     thread.messages[responseId] = {
       id: responseId,
       tokens: [],

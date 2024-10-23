@@ -12,12 +12,14 @@ import {
   colorLayerBackgroundDialog,
   colorNeutralForeground1,
   colorNeutralForegroundHint,
+  colorScrollbarForeground,
   curveEasyEaseMax,
   durationNormal,
   shadow28,
   spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
+  spacingVerticalM,
   spacingVerticalXXL,
   strokeWidthThin,
   typographyStyles,
@@ -27,14 +29,10 @@ import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
+import moment from 'moment';
 
 const template = html<CopilotComposer>`
   <copilot-design-provider>
-    <phx-button appearance="subtle" icon-only>
-      <svg>
-        <use href="img/edge/icons.svg#thumb-like-20-regular"></use>
-      </svg>
-    </phx-button>
     <div id="chat"></div>
     <div id="input-row">
       <div id="start">
@@ -117,9 +115,14 @@ const styles = css`
 
   #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
+    padding-block-end: ${spacingVerticalM};
     display: flex;
     flex-direction: column;
     gap: ${spacingVerticalXXL};
+    max-height: 50vh;
+    overflow-y: auto;
+    scrollbar-color: ${colorScrollbarForeground} transparent;
+    scrollbar-width: thin;
   }
 
   #input-wrapper {
@@ -201,6 +204,8 @@ export class CopilotComposer extends FASTElement {
   _inputElement: HTMLInputElement | null = null;
   _chatElement: HTMLElement | null = null;
   _threadId?: string;
+  _updateInterval?: NodeJS.Timeout;
+  _lockChatScroll = true;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -228,10 +233,14 @@ export class CopilotComposer extends FASTElement {
 
   addEventListeners() {
     Observable.getNotifier(this.cs).subscribe(this, 'threadsById');
+    this._updateInterval = setInterval(() => this.updateChat(), 60000); // update chat every minute for time updates
+    this._chatElement?.addEventListener('scroll', this.toggleChatScrollLock);
   }
 
   removeEventListeners() {
     Observable.getNotifier(this.cs).unsubscribe(this, 'threadsById');
+    clearInterval(this._updateInterval);
+    this._chatElement?.removeEventListener('scroll', this.toggleChatScrollLock);
   }
 
   handleChange(subject: unknown, key: string) {
@@ -275,19 +284,35 @@ export class CopilotComposer extends FASTElement {
   updateChat() {
     if (this._threadId && this._chatElement) {
       const messages = this.cs.threadsById[this._threadId].messages;
-      this._chatElement.innerHTML = '';
-      for (const messageId in messages) {
-        const message = messages[messageId];
-        const entry = document.createElement(
-          'copilot-chat-entry',
+      const messageIds = Object.keys(messages);
+
+      // Skip the first message since it's the user input
+      for (let x = 1; x < messageIds.length; x++) {
+        const message = messages[messageIds[x]];
+
+        let entry = this._chatElement.querySelector(
+          `#${message.id}`,
         ) as CopilotChatEntry;
+        if (!entry) {
+          entry = document.createElement(
+            'copilot-chat-entry',
+          ) as CopilotChatEntry;
+          entry.setAttribute('id', message.id);
+          entry.setAttribute('inline', '');
+          entry.setAttribute('time', moment(message.timestamp).fromNow());
+          if (message.author === 'system') entry.setAttribute('system', '');
+          this._chatElement.appendChild(entry);
+        }
 
-        entry.innerText = message.tokens.join('');
-        if (message.author === 'system') entry.setAttribute('system', '');
-        if (message.status === 'pending') entry.setAttribute('pending', '');
-        entry.setAttribute('inline', '');
+        if (message.status === 'pending') {
+          entry.setAttribute('pending', '');
+        } else {
+          entry.innerText = message.tokens.join('');
+          entry.removeAttribute('pending');
+        }
 
-        this._chatElement.appendChild(entry);
+        if (this._lockChatScroll)
+          this._chatElement.scrollTop = this._chatElement.scrollHeight;
       }
     }
   }
@@ -297,4 +322,10 @@ export class CopilotComposer extends FASTElement {
     this._chatElement.innerHTML = '';
     this._threadId = undefined;
   }
+
+  toggleChatScrollLock = () => {
+    if (!this._chatElement) return;
+    const { scrollTop, scrollHeight, clientHeight } = this._chatElement;
+    this._lockChatScroll = scrollTop + clientHeight >= scrollHeight;
+  };
 }
