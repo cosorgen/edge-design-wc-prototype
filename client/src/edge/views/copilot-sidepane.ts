@@ -8,13 +8,14 @@ import {
   spacingVerticalXXL,
 } from '@phoenixui/themes';
 import '../controls/sidepane-header.js';
-import '../controls/copilot-design-system.js';
+import '../controls/copilot-design-provider.js';
 import './copilot-composer.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import WindowsService from '#serviceswindowsService.js';
+import { backgroundGradient } from '../copilotDesignSystem.js';
 
 const template = html`
-  <copilot-design-system>
+  <copilot-design-provider>
     <div id="content">
       <div class="user message">Create a summary for this page</div>
       <div class="bot message">
@@ -38,7 +39,7 @@ const template = html`
       </div>
     </div>
     <copilot-composer></copilot-composer>
-  </copilot-design-system>
+  </copilot-design-provider>
   <sidepane-header>Copilot</sidepane-header>
 `;
 
@@ -54,7 +55,7 @@ const styles = css`
   copilot-design-system {
     position: absolute;
     inset: 0;
-    background: linear-gradient(var(--backgroundGradient));
+    background: linear-gradient(${backgroundGradient});
     padding-block-start: 50px; /* Account for the sidepane header */
     padding-block-end: 120px; /* Account for the composer */
   }

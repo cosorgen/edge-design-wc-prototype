@@ -119,7 +119,7 @@ const styles = css`
   }
 
   copilot-composer[expanded] {
-    display: flex;
+    display: initial;
     opacity: 1;
     width: var(--composer-width, 512px);
     transform: translateY(0px);

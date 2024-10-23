@@ -8,31 +8,13 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  phoenixDarkThemeWin11,
-  phoenixLightThemeWin11,
-} from '@phoenixui/themes';
 import { setThemeFor } from '@phoenixui/web-components';
-
-const copilotLightTheme = {
-  ...phoenixLightThemeWin11,
-  backgroundGradient:
-    '180deg, #FCF9F6 0%, #FCF9F6 60%, #FBEBE0 99%, #FDE5CD 100%',
-  colorNeutralForeground1: '#33302E',
-  colorNeutralCardBackground: '#fee5ce',
-};
-const copilotDarkTheme = {
-  ...phoenixDarkThemeWin11,
-  backgroundGradient:
-    '180deg, rgba(16, 21, 36, 0.8) 0%, rgba(16, 21, 36, 0.8) 80%, rgba(16, 21, 36, 0.8) 100%',
-  colorNeutralForeground1: '#F2DDCC',
-  colorNeutralCardBackground: '#333333',
-};
+import { copilotLightTheme, copilotDarkTheme } from '../copilotDesignSystem.js';
 
 const template = html` <slot></slot> `;
 
-@customElement({ name: 'copilot-design-system', template })
-export class CopilotDesignSystem extends FASTElement {
+@customElement({ name: 'copilot-design-provider', template })
+export class CopilotDesignProvider extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @inject(WindowsService) ws!: WindowsService;
