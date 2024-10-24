@@ -231,9 +231,7 @@ const styles = css`
   }
 
   #main,
-  #news,
-  #start-actions,
-  #end-actions {
+  #news {
     transform: translateY(0);
     opacity: 1;
     transition-property: transform, opacity;
@@ -243,9 +241,7 @@ const styles = css`
   }
 
   [hidden] #main,
-  [hidden] #news,
-  [hidden] ~ #start-actions,
-  [hidden] ~ #end-actions {
+  [hidden] #news {
     transform: translateY(-64px);
     opacity: 0;
   }
