@@ -2,7 +2,7 @@ import { observable } from '@microsoft/fast-element';
 
 export type Message = {
   id: string;
-  tokens: string[];
+  content: string;
   timestamp: number;
   author: 'user' | 'system';
   status: 'pending' | 'complete' | 'error';
@@ -13,89 +13,23 @@ export type Thread = {
   messages: Record<string, Message>;
 };
 
-const MAX_TOKEN_COUNT = 25;
-const MAX_INTERVAL_BETWEEN_TOKENS = 1000;
-const MAX_WORDS_IN_TOKEN = 3;
-const words = [
-  'Lorem',
-  'ipsum',
-  'dolor',
-  'sit',
-  'amet',
-  'consectetur',
-  'adipiscing',
-  'elit',
-  'sed',
-  'do',
-  'eiusmod',
-  'tempor',
-  'incididunt',
-  'ut',
-  'labore',
-  'et',
-  'dolore',
-  'magna',
-  'aliqua',
-  'Ut',
-  'enim',
-  'ad',
-  'minim',
-  'veniam',
-  'quis',
-  'nostrud',
-  'exercitation',
-  'ullamco',
-  'laboris',
-  'nisi',
-  'ut',
-  'aliquip',
-  'ex',
-  'ea',
-  'commodo',
-  'consequat',
-  'Duis',
-  'aute',
-  'irure',
-  'dolor',
-  'in',
-  'reprehenderit',
-  'in',
-  'voluptate',
-  'velit',
-  'esse',
-  'cillum',
-  'dolore',
-  'eu',
-  'fugiat',
-  'nulla',
-  'pariatur',
-  'Excepteur',
-  'sint',
-  'occaecat',
-  'cupidatat',
-  'non',
-  'proident',
-  'sunt',
-  'in',
-  'culpa',
-  'qui',
-  'officia',
-  'deserunt',
-  'mollit',
-  'anim',
-  'id',
-  'est',
-  'laborum',
-];
+export type OpenAIResponse = {
+  id: string;
+  object: string;
+  created: number;
+  model: string;
+  choices: Array<{
+    message: { role: string; content: string };
+    index: number;
+    finish_reason: string;
+  }>;
+};
 
 export class CopilotService {
-  @observable threadIds: string[] = [];
   @observable threadsById: Record<string, Thread> = {};
-  _tokenCount: number = 0;
 
   newThread() {
     const threadId = 'thread-' + crypto.randomUUID();
-    this.threadIds.push(threadId);
     this.threadsById = {
       ...this.threadsById,
       [threadId]: {
@@ -114,65 +48,57 @@ export class CopilotService {
       ...thread.messages,
       [messageId]: {
         id: messageId,
-        tokens: [message],
+        content: message,
         timestamp: Date.now(),
         author: 'user',
         status: 'complete',
       },
     };
     this.threadsById = { ...this.threadsById, thread };
-    this.listenForResponse(threadId);
+    this.fetchResponse(message, threadId);
   }
 
-  recieve(token: string, threadId: string, messageId: string) {
+  recieve(response: string, threadId: string, messageId: string) {
     const thread = this.threadsById[threadId];
-    thread.messages[messageId].tokens.push(token);
+    thread.messages[messageId].content = response;
     this.threadsById = { ...this.threadsById, thread };
   }
 
-  async listenForResponse(threadId: string) {
-    // Simulate a response from the server
-
+  fetchResponse(message: string, threadId: string) {
     // Set up the response
+    const responseStart = Date.now();
     let thread = this.threadsById[threadId];
     const responseId = 'message' + crypto.randomUUID();
     thread.messages[responseId] = {
       id: responseId,
-      tokens: [],
-      timestamp: Date.now(),
+      content: '',
+      timestamp: responseStart,
       author: 'system',
       status: 'pending',
     };
     this.threadsById = { ...this.threadsById, thread };
 
-    // Generate tokens for the response
-    this._tokenCount = Math.random() * MAX_TOKEN_COUNT;
-    while (this._tokenCount > 0) {
-      const token = await this.generateTokens();
-      this.recieve(token, threadId, responseId);
-      this._tokenCount--;
-    }
+    fetch(
+      `/api/chat?q=${encodeURIComponent(message)}&threadId=${encodeURIComponent(threadId)}`,
+    )
+      .then((r) => {
+        if (!r.ok) console.error(r.statusText, r.status);
+        return r.json();
+      })
+      .then((r: OpenAIResponse) => {
+        if (r.choices.length <= 0) console.error('No response');
+        this.recieve(r.choices[0].message.content, threadId, responseId);
 
-    // Mark the response as complete
-    thread = this.threadsById[threadId];
-    thread.messages[responseId].status = 'complete';
-    this.threadsById = { ...this.threadsById, thread };
-  }
-
-  generateTokens(): Promise<string> {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const numWords = 1 + Math.floor(Math.random() * MAX_WORDS_IN_TOKEN);
-        let token = '';
-        for (let i = 0; i < numWords; i++) {
-          token += this.randomWord() + ' ';
-        }
-        resolve(token);
-      }, Math.random() * MAX_INTERVAL_BETWEEN_TOKENS);
-    });
-  }
-
-  randomWord() {
-    return words[Math.floor(Math.random() * words.length - 1)];
+        // Mark the response as complete but not too fast or we won't see the animation
+        const delayBeforeComplete = Math.max(
+          0,
+          1000 - (Date.now() - responseStart),
+        );
+        setTimeout(() => {
+          thread = this.threadsById[threadId];
+          thread.messages[responseId].status = 'complete';
+          this.threadsById = { ...this.threadsById, thread };
+        }, delayBeforeComplete);
+      });
   }
 }

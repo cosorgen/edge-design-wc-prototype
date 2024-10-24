@@ -312,11 +312,11 @@ export class CopilotComposer extends FASTElement {
         if (message.status === 'pending') {
           entry.setAttribute('pending', '');
         } else {
-          entry.innerText = message.tokens.join('');
+          entry.innerText = message.content;
           entry.removeAttribute('pending');
           entry.setAttribute(
             'style',
-            `--text-transition-duration: ${message.tokens.length * 100}ms`,
+            `--text-transition-duration: ${message.content.split(' ').length * 100}ms`,
           );
         }
 
