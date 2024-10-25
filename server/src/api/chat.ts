@@ -10,7 +10,7 @@ export default async (req: Request, res: Response) => {
       throwServerError('Missing OPENAI_API_KEY', 500);
 
     const response = await fetch(
-      'https://edge-openai-labs.openai.azure.com/openai/deployments/edge-4o-prototype/chat/completions?api-version=2024-02-15-preview',
+      'https://edge-design-prototype.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview',
       {
         method: 'POST',
         headers: {
