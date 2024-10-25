@@ -3,6 +3,7 @@ import './controls/omnibox-action-flyout.js';
 import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
+import './controls/add-favorites-flyout.js';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -12,6 +13,7 @@ export const overflowItems = {
   favorite: {
     title: 'Add favorite',
     iconId: 'star-add-20-regular',
+    iconId2: 'folder-20-regular', // other icon?
   },
   shopping: {
     title: 'Shopping',
@@ -29,29 +31,38 @@ export const overflowItems = {
     title: 'Share',
     iconId: 'share-20-regular',
   },
-} as Record<string, { title: string; iconId: string }>;
+} as Record<string, { title: string; iconId: string; iconId2?: string }>;
 
 export default {
-  favorite: html` <omnibox-action-flyout id="favorite" slot="actions">
+  favorite: html`
+  <omnibox-action-flyout
+    id="favorite"
+    slot="actions"
+    @done="${(x, c) => x.handleDoneClick(c.event)}"
+  >
     <svg slot="trigger-content">
-      <use href="img/edge/icons.svg#${overflowItems.favorite.iconId}" />
+      <use href="img/edge/icons.svg#${(x) => x.done ? overflowItems.favorite.iconId2 : overflowItems.favorite.iconId}" />
     </svg>
-    <div class="flyout-menu">${overflowItems.favorite.title}</div>
-  </omnibox-action-flyout>`,
-  shopping: html`<flyout-menu slot="actions">
+    <div class="flyout-menu">
+      <add-favorites-flyout @done="${(x, c) => x.updateFavoriteIcon(c.event)}"></add-favorites-flyout>
+    </div>
+  </omnibox-action-flyout>
+`,
+
+  shopping: html` <flyout-menu slot="actions">
     <shopping-button
       slot="trigger"
       @click="${(x, c) => c.event.stopPropagation()}"
     ></shopping-button>
     <shopping-flyout></shopping-flyout>
   </flyout-menu>`,
-  'read-aloud': html`<omnibox-action-flyout id="read-aloud" slot="actions">
+  'read-aloud': html` <omnibox-action-flyout id="read-aloud" slot="actions">
     <svg slot="trigger-content">
       <use href="img/edge/icons.svg#${overflowItems['read-aloud'].iconId}" />
     </svg>
     <div class="flyout-menu">${overflowItems['read-aloud'].title}</div>
   </omnibox-action-flyout>`,
-  'limit-cookies': html`<omnibox-action-flyout
+  'limit-cookies': html` <omnibox-action-flyout
     id="limit-cookies"
     slot="actions"
   >
@@ -60,13 +71,13 @@ export default {
     </svg>
     <div class="flyout-menu">${overflowItems['limit-cookies'].title}</div>
   </omnibox-action-flyout>`,
-  install: html`<omnibox-action-flyout id="install" slot="actions">
+  install: html` <omnibox-action-flyout id="install" slot="actions">
     <svg slot="trigger-content">
       <use href="img/edge/icons.svg#${overflowItems.install.iconId}" />
     </svg>
     <div class="flyout-menu">${overflowItems.install.title}</div>
   </omnibox-action-flyout>`,
-  share: html`<omnibox-action-flyout id="install" slot="actions">
+  share: html` <omnibox-action-flyout id="share" slot="actions">
     <svg slot="trigger-content">
       <use href="img/edge/icons.svg#${overflowItems.share.iconId}" />
     </svg>

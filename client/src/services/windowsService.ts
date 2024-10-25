@@ -30,17 +30,27 @@ export default class WindowsService {
 
   constructor() {
     // Set theme and transparency based on system preferences
-    this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    this.transparency = window.matchMedia('(prefers-reduced-transparency: reduce)').matches ? 'reduced' : 'normal';
+    this.theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+    this.transparency = window.matchMedia(
+      '(prefers-reduced-transparency: reduce)',
+    ).matches
+      ? 'reduced'
+      : 'normal';
 
     // Update when system preference changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      this.theme = e.matches ? 'dark' : 'light';
-    });
+    window
+      .matchMedia('(prefers-color-scheme: dark)')
+      .addEventListener('change', (e) => {
+        this.theme = e.matches ? 'dark' : 'light';
+      });
 
-    window.matchMedia('(prefers-reduced-transparency: reduce)').addEventListener('change', (e) => {
-      this.transparency = e.matches ? 'reduced' : 'normal';
-    });
+    window
+      .matchMedia('(prefers-reduced-transparency: reduce)')
+      .addEventListener('change', (e) => {
+        this.transparency = e.matches ? 'reduced' : 'normal';
+      });
 
     // Open default window
     this.openWindow('Microsoft Edge');

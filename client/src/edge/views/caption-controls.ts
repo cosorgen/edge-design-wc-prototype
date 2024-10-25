@@ -1,9 +1,9 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '@phoenixui/web-components/button.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '#serviceswindowsService.js';
+import WindowsService from '#services/windowsService.js';
 import { TabService } from '#servicestabService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
@@ -22,6 +22,7 @@ import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
+import '../controls/identity-flyout.js';
 import '@phoenixui/web-components/toggle-button.js';
 
 const template = html` <div
@@ -48,9 +49,7 @@ const template = html` <div
     </flyout-menu>
     <flyout-menu>
       <identity-control appearance="signedIn" slot="trigger"></identity-control>
-      <context-menu>
-        <div style="padding: 8px;">Profile goes here...</div>
-      </context-menu>
+      <identity-flyout></identity-flyout>
     </flyout-menu>
   </div>
   <phx-button
@@ -181,6 +180,12 @@ export class CaptionControls extends FASTElement {
         window.print(); // maybe see if we can print the current tab iframe?
         break;
       case 'Settings':
+        this.ts.addTab({
+          id: window.crypto.randomUUID(),
+          url: 'edge://settings',
+          active: true,
+        });
+        break;
       case 'Find on page':
       case 'Screenshot':
       case 'New InPrivate window':
