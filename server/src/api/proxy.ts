@@ -1,6 +1,21 @@
 import throwServerError, { ServerError } from './utils.js';
 import { Request, Response } from 'express';
 import * as cheerio from 'cheerio';
+import NodeCache from 'node-cache';
+import NodeCron from 'node-cron';
+
+const cache = new NodeCache();
+
+NodeCron.schedule('0 0 * * *', () => {
+  const { vsize, ksize } = cache.getStats();
+  const cacheSize = (vsize + ksize) * 0.000001;
+  if (cacheSize > 128) cache.flushAll();
+});
+
+type ProxyResponse = {
+  page: string;
+  url: string;
+};
 
 export default async (req: Request, res: Response) => {
   try {
@@ -12,39 +27,59 @@ export default async (req: Request, res: Response) => {
     if (jsUrl.protocol !== 'http:' && jsUrl.protocol !== 'https:')
       throwServerError('Invalid URL', 400);
 
-    let html = '';
-    if (req.query.enhanced === 'true') {
-      // Call proxy API to get the page html
-      await fetch(
+    // Check if the page is already in the cache
+    let response = {
+      page: '',
+      url,
+    };
+    const cached = cache.has(url);
+    if (cached) {
+      response = cache.get(url) as ProxyResponse;
+    } else {
+      // Call proxy API to get the page, this takes some time.
+      // We'll also cache the response for next time.
+      fetch(
         `https://puppeteer-proxy.yellowwater-aef54d0d.westus2.azurecontainerapps.io/?url=${encodeURIComponent(
           url,
         )}&key=${process.env.PROXY_API_KEY}`,
         { signal: AbortSignal.timeout(60000) }, // 60 second timeout
       )
-        .then((res) => res.text())
-        .then((page) => {
-          html = page;
+        .then((res) => res.json())
+        .then((res) => {
+          // Cache the response
+          cache.set(url, {
+            page: res.page,
+            url: res.url,
+          });
         });
-    } else {
+
       await fetch(url)
-        .then((res) => res.text())
+        .then((res) => {
+          response.url = res.url;
+          return res.text();
+        })
         .then((page) => {
-          html = page;
+          response.page = page;
         });
     }
 
     // Using cherrio to manipulate the DOM, we add a base tag
     // to the head of the document to ensure that relative URLs
     // are resolved correctly.
-    const $ = cheerio.load(html);
+    const $ = cheerio.load(response.page);
     $('head').prepend(
       `<base href="${jsUrl.protocol + '//' + jsUrl.hostname}">`,
     );
+    response.page = $.html();
 
-    // Set the cache control header to cache the page for one day
-    res.set('Cache-Control', 'public, max-age=86400');
-
-    return res.send($.html());
+    // No cache on the client side
+    res.set(
+      'Cache-Control',
+      cached
+        ? 'public, max-age=86400'
+        : 'no-store, no-cache, must-revalidate, proxy-revalidate',
+    );
+    return res.json(response);
   } catch (err) {
     console.error(err);
     const serverError = err as ServerError;

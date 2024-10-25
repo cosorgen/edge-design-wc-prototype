@@ -104,10 +104,10 @@ export class WebPage extends FASTElement {
     fetch(`/api/proxy?url=${this.url}`)
       .then((res) => {
         if (!res.ok) this.handlePageError(res);
-        return res.text();
+        return res.json();
       })
-      .then((text) => {
-        this.page = text;
+      .then((res) => {
+        this.page = res.page;
       });
 
     // Try loading a better version of the page in parallel
@@ -115,10 +115,10 @@ export class WebPage extends FASTElement {
     fetch(`/api/proxy?url=${this.url}&enhanced=true`)
       .then((res) => {
         if (!res.ok) return;
-        return res.text();
+        return res.json();
       })
-      .then((text) => {
-        if (text) this.page = text;
+      .then((res) => {
+        if (res) this.page = res.page;
       });
   }
 
