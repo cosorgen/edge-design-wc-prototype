@@ -35,23 +35,27 @@ const template = html<TabBar>`
     <div id="tabs">
       ${repeat(
         (x) => x.ts.tabs,
-        html<Tab>` <horizontal-tab
+        html<Tab>`
+          <horizontal-tab
             ?active="${(x) => x.active}"
             ?loading="${(x) => x.loading}"
             @activate="${(x, c) => c.parent.activateTab(x.id)}"
             @close="${(x, c) => c.parent.closeTab(x.id)}"
           >
             ${(x) =>
-              x.favicon
-                ? html`<img slot="favicon" src="${x.favicon}" />`
-                : null}
-            ${(x) =>
-              x.title ? html`<span slot="title">${x.title}</span>` : null}
+              x.url && x.url.includes('settings')
+                ? html`<svg slot="favicon" width="16" height="16">
+                    <use href="img/edge/icons.svg#settings-16-regular" />
+                  </svg>`
+                : x.favicon
+                  ? html`<img slot="favicon" src="${x.favicon}" />`
+                  : null}
+            <span slot="title"
+              >${(x, c) => c.parent.getTitle(x.url || '')}</span
+            >
           </horizontal-tab>
-          <phx-divider
-            orientation="vertical"
-            appearance="strong"
-          ></phx-divider>`,
+          <phx-divider orientation="vertical" appearance="strong"></phx-divider>
+        `,
         { positioning: true },
       )}
     </div>
@@ -181,5 +185,21 @@ export class TabBar extends FASTElement {
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
+  }
+
+  getTitle(url: string): string {
+    try {
+      const urlObj = new URL(url);
+      if (urlObj.hostname === 'settings') {
+        return 'Settings';
+      }
+      if (urlObj.hostname === 'newtab') {
+        return 'New Tab';
+      }
+      return urlObj.hostname;
+    } catch (error) {
+      console.error('Invalid URL:', error);
+      return 'New Tab';
+    }
   }
 }

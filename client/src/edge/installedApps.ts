@@ -1,6 +1,8 @@
-import { ViewTemplate, html } from '@microsoft/fast-element';
+import { html, ViewTemplate } from '@microsoft/fast-element';
 import './views/extensions-hub.js';
 import './views/copilot-sidepane.js';
+import './views/favorites-menu.js';
+import './views/downloads-menu.js';
 
 export type ToolbarApp = {
   type: 'flyout' | 'sidepane';
@@ -11,7 +13,7 @@ export type ToolbarApp = {
 export default {
   Favorites: {
     type: 'flyout',
-    template: html`<div class="flyout-menu">Favorites</div>`,
+    template: html`<favorites-menu></favorites-menu>`,
     iconId: 'star-20-regular',
   },
   History: {
@@ -26,7 +28,7 @@ export default {
   },
   Downloads: {
     type: 'flyout',
-    template: html`<div class="flyout-menu">Downloads</div>`,
+    template: html` <downloads-menu></downloads-menu>`,
     iconId: 'arrow-download-20-regular',
   },
   Extensions: {

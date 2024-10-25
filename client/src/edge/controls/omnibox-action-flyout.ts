@@ -39,8 +39,8 @@ const styles = css`
   }
 
   ::slotted(.flyout-menu) {
-    width: 256px;
-    height: 300px;
+    min-width: 256px;
+    min-height: 120px;
     padding: ${spacingHorizontalL};
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
@@ -74,4 +74,5 @@ export class OmniboxActionFlyout extends FASTElement {
   handleTriggrClick(e: Event) {
     e.stopPropagation();
   }
+  
 }

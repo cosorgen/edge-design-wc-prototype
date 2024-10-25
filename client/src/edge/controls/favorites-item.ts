@@ -20,7 +20,10 @@ import {
   typographyStyles,
 } from '@phoenixui/themes';
 
-const template = html<FavoritesItem>`<button @click="${(x) => x.handleClick()}">
+const template = html<FavoritesItem>` <button
+  part="favorite-button"
+  @click="${(x) => x.handleClick()}"
+>
   ${when(
     (x) => x.type === 'site',
     html`<img src="${(x) => x.favicon}" alt="${(x) => x.title}" />`,
@@ -43,6 +46,7 @@ const styles = css`
     border-radius: ${borderRadiusMedium};
     background: ${colorSubtleBackground};
     cursor: pointer;
+    width: 100%;
 
     font-family: ${typographyStyles.caption1.fontFamily};
     font-size: ${typographyStyles.caption1.fontSize};

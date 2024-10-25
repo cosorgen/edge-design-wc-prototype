@@ -13,12 +13,14 @@ import '../controls/web-page.js';
 import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 // import './edge-newtab.js';
 import './edge-newtab-legacy.js';
+import './settings.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   // newtab: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
   newtabLegacy: html`<edge-newtab-legacy
     ?active="${(x) => x.active}"
   ></edge-newtab-legacy>`,
+  settings: html`<settings-page ?active="${(x) => x.active}"></settings-page>`,
 };
 
 const template = html<WebContent>`
@@ -67,8 +69,11 @@ export class WebContent extends FASTElement {
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
-    
-    // Always return the legacy new tab
+
+    if (urlObj.hostname === 'settings') {
+      return 'settings';
+    }
+
     if (urlObj.hostname === 'newtab') {
       return 'newtabLegacy';
     }
