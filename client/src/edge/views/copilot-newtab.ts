@@ -22,13 +22,14 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<CopilotNewtab>`<img
     id="bg"
     src="img/edge/newtab/copilot-bg.png"
     alt="Background image"
   />
-  <div id="content" ?hidden="${(x) => x.ews.composerActive}">
+  <div id="content" ?hidden="${(x) => x.cs.composerActive}">
     <div id="main" style="--index: 1;">
       <div id="searchbox">
         <div id="start">
@@ -253,6 +254,7 @@ const styles = css`
   styles,
 })
 export class CopilotNewtab extends FASTElement {
+  @inject(CopilotService) cs!: CopilotService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
 
@@ -266,6 +268,7 @@ export class CopilotNewtab extends FASTElement {
   }
 
   handleSubmit(url: string): void {
-    this.ts.navigateActiveTab(url);
+    if (!this.ts.activeTabId) return;
+    this.ts.navigateTab(this.ts.activeTabId, url);
   }
 }

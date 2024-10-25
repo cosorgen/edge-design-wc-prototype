@@ -1,5 +1,5 @@
-import { Tab } from '#servicestabService.js';
-import { observable } from '@microsoft/fast-element';
+import { Tab, TabService } from '#servicestabService.js';
+import { Observable, observable } from '@microsoft/fast-element';
 
 export type Message = {
   id: string;
@@ -28,7 +28,19 @@ export type OpenAIResponse = {
 };
 
 export class CopilotService {
+  @observable composerActive = false;
   @observable threadsById: Record<string, Thread> = {};
+  _ts!: TabService;
+
+  constructor(ts: TabService) {
+    this._ts = ts;
+
+    Observable.getNotifier(this._ts).subscribe(this);
+  }
+
+  handleChange(subject: unknown, key: string) {
+    // If the active tab changes, we need to create a new thread
+  }
 
   newThread() {
     const threadId = 'thread-' + crypto.randomUUID();

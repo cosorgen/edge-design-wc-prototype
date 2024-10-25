@@ -24,13 +24,8 @@ export const styles = css`
     width: 1024px;
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
-    display: none;
     height: 32px;
     --stroke-diff: calc(${strokeWidthThick} - ${strokeWidthThin});
-  }
-
-  :host([active]) {
-    display: block;
   }
 
   [part='container'] {

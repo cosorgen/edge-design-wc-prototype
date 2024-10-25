@@ -1,4 +1,3 @@
-import { TabService } from '#servicestabService.js';
 import {
   FASTElement,
   customElement,
@@ -15,30 +14,34 @@ import './edge-newtab.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
+import { TabService } from '#servicestabService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
-  newtab: html`<copilot-newtab ?active="${(x) => x.active}"></copilot-newtab>`,
-  newtabEdge: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
-  newtabLegacy: html`<edge-newtab-legacy
-    ?active="${(x) => x.active}"
+  newtab: html<string>`<copilot-newtab
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></copilot-newtab>`,
+  newtabEdge: html<string>`<edge-newtab
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></edge-newtab>`,
+  newtabLegacy: html<string>`<edge-newtab-legacy
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab-legacy>`,
 };
 
 const template = html<WebContent>`
   ${repeat(
-    (x) => x.ts.tabs,
-    html`${when(
-      (x) => x.url.startsWith('edge://'),
-      (x, c) => edgePages[c.parent.getHostname(x.url)],
+    (x) => x.ts.tabIds,
+    html<string>`${when(
+      (x, c) => c.parent.ts.tabsById[x].url.startsWith('edge://'),
+      (x, c) => edgePages[c.parent.getHostname(c.parent.ts.tabsById[x].url)],
       html`<web-page
-        id="${(x) => x.id}"
-        url="${(x) => x.url}"
-        ?active="${(x) => x.active}"
-        @pageload="${(x, c) => c.parent.handleTabLoad(x.id)}"
-        @pageerror="${(x, c) => c.parent.handleTabLoadError(x.id)}"
+        id="${(x) => x}"
+        page="${(x, c) => c.parent.ts.tabsById[x].page}"
+        ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+        @pageload="${(x, c) => c.parent.handleTabLoad(x)}"
+        @pageerror="${(x, c) => c.parent.handleTabLoadError(x)}"
       ></web-page>`,
     )}`,
-    { positioning: true },
   )}
 `;
 

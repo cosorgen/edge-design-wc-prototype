@@ -21,6 +21,7 @@ import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { spacingFrame } from '../designSystem.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
@@ -145,7 +146,8 @@ const styles = css`
   styles,
 })
 export class CopilotEntrypoint extends FASTElement {
-  @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(CopilotService) cs!: CopilotService;
+  @inject(CopilotService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
@@ -266,7 +268,7 @@ export class CopilotEntrypoint extends FASTElement {
 
   toggleActive(): void {
     this.active = !this.active;
-    this.ews.composerActive = this.active;
+    this.cs.composerActive = this.active;
     this.setPopoverState();
     // if (this.active) this._composerElement?.focus();
   }

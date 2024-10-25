@@ -4,7 +4,6 @@ import {
   html,
   css,
   attr,
-  observable,
 } from '@microsoft/fast-element';
 
 const template = html<WebPage>`
@@ -35,8 +34,7 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
-  @attr url = '';
-  @observable page = '';
+  @attr page: string = '';
   _iframeDocumentBody: HTMLBodyElement | null = null;
 
   setElements() {
@@ -93,35 +91,6 @@ export class WebPage extends FASTElement {
     );
   }
 
-  urlChanged() {
-    this.loadWebPage();
-  }
-
-  loadWebPage() {
-    if (!this.url) return;
-    if (this.page) this.handlePageUnload();
-
-    fetch(`/api/proxy?url=${this.url}`)
-      .then((res) => {
-        if (!res.ok) this.handlePageError(res);
-        return res.text();
-      })
-      .then((text) => {
-        this.page = text;
-      });
-
-    // Try loading a better version of the page in parallel
-    // Don't error out if it doesn't work. Fail silently.
-    fetch(`/api/proxy?url=${this.url}&enhanced=true`)
-      .then((res) => {
-        if (!res.ok) return;
-        return res.text();
-      })
-      .then((text) => {
-        if (text) this.page = text;
-      });
-  }
-
   handlePageUnload() {
     this.$emit('pageunload');
     this.removeEventListeners();
@@ -129,8 +98,6 @@ export class WebPage extends FASTElement {
   }
 
   handlePageLoad() {
-    if (!this.page) return;
-
     setTimeout(() => {
       this.setElements();
       this.addEventListeners();
