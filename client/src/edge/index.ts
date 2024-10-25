@@ -36,7 +36,6 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
-import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<MicrosoftEdge>`
   <div class="row" style="--spacingFrame: ${(x) => x.ss.frameSpacing}">
@@ -135,7 +134,6 @@ export class MicrosoftEdge extends FASTElement {
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
   @observable ts!: TabService;
   @observable ews!: EdgeWindowService;
-  @observable cs!: CopilotService;
   _activeTabElement: HTMLElement | null = null;
   _copilotHandleElement: HTMLElement | null = null;
 
@@ -146,10 +144,8 @@ export class MicrosoftEdge extends FASTElement {
     const container = DI.getOrCreateDOMContainer(this);
     this.ews = new EdgeWindowService();
     this.ts = new TabService();
-    this.cs = new CopilotService(this.ts);
     container.register(Registration.instance(TabService, this.ts));
     container.register(Registration.instance(EdgeWindowService, this.ews));
-    container.register(Registration.instance(CopilotService, this.cs));
   }
 
   connectedCallback(): void {

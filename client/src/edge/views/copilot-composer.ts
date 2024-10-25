@@ -240,12 +240,13 @@ export class CopilotComposer extends FASTElement {
 
   addEventListeners() {
     Observable.getNotifier(this.cs).subscribe(this, 'threadsById');
+    Observable.getNotifier(this.ts).subscribe(this, 'activeTabId');
     this._updateInterval = setInterval(() => this.updateChat(), 60000); // update chat every minute for time updates
     this._chatElement?.addEventListener('scroll', this.toggleChatScrollLock);
   }
 
   removeEventListeners() {
-    Observable.getNotifier(this.cs).unsubscribe(this, 'threadsById');
+    Observable.getNotifier(this.cs).unsubscribe(this);
     clearInterval(this._updateInterval);
     this._chatElement?.removeEventListener('scroll', this.toggleChatScrollLock);
   }
@@ -253,6 +254,9 @@ export class CopilotComposer extends FASTElement {
   handleChange(subject: unknown, key: string) {
     if (key === 'threadsById') {
       this.updateChat();
+    }
+    if (key === 'activeTabId' || key === 'tabsById') {
+      this.updateContext();
     }
   }
 
@@ -279,8 +283,16 @@ export class CopilotComposer extends FASTElement {
     if (!this._inputElement) return;
     const message = this._inputElement.value;
     if (!message) return;
-    if (!this._threadId) this._threadId = this.cs.newThread();
-    this.cs.send(message, this._threadId, this.ts.getActiveTab());
+    if (!this._threadId) {
+      this._threadId = this.cs.newThread();
+      if (this.ts.activeTabId) {
+        this.cs.browserContextChanged(
+          this._threadId,
+          this.ts.tabsById[this.ts.activeTabId],
+        );
+      }
+    }
+    this.cs.send(message, this._threadId);
     this._inputElement.value = '';
   }
 
@@ -295,8 +307,10 @@ export class CopilotComposer extends FASTElement {
       const messageIds = Object.keys(messages);
 
       // Skip the first two messages since it's the user input and system prompt
-      for (let x = 2; x < messageIds.length; x++) {
+      for (let x = 0; x < messageIds.length; x++) {
         const message = messages[messageIds[x]];
+        if (message.id === 'system-prompt') continue; // skip system prompt
+        if (message.role === 'context') continue; // skip context messages
 
         let entry = this._chatElement.querySelector(
           `#${message.id}`,
@@ -337,6 +351,15 @@ export class CopilotComposer extends FASTElement {
     if (!this._chatElement) return;
     this._chatElement.innerHTML = '';
     this._threadId = undefined;
+  }
+
+  updateContext() {
+    if (this.ts.activeTabId && this._threadId) {
+      this.cs.browserContextChanged(
+        this._threadId,
+        this.ts.tabsById[this.ts.activeTabId],
+      );
+    }
   }
 
   toggleChatScrollLock = () => {

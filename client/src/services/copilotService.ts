@@ -1,12 +1,11 @@
-import { Tab, TabService } from '#servicestabService.js';
-import { Observable, observable } from '@microsoft/fast-element';
+import { Tab } from '#servicestabService.js';
+import { observable } from '@microsoft/fast-element';
 
 export type Message = {
   id: string;
   content: string;
-  context?: string;
   timestamp: number;
-  role: 'user' | 'system';
+  role: 'user' | 'system' | 'context';
   status: 'pending' | 'complete' | 'error';
 };
 
@@ -28,18 +27,34 @@ export type OpenAIResponse = {
 };
 
 export class CopilotService {
-  @observable composerActive = false;
+  @observable composerActive = true;
   @observable threadsById: Record<string, Thread> = {};
-  _ts!: TabService;
 
-  constructor(ts: TabService) {
-    this._ts = ts;
+  browserContextChanged(threadId: string, tab: Tab) {
+    const messageId = 'message' + crypto.randomUUID();
+    const thread = this.threadsById[threadId];
 
-    Observable.getNotifier(this._ts).subscribe(this);
-  }
+    let content = 'An unknown webpage';
+    if (tab) {
+      if (tab.url === 'edge://newtab') {
+        content =
+          "I am now looking at a page with a beautiful sunset over a lake between two mountians, golden hour, there's a large searchbox in the middle of the page that says 'Search or enter web address'. There's also a news section at the bottom that says 'A stunning new museum in Dubai, an ancient forest discovered in a Chinese sinkhole, and a Korean Air plane’s safe evacuation after overshooting a runway highlight recent global events.' and 'Scroll for more news'.";
+      } else {
+        content = `I am now looking at this webpage: ${tab.page}`;
+      }
+    }
 
-  handleChange(subject: unknown, key: string) {
-    // If the active tab changes, we need to create a new thread
+    thread.messages = {
+      ...thread.messages,
+      [messageId]: {
+        id: messageId,
+        content,
+        timestamp: Date.now(),
+        role: 'context',
+        status: 'complete',
+      },
+    };
+    this.threadsById = { ...this.threadsById, thread };
   }
 
   newThread() {
@@ -51,7 +66,7 @@ export class CopilotService {
         messages: {
           'system-prompt': {
             id: 'system-prompt',
-            content: `You are a helpful assistant that lives inside of Microsoft Edge. You can see the page I'm looking at and help me with anything I need.`,
+            content: `You are a helpful assistant that lives inside of Microsoft Edge. You can see the pages I'm looking at and help me with anything I need.`,
             timestamp: Date.now(),
             role: 'system',
             status: 'complete',
@@ -63,52 +78,32 @@ export class CopilotService {
     return threadId;
   }
 
-  send(message: string, threadId: string, tab?: Tab) {
-    let context = 'An unknown webpage';
-    if (tab) {
-      if (tab.url === 'edge://newtab')
-        context =
-          "A page with a beautiful sunset over a lake between two mountians, golden hour, there's a large searchbox in the middle of the page that says 'Search or enter web address'. There's also a news section at the bottom that says 'A stunning new museum in Dubai, an ancient forest discovered in a Chinese sinkhole, and a Korean Air plane’s safe evacuation after overshooting a runway highlight recent global events.' and 'Scroll for more news'.";
-      else context = `A webpage titled: ${tab.title} at ${tab.url}`;
-    }
-
+  send(content: string, threadId: string) {
     const messageId = 'message' + crypto.randomUUID();
     const thread = this.threadsById[threadId];
     thread.messages = {
       ...thread.messages,
       [messageId]: {
         id: messageId,
-        content: message,
-        context:
-          Object.keys(thread.messages).length === 1
-            ? `This is the page i'm looking at: ${context}`
-            : undefined,
+        content,
         timestamp: Date.now(),
         role: 'user',
         status: 'complete',
       },
     };
     this.threadsById = { ...this.threadsById, thread };
-    this.fetchResponse(message, threadId);
+    this.fetchResponse(threadId);
   }
 
-  recieve(response: string, threadId: string, messageId: string) {
-    const thread = this.threadsById[threadId];
-    thread.messages[messageId].content = response;
-    this.threadsById = { ...this.threadsById, thread };
-  }
-
-  fetchResponse(message: string, threadId: string) {
+  fetchResponse(threadId: string) {
     let thread = this.threadsById[threadId];
 
     // Sanitize the messages before adding the response message
     const sanitizedMessages = Object.values(thread.messages).map((m) => ({
-      role: m.role,
-      content:
-        m.role === 'user'
-          ? `Context: ${m.context}\n\nPrompt: ${m.content}`
-          : m.content,
+      role: m.role === 'context' ? 'user' : m.role,
+      content: m.content,
     }));
+    console.log(sanitizedMessages);
 
     // Set up the response
     const responseStart = Date.now();
@@ -122,23 +117,31 @@ export class CopilotService {
     };
     this.threadsById = { ...this.threadsById, thread };
 
-    fetch(
-      `/api/chat?q=${encodeURIComponent(message)}&threadId=${encodeURIComponent(threadId)}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ messages: sanitizedMessages }),
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    )
+      body: JSON.stringify({ messages: sanitizedMessages }),
+    })
       .then((r) => {
-        if (!r.ok) console.error(r.statusText, r.status);
+        if (!r.ok) {
+          console.error(r.statusText, r.status);
+          // Update the response message with the error
+          thread = this.threadsById[threadId];
+          thread.messages[responseId].status = 'error';
+          thread.messages[responseId].content =
+            `Error: ${r.status} ${r.statusText}`;
+          this.threadsById = { ...this.threadsById, thread };
+        }
         return r.json();
       })
       .then((r: OpenAIResponse) => {
         if (r.choices.length <= 0) console.error('No response');
-        this.recieve(r.choices[0].message.content, threadId, responseId);
+        // Update the response message with the content
+        thread = this.threadsById[threadId];
+        thread.messages[responseId].content = r.choices[0].message.content;
+        this.threadsById = { ...this.threadsById, thread };
 
         // Mark the response as complete but not too fast or we won't see the animation
         const delayBeforeComplete = Math.max(
