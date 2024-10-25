@@ -30,6 +30,7 @@ import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 import moment from 'moment';
+import { TabService } from '#servicestabService.js';
 
 const template = html<CopilotComposer>`
   <copilot-design-provider>
@@ -205,6 +206,7 @@ const styles = css`
 })
 export class CopilotComposer extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
+  @inject(TabService) ts!: TabService;
   @attr placeholder = 'Message Copilot';
   _inputElement: HTMLInputElement | null = null;
   _chatElement: HTMLElement | null = null;
@@ -278,7 +280,7 @@ export class CopilotComposer extends FASTElement {
     const message = this._inputElement.value;
     if (!message) return;
     if (!this._threadId) this._threadId = this.cs.newThread();
-    this.cs.send(message, this._threadId);
+    this.cs.send(message, this._threadId, this.ts.getActiveTab());
     this._inputElement.value = '';
   }
 
@@ -292,8 +294,8 @@ export class CopilotComposer extends FASTElement {
       const messages = this.cs.threadsById[this._threadId].messages;
       const messageIds = Object.keys(messages);
 
-      // Skip the first message since it's the user input
-      for (let x = 1; x < messageIds.length; x++) {
+      // Skip the first two messages since it's the user input and system prompt
+      for (let x = 2; x < messageIds.length; x++) {
         const message = messages[messageIds[x]];
 
         let entry = this._chatElement.querySelector(
@@ -305,7 +307,7 @@ export class CopilotComposer extends FASTElement {
           ) as CopilotChatEntry;
           entry.setAttribute('id', message.id);
           entry.setAttribute('inline', '');
-          if (message.author === 'system') entry.setAttribute('system', '');
+          if (message.role === 'system') entry.setAttribute('system', '');
           this._chatElement.appendChild(entry);
         }
 
@@ -316,7 +318,7 @@ export class CopilotComposer extends FASTElement {
           entry.removeAttribute('pending');
           entry.setAttribute(
             'style',
-            `--text-transition-duration: ${message.content.split(' ').length * 100}ms`,
+            `--text-transition-duration: ${Math.min(2000, message.content.split(' ').length * 100)}ms`,
           );
         }
 
