@@ -109,17 +109,6 @@ export class WebPage extends FASTElement {
       .then((res) => {
         this.page = res.page;
       });
-
-    // Try loading a better version of the page in parallel
-    // Don't error out if it doesn't work. Fail silently.
-    fetch(`/api/proxy?url=${this.url}&enhanced=true`)
-      .then((res) => {
-        if (!res.ok) return;
-        return res.json();
-      })
-      .then((res) => {
-        if (res) this.page = res.page;
-      });
   }
 
   handlePageUnload() {
