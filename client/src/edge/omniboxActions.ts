@@ -3,7 +3,7 @@ import './controls/omnibox-action-flyout.js';
 import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
-import './controls/add-favorites-flyout.js';
+import './views/add-favorites-flyout.js';
 
 export const overflowItems = {
   'limit-cookies': {
