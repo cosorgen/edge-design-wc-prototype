@@ -35,19 +35,18 @@ export const overflowItems = {
 
 export default {
   favorite: html`
-  <omnibox-action-flyout
-    id="favorite"
-    slot="actions"
-    @done="${(x, c) => x.handleDoneClick(c.event)}"
-  >
-    <svg slot="trigger-content">
-      <use href="img/edge/icons.svg#${(x) => x.done ? overflowItems.favorite.iconId2 : overflowItems.favorite.iconId}" />
-    </svg>
-    <div class="flyout-menu">
-      <add-favorites-flyout @done="${(x, c) => x.updateFavoriteIcon(c.event)}"></add-favorites-flyout>
-    </div>
-  </omnibox-action-flyout>
-`,
+    <omnibox-action-flyout id="favorite" slot="actions">
+      <svg slot="trigger-content">
+        <use
+          href="img/edge/icons.svg#${(x) =>
+            x.done
+              ? overflowItems.favorite.iconId2
+              : overflowItems.favorite.iconId}"
+        />
+      </svg>
+      <add-favorites-flyout></add-favorites-flyout>
+    </omnibox-action-flyout>
+  `,
 
   shopping: html` <flyout-menu slot="actions">
     <shopping-button

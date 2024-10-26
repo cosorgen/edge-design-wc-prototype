@@ -6,6 +6,7 @@ import {
   observable,
   repeat,
   when,
+  volatile,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import FavoritesService, {
@@ -247,6 +248,7 @@ export class FavoritesMenu extends FASTElement {
     });
   }
 
+  @volatile
   get filteredFavorites() {
     const lowerCaseSearchValue = this.searchValue.toLowerCase();
 

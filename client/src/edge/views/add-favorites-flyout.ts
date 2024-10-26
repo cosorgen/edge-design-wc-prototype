@@ -1,59 +1,77 @@
-import { customElement, html, css, FASTElement } from '@microsoft/fast-element';
+import {
+  customElement,
+  html,
+  css,
+  FASTElement,
+  attr,
+} from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '@phoenixui/web-components/text-input.js';
 import '@phoenixui/web-components/button.js';
 import {
+  acrylicBackgroundBlur,
+  acrylicBackgroundLuminosity,
+  borderRadiusLayerDialog,
+  colorNeutralForeground1,
+  shadow28,
+  spacingHorizontalL,
   spacingHorizontalM,
   spacingVerticalM,
   typographyStyles,
 } from '@phoenixui/themes';
 import { spacingVerticalXL } from '@phoenixui/themes/tokens.js';
 import { TabService } from '#services/tabService.js';
+import FavoritesService from '#servicesfavoritesService.js';
 
 const template = html<AddFavoritesInputs>`
-  <div class="flyout-menu">
-    <div class="favorite-title">Favorite added</div>
-    <div class="input-group">
-      <label for="favorite-name">Name</label>
-      <phx-text-input
-        id="favorite-name"
-        value="${(x) => x.getFavoriteName()}"
-      ></phx-text-input>
-    </div>
-    <div class="input-group">
-      <label for="favorite-folder">Folder</label>
-      <phx-text-input id="favorite-folder" placeholder="Select folder">
-        <span slot="start">
-          <svg>
-            <use href="./img/edge/icons.svg#folder-20-regular" />
-          </svg>
-        </span>
-        <span slot="end">
-          <svg>
-            <use href="./img/edge/icons.svg#down-chevron-20-regular" />
-          </svg>
-        </span>
-      </phx-text-input>
-    </div>
-    <div class="footer">
-      <phx-button appearance="outline" @click="${(x) => x.closeFlyout()}"
-        >More</phx-button
-      >
-      <div class="button-group">
-        <phx-button appearance="outline" @click="${(x) => x.closeFlyout()}"
-          >Remove</phx-button
-        >
-        <phx-button
-          appearance="primary"
-          @click="${(x, c) => x.handleDone(c.event)}"
-          >Done</phx-button
-        >
-      </div>
+  <div class="favorite-title">Favorite added</div>
+  <div class="input-group">
+    <label for="favorite-name">Name</label>
+    <phx-text-input
+      id="favorite-name"
+      value="${(x) => x.getFavoriteName()}"
+    ></phx-text-input>
+  </div>
+  <div class="input-group">
+    <label for="favorite-folder">Folder</label>
+    <phx-text-input id="favorite-folder" placeholder="Select folder">
+      <span slot="start">
+        <svg>
+          <use href="./img/edge/icons.svg#folder-20-regular" />
+        </svg>
+      </span>
+      <span slot="end">
+        <svg>
+          <use href="./img/edge/icons.svg#down-chevron-20-regular" />
+        </svg>
+      </span>
+    </phx-text-input>
+  </div>
+  <div class="footer">
+    <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
+    <div class="button-group">
+      <phx-button @click="${(x) => x.handleRemove()}"> Remove </phx-button>
+      <phx-button appearance="primary" @click="${(x) => x.closeFlyout()}">
+        Done
+      </phx-button>
     </div>
   </div>
 `;
 
 const styles = css`
+  :host {
+    display: block;
+    min-width: 256px;
+    min-height: 120px;
+    padding: ${spacingHorizontalL};
+    background: ${acrylicBackgroundLuminosity};
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(${acrylicBackgroundBlur});
+    border-radius: ${borderRadiusLayerDialog};
+    box-shadow: ${shadow28};
+    color: ${colorNeutralForeground1};
+  }
+
   .favorite-title {
     margin-bottom: ${spacingVerticalM};
     font-family: ${typographyStyles.subtitle2.fontFamily};
@@ -103,34 +121,50 @@ const styles = css`
 })
 export class AddFavoritesInputs extends FASTElement {
   @inject(TabService) ts!: TabService;
+  @inject(FavoritesService) fs!: FavoritesService;
+  @attr({ mode: 'boolean' }) open = false;
 
-  connectedCallback() {
-    super.connectedCallback();
+  openChanged() {
+    if (this.$fastController.isConnected) {
+      const isFavorite = this.fs.favorites.find(
+        (f) => f.title === this.getFavoriteName(),
+      );
+      if (this.open && !isFavorite) {
+        this.addFavorite();
+      }
+    }
   }
 
   getFavoriteName() {
     const activeTab = this.ts.getActiveTab();
-    if (activeTab) {
-      return this.extractFavoriteName(activeTab.url);
-    }
-    return '';
-  }
-
-  extractFavoriteName(url: string) {
-    const urlObj = new URL(url);
-    return urlObj.hostname;
+    if (activeTab) return activeTab.title;
+    return 'Uknown page';
   }
 
   closeFlyout() {
-    this.$emit('closeflyout'); // Emit a close event
+    this.$emit('closemenu'); // Emit a close event
   }
 
-  handleDone(e: Event) {
-    e.stopPropagation();
-    const favoriteName = this.getFavoriteName();
-    this.$emit('done', { success: true, favoriteName });
+  addFavorite() {
+    const activeTab = this.ts.getActiveTab();
+    if (activeTab) {
+      this.fs.addFavorite({
+        type: 'site',
+        url: activeTab.url,
+        title: activeTab.title!,
+        favicon: activeTab.favicon,
+      });
+    }
+  }
+
+  handleRemove() {
+    const activeTab = this.ts.getActiveTab();
+    const favorite = this.fs.favorites.find(
+      (f) => f.title === activeTab?.title,
+    );
+    if (favorite) {
+      this.fs.removeFavorite(favorite);
+    }
     this.closeFlyout();
   }
-  
-  
 }

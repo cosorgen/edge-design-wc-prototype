@@ -63,4 +63,14 @@ export default class FavoritesService {
       title: 'Other favorites',
     },
   ];
+
+  addFavorite(favorite: Favorite) {
+    this.favorites = [...this.favorites, favorite];
+    console.log('Added favorite:', this.favorites);
+  }
+
+  removeFavorite(favorite: Favorite | FavoriteFolder) {
+    this.favorites = this.favorites.filter((f) => f.title !== favorite.title);
+    console.log('Removed favorite:', this.favorites);
+  }
 }
