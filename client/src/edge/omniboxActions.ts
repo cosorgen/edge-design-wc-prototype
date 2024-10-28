@@ -4,8 +4,6 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/add-favorites-flyout.js';
-import FavoritesService from '#services/favoritesService.js';
-import { TabService } from '#servicestabService.js';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -35,34 +33,14 @@ export const overflowItems = {
   },
 } as Record<string, { title: string; iconId: string; iconId2?: string }>;
 
-const fs = new FavoritesService();
-const ts = new TabService();
-
-let favoriteStatus = false;
-
-const checkFavoriteStatus = () => {
-  console.log('Svg clicked');
-  //const activeTab = { title: "YouTube", url: "https://www.youtube.com" }; //hardcode url tested and works to change icon
-  const activeTab = ts.getActiveTab();
-  console.log('Activetab', activeTab);
-
-  if (activeTab && activeTab.url) {
-    favoriteStatus = fs.isFavorite(activeTab.url);
-    console.log('Favorite Status Updated:', favoriteStatus);
-  }
-};
-
-// Initialize the favorite status
-checkFavoriteStatus();
-
 export default {
   favorite: html`
     <omnibox-action-flyout id="favorite" slot="actions">
-      <svg slot="trigger-content" @click="${() => checkFavoriteStatus()}">
+      <svg slot="trigger-content">
         <use
-          href="img/edge/icons.svg#${() => 
-            favoriteStatus 
-              ? overflowItems.favorite.iconId2 
+          href="img/edge/icons.svg#${(x) =>
+            x.pageIsFavorite()
+              ? overflowItems.favorite.iconId2
               : overflowItems.favorite.iconId}"
         />
       </svg>

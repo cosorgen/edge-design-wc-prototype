@@ -29,6 +29,7 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
+import FavoritesService from '#servicesfavoritesService.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -151,6 +152,7 @@ export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
+  @inject(FavoritesService) fs!: FavoritesService;
   @observable suggestions: Suggestion[] = [];
   _derivedToolbarItems: string[] = [];
   omniboxControl?: OmniboxControl | null = null;
@@ -239,6 +241,16 @@ export class Toolbar extends FASTElement {
 
   handleOmniboxActionClick(id: string, e: Event) {
     e.stopPropagation();
+    return false;
+  }
+
+  pageIsFavorite() {
+    const activeTab = this.ts.getActiveTab();
+
+    if (activeTab && activeTab.url) {
+      return this.fs.isFavorite(activeTab.url);
+    }
+
     return false;
   }
 }
