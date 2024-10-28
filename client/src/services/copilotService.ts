@@ -40,7 +40,7 @@ export class CopilotService {
         content =
           "I am now looking at a page with a beautiful sunset over a lake between two mountians, golden hour, there's a large searchbox in the middle of the page that says 'Search or enter web address'. There's also a news section at the bottom that says 'A stunning new museum in Dubai, an ancient forest discovered in a Chinese sinkhole, and a Korean Air plane’s safe evacuation after overshooting a runway highlight recent global events.' and 'Scroll for more news'.";
       } else {
-        content = `I am now looking at this webpage: ${tab.page}`;
+        content = `I am now looking at this webpage: ${tab.title} ${tab.url}`;
       }
     }
 
