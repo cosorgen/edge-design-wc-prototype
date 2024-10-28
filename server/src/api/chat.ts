@@ -1,35 +1,46 @@
 import throwServerError, { ServerError } from './utils.js';
 import { Request, Response } from 'express';
 
+type OpenAIApiEndpoints = Array<Record<string, string>>;
+
 export default async (req: Request, res: Response) => {
   try {
     const messages = req.body.messages as string;
     if (!messages) throwServerError('Missing parameters', 400);
 
-    if (process.env.OPENAI_API_KEY === undefined)
+    if (process.env.OPENAI_API_ENDPOINTS === undefined)
       throwServerError('Missing OPENAI_API_KEY', 500);
 
-    const response = await fetch(
-      'https://edge-design-prototype.openai.azure.com/openai/deployments/gpt-4o-mini/chat/completions?api-version=2024-08-01-preview',
-      {
+    const endpoints = JSON.parse(
+      process.env.OPENAI_API_ENDPOINTS!,
+    ) as OpenAIApiEndpoints;
+
+    let response;
+    for (let x = 0; x < endpoints.length; x++) {
+      const endpoint = endpoints[x];
+      response = await fetch(endpoint.url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'api-key': `${process.env.OPENAI_API_KEY}`,
+          'api-key': `${endpoint.key}`,
         },
         body: JSON.stringify({
-          model: 'gpt-4.0-mini',
+          model: 'gpt-4o',
           messages,
         }),
-      },
-    ).then((r) => {
-      if (r.status !== 200)
-        throwServerError(
-          'Error chat.ts fetch openai: ' + r.statusText,
-          r.status,
-        );
-      return r.json();
-    });
+      }).then((r) => {
+        if (r.status !== 200) {
+          if (x === endpoints.length - 1) {
+            // Throw error on last endpoint
+            throwServerError(r.statusText, r.status);
+          }
+          return;
+        }
+        return r.json();
+      });
+
+      if (response) break;
+    }
 
     return res.json(response);
   } catch (err) {
