@@ -6,6 +6,7 @@ import {
   observable,
   repeat,
   when,
+  attr,
   volatile,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -14,7 +15,10 @@ import FavoritesService, {
   FavoriteFolder,
 } from '#services/favoritesService.js';
 import { TabService } from '#services/tabService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 import '../controls/favorites-item.js';
+import '../controls/context-menu.js';
+import '../controls/menu-item.js';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
@@ -29,20 +33,38 @@ import {
 import '@phoenixui/web-components/accordion.js';
 import '@phoenixui/web-components/accordion-item.js';
 import '@phoenixui/web-components/text-input.js';
+import { spacingHorizontalXXS } from '@phoenixui/themes/tokens.js';
 
 const template = html<FavoritesMenu>`
   <div id="header">
     <span>Favorites</span>
-    <flyout-menu>
-      <phx-button size="small" appearance="subtle" icon-only slot="trigger">
+    <div id="icons">
+    <phx-button size="small" appearance="subtle" icon-only slot="trigger">
         <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
       </phx-button>
+    <flyout-menu>
       <phx-button size="small" appearance="subtle" icon-only slot="trigger">
         <svg>
           <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
         </svg>
       </phx-button>
+      <context-menu>
+        ${when(
+          (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
+          html` <menu-item
+            @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
+          >
+            Hide favorites menu in toolbar
+          </menu-item>`,
+          html` <menu-item
+            @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
+          >
+            Show favorites menu in toolbar
+          </menu-item>`,
+        )}
+      </context-menu>
     </flyout-menu>
+    </div>
   </div>
   <div id="content">
     <phx-text-input
@@ -110,6 +132,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     min-width: 256px;
+    max-width: 358px;
     background: ${acrylicBackgroundLuminosity};
     backdrop-filter: blur(${acrylicBackgroundBlur});
     border-radius: ${borderRadiusLayerFlyout};
@@ -126,6 +149,10 @@ const styles = css`
     font-size: ${typographyStyles.body1Strong.fontSize};
     font-weight: ${typographyStyles.body1Strong.fontWeight};
   }
+
+  #icons {
+    gap: ${spacingHorizontalXXS};
+    }
 
   #content {
     display: flex;
@@ -158,6 +185,10 @@ const styles = css`
     font-size: ${typographyStyles.body1.fontSize};
     font-weight: ${typographyStyles.body1.fontWeight};
     line-height: ${typographyStyles.body1.lineHeight};
+    overflow: hidden;
+    white-space: nowrap;        
+    width: 100%;
+    flex-grow: 1;            
   }
 
   phx-text-input {
@@ -187,8 +218,10 @@ const styles = css`
 
 @customElement({ name: 'favorites-menu', template, styles })
 export class FavoritesMenu extends FASTElement {
+  @attr({ mode: 'boolean' }) pinned = false;
   @inject(FavoritesService) fs!: FavoritesService;
   @inject(TabService) ts!: TabService;
+  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
 
   @observable favorites: (Favorite | FavoriteFolder)[] = [];
   @observable searchValue = '';
@@ -196,15 +229,17 @@ export class FavoritesMenu extends FASTElement {
 
   connectedCallback() {
     super.connectedCallback();
-    this.loadFavorites().then(() => {
-      this.overrideHeadingStyles();
-      this.setElements();
+    this.loadFavorites();
+    requestAnimationFrame(() => {
+      this.overrideHeadingStyles(); // Call here to set the initial height
     });
+    this.fs.addObserver(this.loadFavorites.bind(this));
   }
-
+  
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.unsetElements();
+    this.fs.removeObserver(this.loadFavorites.bind(this));
   }
 
   setElements() {
@@ -217,7 +252,7 @@ export class FavoritesMenu extends FASTElement {
     this._inputElement = null;
   }
 
-  async loadFavorites() {
+  loadFavorites() {
     this.favorites = this.fs.favorites;
   }
 
@@ -257,6 +292,12 @@ export class FavoritesMenu extends FASTElement {
         favorite.type === 'folder' ||
         favorite.title.toLowerCase().includes(lowerCaseSearchValue),
     );
+  }
+
+  handlePinToggle() {
+    this.pinned = !this.pinned;
+    console.log('Toggled pinned state:', this.pinned);
+    this.$emit('togglepintoolbaritem', this.pinned);
   }
 
   handleItemClick(item: Favorite | FavoriteFolder) {

@@ -37,7 +37,7 @@ export default class FavoritesService {
     {
       type: 'site',
       url: 'https://www.youtube.com',
-      title: 'Youtube',
+      title: 'YouTube',
       favicon: 'https://www.youtube.com/favicon.ico',
     },
     {
@@ -64,13 +64,38 @@ export default class FavoritesService {
     },
   ];
 
+  private observers: Function[] = [];
+
+  addObserver(observer: Function) {
+    this.observers.push(observer);
+  }
+
+  removeObserver(observer: Function) {
+    this.observers = this.observers.filter((obs) => obs !== observer);
+  }
+
   addFavorite(favorite: Favorite) {
     this.favorites = [...this.favorites, favorite];
     console.log('Added favorite:', this.favorites);
+    this.notifyObservers();
   }
 
   removeFavorite(favorite: Favorite | FavoriteFolder) {
     this.favorites = this.favorites.filter((f) => f.title !== favorite.title);
     console.log('Removed favorite:', this.favorites);
+    this.notifyObservers();
+  }
+
+  isFavorite(url: string): boolean {
+    return this.favorites.some((fav) => {
+      if (fav.type === 'site') {
+        return fav.url === url; // Check if the URL matches
+      }
+      return false; // Ignore folders
+    });
+  }
+
+  private notifyObservers() {
+    this.observers.forEach((obs) => obs());
   }
 }

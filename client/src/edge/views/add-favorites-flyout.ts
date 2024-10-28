@@ -138,7 +138,7 @@ export class AddFavoritesInputs extends FASTElement {
   getFavoriteName() {
     const activeTab = this.ts.getActiveTab();
     if (activeTab) return activeTab.title;
-    return 'Uknown page';
+    return 'Unknown page';
   }
 
   closeFlyout() {
