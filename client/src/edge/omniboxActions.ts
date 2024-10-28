@@ -4,6 +4,9 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/add-favorites-flyout.js';
+import {
+  colorBrandForeground1,
+} from '@phoenixui/themes';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -13,7 +16,7 @@ export const overflowItems = {
   favorite: {
     title: 'Add favorite',
     iconId: 'star-add-20-regular',
-    iconId2: 'star-20-regular', // Icon for when it's a favorite
+    iconId2: 'star-20-filled',
   },
   shopping: {
     title: 'Shopping',
@@ -42,6 +45,7 @@ export default {
             x.pageIsFavorite()
               ? overflowItems.favorite.iconId2
               : overflowItems.favorite.iconId}"
+            style="${(x) => x.pageIsFavorite() ? `color: ${colorBrandForeground1};` : ''}"
         />
       </svg>
       <add-favorites-flyout></add-favorites-flyout>
