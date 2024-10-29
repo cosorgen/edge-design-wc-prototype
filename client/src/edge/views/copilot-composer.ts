@@ -17,10 +17,11 @@ import {
   durationNormal,
   durationUltraSlow,
   shadow28,
-  spacingHorizontalM,
   spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
+  spacingVerticalM,
+  spacingVerticalXS,
   spacingVerticalXXL,
   strokeWidthThin,
   typographyStyles,
@@ -170,7 +171,7 @@ const styles = css`
     border: none;
     background: ${colorLayerBackgroundDialog};
     border-radius: 20px;
-    padding: ${spacingHorizontalM};
+    padding-block: ${spacingVerticalM};
     padding-inline-start: ${spacingHorizontalXL};
     padding-inline-end: 64px;
     box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
@@ -193,6 +194,7 @@ const styles = css`
   #end {
     display: flex;
     flex-direction: row;
+    padding-block: ${spacingVerticalXS};
   }
 
   @starting-style {
