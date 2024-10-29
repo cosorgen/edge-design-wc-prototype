@@ -4,7 +4,7 @@ import { observable } from '@microsoft/fast-element';
 export default class EdgeSettingsService {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
-  @observable showLegacyCopilot = true; // Copilot is always shown
+  @observable showLegacyCopilot = true;
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
   @observable frameSpacing = '4px';
@@ -13,6 +13,23 @@ export default class EdgeSettingsService {
   constructor() {
     // Pin Copilot on initialization
     this.pinToolbarItem('Copilot');
+    this.getSettingsFromURL();
+  }
+
+  getSettingsFromURL() {
+    const url = new URL(window.location.href);
+    this.showFavoritesBar =
+      (url.searchParams.get('showFavoritesBar') as
+        | 'always'
+        | 'newtab'
+        | 'never') || 'never';
+
+  }
+
+  setSettingsInURL() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('showFavoritesBar', this.showFavoritesBar);
+    window.history.pushState({}, '', url.toString());
   }
 
   setTruncateURL(truncate: boolean) {
@@ -29,6 +46,7 @@ export default class EdgeSettingsService {
 
   setShowFavoritesBar(show: 'always' | 'newtab' | 'never') {
     this.showFavoritesBar = show;
+    this.setSettingsInURL();
   }
 
   setFrameSpacing(spacing: string) {
