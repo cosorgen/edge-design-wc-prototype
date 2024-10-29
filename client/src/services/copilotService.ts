@@ -1,5 +1,6 @@
 import { Tab } from '#servicestabService.js';
 import { observable } from '@microsoft/fast-element';
+import minify from './html-minify.js';
 
 export type Message = {
   id: string;
@@ -26,102 +27,11 @@ export type OpenAIResponse = {
   }>;
 };
 
-function recurseDoc(
-  node: Node,
-  parent: Node | null,
-  searchFunc: (node: Node) => boolean,
-  actionFunc: (node: Node, parent: Node) => void,
-) {
-  if (searchFunc(node)) {
-    console.log('found node:', node);
-    actionFunc(node, parent || node);
-  } else {
-    node.childNodes.forEach((child) =>
-      recurseDoc(child, node, searchFunc, actionFunc),
-    );
-  }
-}
-
 export class CopilotService {
   @observable composerActive = true;
   @observable threadsById: Record<string, Thread> = {};
 
-  compressPage(page: string) {
-    // Prepare the page for the LLM
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(page, 'text/html');
-
-    // Remove everything from head except for the title, description, and keywords
-    const head = doc.querySelector('head');
-    if (!head) return;
-    const title = head.querySelector('title');
-    const description = head.querySelector('meta[name="description"]');
-    const keywords = head.querySelector('meta[name="keywords"]');
-    head.innerHTML = '';
-    if (title) head.appendChild(title);
-    if (description) head.appendChild(description);
-    if (keywords) head.appendChild(keywords);
-
-    // Remove any script tags
-    doc.querySelectorAll('script').forEach((s) => s.remove());
-
-    // Remove any styles
-    doc.querySelectorAll('style').forEach((s) => s.remove());
-
-    // Remove any svgs
-    doc.querySelectorAll('svg').forEach((s) => s.remove());
-
-    // Remove all attributes from all tags except in include set
-    const skipAttrs = ['alt'];
-    doc.querySelectorAll('*').forEach((el) => {
-      for (let i = el.attributes.length - 1; i >= 0; i--) {
-        if (!skipAttrs.includes(el.attributes[i].name))
-          el.removeAttribute(el.attributes[i].name);
-      }
-    });
-
-    // Remove any comment nodes from the page
-    recurseDoc(
-      doc,
-      null,
-      (node) => node.nodeType === Node.COMMENT_NODE, // Search function
-      (node, parent) => parent.removeChild(node), // Action function
-    );
-
-    // Remove any empty tags
-    // !!!NEEDS TO BE LAST!!!
-    const selfClosingTags = [
-      'IMG',
-      'INPUT',
-      'AREA',
-      'BR',
-      'COL',
-      'HR',
-      'SOURCE',
-    ];
-    recurseDoc(
-      doc,
-      null,
-      (node) =>
-        node.childNodes.length === 0 &&
-        node.nodeType === Node.ELEMENT_NODE &&
-        !selfClosingTags.includes((node as HTMLElement).tagName), // Search function
-      (node, parent) => parent.removeChild(node), // Action function
-    );
-
-    // Serialize the page
-    const serializer = new XMLSerializer();
-    const string = serializer.serializeToString(doc.documentElement);
-
-    return string
-      .replace(/>[\s\n\t]+</gm, '><') // Remove whitespace between tags
-      .replace(/\s{2,}/gm, ' '); // Collapse multiple spaces
-  }
-
   browserContextChanged(threadId: string, tab: Tab) {
-    const messageId = 'message' + crypto.randomUUID();
-    const thread = this.threadsById[threadId];
-
     let content = 'An unknown webpage';
     if (tab) {
       if (tab.url === 'edge://newtab') {
@@ -129,22 +39,28 @@ export class CopilotService {
           "I am now looking at a page with a beautiful sunset over a lake between two mountians, golden hour, there's a large searchbox in the middle of the page that says 'Search or enter web address'. There's also a news section at the bottom that says 'A stunning new museum in Dubai, an ancient forest discovered in a Chinese sinkhole, and a Korean Air plane’s safe evacuation after overshooting a runway highlight recent global events.' and 'Scroll for more news'.";
       } else if (tab.page) {
         // Prepare the page for the LLM
-        const page = this.compressPage(tab.page);
-        content = `I am now looking at this webpage: ${page}`;
+        const page = minify(tab.page);
+        content = `I am now looking at this webpage: \`\`\` ${page} \`\`\``;
       }
     }
 
-    thread.messages = {
-      ...thread.messages,
-      [messageId]: {
-        id: messageId,
-        content,
-        timestamp: Date.now(),
-        role: 'context',
-        status: 'complete',
-      },
-    };
-    this.threadsById = { ...this.threadsById, thread };
+    const chunkSize = 1024;
+    for (let i = 0; i < content.length; i += chunkSize) {
+      const messageId = 'message' + crypto.randomUUID();
+      const thread = this.threadsById[threadId];
+
+      thread.messages = {
+        ...thread.messages,
+        [messageId]: {
+          id: messageId,
+          content: content.slice(i, i + chunkSize),
+          timestamp: Date.now(),
+          role: 'context',
+          status: 'complete',
+        },
+      };
+      this.threadsById = { ...this.threadsById, thread };
+    }
   }
 
   newThread() {
@@ -193,6 +109,7 @@ export class CopilotService {
       role: m.role === 'context' ? 'user' : m.role,
       content: m.content,
     }));
+    console.log(sanitizedMessages);
 
     // Set up the response
     const responseStart = Date.now();
