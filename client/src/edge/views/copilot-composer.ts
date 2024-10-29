@@ -17,6 +17,7 @@ import {
   durationNormal,
   durationUltraSlow,
   shadow28,
+  spacingHorizontalM,
   spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
@@ -42,11 +43,11 @@ const template = html<CopilotComposer>`
         </phx-button>
       </div>
       <div id="input-wrapper">
-        <input
-          type="text"
+        <div
+          contenteditable
           placeholder="${(x) => x.placeholder}"
           @keydown="${(x, c) => x.handleKeydown(c.event)}"
-        />
+        ></div>
         <phx-button
           appearance="primary"
           size="large"
@@ -109,7 +110,7 @@ const styles = css`
   #input-row {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-end;
     gap: ${spacingHorizontalXS};
     padding: ${spacingHorizontalS};
   }
@@ -142,6 +143,7 @@ const styles = css`
   #send {
     position: absolute;
     right: 6px;
+    bottom: 6px;
     border-radius: 14px;
     color: ${colorNeutralForeground1};
 
@@ -154,35 +156,36 @@ const styles = css`
       display ${durationNormal} ${curveEasyEaseMax} allow-discrete;
   }
 
-  input:not(:placeholder-shown) + #send {
+  [contenteditable]:not(:empty) + #send {
     display: inline-flex; /* reset display */
     transform: translateY(0);
     opacity: 1;
   }
 
-  input {
+  [contenteditable] {
     flex: 1;
     box-sizing: border-box;
-    height: 48px;
     min-width: 206px;
     border: none;
     background: ${colorLayerBackgroundDialog};
     border-radius: 20px;
-    padding: ${spacingHorizontalXS};
+    padding: ${spacingHorizontalM};
     padding-inline-start: ${spacingHorizontalXL};
+    padding-inline-end: 64px;
     box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
 
     font-size: 18px;
     line-height: 26px;
     color: ${colorNeutralForeground1};
+
+    &:empty::before {
+      content: attr(placeholder);
+      color: ${colorNeutralForegroundHint};
+    }
   }
 
-  input:focus {
+  [contenteditable]:focus {
     outline: none;
-  }
-
-  input:empty::placeholder {
-    color: ${colorNeutralForegroundHint};
   }
 
   #start,
@@ -192,7 +195,7 @@ const styles = css`
   }
 
   @starting-style {
-    input:not(:placeholder-shown) + #send {
+    [contenteditable]:not(:empty) + #send {
       transform: translateY(8px);
       opacity: 0;
     }
@@ -228,7 +231,7 @@ export class CopilotComposer extends FASTElement {
 
   setElements() {
     this._inputElement = this.shadowRoot?.querySelector(
-      'input',
+      '[contenteditable]',
     ) as HTMLInputElement;
     this._chatElement = this.shadowRoot?.querySelector('#chat') as HTMLElement;
   }
@@ -281,7 +284,7 @@ export class CopilotComposer extends FASTElement {
 
   handleSubmit() {
     if (!this._inputElement) return;
-    const message = this._inputElement.value;
+    const message = this._inputElement.innerText;
     if (!message) return;
     if (!this._threadId) {
       this._threadId = this.cs.newThread();
@@ -293,7 +296,7 @@ export class CopilotComposer extends FASTElement {
       }
     }
     this.cs.send(message, this._threadId);
-    this._inputElement.value = '';
+    this._inputElement.innerHTML = '';
   }
 
   handleClose() {
@@ -348,8 +351,9 @@ export class CopilotComposer extends FASTElement {
   }
 
   clearChat() {
-    if (!this._chatElement) return;
+    if (!this._chatElement || !this._inputElement) return;
     this._chatElement.innerHTML = '';
+    this._inputElement.innerHTML = '';
     this._threadId = undefined;
   }
 
