@@ -8,9 +8,9 @@ You need to add a .env file to the root of the project with the following:
 BING_APP_ID=ID
 WEATHER_APP_ID=ID
 PROXY_API_KEY=KEY
-OPENAI_API_KEY='[
+OPENAI_API_ENDPOINTS='[
     {
-        "url": ""
+        "url": "",
         "key": ""
     }
 ]'

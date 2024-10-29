@@ -9,7 +9,7 @@ export default async (req: Request, res: Response) => {
     if (!messages) throwServerError('Missing parameters', 400);
 
     if (process.env.OPENAI_API_ENDPOINTS === undefined)
-      throwServerError('Missing OPENAI_API_KEY', 500);
+      throwServerError('Missing OPENAI_API_ENDPOINTS', 500);
 
     const endpoints = JSON.parse(
       process.env.OPENAI_API_ENDPOINTS!,
