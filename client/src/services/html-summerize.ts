@@ -22,7 +22,7 @@ export function docToText(doc: Document) {
   return serializer.serializeToString(doc);
 }
 
-export default function minify(page: string) {
+export default function summerize(page: string) {
   // Prepare the page for the LLM
   const parser = new DOMParser();
   const doc = parser.parseFromString(page, 'text/html');

@@ -1,6 +1,6 @@
 import { Tab } from '#servicestabService.js';
 import { observable } from '@microsoft/fast-element';
-import minify from './html-minify.js';
+import summerize from './html-summerize.js';
 
 export type Message = {
   id: string;
@@ -39,28 +39,24 @@ export class CopilotService {
           "I am now looking at a page with a beautiful sunset over a lake between two mountians, golden hour, there's a large searchbox in the middle of the page that says 'Search or enter web address'. There's also a news section at the bottom that says 'A stunning new museum in Dubai, an ancient forest discovered in a Chinese sinkhole, and a Korean Air plane’s safe evacuation after overshooting a runway highlight recent global events.' and 'Scroll for more news'.";
       } else if (tab.page) {
         // Prepare the page for the LLM
-        const page = minify(tab.page);
+        const page = summerize(tab.page);
         content = `I am now looking at this webpage: \`\`\` ${page} \`\`\``;
       }
     }
 
-    const chunkSize = 1024;
-    for (let i = 0; i < content.length; i += chunkSize) {
-      const messageId = 'message' + crypto.randomUUID();
-      const thread = this.threadsById[threadId];
-
-      thread.messages = {
-        ...thread.messages,
-        [messageId]: {
-          id: messageId,
-          content: content.slice(i, i + chunkSize),
-          timestamp: Date.now(),
-          role: 'context',
-          status: 'complete',
-        },
-      };
-      this.threadsById = { ...this.threadsById, thread };
-    }
+    const messageId = 'message' + crypto.randomUUID();
+    const thread = this.threadsById[threadId];
+    thread.messages = {
+      ...thread.messages,
+      [messageId]: {
+        id: messageId,
+        content,
+        timestamp: Date.now(),
+        role: 'context',
+        status: 'complete',
+      },
+    };
+    this.threadsById = { ...this.threadsById, thread };
   }
 
   newThread() {
