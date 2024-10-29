@@ -47,6 +47,7 @@ const template = html<CopilotComposer>`
           contenteditable
           placeholder="${(x) => x.placeholder}"
           @keydown="${(x, c) => x.handleKeydown(c.event)}"
+          @keyup="${(x, c) => x.handleKeyUp(c.event)}"
         ></div>
         <phx-button
           appearance="primary"
@@ -266,13 +267,25 @@ export class CopilotComposer extends FASTElement {
   handleKeydown(e: Event) {
     if (!(e instanceof KeyboardEvent)) return;
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !e.shiftKey) {
       this.handleSubmit();
       return;
     }
     if (e.key === 'Escape') {
       this.handleClose();
       return;
+    }
+
+    return true;
+  }
+
+  handleKeyUp(e: Event) {
+    if (!(e instanceof KeyboardEvent)) return;
+    if (
+      (e.key === 'Backspace' || e.key === 'Delete') &&
+      this._inputElement?.innerText === '\n'
+    ) {
+      this._inputElement!.innerHTML = ''; // need to clear innerHTML to show the placeholder
     }
 
     return true;
