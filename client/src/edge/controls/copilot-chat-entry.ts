@@ -9,13 +9,18 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusLarge,
+  borderRadiusMedium,
+  colorBrandForegroundLink,
+  colorLayerBackgroundDialog,
   colorNeutralCardBackground,
   colorNeutralForeground1,
   colorNeutralForegroundHint,
   curveDecelerateMax,
   durationNormal,
   durationUltraSlow,
+  fontFamilyMonospace,
   spacingHorizontalL,
+  spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
   spacingVerticalM,
@@ -69,7 +74,7 @@ const styles = css`
     display: flex;
     flex-direction: column;
     gap: ${spacingVerticalM};
-    width: 100%;
+    width: fit-content;
 
     font-family: ${typographyStyles.body2.fontFamily};
     font-size: ${typographyStyles.body2.fontSize};
@@ -181,41 +186,42 @@ const styles = css`
   #message * {
     padding: 0;
     margin: 0;
+    width: fit-content;
   }
 
   #message h1 {
-    font-family: ${typographyStyles.display.fontFamily};
-    font-size: ${typographyStyles.display.fontSize};
-    line-height: ${typographyStyles.display.lineHeight};
-    font-weight: ${typographyStyles.display.fontWeight};
-  }
-
-  #message h2 {
-    font-family: ${typographyStyles.largeTitle.fontFamily};
-    font-size: ${typographyStyles.largeTitle.fontSize};
-    line-height: ${typographyStyles.largeTitle.lineHeight};
-    font-weight: ${typographyStyles.largeTitle.fontWeight};
-  }
-
-  #message h3 {
     font-family: ${typographyStyles.title1.fontFamily};
     font-size: ${typographyStyles.title1.fontSize};
     line-height: ${typographyStyles.title1.lineHeight};
     font-weight: ${typographyStyles.title1.fontWeight};
   }
 
-  #message h4 {
+  #message h2 {
     font-family: ${typographyStyles.title2.fontFamily};
     font-size: ${typographyStyles.title2.fontSize};
     line-height: ${typographyStyles.title2.lineHeight};
     font-weight: ${typographyStyles.title2.fontWeight};
   }
 
-  #message h5 {
+  #message h3 {
     font-family: ${typographyStyles.title3.fontFamily};
     font-size: ${typographyStyles.title3.fontSize};
     line-height: ${typographyStyles.title3.lineHeight};
     font-weight: ${typographyStyles.title3.fontWeight};
+  }
+
+  #message h4 {
+    font-family: ${typographyStyles.subtitle1.fontFamily};
+    font-size: ${typographyStyles.subtitle1.fontSize};
+    line-height: ${typographyStyles.subtitle1.lineHeight};
+    font-weight: ${typographyStyles.subtitle1.fontWeight};
+  }
+
+  #message h5 {
+    font-family: ${typographyStyles.subtitle1.fontFamily};
+    font-size: ${typographyStyles.subtitle1.fontSize};
+    line-height: ${typographyStyles.subtitle1.lineHeight};
+    font-weight: ${typographyStyles.subtitle1.fontWeight};
   }
 
   #message h6 {
@@ -239,6 +245,23 @@ const styles = css`
     font-size: ${typographyStyles.subtitle2.fontSize};
     line-height: ${typographyStyles.subtitle2.lineHeight};
     font-weight: ${typographyStyles.subtitle2.fontWeight};
+  }
+
+  #message a {
+    color: ${colorBrandForegroundLink};
+    text-decoration: underline;
+  }
+
+  #message code {
+    font-family: ${fontFamilyMonospace};
+    font-size: ${typographyStyles.body2.fontSize};
+    line-height: ${typographyStyles.body2.lineHeight};
+    font-weight: ${typographyStyles.body2.fontWeight};
+    color: ${colorNeutralForeground1};
+
+    background: ${colorLayerBackgroundDialog};
+    padding: ${spacingVerticalXS} ${spacingHorizontalS};
+    border-radius: ${borderRadiusMedium};
   }
 `;
 
