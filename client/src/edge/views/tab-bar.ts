@@ -71,7 +71,8 @@ const template = html<TabBar>`
     </phx-button>
     <div
       id="window-grabber"
-      @mousedown="${(x) => x.handleTitleBarMouseDown()}"
+      @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
+      @mouseup="${(x, c) => x.handleContextMenu(c.event)}"
     ></div>
   </div>
 `;
@@ -164,6 +165,11 @@ export class TabBar extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @observable dragging = false;
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('contextmenu', this.handleContextMenu);
+  }
+
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
   }
@@ -183,7 +189,10 @@ export class TabBar extends FASTElement {
     this.ws.closeWindow(this.ws.activeWindowId);
   }
 
-  handleTitleBarMouseDown() {
+  handleTitleBarMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
+
     this.$emit('windowmovestart');
   }
 
@@ -202,4 +211,9 @@ export class TabBar extends FASTElement {
       return 'New Tab';
     }
   }
+
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }

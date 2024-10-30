@@ -163,6 +163,8 @@ export class Toolbar extends FASTElement {
     generateSuggestions('').then((res) => {
       this.suggestions = res.suggestions;
     });
+
+    this.addEventListener('contextmenu', this.handleContextMenu);
   }
 
   @volatile
@@ -255,4 +257,9 @@ export class Toolbar extends FASTElement {
 
     return false;
   }
+
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }

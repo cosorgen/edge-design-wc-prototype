@@ -71,6 +71,14 @@ export class FavoritesBar extends FASTElement {
   @inject(FavoritesService) fs!: FavoritesService;
   @inject(TabService) ts!: TabService;
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      return false;
+    });
+  }
+
   handleItemClick(item: Favorite | FavoriteFolder) {
     if (item.type === 'site') {
       const activeTab = this.ts.getActiveTab();
