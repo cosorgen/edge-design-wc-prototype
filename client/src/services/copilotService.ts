@@ -40,7 +40,7 @@ export class CopilotService {
       } else if (tab.page) {
         // Prepare the page for the LLM
         const page = summerize(tab.page);
-        content = `I am now looking at this webpage: \`\`\` ${page} \`\`\``;
+        content = `I am now looking at ${tab.url} with the basic DOM: \`\`\` ${page} \`\`\``;
       }
     }
 

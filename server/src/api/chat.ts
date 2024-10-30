@@ -34,6 +34,7 @@ export default async (req: Request, res: Response) => {
             // Throw error on last endpoint
             throwServerError(r.statusText, r.status);
           }
+          console.warn(r.statusText, r.status);
           return;
         }
         return r.json();

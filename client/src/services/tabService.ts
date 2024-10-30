@@ -100,7 +100,7 @@ export class TabService {
       });
 
     // Get full page content
-    fetch(`/api/proxy?url=${validUrl}`, { cache: 'no-cache' })
+    fetch(`/api/proxy?url=${validUrl}`)
       .then((res) => res.json())
       .then((res) => {
         const tab = this.tabsById[id];
