@@ -52,8 +52,6 @@ export default class WindowsService {
         this.transparency = e.matches ? 'reduced' : 'normal';
       });
 
-    window.addEventListener('resize', () => this.resizeAllWindows());
-      
     // Open default window
     this.openWindow('Microsoft Edge');
   }
@@ -163,34 +161,5 @@ export default class WindowsService {
   closeAllWindows(appName: string) {
     this.windows = this.windows.filter((w) => w.appName !== appName);
     this.activateNextWindow(null);
-  }
-
-  resizeAllWindows() {
-    const currentWidth = window.innerWidth;
-    const currentHeight = window.innerHeight;
-  
-    this.windows.forEach((win) => {
-      const originalWidth = win.width;
-      const originalHeight = win.height;
-      let newWidth = Math.min(currentWidth - 48, originalWidth);
-      let newHeight = Math.min(currentHeight - 48 - 48, originalHeight);
-  
-      if (currentWidth > originalWidth) {
-        newWidth = Math.max(originalWidth, Math.max(currentWidth - 48, newWidth));
-      }
-      if (currentHeight > originalHeight) {
-        newHeight = Math.max(originalHeight, Math.max(currentHeight - 48 - 48, newHeight));
-      }
-  
-      this.moveWindow(win.id, newWidth, newHeight, win.xPos, win.yPos);
-    });
-  
-    this.windows.forEach((win, index) => {
-      const xPos = Math.max(0, (currentWidth - win.width) / 2);
-      const originalYPos = (currentHeight - 48 - win.height) / 2 + 24 * index;
-      const newYPos = Math.max(originalYPos, 0); 
-      
-      this.moveWindow(win.id, win.width, win.height, xPos, newYPos);
-    });
   }
 }
