@@ -45,7 +45,7 @@ const template = html<FavoritesMenu>`
         icon-only
         @click="${(x) => x.handleAddFavorite()}"
       >
-        <svg><use href="./img/edge/icons.svg#star-add-20-regular" /></svg>
+        <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
       </phx-button>
       <flyout-menu>
         <phx-button size="small" appearance="subtle" icon-only slot="trigger">
@@ -54,17 +54,21 @@ const template = html<FavoritesMenu>`
           </svg>
         </phx-button>
         <context-menu>
+          <menu-item @click="${(x) => x.handleAddFavorite()}">
+            Add this page to favorites
+          </menu-item>
+          <menu-item> Add new folder </menu-item>
           ${when(
             (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
             html` <menu-item
               @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
             >
-              Hide favorites menu in toolbar
+              Hide favorites button in toolbar
             </menu-item>`,
             html` <menu-item
               @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
             >
-              Show favorites menu in toolbar
+              Show favorites button in toolbar
             </menu-item>`,
           )}
         </context-menu>
@@ -324,6 +328,7 @@ export class FavoritesMenu extends FASTElement {
     if (!this.pageIsFavorite()) {
       const activeTab = this.ts.getActiveTab();
       if (!activeTab) return;
+      if (activeTab.url === 'edge://newtab') return;
 
       this.fs.addFavorite({
         type: 'site',

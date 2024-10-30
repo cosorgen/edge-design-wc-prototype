@@ -32,6 +32,7 @@ export class TabService {
       tab = {
         id,
         url: 'edge://newtab',
+        title: 'New tab',
         active: true,
       };
     }
@@ -102,13 +103,8 @@ export class TabService {
           title: tab.id === id ? metadata.title : tab.title,
           favicon: tab.id === id ? metadata.favicon : tab.favicon,
         }));
+        console.log(metadata);
       });
-
-    // Set the URL of the active tab to the query
-    this.tabs_ = this.tabs_.map((tab) => ({
-      ...tab,
-      url: tab.id === id ? validUrl : tab.url,
-    }));
   }
 
   tabDidLoad(id: string) {

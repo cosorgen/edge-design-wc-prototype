@@ -50,9 +50,7 @@ const template = html<TabBar>`
                 : x.favicon
                   ? html`<img slot="favicon" src="${x.favicon}" />`
                   : null}
-            <span slot="title"
-              >${(x, c) => c.parent.getTitle(x.url || '')}</span
-            >
+            <span slot="title">${(x) => x.title}</span>
           </horizontal-tab>
           <phx-divider orientation="vertical" appearance="strong"></phx-divider>
         `,
@@ -194,22 +192,6 @@ export class TabBar extends FASTElement {
     if (e.button !== 0) return;
 
     this.$emit('windowmovestart');
-  }
-
-  getTitle(url: string): string {
-    try {
-      const urlObj = new URL(url);
-      if (urlObj.hostname === 'settings') {
-        return 'Settings';
-      }
-      if (urlObj.hostname === 'newtab') {
-        return 'New Tab';
-      }
-      return urlObj.hostname;
-    } catch (error) {
-      console.error('Invalid URL:', error);
-      return 'New Tab';
-    }
   }
 
   handleContextMenu = (e: Event) => {

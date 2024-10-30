@@ -187,6 +187,7 @@ export class CaptionControls extends FASTElement {
         break;
       case 'Settings':
         this.ts.addTab({
+          title: 'Settings',
           id: window.crypto.randomUUID(),
           url: 'edge://settings',
           active: true,
