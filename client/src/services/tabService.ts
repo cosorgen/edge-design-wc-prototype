@@ -27,9 +27,10 @@ export class TabService {
   }
 
   addTab(tab?: Tab) {
+    const id = window.crypto.randomUUID();
     if (!tab) {
       tab = {
-        id: window.crypto.randomUUID(),
+        id,
         url: 'edge://newtab',
         active: true,
       };
@@ -37,6 +38,7 @@ export class TabService {
 
     if (tab.active) this.deactivateTabs();
     this.tabs_.push(tab);
+    return id;
   }
 
   removeTab(tabId: string) {
@@ -72,7 +74,7 @@ export class TabService {
     }));
   }
 
-  navigateActiveTab(url: string) {
+  navigateTabById(id: string, url: string) {
     // Validate URL
     let validUrl = url;
     if (!validUrl.startsWith('edge://')) {
@@ -86,9 +88,9 @@ export class TabService {
     // Set tab to loading state
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
-      title: tab.active ? url : tab.title,
-      url: tab.active ? validUrl : tab.url,
-      loading: tab.active,
+      title: tab.id === id ? url : tab.title,
+      url: tab.id === id ? validUrl : tab.url,
+      loading: tab.id === id,
     }));
 
     // Get metadata for the new query
@@ -97,31 +99,31 @@ export class TabService {
       .then((metadata) => {
         this.tabs_ = this.tabs_.map((tab) => ({
           ...tab,
-          title: tab.active ? metadata.title : tab.title,
-          favicon: tab.active ? metadata.favicon : tab.favicon,
+          title: tab.id === id ? metadata.title : tab.title,
+          favicon: tab.id === id ? metadata.favicon : tab.favicon,
         }));
       });
 
     // Set the URL of the active tab to the query
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
-      url: tab.active ? validUrl : tab.url,
+      url: tab.id === id ? validUrl : tab.url,
     }));
   }
 
-  tabDidLoad(tabId: string) {
+  tabDidLoad(id: string) {
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
-      loading: tab.id === tabId ? false : tab.loading,
-      actionIds: tab.active ? this.getActionsForURL(tab.url) : tab.actionIds,
+      loading: tab.id === id ? false : tab.loading,
+      actionIds: tab.id === id ? this.getActionsForURL(tab.url) : tab.actionIds,
     }));
   }
 
-  tabLoadError(tabId: string) {
+  tabLoadError(id: string) {
     this.tabs_ = this.tabs_.map((tab) => ({
       ...tab,
-      url: tab.id === tabId ? 'edge://error' : tab.url,
-      loading: tab.id === tabId ? false : tab.loading,
+      url: tab.id === id ? 'edge://error' : tab.url,
+      loading: tab.id === id ? false : tab.loading,
     }));
   }
 

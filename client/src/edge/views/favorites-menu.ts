@@ -39,31 +39,36 @@ const template = html<FavoritesMenu>`
   <div id="header">
     <span>Favorites</span>
     <div id="icons">
-    <phx-button size="small" appearance="subtle" icon-only slot="trigger">
-        <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
+      <phx-button
+        size="small"
+        appearance="subtle"
+        icon-only
+        @click="${(x) => x.handleAddFavorite()}"
+      >
+        <svg><use href="./img/edge/icons.svg#star-add-20-regular" /></svg>
       </phx-button>
-    <flyout-menu>
-      <phx-button size="small" appearance="subtle" icon-only slot="trigger">
-        <svg>
-          <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
-        </svg>
-      </phx-button>
-      <context-menu>
-        ${when(
-          (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
-          html` <menu-item
-            @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
-          >
-            Hide favorites menu in toolbar
-          </menu-item>`,
-          html` <menu-item
-            @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
-          >
-            Show favorites menu in toolbar
-          </menu-item>`,
-        )}
-      </context-menu>
-    </flyout-menu>
+      <flyout-menu>
+        <phx-button size="small" appearance="subtle" icon-only slot="trigger">
+          <svg>
+            <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
+          </svg>
+        </phx-button>
+        <context-menu>
+          ${when(
+            (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
+            html` <menu-item
+              @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
+            >
+              Hide favorites menu in toolbar
+            </menu-item>`,
+            html` <menu-item
+              @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
+            >
+              Show favorites menu in toolbar
+            </menu-item>`,
+          )}
+        </context-menu>
+      </flyout-menu>
     </div>
   </div>
   <div id="content">
@@ -152,7 +157,7 @@ const styles = css`
 
   #icons {
     gap: ${spacingHorizontalXXS};
-    }
+  }
 
   #content {
     display: flex;
@@ -186,9 +191,9 @@ const styles = css`
     font-weight: ${typographyStyles.body1.fontWeight};
     line-height: ${typographyStyles.body1.lineHeight};
     overflow: hidden;
-    white-space: nowrap;        
+    white-space: nowrap;
     width: 100%;
-    flex-grow: 1;            
+    flex-grow: 1;
   }
 
   phx-text-input {
@@ -235,7 +240,7 @@ export class FavoritesMenu extends FASTElement {
     });
     this.fs.addObserver(this.loadFavorites.bind(this));
   }
-  
+
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.unsetElements();
@@ -302,8 +307,36 @@ export class FavoritesMenu extends FASTElement {
 
   handleItemClick(item: Favorite | FavoriteFolder) {
     if (item.type === 'site' && item.url) {
-      this.ts.navigateActiveTab(item.url);
+      const activeTab = this.ts.getActiveTab();
+      if (!activeTab) return;
+      if (activeTab.url === 'edge://newtab') {
+        this.ts.navigateTabById(activeTab.id, item.url);
+      } else {
+        const id = this.ts.addTab();
+        if (!id) return;
+        this.ts.navigateTabById(id, item.url);
+      }
       this.$emit('closemenu');
     }
+  }
+
+  handleAddFavorite() {
+    if (!this.pageIsFavorite()) {
+      const activeTab = this.ts.getActiveTab();
+      if (!activeTab) return;
+
+      this.fs.addFavorite({
+        type: 'site',
+        url: activeTab.url,
+        title: activeTab.title || 'New favorite',
+        favicon: activeTab.favicon,
+      });
+    }
+  }
+
+  pageIsFavorite() {
+    const activeTab = this.ts.getActiveTab();
+    if (!activeTab) return false;
+    return this.fs.favorites.some((f) => f.title === activeTab.title);
   }
 }

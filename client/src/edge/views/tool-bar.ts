@@ -215,7 +215,9 @@ export class Toolbar extends FASTElement {
   }
 
   handleOmniboxSubmit(e: CustomEvent) {
-    this.ts.navigateActiveTab(e.detail);
+    const id = this.ts.getActiveTab()?.id;
+    if (!id) return;
+    this.ts.navigateTabById(id, e.detail);
   }
 
   handleOmniboxChange(e: CustomEvent) {

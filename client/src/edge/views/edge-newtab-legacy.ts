@@ -470,7 +470,10 @@ export class EdgeNewTab extends FASTElement {
   }
 
   handleLinkClick(url: string) {
-    this.ts.navigateActiveTab(url);
+    const id = this.ts.getActiveTab()?.id;
+    if (!id) return;
+
+    this.ts.navigateTabById(id, url);
   }
 
   fetchImageOfTheDay() {

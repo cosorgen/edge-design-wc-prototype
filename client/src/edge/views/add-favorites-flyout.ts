@@ -7,6 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '@phoenixui/web-components/text-input.js';
+import { TextInput } from '@phoenixui/web-components/text-input.js';
 import '@phoenixui/web-components/button.js';
 import {
   acrylicBackgroundBlur,
@@ -29,12 +30,12 @@ const template = html<AddFavoritesInputs>`
     <label for="favorite-name">Name</label>
     <phx-text-input
       id="favorite-name"
-      value="${(x) => x.getFavoriteName()}"
+      value="${(x) => x.getPageTitle()}"
     ></phx-text-input>
   </div>
   <div class="input-group">
     <label for="favorite-folder">Folder</label>
-    <phx-text-input id="favorite-folder" placeholder="Select folder">
+    <phx-text-input id="favorite-folder" placeholder="Select folder" disabled>
       <span slot="start">
         <svg>
           <use href="./img/edge/icons.svg#folder-20-regular" />
@@ -51,7 +52,7 @@ const template = html<AddFavoritesInputs>`
     <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
     <div class="button-group">
       <phx-button @click="${(x) => x.handleRemove()}"> Remove </phx-button>
-      <phx-button appearance="primary" @click="${(x) => x.closeFlyout()}">
+      <phx-button appearance="primary" @click="${(x) => x.handleDone()}">
         Done
       </phx-button>
     </div>
@@ -126,8 +127,11 @@ export class AddFavoritesInputs extends FASTElement {
 
   openChanged() {
     if (this.$fastController.isConnected) {
+      const activeTab = this.ts.getActiveTab();
+      if (!activeTab) return;
+
       const isFavorite = this.fs.favorites.find(
-        (f) => f.title === this.getFavoriteName(),
+        (f) => f.type === 'site' && f.url === activeTab.url,
       );
       if (this.open && !isFavorite) {
         this.addFavorite();
@@ -135,23 +139,23 @@ export class AddFavoritesInputs extends FASTElement {
     }
   }
 
-  getFavoriteName() {
+  getPageTitle() {
     const activeTab = this.ts.getActiveTab();
-    if (activeTab) return activeTab.title;
-    return 'Unknown page';
+    if (activeTab) return activeTab.title || 'New favorite';
+    return 'New favorite';
   }
 
   closeFlyout() {
     this.$emit('closemenu'); // Emit a close event
   }
 
-  addFavorite() {
+  addFavorite(title?: string) {
     const activeTab = this.ts.getActiveTab();
     if (activeTab) {
       this.fs.addFavorite({
         type: 'site',
         url: activeTab.url,
-        title: activeTab.title!,
+        title: title || this.getPageTitle(),
         favicon: activeTab.favicon,
       });
     }
@@ -165,6 +169,25 @@ export class AddFavoritesInputs extends FASTElement {
     if (favorite) {
       this.fs.removeFavorite(favorite);
     }
+    this.closeFlyout();
+  }
+
+  handleDone() {
+    const activeTab = this.ts.getActiveTab();
+    if (!activeTab) return;
+
+    // Rename the favorite
+    const favorite = this.fs.favorites.find(
+      (x) => x.type === 'site' && x.url === activeTab.url,
+    );
+    if (favorite) {
+      this.fs.removeFavorite(favorite);
+      const title = (
+        this.shadowRoot?.querySelector('phx-text-input') as TextInput
+      )?.value;
+      this.addFavorite(title);
+    }
+
     this.closeFlyout();
   }
 }

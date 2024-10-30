@@ -32,7 +32,7 @@ const template = html<FavoritesItem>` <button
       alt="${(x) => x.title}"
     />`,
   )}
-  ${(x) => x.title}
+  <div id="title">${(x) => x.title}</div>
 </button>`;
 
 const styles = css`
@@ -47,12 +47,7 @@ const styles = css`
     background: ${colorSubtleBackground};
     cursor: pointer;
     width: 100%;
-
-    font-family: ${typographyStyles.caption1.fontFamily};
-    font-size: ${typographyStyles.caption1.fontSize};
-    font-weight: ${typographyStyles.caption1.fontWeight};
-    line-height: ${typographyStyles.caption1.lineHeight};
-    color: ${colorNeutralForeground1};
+    max-width: 256px;
   }
 
   button:hover {
@@ -69,6 +64,17 @@ const styles = css`
 
   img {
     width: 16px;
+  }
+
+  #title {
+    font-family: ${typographyStyles.caption1.fontFamily};
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+    color: ${colorNeutralForeground1};
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
 
