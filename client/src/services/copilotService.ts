@@ -30,8 +30,11 @@ export type OpenAIResponse = {
 export class CopilotService {
   @observable composerActive = true;
   @observable threadsById: Record<string, Thread> = {};
+  @observable activeThreadId?: string;
 
-  browserContextChanged(threadId: string, tab: Tab) {
+  browserContextChanged(tab: Tab) {
+    if (!this.activeThreadId) this.newThread();
+
     let content = 'An unknown webpage';
     if (tab) {
       if (tab.url === 'edge://newtab') {
@@ -45,7 +48,7 @@ export class CopilotService {
     }
 
     const messageId = 'message' + crypto.randomUUID();
-    const thread = this.threadsById[threadId];
+    const thread = this.threadsById[this.activeThreadId!];
     thread.messages = {
       ...thread.messages,
       [messageId]: {
@@ -60,11 +63,11 @@ export class CopilotService {
   }
 
   newThread() {
-    const threadId = 'thread-' + crypto.randomUUID();
+    this.activeThreadId = 'thread-' + crypto.randomUUID();
     this.threadsById = {
       ...this.threadsById,
-      [threadId]: {
-        id: threadId,
+      [this.activeThreadId]: {
+        id: this.activeThreadId,
         messages: {
           'system-prompt': {
             id: 'system-prompt',
@@ -77,12 +80,14 @@ export class CopilotService {
       },
     };
 
-    return threadId;
+    return this.activeThreadId;
   }
 
-  send(content: string, threadId: string) {
+  send(content: string) {
+    if (!this.activeThreadId) this.newThread();
+
     const messageId = 'message' + crypto.randomUUID();
-    const thread = this.threadsById[threadId];
+    const thread = this.threadsById[this.activeThreadId!];
     thread.messages = {
       ...thread.messages,
       [messageId]: {
@@ -94,11 +99,14 @@ export class CopilotService {
       },
     };
     this.threadsById = { ...this.threadsById, thread };
-    this.fetchResponse(threadId);
+
+    this.fetchResponse();
   }
 
-  fetchResponse(threadId: string) {
-    let thread = this.threadsById[threadId];
+  fetchResponse() {
+    if (!this.activeThreadId) return;
+
+    let thread = this.threadsById[this.activeThreadId!];
 
     // Sanitize the messages before adding the response message
     const sanitizedMessages = Object.values(thread.messages).map((m) => ({
@@ -130,7 +138,7 @@ export class CopilotService {
         if (!r.ok) {
           console.error(r.statusText, r.status);
           // Update the response message with the error
-          thread = this.threadsById[threadId];
+          thread = this.threadsById[this.activeThreadId!];
           thread.messages[responseId].status = 'error';
           thread.messages[responseId].content =
             `Error: ${r.status} ${r.statusText}`;
@@ -141,7 +149,7 @@ export class CopilotService {
       .then((r: OpenAIResponse) => {
         if (r.choices.length <= 0) console.error('No response');
         // Update the response message with the content
-        thread = this.threadsById[threadId];
+        thread = this.threadsById[this.activeThreadId!];
         thread.messages[responseId].content = r.choices[0].message.content;
         this.threadsById = { ...this.threadsById, thread };
 
@@ -151,7 +159,7 @@ export class CopilotService {
           1000 - (Date.now() - responseStart),
         );
         setTimeout(() => {
-          thread = this.threadsById[threadId];
+          thread = this.threadsById[this.activeThreadId!];
           thread.messages[responseId].status = 'complete';
           this.threadsById = { ...this.threadsById, thread };
         }, delayBeforeComplete);
