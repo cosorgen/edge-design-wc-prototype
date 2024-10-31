@@ -177,12 +177,12 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
-        <label for="show-menus-l0">Show menus in L0</label>
+        <label for="show-menus-l0">Show menus in L1</label>
         <phx-switch
           slot="input"
           id="show-menus-l0"
-          ?checked="${(x) => x.ss.showMenusInL0}"
-          @change="${(x) => x.toggleShowMenusInL0()}"
+          ?checked="${(x) => x.ss.showMenusInL1}"
+          @change="${(x) => x.toggleshowMenusInL1()}"
         ></phx-switch>
       </div>
       <div class="entry">
@@ -357,8 +357,8 @@ export class WindowsSettings extends FASTElement {
     );
   }
 
-  toggleShowMenusInL0() {
-    this.ss.setShowMenusInL0(
+  toggleshowMenusInL1() {
+    this.ss.setShowMenusInL1(
       (this.shadowRoot?.querySelector('#show-menus-l0') as Checkbox)?.checked || false,
     );
   }

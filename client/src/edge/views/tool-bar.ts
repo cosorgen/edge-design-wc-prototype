@@ -119,7 +119,7 @@ const template = html<Toolbar>`
       { positioning: true },
     )}
     ${when(
-      (x) => !x.ess.showMenusInL0,
+      (x) => x.ess.showMenusInL1,
       html`
         <flyout-menu>
           <identity-control appearance="signedIn" slot="trigger"></identity-control>
@@ -240,7 +240,7 @@ export class Toolbar extends FASTElement {
     });
 
     // Remove copilot if it's disabled
-    if (!this.ess.showLegacyCopilot || !this.ess.showMenusInL0)
+    if (!this.ess.showLegacyCopilot || this.ess.showMenusInL1)
       this._derivedToolbarItems = this._derivedToolbarItems.filter(
         (id) => id !== 'Copilot',
       );

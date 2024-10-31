@@ -29,7 +29,7 @@ const template = html` <div
     id="window-grabber"
     @mousedown="${(x) => x.handleTitleBarMouseDown()}"
   ></div>
-  ${x => x.ss.showMenusInL0 ? html`
+  ${x => !x.ss.showMenusInL1 ? html`
     <div class="group" id="pill-menu">
       <flyout-menu>
         <phx-toggle-button
