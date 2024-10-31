@@ -62,6 +62,10 @@ export class WebPage extends FASTElement {
       this.handleIframeEvent,
     );
     this._iframeDocumentBody!.addEventListener(
+      'mousemove',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener(
       'keydown',
       this.handleIframeEvent,
     );
@@ -79,6 +83,10 @@ export class WebPage extends FASTElement {
     );
     this._iframeDocumentBody!.removeEventListener(
       'mousedown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'mousemove',
       this.handleIframeEvent,
     );
     this._iframeDocumentBody!.removeEventListener(
@@ -112,6 +120,30 @@ export class WebPage extends FASTElement {
   }
 
   handleIframeEvent = (event: Event) => {
-    this.$emit(event.type);
+    let newEvent = new Event('iframeevent');
+    switch (event.type) {
+      case 'click':
+        newEvent = new MouseEvent('click', event);
+        break;
+      case 'mouseup':
+        newEvent = new MouseEvent('mouseup', event);
+        break;
+      case 'mousedown':
+        newEvent = new MouseEvent('mousedown', event);
+        break;
+      case 'mousemove':
+        newEvent = new MouseEvent('mousemove', event);
+        break;
+      case 'keydown':
+        newEvent = new KeyboardEvent('keydown', event);
+        break;
+      case 'keyup':
+        newEvent = new KeyboardEvent('keyup', event);
+        break;
+      default:
+        break;
+    }
+
+    this.dispatchEvent(newEvent);
   };
 }

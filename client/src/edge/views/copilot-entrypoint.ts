@@ -366,7 +366,7 @@ export class CopilotEntrypoint extends FASTElement {
     if (!this._composerElement) return;
 
     const delta = e.movementX;
-    const composerWidth = this._composerElement?.clientWidth || 0;
+    const composerWidth = this._composerElement.clientWidth;
     let newWidth = composerWidth + delta * 2;
     newWidth = Math.max(402, newWidth);
     newWidth = Math.min(1024, newWidth);
@@ -392,7 +392,7 @@ export class CopilotEntrypoint extends FASTElement {
     if (!this._composerElement) return;
 
     const delta = e.movementY;
-    const composerHeight = this._composerElement?.clientHeight || 0;
+    const composerHeight = this._composerElement.clientHeight;
     let newHeight = composerHeight - delta;
     newHeight = Math.max(68, newHeight);
 

@@ -1,6 +1,5 @@
 import { Tab } from '#servicestabService.js';
 import { observable } from '@microsoft/fast-element';
-import summerize from './html-summerize.js';
 
 export type Message = {
   id: string;
@@ -29,35 +28,6 @@ export type OpenAIResponse = {
 
 export class CopilotService {
   @observable composerActive = true;
-  // @observable threadsById: Record<string, Thread> = {
-  //   'test-thread': {
-  //     id: 'test-thread',
-  //     messages: {
-  //       'system-prompt': {
-  //         id: 'system-prompt',
-  //         content: `You are a helpful assistant that lives inside of Microsoft Edge. You can see the pages I'm looking at and help me with anything I need.`,
-  //         timestamp: Date.now(),
-  //         role: 'system',
-  //         status: 'complete',
-  //       },
-  //       'user-message': {
-  //         id: 'user-message',
-  //         content: `What is the weather like in Seattle?`,
-  //         timestamp: Date.now(),
-  //         role: 'user',
-  //         status: 'complete',
-  //       },
-  //       'response-message': {
-  //         id: 'response-message',
-  //         content: `The weather in Seattle is currently 72 degrees and sunny.`,
-  //         timestamp: Date.now(),
-  //         role: 'system',
-  //         status: 'complete',
-  //       },
-  //     },
-  //   },
-  // };
-  // @observable activeThreadId?: string = 'test-thread';
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
 
@@ -71,8 +41,8 @@ export class CopilotService {
           "I am now looking at a page with a beautiful sunset over a lake between two mountians, golden hour, there's a large searchbox in the middle of the page that says 'Search or enter web address'. There's also a news section at the bottom that says 'A stunning new museum in Dubai, an ancient forest discovered in a Chinese sinkhole, and a Korean Air plane’s safe evacuation after overshooting a runway highlight recent global events.' and 'Scroll for more news'.";
       } else if (tab.page) {
         // Prepare the page for the LLM
-        const page = summerize(tab.page);
-        content = `I am now looking at ${tab.url} with the basic DOM: \`\`\` ${page} \`\`\``;
+        // const page = summerize(tab.page);
+        content = `I am now looking at ${tab.url} with the title: ${tab.title}`;
       }
     }
 
