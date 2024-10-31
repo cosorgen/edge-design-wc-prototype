@@ -87,6 +87,9 @@ const styles = css`
       content: attr(placeholder);
       color: ${colorNeutralForegroundHint};
       cursor: text;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
 

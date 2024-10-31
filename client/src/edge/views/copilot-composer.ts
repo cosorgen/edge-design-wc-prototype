@@ -72,8 +72,10 @@ const template = html<CopilotComposer>`
 const styles = css`
   copilot-design-provider {
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
     backdrop-filter: blur(${acrylicBackgroundBlur});
@@ -183,5 +185,9 @@ export class CopilotComposer extends FASTElement {
     if (this.ts.activeTabId) {
       this.cs.browserContextChanged(this.ts.tabsById[this.ts.activeTabId]);
     }
+  }
+
+  focus() {
+    this._inputElement?.focus();
   }
 }

@@ -29,6 +29,35 @@ export type OpenAIResponse = {
 
 export class CopilotService {
   @observable composerActive = true;
+  // @observable threadsById: Record<string, Thread> = {
+  //   'test-thread': {
+  //     id: 'test-thread',
+  //     messages: {
+  //       'system-prompt': {
+  //         id: 'system-prompt',
+  //         content: `You are a helpful assistant that lives inside of Microsoft Edge. You can see the pages I'm looking at and help me with anything I need.`,
+  //         timestamp: Date.now(),
+  //         role: 'system',
+  //         status: 'complete',
+  //       },
+  //       'user-message': {
+  //         id: 'user-message',
+  //         content: `What is the weather like in Seattle?`,
+  //         timestamp: Date.now(),
+  //         role: 'user',
+  //         status: 'complete',
+  //       },
+  //       'response-message': {
+  //         id: 'response-message',
+  //         content: `The weather in Seattle is currently 72 degrees and sunny.`,
+  //         timestamp: Date.now(),
+  //         role: 'system',
+  //         status: 'complete',
+  //       },
+  //     },
+  //   },
+  // };
+  // @observable activeThreadId?: string = 'test-thread';
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
 

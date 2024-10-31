@@ -81,6 +81,7 @@ const styles = css`
     line-height: ${typographyStyles.body2.lineHeight};
     font-weight: ${typographyStyles.body2.fontWeight};
     color: ${colorNeutralForeground1};
+    text-wrap: pretty;
   }
 
   :host(:not([system])) #message {

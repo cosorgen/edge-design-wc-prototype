@@ -19,6 +19,13 @@ import { CopilotService } from '#servicescopilotService.js';
 const template = html<CopilotInlineChat>`<div id="chat"></div>`;
 
 const styles = css`
+  :host {
+    display: block;
+    height: fit-content;
+    max-height: 100%;
+    overflow: hidden;
+  }
+
   #chat {
     height: 0px;
     transition: height ${durationUltraSlow} ${curveEasyEaseMax};
@@ -27,10 +34,10 @@ const styles = css`
   #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
     padding-block-end: 0;
+    height: fit-content;
+    max-height: calc(100% - ${spacingVerticalXXL});
     display: flex;
     flex-direction: column;
-    height: fit-content;
-    max-height: 50vh;
     overflow: hidden auto;
     scrollbar-color: ${colorScrollbarForeground} transparent;
     scrollbar-width: thin;
@@ -52,6 +59,7 @@ export class CopilotInlineChat extends FASTElement {
     super.connectedCallback();
     this.setElements();
     this.addEventListeners();
+    this.updateChat(); // Initial chat update
   }
 
   disconnectedCallback(): void {
@@ -127,7 +135,7 @@ export class CopilotInlineChat extends FASTElement {
         entry.timestamp = message.timestamp;
 
         if (this._lockChatScroll)
-          this._chatElement.scrollTop = this.scrollHeight;
+          this._chatElement.scrollTop = this._chatElement.scrollHeight;
       }
     }
   }
@@ -138,8 +146,10 @@ export class CopilotInlineChat extends FASTElement {
   }
 
   toggleChatScrollLock = () => {
+    console.log('toggleChatScrollLock');
     if (!this._chatElement) return;
     const { scrollTop, scrollHeight, clientHeight } = this._chatElement;
     this._lockChatScroll = scrollTop + clientHeight >= scrollHeight;
+    console.log('this._lockChatScroll', this._lockChatScroll);
   };
 }
