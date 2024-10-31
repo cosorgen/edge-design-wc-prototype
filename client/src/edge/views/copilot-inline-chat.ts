@@ -146,10 +146,8 @@ export class CopilotInlineChat extends FASTElement {
   }
 
   toggleChatScrollLock = () => {
-    console.log('toggleChatScrollLock');
     if (!this._chatElement) return;
     const { scrollTop, scrollHeight, clientHeight } = this._chatElement;
     this._lockChatScroll = scrollTop + clientHeight >= scrollHeight;
-    console.log('this._lockChatScroll', this._lockChatScroll);
   };
 }
