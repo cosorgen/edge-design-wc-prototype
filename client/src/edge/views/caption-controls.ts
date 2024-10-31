@@ -4,6 +4,7 @@ import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeSettingsService from '#services/settingsService.js';
 import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
@@ -28,31 +29,33 @@ const template = html` <div
     id="window-grabber"
     @mousedown="${(x) => x.handleTitleBarMouseDown()}"
   ></div>
-  <div class="group" id="pill-menu">
-    <flyout-menu>
-      <phx-toggle-button
-        size="small"
-        appearance="subtle"
-        shape="circular"
-        icon-only
-        slot="trigger"
-      >
-        <svg>
-          <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-        </svg>
-      </phx-toggle-button>
-      <more-menu
-        managed
-        @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
-      ></more-menu>
-    </flyout-menu>
-    <flyout-menu>
-      <identity-control appearance="signedIn" slot="trigger"></identity-control>
-      <context-menu>
-        <div style="padding: 8px;">Profile goes here...</div>
-      </context-menu>
-    </flyout-menu>
-  </div>
+  ${x => x.ss.showMenusInL0 ? html`
+    <div class="group" id="pill-menu">
+      <flyout-menu>
+        <phx-toggle-button
+          size="small"
+          appearance="subtle"
+          shape="circular"
+          icon-only
+          slot="trigger"
+        >
+          <svg>
+            <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+          </svg>
+        </phx-toggle-button>
+        <more-menu
+          managed
+          @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
+        ></more-menu>
+      </flyout-menu>
+      <flyout-menu>
+        <identity-control appearance="signedIn" slot="trigger"></identity-control>
+        <context-menu>
+          <div style="padding: 8px;">Profile goes here...</div>
+        </context-menu>
+      </flyout-menu>
+    </div>
+  ` : ''}
   <phx-button
     size="large"
     appearance="subtle"
@@ -147,6 +150,7 @@ export class CaptionControls extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsService) ss!: EdgeSettingsService;
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');

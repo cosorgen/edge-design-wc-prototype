@@ -24,8 +24,9 @@ import {
   Suggestion,
   generateSuggestions,
 } from '#servicesautoSuggestService.js';
+import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import EdgeSettingsService from '#servicessettingsService.js';
 import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
@@ -47,6 +48,7 @@ const template = html<Toolbar>`
     id="omnibox_${(x) => x.ts.getActiveTab()?.id}"
     ?active="${(x) => x.ts.getActiveTab()?.active}"
     ?truncate-url="${(x) => x.ess.truncateURL}"
+    ?full-width="${(x) => x.ess.fullWidthOmnibox}"
     initialValue="${(x) => x.ts.getActiveTab()?.url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
@@ -101,7 +103,7 @@ const template = html<Toolbar>`
           id="${(x) => x}"
           ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
           ?pressed="${(x, c) => x === c.parent.ews.activeSidepaneAppId}"
-          @togglesidepane="${(x, c) => c.parent.toggleSidepane(x, c.event)}"
+          @togglesidepane="${(x, c) => c.parent.toggleSidepane(x)}"
           @togglepintoolbaritem="${(x, c) =>
             c.parent.togglePinToolbarItem(x, c.event)}"
         ></toolbar-sidepane-item>`,
@@ -115,6 +117,45 @@ const template = html<Toolbar>`
         ></toolbar-flyout-item>`,
       )}`,
       { positioning: true },
+    )}
+    ${when(
+      (x) => !x.ess.showMenusInL0,
+      html`
+        <flyout-menu>
+          <identity-control appearance="signedIn" slot="trigger"></identity-control>
+        </flyout-menu>
+        <flyout-menu>
+          <phx-toggle-button
+            size="medium"
+            appearance="subtle"
+            icon-only
+            slot="trigger"
+          >
+            <svg>
+              <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+            </svg>
+          </phx-toggle-button>
+          <more-menu
+            managed
+            @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
+          ></more-menu>
+        </flyout-menu>
+${when(
+  (x) => x.ess.showLegacyCopilot,
+  html`
+    <phx-toggle-button
+      appearance="subtle"
+      icon-only
+      slot="trigger"
+      @click="${(x) => x.toggleSidepane('Copilot')}"
+      ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+    >
+      <img width="20px" src="./img/edge/copilotAppLight.png" />
+    </phx-toggle-button>
+  `
+)}
+
+      `
     )}
   </div>
 `;
@@ -149,8 +190,9 @@ const styles = css`
 })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
+  @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
-  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
+  @inject(EdgeSettingsService) ess!: EdgeSettingsService;
   @observable suggestions: Suggestion[] = [];
   _derivedToolbarItems: string[] = [];
   omniboxControl?: OmniboxControl | null = null;
@@ -198,7 +240,7 @@ export class Toolbar extends FASTElement {
     });
 
     // Remove copilot if it's disabled
-    if (!this.ess.showLegacyCopilot)
+    if (!this.ess.showLegacyCopilot || !this.ess.showMenusInL0)
       this._derivedToolbarItems = this._derivedToolbarItems.filter(
         (id) => id !== 'Copilot',
       );
@@ -227,9 +269,14 @@ export class Toolbar extends FASTElement {
     event.detail ? this.ews.openToolbarItem(id) : this.ews.closeToolbarItem();
   }
 
-  toggleSidepane(id: string, event: Event) {
-    if (!(event instanceof CustomEvent)) return;
-    event.detail ? this.ews.openSidepaneApp(id) : this.ews.closeSidepaneApp();
+  toggleSidepane(id: string) {
+    const isActive = this.ews.activeSidepaneAppId === id;
+    this.$emit('togglesidepane', !isActive);
+    if (isActive) {
+        this.ews.closeSidepaneApp();
+    } else {
+        this.ews.openSidepaneApp(id);
+    }
   }
 
   togglePinToolbarItem(id: string, event: Event) {
@@ -240,5 +287,31 @@ export class Toolbar extends FASTElement {
   handleOmniboxActionClick(id: string, e: Event) {
     e.stopPropagation();
     return false;
+  }
+
+  handleMoreAction(e: CustomEvent) {
+    const action = e.detail;
+    switch (action) {
+      case 'New tab':
+        this.ts.addTab();
+        break;
+      case 'New window':
+        this.ws.openWindow('Microsoft Edge');
+        break;
+      case 'Print':
+        window.print(); // maybe see if we can print the current tab iframe?
+        break;
+      case 'Settings':
+      case 'Find on page':
+      case 'Screenshot':
+      case 'New InPrivate window':
+        break;
+      case 'Close Microsoft Edge':
+        this.ws.closeAllWindows('Microsoft Edge');
+        break;
+      default:
+        this.ews.openToolbarItem(action);
+        break;
+    }
   }
 }

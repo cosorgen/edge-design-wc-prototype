@@ -33,6 +33,10 @@ export const styles = css`
     display: block;
   }
 
+  :host([full-width]) {
+    width: 100%;
+  }
+
   [part='container'] {
     box-sizing: border-box;
     display: flex;

@@ -177,6 +177,24 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
+        <label for="show-menus-l0">Show menus in L0</label>
+        <phx-switch
+          slot="input"
+          id="show-menus-l0"
+          ?checked="${(x) => x.ss.showMenusInL0}"
+          @change="${(x) => x.toggleShowMenusInL0()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
+        <label for="full-width-omnibox">Full width omnibox</label>
+        <phx-switch
+          slot="input"
+          id="full-width-omnibox"
+          ?checked="${(x) => x.ss.fullWidthOmnibox}"
+          @change="${(x) => x.toggleFullWidthOmnibox()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
         <label for="frame-spacing">Frame spacing</label>
         <phx-text-input
           id="frame-spacing"
@@ -338,6 +356,18 @@ export class WindowsSettings extends FASTElement {
         false,
     );
   }
+
+  toggleShowMenusInL0() {
+    this.ss.setShowMenusInL0(
+      (this.shadowRoot?.querySelector('#show-menus-l0') as Checkbox)?.checked || false,
+    );
+  }
+
+  toggleFullWidthOmnibox() {
+    this.ss.setFullWidthOmnibox(
+      (this.shadowRoot?.querySelector('#full-width-omnibox') as Checkbox)?.checked || false,
+    );
+  }  
 
   updateShowFavoritesBar() {
     this.ss.setShowFavoritesBar(

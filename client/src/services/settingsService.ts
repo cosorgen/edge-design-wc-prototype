@@ -9,6 +9,8 @@ export default class EdgeSettingsSerivce {
   @observable pinnedToolbarItems: string[] = [];
   @observable frameSpacing = '4px';
   @observable showLegacyNewTab = false;
+  @observable showMenusInL0 = true;
+  @observable fullWidthOmnibox = false;
 
   constructor() {
     // Load settings from local storage
@@ -31,6 +33,8 @@ export default class EdgeSettingsSerivce {
     this.truncateURL = url.searchParams.get('truncateURL') === 'true';
 
     this.frameSpacing = url.searchParams.get('frameSpacing') || '4px';
+    this.showMenusInL0 = url.searchParams.get('showMenusInL0') === 'true';
+    this.fullWidthOmnibox = url.searchParams.get('fullWidthOmnibox') === 'true';
   }
 
   setSettingsInURL() {
@@ -43,6 +47,8 @@ export default class EdgeSettingsSerivce {
     url.searchParams.set('showLegacyNewTab', this.showLegacyNewTab.toString());
     url.searchParams.set('truncateURL', this.truncateURL.toString());
     url.searchParams.set('frameSpacing', this.frameSpacing);
+    url.searchParams.set('showMenusInL0', this.showMenusInL0.toString());
+    url.searchParams.set('fullWidthOmnibox', this.fullWidthOmnibox.toString());
 
     window.history.pushState({}, '', url.toString());
   }
@@ -83,6 +89,16 @@ export default class EdgeSettingsSerivce {
 
   setFrameSpacing(spacing: string) {
     this.frameSpacing = spacing;
+    this.setSettingsInURL();
+  }
+
+  setShowMenusInL0(show: boolean) {
+    this.showMenusInL0 = show;
+    this.setSettingsInURL();
+  }
+
+  setFullWidthOmnibox(show: boolean): void {
+    this.fullWidthOmnibox = show;
     this.setSettingsInURL();
   }
 }
