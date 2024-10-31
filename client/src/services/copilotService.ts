@@ -113,7 +113,6 @@ export class CopilotService {
       role: m.role === 'context' ? 'user' : m.role,
       content: m.content,
     }));
-    console.log(sanitizedMessages);
 
     // Set up the response
     const responseStart = Date.now();
