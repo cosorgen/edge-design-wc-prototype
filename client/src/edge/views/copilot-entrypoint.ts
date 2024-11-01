@@ -404,13 +404,13 @@ export class CopilotEntrypoint extends FASTElement {
     this._resizeVertical = 0;
   };
 
-  handleComposerMouseDown(): void {
+  handleComposerMouseDown() {
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.setAttribute('dragging', '');
   }
 
-  handleComposerMouseMove = (e: MouseEvent): void => {
+  handleComposerMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
 
     const deltaX = e.movementX;
@@ -421,13 +421,12 @@ export class CopilotEntrypoint extends FASTElement {
       this.getBoundingClientRect();
     const newBottom = parentBottom - composerBottom - deltaY;
     const newLeft = parentLeft - composerLeft + deltaX;
-    console.log(parentBottom, composerBottom, deltaY, newBottom);
 
     this._composerElement.style.left = `${newLeft}px`;
     this._composerElement.style.bottom = `${newBottom}px`;
   };
 
-  handleComposerMouseUp = (): void => {
+  handleComposerMouseUp = () => {
     window.removeEventListener('mouseup', this.handleComposerMouseUp);
     window.removeEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.removeAttribute('dragging');
