@@ -41,6 +41,7 @@ const template = html<CopilotComposer>`
       </div>
       <copilot-input
         placeholder="Message Copilot"
+        @click="${(x) => x.focus()}"
         @submit="${(x, c) => x.handleSubmit(c.event)}"
         @close="${(x) => x.handleClose()}"
       ></copilot-input>

@@ -19,9 +19,9 @@ import {
 import './copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { spacingFrame } from '../designSystem.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { CopilotService } from '#servicescopilotService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
@@ -52,11 +52,10 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
 
 const styles = css`
   :host {
-    --bottom-of-frame: calc(0px - max(${spacingFrame}, 6px) / 2);
     --composer-expanded-width: 512px;
     --composer-retracted-width: 160px;
     --composer-expanded-height: fit-content;
-    --composer-retracted-height: fit-content;
+    --composer-retracted-height: 68px;
 
     position: absolute;
     inset: 0;
@@ -69,7 +68,8 @@ const styles = css`
 
   #hint-target {
     position: absolute;
-    bottom: var(--bottom-of-frame);
+    bottom: 0;
+    left: calc((var(--window-width) / 2) - 128px);
     width: 256px;
     height: 48px;
     cursor: pointer;
@@ -84,29 +84,32 @@ const styles = css`
     height: 4px;
     border-radius: ${borderRadiusCircular};
     background-color: ${colorScrollbarForeground};
+    left: calc((var(--window-width) / 2) - 64px);
 
     width: 128px;
-    bottom: -2px; /* Center the grabber */
+    bottom: calc(${spacingFrame} / 2 - 2px);
     opacity: 1;
     transition:
       width ${durationSlow} ${curveEasyEaseMax},
       opacity ${durationSlow} ${curveEasyEaseMax},
-      bottom ${durationSlow} ${curveEasyEaseMax};
+      bottom ${durationSlow} ${curveEasyEaseMax},
+      left ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #grabber {
     opacity: 0.4;
     width: 64px;
-    bottom: calc(var(--bottom-of-frame) + 16px - 2px);
+    bottom: 16px;
+    left: calc((var(--window-width) / 2) - 32px);
   }
 
   :host([active]) #grabber {
     opacity: 0;
-    bottom: calc(var(--bottom-of-frame) + 66px - 2px);
+    bottom: 68px;
   }
 
   :host([hidden]) #grabber {
-    bottom: calc(var(--bottom-of-frame) - 4px);
+    bottom: -4px;
   }
 
   #hint-composer {
@@ -118,36 +121,59 @@ const styles = css`
     backdrop-filter: blur(${acrylicBackgroundBlur});
     border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
     box-shadow: ${shadow16};
-    width: var(--composer-retracted-width);
 
-    bottom: calc(var(--bottom-of-frame) - 66px);
+    width: var(--composer-retracted-width);
+    bottom: calc(0px - var(--composer-retracted-height));
+    left: calc(var(--window-width) / 2 - var(--composer-retracted-width) / 2);
     opacity: 1;
     transition:
       bottom ${durationSlow} ${curveEasyEaseMax},
       width ${durationSlow} ${curveEasyEaseMax},
-      opacity ${durationSlow} ${curveEasyEaseMax};
+      opacity ${durationSlow} ${curveEasyEaseMax},
+      left ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #hint-composer {
-    bottom: calc(var(--bottom-of-frame) - 32px);
+    bottom: -32px;
   }
 
   :host([active]) #hint-composer {
     width: var(--composer-expanded-width);
     bottom: 36px;
+    left: calc(var(--window-width) / 2 - var(--composer-expanded-width) / 2);
     opacity: 0;
   }
 
   #composer {
     position: absolute;
-    top: calc(var(--window-height) - 68px - 32px);
+    bottom: 32px;
     left: calc(
       (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
     );
     display: initial;
-    max-height: 50vh;
     width: var(--composer-expanded-width);
     height: var(--composer-expanded-height);
+    opacity: 1;
+    transition:
+      width ${durationSlow} ${curveEasyEaseMax},
+      height ${durationSlow} ${curveEasyEaseMax},
+      bottom ${durationSlow} ${curveEasyEaseMax},
+      left ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax};
+  }
+
+  :host(:not([active])) #composer {
+    height: var(--composer-retracted-height);
+    width: var(--composer-retracted-width);
+    bottom: -68px;
+    left: calc(
+      (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
+    );
+    opacity: 0;
+  }
+
+  #composer[dragging] {
+    transition: none;
   }
 
   .resize {
@@ -197,21 +223,12 @@ export class CopilotEntrypoint extends FASTElement {
     super.connectedCallback();
     this.setElements();
     this.addEventListeners();
-    if (this.active) {
-      setTimeout(() => {
-        this.setPopoverState();
-      }, 500);
-    }
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.unsetElements();
     this.removeEventListeners();
-  }
-
-  activeChanged(): void {
-    this.setPopoverState();
   }
 
   setElements(): void {
@@ -283,13 +300,6 @@ export class CopilotEntrypoint extends FASTElement {
   toggleActive(): void {
     this.active = !this.active;
     this.cs.composerActive = this.active;
-    this.setPopoverState();
-  }
-
-  setPopoverState(): void {
-    this.active
-      ? this._composerElement?.setAttribute('expanded', '')
-      : this._composerElement?.removeAttribute('expanded');
   }
 
   calcMarginForMinHeight(): string {
@@ -328,12 +338,18 @@ export class CopilotEntrypoint extends FASTElement {
     const deltaX = e.movementX * this._resizeHorizontal;
     const deltaY = e.movementY * this._resizeVertical;
     const composerWidth = this._composerElement.clientWidth;
-    const composerHeight = this._composerElement.clientHeight;
-    let newWidth = composerWidth + deltaX * 2;
+    const composerHeight = this._composerElement.clientHeight;  
+    const viewportHeight = parseInt(
+      getComputedStyle(this._composerElement).getPropertyValue(
+        '--viewport-height',
+      ),
+    );
+    let newWidth = composerWidth + deltaX;
     newWidth = Math.max(402, newWidth);
     newWidth = Math.min(1024, newWidth);
     let newHeight = composerHeight + deltaY;
     newHeight = Math.max(68, newHeight);
+    newHeight = Math.min(viewportHeight / 2, newHeight);
 
     this.style.setProperty('--composer-expanded-width', `${newWidth}px`);
     this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
@@ -356,18 +372,23 @@ export class CopilotEntrypoint extends FASTElement {
   handleComposerMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
 
+    const composerBottom = parseInt(
+      getComputedStyle(this._composerElement).bottom,
+    );
     const deltaX = e.movementX;
     const deltaY = e.movementY;
-    const newTop = this._composerElement.offsetTop + deltaY;
+    const newBottom = composerBottom - deltaY;
     const newLeft = this._composerElement.offsetLeft + deltaX;
 
     this._composerElement.style.left = `${newLeft}px`;
-    this._composerElement.style.top = `${newTop}px`;
+    this._composerElement.style.bottom = `${newBottom}px`;
   };
 
   handleComposerMouseUp = () => {
     window.removeEventListener('mouseup', this.handleComposerMouseUp);
     window.removeEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.removeAttribute('dragging');
+    this._composerElement?.style.removeProperty('bottom');
+    this._composerElement?.style.removeProperty('left');
   };
 }
