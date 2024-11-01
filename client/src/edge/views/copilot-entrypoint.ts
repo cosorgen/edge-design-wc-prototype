@@ -26,22 +26,22 @@ import { CopilotService } from '#servicescopilotService.js';
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
   <div id="hint-target"></div>
-  <div id="composer">
+  <div id="composer" @mousedown="${(x) => x.handleComposerMouseDown()}">
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
     <div
       class="resize"
       id="top"
-      @mousedown="${(x) => x.handleResizeNSMouseDown()}"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
     ></div>
     <div
       class="resize"
       id="left"
-      @mousedown="${(x) => x.handleResizeEWMouseDown()}"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
     ></div>
     <div
       class="resize"
       id="right"
-      @mousedown="${(x) => x.handleResizeEWMouseDown()}"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
     ></div>
   </div>`;
 
@@ -218,6 +218,8 @@ export class CopilotEntrypoint extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   _hintTargetElement: HTMLDivElement | null = null;
   _composerElement: HTMLDivElement | null = null;
+  _resizeVertical = 0;
+  _resizeHorizontal = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -355,54 +357,79 @@ export class CopilotEntrypoint extends FASTElement {
     return `${margin}px`;
   }
 
-  handleResizeEWMouseDown(): void {
-    window.addEventListener('mousemove', this.handleResizeEWMouseMove);
-    window.addEventListener('mouseup', this.handleResizeEWMouseUp);
-
+  handleResizeMouseDown(e: Event) {
+    e.stopPropagation();
+    window.addEventListener('mousemove', this.handleResizeMouseMove);
+    window.addEventListener('mouseup', this.handleResizeMouseUp);
     this._composerElement?.setAttribute('dragging', '');
+    this._resizeVertical = e
+      .composedPath()
+      .some((x) => x === this.shadowRoot?.querySelector('.resize#top'))
+      ? -1
+      : 0;
+    this._resizeHorizontal = e
+      .composedPath()
+      .some((x) => x === this.shadowRoot?.querySelector('.resize#left'))
+      ? -1
+      : 0;
+    this._resizeHorizontal = e
+      .composedPath()
+      .some((x) => x === this.shadowRoot?.querySelector('.resize#right'))
+      ? 1
+      : this._resizeHorizontal;
   }
 
-  handleResizeEWMouseMove = (e: MouseEvent): void => {
+  handleResizeMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
 
-    const delta = e.movementX;
+    const deltaX = e.movementX * this._resizeHorizontal;
+    const deltaY = e.movementY * this._resizeVertical;
     const composerWidth = this._composerElement.clientWidth;
-    let newWidth = composerWidth + delta * 2;
+    const composerHeight = this._composerElement.clientHeight;
+    let newWidth = composerWidth + deltaX * 2;
     newWidth = Math.max(402, newWidth);
     newWidth = Math.min(1024, newWidth);
-
-    this.style.setProperty('--composer-expanded-width', `${newWidth}px`);
-  };
-
-  handleResizeEWMouseUp = (): void => {
-    window.removeEventListener('mousemove', this.handleResizeEWMouseMove);
-    window.removeEventListener('mouseup', this.handleResizeEWMouseUp);
-
-    this._composerElement?.removeAttribute('dragging');
-  };
-
-  handleResizeNSMouseDown(): void {
-    window.addEventListener('mousemove', this.handleResizeNSMouseMove);
-    window.addEventListener('mouseup', this.handleResizeNSMouseUp);
-
-    this._composerElement?.setAttribute('dragging', '');
-  }
-
-  handleResizeNSMouseMove = (e: MouseEvent): void => {
-    if (!this._composerElement) return;
-
-    const delta = e.movementY;
-    const composerHeight = this._composerElement.clientHeight;
-    let newHeight = composerHeight - delta;
+    let newHeight = composerHeight + deltaY;
     newHeight = Math.max(68, newHeight);
 
+    this.style.setProperty('--composer-expanded-width', `${newWidth}px`);
     this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
   };
 
-  handleResizeNSMouseUp = (): void => {
-    window.removeEventListener('mousemove', this.handleResizeNSMouseMove);
-    window.removeEventListener('mouseup', this.handleResizeNSMouseUp);
+  handleResizeMouseUp = () => {
+    window.removeEventListener('mousemove', this.handleResizeMouseMove);
+    window.removeEventListener('mouseup', this.handleResizeMouseUp);
+    this._composerElement?.removeAttribute('dragging');
+    this._resizeHorizontal = 0;
+    this._resizeVertical = 0;
+  };
 
+  handleComposerMouseDown(): void {
+    window.addEventListener('mouseup', this.handleComposerMouseUp);
+    window.addEventListener('mousemove', this.handleComposerMouseMove);
+    this._composerElement?.setAttribute('dragging', '');
+  }
+
+  handleComposerMouseMove = (e: MouseEvent): void => {
+    if (!this._composerElement) return;
+
+    const deltaX = e.movementX;
+    const deltaY = e.movementY;
+    const { bottom: composerBottom, left: composerLeft } =
+      this._composerElement.getBoundingClientRect();
+    const { bottom: parentBottom, left: parentLeft } =
+      this.getBoundingClientRect();
+    const newBottom = parentBottom - composerBottom - deltaY;
+    const newLeft = parentLeft - composerLeft + deltaX;
+    console.log(parentBottom, composerBottom, deltaY, newBottom);
+
+    this._composerElement.style.left = `${newLeft}px`;
+    this._composerElement.style.bottom = `${newBottom}px`;
+  };
+
+  handleComposerMouseUp = (): void => {
+    window.removeEventListener('mouseup', this.handleComposerMouseUp);
+    window.removeEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.removeAttribute('dragging');
   };
 }
