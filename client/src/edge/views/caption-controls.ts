@@ -172,7 +172,7 @@ export class CaptionControls extends FASTElement {
     const action = e.detail;
     switch (action) {
       case 'New tab':
-        this.ts.addTab();
+        this.ts.activateTab(this.ts.addTab());
         break;
       case 'New window':
         this.ws.openWindow('Microsoft Edge');
