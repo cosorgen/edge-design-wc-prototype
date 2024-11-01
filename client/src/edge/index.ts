@@ -6,6 +6,7 @@ import {
   when,
   observable,
   Observable,
+  Updates,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
@@ -154,6 +155,12 @@ export class MicrosoftEdge extends FASTElement {
     this.setTheme();
     this.setElements();
     this.setEventListeners();
+
+    if (this.$fastController.isConnected) {
+      Updates.enqueue(() => {
+        this.updateCoordinates();
+      });
+    }
   }
 
   disconnectedCallback() {
@@ -225,5 +232,27 @@ export class MicrosoftEdge extends FASTElement {
       (this.ss.showFavoritesBar === 'newtab' &&
         activeTab.url === 'edge://newtab')
     );
+  }
+
+  updateCoordinates() {
+    const { width, height, left, top } = this.getBoundingClientRect();
+    this.style.setProperty('--window-width', `${width}px`);
+    this.style.setProperty('--window-height', `${height}px`);
+    this.style.setProperty('--window-x', `${left}px`);
+    this.style.setProperty('--window-y', `${top}px`);
+
+    const viewport = this.shadowRoot?.querySelector('web-content');
+    if (viewport) {
+      const {
+        width: viewportWidth,
+        height: viewportHeight,
+        left: viewportLeft,
+        top: viewportTop,
+      } = viewport.getBoundingClientRect();
+      this.style.setProperty('--viewport-width', `${viewportWidth}px`);
+      this.style.setProperty('--viewport-height', `${viewportHeight}px`);
+      this.style.setProperty('--viewport-x', `${viewportLeft}px`);
+      this.style.setProperty('--viewport-y', `${viewportTop}px`);
+    }
   }
 }

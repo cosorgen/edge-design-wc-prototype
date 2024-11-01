@@ -25,7 +25,12 @@ import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
-  <div id="hint-target"></div>
+  <div
+    id="hint-target"
+    @mouseover="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
+    @click="${(x) => x.handleClickHintTarget()}"
+    @mouseout="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
+  ></div>
   <div id="composer" @mousedown="${(x) => x.handleComposerMouseDown()}">
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
     <div
@@ -47,17 +52,19 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
 
 const styles = css`
   :host {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-block: ${(x) => x.calcMarginForMinHeight()}; /* Take no space  */
-
     --bottom-of-frame: calc(0px - max(${spacingFrame}, 6px) / 2);
     --composer-expanded-width: 512px;
     --composer-retracted-width: 160px;
     --composer-expanded-height: fit-content;
     --composer-retracted-height: fit-content;
+
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    & * {
+      pointer-events: auto;
+    }
   }
 
   #hint-target {
@@ -133,48 +140,14 @@ const styles = css`
 
   #composer {
     position: absolute;
-    bottom: calc(${spacingFrame} / 2 + 32px);
+    top: calc(var(--window-height) - 68px - 32px);
+    left: calc(
+      (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
+    );
     display: initial;
     max-height: 50vh;
-
-    opacity: 1;
     width: var(--composer-expanded-width);
     height: var(--composer-expanded-height);
-    transform: translateY(0px);
-    transition:
-      opacity ${durationSlow} ${curveEasyEaseMax},
-      width ${durationSlow} ${curveEasyEaseMax},
-      transform ${durationSlow} ${curveEasyEaseMax},
-      display ${durationSlow} 50ms allow-discrete;
-  }
-
-  #composer:not([expanded]) {
-    display: none;
-    opacity: 0;
-    transform: translateY(66px);
-    width: var(
-      --composer-retracted-width
-    ) !important; /* Force the width to be same as hint */
-    height: var(
-      --composer-retracted-height
-    ) !important; /* Force the height to be 68px */
-  }
-
-  #composer[dragging] {
-    transition: none;
-  }
-
-  @starting-style {
-    #composer {
-      opacity: 0;
-      width: var(
-        --composer-retracted-width
-      ) !important; /* Force the width to be same as hint */
-      height: var(
-        --composer-retracted-height
-      ) !important; /* Force the height to be 68px */
-      transform: translateY(66px);
-    }
   }
 
   .resize {
@@ -216,7 +189,6 @@ export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
-  _hintTargetElement: HTMLDivElement | null = null;
   _composerElement: HTMLDivElement | null = null;
   _resizeVertical = 0;
   _resizeHorizontal = 0;
@@ -243,33 +215,16 @@ export class CopilotEntrypoint extends FASTElement {
   }
 
   setElements(): void {
-    this._hintTargetElement = this.shadowRoot?.querySelector(
-      '#hint-target',
-    ) as HTMLDivElement;
-
     this._composerElement = this.shadowRoot?.querySelector(
       '#composer',
     ) as HTMLDivElement;
   }
 
   unsetElements(): void {
-    this._hintTargetElement = null;
     this._composerElement = null;
   }
 
   addEventListeners(): void {
-    this._hintTargetElement?.addEventListener(
-      'mouseover',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.addEventListener(
-      'mouseout',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.addEventListener(
-      'click',
-      this.handleClickHintTarget,
-    );
     this._composerElement?.addEventListener(
       'transitionend',
       this.handleComposerTransitionEnd,
@@ -277,18 +232,6 @@ export class CopilotEntrypoint extends FASTElement {
   }
 
   removeEventListeners(): void {
-    this._hintTargetElement?.removeEventListener(
-      'mouseover',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.removeEventListener(
-      'mouseout',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.removeEventListener(
-      'click',
-      this.handleClickHintTarget,
-    );
     this._composerElement?.removeEventListener(
       'transitionend',
       this.handleComposerTransitionEnd,
@@ -415,15 +358,11 @@ export class CopilotEntrypoint extends FASTElement {
 
     const deltaX = e.movementX;
     const deltaY = e.movementY;
-    const { bottom: composerBottom, left: composerLeft } =
-      this._composerElement.getBoundingClientRect();
-    const { bottom: parentBottom, left: parentLeft } =
-      this.getBoundingClientRect();
-    const newBottom = parentBottom - composerBottom - deltaY;
-    const newLeft = parentLeft - composerLeft + deltaX;
+    const newTop = this._composerElement.offsetTop + deltaY;
+    const newLeft = this._composerElement.offsetLeft + deltaX;
 
     this._composerElement.style.left = `${newLeft}px`;
-    this._composerElement.style.bottom = `${newBottom}px`;
+    this._composerElement.style.top = `${newTop}px`;
   };
 
   handleComposerMouseUp = () => {
