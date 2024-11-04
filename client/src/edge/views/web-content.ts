@@ -77,11 +77,19 @@ export class WebContent extends FASTElement {
 
   connectedCallback(): void {
     super.connectedCallback();
+    this.addEventListeners();
     if (this.$fastController.isConnected) {
       Updates.enqueue(() => {
         this.updateCoordinates();
       });
     }
+  }
+
+  addEventListeners(): void {
+    const resizeObserver = new ResizeObserver(() => {
+      this.updateCoordinates();
+    });
+    resizeObserver.observe(this);
   }
 
   getHostname(url: string): string {

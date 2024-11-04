@@ -24,7 +24,6 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { CopilotService } from '#servicescopilotService.js';
 import { spacingFrame } from '../designSystem.js';
-import WindowsService from '#serviceswindowsService.js';
 import { TabService } from '#servicestabService.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
@@ -157,7 +156,11 @@ const styles = css`
 
   #composer {
     position: absolute;
-    display: initial;
+    min-width: 404px;
+    max-width: calc(var(--viewport-width) + ${spacingFrame});
+    min-height: 68px;
+    max-height: calc(var(--viewport-height) + ${spacingFrame});
+
     width: var(--composer-expanded-width);
     height: var(--composer-expanded-height);
     opacity: 1;
@@ -172,6 +175,11 @@ const styles = css`
     height: var(--composer-retracted-height);
     width: var(--composer-retracted-width);
     opacity: 0;
+  }
+
+  #composer[ntp] {
+    max-width: calc(var(--viewport-width) - var(--ntp-inset) * 2);
+    max-height: calc(var(--viewport-height) - var(--ntp-inset) * 2);
   }
 
   #composer[dragging] {
@@ -223,8 +231,16 @@ const styles = css`
   }
 
   #composer[inline-position='center'] {
-    inset-inline-start: calc(
-      (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
+    inset-inline-start: max(
+      ${spacingFrame} / 2,
+      calc((var(--window-width) / 2) - (var(--composer-expanded-width) / 2))
+    );
+  }
+
+  #composer[inline-position='center'][ntp] {
+    inset-inline-start: max(
+      calc(${spacingFrame} + var(--ntp-inset)),
+      calc((var(--window-width) / 2) - (var(--composer-expanded-width) / 2))
     );
   }
 
@@ -247,7 +263,9 @@ const styles = css`
   }
 
   #composer[inline-position='end'] {
-    inset-inline-start: calc(${spacingFrame} / 2);
+    inset-inline-start: calc(
+      var(--window-width) - var(--composer-expanded-width) - ${spacingFrame} / 2
+    );
   }
 
   #composer[inline-position='end'][ntp] {
@@ -300,7 +318,6 @@ const styles = css`
 export class CopilotEntrypoint extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
-  @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @attr({ mode: 'boolean' }) hint = false;
@@ -341,7 +358,7 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       this.handleComposerTransitionEnd,
     );
-    Observable.getNotifier(this.ws).subscribe(this, 'windows');
+    Observable.getNotifier(this.ews).subscribe(this, 'viewportSize');
   }
 
   removeEventListeners(): void {
@@ -349,11 +366,11 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       this.handleComposerTransitionEnd,
     );
-    Observable.getNotifier(this.ws).unsubscribe(this);
+    Observable.getNotifier(this.ews).unsubscribe(this);
   }
 
   handleChange(subject: unknown, key: string): void {
-    if (key === 'windows') {
+    if (key === 'viewportSize') {
       this.setCSSVariables();
     }
   }
@@ -407,8 +424,10 @@ export class CopilotEntrypoint extends FASTElement {
       .some((x) => x === this.shadowRoot?.querySelector('.resize#right'))
       ? 1
       : this._resizeHorizontal;
-    if (this._composerElement?.hasAttribute('inline-center'))
+    if (this._composerElement?.getAttribute('inline-position') === 'center')
       this._resizeHorizontal *= 2;
+    if (this._composerElement?.getAttribute('block-position') === 'center')
+      this._resizeVertical *= 2;
   }
 
   handleResizeMouseMove = (e: MouseEvent) => {
@@ -419,12 +438,8 @@ export class CopilotEntrypoint extends FASTElement {
     const deltaY = e.movementY * this._resizeVertical;
     const composerWidth = this._composerElement.clientWidth;
     const composerHeight = this._composerElement.clientHeight;
-    let newWidth = composerWidth + deltaX;
-    newWidth = Math.max(402, newWidth);
-    newWidth = Math.min(1024, newWidth);
-    let newHeight = composerHeight + deltaY;
-    newHeight = Math.max(68, newHeight);
-    newHeight = Math.min(this.ews.viewportSize.height / 2, newHeight);
+    const newWidth = composerWidth + deltaX;
+    const newHeight = composerHeight + deltaY;
 
     this.style.setProperty('--composer-expanded-width', `${newWidth}px`);
     this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
@@ -457,7 +472,7 @@ export class CopilotEntrypoint extends FASTElement {
     this._composerElement.style.insetBlockStart = `${newTop}px`;
 
     // Set attributes on composer element based on cursor position
-    const window = this.ws.windows.find((w) => w.id === this.ews.id);
+    const window = this.getBoundingClientRect();
     if (window) {
       let xPosition: 'center' | 'start' | 'end' = 'center';
       let yPosition: 'center' | 'start' | 'end' = 'center';
@@ -467,18 +482,18 @@ export class CopilotEntrypoint extends FASTElement {
       const windowYThird = window.height / 3;
       const windowYHalf = window.height / 2;
 
-      if (cursorX < window.xPos + windowXThird) {
+      if (cursorX < window.left + windowXThird) {
         xPosition = 'start';
-      } else if (cursorX > window.xPos + windowXThird * 2) {
+      } else if (cursorX > window.left + windowXThird * 2) {
         xPosition = 'end';
       }
-      if (cursorY < window.yPos + windowYThird) {
+      if (cursorY < window.top + windowYThird) {
         yPosition = 'start';
-      } else if (cursorY > window.yPos + windowYThird * 2) {
+      } else if (cursorY > window.top + windowYThird * 2) {
         yPosition = 'end';
       }
       if (xPosition === 'center' && yPosition === 'center') {
-        yPosition = cursorY < window.yPos + windowYHalf ? 'start' : 'end';
+        yPosition = cursorY < window.top + windowYHalf ? 'start' : 'end';
       }
 
       this._composerElement.setAttribute('inline-position', xPosition);
@@ -495,14 +510,15 @@ export class CopilotEntrypoint extends FASTElement {
   };
 
   setCSSVariables() {
-    const window = this.ws.windows.find((w) => w.id === this.ews.id);
+    const window = this.getBoundingClientRect();
     if (window) {
       this.style.setProperty('--window-width', `${window.width}px`);
       this.style.setProperty('--window-height', `${window.height}px`);
-      this.style.setProperty('--window-top', `${window.yPos}px`);
+      this.style.setProperty('--window-top', `${window.top}px`);
     }
     const viewportSize = this.ews.viewportSize;
     if (viewportSize) {
+      this.style.setProperty('--viewport-width', `${viewportSize.width}px`);
       this.style.setProperty('--viewport-top', `${viewportSize.top}px`);
       this.style.setProperty('--viewport-height', `${viewportSize.height}px`);
     }
