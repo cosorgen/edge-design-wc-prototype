@@ -72,6 +72,7 @@ const template = html<CopilotComposer>`
 
 const styles = css`
   copilot-design-provider {
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     display: flex;

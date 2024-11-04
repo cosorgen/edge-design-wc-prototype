@@ -38,8 +38,8 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div
     id="composer"
     @mousedown="${(x) => x.handleComposerMouseDown()}"
-    block-center
-    inline-start
+    block-end
+    inline-center
     ?ntp="${(x) => x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
   >
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
@@ -64,7 +64,7 @@ const styles = css`
   :host {
     --composer-expanded-width: 512px;
     --composer-retracted-width: 160px;
-    --composer-expanded-height: fit-content;
+    --composer-expanded-height: 68px;
     --composer-retracted-height: 68px;
     --ntp-inset: 24px;
 
@@ -179,15 +179,24 @@ const styles = css`
   }
 
   #composer[block-end] {
-    inset-block-end: calc(${spacingFrame} / 2);
+    inset-block-start: calc(
+      var(--window-height) - var(--composer-expanded-height) -
+        (${spacingFrame} / 2)
+    );
   }
 
   #composer[block-end][ntp] {
-    inset-block-end: calc(${spacingFrame} + var(--ntp-inset));
+    inset-block-start: calc(
+      var(--window-height) - var(--composer-expanded-height) - ${spacingFrame} - var(
+          --ntp-inset
+        )
+    );
   }
 
   :host(:not([active])) #composer[block-end] {
-    inset-block-end: calc(0px - var(--composer-retracted-height));
+    inset-block-start: calc(
+      var(--window-height) + var(--composer-retracted-height)
+    );
   }
 
   #composer[block-start] {
@@ -209,7 +218,7 @@ const styles = css`
   #composer[block-center] {
     inset-block-start: calc(
       var(--viewport-top) - var(--window-top) + (var(--viewport-height) / 2) -
-        (var(--composer-retracted-height) / 2)
+        (var(--composer-expanded-height) / 2)
     );
   }
 
@@ -235,6 +244,24 @@ const styles = css`
 
   :host(:not([active])) #composer[inline-start] {
     inset-inline-start: calc(0px - var(--composer-retracted-width));
+  }
+
+  #composer[inline-end] {
+    inset-inline-start: calc(${spacingFrame} / 2);
+  }
+
+  #composer[inline-end][ntp] {
+    inset-inline-start: calc(
+      var(--window-width) - var(--composer-expanded-width) - ${spacingFrame} / 2 - var(
+          --ntp-inset
+        )
+    );
+  }
+
+  :host(:not([active])) #composer[inline-end] {
+    inset-inline-start: calc(
+      var(--window-width) + var(--composer-retracted-width)
+    );
   }
 
   .resize {
@@ -343,47 +370,21 @@ export class CopilotEntrypoint extends FASTElement {
     this.toggleActive();
   };
 
-  openSidebar(): void {
-    this._composerElement?.addEventListener(
-      'transitionend',
-      this.handleTransitionToSidebar,
-      { once: true },
-    );
-    this.toggleActive();
-  }
-
   handleComposerTransitionEnd = (e: TransitionEvent) => {
     if (e.propertyName !== 'opacity') return;
     const composer = this._composerElement?.children[0] as HTMLElement;
 
+    // Focus the input when the composer is expanded
     this.active && composer?.focus();
-    !this.active &&
-      this.style.setProperty('--composer-expanded-height', 'fit-content');
-  };
 
-  handleTransitionToSidebar = (e: TransitionEvent) => {
-    if (e.propertyName !== 'opacity') {
-      this._composerElement?.addEventListener(
-        'transitionend',
-        this.handleTransitionToSidebar,
-        { once: true },
-      );
-      return;
-    }
-    this.ews.openSidepaneApp('Copilot');
+    // Reset the expanded height when composer is closed
+    !this.active &&
+      this.style.setProperty('--composer-expanded-height', '68px');
   };
 
   toggleActive(): void {
     this.active = !this.active;
     this.cs.composerActive = this.active;
-  }
-
-  calcMarginForMinHeight(): string {
-    const frameSpacing = parseInt(this.ess.frameSpacing);
-    const minHeight = 6;
-    let margin = -1 * (frameSpacing / 2);
-    if (frameSpacing < minHeight) margin += (minHeight - frameSpacing) / 2;
-    return `${margin}px`;
   }
 
   handleResizeMouseDown(e: Event) {
@@ -446,39 +447,34 @@ export class CopilotEntrypoint extends FASTElement {
   handleComposerMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
 
-    const composerBottom = parseInt(
-      getComputedStyle(this._composerElement).bottom,
-    );
     const deltaX = e.movementX;
     const deltaY = e.movementY;
-    const newBottom = composerBottom - deltaY;
+    const newTop = this._composerElement.offsetTop + deltaY;
     const newLeft = this._composerElement.offsetLeft + deltaX;
 
-    this._composerElement.style.left = `${newLeft}px`;
-    this._composerElement.style.bottom = `${newBottom}px`;
+    this._composerElement.style.insetInlineStart = `${newLeft}px`;
+    this._composerElement.style.insetBlockStart = `${newTop}px`;
   };
 
   handleComposerMouseUp = () => {
     window.removeEventListener('mouseup', this.handleComposerMouseUp);
     window.removeEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.removeAttribute('dragging');
-    this._composerElement?.style.removeProperty('bottom');
-    this._composerElement?.style.removeProperty('left');
+    this._composerElement?.style.removeProperty('inset-inline-start');
+    this._composerElement?.style.removeProperty('inset-block-start');
   };
 
   setCSSVariables() {
-    this.style.setProperty(
-      '--window-width',
-      `${this.ws.windows.find((w) => w.id === this.ews.id)?.width}px`,
-    );
-    this.style.setProperty(
-      '--window-top',
-      `${this.ws.windows.find((w) => w.id === this.ews.id)?.yPos}px`,
-    );
-    this.style.setProperty('--viewport-top', `${this.ews.viewportSize?.top}px`);
-    this.style.setProperty(
-      '--viewport-height',
-      `${this.ews.viewportSize?.height}px`,
-    );
+    const window = this.ws.windows.find((w) => w.id === this.ews.id);
+    if (window) {
+      this.style.setProperty('--window-width', `${window.width}px`);
+      this.style.setProperty('--window-height', `${window.height}px`);
+      this.style.setProperty('--window-top', `${window.yPos}px`);
+    }
+    const viewportSize = this.ews.viewportSize;
+    if (viewportSize) {
+      this.style.setProperty('--viewport-top', `${viewportSize.top}px`);
+      this.style.setProperty('--viewport-height', `${viewportSize.height}px`);
+    }
   }
 }
