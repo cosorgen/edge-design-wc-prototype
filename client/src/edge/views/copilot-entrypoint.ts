@@ -4,6 +4,8 @@ import {
   html,
   css,
   attr,
+  Observable,
+  Updates,
 } from '@microsoft/fast-element';
 import {
   acrylicBackgroundBlur,
@@ -22,6 +24,7 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { CopilotService } from '#servicescopilotService.js';
 import { spacingFrame } from '../designSystem.js';
+import WindowsService from '#serviceswindowsService.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
@@ -211,7 +214,8 @@ const styles = css`
 })
 export class CopilotEntrypoint extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
-  @inject(CopilotService) ews!: EdgeWindowService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
@@ -223,6 +227,11 @@ export class CopilotEntrypoint extends FASTElement {
     super.connectedCallback();
     this.setElements();
     this.addEventListeners();
+    if (this.$fastController.isConnected) {
+      Updates.enqueue(() => {
+        this.setCSSVariables();
+      });
+    }
   }
 
   disconnectedCallback(): void {
@@ -246,6 +255,7 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       this.handleComposerTransitionEnd,
     );
+    Observable.getNotifier(this.ws).subscribe(this, 'windows');
   }
 
   removeEventListeners(): void {
@@ -253,6 +263,13 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       this.handleComposerTransitionEnd,
     );
+    Observable.getNotifier(this.ws).unsubscribe(this);
+  }
+
+  handleChange(subject: unknown, key: string): void {
+    if (key === 'windows') {
+      this.setCSSVariables();
+    }
   }
 
   handleMouseOverHintTarget = (e: Event): void => {
@@ -334,22 +351,18 @@ export class CopilotEntrypoint extends FASTElement {
 
   handleResizeMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
+    if (!this.ews.viewportSize) return;
 
     const deltaX = e.movementX * this._resizeHorizontal;
     const deltaY = e.movementY * this._resizeVertical;
     const composerWidth = this._composerElement.clientWidth;
-    const composerHeight = this._composerElement.clientHeight;  
-    const viewportHeight = parseInt(
-      getComputedStyle(this._composerElement).getPropertyValue(
-        '--viewport-height',
-      ),
-    );
+    const composerHeight = this._composerElement.clientHeight;
     let newWidth = composerWidth + deltaX;
     newWidth = Math.max(402, newWidth);
     newWidth = Math.min(1024, newWidth);
     let newHeight = composerHeight + deltaY;
     newHeight = Math.max(68, newHeight);
-    newHeight = Math.min(viewportHeight / 2, newHeight);
+    newHeight = Math.min(this.ews.viewportSize.height / 2, newHeight);
 
     this.style.setProperty('--composer-expanded-width', `${newWidth}px`);
     this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
@@ -391,4 +404,11 @@ export class CopilotEntrypoint extends FASTElement {
     this._composerElement?.style.removeProperty('bottom');
     this._composerElement?.style.removeProperty('left');
   };
+
+  setCSSVariables() {
+    this.style.setProperty(
+      '--window-width',
+      `${this.ws.windows.find((w) => w.id === this.ews.id)?.width}px`,
+    );
+  }
 }

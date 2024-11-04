@@ -6,6 +6,7 @@ import {
   repeat,
   when,
   ViewTemplate,
+  Updates,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
@@ -15,6 +16,7 @@ import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<copilot-newtab
@@ -71,6 +73,16 @@ const styles = css`
 export class WebContent extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    if (this.$fastController.isConnected) {
+      Updates.enqueue(() => {
+        this.updateCoordinates();
+      });
+    }
+  }
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
@@ -90,5 +102,10 @@ export class WebContent extends FASTElement {
 
   handleTabLoadError(id: string): void {
     this.ts.tabLoadError(id);
+  }
+
+  updateCoordinates() {
+    const { width, height, left, top } = this.getBoundingClientRect();
+    this.ews.viewportSize = { width, height, left, top };
   }
 }

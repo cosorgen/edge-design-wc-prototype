@@ -29,9 +29,7 @@ import { CopilotInlineChat } from './copilot-inline-chat.js';
 import { CopilotInput } from '../controls/copilot-input.js';
 
 const template = html<CopilotComposer>`
-  <copilot-design-provider
-    @mousedown="${(x, c) => x.handleComposerMouseDown(c.event)}"
-  >
+  <copilot-design-provider>
     <copilot-inline-chat></copilot-inline-chat>
     <div id="input-row">
       <div id="start">
@@ -192,10 +190,5 @@ export class CopilotComposer extends FASTElement {
 
   focus() {
     this._inputElement?.focus();
-  }
-
-  handleComposerMouseDown(e: Event) {
-    if (e.composedPath()[0] !== this.shadowRoot?.querySelector('#input-row'))
-      e.stopPropagation();
   }
 }

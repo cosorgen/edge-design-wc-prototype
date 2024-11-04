@@ -9,6 +9,12 @@ export default class EdgeWindowService {
   @observable id: string | null = null;
   @observable activeSidepaneAppId: string | null = null;
   @observable activeToolbarItemId: string | null = null;
+  @observable viewportSize?: {
+    width: number;
+    height: number;
+    left: number;
+    top: number;
+  };
 
   openToolbarItem(id: string) {
     if (this.activeToolbarItemId !== id) {
