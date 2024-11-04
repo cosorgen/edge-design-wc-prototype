@@ -16,50 +16,60 @@ import {
   curveEasyEaseMax,
   colorLayerBackgroundDialog,
 } from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import '../controls/copilot-composer.js';
+import './copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { spacingFrame } from '../designSystem.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
+import { CopilotService } from '#servicescopilotService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
-  <div id="hint-target"></div>
-  <copilot-composer
-    @close="${(x) => x.toggleActive()}"
-    @submit="${(x) => x.openSidebar()}"
-  >
-    <phx-button
-      appearance="subtle"
-      size="large"
-      icon-only
-      slot="start"
-      @click="${(x) => x.openSidebar()}"
-    >
-      <img src="img/edge/copilot-icon.svg" />
-    </phx-button>
-    <phx-button appearance="subtle" size="large" icon-only slot="end">
-      <svg>
-        <use href="img/edge/icons.svg#cast-20-regular" />
-      </svg>
-    </phx-button>
-  </copilot-composer>`;
+  <div
+    id="hint-target"
+    @mouseover="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
+    @click="${(x) => x.handleClickHintTarget()}"
+    @mouseout="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
+  ></div>
+  <div id="composer" @mousedown="${(x) => x.handleComposerMouseDown()}">
+    <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
+    <div
+      class="resize"
+      id="top"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
+    ></div>
+    <div
+      class="resize"
+      id="left"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
+    ></div>
+    <div
+      class="resize"
+      id="right"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
+    ></div>
+  </div>`;
 
 const styles = css`
   :host {
-    position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-block: ${(x) => x.calcMarginForMinHeight()}; /* Take no space  */
+    --composer-expanded-width: 512px;
+    --composer-retracted-width: 160px;
+    --composer-expanded-height: fit-content;
+    --composer-retracted-height: 68px;
 
-    --bottom-of-frame: calc(0px - max(${spacingFrame}, 6px) / 2);
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    & * {
+      pointer-events: auto;
+    }
   }
 
   #hint-target {
     position: absolute;
-    bottom: var(--bottom-of-frame);
+    bottom: 0;
+    left: calc((var(--window-width) / 2) - 128px);
     width: 256px;
     height: 48px;
     cursor: pointer;
@@ -74,26 +84,32 @@ const styles = css`
     height: 4px;
     border-radius: ${borderRadiusCircular};
     background-color: ${colorScrollbarForeground};
+    left: calc((var(--window-width) / 2) - 64px);
 
     width: 128px;
-    bottom: -2px; /* Center the grabber */
+    bottom: calc(${spacingFrame} / 2 - 2px);
     opacity: 1;
-    transition: all ${durationSlow} ${curveEasyEaseMax};
+    transition:
+      width ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax},
+      bottom ${durationSlow} ${curveEasyEaseMax},
+      left ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #grabber {
     opacity: 0.4;
     width: 64px;
-    bottom: calc(var(--bottom-of-frame) + 16px - 2px);
+    bottom: 16px;
+    left: calc((var(--window-width) / 2) - 32px);
   }
 
   :host([active]) #grabber {
     opacity: 0;
-    bottom: calc(var(--bottom-of-frame) + 66px - 2px);
+    bottom: 68px;
   }
 
   :host([hidden]) #grabber {
-    bottom: calc(var(--bottom-of-frame) - 4px);
+    bottom: -4px;
   }
 
   #hint-composer {
@@ -106,49 +122,85 @@ const styles = css`
     border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
     box-shadow: ${shadow16};
 
-    width: 64px;
-    bottom: calc(var(--bottom-of-frame) - 32px);
-    opacity: 0;
-    transition: all ${durationSlow} ${curveEasyEaseMax};
+    width: var(--composer-retracted-width);
+    bottom: calc(0px - var(--composer-retracted-height));
+    left: calc(var(--window-width) / 2 - var(--composer-retracted-width) / 2);
+    opacity: 1;
+    transition:
+      bottom ${durationSlow} ${curveEasyEaseMax},
+      width ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax},
+      left ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([hint]) #hint-composer {
-    width: 160px;
-    opacity: 1;
+    bottom: -32px;
   }
 
   :host([active]) #hint-composer {
-    width: 349px;
-    bottom: 0px;
+    width: var(--composer-expanded-width);
+    bottom: 36px;
+    left: calc(var(--window-width) / 2 - var(--composer-expanded-width) / 2);
     opacity: 0;
   }
 
-  copilot-composer {
+  #composer {
     position: absolute;
-    bottom: 0;
-
-    display: none;
-    opacity: 0;
-    transform: translateY(66px);
-    width: 160px;
-    transition:
-      all ${durationSlow} ${curveEasyEaseMax},
-      display ${durationSlow} 50ms allow-discrete;
-  }
-
-  copilot-composer[expanded] {
-    display: flex;
+    bottom: 32px;
+    left: calc(
+      (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
+    );
+    display: initial;
+    width: var(--composer-expanded-width);
+    height: var(--composer-expanded-height);
     opacity: 1;
-    width: 349px;
-    transform: translateY(0px);
+    transition:
+      width ${durationSlow} ${curveEasyEaseMax},
+      height ${durationSlow} ${curveEasyEaseMax},
+      bottom ${durationSlow} ${curveEasyEaseMax},
+      left ${durationSlow} ${curveEasyEaseMax},
+      opacity ${durationSlow} ${curveEasyEaseMax};
   }
 
-  @starting-style {
-    copilot-composer[expanded] {
-      opacity: 0;
-      width: 160px;
-      transform: translateY(66px);
-    }
+  :host(:not([active])) #composer {
+    height: var(--composer-retracted-height);
+    width: var(--composer-retracted-width);
+    bottom: -68px;
+    left: calc(
+      (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
+    );
+    opacity: 0;
+  }
+
+  #composer[dragging] {
+    transition: none;
+  }
+
+  .resize {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+  }
+
+  .resize#top {
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    cursor: ns-resize;
+  }
+
+  .resize#left {
+    top: -2px;
+    left: -2px;
+    height: calc(100% + 4px);
+    cursor: ew-resize;
+  }
+
+  .resize#right {
+    top: -2px;
+    right: -2px;
+    height: calc(100% + 4px);
+    cursor: ew-resize;
   }
 `;
 
@@ -158,12 +210,14 @@ const styles = css`
   styles,
 })
 export class CopilotEntrypoint extends FASTElement {
-  @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(CopilotService) cs!: CopilotService;
+  @inject(CopilotService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
-  _hintTargetElement: HTMLElement | null = null;
-  _composerElement: HTMLElement | null = null;
+  _composerElement: HTMLDivElement | null = null;
+  _resizeVertical = 0;
+  _resizeHorizontal = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -177,38 +231,17 @@ export class CopilotEntrypoint extends FASTElement {
     this.removeEventListeners();
   }
 
-  activeChanged(): void {
-    this.setPopoverState();
-  }
-
   setElements(): void {
-    this._hintTargetElement = this.shadowRoot?.querySelector(
-      '#hint-target',
-    ) as HTMLElement;
-
     this._composerElement = this.shadowRoot?.querySelector(
-      'copilot-composer',
-    ) as HTMLElement;
+      '#composer',
+    ) as HTMLDivElement;
   }
 
   unsetElements(): void {
-    this._hintTargetElement = null;
     this._composerElement = null;
   }
 
   addEventListeners(): void {
-    this._hintTargetElement?.addEventListener(
-      'mouseover',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.addEventListener(
-      'mouseout',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.addEventListener(
-      'click',
-      this.handleClickHintTarget,
-    );
     this._composerElement?.addEventListener(
       'transitionend',
       this.handleComposerTransitionEnd,
@@ -216,18 +249,6 @@ export class CopilotEntrypoint extends FASTElement {
   }
 
   removeEventListeners(): void {
-    this._hintTargetElement?.removeEventListener(
-      'mouseover',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.removeEventListener(
-      'mouseout',
-      this.handleMouseOverHintTarget,
-    );
-    this._hintTargetElement?.removeEventListener(
-      'click',
-      this.handleClickHintTarget,
-    );
     this._composerElement?.removeEventListener(
       'transitionend',
       this.handleComposerTransitionEnd,
@@ -257,7 +278,11 @@ export class CopilotEntrypoint extends FASTElement {
 
   handleComposerTransitionEnd = (e: TransitionEvent) => {
     if (e.propertyName !== 'opacity') return;
-    this.active && this._composerElement?.focus();
+    const composer = this._composerElement?.children[0] as HTMLElement;
+
+    this.active && composer?.focus();
+    !this.active &&
+      this.style.setProperty('--composer-expanded-height', 'fit-content');
   };
 
   handleTransitionToSidebar = (e: TransitionEvent) => {
@@ -274,14 +299,7 @@ export class CopilotEntrypoint extends FASTElement {
 
   toggleActive(): void {
     this.active = !this.active;
-    this.setPopoverState();
-    // if (this.active) this._composerElement?.focus();
-  }
-
-  setPopoverState(): void {
-    this.active
-      ? this._composerElement?.setAttribute('expanded', '')
-      : this._composerElement?.removeAttribute('expanded');
+    this.cs.composerActive = this.active;
   }
 
   calcMarginForMinHeight(): string {
@@ -291,4 +309,86 @@ export class CopilotEntrypoint extends FASTElement {
     if (frameSpacing < minHeight) margin += (minHeight - frameSpacing) / 2;
     return `${margin}px`;
   }
+
+  handleResizeMouseDown(e: Event) {
+    e.stopPropagation();
+    window.addEventListener('mousemove', this.handleResizeMouseMove);
+    window.addEventListener('mouseup', this.handleResizeMouseUp);
+    this._composerElement?.setAttribute('dragging', '');
+    this._resizeVertical = e
+      .composedPath()
+      .some((x) => x === this.shadowRoot?.querySelector('.resize#top'))
+      ? -1
+      : 0;
+    this._resizeHorizontal = e
+      .composedPath()
+      .some((x) => x === this.shadowRoot?.querySelector('.resize#left'))
+      ? -1
+      : 0;
+    this._resizeHorizontal = e
+      .composedPath()
+      .some((x) => x === this.shadowRoot?.querySelector('.resize#right'))
+      ? 1
+      : this._resizeHorizontal;
+  }
+
+  handleResizeMouseMove = (e: MouseEvent) => {
+    if (!this._composerElement) return;
+
+    const deltaX = e.movementX * this._resizeHorizontal;
+    const deltaY = e.movementY * this._resizeVertical;
+    const composerWidth = this._composerElement.clientWidth;
+    const composerHeight = this._composerElement.clientHeight;  
+    const viewportHeight = parseInt(
+      getComputedStyle(this._composerElement).getPropertyValue(
+        '--viewport-height',
+      ),
+    );
+    let newWidth = composerWidth + deltaX;
+    newWidth = Math.max(402, newWidth);
+    newWidth = Math.min(1024, newWidth);
+    let newHeight = composerHeight + deltaY;
+    newHeight = Math.max(68, newHeight);
+    newHeight = Math.min(viewportHeight / 2, newHeight);
+
+    this.style.setProperty('--composer-expanded-width', `${newWidth}px`);
+    this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
+  };
+
+  handleResizeMouseUp = () => {
+    window.removeEventListener('mousemove', this.handleResizeMouseMove);
+    window.removeEventListener('mouseup', this.handleResizeMouseUp);
+    this._composerElement?.removeAttribute('dragging');
+    this._resizeHorizontal = 0;
+    this._resizeVertical = 0;
+  };
+
+  handleComposerMouseDown() {
+    window.addEventListener('mouseup', this.handleComposerMouseUp);
+    window.addEventListener('mousemove', this.handleComposerMouseMove);
+    this._composerElement?.setAttribute('dragging', '');
+  }
+
+  handleComposerMouseMove = (e: MouseEvent) => {
+    if (!this._composerElement) return;
+
+    const composerBottom = parseInt(
+      getComputedStyle(this._composerElement).bottom,
+    );
+    const deltaX = e.movementX;
+    const deltaY = e.movementY;
+    const newBottom = composerBottom - deltaY;
+    const newLeft = this._composerElement.offsetLeft + deltaX;
+
+    this._composerElement.style.left = `${newLeft}px`;
+    this._composerElement.style.bottom = `${newBottom}px`;
+  };
+
+  handleComposerMouseUp = () => {
+    window.removeEventListener('mouseup', this.handleComposerMouseUp);
+    window.removeEventListener('mousemove', this.handleComposerMouseMove);
+    this._composerElement?.removeAttribute('dragging');
+    this._composerElement?.style.removeProperty('bottom');
+    this._composerElement?.style.removeProperty('left');
+  };
 }

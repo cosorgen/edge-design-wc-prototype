@@ -3,5 +3,6 @@ import proxy from './proxy.js';
 import suggest from './suggest.js';
 import weather from './weather.js';
 import imageOfTheDay from './imageOfTheDay.js';
+import chat from './chat.js';
 
-export { metadata, proxy, suggest, weather, imageOfTheDay };
+export { metadata, proxy, suggest, weather, imageOfTheDay, chat };

@@ -1,6 +1,6 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '../../windows/controls/mica-material.js';
-import '../controls/copilot-composer.js';
+import './copilot-composer.js';
 import '@phoenixui/web-components/button.js';
 import '../controls/newtab-card.js';
 import '../controls/newtab-chip.js';

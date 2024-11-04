@@ -15,7 +15,6 @@ const mod = (n: number, m: number) => ((n % m) + m) % m; // handle negative inde
 
 @customElement({ name: 'omnibox-control', template, styles })
 export class OmniboxControl extends FASTElement {
-  @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean', attribute: 'truncate-url' }) truncateURL = false;
   @attr({ mode: 'boolean', attribute: 'dropdown-open' }) dropdownOpen = false;
   @attr initialValue = '';

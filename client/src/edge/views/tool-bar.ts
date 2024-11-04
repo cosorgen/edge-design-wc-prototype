@@ -45,11 +45,8 @@ const template = html<Toolbar>`
     </phx-button>
   </div>
   <omnibox-control
-    id="omnibox_${(x) => x.ts.getActiveTab()?.id}"
-    ?active="${(x) => x.ts.getActiveTab()?.active}"
     ?truncate-url="${(x) => x.ess.truncateURL}"
-    ?full-width="${(x) => x.ess.fullWidthOmnibox}"
-    initialValue="${(x) => x.ts.getActiveTab()?.url}"
+    initialValue="${(x) => x.ts.tabsById[x.ts.activeTabId!].url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
     @blur="${(x, c) =>
@@ -59,11 +56,12 @@ const template = html<Toolbar>`
       } as CustomEvent)}"
   >
     ${when(
-      (x) => x.ts.getActiveTab()?.actionIds?.top,
-      (x) => omniboxActions[x.ts.getActiveTab()!.actionIds!.top!],
+      (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.top,
+      (x) =>
+        omniboxActions[x.ts.tabsById[x.ts.activeTabId || 0].actionIds!.top!],
     )}
     ${when(
-      (x) => x.ts.getActiveTab()?.actionIds?.overflow,
+      (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.overflow,
       html`
         <omnibox-action-flyout id="more" slot="actions">
           <svg slot="trigger-content">
@@ -71,7 +69,7 @@ const template = html<Toolbar>`
           </svg>
           <context-menu>
             ${repeat(
-              (x) => x.ts.getActiveTab()!.actionIds!.overflow!,
+              (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds!.overflow!,
               html`
                 <menu-item
                   start-slot
@@ -255,7 +253,8 @@ export class Toolbar extends FASTElement {
   }
 
   handleOmniboxSubmit(e: CustomEvent) {
-    this.ts.navigateActiveTab(e.detail);
+    if (!this.ts.activeTabId) return;
+    this.ts.navigateTab(this.ts.activeTabId, e.detail);
   }
 
   handleOmniboxChange(e: CustomEvent) {

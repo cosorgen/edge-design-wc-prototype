@@ -4,7 +4,6 @@ import {
   html,
   css,
   repeat,
-  observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -17,7 +16,7 @@ import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/horizontal-tab.js';
-import { Tab, TabService } from '#services/tabService.js';
+import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { spacingFrame } from '../designSystem.js';
@@ -34,25 +33,31 @@ const template = html<TabBar>`
     </div>
     <div id="tabs">
       ${repeat(
-        (x) => x.ts.tabs,
-        html<Tab>` <horizontal-tab
-            ?active="${(x) => x.active}"
-            ?loading="${(x) => x.loading}"
-            @activate="${(x, c) => c.parent.activateTab(x.id)}"
-            @close="${(x, c) => c.parent.closeTab(x.id)}"
+        (x) => x.ts.tabIds,
+        html<string>` <horizontal-tab
+            ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+            ?loading="${(x, c) => c.parent.ts.tabsById[x].loading}"
+            @activate="${(x, c) => c.parent.activateTab(x)}"
+            @close="${(x, c) => c.parent.closeTab(x)}"
           >
-            ${(x) =>
-              x.favicon
-                ? html`<img slot="favicon" src="${x.favicon}" />`
+            ${(x, c) =>
+              c.parent.ts.tabsById[x].favicon
+                ? html`<img
+                    slot="favicon"
+                    src="${c.parent.ts.tabsById[x].favicon}"
+                  />`
                 : null}
-            ${(x) =>
-              x.title ? html`<span slot="title">${x.title}</span>` : null}
+            ${(x, c) =>
+              c.parent.ts.tabsById[x].title
+                ? html`<span slot="title"
+                    >${c.parent.ts.tabsById[x].title}</span
+                  >`
+                : null}
           </horizontal-tab>
           <phx-divider
             orientation="vertical"
             appearance="strong"
           ></phx-divider>`,
-        { positioning: true },
       )}
     </div>
     <phx-button
@@ -158,7 +163,10 @@ export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
-  @observable dragging = false;
+
+  getTabList() {
+    return this.ts.tabIds.map((tabId) => this.ts.tabsById[tabId]);
+  }
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -166,13 +174,14 @@ export class TabBar extends FASTElement {
 
   closeTab(tabId: string) {
     this.ts.removeTab(tabId);
-    if (this.ts.tabs.length === 0) {
+    if (this.ts.tabIds.length === 0) {
       this.closeWindow();
     }
   }
 
   addTab() {
-    this.ts.addTab();
+    const newId = this.ts.addTab();
+    this.activateTab(newId);
   }
 
   closeWindow() {
