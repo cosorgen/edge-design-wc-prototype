@@ -177,6 +177,15 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
+        <label for="show-copilot-ntp"> Show copilot NTP </label>
+        <phx-switch
+          slot="input"
+          id="show-copilot-ntp"
+          ?checked=${(x) => x.ss.showCopilotNTP}
+          @change=${(x) => x.toggleShowCopilotNTP()}
+        ></phx-switch>
+      </div>
+      <div class="entry">
         <label for="show-menus-l0">Show menus in L1</label>
         <phx-switch
           slot="input"
@@ -340,6 +349,13 @@ export class WindowsSettings extends FASTElement {
     this.ss.setShowLegacyCopilot(
       (this.shadowRoot?.querySelector('#legacy-copilot') as Checkbox)
         ?.checked || false,
+    );
+  }
+
+  toggleShowCopilotNTP() {
+    this.ss.setShowCopilotNTP(
+      (this.shadowRoot?.querySelector('#show-copilot-ntp') as Checkbox)
+      ?.checked || false,
     );
   }
 

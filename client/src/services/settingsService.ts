@@ -5,9 +5,10 @@ export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
   @observable showLegacyCopilot = false;
+  @observable showCopilotNTP = false
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
-  @observable frameSpacing = '8px';
+  @observable frameSpacing = '4px';
   @observable showLegacyNewTab = false;
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = false;
@@ -31,12 +32,15 @@ export default class EdgeSettingsSerivce {
     this.showLegacyNewTab =
       url.searchParams.get('showLegacyNewTab') === 'true' ||
       this.showLegacyNewTab;
+    this.showCopilotNTP =
+      url.searchParams.get('showCopilotNTP') === 'true' || 
+      this.showCopilotNTP;
     this.showLegacyCopilot && this.pinToolbarItem('Copilot');
 
     this.truncateURL =
       url.searchParams.get('truncateURL') === 'true' || this.truncateURL;
 
-    this.frameSpacing = url.searchParams.get('frameSpacing') || '4px';
+    this.frameSpacing = url.searchParams.get('frameSpacing') || this.frameSpacing;
     this.showMenusInL1 = url.searchParams.get('showMenusInL1') === 'true';
     this.fullWidthOmnibox = url.searchParams.get('fullWidthOmnibox') === 'true';
   }
@@ -48,6 +52,7 @@ export default class EdgeSettingsSerivce {
       'showLegacyCopilot',
       this.showLegacyCopilot.toString(),
     );
+    url.searchParams.set('showCopilotNTP', this.showCopilotNTP.toString());
     url.searchParams.set('showLegacyNewTab', this.showLegacyNewTab.toString());
     url.searchParams.set('truncateURL', this.truncateURL.toString());
     url.searchParams.set('frameSpacing', this.frameSpacing);
@@ -78,6 +83,11 @@ export default class EdgeSettingsSerivce {
 
   setShowLegacyNewTab(show: boolean) {
     this.showLegacyNewTab = show;
+    this.setSettingsInURL();
+  }
+
+  setShowCopilotNTP(show: boolean) {
+    this.showCopilotNTP = show;
     this.setSettingsInURL();
   }
 

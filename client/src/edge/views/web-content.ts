@@ -74,15 +74,20 @@ export class WebContent extends FASTElement {
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
-
-    if (this.ess.showLegacyNewTab) {
-      if (urlObj.hostname === 'newtab') {
+  
+    if (urlObj.hostname === 'newtab') {
+      if (this.ess.showCopilotNTP) {
+        return 'newtab';
+      }
+      if (this.ess.showLegacyNewTab) {
         return 'newtabLegacy';
       }
+      return 'newtabEdge';
     }
 
     return urlObj.hostname;
   }
+  
 
   handleTabLoad(id: string): void {
     this.ts.tabDidLoad(id);
