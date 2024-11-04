@@ -38,7 +38,7 @@ import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
-  <div class="row" style="--spacingFrame: ${(x) => x.ss.frameSpacing}">
+  <div class="row">
     <caption-controls></caption-controls>
     <div class="column">
       <tab-bar></tab-bar>
@@ -121,6 +121,11 @@ const styles = css`
     gap: ${spacingFrame};
     width: 100%;
     min-width: 0px;
+  }
+
+  tool-bar,
+  copilot-entrypoint {
+    z-index: 1;
   }
 `;
 

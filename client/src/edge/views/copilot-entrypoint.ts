@@ -25,6 +25,7 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { CopilotService } from '#servicescopilotService.js';
 import { spacingFrame } from '../designSystem.js';
 import WindowsService from '#serviceswindowsService.js';
+import { TabService } from '#servicestabService.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
@@ -34,7 +35,13 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
     @click="${(x) => x.handleClickHintTarget()}"
     @mouseout="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
   ></div>
-  <div id="composer" @mousedown="${(x) => x.handleComposerMouseDown()}">
+  <div
+    id="composer"
+    @mousedown="${(x) => x.handleComposerMouseDown()}"
+    block-center
+    inline-center
+    ?ntp="${(x) => x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
+  >
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
     <div
       class="resize"
@@ -59,6 +66,7 @@ const styles = css`
     --composer-retracted-width: 160px;
     --composer-expanded-height: fit-content;
     --composer-retracted-height: 68px;
+    --ntp-inset: 24px;
 
     position: absolute;
     inset: 0;
@@ -149,10 +157,6 @@ const styles = css`
 
   #composer {
     position: absolute;
-    bottom: 32px;
-    left: calc(
-      (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
-    );
     display: initial;
     width: var(--composer-expanded-width);
     height: var(--composer-expanded-height);
@@ -160,23 +164,65 @@ const styles = css`
     transition:
       width ${durationSlow} ${curveEasyEaseMax},
       height ${durationSlow} ${curveEasyEaseMax},
-      bottom ${durationSlow} ${curveEasyEaseMax},
-      left ${durationSlow} ${curveEasyEaseMax},
+      inset ${durationSlow} ${curveEasyEaseMax},
       opacity ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host(:not([active])) #composer {
     height: var(--composer-retracted-height);
     width: var(--composer-retracted-width);
-    bottom: -68px;
-    left: calc(
-      (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
-    );
     opacity: 0;
   }
 
   #composer[dragging] {
     transition: none;
+  }
+
+  #composer[block-end] {
+    inset-block-end: calc(${spacingFrame} / 2);
+  }
+
+  #composer[block-end][ntp] {
+    inset-block-end: calc(${spacingFrame} + var(--ntp-inset));
+  }
+
+  :host(:not([active])) #composer[block-end] {
+    inset-block-end: calc(0px - var(--composer-retracted-height));
+  }
+
+  #composer[block-start] {
+    inset-block-start: calc(
+      var(--viewport-top) - var(--window-top) - ${spacingFrame} / 2
+    );
+  }
+
+  #composer[block-start][ntp] {
+    inset-block-start: calc(
+      var(--viewport-top) - var(--window-top) + var(--ntp-inset)
+    );
+  }
+
+  :host(:not([active])) #composer[block-start] {
+    inset-block-start: calc(0px - var(--composer-retracted-height));
+  }
+
+  #composer[block-center] {
+    inset-block-start: calc(
+      var(--viewport-top) - var(--window-top) + (var(--viewport-height) / 2) -
+        (var(--composer-retracted-height) / 2)
+    );
+  }
+
+  #composer[inline-center] {
+    inset-inline-start: calc(
+      (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
+    );
+  }
+
+  :host(:not([active])) #composer[inline-center] {
+    inset-inline-start: calc(
+      (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
+    );
   }
 
   .resize {
@@ -217,6 +263,7 @@ export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
+  @inject(TabService) ts!: TabService;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
   _composerElement: HTMLDivElement | null = null;
@@ -347,6 +394,8 @@ export class CopilotEntrypoint extends FASTElement {
       .some((x) => x === this.shadowRoot?.querySelector('.resize#right'))
       ? 1
       : this._resizeHorizontal;
+    if (this._composerElement?.hasAttribute('inline-center'))
+      this._resizeHorizontal *= 2;
   }
 
   handleResizeMouseMove = (e: MouseEvent) => {
@@ -409,6 +458,15 @@ export class CopilotEntrypoint extends FASTElement {
     this.style.setProperty(
       '--window-width',
       `${this.ws.windows.find((w) => w.id === this.ews.id)?.width}px`,
+    );
+    this.style.setProperty(
+      '--window-top',
+      `${this.ws.windows.find((w) => w.id === this.ews.id)?.yPos}px`,
+    );
+    this.style.setProperty('--viewport-top', `${this.ews.viewportSize?.top}px`);
+    this.style.setProperty(
+      '--viewport-height',
+      `${this.ews.viewportSize?.height}px`,
     );
   }
 }
