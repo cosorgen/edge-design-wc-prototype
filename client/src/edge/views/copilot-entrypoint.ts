@@ -38,8 +38,8 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div
     id="composer"
     @mousedown="${(x) => x.handleComposerMouseDown()}"
-    block-end
-    inline-center
+    block-position="end"
+    inline-position="center"
     ?ntp="${(x) => x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
   >
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
@@ -178,14 +178,14 @@ const styles = css`
     transition: none;
   }
 
-  #composer[block-end] {
+  #composer[block-position='end'] {
     inset-block-start: calc(
       var(--window-height) - var(--composer-expanded-height) -
         (${spacingFrame} / 2)
     );
   }
 
-  #composer[block-end][ntp] {
+  #composer[block-position='end'][ntp] {
     inset-block-start: calc(
       var(--window-height) - var(--composer-expanded-height) - ${spacingFrame} - var(
           --ntp-inset
@@ -193,64 +193,64 @@ const styles = css`
     );
   }
 
-  :host(:not([active])) #composer[block-end] {
+  :host(:not([active])) #composer[block-position='end'] {
     inset-block-start: calc(
       var(--window-height) + var(--composer-retracted-height)
     );
   }
 
-  #composer[block-start] {
+  #composer[block-position='start'] {
     inset-block-start: calc(
       var(--viewport-top) - var(--window-top) - ${spacingFrame} / 2
     );
   }
 
-  #composer[block-start][ntp] {
+  #composer[block-position='start'][ntp] {
     inset-block-start: calc(
       var(--viewport-top) - var(--window-top) + var(--ntp-inset)
     );
   }
 
-  :host(:not([active])) #composer[block-start] {
+  :host(:not([active])) #composer[block-position='start'] {
     inset-block-start: calc(0px - var(--composer-retracted-height));
   }
 
-  #composer[block-center] {
+  #composer[block-position='center'] {
     inset-block-start: calc(
       var(--viewport-top) - var(--window-top) + (var(--viewport-height) / 2) -
         (var(--composer-expanded-height) / 2)
     );
   }
 
-  #composer[inline-center] {
+  #composer[inline-position='center'] {
     inset-inline-start: calc(
       (var(--window-width) / 2) - (var(--composer-expanded-width) / 2)
     );
   }
 
-  :host(:not([active])) #composer[inline-center] {
+  :host(:not([active])) #composer[inline-position='center'] {
     inset-inline-start: calc(
       (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
     );
   }
 
-  #composer[inline-start] {
+  #composer[inline-position='start'] {
     inset-inline-start: calc(${spacingFrame} / 2);
   }
 
-  #composer[inline-start][ntp] {
+  #composer[inline-position='start'][ntp] {
     inset-inline-start: calc(${spacingFrame} / 2 + var(--ntp-inset));
   }
 
-  :host(:not([active])) #composer[inline-start] {
+  :host(:not([active])) #composer[inline-position='start'] {
     inset-inline-start: calc(0px - var(--composer-retracted-width));
   }
 
-  #composer[inline-end] {
+  #composer[inline-position='end'] {
     inset-inline-start: calc(${spacingFrame} / 2);
   }
 
-  #composer[inline-end][ntp] {
+  #composer[inline-position='end'][ntp] {
     inset-inline-start: calc(
       var(--window-width) - var(--composer-expanded-width) - ${spacingFrame} / 2 - var(
           --ntp-inset
@@ -258,7 +258,7 @@ const styles = css`
     );
   }
 
-  :host(:not([active])) #composer[inline-end] {
+  :host(:not([active])) #composer[inline-position='end'] {
     inset-inline-start: calc(
       var(--window-width) + var(--composer-retracted-width)
     );
@@ -447,6 +447,7 @@ export class CopilotEntrypoint extends FASTElement {
   handleComposerMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
 
+    // Move the composer with the cursor
     const deltaX = e.movementX;
     const deltaY = e.movementY;
     const newTop = this._composerElement.offsetTop + deltaY;
@@ -454,6 +455,35 @@ export class CopilotEntrypoint extends FASTElement {
 
     this._composerElement.style.insetInlineStart = `${newLeft}px`;
     this._composerElement.style.insetBlockStart = `${newTop}px`;
+
+    // Set attributes on composer element based on cursor position
+    const window = this.ws.windows.find((w) => w.id === this.ews.id);
+    if (window) {
+      let xPosition: 'center' | 'start' | 'end' = 'center';
+      let yPosition: 'center' | 'start' | 'end' = 'center';
+      const cursorX = e.clientX;
+      const cursorY = e.clientY;
+      const windowXThird = window.width / 3;
+      const windowYThird = window.height / 3;
+      const windowYHalf = window.height / 2;
+
+      if (cursorX < window.xPos + windowXThird) {
+        xPosition = 'start';
+      } else if (cursorX > window.xPos + windowXThird * 2) {
+        xPosition = 'end';
+      }
+      if (cursorY < window.yPos + windowYThird) {
+        yPosition = 'start';
+      } else if (cursorY > window.yPos + windowYThird * 2) {
+        yPosition = 'end';
+      }
+      if (xPosition === 'center' && yPosition === 'center') {
+        yPosition = cursorY < window.yPos + windowYHalf ? 'start' : 'end';
+      }
+
+      this._composerElement.setAttribute('inline-position', xPosition);
+      this._composerElement.setAttribute('block-position', yPosition);
+    }
   };
 
   handleComposerMouseUp = () => {
