@@ -45,6 +45,7 @@ const template = html<Toolbar>`
     </phx-button>
   </div>
   <omnibox-control
+    ?full-width="${(x) => x.ess.fullWidthOmnibox}"
     ?truncate-url="${(x) => x.ess.truncateURL}"
     initialValue="${(x) => x.ts.tabsById[x.ts.activeTabId!].url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
