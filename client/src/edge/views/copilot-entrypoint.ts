@@ -39,7 +39,7 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
     id="composer"
     @mousedown="${(x) => x.handleComposerMouseDown()}"
     block-center
-    inline-center
+    inline-start
     ?ntp="${(x) => x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
   >
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
@@ -223,6 +223,18 @@ const styles = css`
     inset-inline-start: calc(
       (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
     );
+  }
+
+  #composer[inline-start] {
+    inset-inline-start: calc(${spacingFrame} / 2);
+  }
+
+  #composer[inline-start][ntp] {
+    inset-inline-start: calc(${spacingFrame} / 2 + var(--ntp-inset));
+  }
+
+  :host(:not([active])) #composer[inline-start] {
+    inset-inline-start: calc(0px - var(--composer-retracted-width));
   }
 
   .resize {
