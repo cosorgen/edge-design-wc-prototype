@@ -184,7 +184,7 @@ export class CopilotComposer extends FASTElement {
   }
 
   updateContext() {
-    if (this.ts.activeTabId) {
+    if (this.ts.activeTabId && this.cs.activeThreadId) {
       this.cs.browserContextChanged(this.ts.tabsById[this.ts.activeTabId]);
     }
   }
