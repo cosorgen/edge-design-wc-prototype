@@ -58,6 +58,9 @@ const template = html<MicrosoftEdge>`
           ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
           ?ntp="${(x) =>
             x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
+          inline-position="center"
+          block-position="end"
+          active
         ></copilot-entrypoint>`,
       )}
     </div>

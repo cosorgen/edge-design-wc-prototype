@@ -4,6 +4,7 @@ import {
   FASTElement,
   customElement,
   Observable,
+  Updates,
 } from '@microsoft/fast-element';
 import {
   colorScrollbarForeground,
@@ -134,8 +135,14 @@ export class CopilotInlineChat extends FASTElement {
         // Update time regardless of message change
         entry.timestamp = message.timestamp;
 
-        if (this._lockChatScroll)
-          this._chatElement.scrollTop = this._chatElement.scrollHeight;
+        Updates.enqueue(() => {
+          if (this._lockChatScroll && this._chatElement) {
+            const lastMessage = this._chatElement?.lastElementChild;
+            if (lastMessage) {
+              lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
+        });
       }
     }
   }

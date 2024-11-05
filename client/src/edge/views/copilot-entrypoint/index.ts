@@ -260,7 +260,7 @@ export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @attr({ mode: 'boolean' }) hint = false;
-  @attr({ mode: 'boolean' }) active = true;
+  @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) hidden = false;
   @attr({ mode: 'boolean' }) ntp = false;
   @attr({ mode: 'boolean' }) dragging = false;
@@ -304,6 +304,7 @@ export class CopilotEntrypoint extends FASTElement {
       this.handleComposerTransitionEnd,
     );
     Observable.getNotifier(this.ews).subscribe(this, 'viewportSize');
+    Observable.getNotifier(this.cs).subscribe(this, 'activeThreadId');
   }
 
   removeEventListeners(): void {
@@ -312,11 +313,15 @@ export class CopilotEntrypoint extends FASTElement {
       this.handleComposerTransitionEnd,
     );
     Observable.getNotifier(this.ews).unsubscribe(this);
+    Observable.getNotifier(this.cs).unsubscribe(this);
   }
 
   handleChange(subject: unknown, key: string): void {
     if (key === 'viewportSize') {
       this.setCSSVariables();
+    }
+    if (key === 'activeThreadId') {
+      this.resizeComposerForChat();
     }
   }
 
@@ -464,6 +469,14 @@ export class CopilotEntrypoint extends FASTElement {
         `${viewportSize.top - windowSize.top}px`,
       );
       this.style.setProperty('--viewport-height', `${viewportSize.height}px`);
+    }
+  }
+
+  resizeComposerForChat() {
+    if (this.cs.activeThreadId) {
+      this.style.setProperty('--composer-expanded-height', '256px');
+    } else {
+      this.style.setProperty('--composer-expanded-height', '68px');
     }
   }
 }
