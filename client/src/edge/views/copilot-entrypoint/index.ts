@@ -455,8 +455,11 @@ export class CopilotEntrypoint extends FASTElement {
     window.removeEventListener('mouseup', this.handleComposerMouseUp);
     window.removeEventListener('mousemove', this.handleComposerMouseMove);
     this.dragging = false;
-    this._composerElement?.style.removeProperty('inset-inline-start');
-    this._composerElement?.style.removeProperty('inset-block-start');
+    Updates.enqueue(() => {
+      // Have to wait for rendering to finish before removing the inline styles
+      this._composerElement?.style.removeProperty('inset-inline-start');
+      this._composerElement?.style.removeProperty('inset-block-start');
+    });
   };
 
   setCSSVariables() {
