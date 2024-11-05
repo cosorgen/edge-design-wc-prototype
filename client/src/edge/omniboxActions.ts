@@ -3,6 +3,10 @@ import './controls/omnibox-action-flyout.js';
 import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
+import './views/add-favorites-flyout.js';
+import {
+  colorBrandForeground1,
+} from '@phoenixui/themes';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -12,6 +16,7 @@ export const overflowItems = {
   favorite: {
     title: 'Add favorite',
     iconId: 'star-add-20-regular',
+    iconId2: 'star-20-filled',
   },
   shopping: {
     title: 'Shopping',
@@ -29,15 +34,22 @@ export const overflowItems = {
     title: 'Share',
     iconId: 'share-20-regular',
   },
-} as Record<string, { title: string; iconId: string }>;
+} as Record<string, { title: string; iconId: string; iconId2?: string }>;
 
 export default {
-  favorite: html` <omnibox-action-flyout id="favorite" slot="actions">
-    <svg slot="trigger-content">
-      <use href="img/edge/icons.svg#${overflowItems.favorite.iconId}" />
-    </svg>
-    <div class="flyout-menu">${overflowItems.favorite.title}</div>
-  </omnibox-action-flyout>`,
+  favorite: html`
+    <omnibox-action-flyout id="favorite" slot="actions">
+      <svg slot="trigger-content">
+        <use
+          href="img/edge/icons.svg#${(x) =>
+            x.pageIsFavorite()
+              ? overflowItems.favorite.iconId2
+              : overflowItems.favorite.iconId}"
+            style="${(x) => x.pageIsFavorite() ? `color: ${colorBrandForeground1};` : ''}"
+        />
+      </svg>
+      <add-favorites-flyout></add-favorites-flyout>
+    </omnibox-action-flyout>`,
   shopping: html`<flyout-menu slot="actions">
     <shopping-button
       slot="trigger"

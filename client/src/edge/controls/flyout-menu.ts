@@ -71,7 +71,9 @@ const styles = css`
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   _popoverElement: HTMLElement | null = null;
+  _popoverSlottedElement: HTMLElement | null = null;
   _contextPopoverElement: HTMLElement | null = null;
+  _contextPopoverSlottedElement: HTMLElement | null = null;
   _triggerElement: HTMLElement | null = null;
   _open = false;
   _contextOpen = false;
@@ -106,8 +108,15 @@ export class FlyoutMenu extends FASTElement {
       'slot',
     )[1] as HTMLSlotElement;
     if (flyoutSlot) {
-      const flyoutElement = flyoutSlot.assignedElements()[0] as HTMLElement;
-      if (flyoutElement) {
+      this._popoverSlottedElement =
+        flyoutSlot.assignedElements()[0] as HTMLElement;
+      // Slots can be nested
+      while (this._popoverSlottedElement instanceof HTMLSlotElement) {
+        this._popoverSlottedElement =
+          this._popoverSlottedElement.assignedElements()[0] as HTMLElement;
+      }
+
+      if (this._popoverSlottedElement) {
         this._popoverElement = this.shadowRoot?.querySelector(
           '#flyout',
         ) as HTMLDivElement;
@@ -119,8 +128,16 @@ export class FlyoutMenu extends FASTElement {
       '[name="context"]',
     ) as HTMLSlotElement;
     if (contextSlot) {
-      const contextElement = contextSlot.assignedElements()[0] as HTMLElement;
-      if (contextElement) {
+      this._contextPopoverSlottedElement =
+        contextSlot.assignedElements()[0] as HTMLElement;
+
+      // Slots can be nested
+      while (this._contextPopoverSlottedElement instanceof HTMLSlotElement) {
+        this._contextPopoverSlottedElement =
+          this._contextPopoverSlottedElement.assignedElements()[0] as HTMLElement;
+      }
+
+      if (this._contextPopoverSlottedElement) {
         this._contextPopoverElement = this.shadowRoot?.querySelector(
           '#context',
         ) as HTMLDivElement;
@@ -138,7 +155,9 @@ export class FlyoutMenu extends FASTElement {
 
   removeSlottedElements() {
     this._popoverElement = null;
+    this._popoverSlottedElement = null;
     this._contextPopoverElement = null;
+    this._contextPopoverSlottedElement = null;
     this._triggerElement = null;
   }
 
@@ -239,6 +258,7 @@ export class FlyoutMenu extends FASTElement {
       'pressed',
       (this._open || this._contextOpen).toString(),
     );
+    this._popoverSlottedElement?.setAttribute('open', this._open.toString());
 
     if (this._open || this._contextOpen) {
       // Listen for close events
@@ -277,6 +297,10 @@ export class FlyoutMenu extends FASTElement {
     this._triggerElement?.setAttribute(
       'pressed',
       (this._open || this._contextOpen).toString(),
+    );
+    this._contextPopoverSlottedElement?.setAttribute(
+      'open',
+      this._open.toString(),
     );
 
     if (this._contextOpen || this._open) {

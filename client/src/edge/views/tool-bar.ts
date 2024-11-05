@@ -27,6 +27,7 @@ import {
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#servicessettingsService.js';
+import FavoritesService from '#servicesfavoritesService.js';
 import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
@@ -192,6 +193,7 @@ export class Toolbar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsService) ess!: EdgeSettingsService;
+  @inject(FavoritesService) fs!: FavoritesService;
   @observable suggestions: Suggestion[] = [];
   _derivedToolbarItems: string[] = [];
   omniboxControl?: OmniboxControl | null = null;
@@ -313,5 +315,15 @@ export class Toolbar extends FASTElement {
         this.ews.openToolbarItem(action);
         break;
     }
+  }
+  pageIsFavorite() {
+    const activeTabId = this.ts.activeTabId;
+    if (activeTabId) {
+      const activeTab = this.ts.tabsById[activeTabId];
+      if (activeTab && activeTab.url) {
+        return this.fs.isFavorite(activeTab.url);
+      }
+    }
+    return false;
   }
 }

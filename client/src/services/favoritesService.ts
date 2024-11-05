@@ -30,25 +30,25 @@ export default class FavoritesService {
     },
     {
       type: 'site',
-      url: 'https://www.microsoft.com',
+      url: 'https://www.microsoft.com/en-us/',
       title: 'Microsoft',
       favicon: 'https://www.microsoft.com/favicon.ico?v2',
     },
     {
       type: 'site',
-      url: 'https://www.youtube.com',
-      title: 'Youtube',
+      url: 'https://www.youtube.com/',
+      title: 'YouTube',
       favicon: 'https://www.youtube.com/favicon.ico',
     },
     {
       type: 'site',
-      url: 'https://www.amazon.com',
+      url: 'https://www.amazon.com/',
       title: 'Amazon',
       favicon: 'https://www.amazon.com/favicon.ico',
     },
     {
       type: 'site',
-      url: 'https://www.instagram.com',
+      url: 'https://www.instagram.com/',
       title: 'Instagram',
       favicon: 'https://static.cdninstagram.com/rsrc.php/y4/r/QaBlI0OZiks.ico',
     },
@@ -63,4 +63,39 @@ export default class FavoritesService {
       title: 'Other favorites',
     },
   ];
+
+  private observers: Function[] = [];
+
+  addObserver(observer: Function) {
+    this.observers.push(observer);
+  }
+
+  removeObserver(observer: Function) {
+    this.observers = this.observers.filter((obs) => obs !== observer);
+  }
+
+  addFavorite(favorite: Favorite) {
+    this.favorites = [...this.favorites, favorite];
+    console.log('Added favorite:', this.favorites);
+    this.notifyObservers();
+  }
+
+  removeFavorite(favorite: Favorite | FavoriteFolder) {
+    this.favorites = this.favorites.filter((f) => f.title !== favorite.title);
+    console.log('Removed favorite:', this.favorites);
+    this.notifyObservers();
+  }
+
+  isFavorite(url: string): boolean {
+    return this.favorites.some((fav) => {
+      if (fav.type === 'site') {
+        return fav.url === url; // Check if the URL matches
+      }
+      return false; // Ignore folders
+    });
+  }
+
+  private notifyObservers() {
+    this.observers.forEach((obs) => obs());
+  }
 }
