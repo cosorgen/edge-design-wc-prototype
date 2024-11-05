@@ -32,7 +32,7 @@ const template = html<FavoritesItem>` <button
       alt="${(x) => x.title}"
     />`,
   )}
-  ${(x) => x.title}
+  <div class="title-container">${(x) => x.title}</div>
 </button>`;
 
 const styles = css`
@@ -54,6 +54,12 @@ const styles = css`
     font-weight: ${typographyStyles.caption1.fontWeight};
     line-height: ${typographyStyles.caption1.lineHeight};
     color: ${colorNeutralForeground1};
+  }
+
+  .title-container {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   button:hover {

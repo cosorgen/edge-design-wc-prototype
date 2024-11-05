@@ -7,9 +7,13 @@ import {
     repeat,
     when,
     attr,
+    volatile,
   } from '@microsoft/fast-element';
   import { inject } from '@microsoft/fast-element/di.js';
-  import FavoritesService, { Favorite, FavoriteFolder } from '#services/favoritesService.js';
+  import FavoritesService, {
+    Favorite,
+    FavoriteFolder,
+  } from '#services/favoritesService.js';
   import { TabService } from '#services/tabService.js';
   import EdgeSettingsSerivce from '#servicessettingsService.js';
   import '../controls/favorites-item.js';
@@ -23,86 +27,113 @@ import {
     shadow28,
     borderRadiusMedium,
     spacingHorizontalS,
-    spacingHorizontalXXS,
     typographyStyles,
     spacingHorizontalMNudge,
   } from '@phoenixui/themes';
   import '@phoenixui/web-components/accordion.js';
   import '@phoenixui/web-components/accordion-item.js';
   import '@phoenixui/web-components/text-input.js';
+  import { spacingHorizontalXXS } from '@phoenixui/themes/tokens.js';
   
   const template = html<FavoritesMenu>`
-    ${when(
-      (x) => x.menuVisible,
-      html`
-        <div id="header">
-          <span>Favorites</span>
-          <flyout-menu>
-            <phx-button size="small" appearance="subtle" icon-only slot="trigger">
-              <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
-            </phx-button>
-            <phx-button size="small" appearance="subtle" icon-only slot="trigger">
-              <svg><use href="./img/edge/icons.svg#more-horizontal-20-regular" /></svg>
-            </phx-button>
-          </flyout-menu>
-        </div>
-        <div id="content">
-          <phx-text-input
-            appearance="filled-darker"
-            placeholder="Search"
-            @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
-            value="${(x) => x.searchValue}"
-          >
-            <svg slot="start"><use href="img/edge/icons.svg#search-20-regular" /></svg>
+    <div id="header">
+      <span>Favorites</span>
+      <div id="icons">
+        <phx-button
+          size="small"
+          appearance="subtle"
+          icon-only
+          @click="${(x) => x.handleAddFavorite()}"
+        >
+          <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
+        </phx-button>
+        <flyout-menu>
+          <phx-button size="small" appearance="subtle" icon-only slot="trigger">
+            <svg>
+              <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
+            </svg>
+          </phx-button>
+          <context-menu>
+            <menu-item @click="${(x) => x.handleAddFavorite()}">
+              Add this page to favorites
+            </menu-item>
+            <menu-item> Add new folder </menu-item>
             ${when(
-              (x) => x.searchValue !== '',
-              html`<button slot="end" @click="${(x) => x.clearSearch()}">
-                <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
-              </button>`,
+              (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
+              html` <menu-item
+                @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
+              >
+                Hide favorites button in toolbar
+              </menu-item>`,
+              html` <menu-item
+                @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
+              >
+                Show favorites button in toolbar
+              </menu-item>`,
             )}
-          </phx-text-input>
-          <phx-accordion>
-            <phx-accordion-item expanded>
-              <span slot="heading" class="folder-heading">
-                <svg><use href="./img/edge/icons.svg#star-20-regular" /></svg>
-                Favorites bar
-              </span>
-              <div class="vertical-container">
-                ${repeat(
-                  (x) => x.filteredFavorites,
-                  html`${when(
-                    (x) => x.type === 'folder',
-                    html`<phx-accordion-item>
-                      <span slot="heading" class="folder-heading">
-                        <svg><use href="./img/edge/icons.svg#folder-20-regular" /></svg>
-                        ${(x) => x.title}
-                      </span>
-                      <div class="vertical-container">
-                        ${repeat(
-                          [1, 2, 3],
-                          html`<favorites-item
-                            type="site"
-                            title="${(item) => `Favorite ${item}`}"
-                            favicon="https://www.microsoft.com/favicon.ico?v2"
-                            @click="${(item, c) => c.parent.handleItemClick(item)}"
-                          ></favorites-item>`,
-                        )}
-                      </div>
-                    </phx-accordion-item>`,
-                    html`<favorites-item
-                      type="${(x) => x.type}"
-                      title="${(x) => x.title}"
-                      favicon="${(x) => x.favicon}"
-                      @click="${(x, c) => c.parent.handleItemClick(x)}"
-                    ></favorites-item>`,
-                  )}`,
-                )}
-              </div>
-            </phx-accordion-item>
-          </phx-accordion>
-        </div>
-      `,
-    )}
+          </context-menu>
+        </flyout-menu>
+      </div>
+    </div>
+    <div id="content">
+      <phx-text-input
+        appearance="filled-darker"
+        placeholder="Search"
+        @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
+        value="${(x) => x.searchValue}"
+      >
+        <svg slot="start">
+          <use href="img/edge/icons.svg#search-20-regular" />
+        </svg>
+        ${when(
+          (x) => x.searchValue !== '',
+          html`<button slot="end" @click="${(x) => x.clearSearch()}">
+            <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
+          </button>`,
+        )}
+      </phx-text-input>
+      <phx-accordion>
+        <phx-accordion-item expanded>
+          <span slot="heading" class="folder-heading">
+            <svg><use href="./img/edge/icons.svg#star-20-regular" /></svg>
+            Favorites bar
+          </span>
+          <div class="vertical-container">
+            ${repeat(
+              (x) => x.filteredFavorites,
+              html`${when(
+                (x) => x.type === 'folder',
+                html`<phx-accordion-item>
+                  <span slot="heading" class="folder-heading">
+                    <svg>
+                      <use href="./img/edge/icons.svg#folder-20-regular" />
+                    </svg>
+                    ${(x) => x.title}
+                  </span>
+                  <div class="vertical-container">
+                    ${repeat(
+                      [1, 2, 3],
+                      html`<favorites-item
+                        type="site"
+                        title="${(item) => `Favorite ${item}`}"
+                        favicon="https://www.microsoft.com/favicon.ico?v2"
+                        @click="${(item, c) => c.parent.handleItemClick(item)}"
+                      ></favorites-item>`,
+                    )}
+                  </div>
+                </phx-accordion-item>`,
+                html`<favorites-item
+                  type="${(x) => x.type}"
+                  title="${(x) => x.title}"
+                  favicon="${(x) => x.favicon}"
+                  @click="${(x, c) => c.parent.handleItemClick(x)}"
+                ></favorites-item>`,
+              )}`,
+            )}
+          </div>
+        </phx-accordion-item>
+      </phx-accordion>
+    </div>
   `;
   
   const styles = css`
@@ -163,10 +194,6 @@ import {
       font-size: ${typographyStyles.body1.fontSize};
       font-weight: ${typographyStyles.body1.fontWeight};
       line-height: ${typographyStyles.body1.lineHeight};
-      overflow: hidden;
-      white-space: nowrap;
-      width: 100%;
-      flex-grow: 1;
     }
   
     phx-text-input {

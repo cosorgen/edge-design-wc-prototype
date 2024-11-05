@@ -178,7 +178,7 @@ export class AddFavoritesInputs extends FASTElement {
 
     const activeTab = this.ts.tabsById[activeTabId];
     const favorite = this.fs.favorites.find(
-      (f) => f.title === activeTab?.title,
+      (f) => f.type === 'site' && f.url === activeTab.url,
     );
     if (favorite) {
       this.fs.removeFavorite(favorite);
