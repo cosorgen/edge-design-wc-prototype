@@ -52,6 +52,11 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
     ></div>
     <div
       class="resize"
+      id="bottom"
+      @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
+    ></div>
+    <div
+      class="resize"
       id="left"
       @mousedown="${(x, c) => x.handleResizeMouseDown(c.event)}"
     ></div>
@@ -237,6 +242,13 @@ const styles = css`
     cursor: ns-resize;
   }
 
+  .resize#bottom {
+    bottom: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    cursor: ns-resize;
+  }
+
   .resize#left {
     top: -2px;
     left: -2px;
@@ -271,8 +283,8 @@ export class CopilotEntrypoint extends FASTElement {
   @attr({ attribute: 'block-position' }) blockPosition = 'end';
   @attr({ attribute: 'inline-position' }) inlinePosition = 'center';
   _composerElement: HTMLDivElement | null = null;
-  _resizeVertical = 0;
-  _resizeHorizontal = 0;
+  _resizeY = 0;
+  _resizeX = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -283,6 +295,12 @@ export class CopilotEntrypoint extends FASTElement {
         this.setCSSVariables();
       });
     }
+
+    // finish the transition if the element is already active
+    if (this.active)
+      this.handleComposerTransitionEnd({
+        propertyName: 'opacity',
+      } as TransitionEvent);
   }
 
   disconnectedCallback(): void {
@@ -369,34 +387,29 @@ export class CopilotEntrypoint extends FASTElement {
     e.stopPropagation();
     window.addEventListener('mousemove', this.handleResizeMouseMove);
     window.addEventListener('mouseup', this.handleResizeMouseUp);
-    this.resizing = true;
-    this._resizeVertical = e
-      .composedPath()
-      .some((x) => x === this.shadowRoot?.querySelector('.resize#top'))
-      ? -1
-      : 0;
-    this._resizeHorizontal = e
-      .composedPath()
-      .some((x) => x === this.shadowRoot?.querySelector('.resize#left'))
-      ? -1
-      : 0;
-    this._resizeHorizontal = e
-      .composedPath()
-      .some((x) => x === this.shadowRoot?.querySelector('.resize#right'))
-      ? 1
-      : this._resizeHorizontal;
-    if (this._composerElement?.getAttribute('inline-position') === 'center')
-      this._resizeHorizontal *= 2;
-    if (this._composerElement?.getAttribute('block-position') === 'center')
-      this._resizeVertical *= 2;
+
+    // Set direction and magnitude of resize
+    const cp = e.composedPath();
+    const t = this.shadowRoot?.querySelector('.resize#top');
+    const b = this.shadowRoot?.querySelector('.resize#bottom');
+    const l = this.shadowRoot?.querySelector('.resize#left');
+    const r = this.shadowRoot?.querySelector('.resize#right');
+    this._resizeY = cp.some((x) => x === t) ? -1 : 0;
+    this._resizeY = cp.some((x) => x === b) ? 1 : this._resizeY;
+    this._resizeX = cp.some((x) => x === l) ? -1 : 0;
+    this._resizeX = cp.some((x) => x === r) ? 1 : this._resizeX;
+    if (this.inlinePosition === 'center') this._resizeX *= 2;
+    if (this.blockPosition === 'center') this._resizeY *= 2;
   }
 
   handleResizeMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
-    if (!this.ews.viewportSize) return;
 
-    const deltaX = e.movementX * this._resizeHorizontal;
-    const deltaY = e.movementY * this._resizeVertical;
+    // Start the resize if it hasn't started yet
+    if (!this.resizing) this.resizing = true;
+
+    const deltaX = e.movementX * this._resizeX;
+    const deltaY = e.movementY * this._resizeY;
     const composerWidth = this._composerElement.clientWidth;
     const composerHeight = this._composerElement.clientHeight;
     const newWidth = composerWidth + deltaX;
@@ -410,18 +423,20 @@ export class CopilotEntrypoint extends FASTElement {
     window.removeEventListener('mousemove', this.handleResizeMouseMove);
     window.removeEventListener('mouseup', this.handleResizeMouseUp);
     this.resizing = false;
-    this._resizeHorizontal = 0;
-    this._resizeVertical = 0;
+    this._resizeX = 0;
+    this._resizeY = 0;
   };
 
   handleComposerMouseDown() {
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
-    this.dragging = true;
   }
 
   handleComposerMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
+
+    // Start the drag if it hasn't started yet
+    if (!this.dragging) this.dragging = true;
 
     // Move the composer with the cursor
     const deltaX = e.movementX;
