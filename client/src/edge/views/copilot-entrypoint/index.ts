@@ -113,12 +113,17 @@ const styles = css`
       inset ${durationSlow} ${curveEasyEaseMax};
   }
 
+  :host([hint]) #grabber {
+    opacity: 0.4;
+    width: var(--grabber-expanded-width);
+  }
+
   :host([active]) #grabber {
     opacity: 0;
   }
 
-  :host([hint]) #grabber {
-    opacity: 0.4;
+  :host:has(#composer[dragging]) #grabber {
+    opacity: 0.2;
     width: var(--grabber-expanded-width);
   }
 
@@ -141,13 +146,18 @@ const styles = css`
       inset ${durationSlow} ${curveEasyEaseMax};
   }
 
-  :host([active]) #hint-composer {
-    width: var(--composer-expanded-width);
-    opacity: 0;
-  }
-
   :host([hint]) #hint-composer {
     opacity: 1;
+    width: var(--composer-retracted-width);
+  }
+
+  :host([active]) #hint-composer {
+    opacity: 0;
+    width: var(--composer-expanded-width);
+  }
+
+  :host:has(#composer[dragging]) #hint-composer {
+    opacity: 0.5;
     width: var(--composer-retracted-width);
   }
 
@@ -182,7 +192,8 @@ const styles = css`
     max-height: calc(var(--viewport-height) - var(--ntp-inset) * 2);
   }
 
-  #composer[dragging] {
+  #composer[dragging],
+  #composer[resizing] {
     transition: none;
   }
 
@@ -233,6 +244,7 @@ export class CopilotEntrypoint extends FASTElement {
   @inject(TabService) ts!: TabService;
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
+  @attr({ mode: 'boolean' }) hidden = false;
   _composerElement: HTMLDivElement | null = null;
   _resizeVertical = 0;
   _resizeHorizontal = 0;
@@ -319,7 +331,7 @@ export class CopilotEntrypoint extends FASTElement {
     e.stopPropagation();
     window.addEventListener('mousemove', this.handleResizeMouseMove);
     window.addEventListener('mouseup', this.handleResizeMouseUp);
-    this._composerElement?.setAttribute('dragging', '');
+    this._composerElement?.setAttribute('resizing', '');
     this._resizeVertical = e
       .composedPath()
       .some((x) => x === this.shadowRoot?.querySelector('.resize#top'))
@@ -359,7 +371,7 @@ export class CopilotEntrypoint extends FASTElement {
   handleResizeMouseUp = () => {
     window.removeEventListener('mousemove', this.handleResizeMouseMove);
     window.removeEventListener('mouseup', this.handleResizeMouseUp);
-    this._composerElement?.removeAttribute('dragging');
+    this._composerElement?.removeAttribute('resizing');
     this._resizeHorizontal = 0;
     this._resizeVertical = 0;
   };
@@ -368,7 +380,6 @@ export class CopilotEntrypoint extends FASTElement {
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.setAttribute('dragging', '');
-    this.hint = true;
   }
 
   handleComposerMouseMove = (e: MouseEvent) => {
@@ -419,7 +430,6 @@ export class CopilotEntrypoint extends FASTElement {
     this._composerElement?.removeAttribute('dragging');
     this._composerElement?.style.removeProperty('inset-inline-start');
     this._composerElement?.style.removeProperty('inset-block-start');
-    this.hint = false;
   };
 
   setCSSVariables() {

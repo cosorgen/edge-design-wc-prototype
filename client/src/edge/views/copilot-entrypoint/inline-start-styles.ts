@@ -13,12 +13,4 @@ export default css`
   :host(:not([active])) #composer[inline-position='start'] {
     inset-inline-start: calc(0px - var(--composer-retracted-width));
   }
-
-  :host:has(#composer[inline-position='start']) #hint-composer {
-    inset-inline-start: calc(0px - var(--composer-retracted-width) / 2);
-  }
-
-  :host:has(#composer[inline-position='start']) #grabber {
-    inset-inline-start: calc(0px - var(--composer-retracted-width) / 2);
-  }
 `;
