@@ -265,8 +265,8 @@ export class CopilotEntrypoint extends FASTElement {
   @attr({ mode: 'boolean' }) ntp = false;
   @attr({ mode: 'boolean' }) dragging = false;
   @attr({ mode: 'boolean' }) resizing = false;
-  @attr({ attribute: 'block-position' }) blockPosition = 'end';
-  @attr({ attribute: 'inline-position' }) inlinePosition = 'end';
+  @attr({ attribute: 'block-position' }) blockPosition = 'start';
+  @attr({ attribute: 'inline-position' }) inlinePosition = 'center';
   _composerElement: HTMLDivElement | null = null;
   _resizeVertical = 0;
   _resizeHorizontal = 0;
@@ -455,10 +455,14 @@ export class CopilotEntrypoint extends FASTElement {
   };
 
   setCSSVariables() {
+    const windowSize = this.getBoundingClientRect();
     const viewportSize = this.ews.viewportSize;
-    if (viewportSize) {
+    if (viewportSize && windowSize) {
       this.style.setProperty('--viewport-width', `${viewportSize.width}px`);
-      this.style.setProperty('--viewport-top', `${viewportSize.top}px`);
+      this.style.setProperty(
+        '--viewport-top',
+        `${viewportSize.top - windowSize.top}px`,
+      );
       this.style.setProperty('--viewport-height', `${viewportSize.height}px`);
     }
   }
