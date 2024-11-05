@@ -3,47 +3,46 @@ import { css } from '@microsoft/fast-element';
 export default css`
   /* Composer */
 
-  /* Centered with retracted width */
-  :host(:not([active])) #composer[inline-position='center'] {
+  :host([inline-position='center']:not([active])) #composer {
+    /* Centered with retracted width */
     inset-inline-start: calc(50% - (var(--composer-retracted-width) / 2));
   }
 
-  /* Centered with expanded width */
-  #composer[inline-position='center'] {
+  :host([inline-position='center']) #composer {
+    /* Centered with expanded width */
     inset-inline-start: calc(50% - (var(--composer-expanded-width) / 2));
   }
 
   /* Hint target */
 
-  /* Centered */
-  :host:has(#composer[inline-position='center']) #hint-target {
+  :host([inline-position='center']) #hint-target {
+    /* Centered */
     inset-inline-start: calc(50% - var(--hint-target-width) / 2);
   }
 
   /* Grabber */
 
-  /* Centered with retracted width */
-  :host:has(#composer[inline-position='center']) #grabber {
+  :host([inline-position='center']) #grabber {
+    /* Centered with retracted width */
     inset-inline-start: calc(50% - var(--grabber-retracted-width) / 2);
   }
 
-  /* Centered with expanded width */
-  :host([hint]):has(#composer[inline-position='center']) #grabber,
-  :host([active]):has(#composer[inline-position='center'][dragging]) #grabber {
+  :host([hint][inline-position='center']) #grabber,
+  :host([active][inline-position='center'][dragging]) #grabber {
+    /* Centered with expanded width */
     inset-inline-start: calc(50% - var(--grabber-expanded-width) / 2);
   }
 
   /* Hint composer */
 
-  /* Centered with retracted width */
-  :host:has(#composer[inline-position='center']) #hint-composer,
-  :host([active]):has(#composer[inline-position='center'][dragging])
-    #hint-composer {
+  :host([inline-position='center']) #hint-composer,
+  :host([active][inline-position='center'][dragging]) #hint-composer {
+    /* Centered with retracted width */
     inset-inline-start: calc(50% - var(--composer-retracted-width) / 2);
   }
 
-  /* Centered with expanded width */
-  :host([active]):has(#composer[inline-position='center']) #hint-composer {
+  :host([active][inline-position='center']) #hint-composer {
+    /* Centered with expanded width */
     inset-inline-start: calc(50% - var(--composer-expanded-width) / 2);
   }
 `;

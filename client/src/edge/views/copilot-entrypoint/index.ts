@@ -40,13 +40,7 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
     @click="${(x) => x.handleClickHintTarget()}"
     @mouseout="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
   ></div>
-  <div
-    id="composer"
-    @mousedown="${(x) => x.handleComposerMouseDown()}"
-    block-position="end"
-    inline-position="center"
-    ?ntp="${(x) => x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
-  >
+  <div id="composer" @mousedown="${(x) => x.handleComposerMouseDown()}">
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
     <div
       class="resize"
@@ -122,7 +116,7 @@ const styles = css`
     opacity: 0;
   }
 
-  :host:has(#composer[dragging]) #grabber {
+  :host([dragging]) #grabber {
     opacity: 0.2;
     width: var(--grabber-expanded-width);
   }
@@ -156,7 +150,7 @@ const styles = css`
     width: var(--composer-expanded-width);
   }
 
-  :host:has(#composer[dragging]) #hint-composer {
+  :host([dragging]) #hint-composer {
     opacity: 0.5;
     width: var(--composer-retracted-width);
   }
@@ -187,13 +181,13 @@ const styles = css`
     opacity: 0;
   }
 
-  #composer[ntp] {
+  :host([ntp]) #composer {
     max-width: calc(var(--viewport-width) - var(--ntp-inset) * 2);
     max-height: calc(var(--viewport-height) - var(--ntp-inset) * 2);
   }
 
-  #composer[dragging],
-  #composer[resizing] {
+  :host([dragging]) #composer,
+  :host([resizing]) #composer {
     transition: none;
   }
 
@@ -245,6 +239,11 @@ export class CopilotEntrypoint extends FASTElement {
   @attr({ mode: 'boolean' }) hint = false;
   @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) hidden = false;
+  @attr({ mode: 'boolean' }) ntp = false;
+  @attr({ mode: 'boolean' }) dragging = false;
+  @attr({ mode: 'boolean' }) resizing = false;
+  @attr({ attribute: 'block-position' }) blockPosition = 'end';
+  @attr({ attribute: 'inline-position' }) inlinePosition = 'center';
   _composerElement: HTMLDivElement | null = null;
   _resizeVertical = 0;
   _resizeHorizontal = 0;
@@ -331,7 +330,7 @@ export class CopilotEntrypoint extends FASTElement {
     e.stopPropagation();
     window.addEventListener('mousemove', this.handleResizeMouseMove);
     window.addEventListener('mouseup', this.handleResizeMouseUp);
-    this._composerElement?.setAttribute('resizing', '');
+    this.resizing = true;
     this._resizeVertical = e
       .composedPath()
       .some((x) => x === this.shadowRoot?.querySelector('.resize#top'))
@@ -371,7 +370,7 @@ export class CopilotEntrypoint extends FASTElement {
   handleResizeMouseUp = () => {
     window.removeEventListener('mousemove', this.handleResizeMouseMove);
     window.removeEventListener('mouseup', this.handleResizeMouseUp);
-    this._composerElement?.removeAttribute('resizing');
+    this.resizing = false;
     this._resizeHorizontal = 0;
     this._resizeVertical = 0;
   };
@@ -379,7 +378,7 @@ export class CopilotEntrypoint extends FASTElement {
   handleComposerMouseDown() {
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
-    this._composerElement?.setAttribute('dragging', '');
+    this.dragging = true;
   }
 
   handleComposerMouseMove = (e: MouseEvent) => {
@@ -419,15 +418,15 @@ export class CopilotEntrypoint extends FASTElement {
         yPosition = cursorY < window.top + windowYHalf ? 'start' : 'end';
       }
 
-      this._composerElement.setAttribute('inline-position', xPosition);
-      this._composerElement.setAttribute('block-position', yPosition);
+      this.inlinePosition = xPosition;
+      this.blockPosition = yPosition;
     }
   };
 
   handleComposerMouseUp = () => {
     window.removeEventListener('mouseup', this.handleComposerMouseUp);
     window.removeEventListener('mousemove', this.handleComposerMouseMove);
-    this._composerElement?.removeAttribute('dragging');
+    this.dragging = false;
     this._composerElement?.style.removeProperty('inset-inline-start');
     this._composerElement?.style.removeProperty('inset-block-start');
   };
