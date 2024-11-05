@@ -65,6 +65,8 @@ const styles = css`
     --hint-target-height: 48px;
     --grabber-expanded-width: 64px;
     --grabber-retracted-width: 128px;
+    --grabber-vertical-expanded-width: 32px;
+    --grabber-vertical-retracted-width: 64px;
     --grabber-height: 4px;
     --composer-expanded-width: 512px;
     --composer-retracted-width: 160px;
@@ -93,6 +95,11 @@ const styles = css`
     display: none;
   }
 
+  :host(:not([inline-position='center'])) #hint-target {
+    width: var(--hint-target-height);
+    height: var(--hint-target-width);
+  }
+
   #grabber {
     position: absolute;
     height: var(--grabber-height);
@@ -103,6 +110,7 @@ const styles = css`
     opacity: 1;
     transition:
       width ${durationSlow} ${curveEasyEaseMax},
+      height ${durationSlow} ${curveEasyEaseMax},
       opacity ${durationSlow} ${curveEasyEaseMax},
       inset ${durationSlow} ${curveEasyEaseMax};
   }
@@ -119,6 +127,21 @@ const styles = css`
   :host([dragging]) #grabber {
     opacity: 0.2;
     width: var(--grabber-expanded-width);
+  }
+
+  :host(:not([inline-position='center'])) #grabber {
+    width: var(--grabber-height);
+    height: var(--grabber-vertical-retracted-width);
+  }
+
+  :host(:not([inline-position='center'])[hint]) #grabber {
+    width: var(--grabber-height);
+    height: var(--grabber-vertical-expanded-width);
+  }
+
+  :host(:not([inline-position='center'])[dragging]) #grabber {
+    width: var(--grabber-height);
+    height: var(--grabber-vertical-expanded-width);
   }
 
   #hint-composer {
@@ -237,7 +260,7 @@ export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @attr({ mode: 'boolean' }) hint = false;
-  @attr({ mode: 'boolean' }) active = false;
+  @attr({ mode: 'boolean' }) active = true;
   @attr({ mode: 'boolean' }) hidden = false;
   @attr({ mode: 'boolean' }) ntp = false;
   @attr({ mode: 'boolean' }) dragging = false;

@@ -5,14 +5,14 @@ export default css`
   /* Composer */
 
   :host([block-position='end']) #composer {
-    /* bottom halfway in margin */
+    /* Align to bottom - 1/2 margin */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) - (${spacingFrame} / 2)
+      100% - var(--composer-expanded-height) - ${spacingFrame} / 2
     );
   }
 
   :host([block-position='end'][ntp]) #composer {
-    /* All the way on page */
+    /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
       100% - var(--composer-expanded-height) - ${spacingFrame} - var(
           --ntp-inset
@@ -21,64 +21,14 @@ export default css`
   }
 
   :host([block-position='end']:not([active])) #composer {
-    /* Hidden off the edge */
+    /* all the way off window */
     inset-block-start: 100%;
   }
 
-  /* Hint target */
+  /* Composer not centered */
 
-  :host([block-position='end']) #hint-target {
-    /* Align to bottom of window */
-    inset-block-start: calc(100% - var(--hint-target-height));
-  }
-
-  /* Grabber */
-
-  :host([block-position='end']) #grabber {
-    /* Centered in margin */
-    inset-block-start: calc(
-      100% - (var(--grabber-height) / 2) - (${spacingFrame} / 2)
-    );
-  }
-
-  :host([active][block-position='end']) #grabber {
-    /* Align to top of composer when it's in margin */
-    inset-block-start: calc(100% - var(--composer-expanded-height));
-  }
-
-  :host([active][block-position='end'][ntp]) #grabber {
-    /* Align to top of composer when it's All the way on page */
-    inset-block-start: calc(
-      100% - var(--composer-expanded-height) - var(--ntp-inset)
-    );
-  }
-
-  :host([hint][block-position='end']) #grabber,
-  :host([hint][block-position='end'][ntp]) #grabber,
-  :host([active][block-position='end'][dragging]) #grabber {
-    /* Align to top of hint composer */
-    inset-block-start: calc(
-      100% - (var(--grabber-height) / 2) - (${spacingFrame} / 2) -
-        (var(--composer-retracted-height) / 4)
-    );
-  }
-
-  /* Hint composer */
-
-  :host([block-position='end']) #hint-composer {
-    /* Hidden off the edge */
-    inset-block-start: 100%;
-  }
-
-  :host([active][block-position='end']) #hint-composer {
-    /* bottom halfway in margin */
-    inset-block-start: calc(
-      100% - var(--composer-expanded-height) - (${spacingFrame} / 2)
-    );
-  }
-
-  :host([active][block-position='end'][ntp]) #hint-composer {
-    /* All the way on page */
+  :host([block-position='end']:not([inline-position='center'])) #composer {
+    /* Align to bottom - margin - ntp offset */
     inset-block-start: calc(
       100% - var(--composer-expanded-height) - ${spacingFrame} - var(
           --ntp-inset
@@ -86,9 +36,104 @@ export default css`
     );
   }
 
-  :host([hint][block-position='end']) #hint-composer,
-  :host([active][block-position='end'][dragging]) #hint-composer {
-    /* Half off the edge */
+  /* Hint target */
+
+  :host([block-position='end']) #hint-target {
+    /* align to bottom of window */
+    inset-block-start: calc(100% - var(--hint-target-height));
+  }
+
+  /* Hint target not centered */
+
+  :host([block-position='end']:not([inline-position='center'])) #hint-target {
+    /* Align to bottom of window */
+    inset-block-start: calc(100% - var(--hint-target-width));
+  }
+
+  /* Grabber */
+
+  :host([block-position='end']) #grabber {
+    /* Center in margin */
+    inset-block-start: calc(
+      100% - var(--grabber-height) / 2 - ${spacingFrame} / 2
+    );
+  }
+
+  :host([block-position='end'][hint]) #grabber,
+  :host([block-position='end'][dragging]) #grabber {
+    /* Center in top 25% of hint composer */
+    inset-block-start: calc(
+      100% - var(--grabber-height) / 2 - ${spacingFrame} - var(
+          --composer-retracted-height
+        ) * 0.25
+    );
+  }
+
+  /* Grabber not centered */
+
+  :host([block-position='end']:not([inline-position='center'])) #grabber {
+    /* Alignt to bottom - margin */
+    inset-block-start: calc(
+      100% - var(--grabber-vertical-retracted-width) - ${spacingFrame} - var(
+          --ntp-inset
+        )
+    );
+  }
+
+  :host([block-position='end'][hint]:not([inline-position='center'])) #grabber,
+  :host([block-position='end'][dragging]:not([inline-position='center']))
+    #grabber {
+    /* Alignt to bottom - half expanded width - margin - ntp offset */
+    inset-block-start: calc(
+      100% - var(--grabber-vertical-expanded-width) -
+        (var(--grabber-vertical-expanded-width) / 2) - ${spacingFrame} - var(
+          --ntp-inset
+        )
+    );
+  }
+
+  /* Hint composer */
+
+  :host([block-position='end']) #hint-composer {
+    /* Hide off screen */
+    inset-block-start: calc(100% + var(--composer-retracted-height));
+  }
+
+  :host([block-position='end'][active]) #hint-composer {
+    /* bottom in margin */
+    inset-block-start: calc(
+      100% - var(--composer-retracted-height) - ${spacingFrame} / 2
+    );
+  }
+
+  :host([block-position='end'][hint]) #hint-composer,
+  :host([block-position='end'][active][dragging]) #hint-composer,
+  :host([block-position='end'][active][dragging][ntp]) #hint-composer {
+    /* half peek */
     inset-block-start: calc(100% - var(--composer-retracted-height) / 2);
+  }
+
+  :host([block-position='end'][active][ntp]) #hint-composer {
+    /* bottom over ntp */
+    inset-block-start: calc(
+      100% - var(--composer-retracted-height) - ${spacingFrame} - var(
+          --ntp-inset
+        )
+    );
+  }
+
+  /* Hint composer not centered */
+
+  :host([block-position='end']:not([inline-position='center'])) #hint-composer,
+  :host(
+      [block-position='end'][active][dragging]:not([inline-position='center'])
+    )
+    #hint-composer {
+    /* Align to bottom - margin - ntp offset */
+    inset-block-start: calc(
+      100% - var(--composer-retracted-height) - ${spacingFrame} - var(
+          --ntp-inset
+        )
+    );
   }
 `;

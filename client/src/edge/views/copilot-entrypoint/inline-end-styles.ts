@@ -64,7 +64,7 @@ export default css`
   }
 
   :host([inline-position='end']) #hint-composer,
-  :host([inline-position='end'][active][dragging]) #hint-composer {
+  :host([inline-position='end'][dragging]) #hint-composer {
     /* Start half off with retracted width */
     inset-inline-start: calc(100% - var(--composer-retracted-width) / 2);
   }
