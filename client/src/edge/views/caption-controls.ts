@@ -23,6 +23,7 @@ import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
+import '../controls/identity-flyout.js';
 import '@phoenixui/web-components/toggle-button.js';
 
 const template = html` <div
@@ -50,9 +51,7 @@ const template = html` <div
       </flyout-menu>
       <flyout-menu>
         <identity-control appearance="signedIn" slot="trigger"></identity-control>
-        <context-menu>
-          <div style="padding: 8px;">Profile goes here...</div>
-        </context-menu>
+        <identity-flyout></identity-flyout>
       </flyout-menu>
     </div>
   ` : ''}
@@ -185,6 +184,13 @@ export class CaptionControls extends FASTElement {
         window.print(); // maybe see if we can print the current tab iframe?
         break;
       case 'Settings':
+        const settingsTabId = this.ts.addTab({
+          id: `tab-${window.crypto.randomUUID()}`,
+          title: 'Settings',
+          url: 'edge://settings',
+        });
+        this.ts.activateTab(settingsTabId);
+        break;
       case 'Find on page':
       case 'Screenshot':
       case 'New InPrivate window':

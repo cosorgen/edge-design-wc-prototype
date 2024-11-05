@@ -13,6 +13,7 @@ import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 import './edge-newtab.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
+import './settings.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 
@@ -26,6 +27,9 @@ const edgePages: Record<string, ViewTemplate> = {
   newtabLegacy: html<string>`<edge-newtab-legacy
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab-legacy>`,
+  settings: html`<settings-page 
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></settings-page>`,
 };
 
 const template = html<WebContent>`
@@ -83,6 +87,10 @@ export class WebContent extends FASTElement {
         return 'newtabLegacy';
       }
       return 'newtabEdge';
+    }
+
+    if (urlObj.hostname === 'settings') {
+      return 'settings';
     }
 
     return urlObj.hostname;

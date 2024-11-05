@@ -41,7 +41,11 @@ const template = html<TabBar>`
             @close="${(x, c) => c.parent.closeTab(x)}"
           >
             ${(x, c) =>
-              c.parent.ts.tabsById[x].favicon
+              c.parent.ts.tabsById[x].url === 'edge://settings'
+                ? html`<svg slot="favicon">
+                    <use href="img/edge/icons.svg#settings-16-regular" />
+                  </svg>`
+                : c.parent.ts.tabsById[x].favicon
                 ? html`<img
                     slot="favicon"
                     src="${c.parent.ts.tabsById[x].favicon}"

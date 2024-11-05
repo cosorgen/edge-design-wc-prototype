@@ -304,6 +304,13 @@ export class Toolbar extends FASTElement {
         window.print(); // maybe see if we can print the current tab iframe?
         break;
       case 'Settings':
+        const settingsTabId = this.ts.addTab({
+          id: `tab-${window.crypto.randomUUID()}`,
+          title: 'Settings',
+          url: 'edge://settings',
+        });
+        this.ts.activateTab(settingsTabId);
+        break;
       case 'Find on page':
       case 'Screenshot':
       case 'New InPrivate window':
