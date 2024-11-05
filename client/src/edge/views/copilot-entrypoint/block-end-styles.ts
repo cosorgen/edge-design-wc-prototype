@@ -26,6 +26,17 @@ export default css`
     inset-block-start: 100%;
   }
 
+  /* Composer not centered */
+
+  :host([block-position='end']:not([inline-position='center'])) #composer {
+    /* Align to bottom - margin - ntp inset */
+    inset-block-start: calc(
+      100% - var(--composer-expanded-height) - ${spacingFrame} - var(
+          --ntp-inset
+        )
+    );
+  }
+
   /* Hint target */
 
   :host([block-position='end']) #hint-target {

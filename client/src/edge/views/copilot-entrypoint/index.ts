@@ -260,12 +260,12 @@ export class CopilotEntrypoint extends FASTElement {
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @attr({ mode: 'boolean' }) hint = false;
-  @attr({ mode: 'boolean' }) active = false;
+  @attr({ mode: 'boolean' }) active = true;
   @attr({ mode: 'boolean' }) hidden = false;
   @attr({ mode: 'boolean' }) ntp = false;
   @attr({ mode: 'boolean' }) dragging = false;
   @attr({ mode: 'boolean' }) resizing = false;
-  @attr({ attribute: 'block-position' }) blockPosition = 'start';
+  @attr({ attribute: 'block-position' }) blockPosition = 'end';
   @attr({ attribute: 'inline-position' }) inlinePosition = 'center';
   _composerElement: HTMLDivElement | null = null;
   _resizeVertical = 0;

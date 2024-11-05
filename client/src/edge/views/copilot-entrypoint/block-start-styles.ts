@@ -19,6 +19,13 @@ export default css`
     inset-block-start: calc(0% - var(--composer-retracted-height));
   }
 
+  /* Composer not centered */
+
+  :host([block-position='start']:not([inline-position='center'])) #composer {
+    /* Align to top of viewport + ntp inset */
+    inset-block-start: calc(var(--viewport-top) + var(--ntp-inset));
+  }
+
   /* Hint target */
 
   :host([block-position='start']) #hint-target {
