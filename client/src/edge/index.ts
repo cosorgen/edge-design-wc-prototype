@@ -31,7 +31,7 @@ import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
-import './views/copilot-entrypoint.js';
+import './views/copilot-entrypoint/index.js';
 import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';

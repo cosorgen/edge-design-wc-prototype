@@ -18,13 +18,19 @@ import {
   curveEasyEaseMax,
   colorLayerBackgroundDialog,
 } from '@phoenixui/themes';
-import './copilot-composer.js';
+import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { CopilotService } from '#servicescopilotService.js';
-import { spacingFrame } from '../designSystem.js';
+import { spacingFrame } from '../../designSystem.js';
 import { TabService } from '#servicestabService.js';
+import inlineCenterStyles from './inline-center-styles.js';
+import inlineStartStyles from './inline-start-styles.js';
+import inlineEndStyles from './inline-end-styles.js';
+import blockStartStyles from './block-start-styles.js';
+import blockEndStyles from './block-end-styles.js';
+import blockCenterStyles from './block-center-styles.js';
 
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
@@ -61,6 +67,11 @@ const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
 
 const styles = css`
   :host {
+    --hint-target-width: 256px;
+    --hint-target-height: 48px;
+    --grabber-expanded-width: 64px;
+    --grabber-retracted-width: 128px;
+    --grabber-height: 4px;
     --composer-expanded-width: 512px;
     --composer-retracted-width: 160px;
     --composer-expanded-height: 68px;
@@ -78,53 +89,43 @@ const styles = css`
 
   #hint-target {
     position: absolute;
-    bottom: 0;
-    left: calc((var(--window-width) / 2) - 128px);
-    width: 256px;
-    height: 48px;
+    width: var(--hint-target-width);
+    height: var(--hint-target-height);
     cursor: pointer;
   }
 
-  :host([hidden]) #hint-target {
+  :host([hidden]) #hint-target,
+  :host([active]) #hint-target {
     display: none;
   }
 
   #grabber {
     position: absolute;
-    height: 4px;
+    height: var(--grabber-height);
     border-radius: ${borderRadiusCircular};
     background-color: ${colorScrollbarForeground};
-    left: calc((var(--window-width) / 2) - 64px);
 
-    width: 128px;
-    bottom: calc(${spacingFrame} / 2 - 2px);
+    width: var(--grabber-retracted-width);
     opacity: 1;
     transition:
       width ${durationSlow} ${curveEasyEaseMax},
       opacity ${durationSlow} ${curveEasyEaseMax},
-      bottom ${durationSlow} ${curveEasyEaseMax},
-      left ${durationSlow} ${curveEasyEaseMax};
-  }
-
-  :host([hint]) #grabber {
-    opacity: 0.4;
-    width: 64px;
-    bottom: 16px;
-    left: calc((var(--window-width) / 2) - 32px);
+      inset ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([active]) #grabber {
     opacity: 0;
-    bottom: 68px;
   }
 
-  :host([hidden]) #grabber {
-    bottom: -4px;
+  :host([hint]) #grabber {
+    opacity: 0.4;
+    width: var(--grabber-expanded-width);
   }
 
   #hint-composer {
+    box-sizing: border-box;
     position: absolute;
-    height: 64px;
+    height: var(--composer-retracted-height);
     border-radius: ${borderRadiusCircular};
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
@@ -133,36 +134,35 @@ const styles = css`
     box-shadow: ${shadow16};
 
     width: var(--composer-retracted-width);
-    bottom: calc(0px - var(--composer-retracted-height));
-    left: calc(var(--window-width) / 2 - var(--composer-retracted-width) / 2);
     opacity: 1;
     transition:
-      bottom ${durationSlow} ${curveEasyEaseMax},
       width ${durationSlow} ${curveEasyEaseMax},
       opacity ${durationSlow} ${curveEasyEaseMax},
-      left ${durationSlow} ${curveEasyEaseMax};
-  }
-
-  :host([hint]) #hint-composer {
-    bottom: -32px;
+      inset ${durationSlow} ${curveEasyEaseMax};
   }
 
   :host([active]) #hint-composer {
     width: var(--composer-expanded-width);
-    bottom: 36px;
-    left: calc(var(--window-width) / 2 - var(--composer-expanded-width) / 2);
     opacity: 0;
+  }
+
+  :host([hint]) #hint-composer {
+    opacity: 1;
+    width: var(--composer-retracted-width);
   }
 
   #composer {
     position: absolute;
-    min-width: 404px;
-    max-width: calc(var(--viewport-width) + ${spacingFrame});
-    min-height: 68px;
-    max-height: calc(var(--viewport-height) + ${spacingFrame});
-
-    width: var(--composer-expanded-width);
-    height: var(--composer-expanded-height);
+    width: clamp(
+      404px,
+      var(--composer-expanded-width),
+      calc(var(--viewport-width) + ${spacingFrame})
+    );
+    height: clamp(
+      var(--composer-retracted-height),
+      var(--composer-expanded-height),
+      calc(var(--viewport-height) + ${spacingFrame})
+    );
     opacity: 1;
     transition:
       width ${durationSlow} ${curveEasyEaseMax},
@@ -186,101 +186,12 @@ const styles = css`
     transition: none;
   }
 
-  #composer[block-position='end'] {
-    inset-block-start: calc(
-      var(--window-height) - var(--composer-expanded-height) -
-        (${spacingFrame} / 2)
-    );
-  }
-
-  #composer[block-position='end'][ntp] {
-    inset-block-start: calc(
-      var(--window-height) - var(--composer-expanded-height) - ${spacingFrame} - var(
-          --ntp-inset
-        )
-    );
-  }
-
-  :host(:not([active])) #composer[block-position='end'] {
-    inset-block-start: calc(
-      var(--window-height) + var(--composer-retracted-height)
-    );
-  }
-
-  #composer[block-position='start'] {
-    inset-block-start: calc(
-      var(--viewport-top) - var(--window-top) - ${spacingFrame} / 2
-    );
-  }
-
-  #composer[block-position='start'][ntp] {
-    inset-block-start: calc(
-      var(--viewport-top) - var(--window-top) + var(--ntp-inset)
-    );
-  }
-
-  :host(:not([active])) #composer[block-position='start'] {
-    inset-block-start: calc(0px - var(--composer-retracted-height));
-  }
-
-  #composer[block-position='center'] {
-    inset-block-start: calc(
-      var(--viewport-top) - var(--window-top) + (var(--viewport-height) / 2) -
-        (var(--composer-expanded-height) / 2)
-    );
-  }
-
-  #composer[inline-position='center'] {
-    inset-inline-start: max(
-      ${spacingFrame} / 2,
-      calc((var(--window-width) / 2) - (var(--composer-expanded-width) / 2))
-    );
-  }
-
-  #composer[inline-position='center'][ntp] {
-    inset-inline-start: max(
-      calc(${spacingFrame} + var(--ntp-inset)),
-      calc((var(--window-width) / 2) - (var(--composer-expanded-width) / 2))
-    );
-  }
-
-  :host(:not([active])) #composer[inline-position='center'] {
-    inset-inline-start: calc(
-      (var(--window-width) / 2) - (var(--composer-retracted-width) / 2)
-    );
-  }
-
-  #composer[inline-position='start'] {
-    inset-inline-start: calc(${spacingFrame} / 2);
-  }
-
-  #composer[inline-position='start'][ntp] {
-    inset-inline-start: calc(${spacingFrame} / 2 + var(--ntp-inset));
-  }
-
-  :host(:not([active])) #composer[inline-position='start'] {
-    inset-inline-start: calc(0px - var(--composer-retracted-width));
-  }
-
-  #composer[inline-position='end'] {
-    inset-inline-start: calc(
-      var(--window-width) - var(--composer-expanded-width) - ${spacingFrame} / 2
-    );
-  }
-
-  #composer[inline-position='end'][ntp] {
-    inset-inline-start: calc(
-      var(--window-width) - var(--composer-expanded-width) - ${spacingFrame} / 2 - var(
-          --ntp-inset
-        )
-    );
-  }
-
-  :host(:not([active])) #composer[inline-position='end'] {
-    inset-inline-start: calc(
-      var(--window-width) + var(--composer-retracted-width)
-    );
-  }
+  ${inlineStartStyles}
+  ${inlineCenterStyles}
+  ${inlineEndStyles}
+  ${blockStartStyles}
+  ${blockCenterStyles}
+  ${blockEndStyles}
 
   .resize {
     position: absolute;
@@ -457,6 +368,7 @@ export class CopilotEntrypoint extends FASTElement {
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
     this._composerElement?.setAttribute('dragging', '');
+    this.hint = true;
   }
 
   handleComposerMouseMove = (e: MouseEvent) => {
@@ -507,15 +419,10 @@ export class CopilotEntrypoint extends FASTElement {
     this._composerElement?.removeAttribute('dragging');
     this._composerElement?.style.removeProperty('inset-inline-start');
     this._composerElement?.style.removeProperty('inset-block-start');
+    this.hint = false;
   };
 
   setCSSVariables() {
-    const window = this.getBoundingClientRect();
-    if (window) {
-      this.style.setProperty('--window-width', `${window.width}px`);
-      this.style.setProperty('--window-height', `${window.height}px`);
-      this.style.setProperty('--window-top', `${window.top}px`);
-    }
     const viewportSize = this.ews.viewportSize;
     if (viewportSize) {
       this.style.setProperty('--viewport-width', `${viewportSize.width}px`);
