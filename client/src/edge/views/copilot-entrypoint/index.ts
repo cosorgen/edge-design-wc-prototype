@@ -32,6 +32,9 @@ import blockStartStyles from './block-start-styles.js';
 import blockEndStyles from './block-end-styles.js';
 import blockCenterStyles from './block-center-styles.js';
 
+const DEFAULT_COMPOSER_WIDTH = '512px';
+const DEFAULT_COMPOSER_HEIGHT = '68px';
+
 const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
   <div id="grabber"></div>
   <div
@@ -68,9 +71,9 @@ const styles = css`
     --grabber-vertical-expanded-width: 32px;
     --grabber-vertical-retracted-width: 64px;
     --grabber-height: 4px;
-    --composer-expanded-width: 512px;
+    --composer-expanded-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-retracted-width: 160px;
-    --composer-expanded-height: 68px;
+    --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: 68px;
     --ntp-inset: 24px;
 
@@ -344,9 +347,17 @@ export class CopilotEntrypoint extends FASTElement {
     // Focus the input when the composer is expanded
     this.active && composer?.focus();
 
-    // Reset the expanded height when composer is closed
-    !this.active &&
-      this.style.setProperty('--composer-expanded-height', '68px');
+    // Reset the expanded height and width when composer is closed
+    if (!this.active) {
+      this.style.setProperty(
+        '--composer-expanded-height',
+        DEFAULT_COMPOSER_HEIGHT,
+      );
+      this.style.setProperty(
+        '--composer-expanded-width',
+        DEFAULT_COMPOSER_WIDTH,
+      );
+    }
   };
 
   toggleActive(): void {
@@ -479,7 +490,10 @@ export class CopilotEntrypoint extends FASTElement {
     if (this.cs.activeThreadId) {
       this.style.setProperty('--composer-expanded-height', '256px');
     } else {
-      this.style.setProperty('--composer-expanded-height', '68px');
+      this.style.setProperty(
+        '--composer-expanded-height',
+        DEFAULT_COMPOSER_HEIGHT,
+      );
     }
   }
 }
