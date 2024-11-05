@@ -15,14 +15,14 @@ export default css`
   }
 
   :host([inline-position='start']:not([active])) #composer {
-    /* Start off edge of window */
+    /* All the way off window */
     inset-inline-start: calc(0% - var(--composer-retracted-width));
   }
 
   /* Hint target */
 
   :host([inline-position='start']) #hint-target {
-    /* Half off screen */
+    /* Align to start */
     inset-inline-start: 0%;
   }
 
@@ -34,10 +34,8 @@ export default css`
   }
 
   :host([inline-position='start'][active]) #grabber {
-    /* Offset composer expanded width + half of margin */
-    inset-inline-start: calc(
-      var(--composer-expanded-width) + ${spacingFrame} / 2
-    );
+    /* Offset composer expanded width + margin */
+    inset-inline-start: calc(var(--composer-expanded-width) + ${spacingFrame});
   }
 
   :host([inline-position='start'][hint]) #grabber,
@@ -64,8 +62,8 @@ export default css`
   }
 
   :host([inline-position='start'][hint]) #hint-composer,
-  :host([inline-position='start'][dragging]) #hint-composer {
-    /* Peek 24px off size */
+  :host([inline-position='start'][active][dragging]) #hint-composer {
+    /* Peek 25% of composer size */
     inset-inline-start: calc(0% - var(--composer-retracted-width) * 0.75);
   }
 `;

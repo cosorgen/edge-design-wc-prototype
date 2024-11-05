@@ -28,44 +28,58 @@ export default css`
   /* Hint target */
 
   :host([inline-position='end']) #hint-target {
-    /* Half off screen */
-    inset-inline-start: calc(100% - var(--hint-target-width) / 2);
+    /* Align to end */
+    inset-inline-start: calc(100% - var(--hint-target-height));
   }
 
   /* Grabber */
 
   :host([inline-position='end']) #grabber {
-    /* Start half off with retracted width */
+    /* Start centered in margin */
     inset-inline-start: calc(
-      100% - var(--grabber-retracted-width) - ${spacingFrame} * 2
+      100% - var(--grabber-height) / 2 - ${spacingFrame} / 2
     );
   }
 
-  :host([hint][inline-position='end']) #grabber,
-  :host([active][inline-position='end'][dragging]) #grabber {
-    /* Start half off with expanded width */
-    inset-inline-start: calc(100% - var(--grabber-expanded-width) / 2);
+  :host([inline-position='end'][active]) #grabber {
+    /* Offset composer expanded width + margin */
+    inset-inline-start: calc(
+      100% - var(--composer-expanded-width) - ${spacingFrame}
+    );
+  }
+
+  :host([inline-position='end'][hint]) #grabber,
+  :host([inline-position='end'][dragging]) #grabber {
+    /* Offset 10% of composer retracted width */
+    inset-inline-start: calc(100% - var(--composer-retracted-width) * 0.1);
   }
 
   /* Hint composer */
 
+  :host([inline-position='end']) #hint-composer {
+    /* Start all the way off window */
+    inset-inline-start: calc(100% + var(--composer-retracted-width));
+  }
+
   :host([inline-position='end'][active]) #hint-composer {
-    /* Start half in margin */
+    /* half in margin */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${spacingFrame} / 2
+      100% - var(--composer-retracted-width) - ${spacingFrame} / 2
     );
   }
 
   :host([inline-position='end'][active][ntp]) #hint-composer {
-    /* Start over ntp */
+    /* over ntp */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${spacingFrame} - var(--ntp-inset)
+      100% - var(--composer-retracted-width) - ${spacingFrame} - var(
+          --ntp-inset
+        )
     );
   }
 
-  :host([inline-position='end']) #hint-composer,
-  :host([inline-position='end'][dragging]) #hint-composer {
-    /* Start half off with retracted width */
-    inset-inline-start: calc(100% - var(--composer-retracted-width) / 2);
+  :host([inline-position='end'][hint]) #hint-composer,
+  :host([inline-position='end'][active][dragging]) #hint-composer {
+    /* Peek 25% of composer size */
+    inset-inline-start: calc(100% - var(--composer-retracted-width) * 0.25);
   }
 `;
