@@ -86,7 +86,8 @@ export class NewtabComposer extends FASTElement {
 
   handleKeydown(e: KeyboardEvent) {
     if (e.key === 'Enter') {
-      this.$emit('submit', (e.target as HTMLInputElement)?.value || '');
+      const value = (e.target as HTMLInputElement)?.value || '';
+      this.$emit('submit', { url: value });
     }
 
     return true; // allow event to continue bubbling

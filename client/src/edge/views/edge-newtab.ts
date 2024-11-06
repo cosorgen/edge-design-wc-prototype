@@ -535,10 +535,23 @@ export class EdgeNewTab extends FASTElement {
 
   handleComposerSubmit(e: Event): void {
     if (!(e instanceof CustomEvent)) return;
-    this.ts.navigateActiveTab(e.detail);
+    
+    const { url } = e.detail;
+    if (!url) {
+      return;
+    }
+  
+    const activeTabId = this.ts.activeTabId;
+    if (!activeTabId) {
+      return;
+    }
+
+    this.ts.navigateTab(activeTabId, url);
   }
 
   handleLinkClick(url: string): void {
-    this.ts.navigateActiveTab(url);
+    if (this.ts.activeTabId) {
+      this.ts.navigateTab(this.ts.activeTabId, url);
+    }
   }
 }
