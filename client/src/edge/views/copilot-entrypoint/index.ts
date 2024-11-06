@@ -285,6 +285,7 @@ export class CopilotEntrypoint extends FASTElement {
   _composerElement: HTMLDivElement | null = null;
   _resizeY = 0;
   _resizeX = 0;
+  _openTimeout?: NodeJS.Timeout;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -349,8 +350,15 @@ export class CopilotEntrypoint extends FASTElement {
   handleMouseOverHintTarget = (e: Event): void => {
     if (e.type === 'mouseover' && !this.hint) {
       this.hint = true;
+      this._openTimeout = setTimeout(() => {
+        this.toggleActive();
+      }, 350);
     } else if (this.hint) {
       this.hint = false;
+      if (this._openTimeout) {
+        clearTimeout(this._openTimeout);
+        this._openTimeout = undefined;
+      }
     }
   };
 
