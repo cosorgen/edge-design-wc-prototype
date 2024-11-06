@@ -36,6 +36,7 @@ import {
   spacingVerticalMNudge,
   spacingVerticalS,
   spacingVerticalXXXL,
+  spacingHorizontalXXXL,
   strokeWidthThin,
   typographyStyles,
 } from '@phoenixui/themes';
@@ -225,7 +226,10 @@ const styles = css`
     align-items: center;
     justify-content: center;
     gap: ${spacingVerticalL};
+    width: 100%;
     max-width: 1024px;
+    padding: ${spacingHorizontalXXXL};
+    box-sizing: border-box; 
   }
 
   #logo {
@@ -347,6 +351,11 @@ const styles = css`
     align-items: center;
     justify-content: center;
     width: 100%;
+    overflow-x: auto;
+  }
+
+  #top-sites:has(> *:nth-last-child(n+6)) {
+    justify-content: flex-start; /* Align items at the start when there's overflow */
   }
 
   .top-site {
@@ -387,7 +396,7 @@ const styles = css`
   #feed {
     position: absolute;
     bottom: 0;
-    width: 100%;
+    width: 85%;
     max-width: 1440px;
     display: flex;
     flex-direction: row;
