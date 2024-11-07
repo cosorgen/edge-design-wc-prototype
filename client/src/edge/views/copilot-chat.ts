@@ -116,10 +116,15 @@ export class CopilotChat extends FASTElement {
       const messageIds = Object.keys(messages);
 
       // Skip the first two messages since it's the user input and system prompt
+      let foundFirstUserMessage = false;
       for (let x = 0; x < messageIds.length; x++) {
         const message = messages[messageIds[x]];
         if (message.id === 'system-prompt') continue; // skip system prompt
         if (message.role === 'context') continue; // skip context messages
+        if (!foundFirstUserMessage && message.role === 'user' && this.inline) {
+          foundFirstUserMessage = true;
+          continue;
+        }
 
         let entry = this._chatElement.querySelector(
           `#${message.id}`,
