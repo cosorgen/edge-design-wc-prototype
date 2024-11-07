@@ -93,6 +93,10 @@ const styles = css`
     flex-direction: column;
     gap: var(--edge-frame-spacing);
   }
+
+  tool-bar {
+    z-index: 1;
+  }
 `;
 
 @customElement({

@@ -46,7 +46,7 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
-  @attr url = 'edge://newtab';
+  @attr url = '';
   @attr({ mode: 'boolean' }) active = false;
   @observable page = '';
 
@@ -55,10 +55,8 @@ export class WebPage extends FASTElement {
   }
 
   loadWebPage() {
-    if (this.url.search('edge://') !== 0) {
-      fetch(`/api/proxy?url=${this.url}`)
-        .then((res) => res.text())
-        .then((text) => (this.page = text));
-    }
+    fetch(`/api/proxy?url=${this.url}`)
+      .then((res) => res.json())
+      .then((res) => (this.page = res.page));
   }
 }
