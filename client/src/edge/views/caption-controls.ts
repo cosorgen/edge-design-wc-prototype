@@ -29,6 +29,7 @@ import '@phoenixui/web-components/toggle-button.js';
 const template = html` <div
     id="window-grabber"
     @mousedown="${(x) => x.handleTitleBarMouseDown()}"
+    @contextmenu="${(x, c) => x.handleContextMenu(c.event)}"
   ></div>
   ${x => !x.ss.showMenusInL1 ? html`
     <div class="group" id="pill-menu">
@@ -151,6 +152,11 @@ export class CaptionControls extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
 
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('contextmenu', this.handleContextMenu);
+  }
+
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
   }
@@ -204,4 +210,9 @@ export class CaptionControls extends FASTElement {
         break;
     }
   }
+  
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }

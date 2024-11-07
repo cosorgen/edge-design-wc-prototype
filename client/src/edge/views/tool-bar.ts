@@ -143,21 +143,20 @@ const template = html<Toolbar>`
             @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
           ></more-menu>
         </flyout-menu>
-${when(
-  (x) => x.ess.showLegacyCopilot,
-  html`
-    <phx-toggle-button
-      appearance="subtle"
-      icon-only
-      slot="trigger"
-      @click="${(x) => x.toggleSidepane('Copilot')}"
-      ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
-    >
-      <img width="20px" src="./img/edge/copilotAppLight.png" />
-    </phx-toggle-button>
-  `
-)}
-
+      ${when(
+        (x) => x.ess.showLegacyCopilot,
+        html`
+          <phx-toggle-button
+            appearance="subtle"
+            icon-only
+            slot="trigger"
+            @click="${(x) => x.toggleSidepane('Copilot')}"
+            ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+          >
+            <img width="20px" src="./img/edge/copilotAppLight.png" />
+          </phx-toggle-button>
+        `
+      )}
       `
     )}
   </div>
@@ -207,6 +206,7 @@ export class Toolbar extends FASTElement {
     generateSuggestions('').then((res) => {
       this.suggestions = res.suggestions;
     });
+    this.addEventListener('contextmenu', this.handleContextMenu);
   }
 
   @volatile
@@ -326,6 +326,7 @@ export class Toolbar extends FASTElement {
         break;
     }
   }
+
   pageIsFavorite() {
     const activeTabId = this.ts.activeTabId;
     if (activeTabId) {
@@ -336,4 +337,9 @@ export class Toolbar extends FASTElement {
     }
     return false;
   }
+  
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }
