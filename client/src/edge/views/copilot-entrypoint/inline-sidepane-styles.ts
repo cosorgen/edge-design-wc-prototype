@@ -6,9 +6,7 @@ export default css`
 
   :host([inline-position='sidepane']) #composer {
     /* Start halfway in margin */
-    inset-inline-start: calc(
-      100% - var(--composer-sidepane-width) - ${spacingFrame}
-    );
+    inset-inline-start: calc(100% - var(--sidepane-width) - ${spacingFrame});
   }
 
   /* Hint target */

@@ -18,6 +18,8 @@ import {
   strokeWidthThin,
   curveEasyEaseMax,
   colorLayerBackgroundDialog,
+  shadow28,
+  borderRadiusLarge,
 } from '@phoenixui/themes';
 import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -41,6 +43,10 @@ const DEFAULT_COMPOSER_HEIGHT = '68px';
 const template = html<CopilotEntrypoint>` ${when(
     (x) => x.cs.showHint,
     html`<div id="hint-composer"></div>`,
+  )}
+  ${when(
+    (x) => x.ews.activeSidepaneAppId !== 'Copilot',
+    html`<div id="sidepane-hint"></div>`,
   )}
   <div id="${(x) => (x.cs.showHint ? 'grabber' : 'grabber-no-hint')}"></div>
   <div
@@ -87,11 +93,11 @@ const styles = css`
     --grabber-height: 4px;
     --composer-expanded-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-retracted-width: 160px;
-    --composer-sidepane-width: 376px;
     --composer-min-width: 404px;
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: 68px;
     --ntp-inset: 24px;
+    --sidepane-width: 376px;
 
     position: absolute;
     inset: 0;
@@ -250,7 +256,7 @@ const styles = css`
   }
 
   :host([block-position='sidepane'][inline-position='sidepane']) #composer {
-    width: var(--composer-sidepane-width);
+    width: var(--sidepane-width);
     height: var(--composer-retracted-height);
   }
 
@@ -296,6 +302,36 @@ const styles = css`
     height: calc(100% + 4px);
     cursor: ew-resize;
   }
+
+  #sidepane-hint {
+    position: absolute;
+    width: var(--sidepane-width);
+    inset-inline-end: calc(0% - var(--sidepane-width));
+    inset-block-start: calc(${spacingFrame} * 2 + 32px + var(--ntp-inset));
+    inset-block-end: calc(${spacingFrame} + var(--ntp-inset));
+    background: ${acrylicBackgroundLuminosity};
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(${acrylicBackgroundBlur});
+    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
+    border-radius: ${borderRadiusLarge};
+    box-shadow: ${shadow28};
+
+    transition: inset ${durationSlow} ${curveEasyEaseMax};
+  }
+
+  :host([block-position='sidepane'][inline-position='sidepane'])
+    #sidepane-hint {
+    inset-inline-end: ${spacingFrame};
+    inset-block-end: ${spacingFrame};
+    inset-block-start: calc(${spacingFrame} * 2 + 32px);
+  }
+
+  :host([block-position='sidepane'][inline-position='sidepane'][dragging])
+    #sidepane-hint {
+    inset-inline-end: calc(0% - var(--sidepane-width) / 2);
+    inset-block-start: calc(${spacingFrame} * 2 + 32px + var(--ntp-inset));
+    inset-block-end: calc(${spacingFrame} + var(--ntp-inset));
+  }
 `;
 
 @customElement({
@@ -333,11 +369,8 @@ export class CopilotEntrypoint extends FASTElement {
       });
     }
 
-    // finish the transition if the element is already active
-    if (this.active)
-      this.handleComposerTransitionEnd({
-        propertyName: 'opacity',
-      } as TransitionEvent);
+    // Focus the composer if it is active
+    if (this.active) this._composerElement?.focus();
   }
 
   disconnectedCallback(): void {
@@ -405,7 +438,7 @@ export class CopilotEntrypoint extends FASTElement {
   };
 
   handleComposerTransitionEnd = (e: TransitionEvent) => {
-    if (e.propertyName !== 'opacity') return;
+    if (e.composedPath()[0] !== this._composerElement) return;
     const composer = this._composerElement?.children[0] as HTMLElement;
 
     // Focus the input when the composer is expanded
@@ -421,6 +454,20 @@ export class CopilotEntrypoint extends FASTElement {
         '--composer-expanded-width',
         DEFAULT_COMPOSER_WIDTH,
       );
+    }
+
+    // Set sidepane open state when composer is dragged to the side
+    if (
+      this.blockPosition === 'sidepane' &&
+      this.inlinePosition === 'sidepane'
+    ) {
+      this.ews.activeSidepaneAppId = 'Copilot';
+      this.cs.composerActive = false;
+    } else {
+      if (this.ews.activeSidepaneAppId === 'Copilot') {
+        this.ews.activeSidepaneAppId = '';
+        this.cs.composerActive = true;
+      }
     }
   };
 
@@ -548,18 +595,6 @@ export class CopilotEntrypoint extends FASTElement {
       this._composerElement?.style.removeProperty('inset-inline-start');
       this._composerElement?.style.removeProperty('inset-block-start');
     });
-    if (
-      this.blockPosition === 'sidepane' &&
-      this.inlinePosition === 'sidepane'
-    ) {
-      // Open the sidepane if the composer is dragged to the side
-      this.ews.activeSidepaneAppId = 'Copilot';
-    } else {
-      // Close it if it's dragged back to the center
-      if (this.ews.activeSidepaneAppId === 'Copilot') {
-        this.ews.activeSidepaneAppId = '';
-      }
-    }
   };
 
   setCSSVariables() {

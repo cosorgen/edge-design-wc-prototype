@@ -32,11 +32,7 @@ const template = html<CopilotNewtab>`<img
       x.ess.theme === 'system' ? x.ws.theme : x.ess.theme}.avif"
     alt="Background image"
   />
-  <div
-    id="content"
-    ?hidden="${(x) =>
-      x.cs.composerActive && x.ews.activeSidepaneAppId !== 'Copilot'}"
-  >
+  <div id="content" ?hidden="${(x) => x.cs.composerActive}">
     <div id="main" style="--index: 1;">
       <div id="searchbox">
         <div id="start">
