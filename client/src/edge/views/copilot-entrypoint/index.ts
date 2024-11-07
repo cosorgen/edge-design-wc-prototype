@@ -49,7 +49,10 @@ const template = html<CopilotEntrypoint>` ${when(
     @click="${(x) => x.handleClickHintTarget()}"
     @mouseout="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
   ></div>
-  <div id="composer" @mousedown="${(x) => x.handleComposerMouseDown()}">
+  <div
+    id="composer"
+    @mousedown="${(x, c) => x.handleComposerMouseDown(c.event)}"
+  >
     <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
     <div
       class="resize"
@@ -311,6 +314,8 @@ export class CopilotEntrypoint extends FASTElement {
   _resizeY = 0;
   _resizeX = 0;
   _openTimeout?: NodeJS.Timeout;
+  _dragStartGlobalX = 0;
+  _dragStartGlobalY = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -462,57 +467,65 @@ export class CopilotEntrypoint extends FASTElement {
     this._resizeY = 0;
   };
 
-  handleComposerMouseDown() {
+  handleComposerMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
+    this._dragStartGlobalX = e.clientX;
+    this._dragStartGlobalY = e.clientY;
   }
 
   handleComposerMouseMove = (e: MouseEvent) => {
     if (!this._composerElement) return;
 
-    // Start the drag if it hasn't started yet
-    if (!this.dragging) this.dragging = true;
+    // Don't start drag unless the mouse has moved a certain distance
+    const xDiff = Math.abs(e.clientX - this._dragStartGlobalX);
+    const yDiff = Math.abs(e.clientY - this._dragStartGlobalY);
+    if (xDiff > 10 || yDiff > 10) {
+      // Start the drag if it hasn't started yet
+      if (!this.dragging) this.dragging = true;
 
-    // Move the composer with the cursor
-    const deltaX = e.movementX;
-    const deltaY = e.movementY;
-    const newTop = this._composerElement.offsetTop + deltaY;
-    const newLeft = this._composerElement.offsetLeft + deltaX;
+      // Move the composer with the cursor
+      const deltaX = e.movementX;
+      const deltaY = e.movementY;
+      const newTop = this._composerElement.offsetTop + deltaY;
+      const newLeft = this._composerElement.offsetLeft + deltaX;
 
-    this._composerElement.style.insetInlineStart = `${newLeft}px`;
-    this._composerElement.style.insetBlockStart = `${newTop}px`;
+      this._composerElement.style.insetInlineStart = `${newLeft}px`;
+      this._composerElement.style.insetBlockStart = `${newTop}px`;
 
-    // Set attributes on composer element based on cursor position
-    const window = this.getBoundingClientRect();
-    if (window) {
-      let xPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
-      let yPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
-      const cursorX = e.clientX;
-      const cursorY = e.clientY;
-      const windowXThird = window.width / 3;
-      const windowYThird = window.height / 3;
-      const windowYHalf = window.height / 2;
+      // Set attributes on composer element based on cursor position
+      const window = this.getBoundingClientRect();
+      if (window) {
+        let xPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
+        let yPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
+        const cursorX = e.clientX;
+        const cursorY = e.clientY;
+        const windowXThird = window.width / 3;
+        const windowYThird = window.height / 3;
+        const windowYHalf = window.height / 2;
 
-      if (cursorX < window.left + windowXThird) {
-        xPosition = 'start';
-      } else if (cursorX > window.left + windowXThird * 2) {
-        xPosition = 'end';
+        if (cursorX < window.left + windowXThird) {
+          xPosition = 'start';
+        } else if (cursorX > window.left + windowXThird * 2) {
+          xPosition = 'end';
+        }
+        if (cursorY < window.top + windowYThird) {
+          yPosition = 'start';
+        } else if (cursorY > window.top + windowYThird * 2) {
+          yPosition = 'end';
+        }
+        if (xPosition === 'center' && yPosition === 'center') {
+          yPosition = cursorY < window.top + windowYHalf ? 'start' : 'end';
+        }
+        if (cursorX >= window.width - 128) {
+          xPosition = 'sidepane';
+          yPosition = 'sidepane';
+        }
+
+        this.inlinePosition = xPosition;
+        this.blockPosition = yPosition;
       }
-      if (cursorY < window.top + windowYThird) {
-        yPosition = 'start';
-      } else if (cursorY > window.top + windowYThird * 2) {
-        yPosition = 'end';
-      }
-      if (xPosition === 'center' && yPosition === 'center') {
-        yPosition = cursorY < window.top + windowYHalf ? 'start' : 'end';
-      }
-      if (cursorX >= window.width - 128) {
-        xPosition = 'sidepane';
-        yPosition = 'sidepane';
-      }
-
-      this.inlinePosition = xPosition;
-      this.blockPosition = yPosition;
     }
   };
 
