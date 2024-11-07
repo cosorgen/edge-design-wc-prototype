@@ -430,6 +430,9 @@ export class CopilotEntrypoint extends FASTElement {
   }
 
   handleResizeMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
+
     e.stopPropagation();
     window.addEventListener('mousemove', this.handleResizeMouseMove);
     window.addEventListener('mouseup', this.handleResizeMouseUp);
@@ -475,6 +478,7 @@ export class CopilotEntrypoint extends FASTElement {
 
   handleComposerMouseDown(e: Event) {
     if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
     window.addEventListener('mouseup', this.handleComposerMouseUp);
     window.addEventListener('mousemove', this.handleComposerMouseMove);
     this._dragStartGlobalX = e.clientX;
@@ -524,7 +528,7 @@ export class CopilotEntrypoint extends FASTElement {
         if (xPosition === 'center' && yPosition === 'center') {
           yPosition = cursorY < window.top + windowYHalf ? 'start' : 'end';
         }
-        if (cursorX >= window.width - 128) {
+        if (cursorX >= window.width - 376) {
           xPosition = 'sidepane';
           yPosition = 'sidepane';
         }
