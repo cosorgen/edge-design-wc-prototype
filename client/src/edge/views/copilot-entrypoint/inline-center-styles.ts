@@ -22,13 +22,16 @@ export default css`
 
   /* Grabber */
 
-  :host([inline-position='center']) #grabber {
+  :host([inline-position='center']) #grabber,
+  :host([inline-position='center']) #grabber-no-hint {
     /* Centered with retracted width */
     inset-inline-start: calc(50% - var(--grabber-retracted-width) / 2);
   }
 
   :host([hint][inline-position='center']) #grabber,
-  :host([active][inline-position='center'][dragging]) #grabber {
+  :host([active][inline-position='center'][dragging]) #grabber,
+  :host([hint][inline-position='center']) #grabber-no-hint,
+  :host([active][inline-position='center'][dragging]) #grabber-no-hint {
     /* Centered with expanded width */
     inset-inline-start: calc(50% - var(--grabber-expanded-width) / 2);
   }

@@ -23,7 +23,8 @@ export default css`
 
   /* Grabber */
 
-  :host([block-position='center']) #grabber {
+  :host([block-position='center']) #grabber,
+  :host([block-position='center']) #grabber-no-hint {
     /* Centered vertically based on retracted width */
     inset-block-start: calc(
       var(--viewport-top) + (var(--viewport-height) / 2) -
@@ -32,7 +33,9 @@ export default css`
   }
 
   :host([block-position='center'][hint]) #grabber,
-  :host([block-position='center'][dragging]) #grabber {
+  :host([block-position='center'][dragging]) #grabber,
+  :host([block-position='center'][hint]) #grabber-no-hint,
+  :host([block-position='center'][dragging]) #grabber-no-hint {
     /* Centered vertically based on expanded width */
     inset-block-start: calc(
       var(--viewport-top) + (var(--viewport-height) / 2) -

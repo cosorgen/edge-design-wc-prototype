@@ -53,7 +53,8 @@ export default css`
 
   /* Grabber */
 
-  :host([block-position='end']) #grabber {
+  :host([block-position='end']) #grabber,
+  :host([block-position='end']) #grabber-no-hint {
     /* Center in margin */
     inset-block-start: calc(
       100% - var(--grabber-height) / 2 - ${spacingFrame} / 2
@@ -84,7 +85,9 @@ export default css`
 
   /* Grabber not centered */
 
-  :host([block-position='end']:not([inline-position='center'])) #grabber {
+  :host([block-position='end']:not([inline-position='center'])) #grabber,
+  :host([block-position='end']:not([inline-position='center']))
+    #grabber-no-hint {
     /* Alignt to bottom - margin */
     inset-block-start: calc(
       100% - var(--grabber-vertical-retracted-width) - ${spacingFrame} - var(
@@ -95,7 +98,11 @@ export default css`
 
   :host([block-position='end'][hint]:not([inline-position='center'])) #grabber,
   :host([block-position='end'][dragging]:not([inline-position='center']))
-    #grabber {
+    #grabber,
+  :host([block-position='end'][hint]:not([inline-position='center']))
+    #grabber-no-hint,
+  :host([block-position='end'][dragging]:not([inline-position='center']))
+    #grabber-no-hint {
     /* Alignt to bottom - half expanded width - margin - ntp offset */
     inset-block-start: calc(
       100% - var(--grabber-vertical-expanded-width) -

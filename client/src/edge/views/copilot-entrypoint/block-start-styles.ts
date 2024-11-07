@@ -42,7 +42,8 @@ export default css`
 
   /* Grabber */
 
-  :host([block-position='start']) #grabber {
+  :host([block-position='start']) #grabber,
+  :host([block-position='start']) #grabber-no-hint {
     /* Center in margin */
     inset-block-start: calc(${spacingFrame} / 2 - var(--grabber-height) / 2);
   }
@@ -75,7 +76,9 @@ export default css`
 
   /* Grabbber not centered */
 
-  :host([block-position='start']:not([inline-position='center'])) #grabber {
+  :host([block-position='start']:not([inline-position='center'])) #grabber,
+  :host([block-position='start']:not([inline-position='center']))
+    #grabber-no-hint {
     /* Alignt to top of viewport + ntp inset */
     inset-block-start: calc(var(--viewport-top) + var(--ntp-inset));
   }
@@ -83,7 +86,11 @@ export default css`
   :host([block-position='start'][hint]:not([inline-position='center']))
     #grabber,
   :host([block-position='start'][dragging]:not([inline-position='center']))
-    #grabber {
+    #grabber,
+  :host([block-position='start'][hint]:not([inline-position='center']))
+    #grabber-no-hint,
+  :host([block-position='start'][dragging]:not([inline-position='center']))
+    #grabber-no-hint {
     /* Alignt to top of viewport + half expanded width - + ntp offset */
     inset-block-start: calc(
       var(--viewport-top) + (var(--grabber-vertical-expanded-width) / 2) +

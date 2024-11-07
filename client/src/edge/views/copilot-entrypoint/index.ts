@@ -6,6 +6,7 @@ import {
   attr,
   Observable,
   Updates,
+  when,
 } from '@microsoft/fast-element';
 import {
   acrylicBackgroundBlur,
@@ -35,8 +36,11 @@ import blockCenterStyles from './block-center-styles.js';
 const DEFAULT_COMPOSER_WIDTH = '512px';
 const DEFAULT_COMPOSER_HEIGHT = '68px';
 
-const template = html<CopilotEntrypoint>` <div id="hint-composer"></div>
-  <div id="grabber"></div>
+const template = html<CopilotEntrypoint>` ${when(
+    (x) => x.cs.showHint,
+    html`<div id="hint-composer"></div>`,
+  )}
+  <div id="${(x) => (x.cs.showHint ? 'grabber' : 'grabber-no-hint')}"></div>
   <div
     id="hint-target"
     @mouseover="${(x, c) => x.handleMouseOverHintTarget(c.event)}"
@@ -108,7 +112,8 @@ const styles = css`
     height: var(--hint-target-width);
   }
 
-  #grabber {
+  #grabber,
+  #grabber-no-hint {
     position: absolute;
     height: var(--grabber-height);
     border-radius: ${borderRadiusCircular};
@@ -123,12 +128,14 @@ const styles = css`
       inset ${durationSlow} ${curveEasyEaseMax};
   }
 
-  :host([hint]) #grabber {
+  :host([hint]) #grabber,
+  :host([hint]) #grabber-no-hint {
     opacity: 0.4;
     width: var(--grabber-expanded-width);
   }
 
-  :host([active]) #grabber {
+  :host([active]) #grabber,
+  :host([active]) #grabber-no-hint {
     opacity: 0;
   }
 
@@ -137,17 +144,25 @@ const styles = css`
     width: var(--grabber-expanded-width);
   }
 
-  :host(:not([inline-position='center'])) #grabber {
+  :host([dragging]) #grabber-no-hint {
+    opacity: 1;
+    width: var(--grabber-expanded-width);
+  }
+
+  :host(:not([inline-position='center'])) #grabber,
+  :host(:not([inline-position='center'])) #grabber-no-hint {
     width: var(--grabber-height);
     height: var(--grabber-vertical-retracted-width);
   }
 
-  :host(:not([inline-position='center'])[hint]) #grabber {
+  :host(:not([inline-position='center'])[hint]) #grabber,
+  :host(:not([inline-position='center'])[hint]) #grabber-no-hint {
     width: var(--grabber-height);
     height: var(--grabber-vertical-expanded-width);
   }
 
-  :host(:not([inline-position='center'])[dragging]) #grabber {
+  :host(:not([inline-position='center'])[dragging]) #grabber,
+  :host(:not([inline-position='center'])[dragging]) #grabber-no-hint {
     width: var(--grabber-height);
     height: var(--grabber-vertical-expanded-width);
   }

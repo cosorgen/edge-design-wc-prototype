@@ -30,6 +30,24 @@ export class CopilotService {
   @observable composerActive = true;
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
+  @observable showHint = false;
+
+  constructor() {
+    this.getSettingsFromURL();
+  }
+
+  getSettingsFromURL() {
+    const url = new URL(window.location.href);
+    this.showHint =
+      url.searchParams.get('showComposerHint') === 'true' || this.showHint;
+  }
+
+  setSettingsInURL() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('showComposerHint', this.showHint.toString());
+
+    window.history.pushState({}, '', url.toString());
+  }
 
   browserContextChanged(tab: Tab) {
     if (!this.activeThreadId) this.newThread();
@@ -162,5 +180,10 @@ export class CopilotService {
           this.threadsById = { ...this.threadsById, thread };
         }, delayBeforeComplete);
       });
+  }
+
+  setShowHint(show: boolean) {
+    this.showHint = show;
+    this.setSettingsInURL();
   }
 }

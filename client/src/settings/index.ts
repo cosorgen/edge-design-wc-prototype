@@ -33,6 +33,7 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { Checkbox } from '@phoenixui/web-components';
 import { TabService } from '#servicestabService.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<WindowsSettings>`
   <mica-material
@@ -177,6 +178,15 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
+        <label for="legacy-newtab"> Show composer hint </label>
+        <phx-switch
+          slot="input"
+          id="composer-hint"
+          ?checked=${(x) => x.cs.showHint}
+          @change="${(x) => x.toggleShowComposerHint()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
         <label for="frame-spacing">Frame spacing</label>
         <phx-text-input
           id="frame-spacing"
@@ -288,6 +298,7 @@ export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
+  @inject(CopilotService) cs!: CopilotService;
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
@@ -367,5 +378,12 @@ export class WindowsSettings extends FASTElement {
     if (newTrigger && newTrigger !== '') {
       this.ts.updateShoppingTriggerURL(newTrigger);
     }
+  }
+
+  toggleShowComposerHint() {
+    this.cs.setShowHint(
+      (this.shadowRoot?.querySelector('#composer-hint') as Checkbox)?.checked ||
+        false,
+    );
   }
 }

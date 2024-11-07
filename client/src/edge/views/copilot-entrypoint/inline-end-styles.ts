@@ -34,7 +34,8 @@ export default css`
 
   /* Grabber */
 
-  :host([inline-position='end']) #grabber {
+  :host([inline-position='end']) #grabber,
+  :host([inline-position='end']) #grabber-no-hint {
     /* Start centered in margin */
     inset-inline-start: calc(
       100% - var(--grabber-height) / 2 - ${spacingFrame} / 2
