@@ -305,21 +305,16 @@ import {
     handleItemClick(item: Favorite | FavoriteFolder) {
       if (item.type === 'site' && item.url) {
         const activeTabId = this.ts.activeTabId;
+        const activeTab = activeTabId ? this.ts.tabsById[activeTabId] : null;
   
-        if (!activeTabId) {
-          console.warn('No active tab found.');
-          return;
-        }
-  
-        const activeTab = this.ts.tabsById[activeTabId];
         if (!activeTab) return;
   
         if (activeTab.url === 'edge://newtab') {
-          this.ts.navigateTab(activeTabId, item.url);
+          this.ts.navigateTab(activeTab.id, item.url);
         } else {
-          const newTabId = this.ts.addTab();
-          if (!newTabId) return;
-          this.ts.navigateTab(newTabId, item.url);
+          const id = this.ts.addTab();
+          if (!id) return;
+          this.ts.navigateTab(id, item.url);
         }
   
         // Close the favorites menu (if needed)

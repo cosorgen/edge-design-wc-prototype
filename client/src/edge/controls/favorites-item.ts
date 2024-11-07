@@ -32,7 +32,7 @@ const template = html<FavoritesItem>` <button
       alt="${(x) => x.title}"
     />`,
   )}
-  <div class="title-container">${(x) => x.title}</div>
+  <div id="title">${(x) => x.title}</div>
 </button>`;
 
 const styles = css`
@@ -48,15 +48,14 @@ const styles = css`
     cursor: pointer;
     width: 100%;
     max-width: 256px;
+  }
 
+  #title {
     font-family: ${typographyStyles.caption1.fontFamily};
     font-size: ${typographyStyles.caption1.fontSize};
     font-weight: ${typographyStyles.caption1.fontWeight};
     line-height: ${typographyStyles.caption1.lineHeight};
     color: ${colorNeutralForeground1};
-  }
-
-  .title-container {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

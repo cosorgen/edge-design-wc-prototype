@@ -33,6 +33,7 @@ export class TabService {
       tab = {
         id: `tab-${window.crypto.randomUUID()}`,
         url: 'edge://newtab',
+        title: 'New tab',
       };
     }
 

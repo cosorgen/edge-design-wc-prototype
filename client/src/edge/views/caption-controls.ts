@@ -188,6 +188,7 @@ export class CaptionControls extends FASTElement {
           id: `tab-${window.crypto.randomUUID()}`,
           title: 'Settings',
           url: 'edge://settings',
+          favicon: 'img/edge/icons.svg#settings-16-regular',
         });
         this.ts.activateTab(settingsTabId);
         break;

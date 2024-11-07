@@ -72,10 +72,19 @@ export class FavoritesBar extends FASTElement {
   @inject(TabService) ts!: TabService;
 
   handleItemClick(item: Favorite | FavoriteFolder) {
-    if (!this.ts.activeTabId) return;
-
-    if (item.type === 'site') {
-      this.ts.navigateTab(this.ts.activeTabId, item.url);
+    if (item.type === 'site' && item.url) {
+      const activeTabId = this.ts.activeTabId;
+      const activeTab = activeTabId ? this.ts.tabsById[activeTabId] : null;
+      
+      if (!activeTab) return;
+      
+      if (activeTab.url === 'edge://newtab') {
+        this.ts.navigateTab(activeTab.id, item.url);
+      } else {
+        const id = this.ts.addTab();
+        if (!id) return;
+        this.ts.navigateTab(id, item.url);
+      }
     }
   }
 }
