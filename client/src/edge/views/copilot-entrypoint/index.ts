@@ -365,9 +365,11 @@ export class CopilotEntrypoint extends FASTElement {
   handleMouseOverHintTarget = (e: Event): void => {
     if (e.type === 'mouseover' && !this.hint) {
       this.hint = true;
-      this._openTimeout = setTimeout(() => {
-        this.toggleActive();
-      }, 350);
+      if (this.cs.autoOpen) {
+        this._openTimeout = setTimeout(() => {
+          this.toggleActive();
+        }, this.cs.autoOpenDelay);
+      }
     } else if (this.hint) {
       this.hint = false;
       if (this._openTimeout) {

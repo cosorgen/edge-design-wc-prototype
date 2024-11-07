@@ -31,6 +31,8 @@ export class CopilotService {
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
   @observable showHint = false;
+  @observable autoOpen = true;
+  @observable autoOpenDelay = 500;
 
   constructor() {
     this.getSettingsFromURL();
@@ -40,11 +42,21 @@ export class CopilotService {
     const url = new URL(window.location.href);
     this.showHint =
       url.searchParams.get('showComposerHint') === 'true' || this.showHint;
+
+    const autoOpen = url.searchParams.get('autoOpenComposer');
+    if (autoOpen === 'false') this.autoOpen = false;
+    else if (autoOpen === 'true') this.autoOpen = true;
+
+    this.autoOpenDelay = parseInt(
+      url.searchParams.get('autoOpenDelay') || '200',
+    );
   }
 
   setSettingsInURL() {
     const url = new URL(window.location.href);
     url.searchParams.set('showComposerHint', this.showHint.toString());
+    url.searchParams.set('autoOpenComposer', this.autoOpen.toString());
+    url.searchParams.set('autoOpenDelay', this.autoOpenDelay.toString());
 
     window.history.pushState({}, '', url.toString());
   }
@@ -184,6 +196,16 @@ export class CopilotService {
 
   setShowHint(show: boolean) {
     this.showHint = show;
+    this.setSettingsInURL();
+  }
+
+  setAutoOpen(open: boolean) {
+    this.autoOpen = open;
+    this.setSettingsInURL();
+  }
+
+  setAutoOpenDelay(delay: number) {
+    this.autoOpenDelay = delay;
     this.setSettingsInURL();
   }
 }
