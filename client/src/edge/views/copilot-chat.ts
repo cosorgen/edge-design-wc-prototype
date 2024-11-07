@@ -5,11 +5,13 @@ import {
   customElement,
   Observable,
   Updates,
+  attr,
 } from '@microsoft/fast-element';
 import {
   colorScrollbarForeground,
   curveEasyEaseMax,
   durationUltraSlow,
+  spacingVerticalXL,
   spacingVerticalXXL,
 } from '@phoenixui/themes';
 import '../controls/copilot-chat-entry.js';
@@ -17,7 +19,7 @@ import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 
-const template = html<CopilotInlineChat>`<div id="chat"></div>`;
+const template = html<CopilotChat>`<div id="chat"></div>`;
 
 const styles = css`
   :host {
@@ -33,7 +35,7 @@ const styles = css`
   }
 
   #chat:not(:empty) {
-    padding: ${spacingVerticalXXL};
+    padding: ${spacingVerticalXL};
     padding-block-end: 0;
     height: fit-content;
     max-height: calc(100% - ${spacingVerticalXXL});
@@ -43,15 +45,21 @@ const styles = css`
     scrollbar-color: ${colorScrollbarForeground} transparent;
     scrollbar-width: thin;
   }
+
+  #chat[inline]:not(:empty) {
+    padding: ${spacingVerticalXXL};
+    padding-block-end: 0;
+  }
 `;
 
 @customElement({
-  name: 'copilot-inline-chat',
+  name: 'copilot-chat',
   template,
   styles,
 })
-export class CopilotInlineChat extends FASTElement {
+export class CopilotChat extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
+  @attr({ mode: 'boolean' }) inline = false;
   _updateInterval?: NodeJS.Timeout;
   _chatElement?: HTMLElement;
   _lockChatScroll = true;
@@ -139,7 +147,10 @@ export class CopilotInlineChat extends FASTElement {
           if (this._lockChatScroll && this._chatElement) {
             const lastMessage = this._chatElement?.lastElementChild;
             if (lastMessage) {
-              lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              lastMessage.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              });
             }
           }
         });

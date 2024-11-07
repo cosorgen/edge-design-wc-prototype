@@ -55,11 +55,10 @@ const template = html<MicrosoftEdge>`
       ${when(
         (x) => !x.ss.showLegacyCopilot,
         html`<copilot-entrypoint
-          ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
           ?ntp="${(x) =>
             x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
-          inline-position="center"
-          block-position="end"
+          inline-position="sidepane"
+          block-position="sidepane"
           active
         ></copilot-entrypoint>`,
       )}

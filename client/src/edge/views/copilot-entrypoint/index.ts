@@ -29,9 +29,11 @@ import { TabService } from '#servicestabService.js';
 import inlineCenterStyles from './inline-center-styles.js';
 import inlineStartStyles from './inline-start-styles.js';
 import inlineEndStyles from './inline-end-styles.js';
+import inlineSidepaneStyles from './inline-sidepane-styles.js';
 import blockStartStyles from './block-start-styles.js';
 import blockEndStyles from './block-end-styles.js';
 import blockCenterStyles from './block-center-styles.js';
+import blockSidepaneStyles from './block-sidepane-styles.js';
 
 const DEFAULT_COMPOSER_WIDTH = '512px';
 const DEFAULT_COMPOSER_HEIGHT = '68px';
@@ -82,6 +84,7 @@ const styles = css`
     --grabber-height: 4px;
     --composer-expanded-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-retracted-width: 160px;
+    --composer-sidepane-width: 328px;
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: 68px;
     --ntp-inset: 24px;
@@ -237,12 +240,19 @@ const styles = css`
     transition: none;
   }
 
+  :host([block-position='sidepane'][inline-position='sidepane']) #composer {
+    width: var(--composer-sidepane-width);
+    height: var(--composer-retracted-height);
+  }
+
   ${inlineStartStyles}
   ${inlineCenterStyles}
   ${inlineEndStyles}
+  ${inlineSidepaneStyles}
   ${blockStartStyles}
   ${blockCenterStyles}
   ${blockEndStyles}
+  ${blockSidepaneStyles}
 
   .resize {
     position: absolute;
@@ -475,8 +485,8 @@ export class CopilotEntrypoint extends FASTElement {
     // Set attributes on composer element based on cursor position
     const window = this.getBoundingClientRect();
     if (window) {
-      let xPosition: 'center' | 'start' | 'end' = 'center';
-      let yPosition: 'center' | 'start' | 'end' = 'center';
+      let xPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
+      let yPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
       const cursorX = e.clientX;
       const cursorY = e.clientY;
       const windowXThird = window.width / 3;
@@ -495,6 +505,15 @@ export class CopilotEntrypoint extends FASTElement {
       }
       if (xPosition === 'center' && yPosition === 'center') {
         yPosition = cursorY < window.top + windowYHalf ? 'start' : 'end';
+      }
+      if (cursorX >= window.width - 128) {
+        xPosition = 'sidepane';
+        yPosition = 'sidepane';
+        this.ews.activeSidepaneAppId = 'Copilot';
+      } else {
+        if (this.ews.activeSidepaneAppId === 'Copilot') {
+          this.ews.activeSidepaneAppId = '';
+        }
       }
 
       this.inlinePosition = xPosition;

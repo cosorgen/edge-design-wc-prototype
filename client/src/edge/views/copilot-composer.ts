@@ -21,16 +21,20 @@ import '@phoenixui/web-components/button.js';
 import '../controls/copilot-chat-entry.js';
 import '../controls/copilot-design-provider.js';
 import '../controls/copilot-input.js';
-import './copilot-inline-chat.js';
+import './copilot-chat.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 import { TabService } from '#servicestabService.js';
-import { CopilotInlineChat } from './copilot-inline-chat.js';
+import { CopilotChat } from './copilot-chat.js';
 import { CopilotInput } from '../controls/copilot-input.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const template = html<CopilotComposer>`
   <copilot-design-provider>
-    <copilot-inline-chat></copilot-inline-chat>
+    <copilot-chat
+      inline
+      ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+    ></copilot-chat>
     <div id="input-row">
       <div id="start">
         <phx-button appearance="subtle" size="large" icon-only>
@@ -93,6 +97,10 @@ const styles = css`
     line-height: ${typographyStyles.body2.lineHeight};
   }
 
+  copilot-chat[hidden] {
+    display: none;
+  }
+
   #input-row {
     display: flex;
     flex-direction: row;
@@ -117,8 +125,9 @@ const styles = css`
 export class CopilotComposer extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(TabService) ts!: TabService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
   _inputElement?: CopilotInput;
-  _chatElement?: CopilotInlineChat;
+  _chatElement?: CopilotChat;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -138,7 +147,7 @@ export class CopilotComposer extends FASTElement {
     ) as CopilotInput;
     this._chatElement = this.shadowRoot?.querySelector(
       'copilot-inline-chat',
-    ) as CopilotInlineChat;
+    ) as CopilotChat;
   }
 
   unsestElements() {
