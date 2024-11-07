@@ -46,7 +46,7 @@ const styles = css`
     scrollbar-width: thin;
   }
 
-  #chat[inline]:not(:empty) {
+  :host([inline]) #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
     padding-block-end: 0;
   }

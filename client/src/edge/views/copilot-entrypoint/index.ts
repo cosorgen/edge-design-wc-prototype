@@ -84,7 +84,7 @@ const styles = css`
     --grabber-height: 4px;
     --composer-expanded-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-retracted-width: 160px;
-    --composer-sidepane-width: 328px;
+    --composer-sidepane-width: 376px;
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: 68px;
     --ntp-inset: 24px;
@@ -509,11 +509,6 @@ export class CopilotEntrypoint extends FASTElement {
       if (cursorX >= window.width - 128) {
         xPosition = 'sidepane';
         yPosition = 'sidepane';
-        this.ews.activeSidepaneAppId = 'Copilot';
-      } else {
-        if (this.ews.activeSidepaneAppId === 'Copilot') {
-          this.ews.activeSidepaneAppId = '';
-        }
       }
 
       this.inlinePosition = xPosition;
@@ -530,6 +525,18 @@ export class CopilotEntrypoint extends FASTElement {
       this._composerElement?.style.removeProperty('inset-inline-start');
       this._composerElement?.style.removeProperty('inset-block-start');
     });
+    if (
+      this.blockPosition === 'sidepane' &&
+      this.inlinePosition === 'sidepane'
+    ) {
+      // Open the sidepane if the composer is dragged to the side
+      this.ews.activeSidepaneAppId = 'Copilot';
+    } else {
+      // Close it if it's dragged back to the center
+      if (this.ews.activeSidepaneAppId === 'Copilot') {
+        this.ews.activeSidepaneAppId = '';
+      }
+    }
   };
 
   setCSSVariables() {

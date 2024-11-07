@@ -1,6 +1,5 @@
 import { css } from '@microsoft/fast-element';
 import { spacingFrame } from '../../designSystem.js';
-import { spacingHorizontalXL } from '@phoenixui/themes';
 
 export default css`
   /* Composer */
@@ -8,8 +7,7 @@ export default css`
   :host([inline-position='sidepane']) #composer {
     /* Start halfway in margin */
     inset-inline-start: calc(
-      100% - var(--composer-sidepane-width) - ${spacingFrame} -
-        ${spacingHorizontalXL}
+      100% - var(--composer-sidepane-width) - ${spacingFrame}
     );
   }
 

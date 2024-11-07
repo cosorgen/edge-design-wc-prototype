@@ -64,6 +64,8 @@ const template = html<CopilotComposer>`
           icon-only
           slot="end"
           @click="${(x) => x.handleClose(true)}"
+          class="${(x) =>
+            x.ews.activeSidepaneAppId === 'Copilot' ? 'hidden' : 'show'}"
         >
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
@@ -114,6 +116,10 @@ const styles = css`
     display: flex;
     flex-direction: row;
     padding-block: ${spacingVerticalXS};
+
+    .hidden {
+      display: none;
+    }
   }
 `;
 
