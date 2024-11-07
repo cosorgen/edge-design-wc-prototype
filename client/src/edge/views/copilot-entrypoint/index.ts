@@ -88,6 +88,7 @@ const styles = css`
     --composer-expanded-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-retracted-width: 160px;
     --composer-sidepane-width: 376px;
+    --composer-min-width: 404px;
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: 68px;
     --ntp-inset: 24px;
@@ -210,7 +211,7 @@ const styles = css`
   #composer {
     position: absolute;
     width: clamp(
-      404px,
+      var(--composer-min-width),
       var(--composer-expanded-width),
       calc(var(--viewport-width) + ${spacingFrame})
     );
@@ -241,6 +242,11 @@ const styles = css`
   :host([dragging]) #composer,
   :host([resizing]) #composer {
     transition: none;
+  }
+
+  :host([dragging]) #composer {
+    width: var(--composer-min-width);
+    height: var(--composer-retracted-height);
   }
 
   :host([block-position='sidepane'][inline-position='sidepane']) #composer {
@@ -485,17 +491,17 @@ export class CopilotEntrypoint extends FASTElement {
       // Start the drag if it hasn't started yet
       if (!this.dragging) this.dragging = true;
 
-      // Move the composer with the cursor
-      const deltaX = e.movementX;
-      const deltaY = e.movementY;
-      const newTop = this._composerElement.offsetTop + deltaY;
-      const newLeft = this._composerElement.offsetLeft + deltaX;
+      // Move the composer to centered with the cursor
+      const window = this.getBoundingClientRect();
+      const cWidth = this._composerElement.clientWidth;
+      const cHeight = this._composerElement.clientHeight;
+      const newTop = e.clientY - window.top - cHeight / 2;
+      const newLeft = e.clientX - window.left - cWidth / 2;
 
       this._composerElement.style.insetInlineStart = `${newLeft}px`;
       this._composerElement.style.insetBlockStart = `${newTop}px`;
 
       // Set attributes on composer element based on cursor position
-      const window = this.getBoundingClientRect();
       if (window) {
         let xPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
         let yPosition: 'center' | 'start' | 'end' | 'sidepane' = 'center';
