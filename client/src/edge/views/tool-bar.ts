@@ -18,6 +18,8 @@ import '../controls/toolbar-sidepane-item.js';
 import '../controls/omnibox-action-flyout.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
+import '../controls/identity-control.js'
+import '../controls/identity-flyout.js'
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -123,6 +125,7 @@ const template = html<Toolbar>`
       html`
         <flyout-menu>
           <identity-control appearance="signedIn" slot="trigger"></identity-control>
+          <identity-flyout></identity-flyout>
         </flyout-menu>
         <flyout-menu>
           <phx-toggle-button
