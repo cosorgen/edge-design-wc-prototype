@@ -214,7 +214,7 @@ const template = html<WindowsSettings>`
           ></phx-switch>
         </div>
         <div class="entry">
-          <label for="show-copilot-ntp"> Show copilot NTP </label>
+          <label for="show-copilot-ntp"> Show copilot new tab page </label>
           <phx-switch
             slot="input"
             id="show-copilot-ntp"
