@@ -27,7 +27,7 @@ export type OpenAIResponse = {
 };
 
 export class CopilotService {
-  @observable composerActive = true;
+  @observable composerActive = false;
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
 
