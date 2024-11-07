@@ -48,7 +48,7 @@ export class CopilotService {
     else if (autoOpen === 'true') this.autoOpen = true;
 
     this.autoOpenDelay = parseInt(
-      url.searchParams.get('autoOpenDelay') || '200',
+      url.searchParams.get('autoOpenDelay') || this.autoOpenDelay.toString(),
     );
   }
 
