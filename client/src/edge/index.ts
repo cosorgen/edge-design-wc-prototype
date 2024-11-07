@@ -160,6 +160,12 @@ export class MicrosoftEdge extends FASTElement {
         this.updateCoordinates();
       });
     }
+
+    const resizeObserver = new ResizeObserver(() => {
+      this.updateCoordinates();
+    });
+  
+    resizeObserver.observe(this);
   }
 
   disconnectedCallback() {

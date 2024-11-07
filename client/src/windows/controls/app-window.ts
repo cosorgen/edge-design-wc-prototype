@@ -11,6 +11,7 @@ import {
   customElement,
   html,
   nullableNumberConverter,
+  observable,
 } from '@microsoft/fast-element';
 
 const template = html<AppWindow>` <div id="content">
@@ -83,8 +84,8 @@ const styles = css`
   :host([maximized]) {
     top: 0px;
     left: 0px;
-    width: ${() => window.innerWidth + 'px'};
-    height: ${() => window.innerHeight - 48 + 'px'};
+    width: ${(x) => x.screenWidth + 'px'};
+    height: ${(x) => x.screenHeight - 48 + 'px'};
   }
 
   #content {
@@ -191,11 +192,15 @@ export class AppWindow extends FASTElement {
   @attr({ converter: nullableNumberConverter }) xPos = 100;
   @attr({ converter: nullableNumberConverter }) yPos = 100;
   @attr({ converter: nullableNumberConverter }) zIndex = 0;
+  @attr({ mode: 'boolean' }) maximized = false;
+  @attr({ mode: 'boolean' }) minimized = false;
   @attr({ attribute: 'min-width', converter: nullableNumberConverter })
   minWidth = 400;
   @attr({ attribute: 'min-height', converter: nullableNumberConverter })
   minHeight = 400;
   @attr({ mode: 'boolean' }) dragging = false;
+  @observable screenWidth = window.innerWidth;
+  @observable screenHeight = window.innerHeight;
 
   connectedCallback() {
     super.connectedCallback();
@@ -208,6 +213,10 @@ export class AppWindow extends FASTElement {
     this.addEventListener('click', () => {
       this.$emit('activate');
     });
+
+    // Listen for window resize event
+    window.addEventListener('resize', this.handleWindowResize);
+    window.addEventListener('fullscreenchange', this.handleWindowResize);
 
     // Get slotted element and give it an id
     const slottedElement = this.shadowRoot
@@ -268,4 +277,21 @@ export class AppWindow extends FASTElement {
     this.xPos = newX;
     this.yPos = newY;
   }
+  
+  handleWindowResize = () => {
+    this.screenWidth = window.innerWidth;
+    this.screenHeight = window.innerHeight;
+    const width = Math.min(window.innerWidth - 48, 1920); // 48px for padding
+    let height = width * 0.75; // 4:3 aspect ratio
+    height = Math.min(height, window.innerHeight - 48 - 48); // 48px for taskbar
+    const xPos = (window.innerWidth - width) / 2;
+    const yPos = (window.innerHeight - 48 - height) / 2;
+    this.$emit('windowmove', {
+      id: this.id,
+      width,
+      height,
+      xPos,
+      yPos,
+    });
+  };
 }
