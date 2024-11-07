@@ -86,12 +86,14 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: var(--edge-frame-spacing);
+    height: 100%;
   }
 
   .column {
     display: flex;
     flex-direction: column;
     gap: var(--edge-frame-spacing);
+    width: 100%;
   }
 
   tool-bar {

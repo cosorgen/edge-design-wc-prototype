@@ -9,15 +9,18 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
+import {
+  borderRadiusLayerApp,
+  colorLayerBackgroundApp,
+  shadow2,
+  strokeWidthThin,
+} from '@phoenixui/themes';
 import './edge-newtab.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService, Tab } from '#servicestabService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
-  newtab: html<string>`<edge-newtab
-    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></edge-newtab>`,
+  newtab: html<Tab>`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
 };
 
 const template = html<WebContent>`
@@ -40,8 +43,9 @@ const styles = css`
     flex: 1;
     display: flex;
     border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
+    border-radius: ${borderRadiusLayerApp};
+    box-shadow: ${shadow2};
     overflow: hidden;
-    z-index: 0; /* ensure content is under omnibox */
 
     * {
       display: none;
