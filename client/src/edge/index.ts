@@ -6,7 +6,6 @@ import {
   when,
   observable,
   Observable,
-  Updates,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
@@ -32,14 +31,14 @@ import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
-import './views/copilot-entrypoint.js';
+import './views/copilot-entrypoint/index.js';
 import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
-  <div class="row" style="--spacingFrame: ${(x) => x.ss.frameSpacing}">
+  <div class="row">
     <caption-controls></caption-controls>
     <div class="column">
       <tab-bar></tab-bar>
@@ -56,7 +55,10 @@ const template = html<MicrosoftEdge>`
       ${when(
         (x) => !x.ss.showLegacyCopilot,
         html`<copilot-entrypoint
-          ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+          ?ntp="${(x) =>
+            x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
+          inline-position="center"
+          block-position="end"
         ></copilot-entrypoint>`,
       )}
     </div>
@@ -122,6 +124,11 @@ const styles = css`
     width: 100%;
     min-width: 0px;
   }
+
+  tool-bar,
+  copilot-entrypoint {
+    z-index: 1;
+  }
 `;
 
 @customElement({
@@ -155,17 +162,7 @@ export class MicrosoftEdge extends FASTElement {
     this.setElements();
     this.setEventListeners();
 
-    if (this.$fastController.isConnected) {
-      Updates.enqueue(() => {
-        this.updateCoordinates();
-      });
-    }
 
-    const resizeObserver = new ResizeObserver(() => {
-      this.updateCoordinates();
-    });
-  
-    resizeObserver.observe(this);
   }
 
   disconnectedCallback() {
@@ -237,27 +234,5 @@ export class MicrosoftEdge extends FASTElement {
       (this.ss.showFavoritesBar === 'newtab' &&
         activeTab.url === 'edge://newtab')
     );
-  }
-
-  updateCoordinates() {
-    const { width, height, left, top } = this.getBoundingClientRect();
-    this.style.setProperty('--window-width', `${width}px`);
-    this.style.setProperty('--window-height', `${height}px`);
-    this.style.setProperty('--window-x', `${left}px`);
-    this.style.setProperty('--window-y', `${top}px`);
-
-    const viewport = this.shadowRoot?.querySelector('web-content');
-    if (viewport) {
-      const {
-        width: viewportWidth,
-        height: viewportHeight,
-        left: viewportLeft,
-        top: viewportTop,
-      } = viewport.getBoundingClientRect();
-      this.style.setProperty('--viewport-width', `${viewportWidth}px`);
-      this.style.setProperty('--viewport-height', `${viewportHeight}px`);
-      this.style.setProperty('--viewport-x', `${viewportLeft}px`);
-      this.style.setProperty('--viewport-y', `${viewportTop}px`);
-    }
   }
 }

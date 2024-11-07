@@ -21,18 +21,20 @@ import '@phoenixui/web-components/button.js';
 import '../controls/copilot-chat-entry.js';
 import '../controls/copilot-design-provider.js';
 import '../controls/copilot-input.js';
-import './copilot-inline-chat.js';
+import './copilot-chat.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 import { TabService } from '#servicestabService.js';
-import { CopilotInlineChat } from './copilot-inline-chat.js';
+import { CopilotChat } from './copilot-chat.js';
 import { CopilotInput } from '../controls/copilot-input.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const template = html<CopilotComposer>`
-  <copilot-design-provider
-    @mousedown="${(x, c) => x.handleComposerMouseDown(c.event)}"
-  >
-    <copilot-inline-chat></copilot-inline-chat>
+  <copilot-design-provider>
+    <copilot-chat
+      inline
+      ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+    ></copilot-chat>
     <div id="input-row">
       <div id="start">
         <phx-button appearance="subtle" size="large" icon-only>
@@ -62,6 +64,8 @@ const template = html<CopilotComposer>`
           icon-only
           slot="end"
           @click="${(x) => x.handleClose(true)}"
+          class="${(x) =>
+            x.ews.activeSidepaneAppId === 'Copilot' ? 'hidden' : 'show'}"
         >
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
@@ -74,6 +78,7 @@ const template = html<CopilotComposer>`
 
 const styles = css`
   copilot-design-provider {
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     display: flex;
@@ -94,6 +99,10 @@ const styles = css`
     line-height: ${typographyStyles.body2.lineHeight};
   }
 
+  copilot-chat[hidden] {
+    display: none;
+  }
+
   #input-row {
     display: flex;
     flex-direction: row;
@@ -107,6 +116,10 @@ const styles = css`
     display: flex;
     flex-direction: row;
     padding-block: ${spacingVerticalXS};
+
+    .hidden {
+      display: none;
+    }
   }
 `;
 
@@ -118,8 +131,9 @@ const styles = css`
 export class CopilotComposer extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(TabService) ts!: TabService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
   _inputElement?: CopilotInput;
-  _chatElement?: CopilotInlineChat;
+  _chatElement?: CopilotChat;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -139,7 +153,7 @@ export class CopilotComposer extends FASTElement {
     ) as CopilotInput;
     this._chatElement = this.shadowRoot?.querySelector(
       'copilot-inline-chat',
-    ) as CopilotInlineChat;
+    ) as CopilotChat;
   }
 
   unsestElements() {
@@ -185,17 +199,12 @@ export class CopilotComposer extends FASTElement {
   }
 
   updateContext() {
-    if (this.ts.activeTabId) {
+    if (this.ts.activeTabId && this.cs.activeThreadId) {
       this.cs.browserContextChanged(this.ts.tabsById[this.ts.activeTabId]);
     }
   }
 
   focus() {
     this._inputElement?.focus();
-  }
-
-  handleComposerMouseDown(e: Event) {
-    if (e.composedPath()[0] !== this.shadowRoot?.querySelector('#input-row'))
-      e.stopPropagation();
   }
 }

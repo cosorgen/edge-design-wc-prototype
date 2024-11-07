@@ -4,26 +4,34 @@ import {
   FASTElement,
   customElement,
   Observable,
+  Updates,
+  attr,
 } from '@microsoft/fast-element';
 import {
   colorScrollbarForeground,
   curveEasyEaseMax,
   durationUltraSlow,
+  spacingVerticalXL,
   spacingVerticalXXL,
 } from '@phoenixui/themes';
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
+import { spacingFrame } from '../designSystem.js';
 
-const template = html<CopilotInlineChat>`<div id="chat"></div>`;
+const template = html<CopilotChat>`<div id="chat"></div>`;
 
 const styles = css`
   :host {
     display: block;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  :host([inline]) {
     height: fit-content;
     max-height: 100%;
-    overflow: hidden;
   }
 
   #chat {
@@ -32,8 +40,8 @@ const styles = css`
   }
 
   #chat:not(:empty) {
-    padding: ${spacingVerticalXXL};
-    padding-block-end: 0;
+    padding: ${spacingVerticalXL};
+    padding-block-end: calc(68px + ${spacingFrame});
     height: fit-content;
     max-height: calc(100% - ${spacingVerticalXXL});
     display: flex;
@@ -42,15 +50,21 @@ const styles = css`
     scrollbar-color: ${colorScrollbarForeground} transparent;
     scrollbar-width: thin;
   }
+
+  :host([inline]) #chat:not(:empty) {
+    padding: ${spacingVerticalXXL};
+    padding-block-end: 0;
+  }
 `;
 
 @customElement({
-  name: 'copilot-inline-chat',
+  name: 'copilot-chat',
   template,
   styles,
 })
-export class CopilotInlineChat extends FASTElement {
+export class CopilotChat extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
+  @attr({ mode: 'boolean' }) inline = false;
   _updateInterval?: NodeJS.Timeout;
   _chatElement?: HTMLElement;
   _lockChatScroll = true;
@@ -102,10 +116,15 @@ export class CopilotInlineChat extends FASTElement {
       const messageIds = Object.keys(messages);
 
       // Skip the first two messages since it's the user input and system prompt
+      let foundFirstUserMessage = false;
       for (let x = 0; x < messageIds.length; x++) {
         const message = messages[messageIds[x]];
         if (message.id === 'system-prompt') continue; // skip system prompt
         if (message.role === 'context') continue; // skip context messages
+        if (!foundFirstUserMessage && message.role === 'user' && this.inline) {
+          foundFirstUserMessage = true;
+          continue;
+        }
 
         let entry = this._chatElement.querySelector(
           `#${message.id}`,
@@ -134,8 +153,17 @@ export class CopilotInlineChat extends FASTElement {
         // Update time regardless of message change
         entry.timestamp = message.timestamp;
 
-        if (this._lockChatScroll)
-          this._chatElement.scrollTop = this._chatElement.scrollHeight;
+        Updates.enqueue(() => {
+          if (this._lockChatScroll && this._chatElement) {
+            const lastMessage = this._chatElement?.lastElementChild;
+            if (lastMessage) {
+              lastMessage.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+              });
+            }
+          }
+        });
       }
     }
   }

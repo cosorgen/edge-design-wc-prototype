@@ -1,45 +1,26 @@
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import { inject } from '@microsoft/fast-element/di.js';
 import {
-  colorNeutralCardBackground,
+  html,
+  css,
+  FASTElement,
+  customElement,
+  Observable,
+  attr,
+} from '@microsoft/fast-element';
+import {
+  acrylicBackgroundBlur,
+  acrylicBackgroundLuminosity,
   colorNeutralForeground1,
-  spacingHorizontalXXL,
-  spacingVerticalXXL,
+  shadow2,
 } from '@phoenixui/themes';
-import '../controls/sidepane-header.js';
 import '../controls/copilot-design-provider.js';
-import './copilot-composer.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import WindowsService from '#serviceswindowsService.js';
-import { backgroundGradient } from '../copilotDesignSystem.js';
+import './copilot-chat.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html`
   <sidepane-header>Copilot</sidepane-header>
   <copilot-design-provider>
-    <div id="content">
-      <div class="user message">Create a summary for this page</div>
-      <div class="bot message">
-        Here are the key points about the Boox Palma from the article:<br /><br />
-
-        <b>Smartphone-Sized E-Reader:</b> The Boox Palma is a compact e-reader
-        with a 6.1-inch E Ink screen, running Android, and capable of
-        downloading apps from the Play Store.<br /><br />
-
-        <b>Battery Life and Usability:</b> Its E Ink screen ensures a battery
-        life of 4-7 days and makes it ideal for reading, though it’s not great
-        for video or high-refresh activities.<br /><br />
-
-        <b>Enhanced Reading Experience:</b> Users appreciate its ability to
-        reduce distractions, making it easier to focus on reading and listening
-        to music or podcasts. <br /><br />
-
-        <b>Limitations:</b> The device has some hardware and software
-        limitations, including a plastic body, outdated Android version, and
-        occasional screen responsiveness issues.
-      </div>
-    </div>
-    <copilot-composer></copilot-composer>
+    <copilot-chat></copilot-chat>
   </copilot-design-provider>
 `;
 
@@ -52,43 +33,21 @@ const styles = css`
     color: ${colorNeutralForeground1};
   }
 
-  copilot-design-system {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(${backgroundGradient});
-    padding-block-start: 50px; /* Account for the sidepane header */
-    padding-block-end: 120px; /* Account for the composer */
+  :host([background]) {
+    background: ${acrylicBackgroundLuminosity};
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(${acrylicBackgroundBlur});
+    box-shadow: ${shadow2};
   }
 
-  #content {
-    box-sizing: border-box;
+  copilot-design-provider {
+    flex: 1;
+    overflow: hidden;
+  }
+
+  copilot-inline-chat {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    padding: ${spacingVerticalXXL};
-    min-height: 0px;
-    gap: ${spacingVerticalXXL};
-    overflow-y: auto;
-  }
-
-  img {
-    width: 100%;
-    object-fit: cover;
-  }
-
-  copilot-composer {
-    position: absolute;
-    bottom: ${spacingVerticalXXL};
-    inset-inline: ${spacingHorizontalXXL};
-  }
-
-  .user {
-    background-color: ${colorNeutralCardBackground};
-    padding: 14px 20px;
-    width: fit-content;
-    border-radius: 12px;
-    align-self: flex-end;
   }
 `;
 
@@ -98,13 +57,13 @@ const styles = css`
   styles,
 })
 export class CopilotSidepane extends FASTElement {
-  @inject(EdgeWindowService) ews!: EdgeWindowService;
-  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
-  @inject(WindowsService) ws!: WindowsService;
+  @inject(CopilotService) cs!: CopilotService;
+  @attr({ mode: 'boolean' }) background = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.addEventListeners();
+    this.reflectAttributes();
   }
 
   disconnectedCallback() {
@@ -113,14 +72,20 @@ export class CopilotSidepane extends FASTElement {
   }
 
   addEventListeners() {
-    this.addEventListener('close', this.handleClose);
+    Observable.getNotifier(this.cs).subscribe(this, 'sidepaneBackground');
   }
 
   removeEventListeners() {
-    this.removeEventListener('close', this.handleClose);
+    Observable.getNotifier(this.cs).unsubscribe(this, 'sidepaneBackground');
   }
 
-  handleClose = () => {
-    this.ews.closeSidepaneApp();
-  };
+  handleChange(obj: unknown, key: string) {
+    if (key === 'sidepaneBackground') {
+      this.reflectAttributes();
+    }
+  }
+
+  reflectAttributes() {
+    this.background = this.cs.sidepaneBackground;
+  }
 }

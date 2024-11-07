@@ -23,13 +23,16 @@ import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { CopilotService } from '#servicescopilotService.js';
+import WindowsService from '#serviceswindowsService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<CopilotNewtab>`<img
     id="bg"
-    src="img/edge/newtab/copilot-bg.png"
+    src="img/edge/newtab/copilot-bg-${(x) =>
+      x.ess.theme === 'system' ? x.ws.theme : x.ess.theme}.avif"
     alt="Background image"
   />
-  <div id="content" ?hidden="${(x) => x.cs.composerActive}">
+  <div id="content" ?hidden="${(x) => x.cs.composerOverPage}">
     <div id="main" style="--index: 1;">
       <div id="searchbox">
         <div id="start">
@@ -257,6 +260,8 @@ export class CopilotNewtab extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(WindowsService) ws!: WindowsService;
+  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
 
   handleKeyUp(event: Event): void {
     if (!(event instanceof KeyboardEvent)) return;

@@ -33,6 +33,7 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { Checkbox } from '@phoenixui/web-components';
 import { TabService } from '#servicestabService.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html<WindowsSettings>`
   <mica-material
@@ -152,7 +153,6 @@ const template = html<WindowsSettings>`
       <div class="entry">
         <label for="truncate-url">Truncate URL</label>
         <phx-switch
-          slot="input"
           id="truncate-url"
           ?checked="${(x) => x.ss.truncateURL}"
           @change="${(x) => x.toggleTruncateUrl()}"
@@ -161,7 +161,6 @@ const template = html<WindowsSettings>`
       <div class="entry">
         <label for="legacy-copilot"> Show legacy copilot </label>
         <phx-switch
-          slot="input"
           id="legacy-copilot"
           ?checked=${(x) => x.ss.showLegacyCopilot}
           @change="${(x) => x.toggleShowLegacyCopilot()}"
@@ -170,7 +169,6 @@ const template = html<WindowsSettings>`
       <div class="entry">
         <label for="legacy-newtab"> Show legacy new tab page </label>
         <phx-switch
-          slot="input"
           id="legacy-newtab"
           ?checked=${(x) => x.ss.showLegacyNewTab}
           @change="${(x) => x.toggleShowLegacyNewTab()}"
@@ -204,12 +202,50 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
+        <label for="composer-hint"> Show composer hint </label>
+        <phx-switch
+          id="composer-hint"
+          ?checked=${(x) => x.cs.showHint}
+          @change="${(x) => x.toggleShowComposerHint()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
+        <label for="legacy-newtab"> Auto open composer on hover </label>
+        <phx-switch
+          id="composer-auto-open"
+          ?checked=${(x) => x.cs.autoOpen}
+          @change="${(x) => x.toggleAutoOpenComposer()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
+        <label for="composer-auto-open-delay"
+          >Composer auto open delay (ms)</label
+        >
+        <phx-text-input
+          id="composer-auto-open-delay"
+          type="number"
+          value="${(x) => x.cs.autoOpenDelay}"
+          @change="${(x) => x.updateComposerAutoOpenDelay()}"
+          ?disabled="${(x) => !x.cs.autoOpen}"
+        >
+        </phx-text-input>
+      </div>
+      <div class="entry">
+        <label for="copilot-sidepane-background">
+          Copilot sidepane background
+        </label>
+        <phx-switch
+          id="copilot-sidepane-background"
+          ?checked=${(x) => x.cs.sidepaneBackground}
+          @change="${(x) => x.toggleShowSidepaneBackground()}"
+        ></phx-switch>
+      </div>
+      <div class="entry">
         <label for="frame-spacing">Frame spacing</label>
         <phx-text-input
           id="frame-spacing"
           type="number"
           value="${(x) => parseInt(x.ss.frameSpacing)}"
-          slot="input"
           @change="${(x) => x.updateFrameSpacing()}"
         >
         </phx-text-input>
@@ -220,7 +256,6 @@ const template = html<WindowsSettings>`
           id="shopping-trigger"
           type="text"
           value="${(x) => x.ts.shoppingTriggerURL}"
-          slot="input"
           @blur="${(x) => x.updateShoppingTrigger()}"
         >
         </phx-text-input>
@@ -315,6 +350,7 @@ export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
+  @inject(CopilotService) cs!: CopilotService;
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
@@ -413,5 +449,42 @@ export class WindowsSettings extends FASTElement {
     if (newTrigger && newTrigger !== '') {
       this.ts.updateShoppingTriggerURL(newTrigger);
     }
+  }
+
+  toggleShowComposerHint() {
+    this.cs.setShowHint(
+      (this.shadowRoot?.querySelector('#composer-hint') as Checkbox)?.checked ||
+        false,
+    );
+  }
+
+  toggleAutoOpenComposer() {
+    this.cs.setAutoOpen(
+      (this.shadowRoot?.querySelector('#composer-auto-open') as Checkbox)
+        ?.checked || false,
+    );
+  }
+
+  updateComposerAutoOpenDelay() {
+    const newDelay = parseInt(
+      (
+        this.shadowRoot?.querySelector(
+          '#composer-auto-open-delay',
+        ) as HTMLInputElement
+      ).value,
+    );
+    if (newDelay && newDelay !== 0) {
+      this.cs.setAutoOpenDelay(newDelay);
+    }
+  }
+
+  toggleShowSidepaneBackground() {
+    this.cs.setShowSidepaneBackground(
+      (
+        this.shadowRoot?.querySelector(
+          '#copilot-sidepane-background',
+        ) as Checkbox
+      )?.checked || false,
+    );
   }
 }
