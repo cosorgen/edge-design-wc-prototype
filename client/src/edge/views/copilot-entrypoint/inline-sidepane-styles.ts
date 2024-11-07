@@ -1,15 +1,23 @@
 import { css } from '@microsoft/fast-element';
 import { spacingFrame } from '../../designSystem.js';
+import { spacingHorizontalM } from '@phoenixui/themes';
 
 export default css`
   /* Composer */
 
   :host([inline-position='sidepane']) #composer {
     /* Start halfway in margin */
-    inset-inline-start: calc(100% - var(--sidepane-width) - ${spacingFrame});
+    inset-inline-start: calc(
+      100% - var(--sidepane-width) - ${spacingFrame} + ${spacingHorizontalM}
+    );
   }
 
   /* Hint target */
+
+  :host([inline-position='sidepane']) #hint-target {
+    /* Align to end */
+    inset-inline-start: calc(100% - var(--hint-target-height));
+  }
 
   /* Grabber */
 
@@ -22,4 +30,9 @@ export default css`
   }
 
   /* Hint composer */
+
+  :host([inline-position='sidepane']) #hint-composer {
+    /* Peek 25% of composer size */
+    inset-inline-start: calc(100% - var(--composer-retracted-width) * 0.25);
+  }
 `;

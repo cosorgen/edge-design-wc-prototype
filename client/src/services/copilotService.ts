@@ -27,12 +27,13 @@ export type OpenAIResponse = {
 };
 
 export class CopilotService {
-  @observable composerActive = true;
+  @observable composerOverPage = true;
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
   @observable showHint = false;
   @observable autoOpen = true;
   @observable autoOpenDelay = 500;
+  @observable sidepaneBackground = false;
 
   constructor() {
     this.getSettingsFromURL();
@@ -50,6 +51,10 @@ export class CopilotService {
     this.autoOpenDelay = parseInt(
       url.searchParams.get('autoOpenDelay') || this.autoOpenDelay.toString(),
     );
+
+    this.sidepaneBackground =
+      url.searchParams.get('showSidepaneBackground') === 'true' ||
+      this.sidepaneBackground;
   }
 
   setSettingsInURL() {
@@ -57,6 +62,10 @@ export class CopilotService {
     url.searchParams.set('showComposerHint', this.showHint.toString());
     url.searchParams.set('autoOpenComposer', this.autoOpen.toString());
     url.searchParams.set('autoOpenDelay', this.autoOpenDelay.toString());
+    url.searchParams.set(
+      'showSidepaneBackground',
+      this.sidepaneBackground.toString(),
+    );
 
     window.history.pushState({}, '', url.toString());
   }
@@ -206,6 +215,11 @@ export class CopilotService {
 
   setAutoOpenDelay(delay: number) {
     this.autoOpenDelay = delay;
+    this.setSettingsInURL();
+  }
+
+  setShowSidepaneBackground(show: boolean) {
+    this.sidepaneBackground = show;
     this.setSettingsInURL();
   }
 }

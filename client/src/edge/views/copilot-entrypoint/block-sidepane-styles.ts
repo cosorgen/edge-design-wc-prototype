@@ -1,5 +1,6 @@
 import { css } from '@microsoft/fast-element';
 import { spacingFrame } from '../../designSystem.js';
+import { spacingVerticalM } from '@phoenixui/themes';
 
 export default css`
   /* Composer */
@@ -7,11 +8,20 @@ export default css`
   :host([block-position='sidepane']) #composer {
     /* Align to bottom - 1/2 margin */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) - ${spacingFrame}
+      100% - var(--composer-retracted-height) - ${spacingFrame} -
+        ${spacingVerticalM}
     );
   }
 
   /* Hint target */
+
+  :host([block-position='sidepane']) #hint-target {
+    /* Centered vertically */
+    inset-block-start: calc(
+      var(--viewport-top) + (var(--viewport-height) / 2) -
+        (var(--hint-target-width) / 2)
+    );
+  }
 
   /* Grabber */
 
@@ -25,4 +35,12 @@ export default css`
   }
 
   /* Hint composer */
+
+  :host([block-position='sidepane']) #hint-composer {
+    /* Centered vertically */
+    inset-block-start: calc(
+      var(--viewport-top) + (var(--viewport-height) / 2) -
+        (var(--composer-retracted-height) / 2)
+    );
+  }
 `;

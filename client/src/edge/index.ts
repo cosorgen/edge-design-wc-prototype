@@ -57,8 +57,8 @@ const template = html<MicrosoftEdge>`
         html`<copilot-entrypoint
           ?ntp="${(x) =>
             x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
-          inline-position="sidepane"
-          block-position="sidepane"
+          inline-position="center"
+          block-position="end"
           active
         ></copilot-entrypoint>`,
       )}

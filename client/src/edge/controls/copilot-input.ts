@@ -78,6 +78,9 @@ const styles = css`
     padding-inline-start: ${spacingHorizontalXL};
     padding-inline-end: 64px;
     box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
+    height: 50px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
     font-size: 18px;
     line-height: 26px;
@@ -91,6 +94,10 @@ const styles = css`
       text-overflow: ellipsis;
       overflow: hidden;
     }
+  }
+
+  [contenteditable]:empty {
+    padding-inline-end: ${spacingHorizontalXL};
   }
 
   [contenteditable]:focus {

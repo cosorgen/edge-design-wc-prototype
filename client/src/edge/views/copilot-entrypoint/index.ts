@@ -20,6 +20,7 @@ import {
   colorLayerBackgroundDialog,
   shadow28,
   borderRadiusLarge,
+  spacingHorizontalM,
 } from '@phoenixui/themes';
 import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -255,8 +256,9 @@ const styles = css`
     height: var(--composer-retracted-height);
   }
 
-  :host([block-position='sidepane'][inline-position='sidepane']) #composer {
-    width: var(--sidepane-width);
+  :host([block-position='sidepane'][inline-position='sidepane']:not([dragging]))
+    #composer {
+    width: calc(var(--sidepane-width) - ${spacingHorizontalM} * 2);
     height: var(--composer-retracted-height);
   }
 
@@ -306,7 +308,7 @@ const styles = css`
   #sidepane-hint {
     position: absolute;
     width: var(--sidepane-width);
-    inset-inline-end: calc(0% - var(--sidepane-width));
+    inset-inline-end: calc(0% - var(--sidepane-width) - 28px);
     inset-block-start: calc(${spacingFrame} * 2 + 32px + var(--ntp-inset));
     inset-block-end: calc(${spacingFrame} + var(--ntp-inset));
     background: ${acrylicBackgroundLuminosity};
@@ -462,18 +464,18 @@ export class CopilotEntrypoint extends FASTElement {
       this.inlinePosition === 'sidepane'
     ) {
       this.ews.activeSidepaneAppId = 'Copilot';
-      this.cs.composerActive = false;
+      this.cs.composerOverPage = false;
     } else {
       if (this.ews.activeSidepaneAppId === 'Copilot') {
         this.ews.activeSidepaneAppId = '';
-        this.cs.composerActive = true;
+        this.cs.composerOverPage = true;
       }
     }
   };
 
   toggleActive(): void {
     this.active = !this.active;
-    this.cs.composerActive = this.active;
+    this.cs.composerOverPage = this.active;
   }
 
   handleResizeMouseDown(e: Event) {

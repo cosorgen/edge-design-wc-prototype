@@ -1,11 +1,21 @@
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import { inject } from '@microsoft/fast-element/di.js';
-import { colorNeutralForeground1 } from '@phoenixui/themes';
+import {
+  html,
+  css,
+  FASTElement,
+  customElement,
+  Observable,
+  attr,
+} from '@microsoft/fast-element';
+import {
+  acrylicBackgroundBlur,
+  acrylicBackgroundLuminosity,
+  colorNeutralForeground1,
+  shadow2,
+} from '@phoenixui/themes';
 import '../controls/copilot-design-provider.js';
 import './copilot-chat.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import WindowsService from '#serviceswindowsService.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import { CopilotService } from '#servicescopilotService.js';
 
 const template = html`
   <copilot-design-provider>
@@ -20,6 +30,13 @@ const styles = css`
     height: 100%;
     width: 100%;
     color: ${colorNeutralForeground1};
+  }
+
+  :host([background]) {
+    background: ${acrylicBackgroundLuminosity};
+    background-blend-mode: luminosity;
+    backdrop-filter: blur(${acrylicBackgroundBlur});
+    box-shadow: ${shadow2};
   }
 
   copilot-design-provider {
@@ -39,13 +56,13 @@ const styles = css`
   styles,
 })
 export class CopilotSidepane extends FASTElement {
-  @inject(EdgeWindowService) ews!: EdgeWindowService;
-  @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
-  @inject(WindowsService) ws!: WindowsService;
+  @inject(CopilotService) cs!: CopilotService;
+  @attr({ mode: 'boolean' }) background = false;
 
   connectedCallback() {
     super.connectedCallback();
     this.addEventListeners();
+    this.reflectAttributes();
   }
 
   disconnectedCallback() {
@@ -54,14 +71,20 @@ export class CopilotSidepane extends FASTElement {
   }
 
   addEventListeners() {
-    this.addEventListener('close', this.handleClose);
+    Observable.getNotifier(this.cs).subscribe(this, 'sidepaneBackground');
   }
 
   removeEventListeners() {
-    this.removeEventListener('close', this.handleClose);
+    Observable.getNotifier(this.cs).unsubscribe(this, 'sidepaneBackground');
   }
 
-  handleClose = () => {
-    this.ews.closeSidepaneApp();
-  };
+  handleChange(obj: unknown, key: string) {
+    if (key === 'sidepaneBackground') {
+      this.reflectAttributes();
+    }
+  }
+
+  reflectAttributes() {
+    this.background = this.cs.sidepaneBackground;
+  }
 }

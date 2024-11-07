@@ -175,7 +175,7 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
-        <label for="legacy-newtab"> Show composer hint </label>
+        <label for="composer-hint"> Show composer hint </label>
         <phx-switch
           id="composer-hint"
           ?checked=${(x) => x.cs.showHint}
@@ -191,7 +191,9 @@ const template = html<WindowsSettings>`
         ></phx-switch>
       </div>
       <div class="entry">
-        <label for="frame-spacing">Composer auto open delay (ms)</label>
+        <label for="composer-auto-open-delay"
+          >Composer auto open delay (ms)</label
+        >
         <phx-text-input
           id="composer-auto-open-delay"
           type="number"
@@ -200,6 +202,16 @@ const template = html<WindowsSettings>`
           ?disabled="${(x) => !x.cs.autoOpen}"
         >
         </phx-text-input>
+      </div>
+      <div class="entry">
+        <label for="copilot-sidepane-background">
+          Copilot sidepane background
+        </label>
+        <phx-switch
+          id="copilot-sidepane-background"
+          ?checked=${(x) => x.cs.sidepaneBackground}
+          @change="${(x) => x.toggleShowSidepaneBackground()}"
+        ></phx-switch>
       </div>
       <div class="entry">
         <label for="frame-spacing">Frame spacing</label>
@@ -418,5 +430,15 @@ export class WindowsSettings extends FASTElement {
     if (newDelay && newDelay !== 0) {
       this.cs.setAutoOpenDelay(newDelay);
     }
+  }
+
+  toggleShowSidepaneBackground() {
+    this.cs.setShowSidepaneBackground(
+      (
+        this.shadowRoot?.querySelector(
+          '#copilot-sidepane-background',
+        ) as Checkbox
+      )?.checked || false,
+    );
   }
 }
