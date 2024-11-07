@@ -18,8 +18,8 @@ import '../controls/toolbar-sidepane-item.js';
 import '../controls/omnibox-action-flyout.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import '../controls/identity-control.js'
-import '../controls/identity-flyout.js'
+import '../controls/identity-control.js';
+import '../controls/identity-flyout.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -124,7 +124,10 @@ const template = html<Toolbar>`
       (x) => x.ess.showMenusInL1,
       html`
         <flyout-menu>
-          <identity-control appearance="signedIn" slot="trigger"></identity-control>
+          <identity-control
+            appearance="signedIn"
+            slot="trigger"
+          ></identity-control>
           <identity-flyout></identity-flyout>
         </flyout-menu>
         <flyout-menu>
@@ -140,24 +143,25 @@ const template = html<Toolbar>`
           </phx-toggle-button>
           <more-menu
             managed
-            @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
+            @moreaction="${(x, c) =>
+              x.handleMoreAction(c.event as CustomEvent)}"
           ></more-menu>
         </flyout-menu>
-      ${when(
-        (x) => x.ess.showLegacyCopilot,
-        html`
-          <phx-toggle-button
-            appearance="subtle"
-            icon-only
-            slot="trigger"
-            @click="${(x) => x.toggleSidepane('Copilot')}"
-            ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
-          >
-            <img width="20px" src="./img/edge/copilotAppLight.png" />
-          </phx-toggle-button>
-        `
-      )}
-      `
+        ${when(
+          (x) => x.ess.showLegacyCopilot,
+          html`
+            <phx-toggle-button
+              appearance="subtle"
+              icon-only
+              slot="trigger"
+              @click="${(x) => x.toggleSidepane('Copilot')}"
+              ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+            >
+              <img width="20px" src="./img/edge/copilotAppLight.png" />
+            </phx-toggle-button>
+          `,
+        )}
+      `,
     )}
   </div>
 `;
@@ -277,9 +281,9 @@ export class Toolbar extends FASTElement {
     const isActive = this.ews.activeSidepaneAppId === id;
     this.$emit('togglesidepane', !isActive);
     if (isActive) {
-        this.ews.closeSidepaneApp();
+      this.ews.closeSidepaneApp();
     } else {
-        this.ews.openSidepaneApp(id);
+      this.ews.openSidepaneApp(id);
     }
   }
 
@@ -336,7 +340,7 @@ export class Toolbar extends FASTElement {
     }
     return false;
   }
-  
+
   handleContextMenu = (e: Event) => {
     e.preventDefault();
     return false;

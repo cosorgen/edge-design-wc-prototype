@@ -18,7 +18,6 @@ import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 
 const template = html`
-  <sidepane-header>Copilot</sidepane-header>
   <copilot-design-provider>
     <copilot-chat></copilot-chat>
   </copilot-design-provider>

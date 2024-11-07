@@ -29,7 +29,7 @@ const edgePages: Record<string, ViewTemplate> = {
   newtabLegacy: html<string>`<edge-newtab-legacy
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab-legacy>`,
-  settings: html`<settings-page 
+  settings: html`<settings-page
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></settings-page>`,
 };
@@ -98,7 +98,7 @@ export class WebContent extends FASTElement {
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
-  
+
     if (urlObj.hostname === 'newtab') {
       if (this.ess.showCopilotNTP) {
         return 'newtab';
@@ -115,7 +115,6 @@ export class WebContent extends FASTElement {
 
     return urlObj.hostname;
   }
-  
 
   handleTabLoad(id: string): void {
     this.ts.tabDidLoad(id);

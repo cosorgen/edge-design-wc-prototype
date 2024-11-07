@@ -5,7 +5,7 @@ export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
   @observable showLegacyCopilot = false;
-  @observable showCopilotNTP = false
+  @observable showCopilotNTP = false;
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
   @observable frameSpacing = '4px';
@@ -33,14 +33,14 @@ export default class EdgeSettingsSerivce {
       url.searchParams.get('showLegacyNewTab') === 'true' ||
       this.showLegacyNewTab;
     this.showCopilotNTP =
-      url.searchParams.get('showCopilotNTP') === 'true' || 
-      this.showCopilotNTP;
+      url.searchParams.get('showCopilotNTP') === 'true' || this.showCopilotNTP;
     this.showLegacyCopilot && this.pinToolbarItem('Copilot');
 
     this.truncateURL =
       url.searchParams.get('truncateURL') === 'true' || this.truncateURL;
 
-    this.frameSpacing = url.searchParams.get('frameSpacing') || this.frameSpacing;
+    this.frameSpacing =
+      url.searchParams.get('frameSpacing') || this.frameSpacing;
     this.showMenusInL1 = url.searchParams.get('showMenusInL1') === 'true';
     this.fullWidthOmnibox = url.searchParams.get('fullWidthOmnibox') === 'true';
   }

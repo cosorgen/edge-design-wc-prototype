@@ -83,9 +83,9 @@ export class FavoritesBar extends FASTElement {
     if (item.type === 'site' && item.url) {
       const activeTabId = this.ts.activeTabId;
       const activeTab = activeTabId ? this.ts.tabsById[activeTabId] : null;
-      
+
       if (!activeTab) return;
-      
+
       if (activeTab.url === 'edge://newtab') {
         this.ts.navigateTab(activeTab.id, item.url);
       } else {

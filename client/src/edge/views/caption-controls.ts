@@ -31,31 +31,38 @@ const template = html` <div
     @mousedown="${(x) => x.handleTitleBarMouseDown()}"
     @contextmenu="${(x, c) => x.handleContextMenu(c.event)}"
   ></div>
-  ${x => !x.ss.showMenusInL1 ? html`
-    <div class="group" id="pill-menu">
-      <flyout-menu>
-        <phx-toggle-button
-          size="small"
-          appearance="subtle"
-          shape="circular"
-          icon-only
-          slot="trigger"
-        >
-          <svg>
-            <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-          </svg>
-        </phx-toggle-button>
-        <more-menu
-          managed
-          @moreaction="${(x, c) => x.handleMoreAction(c.event as CustomEvent)}"
-        ></more-menu>
-      </flyout-menu>
-      <flyout-menu>
-        <identity-control appearance="signedIn" slot="trigger"></identity-control>
-        <identity-flyout></identity-flyout>
-      </flyout-menu>
-    </div>
-  ` : ''}
+  ${(x) =>
+    !x.ss.showMenusInL1
+      ? html`
+          <div class="group" id="pill-menu">
+            <flyout-menu>
+              <phx-toggle-button
+                size="small"
+                appearance="subtle"
+                shape="circular"
+                icon-only
+                slot="trigger"
+              >
+                <svg>
+                  <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+                </svg>
+              </phx-toggle-button>
+              <more-menu
+                managed
+                @moreaction="${(x, c) =>
+                  x.handleMoreAction(c.event as CustomEvent)}"
+              ></more-menu>
+            </flyout-menu>
+            <flyout-menu>
+              <identity-control
+                appearance="signedIn"
+                slot="trigger"
+              ></identity-control>
+              <identity-flyout></identity-flyout>
+            </flyout-menu>
+          </div>
+        `
+      : ''}
   <phx-button
     size="large"
     appearance="subtle"
@@ -189,7 +196,7 @@ export class CaptionControls extends FASTElement {
       case 'Print':
         window.print(); // maybe see if we can print the current tab iframe?
         break;
-      case 'Settings':
+      case 'Settings': {
         const settingsTabId = this.ts.addTab({
           id: `tab-${window.crypto.randomUUID()}`,
           title: 'Settings',
@@ -198,6 +205,7 @@ export class CaptionControls extends FASTElement {
         });
         this.ts.activateTab(settingsTabId);
         break;
+      }
       case 'Find on page':
       case 'Screenshot':
       case 'New InPrivate window':
@@ -210,7 +218,7 @@ export class CaptionControls extends FASTElement {
         break;
     }
   }
-  
+
   handleContextMenu = (e: Event) => {
     e.preventDefault();
     return false;

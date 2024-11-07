@@ -8,6 +8,7 @@ import {
   colorNeutralStroke2,
   colorNeutralStrokeAccessible,
   spacingHorizontalL,
+  spacingHorizontalXL,
   spacingHorizontalS,
   spacingVerticalXS,
   strokeWidthThick,
@@ -95,170 +96,182 @@ const template = html<WindowsSettings>`
       </div>
     </div>
     <div id="main">
-      <div class="entry">
-        <label for="theme">Theme</label>
-        <select id="theme" @change="${(x) => x.updateTheme()}">
-          <option value="light" ?selected="${(x) => x.ws.theme === 'light'}">
-            Light
-          </option>
-          <option value="dark" ?selected="${(x) => x.ws.theme === 'dark'}">
-            Dark
-          </option>
-        </select>
-      </div>
-      <div class="entry">
-        <label for="transparency">Transparency</label>
-        <select id="transparency" @change="${(x) => x.updateTransparency()}">
-          <option
-            value="normal"
-            ?selected="${(x) => x.ws.transparency === 'normal'}"
+      <div>
+        <h2>Overall appearance</h2>
+        <div class="entry">
+          <label for="theme">Theme</label>
+          <select id="theme" @change="${(x) => x.updateTheme()}">
+            <option value="light" ?selected="${(x) => x.ws.theme === 'light'}">
+              Light
+            </option>
+            <option value="dark" ?selected="${(x) => x.ws.theme === 'dark'}">
+              Dark
+            </option>
+          </select>
+        </div>
+        <div class="entry">
+          <label for="transparency">Transparency</label>
+          <select id="transparency" @change="${(x) => x.updateTransparency()}">
+            <option
+              value="normal"
+              ?selected="${(x) => x.ws.transparency === 'normal'}"
+            >
+              Normal
+            </option>
+            <option
+              value="reduced"
+              ?selected="${(x) => x.ws.transparency === 'reduced'}"
+            >
+              Reduced
+            </option>
+          </select>
+        </div>
+        <div class="entry">
+          <label for="frame-spacing">Frame spacing</label>
+          <phx-text-input
+            id="frame-spacing"
+            type="number"
+            value="${(x) => parseInt(x.ss.frameSpacing)}"
+            @change="${(x) => x.updateFrameSpacing()}"
           >
-            Normal
-          </option>
-          <option
-            value="reduced"
-            ?selected="${(x) => x.ws.transparency === 'reduced'}"
+          </phx-text-input>
+        </div>
+      </div>
+      <div>
+        <h2>Browser</h2>
+        <div class="entry">
+          <label for="show-menus-l0">Show menus in L1</label>
+          <phx-switch
+            slot="input"
+            id="show-menus-l0"
+            ?checked="${(x) => x.ss.showMenusInL1}"
+            @change="${(x) => x.toggleshowMenusInL1()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="favorites-bar">Show favorites bar</label>
+          <select
+            id="favorites-bar"
+            @change="${(x) => x.updateShowFavoritesBar()}"
+            value="${(x) => x.ss.showFavoritesBar}"
           >
-            Reduced
-          </option>
-        </select>
-      </div>
-      <div class="entry">
-        <label for="favorites-bar">Show favorites bar</label>
-        <select
-          id="favorites-bar"
-          @change="${(x) => x.updateShowFavoritesBar()}"
-          value="${(x) => x.ss.showFavoritesBar}"
-        >
-          <option
-            value="always"
-            ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
+            <option
+              value="always"
+              ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
+            >
+              Always
+            </option>
+            <option
+              value="never"
+              ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
+            >
+              Never
+            </option>
+            <option
+              value="newtab"
+              ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
+            >
+              On new tab
+            </option>
+          </select>
+        </div>
+        <div class="entry">
+          <label for="truncate-url">Truncate URL</label>
+          <phx-switch
+            id="truncate-url"
+            ?checked="${(x) => x.ss.truncateURL}"
+            @change="${(x) => x.toggleTruncateUrl()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="full-width-omnibox">Full width omnibox</label>
+          <phx-switch
+            slot="input"
+            id="full-width-omnibox"
+            ?checked="${(x) => x.ss.fullWidthOmnibox}"
+            @change="${(x) => x.toggleFullWidthOmnibox()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="shopping-trigger">Shopping trigger URL</label>
+          <phx-text-input
+            id="shopping-trigger"
+            type="text"
+            value="${(x) => x.ts.shoppingTriggerURL}"
+            @blur="${(x) => x.updateShoppingTrigger()}"
           >
-            Always
-          </option>
-          <option
-            value="never"
-            ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
+          </phx-text-input>
+        </div>
+      </div>
+      <div>
+        <h2>New tab pages</h2>
+        <div class="entry">
+          <label for="legacy-newtab"> Show legacy new tab page </label>
+          <phx-switch
+            id="legacy-newtab"
+            ?checked=${(x) => x.ss.showLegacyNewTab}
+            @change="${(x) => x.toggleShowLegacyNewTab()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="show-copilot-ntp"> Show copilot NTP </label>
+          <phx-switch
+            slot="input"
+            id="show-copilot-ntp"
+            ?checked=${(x) => x.ss.showCopilotNTP}
+            @change=${(x) => x.toggleShowCopilotNTP()}
+          ></phx-switch>
+        </div>
+      </div>
+      <div>
+        <h2>Copilot</h2>
+        <div class="entry">
+          <label for="legacy-copilot"> Show legacy copilot </label>
+          <phx-switch
+            id="legacy-copilot"
+            ?checked=${(x) => x.ss.showLegacyCopilot}
+            @change="${(x) => x.toggleShowLegacyCopilot()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="composer-hint"> Show composer hint </label>
+          <phx-switch
+            id="composer-hint"
+            ?checked=${(x) => x.cs.showHint}
+            @change="${(x) => x.toggleShowComposerHint()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="legacy-newtab"> Auto open composer on hover </label>
+          <phx-switch
+            id="composer-auto-open"
+            ?checked=${(x) => x.cs.autoOpen}
+            @change="${(x) => x.toggleAutoOpenComposer()}"
+          ></phx-switch>
+        </div>
+        <div class="entry">
+          <label for="composer-auto-open-delay"
+            >Composer auto open delay (ms)</label
           >
-            Never
-          </option>
-          <option
-            value="newtab"
-            ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
+          <phx-text-input
+            id="composer-auto-open-delay"
+            type="number"
+            value="${(x) => x.cs.autoOpenDelay}"
+            @change="${(x) => x.updateComposerAutoOpenDelay()}"
+            ?disabled="${(x) => !x.cs.autoOpen}"
           >
-            On new tab
-          </option>
-        </select>
-      </div>
-      <div class="entry">
-        <label for="truncate-url">Truncate URL</label>
-        <phx-switch
-          id="truncate-url"
-          ?checked="${(x) => x.ss.truncateURL}"
-          @change="${(x) => x.toggleTruncateUrl()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="legacy-copilot"> Show legacy copilot </label>
-        <phx-switch
-          id="legacy-copilot"
-          ?checked=${(x) => x.ss.showLegacyCopilot}
-          @change="${(x) => x.toggleShowLegacyCopilot()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="legacy-newtab"> Show legacy new tab page </label>
-        <phx-switch
-          id="legacy-newtab"
-          ?checked=${(x) => x.ss.showLegacyNewTab}
-          @change="${(x) => x.toggleShowLegacyNewTab()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="show-copilot-ntp"> Show copilot NTP </label>
-        <phx-switch
-          slot="input"
-          id="show-copilot-ntp"
-          ?checked=${(x) => x.ss.showCopilotNTP}
-          @change=${(x) => x.toggleShowCopilotNTP()}
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="show-menus-l0">Show menus in L1</label>
-        <phx-switch
-          slot="input"
-          id="show-menus-l0"
-          ?checked="${(x) => x.ss.showMenusInL1}"
-          @change="${(x) => x.toggleshowMenusInL1()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="full-width-omnibox">Full width omnibox</label>
-        <phx-switch
-          slot="input"
-          id="full-width-omnibox"
-          ?checked="${(x) => x.ss.fullWidthOmnibox}"
-          @change="${(x) => x.toggleFullWidthOmnibox()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="composer-hint"> Show composer hint </label>
-        <phx-switch
-          id="composer-hint"
-          ?checked=${(x) => x.cs.showHint}
-          @change="${(x) => x.toggleShowComposerHint()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="legacy-newtab"> Auto open composer on hover </label>
-        <phx-switch
-          id="composer-auto-open"
-          ?checked=${(x) => x.cs.autoOpen}
-          @change="${(x) => x.toggleAutoOpenComposer()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="composer-auto-open-delay"
-          >Composer auto open delay (ms)</label
-        >
-        <phx-text-input
-          id="composer-auto-open-delay"
-          type="number"
-          value="${(x) => x.cs.autoOpenDelay}"
-          @change="${(x) => x.updateComposerAutoOpenDelay()}"
-          ?disabled="${(x) => !x.cs.autoOpen}"
-        >
-        </phx-text-input>
-      </div>
-      <div class="entry">
-        <label for="copilot-sidepane-background">
-          Copilot sidepane background
-        </label>
-        <phx-switch
-          id="copilot-sidepane-background"
-          ?checked=${(x) => x.cs.sidepaneBackground}
-          @change="${(x) => x.toggleShowSidepaneBackground()}"
-        ></phx-switch>
-      </div>
-      <div class="entry">
-        <label for="frame-spacing">Frame spacing</label>
-        <phx-text-input
-          id="frame-spacing"
-          type="number"
-          value="${(x) => parseInt(x.ss.frameSpacing)}"
-          @change="${(x) => x.updateFrameSpacing()}"
-        >
-        </phx-text-input>
-      </div>
-      <div class="entry">
-        <label for="shopping-trigger">Shopping trigger URL</label>
-        <phx-text-input
-          id="shopping-trigger"
-          type="text"
-          value="${(x) => x.ts.shoppingTriggerURL}"
-          @blur="${(x) => x.updateShoppingTrigger()}"
-        >
-        </phx-text-input>
+          </phx-text-input>
+        </div>
+        <div class="entry">
+          <label for="copilot-sidepane-background">
+            Copilot sidepane background
+          </label>
+          <phx-switch
+            id="copilot-sidepane-background"
+            ?checked=${(x) => x.cs.sidepaneBackground}
+            @change="${(x) => x.toggleShowSidepaneBackground()}"
+          ></phx-switch>
+        </div>
       </div>
     </div>
   </div>
@@ -268,6 +281,10 @@ const styles = css`
   #content {
     position: absolute;
     inset: 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    overflow: hidden;
   }
 
   #nav {
@@ -281,6 +298,15 @@ const styles = css`
     font-size: ${typographyStyles.subtitle2.fontSize};
     font-weight: ${typographyStyles.subtitle2.fontWeight};
     line-height: ${typographyStyles.subtitle2.lineHeight};
+    margin: 0;
+    user-select: none;
+  }
+
+  h2 {
+    font-family: ${typographyStyles.body1Strong.fontFamily};
+    font-size: ${typographyStyles.body1Strong.fontSize};
+    font-weight: ${typographyStyles.body1Strong.fontWeight};
+    line-height: ${typographyStyles.body1Strong.lineHeight};
     margin: 0;
     user-select: none;
   }
@@ -302,9 +328,11 @@ const styles = css`
   }
 
   #main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: ${spacingHorizontalXL};
     padding: ${spacingHorizontalL};
+    overflow-y: auto;
   }
 
   .entry {
@@ -313,9 +341,16 @@ const styles = css`
     min-height: 40px;
     align-items: center;
     gap: ${spacingHorizontalL};
+    grid-column: span 1;
 
     label {
-      min-width: 160px;
+      width: 200px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #main {
+      grid-template-columns: 1fr; /* Switch to single column on small screens */
     }
   }
 
@@ -391,7 +426,7 @@ export class WindowsSettings extends FASTElement {
   toggleShowCopilotNTP() {
     this.ss.setShowCopilotNTP(
       (this.shadowRoot?.querySelector('#show-copilot-ntp') as Checkbox)
-      ?.checked || false,
+        ?.checked || false,
     );
   }
 
@@ -411,15 +446,17 @@ export class WindowsSettings extends FASTElement {
 
   toggleshowMenusInL1() {
     this.ss.setShowMenusInL1(
-      (this.shadowRoot?.querySelector('#show-menus-l0') as Checkbox)?.checked || false,
+      (this.shadowRoot?.querySelector('#show-menus-l0') as Checkbox)?.checked ||
+        false,
     );
   }
 
   toggleFullWidthOmnibox() {
     this.ss.setFullWidthOmnibox(
-      (this.shadowRoot?.querySelector('#full-width-omnibox') as Checkbox)?.checked || false,
+      (this.shadowRoot?.querySelector('#full-width-omnibox') as Checkbox)
+        ?.checked || false,
     );
-  }  
+  }
 
   updateShowFavoritesBar() {
     this.ss.setShowFavoritesBar(

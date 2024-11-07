@@ -161,8 +161,6 @@ export class MicrosoftEdge extends FASTElement {
     this.setTheme();
     this.setElements();
     this.setEventListeners();
-
-
   }
 
   disconnectedCallback() {

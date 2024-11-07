@@ -44,8 +44,13 @@ const template = html<TabBar>`
               c.parent.ts.tabsById[x].favicon
                 ? html`
                     ${c.parent.ts.tabsById[x].favicon.includes('.svg')
-                      ? html`<svg slot="favicon"><use href="${c.parent.ts.tabsById[x].favicon}"></use></svg>`
-                      : html`<img slot="favicon" src="${c.parent.ts.tabsById[x].favicon}" />`}
+                      ? html`<svg slot="favicon">
+                          <use href="${c.parent.ts.tabsById[x].favicon}"></use>
+                        </svg>`
+                      : html`<img
+                          slot="favicon"
+                          src="${c.parent.ts.tabsById[x].favicon}"
+                        />`}
                   `
                 : null}
             ${(x, c) =>
@@ -75,7 +80,6 @@ const template = html<TabBar>`
       id="window-grabber"
       @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
       @mouseup="${(x, c) => x.handleContextMenu(c.event)}"
-      
     ></div>
   </div>
 `;
@@ -200,7 +204,7 @@ export class TabBar extends FASTElement {
     if (!(e instanceof MouseEvent)) return;
     if (e.button !== 0) return;
   }
-  
+
   handleContextMenu = (e: Event) => {
     e.preventDefault();
     return false;

@@ -277,7 +277,7 @@ export class AppWindow extends FASTElement {
     this.xPos = newX;
     this.yPos = newY;
   }
-  
+
   handleWindowResize = () => {
     this.screenWidth = window.innerWidth;
     this.screenHeight = window.innerHeight;
