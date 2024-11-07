@@ -28,35 +28,8 @@ export type OpenAIResponse = {
 
 export class CopilotService {
   @observable composerActive = true;
-  @observable threadsById: Record<string, Thread> = {
-    'thread-1': {
-      id: 'thread-1',
-      messages: {
-        'system-prompt': {
-          id: 'system-prompt',
-          content: '',
-          timestamp: Date.now(),
-          role: 'system',
-          status: 'complete',
-        },
-        message1: {
-          id: 'message1',
-          content: `Hello.`,
-          timestamp: Date.now(),
-          role: 'user',
-          status: 'complete',
-        },
-        message2: {
-          id: 'message2',
-          content: `Hello, I'm the Microsoft Edge assistant. I can help you with anything you need.`,
-          timestamp: Date.now(),
-          role: 'system',
-          status: 'complete',
-        },
-      },
-    },
-  };
-  @observable activeThreadId?: string = 'thread-1';
+  @observable threadsById: Record<string, Thread> = {};
+  @observable activeThreadId?: string;
   @observable showHint = false;
   @observable autoOpen = true;
   @observable autoOpenDelay = 500;

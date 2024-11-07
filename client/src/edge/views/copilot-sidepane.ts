@@ -1,7 +1,7 @@
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { colorNeutralForeground1, spacingVerticalXL } from '@phoenixui/themes';
+import { colorNeutralForeground1 } from '@phoenixui/themes';
 import '../controls/copilot-design-provider.js';
 import './copilot-chat.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
@@ -24,9 +24,7 @@ const styles = css`
 
   copilot-design-provider {
     flex: 1;
-    margin-bottom: calc(${spacingVerticalXL} + 68px);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   copilot-inline-chat {

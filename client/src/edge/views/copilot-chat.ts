@@ -18,15 +18,20 @@ import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<CopilotChat>`<div id="chat"></div>`;
 
 const styles = css`
   :host {
     display: block;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  :host([inline]) {
     height: fit-content;
     max-height: 100%;
-    overflow: hidden;
   }
 
   #chat {
@@ -36,7 +41,7 @@ const styles = css`
 
   #chat:not(:empty) {
     padding: ${spacingVerticalXL};
-    padding-block-end: 0;
+    padding-block-end: calc(68px + ${spacingFrame});
     height: fit-content;
     max-height: calc(100% - ${spacingVerticalXXL});
     display: flex;
