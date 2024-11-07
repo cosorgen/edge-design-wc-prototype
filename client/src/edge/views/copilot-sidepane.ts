@@ -15,6 +15,7 @@ import WindowsService from '#serviceswindowsService.js';
 import { backgroundGradient } from '../copilotDesignSystem.js';
 
 const template = html`
+  <sidepane-header>Copilot</sidepane-header>
   <copilot-design-provider>
     <div id="content">
       <div class="user message">Create a summary for this page</div>
@@ -40,7 +41,6 @@ const template = html`
     </div>
     <copilot-composer></copilot-composer>
   </copilot-design-provider>
-  <sidepane-header>Copilot</sidepane-header>
 `;
 
 const styles = css`
