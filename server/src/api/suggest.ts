@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import NodeCache from 'node-cache';
 import NodeCron from 'node-cron';
 import throwServerError, { ServerError } from './utils.js';
