@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 import NodeCache from 'node-cache';
 import NodeCron from 'node-cron';
@@ -22,15 +21,16 @@ export default async (req: Request, res: Response) => {
     const jsUrl = new URL(url); // will throw if invalid
     if (jsUrl.protocol !== 'http:' && jsUrl.protocol !== 'https:')
       throwServerError('Invalid URL', 400);
-    const valid = await fetch(url, { method: 'HEAD' }).then((r) => r.ok);
-    if (!valid) throwServerError(`${url} not found`, 404);
 
     // Check cache
     if (cache.has(url)) return res.json(cache.get(url));
 
     // Fetch metadata if not cached
     const metadata = await fetch(url)
-      .then((r) => r.text())
+      .then((r) => {
+        if (!r.ok) throwServerError('Failed to fetch', r.status);
+        return r.text();
+      })
       .then((text) => {
         const $ = cheerio.load(text);
 
