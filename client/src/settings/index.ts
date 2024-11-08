@@ -343,7 +343,7 @@ const styles = css`
   #container {
     display: flex;
     height: 100vh;
-    padding: ${spacingVerticalL} ${spacingHorizontalM};
+    padding: ${spacingHorizontalM};
     gap: ${spacingHorizontalXL};
   }
 
