@@ -363,10 +363,10 @@ const styles = css`
   }
 
   h1 {
-    font-family: ${typographyStyles.subtitle1.fontFamily};
-    font-size: ${typographyStyles.subtitle1.fontSize};
-    font-weight: ${typographyStyles.subtitle1.fontWeight};
-    line-height: ${typographyStyles.subtitle1.lineHeight};
+    font-family: ${typographyStyles.subtitle2.fontFamily};
+    font-size: ${typographyStyles.subtitle2.fontSize};
+    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    line-height: ${typographyStyles.subtitle2.lineHeight};
     padding-top: ${spacingVerticalS};
     margin: 0;
     user-select: none;
