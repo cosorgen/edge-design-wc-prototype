@@ -467,7 +467,7 @@ export class CopilotEntrypoint extends FASTElement {
       this.cs.composerOverPage = false;
     } else {
       if (this.ews.activeSidepaneAppId === 'Copilot') {
-        this.ews.activeSidepaneAppId = '';
+        this.ews.activeSidepaneAppId = null;
         this.cs.composerOverPage = true;
       }
     }
