@@ -13,6 +13,13 @@ import './menu-item.js';
 import { colorNeutralForeground1 } from '@phoenixui/themes';
 import apps from '../installedApps.js';
 
+function toCamelCase(str: string) {
+  return str
+    .replace(/\s+([a-z])/g, (g) => g[1].toUpperCase())
+    .replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+    .replace(/\s/g, '');
+}
+
 const template = html<ToolbarSidepaneItem>`
   <flyout-menu @toggle="${(x) => x.handleFlyoutToggle()}">
     <phx-toggle-button
@@ -29,7 +36,7 @@ const template = html<ToolbarSidepaneItem>`
         </svg>`,
         html`<img
           width="20px"
-          src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
+          src="./img/edge/${(x) => toCamelCase(x.id)}AppLight.png"
         />`,
       )}
     </phx-toggle-button>

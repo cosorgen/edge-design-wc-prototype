@@ -5,6 +5,7 @@ import './views/favorites-menu.js';
 import './views/downloads-menu.js';
 import './views/tools-sidepane.js';
 import './views/search-sidepane.js';
+import './views/legacy-copilot-sidepane.js';
 
 export type ToolbarApp = {
   type: 'flyout' | 'sidepane';
@@ -67,5 +68,9 @@ export default {
   Copilot: {
     type: 'sidepane',
     template: html`<copilot-sidepane></copilot-sidepane>`,
+  },
+  'Legacy Copilot': {
+    type: 'sidepane',
+    template: html`<legacy-copilot-sidepane></legacy-copilot-sidepane>`,
   },
 } as Record<string, ToolbarApp>;

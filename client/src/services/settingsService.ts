@@ -34,7 +34,7 @@ export default class EdgeSettingsSerivce {
       this.showLegacyNewTab;
     this.showCopilotNTP =
       url.searchParams.get('showCopilotNTP') === 'true' || this.showCopilotNTP;
-    this.showLegacyCopilot && this.pinToolbarItem('Copilot');
+    this.showLegacyCopilot && this.pinToolbarItem('Legacy Copilot');
 
     this.truncateURL =
       url.searchParams.get('truncateURL') === 'true' || this.truncateURL;
@@ -77,7 +77,9 @@ export default class EdgeSettingsSerivce {
 
   setShowLegacyCopilot(show: boolean) {
     this.showLegacyCopilot = show;
-    show ? this.pinToolbarItem('Copilot') : this.unpinToolbarItem('Copilot');
+    show
+      ? this.pinToolbarItem('Legacy Copilot')
+      : this.unpinToolbarItem('Legacy Copilot');
     this.setSettingsInURL();
   }
 
