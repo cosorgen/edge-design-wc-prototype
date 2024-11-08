@@ -203,6 +203,7 @@ export class TabBar extends FASTElement {
   handleTitleBarMouseDown(e: Event) {
     if (!(e instanceof MouseEvent)) return;
     if (e.button !== 0) return;
+    this.$emit('windowmovestart');
   }
 
   handleContextMenu = (e: Event) => {

@@ -28,7 +28,7 @@ import '@phoenixui/web-components/toggle-button.js';
 
 const template = html` <div
     id="window-grabber"
-    @mousedown="${(x) => x.handleTitleBarMouseDown()}"
+    @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
     @contextmenu="${(x, c) => x.handleContextMenu(c.event)}"
   ></div>
   ${(x) =>
@@ -164,7 +164,9 @@ export class CaptionControls extends FASTElement {
     this.addEventListener('contextmenu', this.handleContextMenu);
   }
 
-  handleTitleBarMouseDown() {
+  handleTitleBarMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
     this.$emit('windowmovestart');
   }
 

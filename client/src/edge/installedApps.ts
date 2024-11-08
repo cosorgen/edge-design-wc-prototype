@@ -3,6 +3,8 @@ import './views/extensions-hub.js';
 import './views/copilot-sidepane.js';
 import './views/favorites-menu.js';
 import './views/downloads-menu.js';
+import './views/tools-sidepane.js';
+import './views/search-sidepane.js';
 
 export type ToolbarApp = {
   type: 'flyout' | 'sidepane';
@@ -48,7 +50,7 @@ export default {
   },
   Search: {
     type: 'sidepane',
-    template: html`<div style="padding: 8px;">Search</div>`,
+    template: html`<search-sidepane></search-sidepane>`,
   },
   Grammarly: {
     type: 'flyout',
@@ -60,7 +62,7 @@ export default {
   },
   Tools: {
     type: 'sidepane',
-    template: html`<div style="padding: 8px;">Tools</div>`,
+    template: html`<tools-sidepane></tools-sidepane>`,
   },
   Copilot: {
     type: 'sidepane',
