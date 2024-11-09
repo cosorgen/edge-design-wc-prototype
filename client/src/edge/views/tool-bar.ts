@@ -154,8 +154,8 @@ const template = html<Toolbar>`
               appearance="subtle"
               icon-only
               slot="trigger"
-              @click="${(x) => x.toggleSidepane('Copilot')}"
-              ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
+              @click="${(x) => x.toggleSidepane('Legacy Copilot')}"
+              ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
             >
               <img width="20px" src="./img/edge/copilotAppLight.png" />
             </phx-toggle-button>
@@ -249,7 +249,7 @@ export class Toolbar extends FASTElement {
     // Remove copilot if it's disabled
     if (!this.ess.showLegacyCopilot || this.ess.showMenusInL1)
       this._derivedToolbarItems = this._derivedToolbarItems.filter(
-        (id) => id !== 'Copilot',
+        (id) => id !== 'Legacy Copilot',
       );
 
     return this._derivedToolbarItems;
