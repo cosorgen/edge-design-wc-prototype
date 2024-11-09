@@ -6,18 +6,9 @@ import {
   observable,
   repeat,
   attr,
-  ValueConverter,
+  nullableNumberConverter,
 } from '@microsoft/fast-element';
 import { Suggestion } from '#servicesautoSuggestService.js';
-
-const NumberConverter: ValueConverter = {
-  toView(value: number): string {
-    return value.toString();
-  },
-  fromView(value: string): number {
-    return parseInt(value);
-  },
-};
 
 const template = html<OmniboxDropdown>`
   <div part="container">
@@ -57,5 +48,5 @@ const styles = css`
 })
 export class OmniboxDropdown extends FASTElement {
   @observable suggestions: Suggestion[] = [];
-  @attr({ converter: NumberConverter }) 'selected-index' = -1;
+  @attr({ converter: nullableNumberConverter }) 'selected-index' = -1;
 }

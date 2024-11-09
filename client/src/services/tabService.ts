@@ -1,100 +1,174 @@
+import WindowsService from '#serviceswindowsService.js';
 import { observable } from '@microsoft/fast-element';
+import { inject } from '@microsoft/fast-element/di.js';
 
 export type Tab = {
   id: string;
   title?: string;
   url: string;
+  page?: string;
   favicon?: string;
-  active: boolean;
   loading?: boolean;
+  actionIds?: {
+    top: string;
+    overflow?: string[];
+  };
 };
 
 export class TabService {
-  @observable private tabs_: Tab[] = [];
+  @inject(WindowsService) ws!: WindowsService;
+  @observable tabsById: Record<string, Tab> = {};
+  @observable tabIds: Array<string> = [];
+  @observable activeTabId?: string;
+  @observable shoppingTriggerURL = 'https://www.nike.com';
 
   constructor() {
-    this.addTab();
-  }
-
-  get tabs() {
-    return this.tabs_;
+    this.getSettingsFromURL();
+    const id = this.addTab();
+    this.activateTab(id);
   }
 
   addTab(tab?: Tab) {
     if (!tab) {
       tab = {
-        id: window.crypto.randomUUID(),
+        id: `tab-${window.crypto.randomUUID()}`,
         url: 'edge://newtab',
-        active: true,
+        title: 'New tab',
       };
     }
 
-    if (tab.active) this.deactivateTabs();
-    this.tabs_.push(tab);
+    this.tabsById = {
+      ...this.tabsById,
+      [tab.id]: tab,
+    };
+    this.tabIds = [...this.tabIds, tab.id];
+
+    return tab.id;
   }
 
   removeTab(tabId: string) {
-    const tabIndex = this.tabs_.findIndex((tab) => tab.id === tabId);
-    const prevTabId =
-      this.tabs_[tabIndex - 1]?.id ||
-      this.tabs_[tabIndex + 1]?.id ||
-      this.tabs_[this.tabs_.length - 1]?.id;
+    const index = this.tabIds.indexOf(tabId);
+    if (index === -1) return;
 
-    this.tabs_ = this.tabs_.filter((tab) => tab.id !== tabId);
-
-    if (this.tabs_.length !== 0) {
-      this.activateTab(prevTabId);
+    // If it's the active tab, activate the previous tab.
+    // If it's the first tab, activate the next tab.
+    if (this.activeTabId === tabId) {
+      this.activeTabId = this.tabIds[index - 1] || this.tabIds[index + 1];
     }
+
+    delete this.tabsById[tabId]; // this might not work
+    this.tabIds = this.tabIds.filter((id) => id !== tabId);
   }
 
   activateTab(tabId: string) {
-    this.deactivateTabs();
-    this.tabs_ = this.tabs_.map((tab) => ({
-      ...tab,
-      active: tab.id === tabId,
-    }));
+    this.activeTabId = tabId;
   }
 
-  getActiveTab() {
-    return this.tabs_.find((tab) => tab.active);
-  }
-
-  deactivateTabs() {
-    this.tabs_ = this.tabs_.map((tab) => ({
-      ...tab,
-      active: false,
-    }));
-  }
-
-  navigate(url: string) {
-    // Validate URL
-    if (!url.startsWith('http')) {
-      url = `https://www.bing.com/search?q=${url}`;
+  validateURL(url: string) {
+    let validUrl = url;
+    if (!validUrl.startsWith('edge://')) {
+      // see if we just need to add https://
+      if (!validUrl.match(/^.+:\/\/.+\..+$/)) validUrl = `https://${url}`;
+      // if not, search bing
+      if (!validUrl.match(/^.+:\/\/.+\..+$/))
+        validUrl = `https://www.bing.com/search?q=${encodeURIComponent(url)}`;
     }
 
+    return validUrl;
+  }
+
+  navigateTab(id: string, url: string) {
+    const validUrl = this.validateURL(url);
+
     // Set tab to loading state
-    this.tabs_ = this.tabs_.map((tab) => ({
-      ...tab,
-      title: tab.active ? url : tab.title,
-      loading: tab.active,
-    }));
+    const tab = this.tabsById[id];
+    tab.url = validUrl;
+    tab.loading = true;
+    tab.title = url; // update title to query while loading
+    this.tabsById[id] = tab;
 
     // Get metadata for the new query
-    fetch(`/api/metadata?url=${url}`)
+    fetch(`/api/metadata?url=${validUrl}`)
       .then((res) => res.json())
-      .then((metadata) => {
-        this.tabs_ = this.tabs_.map((tab) => ({
-          ...tab,
-          title: tab.active ? metadata.title : tab.title,
-          favicon: tab.active ? metadata.favicon : tab.favicon,
-          loading: false,
-        }));
+      .then((res) => {
+        const tab = this.tabsById[id];
+        tab.title = res.title;
+        tab.favicon = res.favicon;
+        this.tabsById = {
+          ...this.tabsById,
+          [tab.id]: tab,
+        };
       });
 
-    // Set the URL of the active tab to the query
-    this.tabs_ = this.tabs_.map((tab) => ({
-      ...tab,
-      url: tab.active ? url : tab.url,
-    }));
+    // Get full page content
+    fetch(`/api/proxy?url=${validUrl}`)
+      .then((res) => res.json())
+      .then((res) => {
+        const tab = this.tabsById[id];
+        tab.page = res.page;
+        tab.url = res.url; // follow redirects
+        this.tabsById = {
+          ...this.tabsById,
+          [tab.id]: tab,
+        };
+      });
+  }
+
+  tabDidLoad(tabId: string) {
+    const tab = this.tabsById[tabId];
+    tab.loading = false;
+    tab.actionIds = this.getActionsForURL(tab.url);
+    this.tabsById = {
+      ...this.tabsById,
+      [tab.id]: tab,
+    };
+  }
+
+  tabLoadError(tabId: string) {
+    const tab = this.tabsById[tabId];
+    tab.loading = false;
+    tab.url = 'edge://error';
+    delete tab.page;
+    this.tabsById = {
+      ...this.tabsById,
+      [tab.id]: tab,
+    };
+  }
+
+  getActionsForURL(url: string) {
+    let top = 'favorite';
+    const overflow = ['limit-cookies', 'read-aloud', 'install', 'share'];
+    if (
+      url.startsWith(this.shoppingTriggerURL) ||
+      url.replace('www.', '').startsWith(this.shoppingTriggerURL) ||
+      url.startsWith(this.shoppingTriggerURL.replace('www.', ''))
+    ) {
+      overflow.unshift('favorite');
+      top = 'shopping';
+    }
+    return { top, overflow };
+  }
+
+  updateShoppingTriggerURL(url: string) {
+    this.shoppingTriggerURL = url;
+    this.setSettingsInURL();
+  }
+
+  setSettingsInURL() {
+    // Set state in url
+    const url = new URL(window.location.href);
+    url.searchParams.set(
+      'shoppingTriggerURL',
+      encodeURIComponent(this.shoppingTriggerURL),
+    );
+    window.history.pushState({}, '', url.toString());
+  }
+
+  getSettingsFromURL() {
+    // Get state from url
+    const url = new URL(window.location.href);
+    this.shoppingTriggerURL = decodeURIComponent(
+      url.searchParams.get('shoppingTriggerURL') || this.shoppingTriggerURL,
+    );
   }
 }

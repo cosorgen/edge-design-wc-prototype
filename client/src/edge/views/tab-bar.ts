@@ -8,61 +8,57 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import {
   spacingHorizontalXS,
-  spacingVerticalXXS,
-  spacingHorizontalS,
   shadow2,
-  spacingHorizontalXXS,
   spacingVerticalSNudge,
-  spacingHorizontalSNudge,
+  borderRadiusLarge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
-import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
-import '../../windows/controls/mica-material.js';
-import { Tab, TabService } from '#services/tabService.js';
-import WindowsService, { Window } from '#services/windowsService.js';
-import {
-  colorShellFillCaptionControlPrimaryHover,
-  colorShellFillCaptionControlPrimaryPressed,
-  colorShellForegroundCaptionControlPrimaryHover,
-  colorShellForegroundCaptionControlPrimaryPressed,
-} from '../../windows/designSystem.js';
+import { TabService } from '#services/tabService.js';
+import WindowsService from '#services/windowsService.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<TabBar>`
-  <mica-material appearance="tabBar"></mica-material>
   <div id="shadow"></div>
   <div id="content">
     <div class="group">
-      <identity-control></identity-control>
-    </div>
-    <div class="group">
       <phx-button appearance="subtle" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
-        </svg>
-      </phx-button>
-      <phx-button appearance="subtle" icon-only>
-        <svg>
-          <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
+          <use href="img/edge/icons.svg#panel-left-text-20-regular" />
         </svg>
       </phx-button>
     </div>
     <div id="tabs">
       ${repeat(
-        (x) => x.ts.tabs,
-        html<Tab>` <horizontal-tab
-            ?active="${(x) => x.active}"
-            ?loading="${(x) => x.loading}"
-            @activate="${(x, c) => c.parent.activateTab(x.id)}"
-            @close="${(x, c) => c.parent.closeTab(x.id)}"
+        (x) => x.ts.tabIds,
+        html<string>` <horizontal-tab
+            ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+            ?loading="${(x, c) => c.parent.ts.tabsById[x].loading}"
+            @activate="${(x, c) => c.parent.activateTab(x)}"
+            @close="${(x, c) => c.parent.closeTab(x)}"
           >
-            ${(x) =>
-              x.favicon
-                ? html`<img slot="favicon" src="${x.favicon}" />`
+            ${(x, c) =>
+              c.parent.ts.tabsById[x].favicon
+                ? html`
+                    ${c.parent.ts.tabsById[x].favicon.includes('.svg')
+                      ? html`<svg slot="favicon">
+                          <use href="${c.parent.ts.tabsById[x].favicon}"></use>
+                        </svg>`
+                      : html`<img
+                          slot="favicon"
+                          src="${c.parent.ts.tabsById[x].favicon}"
+                        />`}
+                  `
                 : null}
-            ${(x) =>
-              x.title ? html`<span slot="title">${x.title}</span>` : null}
+            ${(x, c) =>
+              c.parent.ts.tabsById[x].title
+                ? html`<span slot="title"
+                    >${c.parent.ts.tabsById[x].title}</span
+                  >`
+                : null}
           </horizontal-tab>
           <phx-divider
             orientation="vertical"
@@ -80,60 +76,22 @@ const template = html<TabBar>`
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
     </phx-button>
-    <div class="group" id="caption-controls" style="gap: 0;">
-      <phx-button
-        size="large"
-        appearance="subtle"
-        shape="square"
-        icon-only
-        @click="${(x) => x.minimizeWindow()}"
-      >
-        <svg>
-          <use
-            href="img/edge/icons.svg#chrome-minimize-20-regular"
-            x="2"
-            y="2"
-          />
-        </svg>
-      </phx-button>
-      <phx-button
-        size="large"
-        appearance="subtle"
-        shape="square"
-        icon-only
-        @click="${(x) => x.maximizeWindow()}"
-      >
-        <svg>
-          <use
-            href="${(x) =>
-              x.windowIsMaximized()
-                ? 'img/edge/icons.svg#chrome-restore-20-regular'
-                : 'img/edge/icons.svg#chrome-maximize-20-regular'}"
-            x="2"
-            y="2"
-          />
-        </svg>
-      </phx-button>
-      <phx-button
-        size="large"
-        appearance="subtle"
-        shape="square"
-        icon-only
-        @click="${(x) => x.closeWindow()}"
-      >
-        <svg>
-          <use href="img/edge/icons.svg#chrome-close-20-regular" x="2" y="2" />
-        </svg>
-      </phx-button>
-    </div>
+    <div
+      id="window-grabber"
+      @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
+      @mouseup="${(x, c) => x.handleContextMenu(c.event)}"
+    ></div>
   </div>
 `;
 
 const styles = css`
   :host {
     display: block;
-    overflow: hidden;
     user-select: none;
+    position: relative; /* for positioning shadow */
+    width: calc(
+      100% - ${(x) => (x.ews.activeSidepaneAppId !== null ? '0px' : '186px')}
+    );
   }
 
   #content {
@@ -144,10 +102,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: ${spacingHorizontalS};
-    padding: ${spacingVerticalSNudge} 156px ${spacingVerticalXXS}
-      ${spacingHorizontalXS};
-    overflow: hidden;
+    gap: ${spacingFrame};
   }
 
   .group {
@@ -159,8 +114,8 @@ const styles = css`
 
   #shadow {
     position: absolute;
-    inset-inline: 0;
-    bottom: -2px;
+    inset-inline: 8px;
+    bottom: calc(-2px - ${spacingFrame});
     height: 2px;
     box-shadow: ${shadow2};
   }
@@ -168,30 +123,21 @@ const styles = css`
   #tabs {
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalXXS};
+    gap: ${spacingFrame};
     overflow: hidden;
-    padding: 10px;
-    margin: -10px; /* for wings to not clip */
+    padding: max(10px, ${spacingFrame});
+    margin: min(-10px, calc(0px - ${spacingFrame})); /* for wings to not clip */
   }
 
-  #add {
-    margin-inline-start: calc(0px - ${spacingHorizontalSNudge});
+  #window-grabber {
+    flex: 1;
+    height: calc(100% + (2 * ${spacingFrame}));
+    margin-block-end: calc(0px - ${spacingFrame});
+    min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
-  #caption-controls {
-    position: absolute;
-    inset-inline-end: 0;
-    inset-block: 0;
-  }
-
-  #caption-controls phx-button:nth-child(3):hover {
-    background-color: ${colorShellFillCaptionControlPrimaryHover};
-    color: ${colorShellForegroundCaptionControlPrimaryHover};
-  }
-
-  #caption-controls phx-button:nth-child(3):active {
-    background-color: ${colorShellFillCaptionControlPrimaryPressed};
-    color: ${colorShellForegroundCaptionControlPrimaryPressed};
+  phx-button {
+    border-radius: ${borderRadiusLarge};
   }
 
   phx-divider,
@@ -203,7 +149,7 @@ const styles = css`
 
   phx-divider {
     margin-block: ${spacingVerticalSNudge};
-    margin-inline: calc(0px - ${spacingHorizontalXXS});
+    margin-inline: calc(0px - (${spacingFrame} / 2));
   }
 
   horizontal-tab[active] + phx-divider,
@@ -223,6 +169,16 @@ const styles = css`
 export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('contextmenu', this.handleContextMenu);
+  }
+
+  getTabList() {
+    return this.ts.tabIds.map((tabId) => this.ts.tabsById[tabId]);
+  }
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -230,33 +186,28 @@ export class TabBar extends FASTElement {
 
   closeTab(tabId: string) {
     this.ts.removeTab(tabId);
-    if (this.ts.tabs.length === 0) {
+    if (this.ts.tabIds.length === 0) {
       this.closeWindow();
     }
   }
 
   addTab() {
-    this.ts.addTab();
+    const newId = this.ts.addTab();
+    this.activateTab(newId);
   }
 
   closeWindow() {
     this.ws.closeWindow(this.ws.activeWindowId);
   }
 
-  minimizeWindow() {
-    this.ws.minimizeWindow(this.ws.activeWindowId);
+  handleTitleBarMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
+    this.$emit('windowmovestart');
   }
 
-  windowIsMaximized() {
-    const window = this.ws.getActiveWindow() as Window;
-    return window.maximized;
-  }
-
-  maximizeWindow() {
-    if (this.windowIsMaximized()) {
-      this.ws.restoreWindow(this.ws.activeWindowId);
-    } else {
-      this.ws.maximizeWindow(this.ws.activeWindowId);
-    }
-  }
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }

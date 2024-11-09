@@ -1,5 +1,12 @@
-import { html } from '@microsoft/fast-element';
-import '../edge/index.js';
+export type App = {
+  name: string;
+  lightIcon: string;
+  darkIcon?: string;
+  width?: number;
+  height?: number;
+  minHeight?: number;
+  minWidth?: number;
+};
 
 export default [
   {
@@ -29,7 +36,6 @@ export default [
   {
     name: 'Microsoft Edge',
     lightIcon: 'img/windows/edge-24.svg',
-    element: html`<microsoft-edge></microsoft-edge>`,
   },
   {
     name: 'Microsoft Store',
@@ -39,5 +45,7 @@ export default [
   {
     name: 'Settings',
     lightIcon: 'img/windows/settings-24.svg',
+    width: 800,
+    height: 600,
   },
-];
+] as App[];

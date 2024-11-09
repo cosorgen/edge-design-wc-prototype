@@ -117,9 +117,7 @@ export default class WeatherWidget extends FASTElement {
 
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-      fetch(
-        `http://localhost:4000/api/weather?lat=${latitude}&lon=${longitude}`,
-      )
+      fetch(`/api/weather?lat=${latitude}&lon=${longitude}`)
         .then((res) => res.json())
         .then((data) => {
           this.temp = data.temp;

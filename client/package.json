@@ -14,5 +14,9 @@
   },
   "imports": {
     "#services*": "./src/services/*"
+  },
+  "devDependencies": {
+    "@types/dompurify": "^3.0.5",
+    "@types/showdown": "^2.0.6"
   }
 }

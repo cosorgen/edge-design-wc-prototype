@@ -4,21 +4,30 @@ import '../omnibox-input.js';
 import '../omnibox-icon.js';
 import '../omnibox-dropdown.js';
 import '@phoenixui/web-components/button.js';
+import { OmniboxControl } from './index.js';
 
-export const template = html`
-  <div part="container" ?dropdown-open="${(x) => x.dropdownOpen}">
+export const template = html<OmniboxControl>`
+  <div part="container">
     <div id="top-row">
-      <omnibox-icon
-        type="${(x) =>
-          x.dropdownSelectedIndex >= 0
-            ? x.suggestions[x.dropdownSelectedIndex].type
-            : 'search'}"
-        entity-image="${(x) =>
-          x.dropdownSelectedIndex >= 0
-            ? x.suggestions[x.dropdownSelectedIndex].entityImage
-            : ''}"
-      ></omnibox-icon>
-      <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
+      <div
+        id="status"
+        @click="${(x) => (!x.dropdownOpen ? x.handleInputClick() : null)}"
+      >
+        <omnibox-icon
+          type="${(x) =>
+            x.dropdownSelectedIndex >= 0
+              ? x.suggestions[x.dropdownSelectedIndex].type
+              : 'search'}"
+          entity-image="${(x) =>
+            x.dropdownSelectedIndex >= 0
+              ? x.suggestions[x.dropdownSelectedIndex].entityImage
+              : ''}"
+        ></omnibox-icon>
+        <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
+      </div>
+      <div id="rest-input" @click="${(x) => x.handleInputClick()}">
+        ${(x) => x.truncatedInputValue()}
+      </div>
       <omnibox-input
         value="${(x) => x.inputValue}"
         @click="${(x) => x.handleInputClick()}"
@@ -28,12 +37,11 @@ export const template = html`
         @arrow-up="${(x) => x.setDropdownSelection(-1)}"
         @arrow-down="${(x) => x.setDropdownSelection(1)}"
       ></omnibox-input>
-      <div id="actions">
-        <phx-button size="small" appearance="subtle" shape="circular" icon-only>
-          <svg>
-            <use href="img/edge/icons.svg#star-add-20-regular" />
-          </svg>
-        </phx-button>
+      <div
+        id="actions"
+        @click="${(x) => (!x.dropdownOpen ? x.handleInputClick() : null)}"
+      >
+        <slot name="actions"></slot>
       </div>
     </div>
     <omnibox-dropdown

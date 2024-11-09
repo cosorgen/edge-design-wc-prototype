@@ -32,7 +32,6 @@ const template = html<OmniboxInput>`
 
 const styles = css`
   :host {
-    flex: 1;
     overflow: hidden;
   }
 
@@ -55,6 +54,10 @@ const styles = css`
     }
   }
 
+  [part='input']:focus {
+    text-overflow: unset;
+  }
+
   .metadata {
     color: ${colorNeutralForegroundHint};
   }
@@ -74,6 +77,7 @@ export class OmniboxInput extends FASTElement {
     this.input = this.shadowRoot?.querySelector('[part="input"]');
     if (!this.input) throw new Error('Input element not found');
     this.input.focus(); // Focus the input when it's created.
+    this.valueChanged(); // Set the initial value.
   }
 
   valueChanged() {
@@ -81,7 +85,10 @@ export class OmniboxInput extends FASTElement {
 
     if (this.input.innerText !== this.value) {
       this.input.innerHTML = this.formatUrl(this.value);
-      this.selectAll(this.input); // Highlight new value for easy editing.
+      if (this.matches(':host([dropdown-open]) *')) {
+        // If the dropdown is open and we get a new value, we need to reselect the text.
+        this.selectAll();
+      }
     }
   }
 
@@ -133,13 +140,15 @@ export class OmniboxInput extends FASTElement {
   handleFocus() {
     if (!this.input) throw new Error('Input element not found');
 
-    this.selectAll(this.input);
+    this.selectAll();
     return true; // Allow default behavior.
   }
 
-  selectAll(el: HTMLElement) {
+  selectAll() {
+    if (!this.input) return;
+
     const range = document.createRange();
-    range.selectNodeContents(el);
+    range.selectNodeContents(this.input);
     const sel = window.getSelection();
     if (sel === null) throw new Error('Selection is null');
     sel.removeAllRanges();
@@ -290,5 +299,15 @@ export class OmniboxInput extends FASTElement {
       sel?.removeAllRanges();
       sel?.addRange(range);
     }
+  }
+
+  focus() {
+    if (!this.input) return;
+    this.input.focus();
+  }
+
+  blur() {
+    if (!this.input) return;
+    this.input.blur();
   }
 }

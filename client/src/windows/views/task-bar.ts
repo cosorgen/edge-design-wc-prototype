@@ -5,14 +5,14 @@ import {
   spacingHorizontalXS,
   colorNeutralStroke3,
 } from '@phoenixui/themes';
-import '../controls/taskbarButton.js';
-import './clockWidget.js';
-import './systemTray.js';
-import '../controls/showDesktopButton.js';
-import '../controls/showMoreButton.js';
-import '../controls/copilotButton.js';
+import '../controls/taskbar-button.js';
+import './clock-widget.js';
+import './system-tray.js';
+import '../controls/show-desktop-button.js';
+import '../controls/show-more-button.js';
+import '../controls/copilot-button.js';
 import '../controls/mica-material.js';
-import './weatherWidget.js';
+import './weather-widget.js';
 
 const template = html<TaskBar>`
   <mica-material></mica-material>

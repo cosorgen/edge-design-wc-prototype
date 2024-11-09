@@ -5,8 +5,12 @@ import {
   css,
   attr,
   observable,
+  when,
 } from '@microsoft/fast-element';
-import { colorNeutralForeground3 } from '@phoenixui/themes';
+import {
+  colorNeutralForeground3,
+  spacingHorizontalXS,
+} from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/divider.js';
 
@@ -18,20 +22,20 @@ import '@phoenixui/web-components/divider.js';
  * The type of button is determined by the URL of the current page.
  */
 
-const labels = {
-  search: '',
+const labels: Record<string, string> = {
   'not-secure': 'Not secure',
-  secure: '',
   file: 'File',
-  edge: 'Edge',
 };
 
-const iconIds = {
+const iconIds: Record<string, string> = {
   search: 'search-20-regular',
   'not-secure': 'lock-open-20-regular',
   secure: 'lock-closed-20-regular',
   file: 'file-20-regular',
-  edge: 'edge-20-regular',
+};
+
+const imgPaths: Record<string, string> = {
+  edge: 'favicon.ico',
 };
 
 const template = html<OmniboxStatus>`
@@ -39,14 +43,21 @@ const template = html<OmniboxStatus>`
     appearance="subtle"
     size="small"
     shape="circular"
-    ?icon-only="${(x) => labels[x.type] === ''}"
+    ?icon-only="${(x) => !labels[x.type]}"
   >
-    <svg ?slot="${(x) => (labels[x.type] !== '' ? 'icon' : null)}">
-      <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}" />
-    </svg>
+    ${when(
+      (x) => imgPaths[x.type],
+      html`<img
+        slot="${(x) => (labels[x.type] ? 'start' : undefined)}"
+        src="${(x) => imgPaths[x.type]}"
+      />`,
+      html` <svg slot="${(x) => (labels[x.type] ? 'start' : undefined)}">
+        <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}" />
+      </svg>`,
+    )}
     <div part="label">${(x) => labels[x.type]}</div>
-    <phx-divider orientation="vertical"></phx-divider>
   </phx-button>
+  <phx-divider orientation="vertical"></phx-divider>
 `;
 
 const styles = css`
@@ -59,15 +70,32 @@ const styles = css`
 
   phx-button {
     color: ${colorNeutralForeground3};
+    gap: ${spacingHorizontalXS};
   }
 
-  [icon-only] phx-divider {
-    display: none;
+  svg,
+  img {
+    width: 20px;
   }
 
   phx-divider {
-    min-height: 1px;
-    height: unset;
+    min-height: 16px;
+    height: 100%;
+  }
+
+  phx-divider::before,
+  phx-divider::after {
+    height: 100%;
+    min-height: 8px;
+  }
+
+  [icon-only] ~ phx-divider {
+    display: none;
+  }
+
+  :host(:hover) phx-divider {
+    display: none;
+  }
 `;
 
 @customElement({

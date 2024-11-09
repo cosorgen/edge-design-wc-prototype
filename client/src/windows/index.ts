@@ -4,6 +4,8 @@ import {
   html,
   css,
   repeat,
+  Observable,
+  ViewTemplate,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -16,10 +18,17 @@ import {
 import { setTheme } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
-import './views/taskBar.js';
-import './controls/taskbarButton.js';
+import './views/task-bar.js';
+import './controls/taskbar-button.js';
 import './controls/mica-material.js';
-import './views/appWindow.js';
+import './controls/app-window.js';
+import '../edge/index.js';
+import '../settings/index.js';
+
+const appTemplates: Record<string, ViewTemplate> = {
+  'Microsoft Edge': html`<microsoft-edge></microsoft-edge>`,
+  Settings: html`<windows-settings></windows-settings>`,
+};
 
 const styles = css`
   :host {
@@ -45,25 +54,32 @@ const styles = css`
 `;
 
 const template = html<WindowsShell>`
-  <mica-material id="desktop" image-only></mica-material>
+  <mica-material
+    id="desktop"
+    image-only
+    @click="${(x) => x.ws.activateWindow(null)}"
+  ></mica-material>
   ${repeat(
     (x) => x.ws.windows,
     html`
       <app-window
-        width="${(x) => x.width}px"
-        height="${(x) => x.height}px"
-        xPos="${(x) => x.xPos}px"
-        yPos="${(x) => x.yPos}px"
+        id="${(x) => x.id}"
+        width="${(x) => x.width}"
+        height="${(x) => x.height}"
+        xPos="${(x) => x.xPos}"
+        yPos="${(x) => x.yPos}"
         zIndex="${(x) => x.zIndex}"
         ?minimized="${(x) => x.minimized}"
         ?maximized="${(x) => x.maximized}"
         ?active="${(x, c) => x.id === c.parent.ws.activeWindowId}"
+        @windowmove="${(x, c) =>
+          c.parent.handleWindowMove(c.event as CustomEvent)}"
+        @activate="${(x, c) => c.parent.ws.activateWindow(x.id)}"
       >
-        ${(x) =>
-          installedApps.filter((app) => app.name === x.appName)[0].element ||
-          ''}
+        ${(x) => appTemplates[x.appName] || ''}
       </app-window>
     `,
+    { positioning: true },
   )}
   <task-bar>
     ${repeat(
@@ -77,7 +93,9 @@ const template = html<WindowsShell>`
               (win) => win.id === c.parent.ws.activeWindowId,
             )?.appName === x.name}"
           @click="${(x, c) =>
-            x.element ? c.parent.handleTaskbarButtonClick(x.name) : ''}"
+            appTemplates[x.name]
+              ? c.parent.handleTaskbarButtonClick(x.name)
+              : ''}"
         >
           <img
             src="${(x, c) =>
@@ -97,12 +115,23 @@ export class WindowsShell extends FASTElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this.setTheme();
+    Observable.getNotifier(this.ws).subscribe(this);
+  }
 
-    // set our theme for the OS
-    setTheme(this.ws.theme);
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    Observable.getNotifier(this.ws).unsubscribe(this);
+  }
 
-    // open default windows
-    this.ws.openWindow('Microsoft Edge');
+  handleChange(source: unknown, propertyName: string) {
+    if (propertyName === 'theme' || propertyName === 'transparency') {
+      this.setTheme();
+    }
+  }
+
+  setTheme() {
+    setTheme(this.ws.theme, this.ws.transparency);
   }
 
   handleTaskbarButtonClick(appName: string) {
@@ -119,7 +148,7 @@ export class WindowsShell extends FASTElement {
     if (windows.length === 1) {
       // if it's minimized, restore it
       if (windows[0].minimized) {
-        this.ws.restoreWindow(windows[0].id);
+        this.ws.minimizeWindow(windows[0].id, false);
         return;
       }
       // if it's not active, activate it
@@ -134,5 +163,10 @@ export class WindowsShell extends FASTElement {
 
     // if there are multiple windows open
     return;
+  }
+
+  handleWindowMove(e: CustomEvent) {
+    const { id, width, height, xPos, yPos } = e.detail;
+    this.ws.moveWindow(id, width, height, xPos, yPos);
   }
 }

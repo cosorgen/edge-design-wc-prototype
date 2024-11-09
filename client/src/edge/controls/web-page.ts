@@ -4,27 +4,21 @@ import {
   html,
   css,
   attr,
-  observable,
 } from '@microsoft/fast-element';
-import { colorLayerBackgroundBase } from '@phoenixui/themes';
 
 const template = html<WebPage>`
   <iframe
     sandbox="allow-same-origin allow-scripts"
     srcdoc="${(x) => x.page}"
+    @load="${(x) => x.handlePageLoad()}"
   ></iframe>
 `;
 
 const styles = css`
   :host {
     flex: 1;
-    display: none;
-    background: ${colorLayerBackgroundBase};
+    background: white;
     overflow: hidden;
-  }
-
-  :host([active]) {
-    display: block;
   }
 
   iframe {
@@ -40,17 +34,116 @@ const styles = css`
   styles,
 })
 export class WebPage extends FASTElement {
-  @attr url = '';
-  @attr({ mode: 'boolean' }) active = false;
-  @observable page = '';
+  @attr page: string = '';
+  _iframeDocumentBody: HTMLBodyElement | null = null;
 
-  urlChanged() {
-    this.loadWebPage();
+  setElements() {
+    const iframe = this.shadowRoot?.querySelector(
+      'iframe',
+    ) as HTMLIFrameElement;
+
+    if (!iframe) return;
+    this._iframeDocumentBody = iframe.contentWindow?.document
+      .body as HTMLBodyElement;
   }
 
-  loadWebPage() {
-    fetch(`/api/proxy?url=${this.url}`)
-      .then((res) => res.json())
-      .then((res) => (this.page = res.page));
+  unsetElements() {
+    this._iframeDocumentBody = null;
   }
+
+  addEventListeners() {
+    this._iframeDocumentBody!.addEventListener('click', this.handleIframeEvent);
+    this._iframeDocumentBody!.addEventListener(
+      'mouseup',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener(
+      'mousedown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener(
+      'mousemove',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener(
+      'keydown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.addEventListener('keyup', this.handleIframeEvent);
+  }
+
+  removeEventListeners() {
+    this._iframeDocumentBody!.removeEventListener(
+      'click',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'mouseup',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'mousedown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'mousemove',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'keydown',
+      this.handleIframeEvent,
+    );
+    this._iframeDocumentBody!.removeEventListener(
+      'keyup',
+      this.handleIframeEvent,
+    );
+  }
+
+  handlePageUnload() {
+    this.$emit('pageunload');
+    this.removeEventListeners();
+    this.unsetElements();
+  }
+
+  handlePageLoad() {
+    setTimeout(() => {
+      this.setElements();
+      this.addEventListeners();
+    }, 500);
+
+    this.$emit('pageload');
+  }
+
+  handlePageError(res: Response) {
+    this.$emit('pageerror');
+    throw new Error(`Error fetching page: ${res.text()}`);
+  }
+
+  handleIframeEvent = (event: Event) => {
+    let newEvent = new Event('iframeevent');
+    switch (event.type) {
+      case 'click':
+        newEvent = new MouseEvent('click', event);
+        break;
+      case 'mouseup':
+        newEvent = new MouseEvent('mouseup', event);
+        break;
+      case 'mousedown':
+        newEvent = new MouseEvent('mousedown', event);
+        break;
+      case 'mousemove':
+        newEvent = new MouseEvent('mousemove', event);
+        break;
+      case 'keydown':
+        newEvent = new KeyboardEvent('keydown', event);
+        break;
+      case 'keyup':
+        newEvent = new KeyboardEvent('keyup', event);
+        break;
+      default:
+        break;
+    }
+
+    this.dispatchEvent(newEvent);
+  };
 }
