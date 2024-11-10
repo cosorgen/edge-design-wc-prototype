@@ -27,7 +27,6 @@ import {
   colorSubtleBackgroundHover,
   colorSubtleBackgroundSelected,
   colorBrandForeground1,
-  spacingVerticalL,
   borderRadiusSmall,
   spacingHorizontalM,
   spacingVerticalS,
@@ -49,9 +48,9 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
-import { Checkbox } from '@phoenixui/web-components';
 import { TabService } from '#servicestabService.js';
 import { CopilotService } from '#servicescopilotService.js';
+import './views/appearance.js';
 
 const template = html<WindowsSettings>`
   <mica-material
@@ -128,82 +127,16 @@ const template = html<WindowsSettings>`
         >
           Browser
         </button>
-        <button
-          class="${(x) => (x.selectedButton === 'newtab' ? 'selected' : '')}"
-          @click="${(x) => x.handleSidebarButtonClick('newtab')}"
-        >
-          New tab pages
-        </button>
-        <button
-          class="${(x) => (x.selectedButton === 'copilot' ? 'selected' : '')}"
-          @click="${(x) => x.handleSidebarButtonClick('copilot')}"
-        >
-          Copilot
-        </button>
       </div>
 
       <div id="main">
-        <!-- Overall Appearance Section -->
-        <div ?hidden="${(x) => x.selectedButton !== 'appearance'}">
-          <h2>Overall appearance</h2>
-          <div class="entry">
-            <label for="theme">Theme</label>
-            <select id="theme" @change="${(x) => x.updateTheme()}">
-              <option
-                value="light"
-                ?selected="${(x) => x.ws.theme === 'light'}"
-              >
-                Light
-              </option>
-              <option value="dark" ?selected="${(x) => x.ws.theme === 'dark'}">
-                Dark
-              </option>
-            </select>
-          </div>
-          <div class="entry">
-            <label for="transparency">Transparency</label>
-            <select
-              id="transparency"
-              @change="${(x) => x.updateTransparency()}"
-            >
-              <option
-                value="normal"
-                ?selected="${(x) => x.ws.transparency === 'normal'}"
-              >
-                Normal
-              </option>
-              <option
-                value="reduced"
-                ?selected="${(x) => x.ws.transparency === 'reduced'}"
-              >
-                Reduced
-              </option>
-            </select>
-          </div>
-          <div class="entry">
-            <label for="frame-spacing">Frame spacing</label>
-            <phx-text-input
-              id="frame-spacing"
-              type="number"
-              value="${(x) => parseInt(x.ss.frameSpacing)}"
-              @change="${(x) => x.updateFrameSpacing()}"
-            >
-            </phx-text-input>
-          </div>
-        </div>
+        <appearance-settings
+          ?hidden="${(x) => x.selectedButton !== 'appearance'}"
+        ></appearance-settings>
 
         <!-- Browser Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'browser'}">
           <h2>Browser</h2>
-          <div class="entry">
-            <label for="show-menus-l0">Show menus in L1</label>
-            <phx-switch
-              slot="input"
-              id="show-menus-l0"
-              ?checked="${(x) => x.ss.showMenusInL1}"
-              @change="${(x) => x.toggleshowMenusInL1()}"
-            ></phx-switch>
-          </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
             <select
@@ -232,23 +165,6 @@ const template = html<WindowsSettings>`
             </select>
           </div>
           <div class="entry">
-            <label for="truncate-url">Truncate URL</label>
-            <phx-switch
-              id="truncate-url"
-              ?checked="${(x) => x.ss.truncateURL}"
-              @change="${(x) => x.toggleTruncateUrl()}"
-            ></phx-switch>
-          </div>
-          <div class="entry">
-            <label for="full-width-omnibox">Full width omnibox</label>
-            <phx-switch
-              slot="input"
-              id="full-width-omnibox"
-              ?checked="${(x) => x.ss.fullWidthOmnibox}"
-              @change="${(x) => x.toggleFullWidthOmnibox()}"
-            ></phx-switch>
-          </div>
-          <div class="entry">
             <label for="shopping-trigger">Shopping trigger URL</label>
             <phx-text-input
               id="shopping-trigger"
@@ -259,87 +175,12 @@ const template = html<WindowsSettings>`
             </phx-text-input>
           </div>
         </div>
-
-        <!-- New Tab Pages Section -->
-        <div ?hidden="${(x) => x.selectedButton !== 'newtab'}">
-          <h2>New tab pages</h2>
-          <div class="entry">
-            <label for="legacy-newtab"> Show legacy new tab page </label>
-            <phx-switch
-              id="legacy-newtab"
-              ?checked="${(x) => x.ss.showLegacyNewTab}"
-              @change="${(x) => x.toggleShowLegacyNewTab()}"
-            ></phx-switch>
-          </div>
-          <div class="entry">
-            <label for="show-copilot-ntp"> Show copilot new tab page </label>
-            <phx-switch
-              slot="input"
-              id="show-copilot-ntp"
-              ?checked="${(x) => x.ss.showCopilotNTP}"
-              @change="${(x) => x.toggleShowCopilotNTP()}"
-            ></phx-switch>
-          </div>
-        </div>
-
-        <!-- Copilot Section -->
-        <div ?hidden="${(x) => x.selectedButton !== 'copilot'}">
-          <h2>Copilot</h2>
-          <div class="entry">
-            <label for="legacy-copilot"> Show legacy copilot </label>
-            <phx-switch
-              id="legacy-copilot"
-              ?checked="${(x) => x.ss.showLegacyCopilot}"
-              @change="${(x) => x.toggleShowLegacyCopilot()}"
-            ></phx-switch>
-          </div>
-          <div class="entry">
-            <label for="composer-hint"> Show composer hint </label>
-            <phx-switch
-              id="composer-hint"
-              ?checked="${(x) => x.cs.showHint}"
-              @change="${(x) => x.toggleShowComposerHint()}"
-            ></phx-switch>
-          </div>
-          <div class="entry">
-            <label for="legacy-newtab"> Auto open composer on hover </label>
-            <phx-switch
-              id="composer-auto-open"
-              ?checked="${(x) => x.cs.autoOpen}"
-              @change="${(x) => x.toggleAutoOpenComposer()}"
-            ></phx-switch>
-          </div>
-          <div class="entry">
-            <label for="composer-auto-open-delay"
-              >Composer auto open delay (ms)</label
-            >
-            <phx-text-input
-              id="composer-auto-open-delay"
-              type="number"
-              value="${(x) => x.cs.autoOpenDelay}"
-              @change="${(x) => x.updateComposerAutoOpenDelay()}"
-              ?disabled="${(x) => !x.cs.autoOpen}"
-            >
-            </phx-text-input>
-          </div>
-          <div class="entry">
-            <label for="copilot-sidepane-background">
-              Copilot sidepane background
-            </label>
-            <phx-switch
-              id="copilot-sidepane-background"
-              ?checked="${(x) => x.cs.sidepaneBackground}"
-              @change="${(x) => x.toggleShowSidepaneBackground()}"
-            ></phx-switch>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 `;
 
 const styles = css`
-
   #container {
     display: flex;
     height: 100vh;
@@ -417,7 +258,7 @@ const styles = css`
     width: 3px;
     height: 16px;
     background-color: ${colorBrandForeground1};
-    border-radius: ${borderRadiusCircular}
+    border-radius: ${borderRadiusCircular};
   }
 
   #sidebar {
@@ -491,6 +332,8 @@ const styles = css`
   }
 `;
 
+type Section = 'appearance' | 'browser';
+
 @customElement({ name: 'windows-settings', template, styles })
 export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
@@ -498,9 +341,9 @@ export class WindowsSettings extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(CopilotService) cs!: CopilotService;
 
-  @observable selectedButton = 'appearance';
+  @observable selectedButton: Section = 'appearance';
 
-  handleSidebarButtonClick(button: string) {
+  handleSidebarButtonClick(button: Section) {
     this.selectedButton = button;
   }
 
@@ -524,75 +367,10 @@ export class WindowsSettings extends FASTElement {
     this.ws.maximizeWindow(this.ws.activeWindowId, !this.windowIsMaximized());
   }
 
-  updateFrameSpacing() {
-    this.ss.setFrameSpacing(
-      `${
-        (this.shadowRoot?.getElementById('frame-spacing') as HTMLInputElement)
-          ?.value || '0'
-      }px`,
-    );
-  }
-
-  toggleShowLegacyCopilot() {
-    this.ss.setShowLegacyCopilot(
-      (this.shadowRoot?.querySelector('#legacy-copilot') as Checkbox)
-        ?.checked || false,
-    );
-  }
-
-  toggleShowCopilotNTP() {
-    this.ss.setShowCopilotNTP(
-      (this.shadowRoot?.querySelector('#show-copilot-ntp') as Checkbox)
-        ?.checked || false,
-    );
-  }
-
-  toggleTruncateUrl() {
-    this.ss.setTruncateURL(
-      (this.shadowRoot?.querySelector('#truncate-url') as Checkbox)?.checked ||
-        false,
-    );
-  }
-
-  toggleShowLegacyNewTab() {
-    this.ss.setShowLegacyNewTab(
-      (this.shadowRoot?.querySelector('#legacy-newtab') as Checkbox)?.checked ||
-        false,
-    );
-  }
-
-  toggleshowMenusInL1() {
-    this.ss.setShowMenusInL1(
-      (this.shadowRoot?.querySelector('#show-menus-l0') as Checkbox)?.checked ||
-        false,
-    );
-  }
-
-  toggleFullWidthOmnibox() {
-    this.ss.setFullWidthOmnibox(
-      (this.shadowRoot?.querySelector('#full-width-omnibox') as Checkbox)
-        ?.checked || false,
-    );
-  }
-
   updateShowFavoritesBar() {
     this.ss.setShowFavoritesBar(
       ((this.shadowRoot?.querySelector('#favorites-bar') as HTMLSelectElement)
         ?.value as 'always' | 'never' | 'newtab') || 'never',
-    );
-  }
-
-  updateTheme() {
-    this.ws.setTheme(
-      ((this.shadowRoot?.querySelector('#theme') as HTMLSelectElement)
-        ?.value as 'light' | 'dark') || 'light',
-    );
-  }
-
-  updateTransparency() {
-    this.ws.setTransparency(
-      ((this.shadowRoot?.querySelector('#transparency') as HTMLSelectElement)
-        ?.value as 'normal' | 'reduced') || 'normal',
     );
   }
 
@@ -603,42 +381,5 @@ export class WindowsSettings extends FASTElement {
     if (newTrigger && newTrigger !== '') {
       this.ts.updateShoppingTriggerURL(newTrigger);
     }
-  }
-
-  toggleShowComposerHint() {
-    this.cs.setShowHint(
-      (this.shadowRoot?.querySelector('#composer-hint') as Checkbox)?.checked ||
-        false,
-    );
-  }
-
-  toggleAutoOpenComposer() {
-    this.cs.setAutoOpen(
-      (this.shadowRoot?.querySelector('#composer-auto-open') as Checkbox)
-        ?.checked || false,
-    );
-  }
-
-  updateComposerAutoOpenDelay() {
-    const newDelay = parseInt(
-      (
-        this.shadowRoot?.querySelector(
-          '#composer-auto-open-delay',
-        ) as HTMLInputElement
-      ).value,
-    );
-    if (newDelay && newDelay !== 0) {
-      this.cs.setAutoOpenDelay(newDelay);
-    }
-  }
-
-  toggleShowSidepaneBackground() {
-    this.cs.setShowSidepaneBackground(
-      (
-        this.shadowRoot?.querySelector(
-          '#copilot-sidepane-background',
-        ) as Checkbox
-      )?.checked || false,
-    );
   }
 }
