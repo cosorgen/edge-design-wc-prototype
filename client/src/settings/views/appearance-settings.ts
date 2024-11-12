@@ -8,12 +8,15 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
+import { typographyStyles } from '@phoenixui/themes';
+import '../controls/setting-entry.js';
+import '../controls/setting-select.js';
 
 const template = html<AppearanceSettings>`
   <h2>Overall appearance</h2>
-  <div class="entry">
+  <setting-entry>
     <label for="theme">Theme</label>
-    <select id="theme" @change="${(x) => x.updateTheme()}">
+    <select is="setting-select" id="theme" @change="${(x) => x.updateTheme()}">
       <option value="light" ?selected="${(x) => x.ws.theme === 'light'}">
         Light
       </option>
@@ -21,10 +24,14 @@ const template = html<AppearanceSettings>`
         Dark
       </option>
     </select>
-  </div>
-  <div class="entry">
+  </setting-entry>
+  <setting-entry>
     <label for="transparency">Transparency</label>
-    <select id="transparency" @change="${(x) => x.updateTransparency()}">
+    <select
+      is="setting-select"
+      id="transparency"
+      @change="${(x) => x.updateTransparency()}"
+    >
       <option
         value="normal"
         ?selected="${(x) => x.ws.transparency === 'normal'}"
@@ -38,8 +45,8 @@ const template = html<AppearanceSettings>`
         Reduced
       </option>
     </select>
-  </div>
-  <div class="entry">
+  </setting-entry>
+  <setting-entry>
     <label for="frame-spacing">Frame spacing</label>
     <phx-text-input
       id="frame-spacing"
@@ -48,7 +55,7 @@ const template = html<AppearanceSettings>`
       @change="${(x) => x.updateFrameSpacing()}"
     >
     </phx-text-input>
-  </div>
+  </setting-entry>
 `;
 
 const styles = css`
@@ -58,6 +65,15 @@ const styles = css`
 
   :host([hidden]) {
     display: none;
+  }
+
+  h2 {
+    font-family: ${typographyStyles.body1Strong.fontFamily};
+    font-size: ${typographyStyles.body1Strong.fontSize};
+    font-weight: ${typographyStyles.body1Strong.fontWeight};
+    line-height: 32px;
+    margin: 0;
+    user-select: none;
   }
 `;
 

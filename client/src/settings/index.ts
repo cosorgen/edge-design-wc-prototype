@@ -6,39 +6,14 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import {
-  borderRadiusMedium,
-  colorBrandStroke,
-  colorLayerBackgroundDialog,
-  colorNeutralBackground1,
-  colorNeutralForeground1,
-  colorNeutralStroke2,
-  colorNeutralStrokeAccessible,
   spacingHorizontalL,
   spacingHorizontalXL,
-  spacingHorizontalS,
-  spacingVerticalXS,
-  strokeWidthThick,
-  strokeWidthThin,
   typographyStyles,
-  borderRadiusCircular,
-  fontFamilyBase,
-  fontSizeBase300,
-  lineHeightBase300,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundSelected,
-  colorBrandForeground1,
-  borderRadiusSmall,
   spacingHorizontalM,
   spacingVerticalS,
 } from '@phoenixui/themes';
 import '../windows/controls/mica-material.js';
 import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/label.js';
-import '@phoenixui/web-components/radio-group.js';
-import '@phoenixui/web-components/radio.js';
-import '@phoenixui/web-components/text-input.js';
-import '@phoenixui/web-components/switch.js';
-import '@phoenixui/web-components/field.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -50,7 +25,9 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import { CopilotService } from '#servicescopilotService.js';
-import './views/appearance.js';
+import './views/appearance-settings.js';
+import './views/browser-settings.js';
+import './controls/left-nav.js';
 
 const template = html<WindowsSettings>`
   <mica-material
@@ -58,7 +35,7 @@ const template = html<WindowsSettings>`
     left="${(x) => x.ws.getWindowById(x.id)?.xPos}"
   ></mica-material>
   <div id="content">
-    <div id="nav">
+    <div id="title-bar">
       <h1>Settings</h1>
       <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
@@ -113,68 +90,29 @@ const template = html<WindowsSettings>`
     </div>
 
     <div id="container">
-      <div id="sidebar">
-        <button
-          class="${(x) =>
-            x.selectedButton === 'appearance' ? 'selected' : ''}"
+      <left-nav>
+        <left-nav-item
           @click="${(x) => x.handleSidebarButtonClick('appearance')}"
+          ?selected="${(x) => x.selectedPage === 'appearance'}"
         >
           Overall appearance
-        </button>
-        <button
-          class="${(x) => (x.selectedButton === 'browser' ? 'selected' : '')}"
+        </left-nav-item>
+        <left-nav-item
           @click="${(x) => x.handleSidebarButtonClick('browser')}"
+          ?selected="${(x) => x.selectedPage === 'browser'}"
         >
           Browser
-        </button>
-      </div>
+        </left-nav-item>
+      </left-nav>
 
       <div id="main">
         <appearance-settings
-          ?hidden="${(x) => x.selectedButton !== 'appearance'}"
+          ?hidden="${(x) => x.selectedPage !== 'appearance'}"
         ></appearance-settings>
 
-        <!-- Browser Section -->
-        <div ?hidden="${(x) => x.selectedButton !== 'browser'}">
-          <h2>Browser</h2>
-          <div class="entry">
-            <label for="favorites-bar">Show favorites bar</label>
-            <select
-              id="favorites-bar"
-              @change="${(x) => x.updateShowFavoritesBar()}"
-              value="${(x) => x.ss.showFavoritesBar}"
-            >
-              <option
-                value="always"
-                ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
-              >
-                Always
-              </option>
-              <option
-                value="never"
-                ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
-              >
-                Never
-              </option>
-              <option
-                value="newtab"
-                ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
-              >
-                On new tab
-              </option>
-            </select>
-          </div>
-          <div class="entry">
-            <label for="shopping-trigger">Shopping trigger URL</label>
-            <phx-text-input
-              id="shopping-trigger"
-              type="text"
-              value="${(x) => x.ts.shoppingTriggerURL}"
-              @blur="${(x) => x.updateShoppingTrigger()}"
-            >
-            </phx-text-input>
-          </div>
-        </div>
+        <browser-settings
+          ?hidden="${(x) => x.selectedPage !== 'browser'}"
+        ></browser-settings>
       </div>
     </div>
   </div>
@@ -197,7 +135,7 @@ const styles = css`
     overflow: hidden;
   }
 
-  #nav {
+  #title-bar {
     display: flex;
     align-items: center;
     padding-inline-start: ${spacingHorizontalL};
@@ -211,60 +149,6 @@ const styles = css`
     padding-top: ${spacingVerticalS};
     margin: 0;
     user-select: none;
-  }
-
-  h2 {
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    line-height: 32px;
-    margin: 0;
-    user-select: none;
-  }
-
-  button {
-    position: relative;
-    width: 100%;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    padding-left: ${spacingHorizontalM};
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    border-radius: ${borderRadiusSmall};
-
-    /* Body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    line-height: ${lineHeightBase300};
-    color: ${colorNeutralForeground1};
-  }
-
-  button:hover {
-    background: ${colorSubtleBackgroundHover};
-  }
-
-  button.selected {
-    background: ${colorSubtleBackgroundSelected};
-  }
-
-  button.selected::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 16px;
-    background-color: ${colorBrandForeground1};
-    border-radius: ${borderRadiusCircular};
-  }
-
-  #sidebar {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
   }
 
   #close:hover {
@@ -286,66 +170,21 @@ const styles = css`
   #main {
     overflow-y: auto;
   }
-
-  .entry {
-    display: flex;
-    flex-direction: row;
-    min-height: 40px;
-    align-items: center;
-    gap: ${spacingHorizontalL};
-    grid-column: span 1;
-
-    label {
-      width: 200px;
-    }
-  }
-
-  @media (max-width: 768px) {
-    #main {
-      grid-template-columns: 1fr; /* Switch to single column on small screens */
-    }
-  }
-
-  select {
-    padding: ${spacingVerticalXS} ${spacingHorizontalS};
-    border-radius: ${borderRadiusMedium};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke2};
-    border-bottom: ${strokeWidthThin} solid ${colorNeutralStrokeAccessible};
-    background-color: ${colorNeutralBackground1};
-
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
-    color: ${colorNeutralForeground1};
-  }
-
-  select:focus,
-  select:focus-visible {
-    border-bottom: ${strokeWidthThick} solid ${colorBrandStroke};
-    outline: none;
-  }
-
-  select option {
-    background-color: ${colorLayerBackgroundDialog};
-    color: ${colorNeutralForeground1};
-  }
 `;
 
 type Section = 'appearance' | 'browser';
 
-@customElement({ name: 'windows-settings', template, styles })
+@customElement({
+  name: 'windows-settings',
+  template,
+  styles,
+})
 export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @inject(CopilotService) cs!: CopilotService;
-
-  @observable selectedButton: Section = 'appearance';
-
-  handleSidebarButtonClick(button: Section) {
-    this.selectedButton = button;
-  }
+  @observable selectedPage: Section = 'appearance';
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');
@@ -367,19 +206,7 @@ export class WindowsSettings extends FASTElement {
     this.ws.maximizeWindow(this.ws.activeWindowId, !this.windowIsMaximized());
   }
 
-  updateShowFavoritesBar() {
-    this.ss.setShowFavoritesBar(
-      ((this.shadowRoot?.querySelector('#favorites-bar') as HTMLSelectElement)
-        ?.value as 'always' | 'never' | 'newtab') || 'never',
-    );
-  }
-
-  updateShoppingTrigger() {
-    const newTrigger = (
-      this.shadowRoot?.querySelector('#shopping-trigger') as HTMLInputElement
-    ).value;
-    if (newTrigger && newTrigger !== '') {
-      this.ts.updateShoppingTriggerURL(newTrigger);
-    }
+  handleSidebarButtonClick(button: Section) {
+    this.selectedPage = button;
   }
 }
