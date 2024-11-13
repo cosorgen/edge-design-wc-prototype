@@ -6,7 +6,7 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
-import { borderRadiusLayerBase } from '@phoenixui/themes';
+import { borderRadiusLayerBase, shadow2 } from '@phoenixui/themes';
 import apps from '../installedApps.js';
 
 const template = html<SidePane>`${(x) => apps[x.id].template}`;
@@ -21,6 +21,7 @@ const styles = css`
     max-width: 376px;
     border-radius: ${borderRadiusLayerBase};
     overflow: hidden;
+    box-shadow: ${shadow2};
   }
 `;
 

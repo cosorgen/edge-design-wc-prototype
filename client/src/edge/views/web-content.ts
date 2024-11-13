@@ -10,7 +10,12 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
+import {
+  borderRadiusLayerBase,
+  colorLayerBackgroundApp,
+  shadow2,
+  strokeWidthThin,
+} from '@phoenixui/themes';
 import './edge-newtab.js';
 import './settings.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
@@ -48,6 +53,8 @@ const styles = css`
     flex: 1;
     display: flex;
     border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
+    border-radius: ${borderRadiusLayerBase};
+    box-shadow: ${shadow2};
     overflow: hidden;
     z-index: 0; /* ensure content is under omnibox */
 

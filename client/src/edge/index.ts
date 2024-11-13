@@ -75,11 +75,6 @@ const styles = css`
     overflow: hidden;
   }
 
-  mica-material {
-    position: absolute;
-    inset: 0;
-  }
-
   #content {
     box-sizing: border-box;
     position: relative;

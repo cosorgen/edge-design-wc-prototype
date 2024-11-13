@@ -8,7 +8,6 @@ import {
 } from '@microsoft/fast-element';
 import {
   borderRadiusLarge,
-  colorLayerBackgroundDialog,
   colorNeutralForeground1,
   colorNeutralShadowAmbient,
   colorNeutralShadowKey,
@@ -33,9 +32,9 @@ import '../../windows/controls/mica-material.js';
 import { spacingFrame } from '../designSystem.js';
 
 const template = html<HorizontalTab>`
-  <div class="tab-background" id="bg"></div>
-  <div class="tab-background" id="left-wing"></div>
-  <div class="tab-background" id="right-wing"></div>
+  <mica-material id="bg"></mica-material>
+  <mica-material id="left-wing"></mica-material>
+  <mica-material id="right-wing"></mica-material>
   <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">
     <div id="favicon" part="favicon">
       ${when(
@@ -166,21 +165,17 @@ const styles = css`
     padding: 0;
   }
 
-  .tab-background {
-    background-color: ${colorLayerBackgroundDialog};
-  }
-
   #bg,
   #left-wing,
   #right-wing {
     visibility: hidden;
-    position: absolute;
     overflow: hidden;
+    inset: unset;
   }
 
   #bg {
     inset: 0;
-    bottom: calc(0px - ${spacingFrame});
+    bottom: calc(0px - ${spacingFrame} / 2);
     border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
   }
 
@@ -188,7 +183,7 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: calc(0px - ${spacingFrame});
+    bottom: calc(0px - ${spacingFrame} / 2);
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 

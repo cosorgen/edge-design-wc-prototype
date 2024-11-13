@@ -29,9 +29,8 @@ const template = html<MicaMaterial>`
 const styles = css`
   :host {
     display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     backdrop-filter: blur(0px); /* Fix for overflow:hidden */
   }
 
@@ -51,7 +50,7 @@ const styles = css`
     backdrop-filter: blur(calc(${tabActiveBackgroundBlur} / 2));
   }
 
-  :host([appearance='tabBar']) #blur {
+  :host([tab-bar]) #blur {
     backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
   }
 
@@ -60,7 +59,7 @@ const styles = css`
     mix-blend-mode: luminosity;
   }
 
-  :host([appearance='tabBar']) #luminosity {
+  :host([tab-bar]) #luminosity {
     background: ${tabBarBackgroundLuminosity};
   }
 
@@ -69,7 +68,7 @@ const styles = css`
     mix-blend-mode: color;
   }
 
-  :host([appearance='tabBar']) #color {
+  :host([tab-bar]) #color {
     background: ${tabBarBackgroundColor};
   }
 
@@ -77,7 +76,7 @@ const styles = css`
     background: ${tabActiveBackgroundNormal};
   }
 
-  :host([appearance='tabBar']) #normal {
+  :host([tab-bar]) #normal {
     background: ${tabBarBackgroundNormal};
   }
 
