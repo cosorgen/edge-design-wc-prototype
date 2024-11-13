@@ -31,7 +31,6 @@ import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
-import './views/copilot-entrypoint/index.js';
 import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
@@ -52,15 +51,6 @@ const template = html<MicrosoftEdge>`
           <web-content></web-content>
         </div>
       </div>
-      ${when(
-        (x) => !x.ss.showLegacyCopilot,
-        html`<copilot-entrypoint
-          ?ntp="${(x) =>
-            x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
-          inline-position="center"
-          block-position="end"
-        ></copilot-entrypoint>`,
-      )}
     </div>
     ${when(
       (x) => x.ews.activeSidepaneAppId,
