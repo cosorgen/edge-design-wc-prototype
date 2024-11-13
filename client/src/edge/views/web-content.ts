@@ -12,23 +12,15 @@ import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
 import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 import './edge-newtab.js';
-import './edge-newtab-legacy.js';
-import './copilot-newtab.js';
 import './settings.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
-  newtab: html<string>`<copilot-newtab
-    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></copilot-newtab>`,
-  newtabEdge: html<string>`<edge-newtab
+  newtab: html<string>`<edge-newtab
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab>`,
-  newtabLegacy: html<string>`<edge-newtab-legacy
-    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></edge-newtab-legacy>`,
   settings: html`<settings-page
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></settings-page>`,
@@ -98,21 +90,6 @@ export class WebContent extends FASTElement {
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
-
-    if (urlObj.hostname === 'newtab') {
-      if (this.ess.showCopilotNTP) {
-        return 'newtab';
-      }
-      if (this.ess.showLegacyNewTab) {
-        return 'newtabLegacy';
-      }
-      return 'newtabEdge';
-    }
-
-    if (urlObj.hostname === 'settings') {
-      return 'settings';
-    }
-
     return urlObj.hostname;
   }
 

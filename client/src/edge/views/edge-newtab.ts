@@ -1,478 +1,456 @@
-import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import '../../windows/controls/mica-material.js';
-import './copilot-composer.js';
+import {
+  html,
+  css,
+  FASTElement,
+  customElement,
+  observable,
+  repeat,
+} from '@microsoft/fast-element';
 import '@phoenixui/web-components/button.js';
-import '../controls/newtab-card.js';
-import '../controls/newtab-chip.js';
-import '../controls/newtab-composer.js';
-import '../controls/newtab-feed-card.js';
-import '../controls/newtab-feed-list.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import { TabService } from '#servicestabService.js';
 import {
-  colorBrandForegroundLink,
-  colorBrandForegroundLinkHover,
-  colorNeutralForegroundHint,
-  curveDecelerateMax,
-  durationUltraSlow,
+  borderRadiusCircular,
+  borderRadiusLarge,
+  colorBackgroundOverlay,
+  colorBrandForeground1,
+  colorBrandForeground1Hover,
+  colorLayerBackgroundDialog,
+  colorNeutralCardBackground,
+  colorNeutralCardBackgroundHover,
+  colorNeutralForeground1,
+  colorNeutralForeground2,
+  colorNeutralForegroundStaticInverted,
+  colorNeutralStroke1,
+  colorSubtleBackgroundHover,
+  shadow8,
   spacingHorizontalL,
+  spacingHorizontalM,
   spacingHorizontalS,
-  spacingHorizontalSNudge,
+  spacingHorizontalXL,
+  spacingHorizontalXS,
   spacingVerticalL,
-  spacingVerticalXXL,
+  spacingVerticalM,
+  spacingVerticalMNudge,
+  spacingVerticalS,
+  spacingVerticalXXXL,
+  spacingHorizontalXXXL,
+  strokeWidthThin,
   typographyStyles,
 } from '@phoenixui/themes';
-import { TabService } from '#servicestabService.js';
 
-const template = html<EdgeNewTab>`
-  <mica-material
-    top="${(x) => x.ws.getWindowById(x.ews.id)?.yPos}"
-    left="${(x) => x.ws.getWindowById(x.ews.id)?.xPos}"
-  ></mica-material>
-  <div class="composer-positioning" id="composer-backdrop"></div>
-  <div class="composer-positioning" id="composer-wrapper">
-    <newtab-composer
-      @submit="${(x, c) => x.handleComposerSubmit(c.event)}"
-    ></newtab-composer>
-  </div>
+const topSites = [
+  {
+    title: 'YouTube',
+    url: 'https://www.youtube.com',
+    icon: 'img/edge/newtab/youtube.png',
+  },
+  {
+    title: 'Netflix',
+    url: 'https://www.netflix.com',
+    icon: 'img/edge/newtab/netflix.png',
+  },
+  {
+    title: 'Instagram',
+    url: 'https://www.instagram.com',
+    icon: 'img/edge/newtab/instagram.png',
+  },
+  {
+    title: 'The New York Times',
+    url: 'https://www.nytimes.com',
+    icon: 'img/edge/newtab/nytimes.png',
+  },
+  {
+    title: 'Target',
+    url: 'https://www.target.com',
+    icon: 'img/edge/newtab/target.png',
+  },
+  {
+    title: 'Spotify',
+    url: 'https://www.spotify.com',
+    icon: 'img/edge/newtab/spotify.png',
+  },
+  {
+    title: 'Yahoo!',
+    url: 'https://www.yahoo.com',
+    icon: 'img/edge/newtab/yahoo.png',
+  },
+  {
+    title: 'Medium',
+    url: 'https://www.medium.com',
+    icon: 'img/edge/newtab/medium.png',
+  },
+];
+
+const template = html<EdgeNewTab>`<img
+    id="of-the-day"
+    src="${(x) => x.imageOfTheDay}"
+    alt="Background image"
+  />
   <div id="content">
-    <div id="composer-placeholder"></div>
     <div id="main">
-      <div id="header">
-        <svg>
-          <use href="img/edge/icons.svg#copilot-20-regular" />
-        </svg>
-        Make the most of your lunch break
+      <div id="logo">
+        <img src="img/edge/microsoft-logo.svg" alt="Microsoft" />
+        Microsoft Start
       </div>
-      <div id="cards">
-        <div id="news" class="card-in" style="--index: 1">
-          <h1>
-            Tonight’s perfect for
-            <a href="" @click="${(x) => x.handleLinkClick('halloumi tacos')}"
-              >Halloumi Tacos</a
-            >—picky eater approved!
-            <a
-              href=""
-              @click="${(x) => x.handleLinkClick('halloumi taco ingredients')}"
-              >Grab ingredients</a
-            >
-            on the way home.
-          </h1>
-          <div id="chips">
-            <newtab-chip
-              @click="${(x) =>
-                x.handleLinkClick(
-                  'https://pickyeaterblog.com/the-best-of-the-picky-eater-my-top-10-most-popular-recipes/',
-                )}"
-              >Veggie hacks for picky eaters</newtab-chip
-            >
-            <newtab-chip
-              @click="${(x) =>
-                x.handleLinkClick(
-                  'https://recipeland.com/recipe/v/bob-s-crock-pot-pizza-1582',
-                )}"
-              >Recipes using ingredients I have</newtab-chip
-            >
-          </div>
+      <div id="actions">
+        <phx-button icon-only appearance="subtle" size="large">
+          <svg>
+            <use href="img/edge/icons.svg#settings-24-regular"></use>
+          </svg>
+        </phx-button>
+        <phx-button icon-only appearance="subtle" size="large">
+          <svg>
+            <use href="img/edge/icons.svg#grid-dots-24-regular"></use>
+          </svg>
+        </phx-button>
+      </div>
+      <div id="image-actions">
+        <phx-button icon-only appearance="subtle">
+          <svg>
+            <use href="img/edge/icons.svg#image-20-regular"></use>
+          </svg>
+        </phx-button>
+        <phx-button icon-only appearance="subtle">
+          <svg>
+            <use href="img/edge/icons.svg#arrow-maximize-20-regular"></use>
+          </svg>
+        </phx-button>
+      </div>
+      <div id="searchbox">
+        <div id="start">
+          <svg>
+            <use href="img/edge/icons.svg#search-24-regular"></use>
+          </svg>
+          <input type="text" placeholder="Search Microsoft and the web" />
         </div>
-        <newtab-card class="card-in" style="--index: 2;">
-          <img
-            load="pre"
-            slot="hero"
-            src="img/edge/newtab/529plan.jpg"
-            alt=""
-          />
-          <h2 slot="heading">Continue researching 529 college plans</h2>
-          <newtab-card-item
-            @click="${(x) =>
-              x.handleLinkClick('529 college savings plan tax advantages')}"
-            >Learn about the tax advantages</newtab-card-item
-          >
-          <newtab-card-item
-            @click="${(x) =>
-              x.handleLinkClick('Open 529 college savings plan')}"
-            >Set up a plan now</newtab-card-item
-          >
-          <newtab-card-item
-            @click="${(x) =>
-              x.handleLinkClick('529 college savings plan covered expenses')}"
-            >Explore covered expenses</newtab-card-item
-          >
-        </newtab-card>
-        <newtab-card class="card-in" style="--index: 3;">
-          <img
-            load="pre"
-            slot="hero"
-            src="img/edge/newtab/heretic.jpg"
-            alt=""
-          />
-          <h2 slot="heading">
-            Have you seen the new trailer for Heretic by A24? It looks
-            spine-chilling!
-          </h2>
-          <newtab-card-item
-            @click="${(x) => x.handleLinkClick('Heretic by A24 trailer')}"
-            >Watch the trailer</newtab-card-item
-          >
-          <newtab-card-item
-            @click="${(x) => x.handleLinkClick('Heretic by A24 release date')}"
-            >Remind me when it releases</newtab-card-item
-          >
-        </newtab-card>
-        <newtab-card class="card-in" style="--index: 4;">
-          <img
-            load="pre"
-            slot="hero"
-            src="img/edge/newtab/weather.jpg"
-            alt=""
-          />
-          <h2 slot="heading">Heatwave intensifies around the Puget Sound</h2>
-          <newtab-card-item
-            @click="${(x) =>
-              x.handleLinkClick('Beaches near me for a heatwave')}"
-            >Cool down at beaches near you</newtab-card-item
-          >
-          <newtab-card-item
-            @click="${(x) =>
-              x.handleLinkClick('Evening walk in the park for a heatwave')}"
-            >Plan a walk for the evening</newtab-card-item
-          >
-          <newtab-card-item
-            @click="${(x) =>
-              x.handleLinkClick('Fans and sunscreen for a heatwave at Target')}"
-          >
-            Target Circle Week: Explore savings on fans and sunscreen
-          </newtab-card-item>
-        </newtab-card>
+        <button>
+          <img src="img/edge/copilot-icon.svg" alt="Voice search" />
+        </button>
+      </div>
+      <div id="top-sites">
+        ${repeat(
+          topSites,
+          html`
+            <div
+              class="top-site"
+              @click="${(x, c) => c.parent.handleLinkClick(x.url)}"
+              role="button"
+            >
+              <img src="${(x) => x.icon}" alt="${(x) => x.title}" />
+              <div>${(x) => x.title}</div>
+            </div>
+          `,
+        )}
+        <div class="top-site" role="button">
+          <img src="img/edge/newtab/add.png" alt="add" />
+          <div>Add</div>
+        </div>
       </div>
     </div>
     <div id="feed">
-      <newtab-feed-card
-        @click="${(x) =>
-          x.handleLinkClick(
-            'https://markets.businessinsider.com/news/stocks/apple-stock-price-soars-new-record-high-ai-focused-wwdc-2024-6#:~:text=Apple%20stock%20soared%20as%20much%20as%207%25%20on,falling%202%25%20on%20Monday%20following%20the%20WWDC%20event',
-          )}"
-        class="card-in"
-        style="--index: 5;"
-      >
-        <img slot="hero" src="img/edge/newtab/wwdc.jpg" alt="" />
-        <img
-          slot="publisher-icon"
-          src="https://s.yimg.com/rz/l/favicon.ico"
-          alt=""
-        />
-        <span slot="publisher">Yahoo News</span>
-        <span slot="time">4d</span>
-        <h3 slot="heading">Apple stock soars after WWDC announcements</h3>
-        Apple's stock soars to record high after WWDC · Investors hope that AI
-        features will boost s ales
-      </newtab-feed-card>
-      <newtab-feed-card
-        @click="${(x) =>
-          x.handleLinkClick('https://www.espn.com/mlb/recap?gameId=401569551')}"
-        class="card-in"
-        style="--index: 6;"
-      >
-        <img slot="hero" src="img/edge/newtab/mariners.jpg" alt="" />
-        <img
-          slot="publisher-icon"
-          src="https://s.yimg.com/rz/l/favicon.ico"
-          alt=""
-        />
-        <span slot="publisher">NBC</span>
-        <span slot="time">4d</span>
-        <h3 slot="heading">Mariners shut out Rangers 5-0 for series sweep</h3>
-        Mariners beat the Texas Rangers 5-0 with Gilbert pitching and Locklear
-        with a home run.
-      </newtab-feed-card>
-      <newtab-feed-list class="card-in" style="--index: 7;">
-        <newtab-feed-list-item
-          @click="${(x) =>
-            x.handleLinkClick(
-              'https://seattle.eater.com/2024/5/15/24156807/oyster-cellars-opening-chef-brendan-mcgillF',
-            )}"
-        >
-          <img
-            slot="publisher-icon"
-            src="img/edge/newtab/sources/cnn.png"
-            alt=""
-          />
-          <span slot="time">4d</span>
-          Downtown Seattle’s New Seafood Bar Finds Inspiration in the Historic
-          Oyster Bars of NYC
-          <img slot="hero" src="img/edge/newtab/oysters.jpg" alt="" />
-        </newtab-feed-list-item>
-        <newtab-feed-list-item
-          @click="${(x) =>
-            x.handleLinkClick(
-              'https://people.com/beyonce-destinys-child-giggle-over-jay-z-mtv-blooper-reel-8625028',
-            )}"
-        >
-          <img
-            slot="publisher-icon"
-            src="img/edge/newtab/sources/people.png"
-            alt=""
-          />
-          <span slot="time">1d</span>
-          Beyoncé and Destiny's Child Giggle Over JAY-Z in Blooper Reel from MTV
-          Spring Break 2000 Top 20 Countdown
-          <img slot="hero" src="img/edge/newtab/yonce.jpg" alt="" />
-        </newtab-feed-list-item>
-        <newtab-feed-list-item
-          @click="${(x) =>
-            x.handleLinkClick(
-              'https://www.nytimes.com/2022/10/06/education/learning/tutoring-learning-loss.html',
-            )}"
-        >
-          <img
-            slot="publisher-icon"
-            src="img/edge/newtab/sources/abc.png"
-            alt=""
-          />
-          <span slot="time">4d</span>
-          Tutoring as a new strategy to combat learning loss in elementary
-          schools Oyster Bars of NYC
-          <img slot="hero" src="img/edge/newtab/tutor.jpg" alt="" />
-        </newtab-feed-list-item>
-        <newtab-feed-list-item
-          @click="${(x) =>
-            x.handleLinkClick(
-              'https://www.usnews.com/education/k12/articles/what-school-choice-is-and-how-it-works',
-            )}"
-        >
-          <img
-            slot="publisher-icon"
-            src="img/edge/newtab/sources/usa.png"
-            alt=""
-          />
-          <span slot="time">1d</span>
-          School choice in different states: a primer on education policy
-          <img slot="hero" src="img/edge/newtab/school.jpg" alt="" />
-        </newtab-feed-list-item>
-        <newtab-feed-list-item
-          @click="${(x) =>
-            x.handleLinkClick(
-              'https://seattle.eater.com/2024/5/15/24156807/oyster-cellars-opening-chef-brendan-mcgillF',
-            )}"
-        >
-          <img
-            slot="publisher-icon"
-            src="img/edge/newtab/sources/cnn.png"
-            alt=""
-          />
-          <span slot="time">4d</span>
-          Downtown Seattle’s New Seafood Bar Finds Inspiration in the Historic
-          Oyster Bars of NYC
-          <img slot="hero" src="img/edge/newtab/oysters.jpg" alt="" />
-        </newtab-feed-list-item>
-      </newtab-feed-list>
-      <newtab-feed-card
-        @click="${(x) =>
-          x.handleLinkClick(
-            'https://www.realsimple.com/healthy-meal-prep-recipes-8664774',
-          )}"
-        class="card-in"
-        style="--index: 8;"
-      >
-        <img slot="hero" src="img/edge/newtab/food.jpg" alt="" />
-        <img
-          slot="publisher-icon"
-          src="https://s.yimg.com/rz/l/favicon.ico"
-          alt=""
-        />
-        <span slot="publisher">Forbes</span>
-        <span slot="time">4d</span>
-        <h3 slot="heading">
-          Healthy Meal Prep Recipe Ideas That’ll Make Your Life So Much Easier
-        </h3>
-        Save time and money with meal prep ideas.
-      </newtab-feed-card>
-      <newtab-feed-card
-        @click="${(x) =>
-          x.handleLinkClick(
-            'https://bikesinsight.com/is-a-balance-bike-worth-it/#:~:text=A%20balance%20bike%20is%20worth%20it%20because%20it,your%20kid%20can%20also%20use%20it%20for%20exercise.',
-          )}"
-        class="card-in"
-        style="--index: 9;"
-      >
-        <img slot="hero" src="img/edge/newtab/bikes.jpg" alt="" />
-        <img
-          slot="publisher-icon"
-          src="https://s.yimg.com/rz/l/favicon.ico"
-          alt=""
-        />
-        <span slot="publisher">The New York Times</span>
-        <span slot="time">4d</span>
-        <h3 slot="heading">Are balance bikes worth it? Experts say yes.</h3>
-        A balance bike may be a little kid’s first introduction to zipping
-        around on their own.
-      </newtab-feed-card>
+      <div id="feed-switch">
+        <div active>Discover</div>
+        <div>Following</div>
+      </div>
+      <div id="headings">
+        <a href="">News</a>
+        <a href="">Sports</a>
+        <a href="">Play</a>
+        <a href="">Money</a>
+        <a href="">Gaming</a>
+        <a href="">Weather</a>
+        <a href="">Watch</a>
+        <a href="">Learning</a>
+        <a href="">Shopping</a>
+        <a href="">Health</a>
+        <a href="">Travel</a>
+        <a href="">Traffic</a>
+        <a href="">Autos</a>
+        <a href="">Real Estate</a>
+      </div>
+      <div id="feed-actions">
+        <phx-button shape="circular">
+          <svg slot="start" width="20px" height="20px">
+            <use href="img/edge/icons.svg#star-edit-20-regular"></use>
+          </svg>
+          Personalize
+        </phx-button>
+        <phx-button shape="circular">
+          <svg slot="start" width="20px" height="20px">
+            <use href="img/edge/icons.svg#options-20-regular"></use>
+          </svg>
+          Feed layout
+        </phx-button>
+      </div>
     </div>
-  </div>
-`;
+  </div>`;
 
 const styles = css`
   :host {
-    --scroll-progress: 0;
-
     display: block;
     position: relative;
     width: 100%;
     height: 100%;
   }
 
+  img#of-the-day {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+
   #content {
     position: absolute;
-    inset: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(transparent, ${colorBackgroundOverlay});
+
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 96px;
-    gap: 96px;
-    overflow-y: auto;
-    overflow-x: hidden;
-  }
-
-  #composer-placeholder {
-    display: block;
-    width: 100%;
-    min-height: 64px;
-  }
-
-  .composer-positioning {
-    position: absolute;
-    box-sizing: border-box;
-    top: 0;
-    inset-inline-start: 0;
-    inset-inline-end: 16px; /* scrollbar */
-    padding-block: max(32px, calc((1 - var(--scroll-progress)) * 96px));
-    display: flex;
-    align-items: center;
     justify-content: center;
-    pointer-events: none;
-  }
-
-  #composer-backdrop {
-    z-index: 1;
-    min-height: 224px;
-    backdrop-filter: blur(8px);
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  }
-
-  #composer-wrapper {
-    z-index: 2;
-  }
-
-  newtab-composer {
-    width: 100%;
-    max-width: 512px;
-    margin-inline: auto;
-    pointer-events: auto;
+    align-items: center;
   }
 
   #main {
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${spacingVerticalXXL};
-    min-width: 320px;
+    justify-content: center;
+    gap: ${spacingVerticalL};
+    width: 100%;
+    max-width: 1024px;
+    padding: ${spacingHorizontalXXXL};
+    box-sizing: border-box; 
   }
 
-  #header {
-    width: 100%;
+  #logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 40px;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: ${spacingHorizontalSNudge};
+    align-items: center;
+    gap: ${spacingHorizontalM};
+    padding: ${spacingVerticalXXXL};
+    font-size: ${typographyStyles.subtitle2.fontSize};
+    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    line-height: ${typographyStyles.subtitle2.lineHeight};
+    font-family: ${typographyStyles.subtitle2.fontFamily};
+    color: ${colorNeutralForegroundStaticInverted};
 
-    font-size: ${typographyStyles.body2.fontSize};
-    font-weight: ${typographyStyles.body2.fontWeight};
-    line-height: ${typographyStyles.body2.lineHeight};
-    font-family: ${typographyStyles.body2.fontFamily};
-    color: ${colorNeutralForegroundHint};
-
-    svg {
+    img {
       width: 20px;
       height: 20px;
     }
   }
 
-  #cards {
-    width: 100%;
+  #actions {
+    position: absolute;
+    top: 0;
+    right: 0;
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalL};
+    align-items: center;
+    gap: ${spacingHorizontalS};
+    padding: ${spacingVerticalXXXL};
+
+    phx-button {
+      color: ${colorNeutralForegroundStaticInverted};
+    }
   }
 
-  #news {
-    max-width: 256px;
+  #image-actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
     display: flex;
     flex-direction: column;
-    gap: ${spacingVerticalL};
+    align-items: center;
+    gap: ${spacingHorizontalS};
+    padding: ${spacingVerticalXXXL};
 
-    h1 {
-      font-family: 'Lora', serif;
-      font-weight: 400;
-      font-size: 32px;
-      line-height: 1.3;
-      margin: 0;
-      white-space: normal;
-      text-wrap: pretty;
+    phx-button {
+      color: ${colorNeutralForegroundStaticInverted};
+    }
+  }
 
-      a {
-        font-style: italic;
-        color: ${colorBrandForegroundLink};
-        text-decoration: underline;
-        text-decoration-style: dotted;
-        text-underline-offset: 8px;
+  #searchbox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: ${spacingHorizontalS};
+    border-radius: ${borderRadiusCircular};
+    background-color: ${colorLayerBackgroundDialog};
+    box-shadow: ${shadow8};
 
-        &:hover {
-          color: ${colorBrandForegroundLinkHover};
-        }
+    #start {
+      padding: ${spacingVerticalM} ${spacingHorizontalL};
+      display: flex;
+      align-items: center;
+      gap: ${spacingHorizontalM};
+      flex: 1;
+      min-width: 512px;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    input {
+      border: none;
+      background: transparent;
+      flex: 1;
+
+      font-size: ${typographyStyles.body2.fontSize};
+      font-weight: ${typographyStyles.body2.fontWeight};
+      line-height: ${typographyStyles.body2.lineHeight};
+      font-family: ${typographyStyles.body2.fontFamily};
+      color: ${colorNeutralForeground1};
+
+      &:focus,
+      &:focus-visible {
+        outline: none;
       }
     }
 
-    #chips {
+    button {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      height: 100%;
+      width: 48px;
+      border-radius: 0 ${borderRadiusCircular} ${borderRadiusCircular} 0;
       display: flex;
-      flex-direction: column;
-      gap: ${spacingHorizontalS};
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    button:hover {
+      background-color: ${colorSubtleBackgroundHover};
     }
   }
 
-  .card-in {
-    transform: translateY(0px);
-    opacity: 1;
-    transition:
-      transform ${durationUltraSlow} ${curveDecelerateMax}
-        calc(var(--index) * 50ms),
-      opacity ${durationUltraSlow} ${curveDecelerateMax}
-        calc(var(--index) * 50ms);
+  #top-sites {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow-x: auto;
   }
 
-  @starting-style {
-    .card-in {
-      transform: translateY(-40px);
-      opacity: 0;
+  #top-sites:has(> *:nth-last-child(n+6)) {
+    justify-content: flex-start; /* Align items at the start when there's overflow */
+  }
+
+  .top-site {
+    flex: 1;
+    min-width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: ${spacingVerticalS};
+    padding: ${spacingVerticalS} ${spacingHorizontalXS};
+    color: ${colorNeutralForegroundStaticInverted};
+    cursor: pointer;
+
+    &:hover {
+      img {
+        background-color: ${colorNeutralCardBackgroundHover};
+      }
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+      padding: ${spacingVerticalS};
+      background-color: ${colorNeutralCardBackground};
+      border-radius: ${borderRadiusLarge};
+    }
+
+    div {
+      text-align: center;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
   #feed {
-    width: 100%;
-    max-width: calc(256px * 4 + ${spacingHorizontalL} * 3);
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: ${spacingHorizontalL};
-    grid-template-areas:
-      '. . list'
-      '. . list';
+    position: absolute;
+    bottom: 0;
+    width: 85%;
+    max-width: 1440px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: ${spacingVerticalL};
+    background-color: ${colorNeutralCardBackground};
+    padding: ${spacingVerticalMNudge} ${spacingHorizontalXL};
+    border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
+    color: ${colorNeutralForeground2};
   }
 
-  newtab-feed-list {
-    grid-area: list;
+  #feed-switch {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalM};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    border-radius: ${borderRadiusLarge};
+    padding: ${spacingVerticalS} ${spacingHorizontalL};
+
+    [active] {
+      color: ${colorBrandForeground1};
+      font-weight: ${typographyStyles.body1Strong.fontWeight};
+    }
   }
+
+  #headings {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalL};
+    overflow-x: auto;
+
+    a {
+      text-decoration: none;
+      color: ${colorNeutralForeground2};
+    }
+
+    a:hover {
+      color: ${colorBrandForeground1Hover};
+    }
+  }
+
+  #feed-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${spacingHorizontalM};
+
+    phx-button {
+      color: ${colorNeutralForeground2};
+    }
 `;
 
 @customElement({
@@ -484,74 +462,31 @@ export class EdgeNewTab extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(TabService) ts!: TabService;
-  _contentElement: HTMLDivElement | null = null;
-  _composerWrapperElement: HTMLDivElement | null = null;
+  @observable imageOfTheDay: string = '';
 
-  connectedCallback(): void {
+  connectedCallback() {
     super.connectedCallback();
-    this.setElements();
-    this.addEventListeners();
+    this.fetchImageOfTheDay();
   }
 
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.removeEventListeners();
-    this.unsetElements();
-  }
-
-  setElements(): void {
-    this._contentElement = this.shadowRoot?.querySelector('#content') || null;
-    this._composerWrapperElement =
-      this.shadowRoot?.querySelector('#composer-backdrop') || null;
-  }
-
-  unsetElements(): void {
-    this._contentElement = null;
-    this._composerWrapperElement = null;
-  }
-
-  addEventListeners(): void {
-    this._contentElement?.addEventListener('scroll', this.handleContentScroll);
-  }
-
-  removeEventListeners(): void {
-    this._contentElement?.removeEventListener(
-      'scroll',
-      this.handleContentScroll,
-    );
-  }
-
-  handleContentScroll = (): void => {
-    if (!this._contentElement) return;
-
-    const transitionEnd = 256;
-    const scrollProgress = Math.min(
-      1,
-      (this._contentElement.scrollTop || 0) / transitionEnd,
-    );
-
-    this.style.setProperty('--scroll-progress', scrollProgress.toString());
-  };
-
-  handleComposerSubmit(e: Event): void {
-    if (!(e instanceof CustomEvent)) return;
-
-    const { url } = e.detail;
-    if (!url) {
-      return;
-    }
-
+  handleLinkClick(url: string) {
     const activeTabId = this.ts.activeTabId;
-    if (!activeTabId) {
-      return;
+    if (activeTabId) {
+      this.ts.navigateTab(activeTabId, url);
     }
-
-    this.ts.navigateTab(activeTabId, url);
   }
 
-  handleLinkClick(url: string): void {
-    if (this.ts.activeTabId) {
-      this.ts.navigateTab(this.ts.activeTabId, url);
-    }
+  fetchImageOfTheDay() {
+    fetch('/api/image-of-the-day')
+      .then((res) => {
+        if (!res.ok) throw new Error('Error fetching Bing image of the day.');
+        return res.text();
+      })
+      .then((data) => {
+        this.imageOfTheDay = data;
+      })
+      .catch((e) => {
+        console.error('Error fetching:', e);
+      });
   }
 }
