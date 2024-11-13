@@ -8,14 +8,7 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
-import {
-  colorNeutralForeground1,
-  colorLayerBackgroundDialog,
-  borderRadiusLarge,
-  shadow2,
-  colorLayerBackgroundApp,
-  typographyStyles,
-} from '@phoenixui/themes';
+import { colorNeutralForeground1, typographyStyles } from '@phoenixui/themes';
 import {
   edgeLightTheme,
   edgeDarkTheme,
@@ -28,6 +21,7 @@ import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#services/tabService.js';
+import '../windows/controls/mica-material.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
@@ -37,25 +31,25 @@ import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
-  <div class="row">
-    <caption-controls></caption-controls>
-    <div class="column">
-      <tab-bar></tab-bar>
-      <div id="activeTab">
-        <div id="content">
-          <tool-bar></tool-bar>
-          ${when(
-            (x) => x.shouldFavoritesBarRender(),
-            html`<favorites-bar></favorites-bar>`,
-          )}
-          <web-content></web-content>
-        </div>
+  <tab-bar></tab-bar>
+  <div id="activeTab">
+    <mica-material></mica-material>
+    <div id="content">
+      <tool-bar></tool-bar>
+      ${when(
+        (x) => x.shouldFavoritesBarRender(),
+        html`<favorites-bar></favorites-bar>`,
+      )}
+      <div class="row">
+        <web-content></web-content>
+        ${when(
+          (x) => x.ews.activeSidepaneAppId,
+          html`<side-pane
+            id="${(x) => x.ews.activeSidepaneAppId}"
+          ></side-pane>`,
+        )}
       </div>
     </div>
-    ${when(
-      (x) => x.ews.activeSidepaneAppId,
-      html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
-    )}
   </div>
 `;
 
@@ -65,11 +59,8 @@ const styles = css`
     inset: 0;
     display: flex;
     flex-direction: column;
-    gap: ${spacingFrame};
     color: ${colorNeutralForeground1};
-    fill: currentColor;
-    background-color: ${colorLayerBackgroundApp};
-    padding: ${spacingFrame};
+    fill: currentcolor;
 
     font-family: ${typographyStyles.body1.fontFamily};
     font-size: ${typographyStyles.body1.fontSize};
@@ -82,8 +73,11 @@ const styles = css`
     width: 100%;
     flex: 1;
     overflow: hidden;
-    padding: 0 2px 2px 2px; /* for shadow */
-    margin: 0 -2px -2px -2px; /* for shadow */
+  }
+
+  mica-material {
+    position: absolute;
+    inset: 0;
   }
 
   #content {
@@ -93,10 +87,8 @@ const styles = css`
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: ${colorLayerBackgroundDialog};
-    border-radius: ${borderRadiusLarge};
-    box-shadow: ${shadow2};
-    overflow: hidden;
+    gap: ${spacingFrame};
+    padding: ${spacingFrame};
   }
 
   .row {
@@ -115,8 +107,7 @@ const styles = css`
     min-width: 0px;
   }
 
-  tool-bar,
-  copilot-entrypoint {
+  tool-bar {
     z-index: 1;
   }
 `;

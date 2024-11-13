@@ -7,8 +7,8 @@ export type ToolbarItem = {
 
 export default class EdgeWindowService {
   @observable id: string | null = null;
-  @observable activeSidepaneAppId: string | null = null;
-  @observable activeToolbarItemId: string | null = null;
+  @observable activeSidepaneAppId?: string = 'Tools';
+  @observable activeToolbarItemId?: string = 'Tools';
   @observable viewportSize?: {
     width: number;
     height: number;
@@ -23,7 +23,7 @@ export default class EdgeWindowService {
   }
 
   closeToolbarItem() {
-    this.activeToolbarItemId = null;
+    this.activeToolbarItemId = undefined;
   }
 
   openSidepaneApp(id: string) {
@@ -34,7 +34,7 @@ export default class EdgeWindowService {
   }
 
   closeSidepaneApp() {
-    this.activeSidepaneAppId = null;
+    this.activeSidepaneAppId = undefined;
     this.closeToolbarItem();
   }
 }
