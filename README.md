@@ -19,6 +19,7 @@ OPENAI_API_ENDPOINTS='[
 Then run the following
 
 ```bash
+npm run auth
 npm install
 npm run dev
 ```

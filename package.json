@@ -11,7 +11,7 @@
     "server"
   ],
   "scripts": {
-    "refresh-auth": "npm exec ado-npm-auth",
+    "auth": "npm exec ado-npm-auth",
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "clean": "node scripts/clean.mjs",
