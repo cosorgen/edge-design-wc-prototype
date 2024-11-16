@@ -174,8 +174,9 @@ const styles = css`
   }
 
   #bg {
-    inset: 0;
-    bottom: calc(0px - ${spacingFrame} / 2);
+    inset-block-start: min(0px, calc(6px - ${spacingFrame}));
+    inset-block-end: calc(0px - ${spacingFrame});
+    inset-inline: 0;
     border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
   }
 
@@ -183,16 +184,16 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: calc(0px - ${spacingFrame} / 2);
+    inset-block-end: calc(0px - ${spacingFrame});
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 
   #left-wing {
-    left: -10px;
+    inset-inline-start: -10px;
   }
 
   #right-wing {
-    right: -10px;
+    inset-inline-end: -10px;
     transform: rotate(90deg);
   }
 

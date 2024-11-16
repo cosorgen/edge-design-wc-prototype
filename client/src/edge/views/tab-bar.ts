@@ -7,7 +7,6 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
-  spacingHorizontalXS,
   shadow2,
   spacingVerticalSNudge,
   borderRadiusLarge,
@@ -118,17 +117,18 @@ const styles = css`
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     gap: calc(${spacingFrame} * 2);
     padding-inline-start: ${spacingFrame};
-    padding-block: calc(${spacingFrame} * 1.5) calc(${spacingFrame} * 0.5);
+    padding-inline-end: max(0px, ${spacingFrame});
+    padding-block: ${spacingFrame};
   }
 
   .group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: calc(${spacingFrame} / 2);
   }
 
   #shadow {
@@ -143,9 +143,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: calc(${spacingFrame} / 2);
-    overflow: hidden;
-    padding: max(10px, ${spacingFrame});
-    margin: min(-10px, calc(0px - ${spacingFrame})); /* for wings to not clip */
+    min-width: 16px;
   }
 
   #add {
@@ -154,9 +152,14 @@ const styles = css`
 
   #window-grabber {
     flex: 1;
-    height: calc(100% + (2 * ${spacingFrame}));
-    margin-block-end: calc(0px - ${spacingFrame});
+    height: 100%;
+    min-height: 32px;
     min-width: 24px;
+    cursor: grab;
+    margin-block-start: calc(0px - ${spacingFrame} * 1.5);
+    padding-block-start: calc(${spacingFrame} * 1.5);
+    margin-block-end: calc(0px - ${spacingFrame} * 0.5);
+    padding-block-end: calc(${spacingFrame} * 0.5);
   }
 
   phx-button {

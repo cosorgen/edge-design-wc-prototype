@@ -2,7 +2,6 @@ import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { spacingFrame } from '../designSystem.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -58,8 +57,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-block: calc(0px - ${spacingFrame} * 1.5)
-      calc(0px - ${spacingFrame} * 0.5);
+    margin-inline-end: -4px;
+    margin-block: -4px;
   }
 
   #close:hover {
