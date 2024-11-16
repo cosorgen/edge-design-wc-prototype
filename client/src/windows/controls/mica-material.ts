@@ -3,8 +3,7 @@ import {
   customElement,
   html,
   css,
-  attr,
-  nullableNumberConverter,
+  Updates,
 } from '@microsoft/fast-element';
 import { desktopBackground } from '../designSystem.js';
 import {
@@ -92,22 +91,22 @@ const styles = css`
 
 @customElement({ name: 'mica-material', template, styles })
 export class MicaMaterial extends FASTElement {
-  @attr({ converter: nullableNumberConverter }) top = 0;
-  @attr({ converter: nullableNumberConverter }) left = 0;
+  _imageElement?: HTMLDivElement;
+  _resizeObserver?: ResizeObserver;
+  _top = 0;
+  _left = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
+    this.setElements();
+    this.addEventListeners();
 
-    // Set event listener for window resize
-    window.addEventListener('resize', this.resizeBackgroundImage);
-
-    window.requestAnimationFrame(() => {
+    Updates.enqueue(() => {
       // Set initial background image position
-      const imageElement = this.shadowRoot?.getElementById('image');
-      if (imageElement) {
-        const { top, left } = imageElement.getBoundingClientRect();
-        this.top = top;
-        this.left = left;
+      if (this._imageElement) {
+        const { top, left } = this._imageElement.getBoundingClientRect();
+        this._top = top;
+        this._left = left;
         this.resizeBackgroundImage();
       }
     }); // needed for bounding client rect
@@ -115,12 +114,34 @@ export class MicaMaterial extends FASTElement {
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
-    window.removeEventListener('resize', this.resizeBackgroundImage);
+    this.removeEventListeners();
+    this.unsetElements();
+  }
+
+  setElements() {
+    this._imageElement = this.shadowRoot?.getElementById(
+      'image',
+    ) as HTMLDivElement;
+  }
+
+  unsetElements() {
+    this._imageElement = undefined;
+  }
+
+  addEventListeners() {
+    this._resizeObserver = new ResizeObserver(this.resizeBackgroundImage);
+    this._resizeObserver.observe(this);
+  }
+
+  removeEventListeners() {
+    if (this._resizeObserver) {
+      this._resizeObserver.disconnect();
+      this._resizeObserver = undefined;
+    }
   }
 
   resizeBackgroundImage = () => {
-    const imageElement = this.shadowRoot?.getElementById('image');
-    if (imageElement) {
+    if (this._imageElement) {
       const { innerWidth: width, innerHeight: height } = window;
       const aspectRatio = width / height;
       let newWidth = width;
@@ -132,20 +153,8 @@ export class MicaMaterial extends FASTElement {
       } else {
         newWidth = height * imageAspectRatio;
       }
-      imageElement.style.backgroundSize = `${newWidth}px ${newHeight}px`;
-      imageElement.style.backgroundPosition = `${(width - newWidth) / 2 - this.left}px ${(height - newHeight) / 2 - this.top}px`;
+      this._imageElement.style.backgroundSize = `${newWidth}px ${newHeight}px`;
+      this._imageElement.style.backgroundPosition = `${(width - newWidth) / 2 - this._left}px ${(height - newHeight) / 2 - this._top}px`;
     }
   };
-
-  topChanged() {
-    if (this.$fastController.isConnected) {
-      this.resizeBackgroundImage();
-    }
-  }
-
-  leftChanged() {
-    if (this.$fastController.isConnected) {
-      this.resizeBackgroundImage();
-    }
-  }
 }
