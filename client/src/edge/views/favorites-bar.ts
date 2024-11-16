@@ -15,7 +15,6 @@ import '../controls/favorites-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import { spacingHorizontalS } from '@phoenixui/themes';
 import { TabService } from '#servicestabService.js';
 import { spacingFrame } from '../designSystem.js';
 
@@ -56,9 +55,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: ${spacingHorizontalS};
-    padding-block-end: ${spacingFrame};
+    justify-content: flex-start;
+    gap: ${spacingFrame};
   }
 `;
 
