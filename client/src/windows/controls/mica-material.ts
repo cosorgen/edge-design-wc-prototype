@@ -92,7 +92,6 @@ const styles = css`
 @customElement({ name: 'mica-material', template, styles })
 export class MicaMaterial extends FASTElement {
   _imageElement?: HTMLDivElement;
-  _resizeObserver?: ResizeObserver;
   _top = 0;
   _left = 0;
 
@@ -129,15 +128,11 @@ export class MicaMaterial extends FASTElement {
   }
 
   addEventListeners() {
-    this._resizeObserver = new ResizeObserver(this.resizeBackgroundImage);
-    this._resizeObserver.observe(this);
+    // TODO: Update background image on move or resize
   }
 
   removeEventListeners() {
-    if (this._resizeObserver) {
-      this._resizeObserver.disconnect();
-      this._resizeObserver = undefined;
-    }
+
   }
 
   resizeBackgroundImage = () => {
