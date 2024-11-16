@@ -30,10 +30,7 @@ import './views/browser-settings.js';
 import './controls/left-nav.js';
 
 const template = html<WindowsSettings>`
-  <mica-material
-    top="${(x) => x.ws.getWindowById(x.id)?.yPos}"
-    left="${(x) => x.ws.getWindowById(x.id)?.xPos}"
-  ></mica-material>
+  <mica-material></mica-material>
   <div id="content">
     <div id="title-bar">
       <h1>Settings</h1>

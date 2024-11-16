@@ -57,6 +57,7 @@ const template = html<WindowsShell>`
   <mica-material
     id="desktop"
     image-only
+    full-fps
     @click="${(x) => x.ws.activateWindow(null)}"
   ></mica-material>
   ${repeat(

@@ -3,7 +3,8 @@ import {
   customElement,
   html,
   css,
-  Updates,
+  observable,
+  attr,
 } from '@microsoft/fast-element';
 import { desktopBackground } from '../designSystem.js';
 import {
@@ -30,7 +31,7 @@ const styles = css`
     display: block;
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(0px); /* Fix for overflow:hidden */
+    backdrop-filter: blur(0px); /* Fix for overflow: hidden; */
   }
 
   div {
@@ -39,10 +40,14 @@ const styles = css`
   }
 
   #image {
+    inset-block-start: ${(x) => `${x.imgRect.top}px`};
+    inset-inline-start: ${(x) => `${x.imgRect.left}px`};
+    width: ${(x) => `${x.imgRect.width}px`};
+    height: ${(x) => `${x.imgRect.height}px`};
     background: ${desktopBackground};
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: top left;
+    background-size: cover;
+    background-position: center;
   }
 
   #blur {
@@ -91,65 +96,45 @@ const styles = css`
 
 @customElement({ name: 'mica-material', template, styles })
 export class MicaMaterial extends FASTElement {
-  _imageElement?: HTMLDivElement;
-  _top = 0;
-  _left = 0;
+  @attr({ mode: 'boolean', attribute: 'image-only' }) imageOnly = false;
+  @attr({ mode: 'boolean', attribute: 'tab-bar' }) tabBar = false;
+  @attr({ mode: 'boolean', attribute: 'full-fps' }) fullFPS = false;
+  @observable imgRect = { top: 0, left: 0, width: 0, height: 0 };
+  _frameCount = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.setElements();
-    this.addEventListeners();
+    this.updateCoordinates();
+  }
 
-    Updates.enqueue(() => {
-      // Set initial background image position
-      if (this._imageElement) {
-        const { top, left } = this._imageElement.getBoundingClientRect();
-        this._top = top;
-        this._left = left;
-        this.resizeBackgroundImage();
+  updateCoordinates = () => {
+    if (!this.fullFPS) {
+      // Skip frames to reduce CPU usage
+      if (this._frameCount !== 5) {
+        this._frameCount++;
+        requestAnimationFrame(this.updateCoordinates);
+        return;
       }
-    }); // needed for bounding client rect
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.removeEventListeners();
-    this.unsetElements();
-  }
-
-  setElements() {
-    this._imageElement = this.shadowRoot?.getElementById(
-      'image',
-    ) as HTMLDivElement;
-  }
-
-  unsetElements() {
-    this._imageElement = undefined;
-  }
-
-  addEventListeners() {
-    // TODO: Update background image on move or resize
-  }
-
-  removeEventListeners() {
-
-  }
-
-  resizeBackgroundImage = () => {
-    if (this._imageElement) {
-      const { innerWidth: width, innerHeight: height } = window;
-      const aspectRatio = width / height;
-      let newWidth = width;
-      let newHeight = height;
-
-      const imageAspectRatio = 16 / 9;
-      if (imageAspectRatio < aspectRatio) {
-        newHeight = width / imageAspectRatio;
-      } else {
-        newWidth = height * imageAspectRatio;
-      }
-      this._imageElement.style.backgroundSize = `${newWidth}px ${newHeight}px`;
-      this._imageElement.style.backgroundPosition = `${(width - newWidth) / 2 - this._left}px ${(height - newHeight) / 2 - this._top}px`;
+      this._frameCount = 0;
     }
+
+    const { top: thisTop, left: thisLeft } = this.getBoundingClientRect();
+    const top = -1 * thisTop;
+    const left = -1 * thisLeft;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (
+      this.imgRect.top === top &&
+      this.imgRect.left === left &&
+      this.imgRect.width === width &&
+      this.imgRect.height === height
+    ) {
+      requestAnimationFrame(this.updateCoordinates);
+      return;
+    }
+
+    this.imgRect = { top, left, width, height };
+    requestAnimationFrame(this.updateCoordinates);
   };
 }
