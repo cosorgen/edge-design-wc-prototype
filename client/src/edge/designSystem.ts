@@ -36,9 +36,4 @@ export const edgeDarkThemeSolid: EdgeTheme = {
   ...commonThemeOverrides,
 };
 
-export const colorLayerBackgroundPillMenu =
-  'var(--colorLayerBackgroundPillMenu)';
 export const spacingFrame = 'var(--spacingFrame)';
-export const colorLayerOmniboxBackground = 'var(--colorLayerOmniboxBackground)';
-export const colorLayerOmniboxBackgroundHover =
-  'var(--colorLayerOmniboxBackgroundHover)';

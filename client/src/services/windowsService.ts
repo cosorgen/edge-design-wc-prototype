@@ -57,7 +57,8 @@ export default class WindowsService {
     this.getSettingsFromURL();
 
     // open default window
-    this.openWindow('Microsoft Edge');
+    const id = this.openWindow('Microsoft Edge');
+    this.activateWindow(id);
   }
 
   getSettingsFromURL() {
@@ -109,7 +110,6 @@ export default class WindowsService {
         zIndex: 1 + this.windows.length,
       },
     ];
-    this.activateWindow(id);
 
     return id;
   }

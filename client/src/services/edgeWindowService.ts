@@ -7,8 +7,8 @@ export type ToolbarItem = {
 
 export default class EdgeWindowService {
   @observable id: string | null = null;
-  @observable activeSidepaneAppId?: string = 'Tools';
-  @observable activeToolbarItemId?: string = 'Tools';
+  @observable activeSidepaneAppId?: string;
+  @observable activeToolbarItemId?: string;
   @observable viewportSize?: {
     width: number;
     height: number;

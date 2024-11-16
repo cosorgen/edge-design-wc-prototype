@@ -15,26 +15,26 @@ const mod = (n: number, m: number) => ((n % m) + m) % m; // handle negative inde
 
 @customElement({ name: 'omnibox-control', template, styles })
 export class OmniboxControl extends FASTElement {
-  @attr({ mode: 'boolean', attribute: 'truncate-url' }) truncateURL = false;
   @attr({ mode: 'boolean', attribute: 'dropdown-open' }) dropdownOpen = false;
   @attr initialValue = '';
   @observable dropdownSelectedIndex = -1;
   @observable inputValue = '';
   @observable suggestions: Suggestion[] = [];
-  dropdownComponent?: OmniboxDropdown | null = null;
-  inputComponent?: HTMLElement | null = null;
+  _dropdownComponent?: OmniboxDropdown | null = null;
+  _inputComponent?: HTMLElement | null = null;
 
   connectedCallback() {
     super.connectedCallback();
-    this.dropdownComponent = this.shadowRoot?.querySelector('omnibox-dropdown');
-    this.inputComponent = this.shadowRoot?.querySelector('omnibox-input');
+    this._dropdownComponent =
+      this.shadowRoot?.querySelector('omnibox-dropdown');
+    this._inputComponent = this.shadowRoot?.querySelector('omnibox-input');
   }
 
   initialValueChanged() {
     if (this.initialValue === 'edge://newtab') {
       // Don't display the address of the new tab page
       this.initialValue = '';
-      if (this.inputComponent) this.inputComponent.focus();
+      if (this._inputComponent) this._inputComponent.focus();
     }
 
     if (this.inputValue !== this.initialValue) {
@@ -45,16 +45,16 @@ export class OmniboxControl extends FASTElement {
 
   suggestionsChanged() {
     if (
-      this.dropdownComponent &&
-      this.dropdownComponent instanceof OmniboxDropdown
+      this._dropdownComponent &&
+      this._dropdownComponent instanceof OmniboxDropdown
     ) {
-      this.dropdownComponent.suggestions = this.suggestions;
+      this._dropdownComponent.suggestions = this.suggestions;
     }
   }
 
   handleInputClick() {
     setTimeout(() => {
-      if (this.inputComponent) this.inputComponent.focus();
+      if (this._inputComponent) this._inputComponent.focus();
     }, 50); // wait for render incase input is display: none
     this.dropdownOpen = true;
   }
@@ -92,18 +92,5 @@ export class OmniboxControl extends FASTElement {
     (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).blur();
     this.inputValue = e.detail;
     this.$emit('submit', e.detail);
-  }
-
-  truncatedInputValue() {
-    if (
-      this.inputValue &&
-      this.inputValue !== 'edge://newtab' &&
-      !this.dropdownOpen &&
-      this.truncateURL
-    ) {
-      const url = new URL(this.inputValue);
-      return url.hostname;
-    }
-    return '';
   }
 }

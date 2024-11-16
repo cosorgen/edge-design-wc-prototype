@@ -4,24 +4,23 @@ import {
   borderRadiusLayerDialog,
   colorBrandStroke1,
   colorLayerBackgroundDialog,
+  colorNeutralBackground1,
+  colorNeutralBackground1Hover,
   colorNeutralForegroundHint,
+  colorNeutralStroke1,
   shadow28,
   spacingHorizontalNone,
-  spacingHorizontalXS,
   spacingHorizontalXXS,
   spacingVerticalXS,
   spacingVerticalXXS,
   strokeWidthThick,
   strokeWidthThin,
 } from '@phoenixui/themes';
-import {
-  colorLayerOmniboxBackground,
-  colorLayerOmniboxBackgroundHover,
-} from '../../designSystem.js';
+import { spacingFrame } from '../../designSystem.js';
 
 export const styles = css`
   :host {
-    width: 1024px;
+    width: 100%;
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     height: 32px;
@@ -32,16 +31,12 @@ export const styles = css`
     display: block;
   }
 
-  :host([full-width]) {
-    width: 100%;
-  }
-
   [part='container'] {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: ${colorLayerOmniboxBackground};
-    border: ${strokeWidthThin} solid transparent;
+    background-color: ${colorNeutralBackground1};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
     border-radius: ${borderRadiusCircular};
     padding: calc(${spacingVerticalXXS} + var(--stroke-diff))
       calc(${spacingHorizontalXXS} + var(--stroke-diff));
@@ -59,34 +54,24 @@ export const styles = css`
     box-shadow: ${shadow28};
   }
 
-  :host(:not([dropdown-open])) [part='container']:hover {
-    background-color: ${colorLayerOmniboxBackgroundHover};
+  :host(:not([dropdown-open])) [part='container']:has(omnibox-input:hover) {
+    background-color: ${colorNeutralBackground1Hover};
   }
 
   #top-row {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
-
-    #status,
-    #actions {
-      flex: 1;
-      min-width: 25%;
-    }
+    gap: ${spacingFrame};
   }
 
   :host([dropdown-open]) #top-row {
     padding: ${spacingVerticalXS} ${spacingHorizontalNone};
     gap: ${spacingHorizontalNone};
+  }
 
-    #status {
-      flex: 0;
-      min-width: unset;
-    }
-    omnibox-input {
-      flex: 1;
-    }
+  omnibox-input {
+    flex: 1;
   }
 
   #status,
@@ -137,19 +122,6 @@ export const styles = css`
   }
 
   :host([dropdown-open]) omnibox-status {
-    display: none;
-  }
-
-  #rest-input {
-    display: none;
-    cursor: text;
-  }
-
-  :host([truncate-url]:not([dropdown-open])) #rest-input {
-    display: block;
-  }
-
-  :host([truncate-url]:not([dropdown-open])) omnibox-input:not([value='']) {
     display: none;
   }
 `;

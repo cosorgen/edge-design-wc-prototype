@@ -27,13 +27,17 @@ import {
   spacingVerticalXS,
   typographyStyles,
 } from '@phoenixui/themes';
-import { MoreMenuEntry } from './menu-item.js';
-import './menu-item.js';
-import './more-menu-zoom.js';
+import { MoreMenuEntry } from '../controls/menu-item.js';
+import '../controls/menu-item.js';
+import '../controls/more-menu-zoom.js';
 import '@phoenixui/web-components/divider.js';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/text-input.js';
 import '@phoenixui/web-components/link.js';
+import { TabService } from '#servicestabService.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import WindowsService from '#serviceswindowsService.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const defaultItems: MoreMenuEntry[] = [
   {
@@ -333,6 +337,9 @@ const styles = css`
 })
 export default class MoreMenu extends FASTElement {
   @attr({ mode: 'boolean' }) managed = false;
+  @inject(TabService) ts!: TabService;
+  @inject(WindowsService) ws!: WindowsService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
   @observable items: MoreMenuEntry[] = [...defaultItems];
   @observable searchValue = '';
   _inputElement: HTMLInputElement | null = null;
@@ -357,8 +364,41 @@ export default class MoreMenu extends FASTElement {
     this._inputElement = null;
   }
 
-  handleMenuItemClick(title: string) {
-    this.$emit('moreaction', title);
+  handleMenuItemClick(action: string) {
+    switch (action) {
+      case 'New tab': {
+        const id = this.ts.addTab();
+        this.ts.activateTab(id);
+        break;
+      }
+      case 'New window': {
+        const id = this.ws.openWindow('Microsoft Edge');
+        this.ws.activateWindow(id);
+        break;
+      }
+      case 'Print':
+        window.print(); // maybe see if we can print the current tab iframe?
+        break;
+      case 'Settings': {
+        const id = this.ts.addTab({
+          id: `tab-${window.crypto.randomUUID()}`,
+          title: 'Settings',
+          url: 'edge://settings',
+        });
+        this.ts.activateTab(id);
+        break;
+      }
+      case 'Find on page':
+      case 'Screenshot':
+      case 'New InPrivate window':
+        break;
+      case 'Close Microsoft Edge':
+        this.ws.closeAllWindows('Microsoft Edge');
+        break;
+      default:
+        this.ews.openToolbarItem(action);
+        break;
+    }
   }
 
   handleInputKeyUp(e: KeyboardEvent) {

@@ -8,7 +8,6 @@ import {
   volatile,
   when,
 } from '@microsoft/fast-element';
-import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
@@ -20,6 +19,7 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
+import './more-menu.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -30,9 +30,9 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
-import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -48,8 +48,6 @@ const template = html<Toolbar>`
     </phx-button>
   </div>
   <omnibox-control
-    ?full-width="${(x) => x.ess.fullWidthOmnibox}"
-    ?truncate-url="${(x) => x.ess.truncateURL}"
     initialValue="${(x) => x.ts.tabsById[x.ts.activeTabId!].url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
@@ -120,49 +118,29 @@ const template = html<Toolbar>`
       )}`,
       { positioning: true },
     )}
-    ${when(
-      (x) => x.ess.showMenusInL1,
-      html`
-        <flyout-menu>
-          <identity-control
-            appearance="signedIn"
-            slot="trigger"
-          ></identity-control>
-          <identity-flyout></identity-flyout>
-        </flyout-menu>
-        <flyout-menu>
-          <phx-toggle-button
-            size="medium"
-            appearance="subtle"
-            icon-only
-            slot="trigger"
-          >
-            <svg>
-              <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-            </svg>
-          </phx-toggle-button>
-          <more-menu
-            managed
-            @moreaction="${(x, c) =>
-              x.handleMoreAction(c.event as CustomEvent)}"
-          ></more-menu>
-        </flyout-menu>
-        ${when(
-          (x) => x.ess.showLegacyCopilot,
-          html`
-            <phx-toggle-button
-              appearance="subtle"
-              icon-only
-              slot="trigger"
-              @click="${(x) => x.toggleSidepane('Legacy Copilot')}"
-              ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
-            >
-              <img width="20px" src="./img/edge/copilotAppLight.png" />
-            </phx-toggle-button>
-          `,
-        )}
-      `,
-    )}
+    <flyout-menu>
+      <phx-toggle-button
+        size="medium"
+        appearance="subtle"
+        icon-only
+        slot="trigger"
+      >
+        <svg>
+          <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+        </svg>
+      </phx-toggle-button>
+      <more-menu managed></more-menu>
+    </flyout-menu>
+
+    <phx-toggle-button
+      appearance="subtle"
+      icon-only
+      slot="trigger"
+      @click="${(x) => x.toggleSidepane('Legacy Copilot')}"
+      ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
+    >
+      <img width="20px" src="./img/edge/copilotAppLight.png" />
+    </phx-toggle-button>
   </div>
 `;
 
@@ -170,8 +148,7 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalS};
-    padding: ${spacingFrame};
+    gap: calc(${spacingFrame} * 2);
     user-select: none;
   }
 
@@ -180,7 +157,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${spacingFrame};
   }
 
   .right {
@@ -246,12 +223,6 @@ export class Toolbar extends FASTElement {
       );
     });
 
-    // Remove copilot if it's disabled
-    if (!this.ess.showLegacyCopilot || this.ess.showMenusInL1)
-      this._derivedToolbarItems = this._derivedToolbarItems.filter(
-        (id) => id !== 'Legacy Copilot',
-      );
-
     return this._derivedToolbarItems;
   }
 
@@ -295,40 +266,6 @@ export class Toolbar extends FASTElement {
   handleOmniboxActionClick(id: string, e: Event) {
     e.stopPropagation();
     return false;
-  }
-
-  handleMoreAction(e: CustomEvent) {
-    const action = e.detail;
-    switch (action) {
-      case 'New tab':
-        this.ts.addTab();
-        break;
-      case 'New window':
-        this.ws.openWindow('Microsoft Edge');
-        break;
-      case 'Print':
-        window.print(); // maybe see if we can print the current tab iframe?
-        break;
-      case 'Settings': {
-        const settingsTabId = this.ts.addTab({
-          id: `tab-${window.crypto.randomUUID()}`,
-          title: 'Settings',
-          url: 'edge://settings',
-        });
-        this.ts.activateTab(settingsTabId);
-        break;
-      }
-      case 'Find on page':
-      case 'Screenshot':
-      case 'New InPrivate window':
-        break;
-      case 'Close Microsoft Edge':
-        this.ws.closeAllWindows('Microsoft Edge');
-        break;
-      default:
-        this.ews.openToolbarItem(action);
-        break;
-    }
   }
 
   pageIsFavorite() {

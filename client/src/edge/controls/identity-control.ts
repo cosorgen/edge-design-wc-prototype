@@ -70,6 +70,7 @@ const styles = css`
     background-color: ${colorSubtleBackgroundHover};
   }
 
+  :host([pressed]) button,
   button:hover:active {
     border: ${strokeWidthThin} solid ${colorNeutralStroke1Pressed};
     background-color: ${colorSubtleBackgroundPressed};

@@ -4,7 +4,7 @@ import { observable } from '@microsoft/fast-element';
 export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
-  @observable pinnedToolbarItems: string[] = [];
+  @observable pinnedToolbarItems: string[] = ['Favorites'];
   @observable frameSpacing = '4px';
 
   constructor() {

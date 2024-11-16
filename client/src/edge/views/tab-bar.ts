@@ -18,6 +18,9 @@ import '@phoenixui/web-components/divider.js';
 import '../controls/horizontal-tab.js';
 import '../../windows/controls/mica-material.js';
 import '../views/caption-controls.js';
+import '../controls/flyout-menu.js';
+import '../controls/identity-control.js';
+import '../controls/identity-flyout.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -27,10 +30,24 @@ const template = html<TabBar>`
   <mica-material tab-bar></mica-material>
   <div id="shadow"></div>
   <div id="content">
+    <div class="group" style="padding: 3px">
+      <flyout-menu>
+        <identity-control
+          appearance="signedIn"
+          slot="trigger"
+        ></identity-control>
+        <identity-flyout></identity-flyout>
+      </flyout-menu>
+    </div>
     <div class="group">
       <phx-button appearance="subtle" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#panel-left-text-20-regular" />
+          <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
+        </svg>
+      </phx-button>
+      <phx-button appearance="subtle" icon-only>
+        <svg>
+          <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
         </svg>
       </phx-button>
     </div>
@@ -102,7 +119,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: ${spacingFrame};
+    gap: calc(${spacingFrame} * 2);
     padding-inline-start: ${spacingFrame};
     padding-block: calc(${spacingFrame} * 1.5) calc(${spacingFrame} * 0.5);
   }
@@ -129,6 +146,10 @@ const styles = css`
     overflow: hidden;
     padding: max(10px, ${spacingFrame});
     margin: min(-10px, calc(0px - ${spacingFrame})); /* for wings to not clip */
+  }
+
+  #add {
+    margin-inline-start: calc(0px - ${spacingFrame});
   }
 
   #window-grabber {

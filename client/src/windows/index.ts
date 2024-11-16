@@ -140,7 +140,8 @@ export class WindowsShell extends FASTElement {
 
     // if no windows are open, open it
     if (windows.length === 0) {
-      this.ws.openWindow(appName);
+      const id = this.ws.openWindow(appName);
+      this.ws.activateWindow(id);
       return;
     }
 
