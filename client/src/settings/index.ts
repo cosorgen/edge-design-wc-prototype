@@ -12,8 +12,6 @@ import {
   spacingHorizontalM,
   spacingVerticalS,
 } from '@phoenixui/themes';
-import '../windows/controls/mica-material.js';
-import '@phoenixui/web-components/button.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -25,6 +23,8 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import { CopilotService } from '#servicescopilotService.js';
+import '@phoenixui/web-components/button.js';
+import '../windows/controls/mica-material.js';
 import './views/appearance-settings.js';
 import './views/browser-settings.js';
 import './controls/left-nav.js';
