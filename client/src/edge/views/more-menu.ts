@@ -10,8 +10,6 @@ import {
   ViewTemplate,
 } from '@microsoft/fast-element';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
   borderRadiusMedium,
   colorBrandBackground2,
@@ -38,6 +36,7 @@ import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import '../../windows/controls/acrylic-material.js';
 
 const defaultItems: MoreMenuEntry[] = [
   {
@@ -163,87 +162,95 @@ const defaultItems: MoreMenuEntry[] = [
 ];
 
 const template = html<MoreMenu>`
-  <phx-text-input
-    appearance="filled-darker"
-    placeholder="Search"
-    @keyup="${(x, c) => x.handleInputKeyUp(c.event as KeyboardEvent)}"
-  >
-    <svg slot="start">
-      <use href="img/edge/icons.svg#search-20-regular" />
-    </svg>
-    ${when(
-      (x) => x.searchValue !== '',
-      html` <button slot="end" @click="${(x) => x.clearSearch()}">
-        <svg>
-          <use href="img/edge/icons.svg#dismiss-16-regular" />
-        </svg>
-      </button>`,
-    )}
-  </phx-text-input>
-  <div id="menu-items">
-    ${repeat(
-      (x) => x.items,
-      html<MoreMenuEntry>` ${when(
-        (x) => x.type === 'divider',
-        html`<phx-divider></phx-divider>`,
-      )}
+  <acrylic-material></acrylic-material>
+  <div id="content">
+    <phx-text-input
+      appearance="filled-darker"
+      placeholder="Search"
+      @keyup="${(x, c) => x.handleInputKeyUp(c.event as KeyboardEvent)}"
+    >
+      <svg slot="start">
+        <use href="img/edge/icons.svg#search-20-regular" />
+      </svg>
       ${when(
-        (x) => x.type === 'action',
-        html` <menu-item
-          @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
-          end-slot
-        >
-          ${(x, c) => c.parent.formatTitle(x.title)}
-          <span class="hint" slot="end">${(x) => x.shortcut}</span>
-        </menu-item>`,
-      )}
-      ${when(
-        (x) => x.type === 'sub-menu',
-        html` <menu-item end-slot>
-          ${(x, c) => c.parent.formatTitle(x.title)}
-          <svg slot="end">
-            <use href="img/edge/icons.svg#chevron-right-20-regular" />
+        (x) => x.searchValue !== '',
+        html` <button slot="end" @click="${(x) => x.clearSearch()}">
+          <svg>
+            <use href="img/edge/icons.svg#dismiss-16-regular" />
           </svg>
-        </menu-item>`,
+        </button>`,
+      )}
+    </phx-text-input>
+    <div id="menu-items">
+      ${repeat(
+        (x) => x.items,
+        html<MoreMenuEntry>` ${when(
+          (x) => x.type === 'divider',
+          html`<phx-divider></phx-divider>`,
+        )}
+        ${when(
+          (x) => x.type === 'action',
+          html` <menu-item
+            @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
+            end-slot
+          >
+            ${(x, c) => c.parent.formatTitle(x.title)}
+            <span class="hint" slot="end">${(x) => x.shortcut}</span>
+          </menu-item>`,
+        )}
+        ${when(
+          (x) => x.type === 'sub-menu',
+          html` <menu-item end-slot>
+            ${(x, c) => c.parent.formatTitle(x.title)}
+            <svg slot="end">
+              <use href="img/edge/icons.svg#chevron-right-20-regular" />
+            </svg>
+          </menu-item>`,
+        )}
+        ${when(
+          (x) => x.type === 'zoom',
+          html` <more-menu-zoom></more-menu-zoom>`,
+        )}
+        ${when(
+          (x) => x.type === 'label',
+          html` <div class="label">${(x) => x.title}</div>`,
+        )}`,
       )}
       ${when(
-        (x) => x.type === 'zoom',
-        html` <more-menu-zoom></more-menu-zoom>`,
+        (x) => x.additionalSettings(),
+        html`<phx-divider></phx-divider>
+          <div class="label" id="additional">
+            Also ${(x) => x.additionalSettings()} results found in
+            <phx-link inline>Settings</phx-link>
+          </div> `,
       )}
       ${when(
-        (x) => x.type === 'label',
-        html` <div class="label">${(x) => x.title}</div>`,
-      )}`,
-    )}
-    ${when(
-      (x) => x.additionalSettings(),
-      html`<phx-divider></phx-divider>
-        <div class="label" id="additional">
-          Also ${(x) => x.additionalSettings()} results found in
-          <phx-link inline>Settings</phx-link>
-        </div> `,
-    )}
-    ${when(
-      (x) => x.searchValue === '',
-      html`<div class="label" id="managed">Managed by your organization</div>`,
-    )}
+        (x) => x.searchValue === '',
+        html`<div class="label" id="managed">
+          Managed by your organization
+        </div>`,
+      )}
+    </div>
   </div>
 `;
 
 const styles = css`
   :host {
+    position: relative;
+    display: block;
+    border-radius: ${borderRadiusLayerFlyout};
+    box-shadow: ${shadow28};
+    overflow: hidden;
+  }
+
+  #content {
+    position: relative;
     min-width: 200px;
     max-width: 512px;
     display: flex;
     flex-direction: column;
     gap: ${spacingVerticalS};
     padding: ${spacingVerticalS};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
-    overflow: hidden;
   }
 
   #menu-items {

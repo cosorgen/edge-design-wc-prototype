@@ -6,36 +6,46 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
+import {
+  borderRadiusLayerFlyout,
+  colorNeutralForeground1,
+  shadow28,
+} from '@phoenixui/themes';
 import WindowsService from '#services/windowsService.js';
+import '../../../windows/controls/acrylic-material.js';
 
-const template = html<SettingsPage>`
+const template = html<DownloadsHubFlyout>`
+  <acrylic-material></acrylic-material>
   <div>
-    <img
-      src="${(x) => x.getImageSource()}"
-      alt="Settings Page"
-      class="settings-image"
-    />
+    <img src="${(x) => x.getImageSource()}" alt="Download Icon" />
   </div>
 `;
 
 const styles = css`
   :host {
-    display: block;
     position: relative;
-    width: 100%;
-    height: 100%; /* Ensure it takes full height */
-    overflow: auto; /* Enable scrolling */
+    display: block;
+    border-radius: ${borderRadiusLayerFlyout};
+    box-shadow: ${shadow28};
+    color: ${colorNeutralForeground1};
+    overflow: hidden;
   }
 
-  .settings-image {
-    width: 100%; /* Fill the width */
-    height: auto; /* Maintain aspect ratio */
-    object-fit: contain;
+  div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 368px;
+    height: 298px;
+  }
+
+  img {
+    width: 100%;
   }
 `;
 
-@customElement({ name: 'settings-page', template, styles })
-export class SettingsPage extends FASTElement {
+@customElement({ name: 'downloads-hub-flyout', template, styles })
+export class DownloadsHubFlyout extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
 
   connectedCallback() {
@@ -56,7 +66,7 @@ export class SettingsPage extends FASTElement {
 
   getImageSource() {
     return this.ws.theme === 'dark'
-      ? './img/edge/settings-dark.png'
-      : './img/edge/settings-light.png';
+      ? './img/edge/download-dark.png'
+      : './img/edge/download-light.png';
   }
 }

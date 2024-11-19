@@ -5,7 +5,6 @@ import {
   customElement,
   attr,
 } from '@microsoft/fast-element';
-import '../views/copilot-sidepane.js';
 import { borderRadiusLayerBase, shadow2 } from '@phoenixui/themes';
 import apps from '../installedApps.js';
 

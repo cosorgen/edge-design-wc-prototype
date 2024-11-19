@@ -1,11 +1,16 @@
 import { ViewTemplate, html } from '@microsoft/fast-element';
-import './views/extensions-hub.js';
-import './views/copilot-sidepane.js';
-import './views/favorites-menu.js';
-import './views/downloads-menu.js';
-import './views/tools-sidepane.js';
-import './views/search-sidepane.js';
-import './views/legacy-copilot-sidepane.js';
+import './views/hub-flyouts/extensions-hub-flyout.js';
+import './views/hub-flyouts/favorites-hub-flyout.js';
+import './views/hub-flyouts/downloads-hub-flyout.js';
+import './views/hub-flyouts/history-hub-flyout.js';
+import './views/hub-flyouts/shopping-hub-flyout.js';
+import './views/hub-flyouts/browser-essentials-flyout.js';
+import './views/hub-flyouts/passwords-flyout.js';
+import './views/hub-flyouts/grammarly-flyout.js';
+import './views/hub-flyouts/adblocker-flyout.js';
+import './views/sidepanes/tools-sidepane.js';
+import './views/sidepanes/search-sidepane.js';
+import './views/sidepanes/copilot-sidepane.js';
 
 export type ToolbarApp = {
   type: 'flyout' | 'sidepane';
@@ -16,50 +21,50 @@ export type ToolbarApp = {
 export default {
   Favorites: {
     type: 'flyout',
-    template: html`<favorites-menu></favorites-menu>`,
+    template: html`<favorites-hub-flyout></favorites-hub-flyout>`,
     iconId: 'star-20-regular',
   },
   History: {
     type: 'flyout',
-    template: html`<div class="flyout-menu">History</div>`,
+    template: html`<history-hub-flyout></history-hub-flyout>`,
     iconId: 'history-20-regular',
   },
   Shopping: {
     type: 'flyout',
-    template: html`<div class="flyout-menu">Shopping</div>`,
+    template: html`<shopping-hub-flyout></shopping-hub-flyout>`,
     iconId: 'tag-20-regular',
   },
   Downloads: {
     type: 'flyout',
-    template: html`<downloads-menu></downloads-menu>`,
+    template: html`<downloads-hub-flyout></downloads-hub-flyout>`,
     iconId: 'arrow-download-20-regular',
   },
   Extensions: {
     type: 'flyout',
-    template: html`<extensions-hub></extensions-hub>`,
+    template: html`<extensions-hub-flyout></extensions-hub-flyout>`,
     iconId: 'puzzle-piece-20-regular',
   },
   'Browser Essentials': {
     type: 'flyout',
-    template: html`<div class="flyout-menu">Browser Essentials</div>`,
+    template: html`<browser-essentials-flyout></browser-essentials-flyout>`,
     iconId: 'heart-pulse-20-regular',
   },
   Passwords: {
     type: 'flyout',
-    template: html`<div class="flyout-menu">Passwords</div>`,
+    template: html`<passwords-flyout></passwords-flyout>`,
     iconId: 'key-20-regular',
+  },
+  Grammarly: {
+    type: 'flyout',
+    template: html`<grammarly-flyout></grammarly-flyout>`,
+  },
+  AdBlocker: {
+    type: 'flyout',
+    template: html`<adblocker-flyout></adblocker-flyout>`,
   },
   Search: {
     type: 'sidepane',
     template: html`<search-sidepane></search-sidepane>`,
-  },
-  Grammarly: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">Grammarly</div>`,
-  },
-  AdBlocker: {
-    type: 'flyout',
-    template: html`<div class="flyout-menu">AdBlocker</div>`,
   },
   Tools: {
     type: 'sidepane',
@@ -68,9 +73,5 @@ export default {
   Copilot: {
     type: 'sidepane',
     template: html`<copilot-sidepane></copilot-sidepane>`,
-  },
-  'Legacy Copilot': {
-    type: 'sidepane',
-    template: html`<legacy-copilot-sidepane></legacy-copilot-sidepane>`,
   },
 } as Record<string, ToolbarApp>;

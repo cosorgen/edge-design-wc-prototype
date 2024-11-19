@@ -6,46 +6,36 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  shadow28,
-} from '@phoenixui/themes';
 import WindowsService from '#services/windowsService.js';
 
-const template = html<DownloadsMenu>`
+const template = html<EdgeSettings>`
   <div>
     <img
       src="${(x) => x.getImageSource()}"
-      alt="Download Icon"
-      class="download-image"
+      alt="Settings Page"
+      class="settings-image"
     />
   </div>
 `;
 
 const styles = css`
   :host {
-    display: flex;
-    flex-direction: column;
-    width: 368px;
-    height: 298px;
-    background: ${acrylicBackgroundLuminosity};
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
-    overflow: hidden;
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%; /* Ensure it takes full height */
+    overflow: auto; /* Enable scrolling */
   }
 
-  .download-image {
-    width: 100%;
+  .settings-image {
+    width: 100%; /* Fill the width */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain;
   }
 `;
 
-@customElement({ name: 'downloads-menu', template, styles })
-export class DownloadsMenu extends FASTElement {
+@customElement({ name: 'edge-settings', template, styles })
+export class EdgeSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
 
   connectedCallback() {
@@ -66,7 +56,7 @@ export class DownloadsMenu extends FASTElement {
 
   getImageSource() {
     return this.ws.theme === 'dark'
-      ? './img/edge/download-dark.png'
-      : './img/edge/download-light.png';
+      ? './img/edge/settings-dark.png'
+      : './img/edge/settings-light.png';
   }
 }

@@ -10,14 +10,7 @@ import '@phoenixui/web-components/toggle-button.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerDialog,
-  colorNeutralForeground1,
-  shadow28,
-  spacingHorizontalL,
-} from '@phoenixui/themes';
+import { colorNeutralForeground1 } from '@phoenixui/themes';
 import apps from '../installedApps.js';
 
 const template = html<ToolbarFlyoutItem>`
@@ -58,18 +51,6 @@ const template = html<ToolbarFlyoutItem>`
 
 const styles = css`
   phx-toggle-button {
-    color: ${colorNeutralForeground1};
-  }
-
-  .flyout-menu {
-    width: 256px;
-    height: 300px;
-    padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
     color: ${colorNeutralForeground1};
   }
 `;

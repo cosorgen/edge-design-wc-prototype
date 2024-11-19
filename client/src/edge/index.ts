@@ -27,7 +27,6 @@ import './views/tool-bar.js';
 import './views/web-content.js';
 import './views/favorites-bar.js';
 import './controls/side-pane.js';
-import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`

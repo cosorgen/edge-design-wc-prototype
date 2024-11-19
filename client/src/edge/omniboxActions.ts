@@ -3,7 +3,7 @@ import './controls/omnibox-action-flyout.js';
 import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
-import './views/add-favorites-flyout.js';
+import './views/omnibox-flyouts/add-favorites-omnibox-flyout.js';
 import { colorBrandForeground1 } from '@phoenixui/themes';
 
 export const overflowItems = {

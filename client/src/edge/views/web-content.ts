@@ -16,8 +16,8 @@ import {
   shadow2,
   strokeWidthThin,
 } from '@phoenixui/themes';
-import './edge-newtab.js';
-import './settings.js';
+import './fullpage/edge-newtab.js';
+import './fullpage/edge-settings.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';

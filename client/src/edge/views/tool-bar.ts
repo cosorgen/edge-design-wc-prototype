@@ -13,7 +13,6 @@ import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
 import '../controls/toolbar-flyout-item.js';
-import '../controls/toolbar-sidepane-item.js';
 import '../controls/omnibox-action-flyout.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
@@ -30,7 +29,6 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
-import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
 import { spacingFrame } from '../designSystem.js';
 
@@ -97,25 +95,14 @@ const template = html<Toolbar>`
   <div class="group right">
     ${repeat(
       (x) => x.derivedToolbarItems,
-      html`${when(
-        (x) => apps[x].type === 'sidepane',
-        html`<toolbar-sidepane-item
-          id="${(x) => x}"
-          ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
-          ?pressed="${(x, c) => x === c.parent.ews.activeSidepaneAppId}"
-          @togglesidepane="${(x, c) => c.parent.toggleSidepane(x)}"
-          @togglepintoolbaritem="${(x, c) =>
-            c.parent.togglePinToolbarItem(x, c.event)}"
-        ></toolbar-sidepane-item>`,
-        html`<toolbar-flyout-item
-          id="${(x) => x}"
-          ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
-          ?initially-open="${(x, c) => x === c.parent.ews.activeToolbarItemId}"
-          @toggleflyout="${(x, c) => c.parent.toggleFlyout(x, c.event)}"
-          @togglepintoolbaritem="${(x, c) =>
-            c.parent.togglePinToolbarItem(x, c.event)}"
-        ></toolbar-flyout-item>`,
-      )}`,
+      html`<toolbar-flyout-item
+        id="${(x) => x}"
+        ?pinned="${(x, c) => c.parent.ess.pinnedToolbarItems.includes(x)}"
+        ?initially-open="${(x, c) => x === c.parent.ews.activeToolbarItemId}"
+        @toggleflyout="${(x, c) => c.parent.toggleFlyout(x, c.event)}"
+        @togglepintoolbaritem="${(x, c) =>
+          c.parent.togglePinToolbarItem(x, c.event)}"
+      ></toolbar-flyout-item>`,
       { positioning: true },
     )}
     <flyout-menu>
@@ -136,8 +123,8 @@ const template = html<Toolbar>`
       appearance="subtle"
       icon-only
       slot="trigger"
-      @click="${(x) => x.toggleSidepane('Legacy Copilot')}"
-      ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
+      @click="${(x) => x.toggleSidepane('Copilot')}"
+      ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
     >
       <img width="20px" src="./img/edge/copilotAppLight.png" />
     </phx-toggle-button>
@@ -206,14 +193,6 @@ export class Toolbar extends FASTElement {
       this._derivedToolbarItems.unshift(this.ews.activeToolbarItemId); // Add temp to the end
     }
 
-    // Look for missing active sidepane items
-    if (
-      this.ews.activeSidepaneAppId &&
-      !this._derivedToolbarItems.includes(this.ews.activeSidepaneAppId)
-    ) {
-      this._derivedToolbarItems.unshift(this.ews.activeSidepaneAppId); // Add temp to the end
-    }
-
     //remove items that are not pinned or active
     this._derivedToolbarItems = this._derivedToolbarItems.filter((id) => {
       return (
@@ -250,7 +229,6 @@ export class Toolbar extends FASTElement {
 
   toggleSidepane(id: string) {
     const isActive = this.ews.activeSidepaneAppId === id;
-    this.$emit('togglesidepane', !isActive);
     if (isActive) {
       this.ews.closeSidepaneApp();
     } else {

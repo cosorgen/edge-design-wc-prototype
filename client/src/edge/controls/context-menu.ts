@@ -1,7 +1,5 @@
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
   colorNeutralForeground1,
   colorNeutralForegroundHint,
@@ -11,8 +9,10 @@ import {
   spacingVerticalXS,
 } from '@phoenixui/themes';
 import './menu-item.js';
+import '../../windows/controls/acrylic-material.js';
 
 const template = html<ContextMenu>`
+  <acrylic-material></acrylic-material>
   <div id="menu-items">
     <slot></slot>
   </div>
@@ -20,15 +20,8 @@ const template = html<ContextMenu>`
 
 const styles = css`
   :host {
-    min-width: 96px;
-    max-width: 512px;
-    display: flex;
-    flex-direction: column;
-    gap: ${spacingVerticalS};
-    padding: ${spacingVerticalS};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
+    position: relative;
+    display: block;
     border-radius: ${borderRadiusLayerFlyout};
     box-shadow: ${shadow28};
     overflow: hidden;
@@ -36,8 +29,12 @@ const styles = css`
   }
 
   #menu-items {
+    position: relative;
     display: flex;
     flex-direction: column;
+    min-width: 96px;
+    max-width: 512px;
+    padding: ${spacingVerticalS};
   }
 
   .hint {

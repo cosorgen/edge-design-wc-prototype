@@ -24,7 +24,7 @@ import { spacingVerticalXL } from '@phoenixui/themes/tokens.js';
 import { TabService } from '#services/tabService.js';
 import FavoritesService from '#services/favoritesService.js';
 
-const template = html<AddFavoritesInputs>`
+const template = html<AddFavoritesOmniboxFlyout>`
   <div class="favorite-title">Favorite added</div>
   <div class="input-group">
     <label for="favorite-name">Name</label>
@@ -116,11 +116,11 @@ const styles = css`
 `;
 
 @customElement({
-  name: 'add-favorites-flyout',
+  name: 'add-favorites-omnibox-flyout',
   template,
   styles,
 })
-export class AddFavoritesInputs extends FASTElement {
+export class AddFavoritesOmniboxFlyout extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(FavoritesService) fs!: FavoritesService;
   @attr({ mode: 'boolean' }) open = false;
