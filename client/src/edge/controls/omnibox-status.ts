@@ -39,7 +39,7 @@ const imgPaths: Record<string, string> = {
 };
 
 const template = html<OmniboxStatus>`
-  <phx-button
+  <mai-button
     appearance="subtle"
     size="small"
     shape="circular"
@@ -56,7 +56,7 @@ const template = html<OmniboxStatus>`
       </svg>`,
     )}
     <div part="label">${(x) => labels[x.type]}</div>
-  </phx-button>
+  </mai-button>
   <phx-divider orientation="vertical"></phx-divider>
 `;
 
@@ -68,7 +68,7 @@ const styles = css`
     height: 100%;
   }
 
-  phx-button {
+  mai-button {
     color: ${colorNeutralForeground3};
     gap: ${spacingHorizontalXS};
   }

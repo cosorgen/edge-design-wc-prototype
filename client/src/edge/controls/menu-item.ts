@@ -87,7 +87,7 @@ const styles = css`
     overflow: hidden;
   }
 
-  button:has(::slotted(phx-button)) {
+  button:has(::slotted(mai-button)) {
     padding-inline-end: 0;
   }
 `;

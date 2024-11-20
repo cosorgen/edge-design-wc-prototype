@@ -24,7 +24,7 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
     </div>
   </button>
   <div id="end">
-    <phx-button
+    <mai-button
       appearance="subtle"
       icon-only
       @click="${(x, c) => x.handlePinClick(c.event)}"
@@ -35,8 +35,8 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
             x.pinned ? 'pin-off' : 'pin'}-20-regular"
         />
       </svg>
-    </phx-button>
-    <phx-button
+    </mai-button>
+    <mai-button
       appearance="subtle"
       icon-only
       @click="${(x, c) => {
@@ -47,7 +47,7 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
       <svg>
         <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
   </div>`;
 
 const styles = css`

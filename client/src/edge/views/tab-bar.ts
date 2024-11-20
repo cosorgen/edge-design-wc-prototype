@@ -25,11 +25,11 @@ const template = html<TabBar>`
   <div id="shadow"></div>
   <div id="content">
     <div class="group">
-      <phx-button appearance="subtle" icon-only>
+      <mai-button appearance="subtle" icon-only>
         <svg>
           <use href="img/edge/icons.svg#panel-left-text-20-regular" />
         </svg>
-      </phx-button>
+      </mai-button>
     </div>
     <div id="tabs">
       ${repeat(
@@ -66,7 +66,7 @@ const template = html<TabBar>`
           ></phx-divider>`,
       )}
     </div>
-    <phx-button
+    <mai-button
       appearance="subtle"
       icon-only
       id="add"
@@ -75,7 +75,7 @@ const template = html<TabBar>`
       <svg>
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
     <div
       id="window-grabber"
       @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
@@ -136,7 +136,7 @@ const styles = css`
     min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
-  phx-button {
+  mai-button {
     border-radius: ${borderRadiusLarge};
   }
 

@@ -54,7 +54,7 @@ const template = html<HorizontalTab>`
       <slot name="title">New tab</slot>
     </div>
   </button>
-  <phx-button
+  <mai-button
     size="small"
     appearance="subtle"
     icon-only
@@ -63,7 +63,7 @@ const template = html<HorizontalTab>`
     <svg>
       <use href="img/edge/icons.svg#dismiss-12-regular"></use>
     </svg>
-  </phx-button>
+  </mai-button>
 `;
 
 const styles = css`
@@ -151,14 +151,14 @@ const styles = css`
     height: 16px;
   }
 
-  phx-button {
+  mai-button {
     position: absolute;
     inset-inline-end: ${spacingHorizontalS};
     inset-block: ${spacingHorizontalS};
   }
 
-  phx-button svg,
-  phx-button {
+  mai-button svg,
+  mai-button {
     width: 16px;
     height: 16px;
     min-width: 16px;

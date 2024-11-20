@@ -13,17 +13,17 @@ import { spacingFrame } from '../designSystem.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">
-    <phx-button size="small" appearance="subtle" icon-only>
+    <mai-button size="small" appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#more-vertical-16-regular" />
       </svg>
-    </phx-button>
-    <phx-button size="small" appearance="subtle" icon-only>
+    </mai-button>
+    <mai-button size="small" appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#arrow-clockwise-16-regular" />
       </svg>
-    </phx-button>
-    <phx-button
+    </mai-button>
+    <mai-button
       size="small"
       appearance="subtle"
       @click="${(x) => x.$emit('close')}"
@@ -32,7 +32,7 @@ const template = html` <div id="title"><slot></slot></div>
       <svg>
         <use href="img/edge/icons.svg#dismiss-16-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
   </div>`;
 
 const styles = css`

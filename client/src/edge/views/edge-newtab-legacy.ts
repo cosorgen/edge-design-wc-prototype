@@ -96,28 +96,28 @@ const template = html<EdgeNewTab>`<img
         Microsoft Start
       </div>
       <div id="actions">
-        <phx-button icon-only appearance="subtle" size="large">
+        <mai-button icon-only appearance="subtle" size="large">
           <svg>
             <use href="img/edge/icons.svg#settings-24-regular"></use>
           </svg>
-        </phx-button>
-        <phx-button icon-only appearance="subtle" size="large">
+        </mai-button>
+        <mai-button icon-only appearance="subtle" size="large">
           <svg>
             <use href="img/edge/icons.svg#grid-dots-24-regular"></use>
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
       <div id="image-actions">
-        <phx-button icon-only appearance="subtle">
+        <mai-button icon-only appearance="subtle">
           <svg>
             <use href="img/edge/icons.svg#image-20-regular"></use>
           </svg>
-        </phx-button>
-        <phx-button icon-only appearance="subtle">
+        </mai-button>
+        <mai-button icon-only appearance="subtle">
           <svg>
             <use href="img/edge/icons.svg#arrow-maximize-20-regular"></use>
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
       <div id="searchbox">
         <div id="start">
@@ -172,18 +172,18 @@ const template = html<EdgeNewTab>`<img
         <a href="">Real Estate</a>
       </div>
       <div id="feed-actions">
-        <phx-button shape="circular">
+        <mai-button shape="circular">
           <svg slot="start" width="20px" height="20px">
             <use href="img/edge/icons.svg#star-edit-20-regular"></use>
           </svg>
           Personalize
-        </phx-button>
-        <phx-button shape="circular">
+        </mai-button>
+        <mai-button shape="circular">
           <svg slot="start" width="20px" height="20px">
             <use href="img/edge/icons.svg#options-20-regular"></use>
           </svg>
           Feed layout
-        </phx-button>
+        </mai-button>
       </div>
     </div>
   </div>`;
@@ -263,7 +263,7 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding: ${spacingVerticalXXXL};
 
-    phx-button {
+    mai-button {
       color: ${colorNeutralForegroundStaticInverted};
     }
   }
@@ -278,7 +278,7 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding: ${spacingVerticalXXXL};
 
-    phx-button {
+    mai-button {
       color: ${colorNeutralForegroundStaticInverted};
     }
   }
@@ -448,7 +448,7 @@ const styles = css`
     align-items: center;
     gap: ${spacingHorizontalM};
 
-    phx-button {
+    mai-button {
       color: ${colorNeutralForeground2};
     }
 `;

@@ -8,22 +8,22 @@ import {
 
 const template = html<MoreMenuZoom>`
   <div part="label">Zoom</div>
-  <phx-button appearance="subtle" size="small" icon-only>
+  <mai-button appearance="subtle" size="small" icon-only>
     <svg>
       <use href="img/edge/icons.svg#subtract-16-regular" />
     </svg>
-  </phx-button>
+  </mai-button>
   <div id="value">100%</div>
-  <phx-button appearance="subtle" size="small" icon-only>
+  <mai-button appearance="subtle" size="small" icon-only>
     <svg>
       <use href="img/edge/icons.svg#add-16-regular" />
     </svg>
-  </phx-button>
-  <phx-button appearance="subtle" size="small" icon-only>
+  </mai-button>
+  <mai-button appearance="subtle" size="small" icon-only>
     <svg>
       <use href="img/edge/icons.svg#arrow-maximize-16-regular" />
     </svg>
-  </phx-button>
+  </mai-button>
 `;
 
 const styles = css`

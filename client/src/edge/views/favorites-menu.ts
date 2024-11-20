@@ -38,20 +38,20 @@ const template = html<FavoritesMenu>`
   <div id="header">
     <span>Favorites</span>
     <div id="icons">
-      <phx-button
+      <mai-button
         size="small"
         appearance="subtle"
         icon-only
         @click="${(x) => x.handleAddFavorite()}"
       >
         <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
-      </phx-button>
+      </mai-button>
       <flyout-menu>
-        <phx-button size="small" appearance="subtle" icon-only slot="trigger">
+        <mai-button size="small" appearance="subtle" icon-only slot="trigger">
           <svg>
             <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
           </svg>
-        </phx-button>
+        </mai-button>
         <context-menu>
           <menu-item @click="${(x) => x.handleAddFavorite()}">
             Add this page to favorites

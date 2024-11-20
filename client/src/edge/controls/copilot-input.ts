@@ -23,7 +23,7 @@ const template = html<CopilotInput>`
     @keydown="${(x, c) => x.handleKeydown(c.event)}"
     @keyup="${(x, c) => x.handleKeyUp(c.event)}"
   ></div>
-  <phx-button
+  <mai-button
     appearance="primary"
     size="large"
     @click="${(x) => x.handleSubmit()}"
@@ -33,7 +33,7 @@ const template = html<CopilotInput>`
     <svg>
       <use href="img/edge/icons.svg#arrow-up-24-regular" />
     </svg>
-  </phx-button>
+  </mai-button>
 `;
 
 const styles = css`

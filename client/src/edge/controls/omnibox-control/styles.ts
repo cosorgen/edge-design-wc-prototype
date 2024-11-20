@@ -112,7 +112,7 @@ export const styles = css`
     justify-content: flex-end;
   }
 
-  [name='actions']::slotted(phx-button) {
+  [name='actions']::slotted(mai-button) {
     color: ${colorNeutralForegroundHint};
   }
 

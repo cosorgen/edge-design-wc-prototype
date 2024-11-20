@@ -63,7 +63,7 @@ const template = html<WindowsSettings>`
       <h1>Settings</h1>
       <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
-        <phx-button
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -77,8 +77,8 @@ const template = html<WindowsSettings>`
               href="./img/edge/icons.svg#chrome-minimize-20-regular"
             />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -93,8 +93,8 @@ const template = html<WindowsSettings>`
                 x.windowIsMaximized() ? 'restore' : 'maximize'}-20-regular"
             />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -109,7 +109,7 @@ const template = html<WindowsSettings>`
               href="./img/edge/icons.svg#chrome-close-20-regular"
             />
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
     </div>
 

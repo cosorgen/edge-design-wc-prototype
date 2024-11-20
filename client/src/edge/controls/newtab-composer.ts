@@ -18,15 +18,15 @@ const template = html`
   />
   <div id="end">
     <slot name="end">
-      <phx-button appearance="subtle" size="large" icon-only>
+      <mai-button appearance="subtle" size="large" icon-only>
         <svg>
           <use x="2" y="2" href="img/edge/icons.svg#add-20-regular" />
         </svg>
-      </phx-button>
-      <phx-button appearance="subtle" size="large" icon-only>
+      </mai-button>
+      <mai-button appearance="subtle" size="large" icon-only>
         <svg>
           <use href="img/edge/icons.svg#headphones-24-regular" />
-        </svg> </phx-button
+        </svg> </mai-button
     ></slot>
   </div>
 `;

@@ -49,12 +49,12 @@ const template = html<AddFavoritesInputs>`
     </phx-text-input>
   </div>
   <div class="footer">
-    <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
+    <mai-button @click="${(x) => x.closeFlyout()}"> More </mai-button>
     <div class="button-group">
-      <phx-button @click="${(x) => x.handleRemove()}"> Remove </phx-button>
-      <phx-button appearance="primary" @click="${(x) => x.handleDone()}">
+      <mai-button @click="${(x) => x.handleRemove()}"> Remove </mai-button>
+      <mai-button appearance="primary" @click="${(x) => x.handleDone()}">
         Done
-      </phx-button>
+      </mai-button>
     </div>
   </div>
 `;

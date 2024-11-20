@@ -32,11 +32,11 @@ import apps, { ToolbarApp } from '../installedApps.js';
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>
     <flyout-menu>
-      <phx-button size="small" appearance="subtle" icon-only slot="trigger">
+      <mai-button size="small" appearance="subtle" icon-only slot="trigger">
         <svg>
           <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
         </svg>
-      </phx-button>
+      </mai-button>
       <context-menu>
         ${when(
           (x) => x.ess.pinnedToolbarItems.includes('Extensions'),

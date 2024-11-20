@@ -46,16 +46,16 @@ const template = html`<div id="message">
   </div>
   <div id="actions">
     <span id="timestamp">${(x) => moment(x.time).fromNow()}</span>
-    <phx-button size="small" appearance="subtle" icon-only>
+    <mai-button size="small" appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#thumb-like-20-regular"></use>
       </svg>
-    </phx-button>
-    <phx-button size="small" appearance="subtle" icon-only>
+    </mai-button>
+    <mai-button size="small" appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#thumb-dislike-20-regular"></use>
       </svg>
-    </phx-button>
+    </mai-button>
   </div>
   <div id="loading"></div>`;
 
@@ -132,7 +132,7 @@ const styles = css`
     opacity: 0;
     transition: opacity ${durationNormal};
 
-    phx-button {
+    mai-button {
       color: ${colorNeutralForegroundHint};
     }
   }

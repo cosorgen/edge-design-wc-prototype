@@ -62,23 +62,23 @@ const template = html<CopilotNewtab>`<img
     </div>
   </div>
   <div id="start-actions" style="--index: 2;">
-    <phx-button icon-only appearance="subtle" size="large">
+    <mai-button icon-only appearance="subtle" size="large">
       <svg>
         <use href="img/edge/icons.svg#grid-dots-24-regular"></use>
       </svg>
-    </phx-button>
+    </mai-button>
   </div>
   <div id="end-actions" style="--index: 2;">
-    <phx-button icon-only appearance="subtle" size="large">
+    <mai-button icon-only appearance="subtle" size="large">
       <svg>
         <use x="-2" y="-2" href="img/edge/icons.svg#rewards-24-regular"></use>
       </svg>
-    </phx-button>
-    <phx-button icon-only appearance="subtle" size="large">
+    </mai-button>
+    <mai-button icon-only appearance="subtle" size="large">
       <svg>
         <use href="img/edge/icons.svg#settings-24-regular"></use>
       </svg>
-    </phx-button>
+    </mai-button>
   </div>`;
 
 const styles = css`
@@ -135,7 +135,7 @@ const styles = css`
     gap: ${spacingHorizontalS};
     padding: ${spacingVerticalXL};
 
-    phx-button {
+    mai-button {
       color: inherit;
     }
   }

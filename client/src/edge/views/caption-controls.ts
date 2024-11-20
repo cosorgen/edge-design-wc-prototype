@@ -63,7 +63,7 @@ const template = html` <div
           </div>
         `
       : ''}
-  <phx-button
+  <mai-button
     size="large"
     appearance="subtle"
     shape="square"
@@ -73,8 +73,8 @@ const template = html` <div
     <svg>
       <use href="img/edge/icons.svg#chrome-minimize-20-regular" x="2" y="2" />
     </svg>
-  </phx-button>
-  <phx-button
+  </mai-button>
+  <mai-button
     size="large"
     appearance="subtle"
     shape="square"
@@ -91,8 +91,8 @@ const template = html` <div
         y="2"
       />
     </svg>
-  </phx-button>
-  <phx-button
+  </mai-button>
+  <mai-button
     size="large"
     appearance="subtle"
     shape="square"
@@ -103,7 +103,7 @@ const template = html` <div
     <svg>
       <use href="img/edge/icons.svg#chrome-close-20-regular" x="2" y="2" />
     </svg>
-  </phx-button>`;
+  </mai-button>`;
 
 const styles = css`
   :host {

@@ -37,9 +37,9 @@ const template = html<CopilotComposer>`
     ></copilot-chat>
     <div id="input-row">
       <div id="start">
-        <phx-button appearance="subtle" size="large" icon-only>
+        <mai-button appearance="subtle" size="large" icon-only>
           <img src="img/edge/copilot-icon.svg" />
-        </phx-button>
+        </mai-button>
       </div>
       <copilot-input
         placeholder="Message Copilot"
@@ -48,17 +48,17 @@ const template = html<CopilotComposer>`
         @close="${(x) => x.handleClose()}"
       ></copilot-input>
       <div id="end">
-        <phx-button appearance="subtle" size="large" icon-only slot="end">
+        <mai-button appearance="subtle" size="large" icon-only slot="end">
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#add-24-regular" />
           </svg>
-        </phx-button>
-        <phx-button appearance="subtle" size="large" icon-only slot="end">
+        </mai-button>
+        <mai-button appearance="subtle" size="large" icon-only slot="end">
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#mic-new-24-regular" />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           appearance="subtle"
           size="large"
           icon-only
@@ -73,7 +73,7 @@ const template = html<CopilotComposer>`
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
     </div>
   </copilot-design-provider>
