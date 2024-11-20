@@ -8,7 +8,11 @@ import {
   volatile,
   when,
 } from '@microsoft/fast-element';
-import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
+import {
+  spacingHorizontalS,
+  spacingHorizontalXS,
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '@mai-ui/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
@@ -31,7 +35,6 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
-import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
 

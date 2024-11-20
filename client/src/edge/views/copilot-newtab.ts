@@ -18,7 +18,7 @@ import {
   spacingVerticalXL,
   spacingVerticalXXXL,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';

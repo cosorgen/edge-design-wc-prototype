@@ -10,7 +10,10 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
+import {
+  colorLayerBackgroundApp,
+  strokeWidthThin,
+} from '@mai-ui/phoenix-theme';
 import './edge-newtab.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';

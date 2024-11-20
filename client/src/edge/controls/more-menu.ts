@@ -26,7 +26,7 @@ import {
   spacingVerticalS,
   spacingVerticalXS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';

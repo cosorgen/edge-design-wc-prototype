@@ -15,7 +15,7 @@ import {
   colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalL,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">

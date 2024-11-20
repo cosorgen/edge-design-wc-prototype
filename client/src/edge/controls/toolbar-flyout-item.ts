@@ -17,7 +17,7 @@ import {
   colorNeutralForeground1,
   shadow28,
   spacingHorizontalL,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import apps from '../installedApps.js';
 
 const template = html<ToolbarFlyoutItem>`

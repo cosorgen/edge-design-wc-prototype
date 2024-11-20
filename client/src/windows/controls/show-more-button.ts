@@ -3,7 +3,7 @@ import {
   borderRadiusSmall,
   colorNeutralForeground1,
   spacingHorizontalXS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,

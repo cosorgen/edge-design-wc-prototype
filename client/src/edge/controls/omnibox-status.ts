@@ -10,7 +10,7 @@ import {
 import {
   colorNeutralForeground3,
   spacingHorizontalXS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/divider.js';
 

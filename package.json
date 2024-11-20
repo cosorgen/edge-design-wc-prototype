@@ -17,14 +17,16 @@
     "packages/switch",
     "packages/divider",
     "packages/menu",
+    "packages/phoenix-theme",
     "client",
     "server"
   ],
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
-    "build:packages": "npm run build -ws --if-present",
-    "clean": "node scripts/clean.mjs",
+    "build:pkg": "npm run build -ws --if-present",
+    "clean": "rimraf dist",
+    "clean:pkg": "npm run clean -ws --if-present",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",

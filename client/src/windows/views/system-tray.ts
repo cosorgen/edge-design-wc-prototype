@@ -4,7 +4,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   colorNeutralForeground1,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,

@@ -6,8 +6,7 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
-import { borderRadiusLayerBase } from '@phoenixui/themes';
-import { spacingFrame } from '../designSystem.js';
+import { borderRadiusLayerBase, spacingFrame } from '@mai-ui/phoenix-theme';
 import apps from '../installedApps.js';
 
 const template = html<SidePane>`${(x) => apps[x.id].template}`;

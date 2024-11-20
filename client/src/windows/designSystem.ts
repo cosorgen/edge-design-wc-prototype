@@ -5,7 +5,7 @@ import {
   phoenixDarkThemeWin11,
   phoenixLightThemeSolidWin11,
   phoenixLightThemeWin11,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import { OSTheme, OSTransparency } from '../services/windowsService.js';
 
 export type WindowsTokens = {

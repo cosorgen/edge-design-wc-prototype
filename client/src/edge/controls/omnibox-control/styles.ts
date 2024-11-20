@@ -13,11 +13,9 @@ import {
   spacingVerticalXXS,
   strokeWidthThick,
   strokeWidthThin,
-} from '@phoenixui/themes';
-import {
   colorLayerOmniboxBackground,
   colorLayerOmniboxBackgroundHover,
-} from '../../designSystem.js';
+} from '@mai-ui/phoenix-theme';
 
 export const styles = css`
   :host {

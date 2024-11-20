@@ -4,7 +4,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXXS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html<MoreMenuZoom>`
   <div part="label">Zoom</div>

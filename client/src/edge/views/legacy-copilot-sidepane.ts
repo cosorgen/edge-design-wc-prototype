@@ -7,7 +7,7 @@ import {
   spacingHorizontalM,
   spacingVerticalM,
   spacingVerticalXXL,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '../controls/sidepane-header.js';
 import '../controls/copilot-design-provider.js';
 import './copilot-composer.js';

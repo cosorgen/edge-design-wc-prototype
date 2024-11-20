@@ -5,7 +5,6 @@ import WindowsService from '#serviceswindowsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#services/settingsService.js';
-import { colorLayerBackgroundPillMenu, spacingFrame } from '../designSystem.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -18,7 +17,9 @@ import {
   spacingHorizontalXS,
   spacingHorizontalXXS,
   strokeWidthThin,
-} from '@phoenixui/themes';
+  colorLayerBackgroundPillMenu,
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';

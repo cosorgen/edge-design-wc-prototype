@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import { borderRadiusMedium } from '@phoenixui/themes';
+import { borderRadiusMedium } from '@mai-ui/phoenix-theme';
 
 /**
  * The icon component for the Omnibox dropdown item.

@@ -8,7 +8,7 @@ import {
   lineHeightBase300,
   spacingHorizontalL,
   spacingHorizontalS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 export type MoreMenuEntry = {
   title?: string;

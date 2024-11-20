@@ -13,7 +13,7 @@ import {
   durationNormal,
   spacingHorizontalXL,
   spacingVerticalM,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 
 const template = html<CopilotInput>`

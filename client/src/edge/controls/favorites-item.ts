@@ -18,7 +18,7 @@ import {
   spacingHorizontalSNudge,
   spacingHorizontalXS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html<FavoritesItem>` <button
   part="favorite-button"

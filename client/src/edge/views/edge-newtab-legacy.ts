@@ -39,7 +39,7 @@ import {
   spacingHorizontalXXXL,
   strokeWidthThin,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const topSites = [
   {

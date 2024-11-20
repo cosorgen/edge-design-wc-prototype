@@ -11,7 +11,8 @@ import {
   shadow2,
   spacingVerticalSNudge,
   borderRadiusLarge,
-} from '@phoenixui/themes';
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
@@ -19,7 +20,6 @@ import '../controls/horizontal-tab.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { spacingFrame } from '../designSystem.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>

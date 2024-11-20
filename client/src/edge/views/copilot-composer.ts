@@ -16,7 +16,7 @@ import {
   spacingVerticalXS,
   strokeWidthThin,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '../controls/copilot-chat-entry.js';
 import '../controls/copilot-design-provider.js';

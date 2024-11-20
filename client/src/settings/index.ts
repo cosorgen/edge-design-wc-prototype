@@ -31,7 +31,7 @@ import {
   borderRadiusSmall,
   spacingHorizontalM,
   spacingVerticalS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '../windows/controls/mica-material.js';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/label.js';

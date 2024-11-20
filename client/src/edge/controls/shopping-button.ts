@@ -11,7 +11,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html`
   <button>

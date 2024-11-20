@@ -12,7 +12,7 @@ import {
   colorSubtleBackgroundPressed,
   spacingHorizontalM,
   spacingHorizontalS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">

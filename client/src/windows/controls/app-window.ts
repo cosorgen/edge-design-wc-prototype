@@ -3,7 +3,7 @@ import {
   durationSlow,
   shadow28,
   shadowBaseLayer,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import {
   FASTElement,
   attr,

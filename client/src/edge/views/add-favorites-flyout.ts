@@ -19,8 +19,8 @@ import {
   spacingHorizontalM,
   spacingVerticalM,
   typographyStyles,
-} from '@phoenixui/themes';
-import { spacingVerticalXL } from '@phoenixui/themes/tokens.js';
+} from '@mai-ui/phoenix-theme';
+import { spacingVerticalXL } from '@mai-ui/phoenix-theme';
 import { TabService } from '#services/tabService.js';
 import FavoritesService from '#services/favoritesService.js';
 

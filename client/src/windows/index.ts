@@ -14,7 +14,7 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   colorNeutralForeground1,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import { setTheme } from './designSystem.js';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';

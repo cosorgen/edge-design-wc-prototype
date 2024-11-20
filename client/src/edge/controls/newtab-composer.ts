@@ -7,7 +7,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html`
   <div id="start"></div>

@@ -26,11 +26,11 @@ import {
   spacingHorizontalS,
   spacingHorizontalSNudge,
   spacingVerticalXXS,
-} from '@phoenixui/themes';
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/spinner.js';
 import '../../windows/controls/mica-material.js';
-import { spacingFrame } from '../designSystem.js';
 
 const template = html<HorizontalTab>`
   <div class="tab-background" id="bg"></div>

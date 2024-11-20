@@ -1,5 +1,5 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, spacingHorizontalM } from '@phoenixui/themes';
+import { borderRadiusSmall, spacingHorizontalM } from '@mai-ui/phoenix-theme';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,

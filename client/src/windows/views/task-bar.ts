@@ -4,7 +4,7 @@ import {
   strokeWidthThin,
   spacingHorizontalXS,
   colorNeutralStroke3,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '../controls/taskbar-button.js';
 import './clock-widget.js';
 import './system-tray.js';

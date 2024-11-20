@@ -16,7 +16,7 @@ import {
   tabBarBackgroundLuminosity,
   tabBarBackgroundColor,
   tabBarBackgroundNormal,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html<MicaMaterial>`
   <div id="image"></div>

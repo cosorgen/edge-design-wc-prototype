@@ -1,7 +1,7 @@
 import {
   phoenixLightThemeWin11,
   phoenixDarkThemeWin11,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const commonOverrides = {
   fontFamilyBase: 'ABC Ginto Variable, sans-serif',

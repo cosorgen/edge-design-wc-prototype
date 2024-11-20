@@ -5,7 +5,7 @@ import {
   FASTElement,
   html,
 } from '@microsoft/fast-element';
-import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
+import { curveDecelerateMax, durationFast } from '@mai-ui/phoenix-theme';
 
 // Popovers need to be manually controlled so that we can use context menus with trackpads
 const template = html<FlyoutMenu>`

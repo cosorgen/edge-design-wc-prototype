@@ -4,7 +4,7 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/add-favorites-flyout.js';
-import { colorBrandForeground1 } from '@phoenixui/themes';
+import { colorBrandForeground1 } from '@mai-ui/phoenix-theme';
 
 export const overflowItems = {
   'limit-cookies': {

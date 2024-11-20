@@ -1,6 +1,6 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '../controls/sidepane-header.js';
-import { colorLayerBackgroundDialog } from '@phoenixui/themes';
+import { colorLayerBackgroundDialog } from '@mai-ui/phoenix-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 

@@ -6,7 +6,7 @@ import {
   borderRadiusLayerDialog,
   colorNeutralForeground1,
   shadow28,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html` Coupons available `;
 

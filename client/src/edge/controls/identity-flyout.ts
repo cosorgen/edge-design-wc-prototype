@@ -12,7 +12,7 @@ import {
   borderRadiusLayerFlyout,
   colorNeutralForeground1,
   shadow28,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import WindowsService from '#services/windowsService.js';
 
 const template = html<IdentityMenu>`

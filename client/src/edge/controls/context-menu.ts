@@ -9,7 +9,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalS,
   spacingVerticalXS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import './menu-item.js';
 
 const template = html<ContextMenu>`

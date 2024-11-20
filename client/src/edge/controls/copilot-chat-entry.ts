@@ -28,7 +28,7 @@ import {
   spacingVerticalXS,
   spacingVerticalXXS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/spinner.js';
 import showdown from 'showdown';

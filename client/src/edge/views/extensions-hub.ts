@@ -17,7 +17,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/extension-hub-item.js';

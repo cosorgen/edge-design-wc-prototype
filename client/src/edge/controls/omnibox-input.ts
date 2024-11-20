@@ -11,7 +11,7 @@ import {
   fontSizeBase300,
   fontWeightRegular,
   lineHeightBase300,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const template = html<OmniboxInput>`
   <div

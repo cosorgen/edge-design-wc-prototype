@@ -21,13 +21,13 @@ import {
   shadow28,
   borderRadiusLarge,
   spacingHorizontalM,
-} from '@phoenixui/themes';
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { CopilotService } from '#servicescopilotService.js';
-import { spacingFrame } from '../../designSystem.js';
 import { TabService } from '#servicestabService.js';
 import inlineCenterStyles from './inline-center-styles.js';
 import inlineStartStyles from './inline-start-styles.js';

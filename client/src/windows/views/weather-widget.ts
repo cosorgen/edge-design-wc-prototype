@@ -15,7 +15,7 @@ import {
   fontWeightRegular,
   lineHeightBase200,
   spacingHorizontalS,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,

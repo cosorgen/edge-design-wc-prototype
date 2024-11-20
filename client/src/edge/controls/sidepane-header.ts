@@ -7,9 +7,9 @@ import {
   spacingHorizontalS,
   strokeWidthThin,
   typographyStyles,
-} from '@phoenixui/themes';
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
-import { spacingFrame } from '../designSystem.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">

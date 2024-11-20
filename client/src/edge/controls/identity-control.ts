@@ -18,7 +18,7 @@ import {
   lineHeightBase200,
   spacingHorizontalXS,
   strokeWidthThin,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 
 const imageIds = {
   signedIn: 'dog',

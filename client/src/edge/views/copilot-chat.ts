@@ -13,12 +13,12 @@ import {
   durationUltraSlow,
   spacingVerticalXL,
   spacingVerticalXXL,
-} from '@phoenixui/themes';
+  spacingFrame,
+} from '@mai-ui/phoenix-theme';
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
-import { spacingFrame } from '../designSystem.js';
 
 const template = html<CopilotChat>`<div id="chat"></div>`;
 

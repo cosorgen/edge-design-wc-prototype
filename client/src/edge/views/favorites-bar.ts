@@ -15,9 +15,8 @@ import '../controls/favorites-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import { spacingHorizontalS } from '@phoenixui/themes';
+import { spacingHorizontalS, spacingFrame } from '@mai-ui/phoenix-theme';
 import { TabService } from '#servicestabService.js';
-import { spacingFrame } from '../designSystem.js';
 
 const template = html`
   ${repeat(

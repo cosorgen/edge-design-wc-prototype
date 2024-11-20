@@ -19,7 +19,7 @@ import {
   spacingHorizontalM,
   spacingVerticalS,
   strokeWidthThickest,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import './omnibox-icon.js';
 
 const template = html<OmniboxSuggestion>` <div id="start">

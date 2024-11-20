@@ -22,7 +22,7 @@ import {
   spacingVerticalL,
   spacingVerticalXXL,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@mai-ui/phoenix-theme';
 import { TabService } from '#servicestabService.js';
 
 const template = html<EdgeNewTab>`

@@ -10,7 +10,7 @@ import '@phoenixui/web-components/toggle-button.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import { colorNeutralForeground1 } from '@phoenixui/themes';
+import { colorNeutralForeground1 } from '@mai-ui/phoenix-theme';
 import apps from '../installedApps.js';
 
 function toCamelCase(str: string) {
