@@ -19,9 +19,16 @@ OPENAI_API_ENDPOINTS='[
 Then run the following
 
 ```bash
-npm run auth
 npm install
 npm run dev
 ```
+
+If you get a 401 error from npm run the following:
+
+```bash
+npx ado-npm-auth
+```
+
+> *Note*: You may need to remove the package scope in .npmrc for the script to work.
 
 http://localhost:4000 should automatically open and refresh to see your work.
