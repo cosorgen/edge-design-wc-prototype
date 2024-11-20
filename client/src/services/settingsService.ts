@@ -12,6 +12,7 @@ export default class EdgeSettingsSerivce {
   @observable showLegacyNewTab = false;
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = false;
+  @observable edgeTheme: 'kumo' | 'phoenix' | 'fluent' = 'phoenix';
 
   constructor() {
     // Load settings from local storage
@@ -25,6 +26,10 @@ export default class EdgeSettingsSerivce {
         | 'always'
         | 'newtab'
         | 'never') || this.showFavoritesBar;
+
+    this.edgeTheme =
+      (url.searchParams.get('edgeTheme') as 'kumo' | 'phoenix' | 'fluent') ||
+      this.edgeTheme;
 
     this.showLegacyCopilot =
       url.searchParams.get('showLegacyCopilot') === 'true' ||
@@ -48,6 +53,7 @@ export default class EdgeSettingsSerivce {
   setSettingsInURL() {
     const url = new URL(window.location.href);
     url.searchParams.set('showFavoritesBar', this.showFavoritesBar);
+    url.searchParams.set('edgeTheme', this.edgeTheme);
     url.searchParams.set(
       'showLegacyCopilot',
       this.showLegacyCopilot.toString(),
@@ -115,6 +121,11 @@ export default class EdgeSettingsSerivce {
 
   setFullWidthOmnibox(show: boolean): void {
     this.fullWidthOmnibox = show;
+    this.setSettingsInURL();
+  }
+
+  setEdgeTheme(theme: 'kumo' | 'phoenix' | 'fluent') {
+    this.edgeTheme = theme;
     this.setSettingsInURL();
   }
 }

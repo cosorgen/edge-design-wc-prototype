@@ -1,18 +1,19 @@
-import type { ValuesOf } from "@fluentui/web-components/utilities.js";
+import type { ValuesOf } from '@fluentui/web-components/utilities.js';
 export {
-    ButtonFormTarget,
-    ButtonType,
-} from "@fluentui/web-components/button/options.js";
+  ButtonFormTarget,
+  ButtonType,
+} from '@fluentui/web-components/button/options.js';
 
 /**
  * ButtonAppearance constants
  * @public
  */
 export const ButtonAppearance = {
-    neutral: "neutral",
-    outline: "outline",
-    primary: "primary",
-    transparent: "transparent",
+  neutral: 'neutral',
+  outline: 'outline',
+  primary: 'primary',
+  transparent: 'transparent',
+  subtle: 'subtle',
 } as const;
 
 /**
@@ -26,8 +27,8 @@ export type ButtonAppearance = ValuesOf<typeof ButtonAppearance>;
  * @public
  */
 export const ButtonSize = {
-    medium: "medium",
-    large: "large",
+  medium: 'medium',
+  large: 'large',
 } as const;
 
 /**
