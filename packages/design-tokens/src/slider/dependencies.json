@@ -1,0 +1,54 @@
+[
+    {
+        "name": "borderRadiusCircular",
+        "f2": "borderRadiusCircular"
+    },
+    {
+        "name": "borderRadiusMedium",
+        "f2": "borderRadiusMedium"
+    },
+    {
+        "name": "borderRadiusSmall",
+        "f2": "borderRadiusSmall"
+    },
+    {
+        "name": "colorCompoundBrandBackground",
+        "f2": "colorCompoundBrandBackground"
+    },
+    {
+        "name": "colorCompoundBrandBackgroundHover",
+        "f2": "colorCompoundBrandBackgroundHover"
+    },
+    {
+        "name": "colorCompoundBrandBackgroundPressed",
+        "f2": "colorCompoundBrandBackgroundPressed"
+    },
+    {
+        "name": "colorNeutralBackground1",
+        "f2": "colorNeutralBackground1"
+    },
+    {
+        "name": "colorNeutralBackgroundDisabled",
+        "f2": "colorNeutralBackgroundDisabled"
+    },
+    {
+        "name": "colorNeutralForegroundDisabled",
+        "f2": "colorNeutralForegroundDisabled"
+    },
+    {
+        "name": "colorNeutralStroke1",
+        "f2": "colorNeutralStroke1"
+    },
+    {
+        "name": "colorNeutralStrokeAccessible",
+        "f2": "colorNeutralStrokeAccessible"
+    },
+    {
+        "name": "colorStrokeFocus1",
+        "f2": "colorStrokeFocus1"
+    },
+    {
+        "name": "colorStrokeFocus2",
+        "f2": "colorStrokeFocus2"
+    }
+]

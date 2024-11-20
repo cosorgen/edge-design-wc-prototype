@@ -1,0 +1,66 @@
+[
+    {
+        "name": "colorNeutralBackground3",
+        "f2": "colorNeutralBackground3"
+    },
+    {
+        "name": "colorNeutralForeground3",
+        "f2": "colorNeutralForeground3"
+    },
+    {
+        "name": "colorNeutralStroke1",
+        "f2": "colorNeutralStroke1"
+    },
+    {
+        "name": "colorPaletteDarkOrangeBackground1",
+        "f2": "colorPaletteDarkOrangeBackground1"
+    },
+    {
+        "name": "colorPaletteDarkOrangeBorder1",
+        "f2": "colorPaletteDarkOrangeBorder1"
+    },
+    {
+        "name": "colorPaletteGreenBackground1",
+        "f2": "colorPaletteGreenBackground1"
+    },
+    {
+        "name": "colorPaletteGreenBorder1",
+        "f2": "colorPaletteGreenBorder1"
+    },
+    {
+        "name": "colorPaletteRedBackground1",
+        "f2": "colorPaletteRedBackground1"
+    },
+    {
+        "name": "colorPaletteRedBorder1",
+        "f2": "colorPaletteRedBorder1"
+    },
+    {
+        "name": "fontFamilyBase",
+        "f2": "fontFamilyBase"
+    },
+    {
+        "name": "fontSizeBase200",
+        "f2": "fontSizeBase200"
+    },
+    {
+        "name": "lineHeightBase200",
+        "f2": "lineHeightBase200"
+    },
+    {
+        "name": "spacingHorizontalM",
+        "f2": "spacingHorizontalM"
+    },
+    {
+        "name": "spacingHorizontalS",
+        "f2": "spacingHorizontalS"
+    },
+    {
+        "name": "spacingVerticalMNudge",
+        "f2": "spacingVerticalMNudge"
+    },
+    {
+        "name": "spacingVerticalS",
+        "f2": "spacingVerticalS"
+    }
+]

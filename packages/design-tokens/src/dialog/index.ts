@@ -1,0 +1,10 @@
+export const colorBackgroundOverlay = "var(--colorBackgroundOverlay)";
+export const colorNeutralBackground1 = "var(--colorNeutralBackground1)";
+export const colorNeutralForeground1 = "var(--colorNeutralForeground1)";
+export const colorTransparentStroke = "var(--colorTransparentStroke)";
+export const curveAccelerateMid = "var(--curveAccelerateMid)";
+export const curveDecelerateMid = "var(--curveDecelerateMid)";
+export const curveLinear = "var(--curveLinear)";
+export const durationGentle = "var(--durationGentle)";
+export const shadow64 = "var(--shadow64)";
+export const strokeWidthThin = "var(--strokeWidthThin)";

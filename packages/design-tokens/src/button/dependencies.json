@@ -1,0 +1,321 @@
+[
+    {
+        "name": "backgroundControlBrandRest",
+        "smtc": "background-control-brand-rest",
+        "f2": "colorBrandBackground"
+    },
+    {
+        "name": "backgroundControlBrandHover",
+        "smtc": "background-control-brand-hover",
+        "f2": "colorBrandBackgroundHover"
+    },
+    {
+        "name": "backgroundControlBrandPressed",
+        "smtc": "background-control-brand-pressed",
+        "f2": "colorBrandBackgroundPressed"
+    },
+    {
+        "name": "backgroundControlNeutralRest",
+        "smtc": "background-control-neutral-rest",
+        "f2": "colorNeutralBackground1"
+    },
+    {
+        "name": "backgroundControlNeutralHover",
+        "smtc": "background-control-neutral-hover",
+        "f2": "colorNeutralBackground1Hover"
+    },
+    {
+        "name": "backgroundControlNeutralPressed",
+        "smtc": "background-control-neutral-pressed",
+        "f2": "colorNeutralBackground1Pressed"
+    },
+    {
+        "name": "backgroundControlNeutralDisabled",
+        "smtc": "background-control-neutral-disabled",
+        "f2": "colorNeutralBackgroundDisabled"
+    },
+    {
+        "name": "backgroundControlOutlineRest",
+        "smtc": "background-control-outline-rest",
+        "f2": "colorNeutralBackground1"
+    },
+    {
+        "name": "backgroundControlOutlineHover",
+        "smtc": "background-control-outline-hover",
+        "f2": "colorNeutralBackground1Hover"
+    },
+    {
+        "name": "backgroundControlOutlinePressed",
+        "smtc": "background-control-outline-pressed",
+        "f2": "colorNeutralBackground1Pressed"
+    },
+    {
+        "name": "backgroundControlOutlineDisabled",
+        "smtc": "background-control-outline-disabled",
+        "f2": "colorNeutralBackgroundDisabled"
+    },
+    {
+        "name": "foregroundControlNeutralPrimaryRest",
+        "smtc": "foreground-control-neutral-primary-rest",
+        "f2": "colorNeutralForeground1"
+    },
+    {
+        "name": "foregroundControlNeutralPrimaryHover",
+        "smtc": "foreground-control-neutral-primary-hover",
+        "f2": "colorNeutralForeground1Hover"
+    },
+    {
+        "name": "foregroundControlNeutralPrimaryPressed",
+        "smtc": "foreground-control-neutral-primary-pressed",
+        "f2": "colorNeutralForeground1Pressed"
+    },
+    {
+        "name": "foregroundControlOnTransparentRest",
+        "ctrl": true,
+        "smtc": "foreground-control-on-transparent-rest",
+        "f2": "colorNeutralForeground2"
+    },
+    {
+        "name": "foregroundControlOnTransparentHover",
+        "ctrl": true,
+        "smtc": "foreground-control-on-transparent-hover",
+        "f2": "colorNeutralForeground2BrandHover"
+    },
+    {
+        "name": "foregroundControlOnTransparentPressed",
+        "ctrl": true,
+        "smtc": "foreground-control-on-transparent-pressed",
+        "f2": "colorNeutralForeground2BrandPressed"
+    },
+    {
+        "name": "foregroundControlNeutralPrimaryDisabled",
+        "smtc": "foreground-control-neutral-primary-disabled",
+        "f2": "colorNeutralForegroundDisabled"
+    },
+    {
+        "name": "foregroundControlOnBrandRest",
+        "smtc": "foreground-control-on-brand-rest",
+        "f2": "colorNeutralForegroundOnBrand"
+    },
+    {
+        "name": "foregroundControlOnOutlineRest",
+        "optiona": "foreground-control-on-outline-rest",
+        "smtc": "foreground-control-neutral-primary-rest",
+        "f2": "colorNeutralForeground1"
+    },
+    {
+        "name": "foregroundControlOnOutlineHover",
+        "optiona": "foreground-control-on-outline-hover",
+        "smtc": "foreground-control-neutral-primary-hover",
+        "f2": "colorNeutralForeground1Hover"
+    },
+    {
+        "name": "foregroundControlOnOutlinePressed",
+        "optiona": "foreground-control-on-outline-pressed",
+        "smtc": "foreground-control-neutral-primary-pressed",
+        "f2": "colorNeutralForeground1Pressed"
+    },
+    {
+        "name": "foregroundControlOnOutlineDisabled",
+        "optiona": "foreground-control-on-outline-disabled",
+        "smtc": "foreground-control-neutral-primary-disabled",
+        "f2": "colorNeutralForegroundDisabled"
+    },
+    {
+        "name": "strokeControlOnNeutralGradientStop2Rest",
+        "ctrl": true,
+        "smtc": "stroke-control-on-neutral-gradient-stop-2-rest",
+        "f2": "colorNeutralStroke1"
+    },
+    {
+        "name": "strokeControlOnNeutralGradientStop2Hover",
+        "ctrl": true,
+        "smtc": "stroke-control-on-neutral-gradient-stop-2-hover",
+        "f2": "colorNeutralStroke1Hover"
+    },
+    {
+        "name": "strokeControlOnNeutralGradientStop2Pressed",
+        "ctrl": true,
+        "smtc": "stroke-control-on-neutral-gradient-stop-2-pressed",
+        "f2": "colorNeutralStroke1Pressed"
+    },
+    {
+        "name": "strokeControlOnNeutralGradientStop2Disabled",
+        "ctrl": true,
+        "smtc": "stroke-control-on-neutral-gradient-stop-2-disabled",
+        "f2": "colorNeutralStrokeDisabled"
+    },
+    {
+        "name": "strokeControlOutlineGradientStop2Rest",
+        "optional": "stroke-control-outline-gradient-stop-2-rest",
+        "smtc": "stroke-control-outline-rest",
+        "f2": "colorNeutralStroke1"
+    },
+    {
+        "name": "strokeControlOutlineGradientStop2Hover",
+        "optional": "stroke-control-outline-gradient-stop-2-hover",
+        "smtc": "stroke-control-outline-hover",
+        "f2": "colorNeutralStroke1Hover"
+    },
+    {
+        "name": "strokeControlOutlineGradientStop2Pressed",
+        "optional": "stroke-control-outline-gradient-stop-2-pressed",
+        "smtc": "stroke-control-outline-pressed",
+        "f2": "colorNeutralStroke1Pressed"
+    },
+    {
+        "name": "strokeControlOutlineGradientStop2Disabled",
+        "optional": "stroke-control-on-neutral-gradient-stop-2-disabled",
+        "smtc": "stroke-control-outline-disabled",
+        "f2": "colorNeutralStrokeDisabled"
+    },
+    {
+        "name": "strokeControlOutlineRest",
+        "smtc": "stroke-control-outline-rest",
+        "f2": "colorNeutralStroke1"
+    },
+    {
+        "name": "strokeControlOutlineHover",
+        "smtc": "stroke-control-outline-hover",
+        "f2": "colorNeutralStroke1Hover"
+    },
+    {
+        "name": "strokeControlOutlinePressed",
+        "smtc": "stroke-control-outline-pressed",
+        "f2": "colorNeutralStroke1Pressed"
+    },
+    {
+        "name": "strokeControlOutlineDisabled",
+        "smtc": "stroke-control-outline-disabled",
+        "f2": "colorNeutralStrokeDisabled"
+    },
+    {
+        "name": "strokeWidthControlOutlineRest",
+        "optional": "stroke-width-control-outline-rest",
+        "smtc": "stroke-width-default",
+        "f2": "strokeWidthThin"
+    },
+    {
+        "name": "strokeWidthControlOutlineHover",
+        "optional": "stroke-width-control-outline-hover",
+        "smtc": "stroke-width-default",
+        "f2": "strokeWidthThin"
+    },
+    {
+        "name": "strokeWidthControlOutlinePressed",
+        "optional": "stroke-width-control-outline-pressed",
+        "smtc": "stroke-width-default",
+        "f2": "strokeWidthThin"
+    },
+    {
+        "name": "controlFocusOuterStrokeColor",
+        "smtc": "control-focus-outer-stroke-color",
+        "f2": "colorStrokeFocus2"
+    },
+    {
+        "name": "nullColor0",
+        "smtc": "null-color",
+        "f2": "colorTransparentBackground"
+    },
+    {
+        "name": "nullColor1",
+        "smtc": "null-color",
+        "f2": "colorTransparentBackgroundHover"
+    },
+    {
+        "name": "nullColor2",
+        "smtc": "null-color",
+        "f2": "colorTransparentBackgroundPressed"
+    },
+    {
+        "name": "nullColor3",
+        "smtc": "null-color",
+        "f2": "colorTransparentStroke"
+    },
+    {
+        "$comment": "No semantic token available",
+        "name": "curveEasyEase",
+        "f2": "curveEasyEase"
+    },
+    {
+        "$comment": "No semantic token available",
+        "name": "durationFaster",
+        "f2": "durationFaster"
+    },
+    {
+        "name": "textStyleDefaultRegularFontFamily",
+        "smtc": "text-style-default-regular-font-family",
+        "f2": "fontFamilyBase"
+    },
+    {
+        "name": "textRampBody2FontSize",
+        "smtc": "text-ramp-body-2-font-size",
+        "f2": "fontSizeBase300"
+    },
+    {
+        "name": "fontSizeBase400",
+        "$comment": "No semantic token available, requires large state",
+        "f2": "fontSizeBase400"
+    },
+    {
+        "name": "textControlButtonWeight",
+        "ctrl": true,
+        "smtc": "text-control-button-weight",
+        "f2": "fontWeightSemibold"
+    },
+    {
+        "name": "textRampBody2LineHeight",
+        "smtc": "text-ramp-body-2-line-height",
+        "f2": "lineHeightBase300"
+    },
+    {
+        "name": "lineHeightBase400",
+        "$comment": "No semantic token available, requires large state",
+        "f2": "lineHeightBase400"
+    },
+    {
+        "name": "controlFabBgFgShadow",
+        "$comment": "The semantic tokens needed are a combination of tokens, one consolidated token will be set and used in the component",
+        "smtc_vars": [
+            "control-fab-bg-fg-shadow-key-rest-blur",
+            "control-fab-bg-fg-shadow-key-rest-y",
+            "control-fab-bg-fg-shadow-key-rest-color",
+            "control-fab-bg-fg-shadow-ambient-blur",
+            "control-fab-bg-fg-shadow-ambient-y",
+            "control-fab-bg-fg-shadow-ambient-color"
+        ],
+        "smtc": "internal-control-fab-bg-fg-shadow",
+        "smtc_css": "0 var(--smtc-control-fab-bg-fg-shadow-key-rest-y) var(--smtc-control-fab-bg-fg-shadow-key-rest-blur) var(--smtc-control-fab-bg-fg-shadow-key-rest-color), 0 var(--smtc-control-fab-bg-fg-shadow-ambient-y) var(--smtc-control-fab-bg-fg-shadow-ambient-blur) var(--smtc-control-fab-bg-fg-shadow-ambient-color)",
+        "f2": "shadow2"
+    },
+    {
+        "name": "shadow4",
+        "$comment": "Get clarity on this, should be similar to shadow2 however additional shadow tokens do not seem to be available",
+        "f2": "shadow4"
+    },
+    {
+        "name": "spacingHorizontalL",
+        "$comment": "No semantic token available, requires large state",
+        "f2": "spacingHorizontalL"
+    },
+    {
+        "name": "paddingControlHorizontalDefault",
+        "smtc": "padding-control-horizontal-default",
+        "f2": "spacingHorizontalM"
+    },
+    {
+        "name": "gapControlDefault",
+        "smtc": "gap-control-default",
+        "f2": "spacingHorizontalSNudge"
+    },
+    {
+        "name": "controlFocusOuterStrokeWidth",
+        "smtc": "control-focus-outer-stroke-width",
+        "f2": "strokeWidthThick"
+    },
+    {
+        "name": "controlFocusInnerStrokeWidth",
+        "smtc": "control-focus-inner-stroke-width",
+        "f2": "strokeWidthThin"
+    }
+]

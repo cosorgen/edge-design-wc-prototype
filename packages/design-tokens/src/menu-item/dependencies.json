@@ -1,0 +1,95 @@
+[
+    {
+        "name": "borderRadiusMedium",
+        "smtc": "control-list-corner-rest",
+        "f2": "borderRadiusMedium"
+    },
+    {
+        "name": "colorCompoundBrandForeground1Pressed",
+        "smtc": "foreground-control-icon-on-subtle-pressed",
+        "f2": "colorCompoundBrandForeground1Pressed"
+    },
+    {
+        "name": "colorNeutralBackground1",
+        "smtc": "background-control-subtle-rest",
+        "f2": "colorNeutralBackground1"
+    },
+    {
+        "name": "colorNeutralBackground1Hover",
+        "smtc": "background-control-subtle-hover",
+        "f2": "colorNeutralBackground1Hover"
+    },
+    {
+        "name": "colorNeutralBackground1Selected",
+        "smtc": "background-control-subtle-pressed",
+        "f2": "colorNeutralBackground1Selected"
+    },
+    {
+        "name": "colorNeutralBackgroundDisabled",
+        "smtc": "background-control-subtle-disabled",
+        "f2": "colorNeutralBackgroundDisabled"
+    },
+    {
+        "name": "colorNeutralForeground2",
+        "smtc": "foreground-control-on-subtle-rest",
+        "f2": "colorNeutralForeground2"
+    },
+    {
+        "name": "colorNeutralForeground2Hover",
+        "smtc": "foreground-control-on-subtle-hover",
+        "f2": "colorNeutralForeground2Hover"
+    },
+    {
+        "name": "colorNeutralForeground2Pressed",
+        "smtc": "foreground-control-on-subtle-pressed",
+        "f2": "colorNeutralForeground2Pressed"
+    },
+    {
+        "name": "colorNeutralForeground3",
+        "smtc": "foreground-neutral-secondary",
+        "f2": "colorNeutralForeground3"
+    },
+    {
+        "name": "colorNeutralForegroundDisabled",
+        "smtc": "foreground-control-on-subtle-disabled",
+        "f2": "colorNeutralForegroundDisabled"
+    },
+    {
+        "name": "colorStrokeFocus2",
+        "$comment": "There is also an inner stroke, this has no mapping yet.",
+        "smtc": "control-focus-outer-stroke-width",
+        "f2": "colorStrokeFocus2"
+    },
+    {
+        "name": "fontFamilyBase",
+        "smtc": "text-style-default-regular-font-family",
+        "f2": "fontFamilyBase"
+    },
+    {
+        "name": "fontSizeBase200",
+        "$comment": "fontSizeBase200 is actually different per fluent 2 tokens in practice but only 1 is present for semantic tokens AND fluent 2 in figma.",
+        "smtc": "text-ramp-body-2-font-size",
+        "f2": "fontSizeBase200"
+    },
+    {
+        "name": "fontSizeBase300",
+        "smtc": "text-ramp-body-2-font-size",
+        "f2": "fontSizeBase300"
+    },
+    {
+        "name": "fontWeightRegular",
+        "smtc": "text-style-default-regular-weight",
+        "f2": "fontWeightRegular"
+    },
+    {
+        "name": "lineHeightBase200",
+        "$comment": "fontSizeBase200 is actually different per fluent 2 tokens in practice but only 1 is present for semantic tokens AND fluent 2 in figma.",
+        "smtc": "text-ramp-body-2-line-height",
+        "f2": "lineHeightBase200"
+    },
+    {
+        "name": "lineHeightBase300",
+        "smtc": "text-ramp-body-2-line-height",
+        "f2": "lineHeightBase300"
+    }
+]

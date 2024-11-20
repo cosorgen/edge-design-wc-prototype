@@ -1,0 +1,40 @@
+{
+    "name": "@mai-ui/component-framework",
+    "description": "MAI Web Components Framework",
+    "version": "0.0.1",
+    "author": "Microsoft",
+    "license": "UNLICENSED",
+    "type": "module",
+    "private": true,
+    "exports": {
+        ".": {
+            "default": "./dist/esm/index.js",
+            "types": "./dist/dts/index.d.ts"
+        },
+        "./design-system.js": {
+            "default": "./dist/esm/design-system.js",
+            "types": "./dist/dts/design-system.d.ts"
+        },
+        "./get-initials.js": {
+            "default": "./dist/esm/get-initials.js",
+            "types": "./dist/dts/get-initials.d.ts"
+        },
+        "./states.js": {
+            "default": "./dist/esm/states.js",
+            "types": "./dist/dts/states.d.ts"
+        },
+        "./toggle-state.js": {
+            "default": "./dist/esm/toggle-state.js",
+            "types": "./dist/dts/toggle-state.d.ts"
+        },
+        "./package.json": "./package.json"
+    },
+    "dependencies": {
+        "@mai-ui/design-tokens": "^0.0.1"
+    },
+    "scripts": {
+        "build": "npm run build:tsc",
+        "build:tsc": "tsc -p tsconfig.build.json",
+        "clean": "rimraf dist"
+    }
+}

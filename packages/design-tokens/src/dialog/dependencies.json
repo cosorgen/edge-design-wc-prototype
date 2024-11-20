@@ -1,0 +1,42 @@
+[
+  {
+    "name": "colorBackgroundOverlay",
+    "f2": "colorBackgroundOverlay"
+  },
+  {
+    "name": "colorNeutralBackground1",
+    "f2": "colorNeutralBackground1"
+  },
+  {
+    "name": "colorNeutralForeground1",
+    "f2": "colorNeutralForeground1"
+  },
+  {
+    "name": "colorTransparentStroke",
+    "f2": "colorTransparentStroke"
+  },
+  {
+    "name": "curveAccelerateMid",
+    "f2": "curveAccelerateMid"
+  },
+  {
+    "name": "curveDecelerateMid",
+    "f2": "curveDecelerateMid"
+  },
+  {
+    "name": "curveLinear",
+    "f2": "curveLinear"
+  },
+  {
+    "name": "durationGentle",
+    "f2": "durationGentle"
+  },
+  {
+    "name": "shadow64",
+    "f2": "shadow64"
+  },
+  {
+    "name": "strokeWidthThin",
+    "f2": "strokeWidthThin"
+  }
+]

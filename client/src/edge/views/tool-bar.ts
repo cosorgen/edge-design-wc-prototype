@@ -10,6 +10,7 @@ import {
 } from '@microsoft/fast-element';
 import { spacingHorizontalS, spacingHorizontalXS } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
@@ -36,16 +37,16 @@ import omniboxActions, { overflowItems } from '../omniboxActions.js';
 
 const template = html<Toolbar>`
   <div class="group">
-    <phx-button appearance="subtle" icon-only disabled>
+    <mai-button appearance="subtle" icon-only disabled>
       <svg>
         <use href="img/edge/icons.svg#back-20-regular" />
       </svg>
-    </phx-button>
-    <phx-button appearance="subtle" icon-only>
+    </mai-button>
+    <mai-button appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#arrow-clockwise-20-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
   </div>
   <omnibox-control
     ?full-width="${(x) => x.ess.fullWidthOmnibox}"
@@ -155,7 +156,8 @@ const template = html<Toolbar>`
               icon-only
               slot="trigger"
               @click="${(x) => x.toggleSidepane('Legacy Copilot')}"
-              ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
+              ?pressed="${(x) =>
+                x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
             >
               <img width="20px" src="./img/edge/copilotAppLight.png" />
             </phx-toggle-button>

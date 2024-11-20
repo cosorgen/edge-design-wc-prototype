@@ -1,0 +1,52 @@
+[
+    {
+        "name": "borderRadiusMedium",
+        "f2": "borderRadiusMedium"
+    },
+    {
+        "name": "colorNeutralForeground1",
+        "f2": "colorNeutralForeground1"
+    },
+    {
+        "name": "colorStrokeFocus2",
+        "f2": "colorStrokeFocus2"
+    },
+    {
+        "name": "fontFamilyBase",
+        "smtc": "text-style-default-regular-font-family",
+        "f2": "fontFamilyBase"
+    },
+    {
+        "name": "fontSizeBase300",
+        "smtc": "text-ramp-body-2-font-size",
+        "f2": "fontSizeBase300"
+    },
+    {
+        "name": "fontWeightRegular",
+        "smtc": "text-style-default-regular-weight",
+        "f2": "fontWeightRegular"
+    },
+    {
+        "name": "lineHeightBase300",
+        "smtc": "text-ramp-body-2-line-height",
+        "f2": "lineHeightBase300"
+    },
+    {
+        "name": "spacingHorizontalM",
+        "smtc": "padding-control-horizontal-default",
+        "f2": "spacingHorizontalM"
+    },
+    {
+        "name": "spacingVerticalS",
+        "f2": "spacingVerticalS"
+    },
+    {
+        "name": "spacingVerticalXXS",
+        "f2": "spacingVerticalXXS"
+    },
+    {
+        "name": "strokeWidthThick",
+        "smtc": "control-focus-outer-stroke-width",
+        "f2": "strokeWidthThick"
+    }
+]

@@ -1,0 +1,338 @@
+[
+  {
+    "name": "aiComposerCornerRest",
+    "smtc": "ai-composer-corner-rest"
+  },
+  {
+    "name": "aiComposerStrokeWidthRest",
+    "smtc": "ai-composer-stroke-width-rest"
+  },
+  {
+    "name": "aiComposerStrokeRest",
+    "smtc": "ai-composer-stroke-rest"
+  },
+  {
+    "name": "aiComposerBackgroundRest",
+    "smtc": "ai-composer-background-rest"
+  },
+  {
+    "name": "aiComposerBottomStrokeWidthRest",
+    "smtc": "ai-composer-bottom-stroke-width-rest"
+  },
+  {
+    "name": "aiComposerCornerSelectedRest",
+    "smtc": "ai-composer-corner-selected-rest"
+  },
+  {
+    "name": "aiComposerStrokeWidthSelectedRest",
+    "smtc": "ai-composer-stroke-width-selected-rest"
+  },
+  {
+    "name": "aiComposerStrokeSelectedRest",
+    "smtc": "ai-composer-stroke-selected-rest"
+  },
+  {
+    "name": "aiComposerBackgroundSelectedRest",
+    "smtc": "ai-composer-background-selected-rest"
+  },
+  {
+    "name": "aiComposerCornerHover",
+    "smtc": "ai-composer-corner-hover"
+  },
+  {
+    "name": "aiComposerStrokeWidthHover",
+    "smtc": "ai-composer-stroke-width-hover"
+  },
+  {
+    "name": "aiComposerStrokeHover",
+    "smtc": "ai-composer-stroke-hover"
+  },
+  {
+    "name": "aiComposerBackgroundHover",
+    "smtc": "ai-composer-background-hover"
+  },
+  {
+    "name": "aiComposerBottomStrokeWidthHover",
+    "smtc": "ai-composer-bottom-stroke-width-hover"
+  },
+  {
+    "name": "aiComposerCornerPressed",
+    "smtc": "ai-composer-corner-pressed"
+  },
+  {
+    "name": "aiComposerStrokeWidthPressed",
+    "smtc": "ai-composer-stroke-width-pressed"
+  },
+  {
+    "name": "aiComposerStrokePressed",
+    "smtc": "ai-composer-stroke-pressed"
+  },
+  {
+    "name": "aiComposerBackgroundPressed",
+    "smtc": "ai-composer-background-pressed"
+  },
+  {
+    "name": "aiComposerBottomStrokeWidthPressed",
+    "smtc": "ai-composer-bottom-stroke-width-pressed"
+  },
+  {
+    "name": "aiComposerStrokeDisabled",
+    "smtc": "ai-composer-stroke-disabled"
+  },
+  {
+    "name": "aiComposerBackgroundDisabled",
+    "smtc": "ai-composer-background-disabled"
+  },
+  {
+    "name": "aiGradientStrongStop1",
+    "smtc": "ai-gradient-strong-stop-1"
+  },
+  {
+    "name": "aiGradientStrongStop2",
+    "smtc": "ai-gradient-strong-stop-2"
+  },
+  {
+    "name": "aiGradientStrongStop3",
+    "smtc": "ai-gradient-strong-stop-3"
+  },
+  {
+    "name": "aiGradientStrongStop4",
+    "smtc": "ai-gradient-strong-stop-4"
+  },
+  {
+    "name": "aiGradientStrongStop5",
+    "smtc": "ai-gradient-strong-stop-5"
+  },
+  {
+    "name": "backgroundControlBrandRest",
+    "smtc": "background-control-brand-rest"
+  },
+  {
+    "name": "backgroundControlBrandHover",
+    "smtc": "background-control-brand-hover"
+  },
+  {
+    "name": "backgroundControlBrandPressed",
+    "smtc": "background-control-brand-pressed"
+  },
+  {
+    "name": "backgroundControlBrandDisabled",
+    "smtc": "background-control-brand-disabled"
+  },
+  {
+    "name": "backgroundControlNeutralSecondaryRest",
+    "smtc": "background-control-neutral-secondary-rest"
+  },
+  {
+    "name": "backgroundControlNeutralSecondaryHover",
+    "smtc": "background-control-neutral-secondary-hover"
+  },
+  {
+    "name": "backgroundControlNeutralSecondaryPressed",
+    "smtc": "background-control-neutral-secondary-pressed"
+  },
+  {
+    "name": "backgroundControlNeutralSecondaryDisabled",
+    "smtc": "background-control-neutral-secondary-disabled"
+  },
+  {
+    "name": "backgroundControlSubtleRest",
+    "smtc": "background-control-subtle-rest"
+  },
+  {
+    "name": "backgroundControlSubtleHover",
+    "smtc": "background-control-subtle-hover"
+  },
+  {
+    "name": "backgroundControlSubtlePressed",
+    "smtc": "background-control-subtle-pressed"
+  },
+  {
+    "name": "backgroundControlSubtleDisabled",
+    "smtc": "background-control-subtle-disabled"
+  },
+  {
+    "name": "cornerControlRest",
+    "smtc": "corner-control-rest"
+  },
+  {
+    "name": "cornerControlHover",
+    "smtc": "corner-control-hover"
+  },
+  {
+    "name": "cornerControlPressed",
+    "smtc": "corner-control-pressed"
+  },
+  {
+    "name": "cornerControlDisabled",
+    "smtc": "corner-control-disabled"
+  },
+  {
+    "name": "cornerImageDefault",
+    "smtc": "corner-image-default"
+  },
+  {
+    "name": "foregroundControlNeutralPrimaryRest",
+    "smtc": "foreground-control-neutral-primary-rest"
+  },
+  {
+    "name": "foregroundControlNeutralPrimaryHover",
+    "smtc": "foreground-control-neutral-primary-hover"
+  },
+  {
+    "name": "foregroundControlNeutralPrimaryPressed",
+    "smtc": "foreground-control-neutral-primary-pressed"
+  },
+  {
+    "name": "foregroundControlNeutralPrimaryDisabled",
+    "smtc": "foreground-control-neutral-primary-disabled"
+  },
+  {
+    "name": "foregroundControlNeutralSecondaryRest",
+    "smtc": "foreground-control-neutral-secondary-rest"
+  },
+  {
+    "name": "foregroundControlNeutralSecondaryHover",
+    "smtc": "foreground-control-neutral-secondary-hover"
+  },
+  {
+    "name": "foregroundControlNeutralSecondaryPressed",
+    "smtc": "foreground-control-neutral-secondary-pressed"
+  },
+  {
+    "name": "foregroundControlNeutralSecondaryDisabled",
+    "smtc": "foreground-control-neutral-secondary-disabled"
+  },
+  {
+    "name": "foregroundControlOnBrandRest",
+    "smtc": "foreground-control-on-brand-rest"
+  },
+  {
+    "name": "foregroundControlOnBrandHover",
+    "smtc": "foreground-control-on-brand-hover"
+  },
+  {
+    "name": "foregroundControlOnBrandPressed",
+    "smtc": "foreground-control-on-brand-pressed"
+  },
+  {
+    "name": "foregroundControlOnBrandDisabled",
+    "smtc": "foreground-control-on-brand-disabled"
+  },
+  {
+    "name": "foregroundControlIconOnSubtleRest",
+    "smtc": "foreground-control-icon-on-subtle-rest"
+  },
+  {
+    "name": "foregroundControlIconOnSubtleHover",
+    "smtc": "foreground-control-icon-on-subtle-hover"
+  },
+  {
+    "name": "foregroundControlIconOnSubtlePressed",
+    "smtc": "foreground-control-icon-on-subtle-pressed"
+  },
+  {
+    "name": "foregroundControlIconOnSubtleDisabled",
+    "smtc": "foreground-control-icon-on-subtle-disabled"
+  },
+  {
+    "name": "gapBetweenControlNested",
+    "smtc": "gap-between-control-nested"
+  },
+  {
+    "name": "gapControlToSecondaryIcon",
+    "smtc": "gap-control-to-secondary-icon"
+  },
+  {
+    "name": "gapControlDefault",
+    "smtc": "gap-control-default"
+  },
+  {
+    "name": "nullColor",
+    "smtc": "null-color"
+  },
+  {
+    "name": "paddingToNestedControl",
+    "smtc": "padding-to-nested-control"
+  },
+  {
+    "name": "paddingControlIconOnly",
+    "smtc": "padding-control-icon-only"
+  },
+  {
+    "name": "paddingControlTextTop",
+    "smtc": "padding-control-text-top"
+  },
+  {
+    "name": "paddingControlTextBottom",
+    "smtc": "padding-control-text-bottom"
+  },
+  {
+    "name": "paddingControlTextLeft",
+    "smtc": "padding-control-text-left"
+  },
+  {
+    "name": "paddingControlTextRight",
+    "smtc": "padding-control-text-right"
+  },
+  {
+    "name": "shapeButtonRest",
+    "smtc": "shape-button-rest"
+  },
+  {
+    "name": "shapeButtonHover",
+    "smtc": "shape-button-hover"
+  },
+  {
+    "name": "shapeButtonPressed",
+    "smtc": "shape-button-pressed"
+  },
+  {
+    "name": "shapeButtonDisabled",
+    "smtc": "shape-button-disabled"
+  },
+  {
+    "name": "strokeControlOnSubtleRest",
+    "smtc": "stroke-control-on-subtle-rest"
+  },
+  {
+    "name": "strokeWidthControlDefaultRest",
+    "smtc": "stroke-width-control-default-rest"
+  },
+  {
+    "name": "sizeControlDefault",
+    "smtc": "size-control-default"
+  },
+  {
+    "name": "sizeIconDefault",
+    "smtc": "size-icon-default"
+  },
+  {
+    "name": "textRampBody1FontSize",
+    "smtc": "text-ramp-body-1-font-size"
+  },
+  {
+    "name": "textRampBody1LineHeight",
+    "smtc": "text-ramp-body-1-line-height"
+  },
+  {
+    "name": "textRampCaption1FontSize",
+    "smtc": "text-ramp-caption-1-font-size"
+  },
+  {
+    "name": "textStyleDefaultRegularLetterSpacing",
+    "smtc": "text-style-default-regular-letter-spacing"
+  },
+  {
+    "name": "textStyleDefaultRegularFontFamily",
+    "smtc": "text-style-default-regular-font-family"
+  },
+  {
+    "name": "textStyleDefaultRegularWeight",
+    "smtc": "text-style-default-regular-weight"
+  },
+  {
+    "name": "textRampBody2LineHeight",
+    "smtc": "text-ramp-body-2-line-height"
+  }
+]

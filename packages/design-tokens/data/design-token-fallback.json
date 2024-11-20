@@ -1,0 +1,3952 @@
+{
+  "sizeControlDefault": {
+    "type": "smtc-f2",
+    "smtc": "sizeControlDefault",
+    "f2": null
+  },
+  "sizeIconDefault": {
+    "type": "smtc-f2",
+    "smtc": "sizeIconDefault",
+    "f2": null
+  },
+  "sizeIconNestedControl": {
+    "type": "smtc-f2",
+    "smtc": "sizeIconNestedControl",
+    "f2": null
+  },
+  "sizeIconChevron": {
+    "type": "smtc-f2",
+    "smtc": "sizeIconChevron",
+    "f2": null
+  },
+  "sizeIndicatorPillLengthRest": {
+    "type": "smtc-f2",
+    "smtc": "sizeIndicatorPillLengthRest",
+    "f2": null
+  },
+  "sizeWindowMinWidth": {
+    "type": "smtc-f2",
+    "smtc": "sizeWindowMinWidth",
+    "f2": null
+  },
+  "sizeWindowMaxWidth": {
+    "type": "smtc-f2",
+    "smtc": "sizeWindowMaxWidth",
+    "f2": null
+  },
+  "gapBetweenControlDefault": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenControlDefault",
+    "f2": null
+  },
+  "gapBetweenControlNested": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenControlNested",
+    "f2": null
+  },
+  "gapBetweenContentXxs": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenContentXxs",
+    "f2": null
+  },
+  "gapBetweenContentXs": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenContentXs",
+    "f2": null
+  },
+  "gapBetweenContentSmall": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenContentSmall",
+    "f2": null
+  },
+  "gapBetweenContentMedium": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenContentMedium",
+    "f2": null
+  },
+  "gapBetweenContentLarge": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenContentLarge",
+    "f2": null
+  },
+  "gapBetweenContentXl": {
+    "type": "smtc-f2",
+    "smtc": "gapBetweenContentXl",
+    "f2": null
+  },
+  "paddingContentXl": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentXl",
+    "f2": null
+  },
+  "paddingContentXxl": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentXxl",
+    "f2": null
+  },
+  "paddingControlTopToText": {
+    "type": "smtc-f2",
+    "smtc": "paddingControlTopToText",
+    "f2": null
+  },
+  "cornerLayerDefault": {
+    "type": "smtc-f2",
+    "smtc": "cornerLayerDefault",
+    "f2": null
+  },
+  "cornerWindowDefault": {
+    "type": "smtc-f2",
+    "smtc": "cornerWindowDefault",
+    "f2": null
+  },
+  "iconThemeControlDefaultRest": {
+    "type": "smtc-f2",
+    "smtc": "iconThemeControlDefaultRest",
+    "f2": null
+  },
+  "iconThemeControlDefaultSelected": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlDefaultSelected",
+    "f2": null
+  },
+  "iconThemeBadgeRest": {
+    "type": "smtc-f2",
+    "smtc": "iconThemeBadgeRest",
+    "f2": null
+  },
+  "textRampDisplay1FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampDisplay1FontSize",
+    "f2": null
+  },
+  "textRampDisplay1LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampDisplay1LineHeight",
+    "f2": null
+  },
+  "textRampDisplay2FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampDisplay2FontSize",
+    "f2": null
+  },
+  "textRampDisplay2LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampDisplay2LineHeight",
+    "f2": null
+  },
+  "textRampTitle1FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampTitle1FontSize",
+    "f2": null
+  },
+  "textRampTitle1LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampTitle1LineHeight",
+    "f2": null
+  },
+  "textRampTitle2FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampTitle2FontSize",
+    "f2": null
+  },
+  "textRampTitle2LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampTitle2LineHeight",
+    "f2": null
+  },
+  "textRampSubtitle1FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampSubtitle1FontSize",
+    "f2": null
+  },
+  "textRampSubtitle1LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampSubtitle1LineHeight",
+    "f2": null
+  },
+  "textRampSubtitle2FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampSubtitle2FontSize",
+    "f2": null
+  },
+  "textRampSubtitle2LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampSubtitle2LineHeight",
+    "f2": null
+  },
+  "textStyleDefaultRegularFontFamily": {
+    "type": "smtc-f2",
+    "smtc": "textStyleDefaultRegularFontFamily",
+    "f2": null
+  },
+  "textStyleDefaultRegularWeight": {
+    "type": "smtc-f2",
+    "smtc": "textStyleDefaultRegularWeight",
+    "f2": null
+  },
+  "textStyleDefaultRegularLetterSpacing": {
+    "type": "smtc-f2",
+    "smtc": "textStyleDefaultRegularLetterSpacing",
+    "f2": null
+  },
+  "textStyleDefaultHeaderWeight": {
+    "type": "smtc-f2",
+    "smtc": "textStyleDefaultHeaderWeight",
+    "f2": null
+  },
+  "textControlSelectedWeight": {
+    "type": "smtc-f2",
+    "smtc": "textControlSelectedWeight",
+    "f2": null
+  },
+  "shadowLayerKeyY": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerKeyY",
+    "f2": null
+  },
+  "shadowLayerKeyXOffset": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerKeyXOffset",
+    "f2": null
+  },
+  "shadowLayerKeyBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerKeyBlur",
+    "f2": null
+  },
+  "shadowLayerAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerAmbientY",
+    "f2": null
+  },
+  "shadowLayerAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerAmbientX",
+    "f2": null
+  },
+  "shadowLayerAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerAmbientBlur",
+    "f2": null
+  },
+  "shadowCardKeyRestColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardKeyRestColor",
+    "f2": null
+  },
+  "shadowCardKeyRestX": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardKeyRestX",
+    "f2": null
+  },
+  "shadowCardKeyRestY": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardKeyRestY",
+    "f2": null
+  },
+  "shadowCardKeyRestBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardKeyRestBlur",
+    "f2": null
+  },
+  "shadowCardKeyHoverX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyHoverX",
+    "f2": null
+  },
+  "shadowCardKeyPressedX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyPressedX",
+    "f2": null
+  },
+  "shadowCardKeyDisabledX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyDisabledX",
+    "f2": null
+  },
+  "shadowCardAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardAmbientColor",
+    "f2": null
+  },
+  "shadowCardAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardAmbientX",
+    "f2": null
+  },
+  "shadowCardAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardAmbientY",
+    "f2": null
+  },
+  "shadowCardAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowCardAmbientBlur",
+    "f2": null
+  },
+  "shadowTooltipKeyX": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipKeyX",
+    "f2": null
+  },
+  "shadowTooltipKeyY": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipKeyY",
+    "f2": null
+  },
+  "shadowTooltipKeyBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipKeyBlur",
+    "f2": null
+  },
+  "shadowTooltipAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipAmbientX",
+    "f2": null
+  },
+  "shadowTooltipAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipAmbientY",
+    "f2": null
+  },
+  "shadowTooltipAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipAmbientBlur",
+    "f2": null
+  },
+  "shadowFlyoutKeyX": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutKeyX",
+    "f2": null
+  },
+  "shadowFlyoutKeyY": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutKeyY",
+    "f2": null
+  },
+  "shadowFlyoutKeyBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutKeyBlur",
+    "f2": null
+  },
+  "shadowFlyoutAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutAmbientX",
+    "f2": null
+  },
+  "shadowFlyoutAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutAmbientY",
+    "f2": null
+  },
+  "shadowFlyoutAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutAmbientBlur",
+    "f2": null
+  },
+  "shadowWindowActiveKeyX": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveKeyX",
+    "f2": null
+  },
+  "shadowWindowActiveKeyY": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveKeyY",
+    "f2": null
+  },
+  "shadowWindowActiveKeyBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveKeyBlur",
+    "f2": null
+  },
+  "shadowWindowActiveAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveAmbientX",
+    "f2": null
+  },
+  "shadowWindowActiveAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveAmbientY",
+    "f2": null
+  },
+  "shadowWindowActiveAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveAmbientBlur",
+    "f2": null
+  },
+  "shadowWindowInactiveKeyX": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveKeyX",
+    "f2": null
+  },
+  "shadowWindowInactiveKeyY": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveKeyY",
+    "f2": null
+  },
+  "shadowWindowInactiveKeyBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveKeyBlur",
+    "f2": null
+  },
+  "shadowWindowInactiveAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveAmbientX",
+    "f2": null
+  },
+  "shadowWindowInactiveAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveAmbientY",
+    "f2": null
+  },
+  "shadowWindowInactiveAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveAmbientBlur",
+    "f2": null
+  },
+  "controlFocusPosition": {
+    "type": "smtc-f2",
+    "smtc": "controlFocusPosition",
+    "f2": null
+  },
+  "controlFabBgFgSize": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgSize",
+    "f2": null
+  },
+  "controlFabBgFgIconSize": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgIconSize",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyRestX": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyRestX",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyRestY": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyRestY",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyRestBlur": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyRestBlur",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyRestColor": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyRestColor",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyHoverX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyHoverX",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyHoverY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyHoverY",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyHoverBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyHoverBlur",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyHoverColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyHoverColor",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyPressedX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyPressedX",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyPressedY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyPressedY",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyPressedBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyPressedBlur",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyPressedColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyPressedColor",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyDisabledX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyDisabledX",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyDisabledY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyDisabledY",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyDisabledBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyDisabledBlur",
+    "f2": null
+  },
+  "controlFabBgFgShadowKeyDisabledColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgShadowKeyDisabledColor",
+    "f2": null
+  },
+  "controlFabBgFgShadowAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowAmbientColor",
+    "f2": null
+  },
+  "controlFabBgFgShadowAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowAmbientY",
+    "f2": null
+  },
+  "controlFabBgFgShadowAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgShadowAmbientBlur",
+    "f2": null
+  },
+  "controlFabBgFgPaddingTop": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgPaddingTop",
+    "f2": null
+  },
+  "controlFabBgFgPaddingBottom": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgPaddingBottom",
+    "f2": null
+  },
+  "controlChoiceSizeBaseRest": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceSizeBaseRest",
+    "f2": null
+  },
+  "controlChoiceSizeSwitchBaseWidth": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceSizeSwitchBaseWidth",
+    "f2": null
+  },
+  "controlChoiceSizeSwitchBaseHeight": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceSizeSwitchBaseHeight",
+    "f2": null
+  },
+  "controlChoiceSizeCheckRest": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceSizeCheckRest",
+    "f2": null
+  },
+  "controlChoiceSizeDotRest": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceSizeDotRest",
+    "f2": null
+  },
+  "controlChoiceIconTheme": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceIconTheme",
+    "f2": null
+  },
+  "controlChoicePaddingSwitchBaseRest": {
+    "type": "smtc-f2",
+    "smtc": "controlChoicePaddingSwitchBaseRest",
+    "f2": null
+  },
+  "controlChoiceSizeSwitchThumbWidthRest": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceSizeSwitchThumbWidthRest",
+    "f2": null
+  },
+  "controlSegmentedControlPaddingRest": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlPaddingRest",
+    "f2": null
+  },
+  "controlSegmentedControlPaddingHover": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlPaddingHover",
+    "f2": null
+  },
+  "controlSegmentedControlPaddingPressed": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlPaddingPressed",
+    "f2": null
+  },
+  "controlSegmentedControlGapDefault": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlGapDefault",
+    "f2": null
+  },
+  "controlSegmentedControlItemIconSize": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlItemIconSize",
+    "f2": null
+  },
+  "controlBadgeSizeBeacon": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeSizeBeacon",
+    "f2": null
+  },
+  "controlSliderThumbSizeRest": {
+    "type": "smtc-f2",
+    "smtc": "controlSliderThumbSizeRest",
+    "f2": null
+  },
+  "controlSliderThumbStrokeWidthRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeWidthRest",
+    "f2": null
+  },
+  "aiVisibilityCardBrandHint": {
+    "type": "smtc-f2",
+    "smtc": "aiVisibilityCardBrandHint",
+    "f2": null
+  },
+  "aiComposerCornerRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerCornerRest",
+    "f2": null
+  },
+  "aiComposerPaddingVertical": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerPaddingVertical",
+    "f2": null
+  },
+  "aiComposerCornerHover": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerCornerHover",
+    "f2": null
+  },
+  "aiComposerCornerPressed": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerCornerPressed",
+    "f2": null
+  },
+  "aiComposerCornerSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerCornerSelectedRest",
+    "f2": null
+  },
+  "aiComposerBackgroundRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBackgroundRest",
+    "f2": null
+  },
+  "aiComposerBackgroundHover": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBackgroundHover",
+    "f2": null
+  },
+  "aiComposerBackgroundPressed": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBackgroundPressed",
+    "f2": null
+  },
+  "aiComposerBackgroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBackgroundDisabled",
+    "f2": null
+  },
+  "aiComposerBackgroundSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBackgroundSelectedRest",
+    "f2": null
+  },
+  "aiComposerBackgroundErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBackgroundErrorRest",
+    "f2": null
+  },
+  "aiComposerStrokeWidthRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeWidthRest",
+    "f2": null
+  },
+  "aiComposerStrokeWidthHover": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeWidthHover",
+    "f2": null
+  },
+  "aiComposerStrokeWidthPressed": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeWidthPressed",
+    "f2": null
+  },
+  "aiComposerStrokeWidthSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeWidthSelectedRest",
+    "f2": null
+  },
+  "aiComposerStrokeWidthErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeWidthErrorRest",
+    "f2": null
+  },
+  "aiGradientStrongStop1": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientStrongStop1",
+    "f2": null
+  },
+  "aiGradientStrongStop2": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientStrongStop2",
+    "f2": null
+  },
+  "aiGradientStrongStop3": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientStrongStop3",
+    "f2": null
+  },
+  "aiGradientStrongStop4": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientStrongStop4",
+    "f2": null
+  },
+  "aiGradientStrongStop5": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientStrongStop5",
+    "f2": null
+  },
+  "aiGradientShimmerStop1": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientShimmerStop1",
+    "f2": null
+  },
+  "aiGradientShimmerStop2": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientShimmerStop2",
+    "f2": null
+  },
+  "aiGradientShimmerStop3": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientShimmerStop3",
+    "f2": null
+  },
+  "aiGradientShimmerStop4": {
+    "type": "smtc-f2",
+    "smtc": "aiGradientShimmerStop4",
+    "f2": null
+  },
+  "shellCornerDesktop": {
+    "type": "smtc-f2",
+    "smtc": "shellCornerDesktop",
+    "f2": null
+  },
+  "shellVisibilityDesktopSpacer": {
+    "type": "smtc-f2",
+    "smtc": "shellVisibilityDesktopSpacer",
+    "f2": null
+  },
+  "shellCornerFlyout": {
+    "type": "smtc-f2",
+    "smtc": "shellCornerFlyout",
+    "f2": null
+  },
+  "booleanSpinnerTrackVisibility": {
+    "type": "smtc-f2",
+    "smtc": "booleanSpinnerTrackVisibility",
+    "f2": null
+  },
+  "avatarToDo24pxIconSize": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxIconSize",
+    "f2": null
+  },
+  "avatarToDo24pxStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxStrokeWidth",
+    "f2": null
+  },
+  "avatarToDo24pxStrokeColor": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxStrokeColor",
+    "f2": null
+  },
+  "avatarToDo24pxBufferStrokeColor": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxBufferStrokeColor",
+    "f2": null
+  },
+  "avatarToDo24pxTextFontSize": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxTextFontSize",
+    "f2": null
+  },
+  "avatarToDo24pxTextWeight": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxTextWeight",
+    "f2": null
+  },
+  "avatarToDo24pxTextFigmaOnlyFontSize": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxTextFigmaOnlyFontSize",
+    "f2": null
+  },
+  "avatarToDo24pxTextFigmaOnlyLineHeight": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxTextFigmaOnlyLineHeight",
+    "f2": null
+  },
+  "avatarToDo24pxPresenceBadgeSize": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxPresenceBadgeSize",
+    "f2": null
+  },
+  "avatarToDo24pxPresenceBadgeOffset": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxPresenceBadgeOffset",
+    "f2": null
+  },
+  "avatarToDo24pxPresenceBadgeBufferStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxPresenceBadgeBufferStrokeWidth",
+    "f2": null
+  },
+  "avatarToDo24pxPresenceBadgeBufferStrokeVisibility": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxPresenceBadgeBufferStrokeVisibility",
+    "f2": null
+  },
+  "avatarToDo24pxActiveRingSize": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxActiveRingSize",
+    "f2": null
+  },
+  "avatarToDo24pxActiveRingBufferStrokeVisibility": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxActiveRingBufferStrokeVisibility",
+    "f2": null
+  },
+  "controlListSplitDividerInsetPadding": {
+    "type": "smtc-f2",
+    "smtc": "controlListSplitDividerInsetPadding",
+    "f2": null
+  },
+  "controlListSplitDividerColor": {
+    "type": "smtc-f2",
+    "smtc": "controlListSplitDividerColor",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarFillWidth": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarFillWidth",
+    "f2": null
+  },
+  "nullColor": {
+    "type": "smtc-f2",
+    "smtc": "nullColor",
+    "f2": null
+  },
+  "nullNumber": {
+    "type": "smtc-f2",
+    "smtc": "nullNumber",
+    "f2": null
+  },
+  "nullString": {
+    "type": "smtc-f2",
+    "smtc": "nullString",
+    "f2": null
+  },
+  "aiComposerBottomStrokeWidthRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeWidthRest",
+    "f2": null
+  },
+  "aiComposerBottomStrokeWidthHover": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeWidthHover",
+    "f2": null
+  },
+  "aiComposerBottomStrokeWidthPressed": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeWidthPressed",
+    "f2": null
+  },
+  "aiComposerBottomStrokeWidthSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeWidthSelectedRest",
+    "f2": null
+  },
+  "aiComposerBottomStrokeWidthErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeWidthErrorRest",
+    "f2": null
+  },
+  "sizeIndicatorPillWidthRest": {
+    "type": "smtc-f2",
+    "smtc": "sizeIndicatorPillWidthRest",
+    "f2": "thicker"
+  },
+  "sizeProgressBarHeightEmpty": {
+    "type": "smtc-f2",
+    "smtc": "sizeProgressBarHeightEmpty",
+    "f2": "thick"
+  },
+  "gapControlDefault": {
+    "type": "smtc-f2",
+    "smtc": "gapControlDefault",
+    "f2": "horizontalSnudge"
+  },
+  "gapControlToChevron": {
+    "type": "smtc-f2",
+    "smtc": "gapControlToChevron",
+    "f2": "horizontalXs"
+  },
+  "gapControlControlToLabel": {
+    "type": "smtc-f2",
+    "smtc": "gapControlControlToLabel",
+    "f2": "horizontalM"
+  },
+  "paddingImageInset": {
+    "type": "smtc-f2",
+    "smtc": "paddingImageInset",
+    "f2": "verticalM"
+  },
+  "paddingContentInset": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentInset",
+    "f2": "verticalM"
+  },
+  "paddingToNestedControl": {
+    "type": "smtc-f2",
+    "smtc": "paddingToNestedControl",
+    "f2": "horizontalS"
+  },
+  "paddingControlHorizontalDefault": {
+    "type": "smtc-f2",
+    "smtc": "paddingControlHorizontalDefault",
+    "f2": "horizontalM"
+  },
+  "paddingNestedControlHorizontalDefault": {
+    "type": "smtc-f2",
+    "smtc": "paddingNestedControlHorizontalDefault",
+    "f2": "horizontalS"
+  },
+  "paddingContentNone": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentNone",
+    "f2": "horizontalNone"
+  },
+  "paddingContentXs": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentXs",
+    "f2": "horizontalS"
+  },
+  "paddingContentS": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentS",
+    "f2": "horizontalL"
+  },
+  "paddingContentM": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentM",
+    "f2": "horizontalXxl"
+  },
+  "paddingContentL": {
+    "type": "smtc-f2",
+    "smtc": "paddingContentL",
+    "f2": "horizontalXxxl"
+  },
+  "paddingNestedControlIconOnly": {
+    "type": "smtc-f2",
+    "smtc": "paddingNestedControlIconOnly",
+    "f2": "horizontalSnudge"
+  },
+  "paddingControlIconOnly": {
+    "type": "smtc-f2",
+    "smtc": "paddingControlIconOnly",
+    "f2": "horizontalSnudge"
+  },
+  "cornerControlRest": {
+    "type": "smtc-f2",
+    "smtc": "cornerControlRest",
+    "f2": "medium"
+  },
+  "cornerNestedControlRest": {
+    "type": "smtc-f2",
+    "smtc": "cornerNestedControlRest",
+    "f2": "small"
+  },
+  "cornerControlCircular": {
+    "type": "smtc-f2",
+    "smtc": "cornerControlCircular",
+    "f2": "circular"
+  },
+  "cornerControlZero": {
+    "type": "smtc-f2",
+    "smtc": "cornerControlZero",
+    "f2": "none"
+  },
+  "strokeWidthDividerDefault": {
+    "type": "smtc-f2",
+    "smtc": "strokeWidthDividerDefault",
+    "f2": "thin"
+  },
+  "strokeWidthControlDefaultRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeWidthControlDefaultRest",
+    "f2": "thin"
+  },
+  "strokeWidthControlInputBottomRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeWidthControlInputBottomRest",
+    "f2": "thin"
+  },
+  "strokeWidthControlInputBottomSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeWidthControlInputBottomSelectedRest",
+    "f2": "thick"
+  },
+  "textRampBody1FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampBody1FontSize",
+    "f2": "fontSize400"
+  },
+  "textRampBody1LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampBody1LineHeight",
+    "f2": "lineHeight400"
+  },
+  "textRampBody2FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampBody2FontSize",
+    "f2": "fontSize300"
+  },
+  "textRampBody2LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampBody2LineHeight",
+    "f2": "lineHeight300"
+  },
+  "textRampCaption1FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampCaption1FontSize",
+    "f2": "fontSize200"
+  },
+  "textRampCaption1LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampCaption1LineHeight",
+    "f2": "lineHeight200"
+  },
+  "textRampCaption2FontSize": {
+    "type": "smtc-f2",
+    "smtc": "textRampCaption2FontSize",
+    "f2": "fontSize100"
+  },
+  "textRampCaption2LineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textRampCaption2LineHeight",
+    "f2": "lineHeight100"
+  },
+  "backgroundControlBrandRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlBrandRest",
+    "f2": "brandBackground1Rest"
+  },
+  "backgroundControlBrandHover": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlBrandHover",
+    "f2": "brandBackground1Hover"
+  },
+  "backgroundControlBrandPressed": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlBrandPressed",
+    "f2": "brandBackground1Selected"
+  },
+  "backgroundControlBrandDisabled": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlBrandDisabled",
+    "f2": "neutralBackgroundDisabledRest"
+  },
+  "backgroundControlNeutralRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlNeutralRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundControlNeutralHover": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlNeutralHover",
+    "f2": "neutralBackground1Hover"
+  },
+  "backgroundControlNeutralPressed": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlNeutralPressed",
+    "f2": "neutralBackground1Pressed"
+  },
+  "backgroundControlNeutralDisabled": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlNeutralDisabled",
+    "f2": "neutralBackgroundDisabledRest"
+  },
+  "backgroundControlSubtleRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlSubtleRest",
+    "f2": "neutralBackgroundSubtleRest"
+  },
+  "backgroundControlSubtleHover": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlSubtleHover",
+    "f2": "neutralBackgroundSubtleHover"
+  },
+  "backgroundControlSubtlePressed": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlSubtlePressed",
+    "f2": "neutralBackgroundSubtlePressed"
+  },
+  "backgroundControlSubtleDisabled": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlSubtleDisabled",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "backgroundControlProgressBarEmptyRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlProgressBarEmptyRest",
+    "f2": "neutralBackground6Rest"
+  },
+  "backgroundLayerPrimary": {
+    "type": "smtc-f2",
+    "smtc": "backgroundLayerPrimary",
+    "f2": "neutralBackground1Rest"
+  },
+  "strokeControlOnBrandDividerRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnBrandDividerRest",
+    "f2": "neutralStrokeOnBrand2Rest"
+  },
+  "strokeControlOnNeutralDividerRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnNeutralDividerRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnNeutralDividerDisabledDel": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnNeutralDividerDisabledDel",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "strokeControlOutlineRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOutlineRest",
+    "f2": "neutralStroke1Rest"
+  },
+  "strokeControlOutlineHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOutlineHover",
+    "f2": "neutralStroke1Hover"
+  },
+  "strokeControlOutlinePressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOutlinePressed",
+    "f2": "neutralStroke1Pressed"
+  },
+  "strokeControlOutlineDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOutlineDisabled",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "strokeControlOutlineDividerRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOutlineDividerRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOutlineDividerDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOutlineDividerDisabled",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlInputOutlineRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputOutlineRest",
+    "f2": "neutralStroke1Rest"
+  },
+  "strokeControlInputOutlineHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputOutlineHover",
+    "f2": "neutralStroke1Hover"
+  },
+  "strokeControlInputOutlinePressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputOutlinePressed",
+    "f2": "neutralStroke1Pressed"
+  },
+  "strokeControlInputOutlineDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputOutlineDisabled",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "strokeControlInputOutlineSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputOutlineSelectedRest",
+    "f2": "neutralStroke1Selected"
+  },
+  "strokeControlInputOutlineErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputOutlineErrorRest",
+    "f2": "statusDangerStroke2Rest"
+  },
+  "strokeControlInputBottomPressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputBottomPressed",
+    "f2": "neutralStrokeAccessiblePressed"
+  },
+  "strokeControlInputBottomSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputBottomSelectedRest",
+    "f2": "brandStroke1Rest"
+  },
+  "strokeWindowActive": {
+    "type": "smtc-f2",
+    "smtc": "strokeWindowActive",
+    "f2": "neutralStroke2Rest"
+  },
+  "strokeWindowInactive": {
+    "type": "smtc-f2",
+    "smtc": "strokeWindowInactive",
+    "f2": "neutralStroke2Rest"
+  },
+  "backgroundCardPrimaryRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundCardPrimaryRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundCardPrimaryHover": {
+    "type": "smtc-f2",
+    "smtc": "backgroundCardPrimaryHover",
+    "f2": "neutralBackground1Hover"
+  },
+  "backgroundCardPrimaryPressed": {
+    "type": "smtc-f2",
+    "smtc": "backgroundCardPrimaryPressed",
+    "f2": "neutralBackground1Pressed"
+  },
+  "backgroundCardPrimaryDisabled": {
+    "type": "smtc-f2",
+    "smtc": "backgroundCardPrimaryDisabled",
+    "f2": "neutralBackground1Pressed"
+  },
+  "backgroundTooltipRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundTooltipRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "foregroundControlNeutralPrimaryRest": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralPrimaryRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundControlNeutralSecondaryRest": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralSecondaryRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundControlNeutralSecondaryHover": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralSecondaryHover",
+    "f2": "neutralForeground1Hover"
+  },
+  "foregroundControlNeutralSecondaryPressed": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralSecondaryPressed",
+    "f2": "neutralForeground1Pressed"
+  },
+  "foregroundControlNeutralSecondaryDisabled": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralSecondaryDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlNeutralPrimaryHover": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralPrimaryHover",
+    "f2": "neutralForeground1Hover"
+  },
+  "foregroundControlNeutralPrimaryPressed": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralPrimaryPressed",
+    "f2": "neutralForeground1Pressed"
+  },
+  "foregroundControlNeutralPrimaryDisabled": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlNeutralPrimaryDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlBrandRest": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlBrandRest",
+    "f2": "neutralForeground2BrandSelected"
+  },
+  "foregroundControlOnBrandRest": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlOnBrandRest",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "foregroundControlOnBrandHover": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlOnBrandHover",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "foregroundControlOnBrandPressed": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlOnBrandPressed",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "foregroundControlOnBrandDisabled": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlOnBrandDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlShapeSafeActiveBrandRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlShapeSafeActiveBrandRest",
+    "f2": "brandStrokeCompoundRest"
+  },
+  "foregroundControlShapeSafeActiveBrandDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlShapeSafeActiveBrandDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "foregroundControlHintShapeHover": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlHintShapeHover",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "foregroundControlHintShapePressed": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlHintShapePressed",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "foregroundControlOnTooltipRest": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlOnTooltipRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundControlBrandHover": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlBrandHover",
+    "f2": "neutralForeground2BrandHover"
+  },
+  "foregroundControlBrandPressed": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlBrandPressed",
+    "f2": "neutralForeground2BrandPressed"
+  },
+  "foregroundControlBrandDisabled": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlBrandDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "dividerDefault": {
+    "type": "smtc-f2",
+    "smtc": "dividerDefault",
+    "f2": "neutralStroke1Rest"
+  },
+  "shadowLayerKeyColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowLayerAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowLayerAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "shadowTooltipKeyColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowTooltipAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowTooltipAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "shadowFlyoutKeyColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowFlyoutAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowFlyoutAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "shadowWindowActiveKeyColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowWindowActiveAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowActiveAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "shadowWindowInactiveKeyColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowWindowInactiveAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "shadowWindowInactiveAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "controlSplitBackgroundHoverSecondary": {
+    "type": "smtc-f2",
+    "smtc": "controlSplitBackgroundHoverSecondary",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "controlFocusInnerStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "controlFocusInnerStrokeWidth",
+    "f2": "thin"
+  },
+  "controlFocusOuterStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "controlFocusOuterStrokeWidth",
+    "f2": "thick"
+  },
+  "controlFabBgFgPaddingHorizontalNotInUse": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgPaddingHorizontalNotInUse",
+    "f2": "horizontalM"
+  },
+  "controlFabBgFgCornerRest": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgCornerRest",
+    "f2": "circular"
+  },
+  "controlFabBgFgBackgroundFloatingRest": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgBackgroundFloatingRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "controlFabBgFgBackgroundFloatingHover": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgBackgroundFloatingHover",
+    "f2": "neutralBackground1Hover"
+  },
+  "controlFabBgFgBackgroundFloatingPressed": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgBackgroundFloatingPressed",
+    "f2": "neutralBackground1Pressed"
+  },
+  "controlFabBgFgBackgroundFloatingDisabled": {
+    "type": "smtc-f2",
+    "smtc": "controlFabBgFgBackgroundFloatingDisabled",
+    "f2": "neutralBackgroundDisabledRest"
+  },
+  "controlFabBgFgCornerHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgCornerHover",
+    "f2": "circular"
+  },
+  "controlFabBgFgCornerPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlFabBgFgCornerPressed",
+    "f2": "circular"
+  },
+  "controlChoicePaddingHorizontalWithLabel": {
+    "type": "smtc-f2",
+    "smtc": "controlChoicePaddingHorizontalWithLabel",
+    "f2": "horizontalS"
+  },
+  "controlChoicePaddingVerticalWithLabel": {
+    "type": "smtc-f2",
+    "smtc": "controlChoicePaddingVerticalWithLabel",
+    "f2": "verticalNone"
+  },
+  "controlChoicePaddingControlOnly": {
+    "type": "smtc-f2",
+    "smtc": "controlChoicePaddingControlOnly",
+    "f2": "horizontalS"
+  },
+  "controlChoiceCornerCheckRest": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceCornerCheckRest",
+    "f2": "small"
+  },
+  "controlListSelectedBackgroundHoverSecondaryReactive": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListSelectedBackgroundHoverSecondaryReactive",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "controlSegmentedControlItemPaddingHorizontalDefault": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlItemPaddingHorizontalDefault",
+    "f2": "horizontalS"
+  },
+  "controlSegmentedControlItemPaddingIconOnly": {
+    "type": "smtc-f2",
+    "smtc": "controlSegmentedControlItemPaddingIconOnly",
+    "f2": "horizontalSnudge"
+  },
+  "controlBadgeCorner": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeCorner",
+    "f2": "medium"
+  },
+  "controlListSplitPadding": {
+    "type": "smtc-f2",
+    "smtc": "controlListSplitPadding",
+    "f2": "horizontalSnudge"
+  },
+  "sizeIndicatorPillLengthHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "sizeIndicatorPillLengthHover",
+    "f2": null
+  },
+  "sizeIndicatorPillLengthPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "sizeIndicatorPillLengthPressed",
+    "f2": null
+  },
+  "sizeIndicatorPillLengthHintHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "sizeIndicatorPillLengthHintHover",
+    "f2": null
+  },
+  "sizeIndicatorPillLengthHintPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "sizeIndicatorPillLengthHintPressed",
+    "f2": null
+  },
+  "gapBetweenTextSmall": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "gapBetweenTextSmall",
+    "f2": null
+  },
+  "gapBetweenTextLarge": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "gapBetweenTextLarge",
+    "f2": null
+  },
+  "gapBetweenListDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "gapBetweenListDefault",
+    "f2": null
+  },
+  "gapBetweenCardDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "gapBetweenCardDefault",
+    "f2": null
+  },
+  "paddingControlBottomToText": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "paddingControlBottomToText",
+    "f2": null
+  },
+  "cornerLayerIntersection": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerLayerIntersection",
+    "f2": null
+  },
+  "cornerImageDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerImageDefault",
+    "f2": null
+  },
+  "cornerImageInset": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerImageInset",
+    "f2": null
+  },
+  "strokeWidthSurfaceDefault": {
+    "type": "smtc-f2",
+    "smtc": "strokeWidthSurfaceDefault",
+    "f2": null
+  },
+  "iconThemeControlDefaultHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlDefaultHover",
+    "f2": null
+  },
+  "iconThemeControlDefaultPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlDefaultPressed",
+    "f2": null
+  },
+  "iconThemeControlSubtleRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlSubtleRest",
+    "f2": null
+  },
+  "iconThemeControlSubtleHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlSubtleHover",
+    "f2": null
+  },
+  "iconThemeControlSubtlePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlSubtlePressed",
+    "f2": null
+  },
+  "iconThemeControlSubtleSelected": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlSubtleSelected",
+    "f2": null
+  },
+  "iconThemeControlChevronDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlChevronDefault",
+    "f2": null
+  },
+  "iconThemeControlChevronSelected": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "iconThemeControlChevronSelected",
+    "f2": null
+  },
+  "textStyleDefaultHeaderLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDefaultHeaderLetterSpacing",
+    "f2": null
+  },
+  "textStyleDefaultHeaderCase": {
+    "type": "smtc-f2",
+    "smtc": "textStyleDefaultHeaderCase",
+    "f2": null
+  },
+  "textStyleAiVoiceRegularFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceRegularFontFamily",
+    "f2": null
+  },
+  "textStyleAiVoiceRegularWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceRegularWeight",
+    "f2": null
+  },
+  "textStyleAiVoiceRegularLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceRegularLetterSpacing",
+    "f2": null
+  },
+  "textStyleAiVoiceHeaderFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceHeaderFontFamily",
+    "f2": null
+  },
+  "textStyleAiVoiceHeaderWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceHeaderWeight",
+    "f2": null
+  },
+  "textStyleAiVoiceHeaderLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceHeaderLetterSpacing",
+    "f2": null
+  },
+  "textStyleAiVoiceHeaderCase": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleAiVoiceHeaderCase",
+    "f2": null
+  },
+  "textStyleArticleRegularFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleRegularFontFamily",
+    "f2": null
+  },
+  "textStyleArticleRegularWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleRegularWeight",
+    "f2": null
+  },
+  "textStyleArticleRegularLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleRegularLetterSpacing",
+    "f2": null
+  },
+  "textStyleArticleHeaderFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleHeaderFontFamily",
+    "f2": null
+  },
+  "textStyleArticleHeaderWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleHeaderWeight",
+    "f2": null
+  },
+  "textStyleArticleHeaderLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleHeaderLetterSpacing",
+    "f2": null
+  },
+  "textStyleArticleHeaderCase": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleArticleHeaderCase",
+    "f2": null
+  },
+  "textStyleCodeRegularFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeRegularFontFamily",
+    "f2": null
+  },
+  "textStyleCodeRegularWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeRegularWeight",
+    "f2": null
+  },
+  "textStyleCodeRegularLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeRegularLetterSpacing",
+    "f2": null
+  },
+  "textStyleCodeHeaderFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeHeaderFontFamily",
+    "f2": null
+  },
+  "textStyleCodeHeaderWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeHeaderWeight",
+    "f2": null
+  },
+  "textStyleCodeHeaderLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeHeaderLetterSpacing",
+    "f2": null
+  },
+  "textStyleCodeHeaderCase": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleCodeHeaderCase",
+    "f2": null
+  },
+  "textStyleDataVizRegularFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizRegularFontFamily",
+    "f2": null
+  },
+  "textStyleDataVizRegularWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizRegularWeight",
+    "f2": null
+  },
+  "textStyleDataVizRegularLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizRegularLetterSpacing",
+    "f2": null
+  },
+  "textStyleDataVizHeaderFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizHeaderFontFamily",
+    "f2": null
+  },
+  "textStyleDataVizHeaderWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizHeaderWeight",
+    "f2": null
+  },
+  "textStyleDataVizHeaderLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizHeaderLetterSpacing",
+    "f2": null
+  },
+  "textStyleDataVizHeaderCase": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDataVizHeaderCase",
+    "f2": null
+  },
+  "textStyleQuoteRegularFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteRegularFontFamily",
+    "f2": null
+  },
+  "textStyleQuoteRegularWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteRegularWeight",
+    "f2": null
+  },
+  "textStyleQuoteRegularLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteRegularLetterSpacing",
+    "f2": null
+  },
+  "textStyleQuoteHeaderFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteHeaderFontFamily",
+    "f2": null
+  },
+  "textStyleQuoteHeaderWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteHeaderWeight",
+    "f2": null
+  },
+  "textStyleQuoteHeaderLetterSpacing": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteHeaderLetterSpacing",
+    "f2": null
+  },
+  "textStyleQuoteHeaderCase": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleQuoteHeaderCase",
+    "f2": null
+  },
+  "textControlButtonWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textControlButtonWeight",
+    "f2": null
+  },
+  "textControlButtonSelectedWeight": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textControlButtonSelectedWeight",
+    "f2": null
+  },
+  "textControlBadgeDelWeight": {
+    "type": "smtc-f2",
+    "smtc": "textControlBadgeDelWeight",
+    "f2": null
+  },
+  "textControlBadgeDelFontSize": {
+    "type": "smtc-f2",
+    "smtc": "textControlBadgeDelFontSize",
+    "f2": null
+  },
+  "textControlBadgeDelLineHeight": {
+    "type": "smtc-f2",
+    "smtc": "textControlBadgeDelLineHeight",
+    "f2": null
+  },
+  "backgroundPageRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundPageRest",
+    "f2": null
+  },
+  "strokeFlyoutRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeFlyoutRest",
+    "f2": null
+  },
+  "backgroundFlyoutRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundFlyoutRest",
+    "f2": null
+  },
+  "backgroundDialogRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundDialogRest",
+    "f2": null
+  },
+  "shadowCardKeyHoverColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyHoverColor",
+    "f2": null
+  },
+  "shadowCardKeyHoverY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyHoverY",
+    "f2": null
+  },
+  "shadowCardKeyHoverBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyHoverBlur",
+    "f2": null
+  },
+  "shadowCardKeyPressedColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyPressedColor",
+    "f2": null
+  },
+  "shadowCardKeyPressedY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyPressedY",
+    "f2": null
+  },
+  "shadowCardKeyPressedBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyPressedBlur",
+    "f2": null
+  },
+  "shadowCardKeyDisabledColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyDisabledColor",
+    "f2": null
+  },
+  "shadowCardKeyDisabledY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyDisabledY",
+    "f2": null
+  },
+  "shadowCardKeyDisabledBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowCardKeyDisabledBlur",
+    "f2": null
+  },
+  "shadowToolbarKeyYOffset": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarKeyYOffset",
+    "f2": null
+  },
+  "shadowToolbarKeyXOffset": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarKeyXOffset",
+    "f2": null
+  },
+  "shadowToolbarKeyBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarKeyBlur",
+    "f2": null
+  },
+  "shadowToolbarAmbientYOffset": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarAmbientYOffset",
+    "f2": null
+  },
+  "shadowToolbarAmbientXOffset": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarAmbientXOffset",
+    "f2": null
+  },
+  "shadowToolbarAmbientBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarAmbientBlur",
+    "f2": null
+  },
+  "shadowOnDragShadowKeyY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowKeyY",
+    "f2": null
+  },
+  "shadowOnDragShadowKeyX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowKeyX",
+    "f2": null
+  },
+  "shadowOnDragShadowKeyBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowKeyBlur",
+    "f2": null
+  },
+  "shadowOnDragShadowAmbientY": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowAmbientY",
+    "f2": null
+  },
+  "shadowOnDragShadowAmbientX": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowAmbientX",
+    "f2": null
+  },
+  "shadowOnDragShadowAmbientBlur": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowAmbientBlur",
+    "f2": null
+  },
+  "booleanShowUnselectedHints": {
+    "type": "smtc-f2",
+    "smtc": "booleanShowUnselectedHints",
+    "f2": null
+  },
+  "controlChoiceSizeDotHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeDotHover",
+    "f2": null
+  },
+  "controlChoiceSizeDotPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeDotPressed",
+    "f2": null
+  },
+  "controlChoiceSizeDotHintHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeDotHintHover",
+    "f2": null
+  },
+  "controlChoiceSizeDotHintPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeDotHintPressed",
+    "f2": null
+  },
+  "controlChoiceSizeTargetRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeTargetRest",
+    "f2": null
+  },
+  "controlChoicePaddingSwitchBaseHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoicePaddingSwitchBaseHover",
+    "f2": null
+  },
+  "controlChoicePaddingSwitchBasePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoicePaddingSwitchBasePressed",
+    "f2": null
+  },
+  "controlChoiceSizeSwitchThumbWidthHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeSwitchThumbWidthHover",
+    "f2": null
+  },
+  "controlChoiceSizeSwitchThumbWidthPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceSizeSwitchThumbWidthPressed",
+    "f2": null
+  },
+  "controlListPaddingTopToText": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListPaddingTopToText",
+    "f2": null
+  },
+  "controlListPaddingBottomToText": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListPaddingBottomToText",
+    "f2": null
+  },
+  "controlListIndentLevel1": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListIndentLevel1",
+    "f2": null
+  },
+  "controlListIndentLevel2": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListIndentLevel2",
+    "f2": null
+  },
+  "controlListIndentLevel3": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListIndentLevel3",
+    "f2": null
+  },
+  "controlListSizeDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListSizeDefault",
+    "f2": null
+  },
+  "controlSegmentedControlCornerRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSegmentedControlCornerRest",
+    "f2": null
+  },
+  "controlSegmentedControlCornerHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSegmentedControlCornerHover",
+    "f2": null
+  },
+  "controlSegmentedControlCornerPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSegmentedControlCornerPressed",
+    "f2": null
+  },
+  "controlSegmentedControlItemCornerRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSegmentedControlItemCornerRest",
+    "f2": null
+  },
+  "controlSegmentedControlItemCornerHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSegmentedControlItemCornerHover",
+    "f2": null
+  },
+  "controlSegmentedControlItemCornerPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSegmentedControlItemCornerPressed",
+    "f2": null
+  },
+  "controlSliderTargetSize": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderTargetSize",
+    "f2": null
+  },
+  "controlBadgeSizeDefault": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeSizeDefault",
+    "f2": null
+  },
+  "controlBadgeSizeIcon": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeSizeIcon",
+    "f2": null
+  },
+  "controlBadgeTextWeight": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeTextWeight",
+    "f2": null
+  },
+  "controlBadgeTextFontSize": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeTextFontSize",
+    "f2": null
+  },
+  "controlBadgeTextLineHeight": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeTextLineHeight",
+    "f2": null
+  },
+  "controlBadgeTextLetterSpacing": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeTextLetterSpacing",
+    "f2": null
+  },
+  "controlSliderHeightRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderHeightRest",
+    "f2": null
+  },
+  "controlSliderThumbSizeHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbSizeHover",
+    "f2": null
+  },
+  "controlSliderThumbSizePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbSizePressed",
+    "f2": null
+  },
+  "controlSliderThumbStrokeWidthHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeWidthHover",
+    "f2": null
+  },
+  "controlSliderThumbStrokeWidthPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeWidthPressed",
+    "f2": null
+  },
+  "controlSliderThumbStrokeWidthDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeWidthDisabled",
+    "f2": null
+  },
+  "booleanShowInlineLinkUnderlines": {
+    "type": "smtc-f2",
+    "smtc": "booleanShowInlineLinkUnderlines",
+    "f2": null
+  },
+  "booleanShowPageLinkUnderlines": {
+    "type": "smtc-f2",
+    "smtc": "booleanShowPageLinkUnderlines",
+    "f2": null
+  },
+  "dividerList": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "dividerList",
+    "f2": null
+  },
+  "aiComposerStrokeRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeRest",
+    "f2": null
+  },
+  "aiComposerStrokeHoverUsesGradient": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeHoverUsesGradient",
+    "f2": null
+  },
+  "aiComposerStrokePressedUsesGradient": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokePressedUsesGradient",
+    "f2": null
+  },
+  "aiComposerStrokeDisabledUsesGradient": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeDisabledUsesGradient",
+    "f2": null
+  },
+  "aiComposerStrokeSelectedRestUsesGradient": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeSelectedRestUsesGradient",
+    "f2": null
+  },
+  "aiComposerStrokeErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerStrokeErrorRest",
+    "f2": null
+  },
+  "aiComposerBottomStrokeRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeRest",
+    "f2": null
+  },
+  "aiComposerBottomStrokeHover": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeHover",
+    "f2": null
+  },
+  "aiComposerBottomStrokePressed": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokePressed",
+    "f2": null
+  },
+  "aiComposerBottomStrokeDisabled": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeDisabled",
+    "f2": null
+  },
+  "aiComposerBottomStrokeSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeSelectedRest",
+    "f2": null
+  },
+  "aiComposerBottomStrokeErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "aiComposerBottomStrokeErrorRest",
+    "f2": null
+  },
+  "shellAcrylicDefaultRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shellAcrylicDefaultRest",
+    "f2": null
+  },
+  "avatarToDo24pxBufferStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxBufferStrokeWidth",
+    "f2": null
+  },
+  "avatarToDo24pxActiveRingStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxActiveRingStrokeWidth",
+    "f2": null
+  },
+  "avatarToDo24pxActiveRingBufferStrokeWidth": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxActiveRingBufferStrokeWidth",
+    "f2": null
+  },
+  "liteFilterDelDefaultForegroundColorSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorSelectedDisabled",
+    "f2": null
+  },
+  "liteFilterDelBrandBackgroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundDisabled",
+    "f2": null
+  },
+  "liteFilterDelBrandBackgroundSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundSelectedDisabled",
+    "f2": null
+  },
+  "liteFilterDelBrandStrokeColorSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorSelectedDisabled",
+    "f2": null
+  },
+  "navItemDeleteSize": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteSize",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarSizeLengthHover": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeLengthHover",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarSizeLengthPressed": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeLengthPressed",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarSizeLengthSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeLengthSelectedRest",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarSizeLengthSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeLengthSelectedHover",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarSizeLengthSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeLengthSelectedPressed",
+    "f2": null
+  },
+  "navItemDeleteIndicatorBarSizeLengthSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeLengthSelectedDisabled",
+    "f2": null
+  },
+  "sizeProgressBarHeightFilled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "sizeProgressBarHeightFilled",
+    "f2": "thick"
+  },
+  "paddingFlyout": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "paddingFlyout",
+    "f2": "horizontalNone"
+  },
+  "cornerNestedControlHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerNestedControlHover",
+    "f2": "small"
+  },
+  "cornerNestedControlPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerNestedControlPressed",
+    "f2": "small"
+  },
+  "cornerControlHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerControlHover",
+    "f2": "medium"
+  },
+  "cornerControlPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerControlPressed",
+    "f2": "medium"
+  },
+  "cornerIndicatorPillRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerIndicatorPillRest",
+    "f2": "circular"
+  },
+  "cornerCardRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerCardRest",
+    "f2": "small"
+  },
+  "cornerCardHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerCardHover",
+    "f2": "small"
+  },
+  "cornerCardPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerCardPressed",
+    "f2": "small"
+  },
+  "cornerToolbarDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerToolbarDefault",
+    "f2": "medium"
+  },
+  "cornerTooltipDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerTooltipDefault",
+    "f2": "medium"
+  },
+  "cornerFlyoutRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerFlyoutRest",
+    "f2": "medium"
+  },
+  "cornerFlyoutHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerFlyoutHover",
+    "f2": "medium"
+  },
+  "cornerFlyoutPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerFlyoutPressed",
+    "f2": "medium"
+  },
+  "cornerProgressBarRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "cornerProgressBarRest",
+    "f2": "circular"
+  },
+  "strokeWidthDividerStrong": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthDividerStrong",
+    "f2": "thin"
+  },
+  "strokeWidthControlDividerRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthControlDividerRest",
+    "f2": "thin"
+  },
+  "strokeWidthControlOutlineRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthControlOutlineRest",
+    "f2": "thin"
+  },
+  "strokeWidthControlOutlineHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthControlOutlineHover",
+    "f2": "thin"
+  },
+  "strokeWidthControlOutlinePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthControlOutlinePressed",
+    "f2": "thin"
+  },
+  "strokeWidthControlInputBottomHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthControlInputBottomHover",
+    "f2": "thin"
+  },
+  "strokeWidthControlInputBottomPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeWidthControlInputBottomPressed",
+    "f2": "thick"
+  },
+  "textStyleDefaultHeaderFontFamily": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "textStyleDefaultHeaderFontFamily",
+    "f2": "fontFamilyBase"
+  },
+  "backgroundControlOutlineRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlOutlineRest",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "backgroundControlOutlineHover": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlOutlineHover",
+    "f2": "neutralBackgroundTransparentHover"
+  },
+  "backgroundControlOutlinePressed": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlOutlinePressed",
+    "f2": "neutralBackgroundTransparentPressed"
+  },
+  "backgroundControlOutlineDisabled": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlOutlineDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "backgroundControlStrongOutlineRest": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlStrongOutlineRest",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "backgroundControlStrongOutlineHover": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlStrongOutlineHover",
+    "f2": "neutralBackgroundTransparentHover"
+  },
+  "backgroundControlStrongOutlinePressed": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlStrongOutlinePressed",
+    "f2": "neutralBackgroundTransparentPressed"
+  },
+  "backgroundControlStrongOutlineDisabled": {
+    "type": "smtc-f2",
+    "smtc": "backgroundControlStrongOutlineDisabled",
+    "f2": "neutralBackgroundTransparentPressed"
+  },
+  "backgroundControlInputRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlInputRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundControlInputHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlInputHover",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundControlInputPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlInputPressed",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundControlInputDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlInputDisabled",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "backgroundControlInputSelectedRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlInputSelectedRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundControlInputErrorRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlInputErrorRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundControlActiveBrandRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlActiveBrandRest",
+    "f2": "backgroundControlBrandRest"
+  },
+  "backgroundControlActiveBrandHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlActiveBrandHover",
+    "f2": "backgroundControlBrandHover"
+  },
+  "backgroundControlActiveBrandPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlActiveBrandPressed",
+    "f2": "backgroundControlBrandPressed"
+  },
+  "backgroundControlActiveBrandDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlActiveBrandDisabled",
+    "f2": "backgroundControlBrandDisabled"
+  },
+  "backgroundControlTextSelectedFill": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlTextSelectedFill",
+    "f2": "backgroundControlActiveBrandRest"
+  },
+  "backgroundControlProgressBarFullRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundControlProgressBarFullRest",
+    "f2": "backgroundControlActiveBrandRest"
+  },
+  "backgroundPageRestMicaColorBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundPageRestMicaColorBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundPageRestLumBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundPageRestLumBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "strokeControlOnBrandRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnBrandRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnBrandHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnBrandHover",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeControlOnBrandPressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnBrandPressed",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeControlOnBrandDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnBrandDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "strokeControlOnBrandGradientStop2Rest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnBrandGradientStop2Rest",
+    "f2": "strokeControlOnBrandRest"
+  },
+  "strokeControlOnBrandGradientStop2Hover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnBrandGradientStop2Hover",
+    "f2": "strokeControlOnBrandHover"
+  },
+  "strokeControlOnBrandGradientStop2Pressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnBrandGradientStop2Pressed",
+    "f2": "strokeControlOnBrandPressed"
+  },
+  "strokeControlOnBrandGradientStop2Disabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnBrandGradientStop2Disabled",
+    "f2": "strokeControlOnBrandDisabled"
+  },
+  "strokeControlOnNeutralRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnNeutralRest",
+    "f2": "neutralStroke1Rest"
+  },
+  "strokeControlOnNeutralHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnNeutralHover",
+    "f2": "neutralStroke1Hover"
+  },
+  "strokeControlOnNeutralPressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnNeutralPressed",
+    "f2": "neutralStroke1Pressed"
+  },
+  "strokeControlOnNeutralDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnNeutralDisabled",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "strokeControlOnNeutralGradientStop2Rest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnNeutralGradientStop2Rest",
+    "f2": "strokeControlOnNeutralRest"
+  },
+  "strokeControlOnNeutralGradientStop2Hover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnNeutralGradientStop2Hover",
+    "f2": "strokeControlOnNeutralHover"
+  },
+  "strokeControlOnNeutralGradientStop2Pressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnNeutralGradientStop2Pressed",
+    "f2": "strokeControlOnNeutralPressed"
+  },
+  "strokeControlOnNeutralGradientStop2Disabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnNeutralGradientStop2Disabled",
+    "f2": "strokeControlOnNeutralDisabled"
+  },
+  "strokeControlOutlineGradientStop2Rest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOutlineGradientStop2Rest",
+    "f2": "strokeControlOutlineRest"
+  },
+  "strokeControlOutlineGradientStop2Hover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOutlineGradientStop2Hover",
+    "f2": "strokeControlOutlineHover"
+  },
+  "strokeControlOutlineGradientStop2Pressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOutlineGradientStop2Pressed",
+    "f2": "strokeControlOutlinePressed"
+  },
+  "strokeControlOutlineGradientStop2Disabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOutlineGradientStop2Disabled",
+    "f2": "strokeControlOutlineDisabled"
+  },
+  "strokeControlStrongOutlineRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlStrongOutlineRest",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "strokeControlStrongOutlineHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlStrongOutlineHover",
+    "f2": "neutralStrokeAccessibleHover"
+  },
+  "strokeControlStrongOutlinePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlStrongOutlinePressed",
+    "f2": "neutralStrokeAccessiblePressed"
+  },
+  "strokeControlStrongOutlineDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlStrongOutlineDisabled",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "strokeControlOnSubtleRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnSubtleRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnSubtleHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnSubtleHover",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnSubtlePressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnSubtlePressed",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnSubtleDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnSubtleDisabled",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnSubtleDividerRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnSubtleDividerRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlOnSubtleDividerDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlOnSubtleDividerDisabled",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlInputBottomRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlInputBottomRest",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "strokeControlInputBottomHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlInputBottomHover",
+    "f2": "neutralStrokeAccessibleHover"
+  },
+  "strokeControlInputBottomDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputBottomDisabled",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeControlInputBottomErrorRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeControlInputBottomErrorRest",
+    "f2": "brandStroke1Rest"
+  },
+  "strokeControlOnActiveBrandRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandRest",
+    "f2": "strokeControlOnBrandRest"
+  },
+  "strokeControlOnActiveBrandHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandHover",
+    "f2": "strokeControlOnBrandHover"
+  },
+  "strokeControlOnActiveBrandPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandPressed",
+    "f2": "strokeControlOnBrandPressed"
+  },
+  "strokeControlOnActiveBrandDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandDisabled",
+    "f2": "strokeControlOnBrandDisabled"
+  },
+  "strokeControlOnActiveBrandDividerRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandDividerRest",
+    "f2": "strokeControlOnBrandDividerRest"
+  },
+  "strokeControlOnActiveBrandGradientStop2Rest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandGradientStop2Rest",
+    "f2": "strokeControlOnActiveBrandRest"
+  },
+  "strokeControlOnActiveBrandGradientStop2Hover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandGradientStop2Hover",
+    "f2": "strokeControlOnActiveBrandHover"
+  },
+  "strokeControlOnActiveBrandGradientStop2Pressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandGradientStop2Pressed",
+    "f2": "strokeControlOnActiveBrandPressed"
+  },
+  "strokeControlOnActiveBrandGradientStop2Disabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeControlOnActiveBrandGradientStop2Disabled",
+    "f2": "strokeControlOnActiveBrandDisabled"
+  },
+  "strokeLayerRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeLayerRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeCardPrimaryRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardPrimaryRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeCardPrimaryHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardPrimaryHover",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeCardPrimaryPressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardPrimaryPressed",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeCardPrimaryDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardPrimaryDisabled",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeCardSecondaryRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardSecondaryRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeCardSecondaryHover": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardSecondaryHover",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeCardSecondaryPressed": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardSecondaryPressed",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeCardSecondaryDisabled": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardSecondaryDisabled",
+    "f2": "neutralStrokeTransparentInteractiveRest"
+  },
+  "strokeCardActiveRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeCardActiveRest",
+    "f2": "neutralBackground1Selected"
+  },
+  "strokeImageRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeImageRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeToolbarRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "strokeToolbarRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeTooltipRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeTooltipRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "strokeDialogRest": {
+    "type": "smtc-f2",
+    "smtc": "strokeDialogRest",
+    "f2": "neutralStroke2Rest"
+  },
+  "backgroundLayerSecondary": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundLayerSecondary",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundLayerTertiary": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundLayerTertiary",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundCardSecondaryRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundCardSecondaryRest",
+    "f2": "backgroundCardPrimaryRest"
+  },
+  "backgroundCardSecondaryHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundCardSecondaryHover",
+    "f2": "backgroundCardPrimaryHover"
+  },
+  "backgroundCardSecondaryPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundCardSecondaryPressed",
+    "f2": "backgroundCardPrimaryPressed"
+  },
+  "backgroundCardSecondaryDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundCardSecondaryDisabled",
+    "f2": "backgroundCardPrimaryPressed"
+  },
+  "backgroundCardActiveRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundCardActiveRest",
+    "f2": "neutralBackground1Selected"
+  },
+  "backgroundToolbarFill": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundToolbarFill",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundFlyoutRestAcrylicColorBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundFlyoutRestAcrylicColorBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundFlyoutRestAcrylicLumBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundFlyoutRestAcrylicLumBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundFlyoutRestAcrylicLumBlend2": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundFlyoutRestAcrylicLumBlend2",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundDialogRestMicaColorBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundDialogRestMicaColorBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "backgroundDialogRestMicaLumBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "backgroundDialogRestMicaLumBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "foregroundNeutralPrimary": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundNeutralPrimary",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundNeutralSecondary": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundNeutralSecondary",
+    "f2": "neutralForeground2Rest"
+  },
+  "foregroundNeutralDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundNeutralDisabled",
+    "f2": "neutralForeground2Rest"
+  },
+  "foregroundBrandPrimary": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundBrandPrimary",
+    "f2": "brandForegroundLinkRest"
+  },
+  "foregroundControlIconOnNeutralRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnNeutralRest",
+    "f2": "neutralForeground2Rest"
+  },
+  "foregroundControlIconOnNeutralHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnNeutralHover",
+    "f2": "neutralForeground2Hover"
+  },
+  "foregroundControlIconOnNeutralPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnNeutralPressed",
+    "f2": "neutralForeground2Pressed"
+  },
+  "foregroundControlIconOnNeutralDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnNeutralDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlActiveBrandRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlActiveBrandRest",
+    "f2": "foregroundControlBrandRest"
+  },
+  "foregroundControlActiveBrandHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlActiveBrandHover",
+    "f2": "foregroundControlBrandHover"
+  },
+  "foregroundControlActiveBrandPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlActiveBrandPressed",
+    "f2": "foregroundControlBrandPressed"
+  },
+  "foregroundControlActiveBrandDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlActiveBrandDisabled",
+    "f2": "foregroundControlBrandDisabled"
+  },
+  "foregroundControlOnOutlineRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnOutlineRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundControlOnOutlineHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnOutlineHover",
+    "f2": "neutralForeground1Hover"
+  },
+  "foregroundControlOnOutlinePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnOutlinePressed",
+    "f2": "neutralForeground1Pressed"
+  },
+  "foregroundControlOnOutlineDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnOutlineDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlIconOnOutlineRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnOutlineRest",
+    "f2": "neutralForeground2Rest"
+  },
+  "foregroundControlIconOnOutlineHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnOutlineHover",
+    "f2": "neutralForeground2Hover"
+  },
+  "foregroundControlIconOnOutlinePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnOutlinePressed",
+    "f2": "neutralForeground2Pressed"
+  },
+  "foregroundControlIconOnOutlineDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnOutlineDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlOnSubtleRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnSubtleRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundControlOnSubtleHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnSubtleHover",
+    "f2": "neutralForeground1Hover"
+  },
+  "foregroundControlOnSubtlePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnSubtlePressed",
+    "f2": "neutralForeground1Pressed"
+  },
+  "foregroundControlOnSubtleDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnSubtleDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlIconOnSubtleRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnSubtleRest",
+    "f2": "neutralForeground2Rest"
+  },
+  "foregroundControlIconOnSubtleHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnSubtleHover",
+    "f2": "neutralForeground2BrandHover"
+  },
+  "foregroundControlIconOnSubtlePressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnSubtlePressed",
+    "f2": "neutralForeground2BrandPressed"
+  },
+  "foregroundControlIconOnSubtleDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlIconOnSubtleDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlOnTransparentRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnTransparentRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "foregroundControlOnTransparentHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnTransparentHover",
+    "f2": "neutralForeground2BrandHover"
+  },
+  "foregroundControlOnTransparentPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnTransparentPressed",
+    "f2": "neutralForeground2BrandPressed"
+  },
+  "foregroundControlOnTransparentDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnTransparentDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlOnActiveBrandRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnActiveBrandRest",
+    "f2": "foregroundControlOnBrandRest"
+  },
+  "foregroundControlOnActiveBrandHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnActiveBrandHover",
+    "f2": "foregroundControlOnBrandHover"
+  },
+  "foregroundControlOnActiveBrandPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnActiveBrandPressed",
+    "f2": "foregroundControlOnBrandPressed"
+  },
+  "foregroundControlOnActiveBrandDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlOnActiveBrandDisabled",
+    "f2": "foregroundControlOnBrandDisabled"
+  },
+  "foregroundControlLinkBrandRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkBrandRest",
+    "f2": "foregroundControlBrandRest"
+  },
+  "foregroundControlLinkBrandHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkBrandHover",
+    "f2": "foregroundControlBrandHover"
+  },
+  "foregroundControlLinkBrandPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkBrandPressed",
+    "f2": "foregroundControlBrandPressed"
+  },
+  "foregroundControlLinkBrandDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkBrandDisabled",
+    "f2": "foregroundControlBrandDisabled"
+  },
+  "foregroundControlLinkNeutralRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkNeutralRest",
+    "f2": "foregroundControlNeutralPrimaryRest"
+  },
+  "foregroundControlLinkNeutralHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkNeutralHover",
+    "f2": "foregroundControlNeutralPrimaryHover"
+  },
+  "foregroundControlLinkNeutralPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkNeutralPressed",
+    "f2": "foregroundControlNeutralPrimaryPressed"
+  },
+  "foregroundControlLinkNeutralDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlLinkNeutralDisabled",
+    "f2": "foregroundControlNeutralPrimaryDisabled"
+  },
+  "foregroundControlShapeSafeNeutralRest": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlShapeSafeNeutralRest",
+    "f2": "neutralStrokeAccessibleHover"
+  },
+  "foregroundControlShapeSafeNeutralHover": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlShapeSafeNeutralHover",
+    "f2": "neutralStrokeAccessibleHover"
+  },
+  "foregroundControlShapeSafeNeutralPressed": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlShapeSafeNeutralPressed",
+    "f2": "neutralStrokeAccessiblePressed"
+  },
+  "foregroundControlShapeSafeNeutralDisabled": {
+    "type": "smtc-f2",
+    "smtc": "foregroundControlShapeSafeNeutralDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "foregroundControlTextSelectedRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "foregroundControlTextSelectedRest",
+    "f2": "neutralForeground4Rest"
+  },
+  "dividerStrong": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "dividerStrong",
+    "f2": "neutralStroke3Rest"
+  },
+  "shadowToolbarKeyColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowToolbarAmbientColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowToolbarAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "shadowOnDragShadowKeyColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowKeyColor",
+    "f2": "shadowAmbientLighter"
+  },
+  "shadowOnDragShadowAmbientColor": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shadowOnDragShadowAmbientColor",
+    "f2": "shadowAmbientDarker"
+  },
+  "statusBrandFill": {
+    "type": "smtc-f2",
+    "smtc": "statusBrandFill",
+    "f2": "brandBackground1Rest"
+  },
+  "statusBrandStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusBrandStroke",
+    "f2": "brandBackground1Rest"
+  },
+  "statusBrandOnBrand": {
+    "type": "smtc-f2",
+    "smtc": "statusBrandOnBrand",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "statusBrandTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusBrandTintFill",
+    "f2": "brandBackground2Rest"
+  },
+  "statusBrandTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusBrandTintForeground",
+    "f2": "brandForeground2Rest"
+  },
+  "statusDangerFill": {
+    "type": "smtc-f2",
+    "smtc": "statusDangerFill",
+    "f2": "statusDangerBackground3Rest"
+  },
+  "statusDangerStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusDangerStroke",
+    "f2": "statusDangerStroke2Rest"
+  },
+  "statusDangerForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusDangerForeground",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "statusDangerTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusDangerTintFill",
+    "f2": "statusDangerBackground1Rest"
+  },
+  "statusDangerTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusDangerTintForeground",
+    "f2": "statusDangerForeground3Rest"
+  },
+  "statusCautionFill": {
+    "type": "smtc-f2",
+    "smtc": "statusCautionFill",
+    "f2": "statusWarningBackground3Rest"
+  },
+  "statusCautionStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusCautionStroke",
+    "f2": "statusWarningBackground3Rest"
+  },
+  "statusCautionForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusCautionForeground",
+    "f2": "neutralForegroundStaticRest"
+  },
+  "statusCautionTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusCautionTintFill",
+    "f2": "statusWarningBackground1Rest"
+  },
+  "statusCautionTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusCautionTintForeground",
+    "f2": "statusWarningForeground2Rest"
+  },
+  "statusWarningFill": {
+    "type": "smtc-f2",
+    "smtc": "statusWarningFill",
+    "f2": "statusWarningBackground3Rest"
+  },
+  "statusWarningStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusWarningStroke",
+    "f2": "statusWarningBackground3Rest"
+  },
+  "statusWarningForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusWarningForeground",
+    "f2": "neutralForegroundStaticRest"
+  },
+  "statusWarningTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusWarningTintFill",
+    "f2": "statusWarningBackground1Rest"
+  },
+  "statusWarningTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusWarningTintForeground",
+    "f2": "statusWarningForeground2Rest"
+  },
+  "statusSuccessFill": {
+    "type": "smtc-f2",
+    "smtc": "statusSuccessFill",
+    "f2": "statusSuccessBackground3Rest"
+  },
+  "statusSuccessStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusSuccessStroke",
+    "f2": "statusSuccessStroke2Rest"
+  },
+  "statusSuccessOnSuccess": {
+    "type": "smtc-f2",
+    "smtc": "statusSuccessOnSuccess",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "statusSuccessTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusSuccessTintFill",
+    "f2": "statusSuccessBackground1Rest"
+  },
+  "statusSuccessTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusSuccessTintForeground",
+    "f2": "statusSuccessForeground1Rest"
+  },
+  "statusImportantFill": {
+    "type": "smtc-f2",
+    "smtc": "statusImportantFill",
+    "f2": "neutralForeground1Rest"
+  },
+  "statusImportantStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusImportantStroke",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "statusImportantForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusImportantForeground",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "statusImportantTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusImportantTintFill",
+    "f2": "neutralForeground3Rest"
+  },
+  "statusImportantTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusImportantTintForeground",
+    "f2": "neutralBackground1Rest"
+  },
+  "statusInformativeFill": {
+    "type": "smtc-f2",
+    "smtc": "statusInformativeFill",
+    "f2": "neutralBackground5Rest"
+  },
+  "statusInformativeStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusInformativeStroke",
+    "f2": "neutralStroke2Rest"
+  },
+  "statusInformativeForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusInformativeForeground",
+    "f2": "neutralForeground3Rest"
+  },
+  "statusInformativeTintFill": {
+    "type": "smtc-f2",
+    "smtc": "statusInformativeTintFill",
+    "f2": "neutralBackground4Rest"
+  },
+  "statusInformativeTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusInformativeTintForeground",
+    "f2": "neutralForeground3Rest"
+  },
+  "statusNeutralFill": {
+    "type": "smtc-f2",
+    "smtc": "statusNeutralFill",
+    "f2": "neutralBackground5Rest"
+  },
+  "statusNeutralStroke": {
+    "type": "smtc-f2",
+    "smtc": "statusNeutralStroke",
+    "f2": "neutralStroke2Rest"
+  },
+  "statusNeutralForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusNeutralForeground",
+    "f2": "neutralForeground3Rest"
+  },
+  "statusNeutralTintBackground": {
+    "type": "smtc-f2",
+    "smtc": "statusNeutralTintBackground",
+    "f2": "neutralBackground4Rest"
+  },
+  "statusNeutralTintForeground": {
+    "type": "smtc-f2",
+    "smtc": "statusNeutralTintForeground",
+    "f2": "neutralForeground3Rest"
+  },
+  "controlFocusInnerStrokeColor": {
+    "type": "smtc-f2",
+    "smtc": "controlFocusInnerStrokeColor",
+    "f2": "neutralStrokeFocus1Rest"
+  },
+  "controlFocusOuterStrokeColor": {
+    "type": "smtc-f2",
+    "smtc": "controlFocusOuterStrokeColor",
+    "f2": "neutralStrokeFocus2Rest"
+  },
+  "controlChoiceCornerSwitch": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerSwitch",
+    "f2": "circular"
+  },
+  "controlChoiceShadowSwitchThumbKeyX": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbKeyX",
+    "f2": "nullNumber"
+  },
+  "controlChoiceShadowSwitchThumbKeyY": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbKeyY",
+    "f2": "nullNumber"
+  },
+  "controlChoiceShadowSwitchThumbKeyBlur": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbKeyBlur",
+    "f2": "nullNumber"
+  },
+  "controlChoiceShadowSwitchThumbKeyColor": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbKeyColor",
+    "f2": "nullColor"
+  },
+  "controlChoiceShadowSwitchThumbAmbientX": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbAmbientX",
+    "f2": "nullNumber"
+  },
+  "controlChoiceShadowSwitchThumbAmbientY": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbAmbientY",
+    "f2": "nullNumber"
+  },
+  "controlChoiceShadowSwitchThumbAmbientBlur": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbAmbientBlur",
+    "f2": "nullNumber"
+  },
+  "controlChoiceShadowSwitchThumbAmbientColor": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceShadowSwitchThumbAmbientColor",
+    "f2": "nullColor"
+  },
+  "controlChoiceCornerCheckHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerCheckHover",
+    "f2": "small"
+  },
+  "controlChoiceCornerCheckPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerCheckPressed",
+    "f2": "small"
+  },
+  "controlChoiceCornerRadioRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerRadioRest",
+    "f2": "circular"
+  },
+  "controlChoiceCornerRadioHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerRadioHover",
+    "f2": "circular"
+  },
+  "controlChoiceCornerRadioPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerRadioPressed",
+    "f2": "circular"
+  },
+  "controlChoiceCornerDotRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerDotRest",
+    "f2": "circular"
+  },
+  "controlChoiceCornerDotHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerDotHover",
+    "f2": "circular"
+  },
+  "controlChoiceCornerDotPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlChoiceCornerDotPressed",
+    "f2": "circular"
+  },
+  "controlChoiceCornerDotHintHover": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceCornerDotHintHover",
+    "f2": "circular"
+  },
+  "controlChoiceCornerDotHintPressed": {
+    "type": "smtc-f2",
+    "smtc": "controlChoiceCornerDotHintPressed",
+    "f2": "circular"
+  },
+  "controlListCornerRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListCornerRest",
+    "f2": "medium"
+  },
+  "controlListCornerHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListCornerHover",
+    "f2": "medium"
+  },
+  "controlListCornerPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListCornerPressed",
+    "f2": "medium"
+  },
+  "controlListSelectedBackgroundRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListSelectedBackgroundRest",
+    "f2": "backgroundControlSubtleRest"
+  },
+  "controlListSelectedBackgroundHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListSelectedBackgroundHover",
+    "f2": "backgroundControlSubtleHover"
+  },
+  "controlListSelectedBackgroundPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListSelectedBackgroundPressed",
+    "f2": "backgroundControlSubtlePressed"
+  },
+  "controlListSelectedBackgroundDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlListSelectedBackgroundDisabled",
+    "f2": "backgroundControlSubtleDisabled"
+  },
+  "controlListRadioCheckBaseRest": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckBaseRest",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "controlListRadioCheckBaseDisabled": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckBaseDisabled",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "controlListRadioCheckBaseSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckBaseSelectedRest",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "controlListRadioCheckBaseSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckBaseSelectedDisabled",
+    "f2": "neutralBackgroundTransparentRest"
+  },
+  "controlListRadioCheckStrokeRest": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckStrokeRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "controlListRadioCheckStrokeDisabled": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckStrokeDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "controlListRadioCheckStrokeSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckStrokeSelectedRest",
+    "f2": "neutralStrokeTransparentRest"
+  },
+  "controlListRadioCheckStrokeSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckStrokeSelectedDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "controlListRadioCheckIndicatorUnselectedHover": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckIndicatorUnselectedHover",
+    "f2": "neutralForeground1Hover"
+  },
+  "controlListRadioCheckIndicatorUnselectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckIndicatorUnselectedPressed",
+    "f2": "neutralForeground1Pressed"
+  },
+  "controlListRadioCheckIndicatorRest": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckIndicatorRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "controlListRadioCheckIndicatorDisabled": {
+    "type": "smtc-f2",
+    "smtc": "controlListRadioCheckIndicatorDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "controlBadgeGap": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgeGap",
+    "f2": "horizontalXxs"
+  },
+  "controlBadgePadding": {
+    "type": "smtc-f2",
+    "smtc": "controlBadgePadding",
+    "f2": "horizontalSnudge"
+  },
+  "controlSliderCornerRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderCornerRest",
+    "f2": "circular"
+  },
+  "controlSliderBarEmptyFillRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarEmptyFillRest",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "controlSliderBarEmptyFillHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarEmptyFillHover",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "controlSliderBarEmptyFillPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarEmptyFillPressed",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "controlSliderBarEmptyFillDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarEmptyFillDisabled",
+    "f2": "neutralStrokeAccessibleRest"
+  },
+  "controlSliderBarFullFillRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarFullFillRest",
+    "f2": "brandBackground1Rest"
+  },
+  "controlSliderBarFullFillHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarFullFillHover",
+    "f2": "brandBackground1Hover"
+  },
+  "controlSliderBarFullFillPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarFullFillPressed",
+    "f2": "brandBackground1Pressed"
+  },
+  "controlSliderBarFullFillDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderBarFullFillDisabled",
+    "f2": "neutralBackgroundDisabledRest"
+  },
+  "controlSliderThumbCornerDefault": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbCornerDefault",
+    "f2": "circular"
+  },
+  "controlSliderThumbBackgroundRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbBackgroundRest",
+    "f2": "brandBackgroundCompoundRest"
+  },
+  "controlSliderThumbBackgroundHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbBackgroundHover",
+    "f2": "brandBackgroundCompoundHover"
+  },
+  "controlSliderThumbBackgroundPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbBackgroundPressed",
+    "f2": "brandBackgroundCompoundPressed"
+  },
+  "controlSliderThumbBackgroundDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbBackgroundDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "controlSliderThumbStrokeColorRest": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeColorRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "controlSliderThumbStrokeColorHover": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeColorHover",
+    "f2": "neutralBackground1Rest"
+  },
+  "controlSliderThumbStrokeColorPressed": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeColorPressed",
+    "f2": "neutralBackground1Rest"
+  },
+  "controlSliderThumbStrokeColorDisabled": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "controlSliderThumbStrokeColorDisabled",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "shellAcrylicDefaultRestAcrylicColorBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shellAcrylicDefaultRestAcrylicColorBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "shellAcrylicDefaultRestAcrylicLumBlend": {
+    "type": "ctrl-smtc-f2",
+    "smtc": "shellAcrylicDefaultRestAcrylicLumBlend",
+    "f2": "neutralBackground1Rest"
+  },
+  "unfinishedRest": {
+    "type": "smtc-f2",
+    "smtc": "unfinishedRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "avatarToDoDefaultCorner": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultCorner",
+    "f2": "none"
+  },
+  "avatarToDoDefaultActiveRingRest": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultActiveRingRest",
+    "f2": "avatarColoredActiveStroke"
+  },
+  "avatarToDoDefaultActiveRingDisabled": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultActiveRingDisabled",
+    "f2": "avatarColoredActiveStroke"
+  },
+  "avatarToDoDefaultNeutralBackgroundRest": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultNeutralBackgroundRest",
+    "f2": "neutralBackground6Rest"
+  },
+  "avatarToDoDefaultNeutralBackgroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultNeutralBackgroundDisabled",
+    "f2": "neutralBackground6Rest"
+  },
+  "avatarToDoDefaultNeutralForegroundRest": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultNeutralForegroundRest",
+    "f2": "neutralForeground3Rest"
+  },
+  "avatarToDoDefaultNeutralForegroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultNeutralForegroundDisabled",
+    "f2": "neutralForeground3Rest"
+  },
+  "avatarToDoDefaultColoredBackgroundRest": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultColoredBackgroundRest",
+    "f2": "avatarColoredBackground"
+  },
+  "avatarToDoDefaultColoredBackgroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultColoredBackgroundDisabled",
+    "f2": "avatarColoredBackground"
+  },
+  "avatarToDoDefaultColoredForegroundRest": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultColoredForegroundRest",
+    "f2": "avatarColoredForeground"
+  },
+  "avatarToDoDefaultColoredForegroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDoDefaultColoredForegroundDisabled",
+    "f2": "avatarColoredForeground"
+  },
+  "avatarToDo24pxGroupCorner": {
+    "type": "smtc-f2",
+    "smtc": "avatarToDo24pxGroupCorner",
+    "f2": "none"
+  },
+  "liteFilterDelDefaultCornerRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultCornerRest",
+    "f2": "circular"
+  },
+  "liteFilterDelDefaultCornerHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultCornerHover",
+    "f2": "circular"
+  },
+  "liteFilterDelDefaultCornerPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultCornerPressed",
+    "f2": "circular"
+  },
+  "liteFilterDelDefaultCornerDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultCornerDisabled",
+    "f2": "medium"
+  },
+  "liteFilterDelDefaultBackgroundRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundRest",
+    "f2": "neutralBackground1Rest"
+  },
+  "liteFilterDelDefaultBackgroundHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundHover",
+    "f2": "neutralBackground1Hover"
+  },
+  "liteFilterDelDefaultBackgroundPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundPressed",
+    "f2": "neutralBackground1Pressed"
+  },
+  "liteFilterDelDefaultBackgroundDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundDisabled",
+    "f2": "neutralBackgroundDisabledRest"
+  },
+  "liteFilterDelDefaultBackgroundSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundSelectedRest",
+    "f2": "brandBackgroundCompoundRest"
+  },
+  "liteFilterDelDefaultBackgroundSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundSelectedHover",
+    "f2": "brandBackgroundCompoundHover"
+  },
+  "liteFilterDelDefaultBackgroundSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundSelectedPressed",
+    "f2": "brandBackgroundCompoundPressed"
+  },
+  "liteFilterDelDefaultBackgroundSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultBackgroundSelectedDisabled",
+    "f2": "brandBackgroundCompoundPressed"
+  },
+  "liteFilterDelDefaultStrokeColorRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorRest",
+    "f2": "neutralStroke1Rest"
+  },
+  "liteFilterDelDefaultStrokeColorHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorHover",
+    "f2": "neutralStroke1Hover"
+  },
+  "liteFilterDelDefaultStrokeColorPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorPressed",
+    "f2": "neutralStroke1Pressed"
+  },
+  "liteFilterDelDefaultStrokeColorDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorDisabled",
+    "f2": "neutralStrokeDisabledRest"
+  },
+  "liteFilterDelDefaultStrokeColorSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorSelectedRest",
+    "f2": "brandBackgroundCompoundRest"
+  },
+  "liteFilterDelDefaultStrokeColorSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorSelectedHover",
+    "f2": "brandBackgroundCompoundHover"
+  },
+  "liteFilterDelDefaultStrokeColorSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorSelectedPressed",
+    "f2": "brandBackgroundCompoundPressed"
+  },
+  "liteFilterDelDefaultStrokeColorSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultStrokeColorSelectedDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "liteFilterDelDefaultForegroundColorRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorRest",
+    "f2": "neutralForeground1Rest"
+  },
+  "liteFilterDelDefaultForegroundColorHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorHover",
+    "f2": "neutralForeground1Hover"
+  },
+  "liteFilterDelDefaultForegroundColorPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorPressed",
+    "f2": "neutralForeground1Pressed"
+  },
+  "liteFilterDelDefaultForegroundColorDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorDisabled",
+    "f2": "neutralForegroundDisabledRest"
+  },
+  "liteFilterDelDefaultForegroundColorSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorSelectedRest",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelDefaultForegroundColorSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorSelectedHover",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelDefaultForegroundColorSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelDefaultForegroundColorSelectedPressed",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandBackgroundRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundRest",
+    "f2": "brandBackground1Rest"
+  },
+  "liteFilterDelBrandBackgroundHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundHover",
+    "f2": "brandBackground1Hover"
+  },
+  "liteFilterDelBrandBackgroundPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundPressed",
+    "f2": "brandBackground1Pressed"
+  },
+  "liteFilterDelBrandBackgroundSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundSelectedRest",
+    "f2": "brandBackground1Rest"
+  },
+  "liteFilterDelBrandBackgroundSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundSelectedHover",
+    "f2": "brandBackground1Hover"
+  },
+  "liteFilterDelBrandBackgroundSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandBackgroundSelectedPressed",
+    "f2": "brandBackground1Pressed"
+  },
+  "liteFilterDelBrandStrokeColorRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorRest",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "liteFilterDelBrandStrokeColorHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorHover",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "liteFilterDelBrandStrokeColorPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorPressed",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "liteFilterDelBrandStrokeColorDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "liteFilterDelBrandStrokeColorSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorSelectedRest",
+    "f2": "brandBackgroundCompoundRest"
+  },
+  "liteFilterDelBrandStrokeColorSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorSelectedHover",
+    "f2": "brandBackgroundCompoundHover"
+  },
+  "liteFilterDelBrandStrokeColorSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandStrokeColorSelectedPressed",
+    "f2": "brandBackgroundCompoundPressed"
+  },
+  "liteFilterDelBrandForegroundColorRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorRest",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorHover",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorPressed",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorDisabled",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorSelectedRest": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorSelectedRest",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorSelectedHover": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorSelectedHover",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorSelectedPressed": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorSelectedPressed",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "liteFilterDelBrandForegroundColorSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "liteFilterDelBrandForegroundColorSelectedDisabled",
+    "f2": "neutralForegroundOnBrandRest"
+  },
+  "navItemDeleteIndicatorBarSizeThickness": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarSizeThickness",
+    "f2": "thicker"
+  },
+  "navItemDeleteIndicatorBarColorHint": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarColorHint",
+    "f2": "neutralStroke1Hover"
+  },
+  "navItemDeleteIndicatorBarColorSelected": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarColorSelected",
+    "f2": "brandStrokeCompoundRest"
+  },
+  "navItemDeleteIndicatorBarColorSelectedDisabled": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarColorSelectedDisabled",
+    "f2": "neutralStrokeTransparentDisabledRest"
+  },
+  "navItemDeleteIndicatorBarCorner": {
+    "type": "smtc-f2",
+    "smtc": "navItemDeleteIndicatorBarCorner",
+    "f2": "circular"
+  }
+}

@@ -1,0 +1,70 @@
+[
+    {
+        "name": "borderRadiusCircular",
+        "f2": "borderRadiusCircular"
+    },
+    {
+        "name": "borderRadiusMedium",
+        "f2": "borderRadiusMedium"
+    },
+    {
+        "name": "colorCompoundBrandBackground",
+        "f2": "colorCompoundBrandBackground"
+    },
+    {
+        "name": "colorCompoundBrandBackgroundHover",
+        "f2": "colorCompoundBrandBackgroundHover"
+    },
+    {
+        "name": "colorCompoundBrandBackgroundPressed",
+        "f2": "colorCompoundBrandBackgroundPressed"
+    },
+    {
+        "name": "colorCompoundBrandStroke",
+        "f2": "colorCompoundBrandStroke"
+    },
+    {
+        "name": "colorNeutralBackground1",
+        "f2": "colorNeutralBackground1"
+    },
+    {
+        "name": "colorNeutralBackgroundDisabled",
+        "f2": "colorNeutralBackgroundDisabled"
+    },
+    {
+        "name": "colorNeutralForegroundInverted",
+        "f2": "colorNeutralForegroundInverted"
+    },
+    {
+        "name": "colorNeutralStrokeAccessible",
+        "f2": "colorNeutralStrokeAccessible"
+    },
+    {
+        "name": "colorNeutralStrokeAccessibleHover",
+        "f2": "colorNeutralStrokeAccessibleHover"
+    },
+    {
+        "name": "colorNeutralStrokeAccessiblePressed",
+        "f2": "colorNeutralStrokeAccessiblePressed"
+    },
+    {
+        "name": "colorNeutralStrokeDisabled",
+        "f2": "colorNeutralStrokeDisabled"
+    },
+    {
+        "name": "colorStrokeFocus2",
+        "f2": "colorStrokeFocus2"
+    },
+    {
+        "name": "colorTransparentStroke",
+        "f2": "colorTransparentStroke"
+    },
+    {
+        "name": "strokeWidthThick",
+        "f2": "strokeWidthThick"
+    },
+    {
+        "name": "strokeWidthThin",
+        "f2": "strokeWidthThin"
+    }
+]

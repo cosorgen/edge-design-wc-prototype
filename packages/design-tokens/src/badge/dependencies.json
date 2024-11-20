@@ -1,0 +1,72 @@
+[
+  {
+    "name": "borderRadiusCircular",
+    "smtc": null,
+    "f2": "borderRadiusCircular"
+  },
+  {
+    "name": "colorBrandBackground",
+    "smtc": null,
+    "f2": "colorBrandBackground"
+  },
+  {
+    "name": "colorNeutralBackground6",
+    "smtc": null,
+    "f2": "colorNeutralBackground6"
+  },
+  {
+    "name": "colorNeutralForeground1",
+    "smtc": null,
+    "f2": "colorNeutralForeground1"
+  },
+  {
+    "name": "colorNeutralForegroundOnBrand",
+    "smtc": null,
+    "f2": "colorNeutralForegroundOnBrand"
+  },
+  {
+    "name": "colorTransparentBackground",
+    "smtc": null,
+    "f2": "colorTransparentBackground"
+  },
+  {
+    "name": "colorTransparentStroke",
+    "smtc": null,
+    "f2": "colorTransparentStroke"
+  },
+  {
+    "name": "fontFamilyBase",
+    "smtc": null,
+    "f2": "fontFamilyBase"
+  },
+  {
+    "name": "fontSizeBase200",
+    "smtc": null,
+    "f2": "fontSizeBase200"
+  },
+  {
+    "name": "fontWeightSemibold",
+    "smtc": null,
+    "f2": "fontWeightSemibold"
+  },
+  {
+    "name": "lineHeightBase200",
+    "smtc": null,
+    "f2": "lineHeightBase200"
+  },
+  {
+    "name": "spacingHorizontalXS",
+    "smtc": null,
+    "f2": "spacingHorizontalXS"
+  },
+  {
+    "name": "spacingHorizontalXXS",
+    "smtc": null,
+    "f2": "spacingHorizontalXXS"
+  },
+  {
+    "name": "strokeWidthThin",
+    "smtc": null,
+    "f2": "strokeWidthThin"
+  }
+]

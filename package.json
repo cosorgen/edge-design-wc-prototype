@@ -7,12 +7,23 @@
   "author": "",
   "license": "MIT",
   "workspaces": [
+    "packages/web-components-framework",
+    "packages/design-tokens",
+    "packages/menu-item",
+    "packages/menu-list",
+    "packages/button",
+    "packages/composer",
+    "packages/menu-button",
+    "packages/switch",
+    "packages/divider",
+    "packages/menu",
     "client",
     "server"
   ],
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
+    "build:packages": "npm run build -ws --if-present",
     "clean": "node scripts/clean.mjs",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

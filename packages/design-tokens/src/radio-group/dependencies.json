@@ -1,0 +1,22 @@
+[
+    {
+        "name": "colorNeutralForeground1",
+        "f2": "colorNeutralForeground1"
+    },
+    {
+        "name": "colorNeutralForeground2",
+        "f2": "colorNeutralForeground2"
+    },
+    {
+        "name": "colorNeutralForeground3",
+        "f2": "colorNeutralForeground3"
+    },
+    {
+        "name": "colorNeutralForegroundDisabled",
+        "f2": "colorNeutralForegroundDisabled"
+    },
+    {
+        "name": "spacingVerticalL",
+        "f2": "spacingVerticalL"
+    }
+]

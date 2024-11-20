@@ -1,0 +1,877 @@
+{
+  "ctrl-avatar-default-corner": {
+    "name": "--0",
+    "inherits": true,
+    "initialValue": "10000px"
+  },
+  "ctrl-avatar-default-background-color": {
+    "name": "--1",
+    "inherits": true,
+    "initialValue": "#e6e6e6"
+  },
+  "ctrl-avatar-default-foreground-color": {
+    "name": "--2",
+    "inherits": true,
+    "initialValue": "#616161"
+  },
+  "ctrl-avatar-default-badge-stroke-color": {
+    "name": "--3",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-brand-background-color": {
+    "name": "--4",
+    "inherits": true,
+    "initialValue": "#0f6cbd"
+  },
+  "ctrl-status-brand-foreground-color": {
+    "name": "--5",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-brand-tint-background-color": {
+    "name": "--6",
+    "inherits": true,
+    "initialValue": "#ebf3fc"
+  },
+  "ctrl-status-brand-tint-foreground-color": {
+    "name": "--7",
+    "inherits": true,
+    "initialValue": "#115ea3"
+  },
+  "ctrl-status-brand-tint-stroke-color": {
+    "name": "--8",
+    "inherits": true,
+    "initialValue": "#b4d6fa"
+  },
+  "ctrl-status-danger-background-color": {
+    "name": "--9",
+    "inherits": true,
+    "initialValue": "#d13438"
+  },
+  "ctrl-status-danger-foreground-color": {
+    "name": "--a",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-danger-tint-background-color": {
+    "name": "--b",
+    "inherits": true,
+    "initialValue": "#fdf6f6"
+  },
+  "ctrl-status-danger-tint-foreground-color": {
+    "name": "--c",
+    "inherits": true,
+    "initialValue": "#bc2f32"
+  },
+  "ctrl-status-danger-tint-stroke-color": {
+    "name": "--d",
+    "inherits": true,
+    "initialValue": "#f1bbbc"
+  },
+  "ctrl-status-important-background-color": {
+    "name": "--e",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-status-important-foreground-color": {
+    "name": "--f",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-important-tint-background-color": {
+    "name": "--g",
+    "inherits": true,
+    "initialValue": "#616161"
+  },
+  "ctrl-status-important-tint-foreground-color": {
+    "name": "--h",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-important-tint-stroke-color": {
+    "name": "--i",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-status-informative-background-color": {
+    "name": "--j",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-status-informative-foreground-color": {
+    "name": "--k",
+    "inherits": true,
+    "initialValue": "#ebebeb"
+  },
+  "ctrl-status-informative-tint-background-color": {
+    "name": "--l",
+    "inherits": true,
+    "initialValue": "#f0f0f0"
+  },
+  "ctrl-status-informative-tint-foreground-color": {
+    "name": "--m",
+    "inherits": true,
+    "initialValue": "#616161"
+  },
+  "ctrl-status-informative-tint-stroke-color": {
+    "name": "--n",
+    "inherits": true,
+    "initialValue": "#e0e0e0"
+  },
+  "ctrl-status-success-background-color": {
+    "name": "--o",
+    "inherits": true,
+    "initialValue": "#107c10"
+  },
+  "ctrl-status-success-foreground-color": {
+    "name": "--p",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-success-tint-background-color": {
+    "name": "--q",
+    "inherits": true,
+    "initialValue": "#f1faf1"
+  },
+  "ctrl-status-success-tint-foreground-color": {
+    "name": "--r",
+    "inherits": true,
+    "initialValue": "#0e700e"
+  },
+  "ctrl-status-success-tint-stroke-color": {
+    "name": "--s",
+    "inherits": true,
+    "initialValue": "#107c10"
+  },
+  "ctrl-status-warning-background-color": {
+    "name": "--t",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-status-warning-foreground-color": {
+    "name": "--u",
+    "inherits": true,
+    "initialValue": "#fde300"
+  },
+  "ctrl-status-warning-tint-background-color": {
+    "name": "--v",
+    "inherits": true,
+    "initialValue": "#fffef5"
+  },
+  "ctrl-status-warning-tint-foreground-color": {
+    "name": "--w",
+    "inherits": true,
+    "initialValue": "#817400"
+  },
+  "ctrl-status-warning-tint-stroke-color": {
+    "name": "--x",
+    "inherits": true,
+    "initialValue": "#fef7b2"
+  },
+  "ctrl-status-caution-background-color": {
+    "name": "--y",
+    "inherits": true,
+    "initialValue": "#da3b01"
+  },
+  "ctrl-status-caution-foreground-color": {
+    "name": "--z",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-status-caution-tint-background-color": {
+    "name": "--A",
+    "inherits": true,
+    "initialValue": "#fdf6f3"
+  },
+  "ctrl-status-caution-tint-foreground-color": {
+    "name": "--B",
+    "inherits": true,
+    "initialValue": "#c43501"
+  },
+  "ctrl-status-caution-tint-stroke-color": {
+    "name": "--C",
+    "inherits": true,
+    "initialValue": "#f4bfab"
+  },
+  "ctrl-badge-default-corner": {
+    "name": "--D",
+    "inherits": true,
+    "initialValue": "10000px"
+  },
+  "ctrl-badge-brand-background-color": {
+    "name": "--E",
+    "inherits": true,
+    "initialValue": "#0f6cbd"
+  },
+  "ctrl-badge-zero-corner": {
+    "name": "--F",
+    "inherits": true,
+    "initialValue": "0"
+  },
+  "ctrl-page-text-ramp-caption2-font-size": {
+    "name": "--G",
+    "inherits": true,
+    "initialValue": "10px"
+  },
+  "ctrl-page-text-ramp-caption2-line-height": {
+    "name": "--H",
+    "inherits": true,
+    "initialValue": "14px"
+  },
+  "ctrl-page-text-ramp-caption1-font-size": {
+    "name": "--I",
+    "inherits": true,
+    "initialValue": "12px"
+  },
+  "ctrl-page-text-ramp-caption1-line-height": {
+    "name": "--J",
+    "inherits": true,
+    "initialValue": "16px"
+  },
+  "ctrl-page-text-ramp-body2-font-size": {
+    "name": "--K",
+    "inherits": true,
+    "initialValue": "14px"
+  },
+  "ctrl-page-text-ramp-body2-line-height": {
+    "name": "--L",
+    "inherits": true,
+    "initialValue": "20px"
+  },
+  "ctrl-page-text-ramp-body1-font-size": {
+    "name": "--M",
+    "inherits": true,
+    "initialValue": "16px"
+  },
+  "ctrl-page-text-ramp-body1-line-height": {
+    "name": "--N",
+    "inherits": true,
+    "initialValue": "22px"
+  },
+  "ctrl-page-text-ramp-title2-font-size": {
+    "name": "--O",
+    "inherits": true,
+    "initialValue": "20px"
+  },
+  "ctrl-page-text-ramp-title2-line-height": {
+    "name": "--P",
+    "inherits": true,
+    "initialValue": "28px"
+  },
+  "ctrl-page-text-ramp-title1-font-size": {
+    "name": "--Q",
+    "inherits": true,
+    "initialValue": "24px"
+  },
+  "ctrl-page-text-default-weight-regular": {
+    "name": "--R",
+    "inherits": true,
+    "initialValue": "400"
+  },
+  "ctrl-page-text-default-weight-medium": {
+    "name": "--S",
+    "inherits": true,
+    "initialValue": "500"
+  },
+  "ctrl-page-text-default-weight-semibold": {
+    "name": "--T",
+    "inherits": true,
+    "initialValue": "600"
+  },
+  "ctrl-page-text-default-weight-bold": {
+    "name": "--U",
+    "inherits": true,
+    "initialValue": "700"
+  },
+  "ctrl-default-padding-vertical-default-xs": {
+    "name": "--V",
+    "inherits": true,
+    "initialValue": "4px"
+  },
+  "ctrl-default-padding-icon-only-s": {
+    "name": "--W",
+    "inherits": true,
+    "initialValue": "6px"
+  },
+  "ctrl-default-padding-icon-only-m": {
+    "name": "--X",
+    "inherits": true,
+    "initialValue": "10px"
+  },
+  "ctrl-default-padding-to-nested-control-xxs": {
+    "name": "--Y",
+    "inherits": true,
+    "initialValue": "2px"
+  },
+  "ctrl-default-padding-to-nested-control-xs": {
+    "name": "--Z",
+    "inherits": true,
+    "initialValue": "4px"
+  },
+  "ctrl-default-padding-to-nested-control-s": {
+    "name": "---",
+    "inherits": true,
+    "initialValue": "8px"
+  },
+  "ctrl-default-padding-to-nested-control-m": {
+    "name": "--_",
+    "inherits": true,
+    "initialValue": "12px"
+  },
+  "ctrl-default-padding-to-nested-control-l": {
+    "name": "--00",
+    "inherits": true,
+    "initialValue": "16px"
+  },
+  "ctrl-default-corner-small": {
+    "name": "--01",
+    "inherits": true,
+    "initialValue": "2px"
+  },
+  "ctrl-default-corner-medium": {
+    "name": "--02",
+    "inherits": true,
+    "initialValue": "4px"
+  },
+  "ctrl-default-corner-large": {
+    "name": "--03",
+    "inherits": true,
+    "initialValue": "6px"
+  },
+  "ctrl-default-corner-xlarge": {
+    "name": "--04",
+    "inherits": true,
+    "initialValue": "8px"
+  },
+  "ctrl-default-stroke-width": {
+    "name": "--05",
+    "inherits": true,
+    "initialValue": "1px"
+  },
+  "ctrl-default-text-default-family": {
+    "name": "--06",
+    "inherits": true,
+    "initialValue": "'Segoe Sans', 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif"
+  },
+  "ctrl-default-focus-outer-stroke-width": {
+    "name": "--07",
+    "inherits": true,
+    "initialValue": "2px"
+  },
+  "ctrl-default-focus-outer-stroke-color": {
+    "name": "--08",
+    "inherits": true,
+    "initialValue": "#000000"
+  },
+  "ctrl-default-shadow2": {
+    "name": "--09",
+    "inherits": true,
+    "initialValue": "0 0 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.14)"
+  },
+  "ctrl-default-shadow4": {
+    "name": "--0a",
+    "inherits": true,
+    "initialValue": "0 0 2px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.14)"
+  },
+  "ctrl-default-shadow8": {
+    "name": "--0b",
+    "inherits": true,
+    "initialValue": "0 0 2px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.14)"
+  },
+  "ctrl-default-shadow16": {
+    "name": "--0c",
+    "inherits": true,
+    "initialValue": "0 0 2px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.14)"
+  },
+  "ctrl-default-shadow28": {
+    "name": "--0d",
+    "inherits": true,
+    "initialValue": "0 0 8px rgba(0,0,0,0.12), 0 14px 28px rgba(0,0,0,0.14)"
+  },
+  "ctrl-default-shadow64": {
+    "name": "--0e",
+    "inherits": true,
+    "initialValue": "0 0 8px rgba(0,0,0,0.30), 0 32px 64px rgba(0,0,0,0.25)"
+  },
+  "ctrl-default-duration-ultra-fast": {
+    "name": "--0f",
+    "inherits": true,
+    "initialValue": "50ms"
+  },
+  "ctrl-default-duration-faster": {
+    "name": "--0g",
+    "inherits": true,
+    "initialValue": "100ms"
+  },
+  "ctrl-default-duration-normal": {
+    "name": "--0h",
+    "inherits": true,
+    "initialValue": "200ms"
+  },
+  "ctrl-default-duration-slower": {
+    "name": "--0i",
+    "inherits": true,
+    "initialValue": "400ms"
+  },
+  "ctrl-default-duration-ultra-slow": {
+    "name": "--0j",
+    "inherits": true,
+    "initialValue": "500ms"
+  },
+  "ctrl-default-duration-gentle": {
+    "name": "--0k",
+    "inherits": true,
+    "initialValue": "250ms"
+  },
+  "ctrl-default-curve-accelerate-max": {
+    "name": "--0l",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0.9,0.1,1,0.2)"
+  },
+  "ctrl-default-curve-accelerate-mid": {
+    "name": "--0m",
+    "inherits": true,
+    "initialValue": "cubic-bezier(1,0,1,1)"
+  },
+  "ctrl-default-curve-accelerate-min": {
+    "name": "--0n",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0.8,0,0.78,1)"
+  },
+  "ctrl-default-curve-decelerate-max": {
+    "name": "--0o",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0.1,0.9,0.2,1)"
+  },
+  "ctrl-default-curve-decelerate-mid": {
+    "name": "--0p",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0,0,0,1)"
+  },
+  "ctrl-default-curve-decelerate-min": {
+    "name": "--0q",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0.33,0,0.1,1)"
+  },
+  "ctrl-default-curve-easy-ease-max": {
+    "name": "--0r",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0.8,0,0.2,1)"
+  },
+  "ctrl-default-curve-easy-ease-mid": {
+    "name": "--0s",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0.33,0,0.67,1)"
+  },
+  "ctrl-default-curve-linear": {
+    "name": "--0t",
+    "inherits": true,
+    "initialValue": "cubic-bezier(0,0,1,1)"
+  },
+  "ctrl-default-spacing-horizontal-xxl": {
+    "name": "--0u",
+    "inherits": true,
+    "initialValue": "24px"
+  },
+  "ctrl-default-spacing-vertical-l": {
+    "name": "--0v",
+    "inherits": true,
+    "initialValue": "16px"
+  },
+  "ctrl-default-spacing-vertical-s": {
+    "name": "--0w",
+    "inherits": true,
+    "initialValue": "8px"
+  },
+  "ctrl-default-spacing-vertical-xxl": {
+    "name": "--0x",
+    "inherits": true,
+    "initialValue": "24px"
+  },
+  "ctrl-button-default-background-color-rest": {
+    "name": "--0y",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-button-default-background-color-hover": {
+    "name": "--0z",
+    "inherits": true,
+    "initialValue": "#f5f5f5"
+  },
+  "ctrl-button-default-background-color-pressed": {
+    "name": "--0A",
+    "inherits": true,
+    "initialValue": "#e0e0e0"
+  },
+  "ctrl-button-default-background-color-disabled": {
+    "name": "--0B",
+    "inherits": true,
+    "initialValue": "#f0f0f0"
+  },
+  "ctrl-button-default-stroke-color-rest": {
+    "name": "--0C",
+    "inherits": true,
+    "initialValue": "#e6e6e6"
+  },
+  "ctrl-button-default-stroke-color-hover": {
+    "name": "--0D",
+    "inherits": true,
+    "initialValue": "#c7c7c7"
+  },
+  "ctrl-button-default-stroke-color-pressed": {
+    "name": "--0E",
+    "inherits": true,
+    "initialValue": "#b3b3b3"
+  },
+  "ctrl-button-default-stroke-color-disabled": {
+    "name": "--0F",
+    "inherits": true,
+    "initialValue": "#e0e0e0"
+  },
+  "ctrl-button-default-stroke-color-selected-rest": {
+    "name": "--0G",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-default-foreground-color-rest": {
+    "name": "--0H",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-button-default-foreground-color-hover": {
+    "name": "--0I",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-button-default-foreground-color-pressed": {
+    "name": "--0J",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-button-default-foreground-color-disabled": {
+    "name": "--0K",
+    "inherits": true,
+    "initialValue": "#bdbdbd"
+  },
+  "ctrl-button-brand-background-color-rest": {
+    "name": "--0L",
+    "inherits": true,
+    "initialValue": "#0f6cbd"
+  },
+  "ctrl-button-brand-background-color-hover": {
+    "name": "--0M",
+    "inherits": true,
+    "initialValue": "#115ea3"
+  },
+  "ctrl-button-brand-background-color-pressed": {
+    "name": "--0N",
+    "inherits": true,
+    "initialValue": "#0c3b5e"
+  },
+  "ctrl-button-brand-stroke-color-selected-rest": {
+    "name": "--0O",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-button-brand-foreground-color-rest": {
+    "name": "--0P",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-button-brand-foreground-color-hover": {
+    "name": "--0Q",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-button-outline-background-color-rest": {
+    "name": "--0R",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-outline-background-color-hover": {
+    "name": "--0S",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-outline-background-color-pressed": {
+    "name": "--0T",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-subtle-background-color-rest": {
+    "name": "--0U",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-subtle-background-color-hover": {
+    "name": "--0V",
+    "inherits": true,
+    "initialValue": "#f5f5f5"
+  },
+  "ctrl-button-subtle-background-color-pressed": {
+    "name": "--0W",
+    "inherits": true,
+    "initialValue": "#e0e0e0"
+  },
+  "ctrl-button-subtle-foreground-color-rest": {
+    "name": "--0X",
+    "inherits": true,
+    "initialValue": "#525252"
+  },
+  "ctrl-button-subtle-foreground-color-hover": {
+    "name": "--0Y",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-button-subtle-foreground-color-pressed": {
+    "name": "--0Z",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-button-transparent-background-color-rest": {
+    "name": "--0-",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-transparent-background-color-hover": {
+    "name": "--0_",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-transparent-background-color-pressed": {
+    "name": "--10",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-button-transparent-foreground-color-rest": {
+    "name": "--11",
+    "inherits": true,
+    "initialValue": "#525252"
+  },
+  "ctrl-button-transparent-foreground-color-hover": {
+    "name": "--12",
+    "inherits": true,
+    "initialValue": "#0f6cbd"
+  },
+  "ctrl-button-transparent-foreground-color-pressed": {
+    "name": "--13",
+    "inherits": true,
+    "initialValue": "#115ea3"
+  },
+  "ctrl-button-circular-corner": {
+    "name": "--14",
+    "inherits": true,
+    "initialValue": "10000px"
+  },
+  "ctrl-button-zero-corner": {
+    "name": "--15",
+    "inherits": true,
+    "initialValue": "0"
+  },
+  "ctrl-list-background-color": {
+    "name": "--16",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-list-stroke-color-selected-rest": {
+    "name": "--17",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-list-stroke-color-box-shadow-selected-rest": {
+    "name": "--18",
+    "inherits": true,
+    "initialValue": "#000000"
+  },
+  "ctrl-list-foreground-color-rest": {
+    "name": "--19",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-list-foreground-color-disabled": {
+    "name": "--1a",
+    "inherits": true,
+    "initialValue": "#bdbdbd"
+  },
+  "ctrl-text-input-background-rest": {
+    "name": "--1b",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-text-input-background-selected-rest": {
+    "name": "--1c",
+    "inherits": true,
+    "initialValue": "#292929"
+  },
+  "ctrl-text-input-darker-background-rest": {
+    "name": "--1d",
+    "inherits": true,
+    "initialValue": "#f5f5f5"
+  },
+  "ctrl-text-input-darker-stroke-color-rest": {
+    "name": "--1e",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-text-input-darker-stroke-color-hover": {
+    "name": "--1f",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-text-input-lighter-stroke-color-rest": {
+    "name": "--1g",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-text-input-lighter-stroke-color-hover": {
+    "name": "--1h",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-text-input-stroke-color-rest": {
+    "name": "--1i",
+    "inherits": true,
+    "initialValue": "#e6e6e6"
+  },
+  "ctrl-text-input-stroke-color-hover": {
+    "name": "--1j",
+    "inherits": true,
+    "initialValue": "#c7c7c7"
+  },
+  "ctrl-text-input-stroke-color-pressed": {
+    "name": "--1k",
+    "inherits": true,
+    "initialValue": "#b3b3b3"
+  },
+  "ctrl-text-input-stroke-color-disabled": {
+    "name": "--1l",
+    "inherits": true,
+    "initialValue": "#e0e0e0"
+  },
+  "ctrl-text-input-stroke-color-error-rest": {
+    "name": "--1m",
+    "inherits": true,
+    "initialValue": "#d13438"
+  },
+  "ctrl-text-input-stroke-bottom-color-rest": {
+    "name": "--1n",
+    "inherits": true,
+    "initialValue": "#0f6cbd"
+  },
+  "ctrl-text-input-stroke-bottom-color-pressed": {
+    "name": "--1o",
+    "inherits": true,
+    "initialValue": "#0f548c"
+  },
+  "ctrl-text-input-stroke-bottom-color-disabled": {
+    "name": "--1p",
+    "inherits": true,
+    "initialValue": "#e0e0e0"
+  },
+  "ctrl-text-input-accessible-stroke-bottom-color-rest": {
+    "name": "--1q",
+    "inherits": true,
+    "initialValue": "#616161"
+  },
+  "ctrl-text-input-accessible-stroke-bottom-color-hover": {
+    "name": "--1r",
+    "inherits": true,
+    "initialValue": "#575757"
+  },
+  "ctrl-text-input-accessible-stroke-bottom-color-pressed": {
+    "name": "--1s",
+    "inherits": true,
+    "initialValue": "#4d4d4d"
+  },
+  "ctrl-text-input-control-background-rest": {
+    "name": "--1t",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-text-input-icon-color-rest": {
+    "name": "--1u",
+    "inherits": true,
+    "initialValue": "#616161"
+  },
+  "ctrl-text-input-foreground-color-rest": {
+    "name": "--1v",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-text-input-foreground-color-disabled": {
+    "name": "--1w",
+    "inherits": true,
+    "initialValue": "#bdbdbd"
+  },
+  "ctrl-text-input-foreground-color-selected-rest": {
+    "name": "--1x",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-text-input-label-color-rest": {
+    "name": "--1y",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-text-input-placeholder-foreground-color": {
+    "name": "--1z",
+    "inherits": true,
+    "initialValue": "#707070"
+  },
+  "ctrl-text-input-outline-stroke-color-selected": {
+    "name": "--1A",
+    "inherits": true,
+    "initialValue": "#e6e6e6"
+  },
+  "ctrl-card-corner": {
+    "name": "--1B",
+    "inherits": true,
+    "initialValue": "24px"
+  },
+  "ctrl-card-stroke-color": {
+    "name": "--1C",
+    "inherits": true,
+    "initialValue": "#e6e6e6"
+  },
+  "ctrl-dialog-primary-background-color": {
+    "name": "--1D",
+    "inherits": true,
+    "initialValue": "#ffffff"
+  },
+  "ctrl-dialog-secondary-background-color": {
+    "name": "--1E",
+    "inherits": true,
+    "initialValue": "rgba(0, 0, 0, 0.4)"
+  },
+  "ctrl-dialog-foreground-color": {
+    "name": "--1F",
+    "inherits": true,
+    "initialValue": "#242424"
+  },
+  "ctrl-dialog-stroke-color": {
+    "name": "--1G",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-dialog-stroke-width": {
+    "name": "--1H",
+    "inherits": true,
+    "initialValue": "1px"
+  },
+  "ctrl-progress-indicator-background-color": {
+    "name": "--1I",
+    "inherits": true,
+    "initialValue": "#0f6cbd"
+  },
+  "ctrl-progress-indicator-transient-background-color": {
+    "name": "--1J",
+    "inherits": true,
+    "initialValue": "transparent"
+  },
+  "ctrl-progress-background-color": {
+    "name": "--1K",
+    "inherits": true,
+    "initialValue": "#e6e6e6"
+  }
+}

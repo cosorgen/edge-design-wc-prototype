@@ -1,0 +1,52 @@
+[
+    {
+        "name": "colorNeutralForeground1",
+        "$comment": "No semantic token for strong state",
+        "f2": "colorNeutralForeground1"
+    },
+    {
+        "name": "colorNeutralForeground2",
+        "smtc": "foreground-neutral-secondary",
+        "f2": "colorNeutralForeground2"
+    },
+    {
+        "name": "colorNeutralForeground3",
+        "$comment": "No semantic token for subtle state",
+        "f2": "colorNeutralForeground3"
+    },
+    {
+        "name": "colorNeutralStroke1",
+        "$comment": "No semantic token for strong state",
+        "f2": "colorNeutralStroke1"
+    },
+    {
+        "name": "colorNeutralStroke2",
+        "smtc": "divider-default",
+        "f2": "colorNeutralStroke2"
+    },
+    {
+        "name": "colorNeutralStroke3",
+        "$comment": "No semantic token for subtle state",
+        "f2": "colorNeutralStroke3"
+    },
+    {
+        "name": "fontFamilyBase",
+        "smtc": "text-style-default-regular-font-family",
+        "f2": "fontFamilyBase"
+    },
+    {
+        "name": "fontSizeBase200",
+        "smtc": "text-ramp-body-2-font-size",
+        "f2": "fontSizeBase200"
+    },
+    {
+        "name": "fontWeightRegular",
+        "smtc": "text-style-default-regular-weight",
+        "f2": "fontWeightRegular"
+    },
+    {
+        "name": "strokeWidthThin",
+        "smtc": "stroke-width-divider-default",
+        "f2": "strokeWidthThin"
+    }
+]
