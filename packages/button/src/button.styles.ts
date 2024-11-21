@@ -41,7 +41,6 @@ import {
   cornerSmallControlRest,
   curveEasyEase,
   durationFaster,
-  fontSizeBase400,
   foregroundControlNeutralPrimaryDisabled,
   foregroundControlNeutralPrimaryHover,
   foregroundControlNeutralPrimaryPressed,
@@ -53,13 +52,12 @@ import {
   foregroundControlOnOutlineRest,
   gapControlDefault,
   gapSmallControlDefault,
-  lineHeightBase400,
   nullColor0,
   nullColor3,
   paddingControlHorizontalDefault,
+  paddingLargeControlVertical,
   paddingSmallControlVertical,
   shadow4,
-  spacingHorizontalL,
   strokeControlOnNeutralGradientStop2Disabled,
   strokeControlOnNeutralGradientStop2Hover,
   strokeControlOnNeutralGradientStop2Pressed,
@@ -74,6 +72,9 @@ import {
   textControlButtonWeight,
   textRampBody2FontSize,
   textRampBody2LineHeight,
+  textRampBody3FontSize,
+  textRampBody3FontWeight,
+  textRampBody3LineHeight,
   textRampCaption1FontSize,
   textRampCaption1FontWeight,
   textRampCaption1LineHeight,
@@ -193,9 +194,10 @@ export const baseButtonStyles = css`
 
   :host(${largeState}) {
     min-height: 40px;
-    padding: 0 ${spacingHorizontalL};
-    font-size: ${fontSizeBase400};
-    line-height: ${lineHeightBase400};
+    padding: 0 ${paddingLargeControlVertical};
+    font-size: ${textRampBody3FontSize};
+    line-height: ${textRampBody3LineHeight};
+    font-weight: ${textRampBody3FontWeight};
     border-radius: ${cornerLargeControlRest};
   }
 

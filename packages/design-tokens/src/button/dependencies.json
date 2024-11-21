@@ -273,11 +273,6 @@
     "f2": "fontSizeBase300"
   },
   {
-    "name": "fontSizeBase400",
-    "$comment": "No semantic token available, requires large state",
-    "f2": "fontSizeBase400"
-  },
-  {
     "name": "textControlButtonWeight",
     "ctrl": true,
     "smtc": "text-control-button-weight",
@@ -416,6 +411,26 @@
   {
     "name": "textRampCaption1FontWeight",
     "smtc": "text-ramp-caption-1-font-weight",
+    "f2": "fontWeightRegular"
+  },
+  {
+    "name": "paddingLargeControlVertical",
+    "smtc": "padding-large-control-vertical",
+    "f2": "spacingHorizontalL"
+  },
+  {
+    "name": "textRampBody3FontSize",
+    "smtc": "text-ramp-body-3-font-size",
+    "f2": "fontSizeBase400"
+  },
+  {
+    "name": "textRampBody3LineHeight",
+    "smtc": "text-ramp-body-3-line-height",
+    "f2": "lineHeightBase400"
+  },
+  {
+    "name": "textRampBody3FontWeight",
+    "smtc": "text-ramp-body-3-font-weight",
     "f2": "fontWeightRegular"
   }
 ]

@@ -51,8 +51,6 @@ export const curveEasyEase = "var(--curveEasyEase)";
 export const durationFaster = "var(--durationFaster)";
 export const textStyleDefaultRegularFontFamily = "var(--smtc-text-style-default-regular-font-family, var(--fontFamilyBase))";
 export const textRampBody2FontSize = "var(--smtc-text-ramp-body-2-font-size, var(--fontSizeBase300))";
-// No semantic token available, requires large state
-export const fontSizeBase400 = "var(--fontSizeBase400)";
 export const textControlButtonWeight = "var(--ctrl-text-control-button-weight, var(--smtc-text-control-button-weight, var(--fontWeightSemibold)))";
 export const textRampBody2LineHeight = "var(--smtc-text-ramp-body-2-line-height, var(--lineHeightBase300))";
 // No semantic token available, requires large state
@@ -84,3 +82,7 @@ export const paddingSmallControlVertical = "var(--smtc-padding-small-control-ver
 export const textRampCaption1FontSize = "var(--smtc-text-ramp-caption-1-font-size, var(--fontSizeBase200))";
 export const textRampCaption1LineHeight = "var(--smtc-text-ramp-caption-1-line-height, var(--lineHeightBase200))";
 export const textRampCaption1FontWeight = "var(--smtc-text-ramp-caption-1-font-weight, var(--fontWeightRegular))";
+export const paddingLargeControlVertical = "var(--smtc-padding-large-control-vertical, var(--spacingHorizontalL))";
+export const textRampBody3FontSize = "var(--smtc-text-ramp-body-3-font-size, var(--fontSizeBase400))";
+export const textRampBody3LineHeight = "var(--smtc-text-ramp-body-3-line-height, var(--lineHeightBase400))";
+export const textRampBody3FontWeight = "var(--smtc-text-ramp-body-3-font-weight, var(--fontWeightRegular))";
