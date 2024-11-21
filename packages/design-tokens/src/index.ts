@@ -1,9 +1,1 @@
-import "./accordion-item/dependencies.json";
-import "./avatar/dependencies.json";
-import "./badge/dependencies.json";
 import "./button/dependencies.json";
-import "./card/dependencies.json";
-import "./composer/dependencies.json";
-import "./dialog/dependencies.json";
-import "./progress-bar/dependencies.json";
-import "./text-input/dependencies.json";

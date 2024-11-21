@@ -11,126 +11,17 @@
       "types": "./dist/dts/design-tokens.d.ts",
       "default": "./dist/esm/design-tokens.js"
     },
-    "./accordion-item.js": {
-      "types": "./dist/dts/accordion-item/index.d.ts",
-      "default": "./dist/esm/accordion-item/index.js"
-    },
-    "./avatar.js": {
-      "types": "./dist/dts/avatar/index.d.ts",
-      "default": "./dist/esm/avatar/index.js"
-    },
-    "./badge.js": {
-      "types": "./dist/dts/badge/index.d.ts",
-      "default": "./dist/esm/badge/index.js"
-    },
     "./button.js": {
       "types": "./dist/dts/button/index.d.ts",
       "default": "./dist/esm/button/index.js"
     },
-    "./card.js": {
-      "types": "./dist/dts/card/index.d.ts",
-      "default": "./dist/esm/card/index.js"
-    },
-    "./checkbox.js": {
-      "types": "./dist/dts/checkbox/index.d.ts",
-      "default": "./dist/esm/checkbox/index.js"
-    },
-    "./composer.js": {
-      "types": "./dist/dts/composer/index.d.ts",
-      "default": "./dist/esm/composer/index.js"
-    },
-    "./dialog.js": {
-      "types": "./dist/dts/dialog/index.d.ts",
-      "default": "./dist/esm/dialog/index.js"
-    },
-    "./dialog-body.js": {
-      "types": "./dist/dts/dialog-body/index.d.ts",
-      "default": "./dist/esm/dialog-body/index.js"
-    },
-    "./divider.js": {
-      "types": "./dist/dts/divider/index.d.ts",
-      "default": "./dist/esm/divider/index.js"
-    },
-    "./field.js": {
-      "types": "./dist/dts/field/index.d.ts",
-      "default": "./dist/esm/field/index.js"
-    },
-    "./link.js": {
-      "types": "./dist/dts/link/index.d.ts",
-      "default": "./dist/esm/link/index.js"
-    },
-    "./menu-item.js": {
-      "types": "./dist/dts/menu-item/index.d.ts",
-      "default": "./dist/esm/menu-item/index.js"
-    },
-    "./menu-list.js": {
-      "types": "./dist/dts/menu-list/index.d.ts",
-      "default": "./dist/esm/menu-list/index.js"
-    },
-    "./message-bar.js": {
-      "types": "./dist/dts/message-bar/index.d.ts",
-      "default": "./dist/esm/message-bar/index.js"
-    },
-    "./progress-bar.js": {
-      "types": "./dist/dts/progress-bar/index.d.ts",
-      "default": "./dist/esm/progress-bar/index.js"
-    },
-    "./radio.js": {
-      "types": "./dist/dts/radio/index.d.ts",
-      "default": "./dist/esm/radio/index.js"
-    },
-    "./radio-group.js": {
-      "types": "./dist/dts/radio-group/index.d.ts",
-      "default": "./dist/esm/radio-group/index.js"
-    },
-    "./rating-display.js": {
-      "types": "./dist/dts/rating-display/index.d.ts",
-      "default": "./dist/esm/rating-display/index.js"
-    },
-    "./slider.js": {
-      "types": "./dist/dts/slider/index.d.ts",
-      "default": "./dist/esm/slider/index.js"
-    },
-    "./spinner.js": {
-      "types": "./dist/dts/spinner/index.d.ts",
-      "default": "./dist/esm/spinner/index.js"
-    },
-    "./switch.js": {
-      "types": "./dist/dts/switch/index.d.ts",
-      "default": "./dist/esm/switch/index.js"
-    },
-    "./tab.js": {
-      "types": "./dist/dts/tab/index.d.ts",
-      "default": "./dist/esm/tab/index.js"
-    },
-    "./tablist.js": {
-      "types": "./dist/dts/tablist/index.d.ts",
-      "default": "./dist/esm/tablist/index.js"
-    },
-    "./textarea.js": {
-      "types": "./dist/dts/textarea/index.d.ts",
-      "default": "./dist/esm/textarea/index.js"
-    },
-    "./text-input.js": {
-      "types": "./dist/dts/text-input/index.d.ts",
-      "default": "./dist/esm/text-input/index.js"
-    },
-    "./fluent2.kumo.css": "./data/fluent2.kumo.css",
-    "./ctrl.kumo.light.css": "./dist/ctrl.kumo.light.css",
-    "./ctrl.kumo.dark.css": "./dist/ctrl.kumo.dark.css",
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "npm run build:tsc && npm run copy:css",
+    "build": "npm run build:tsc",
     "build:tsc": "tsc -p tsconfig.build.json",
     "clean": "rimraf dist",
-    "generate": "npm run generate:tokens && npm run generate:css && npm run generate:component-exports",
-    "generate:tokens": "node ./scripts/generate-tokens.js",
-    "generate:css": "node ./scripts/generate-css-theme-files.js",
-    "generate:component-exports": "node ./scripts/generate-component-ts-files.js",
-    "copy:css": "copyfiles -u 1 ./src/*.css ./data/*.css ./dist/"
-  },
-  "devDependencies": {
-    "copyfiles": "^2.4.1"
+    "generate": "npm run generate:component-exports",
+    "generate:component-exports": "node ./scripts/generate-component-ts-files.js"
   }
 }
