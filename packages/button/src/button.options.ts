@@ -10,14 +10,14 @@ export {
  */
 export const ButtonAppearance = {
   neutral: 'neutral',
+  brand: 'brand',
+  floating: 'floating',
   outline: 'outline',
-  primary: 'primary',
-  transparent: 'transparent',
   subtle: 'subtle',
 } as const;
 
 /**
- * A Button can be secondary, primary, outline, subtle, transparent
+ * A Button can be neutral, brand, floating, outline and subtle.
  * @public
  */
 export type ButtonAppearance = ValuesOf<typeof ButtonAppearance>;
@@ -27,6 +27,7 @@ export type ButtonAppearance = ValuesOf<typeof ButtonAppearance>;
  * @public
  */
 export const ButtonSize = {
+  small: 'small',
   medium: 'medium',
   large: 'large',
 } as const;
@@ -36,3 +37,19 @@ export const ButtonSize = {
  * @public
  */
 export type ButtonSize = ValuesOf<typeof ButtonSize>;
+
+/**
+ * ButtonShape constants
+ * @public
+ */
+export const ButtonShape = {
+  rounded: 'rounded',
+  circular: 'circular',
+  square: 'square',
+} as const;
+
+/**
+ * A Button can be rounded, square or circular.
+ * @public
+ */
+export type ButtonShape = ValuesOf<typeof ButtonShape>;

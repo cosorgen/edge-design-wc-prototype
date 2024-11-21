@@ -3,12 +3,14 @@ import {
   forcedColorsStylesheetBehavior,
 } from '@fluentui/web-components/utilities.js';
 import {
+  circularState,
   iconOnlyState,
   largeState,
   outlineState,
   primaryState,
+  smallState,
+  squareState,
   subtleState,
-  transparentState,
 } from '@mai-ui/component-framework/states.js';
 import {
   backgroundControlBrandHover,
@@ -30,6 +32,13 @@ import {
   controlFocusInnerStrokeWidth,
   controlFocusOuterStrokeColor,
   controlFocusOuterStrokeWidth,
+  cornerControlCircular,
+  cornerControlHover,
+  cornerControlNone,
+  cornerControlPressed,
+  cornerControlRest,
+  cornerLargeControlRest,
+  cornerSmallControlRest,
   curveEasyEase,
   durationFaster,
   fontSizeBase400,
@@ -42,16 +51,13 @@ import {
   foregroundControlOnOutlineHover,
   foregroundControlOnOutlinePressed,
   foregroundControlOnOutlineRest,
-  foregroundControlOnTransparentHover,
-  foregroundControlOnTransparentPressed,
-  foregroundControlOnTransparentRest,
   gapControlDefault,
+  gapSmallControlDefault,
   lineHeightBase400,
   nullColor0,
-  nullColor1,
-  nullColor2,
   nullColor3,
   paddingControlHorizontalDefault,
+  paddingSmallControlVertical,
   shadow4,
   spacingHorizontalL,
   strokeControlOnNeutralGradientStop2Disabled,
@@ -68,6 +74,9 @@ import {
   textControlButtonWeight,
   textRampBody2FontSize,
   textRampBody2LineHeight,
+  textRampCaption1FontSize,
+  textRampCaption1FontWeight,
+  textRampCaption1LineHeight,
   textStyleDefaultRegularFontFamily,
 } from '@mai-ui/design-tokens/button.js';
 import { css } from '@microsoft/fast-element';
@@ -98,7 +107,7 @@ export const baseButtonStyles = css`
       ${strokeControlOnNeutralGradientStop2Rest};
     padding: 0 ${paddingControlHorizontalDefault};
     min-width: 96px;
-    border-radius: var(--rounded-border-radius);
+    border-radius: ${cornerControlRest};
     font-size: ${textRampBody2FontSize};
     font-family: ${textStyleDefaultRegularFontFamily};
     font-weight: ${textControlButtonWeight};
@@ -118,6 +127,7 @@ export const baseButtonStyles = css`
   :host(:hover) {
     background-color: ${backgroundControlNeutralHover};
     border-color: ${strokeControlOnNeutralGradientStop2Hover};
+    border-radius: ${cornerControlHover};
     color: ${foregroundControlNeutralPrimaryHover};
     box-shadow: var(--part-button-shadow-hover, none);
   }
@@ -126,6 +136,7 @@ export const baseButtonStyles = css`
     background-color: ${backgroundControlNeutralPressed};
     color: ${foregroundControlNeutralPrimaryPressed};
     border-color: ${strokeControlOnNeutralGradientStop2Pressed};
+    border-radius: ${cornerControlPressed};
     outline-style: none;
     box-shadow: var(--part-button-shadow-pressed, none);
   }
@@ -156,9 +167,6 @@ export const baseButtonStyles = css`
 
   :is([slot='end'], ::slotted([slot='end'])) {
     margin-inline-start: var(--icon-spacing);
-  }
-
-  :is([slot='end'], ::slotted([slot='end'])) {
     flex-shrink: 0;
   }
 
@@ -167,15 +175,28 @@ export const baseButtonStyles = css`
     max-width: 32px;
   }
 
+  :host(${smallState}) {
+    --icon-spacing: ${gapSmallControlDefault};
+    min-height: 24px;
+    min-width: 64px;
+    padding: 0 ${paddingSmallControlVertical};
+    border-radius: ${cornerSmallControlRest};
+    font-size: ${textRampCaption1FontSize};
+    line-height: ${textRampCaption1LineHeight};
+    font-weight: ${textRampCaption1FontWeight};
+  }
+
+  :host(${smallState}${iconOnlyState}) {
+    min-width: 24px;
+    max-width: 24px;
+  }
+
   :host(${largeState}) {
     min-height: 40px;
     padding: 0 ${spacingHorizontalL};
     font-size: ${fontSizeBase400};
     line-height: ${lineHeightBase400};
-    border-radius: var(
-      --part-button-large-state-corner-radius,
-      var(--rounded-border-radius)
-    );
+    border-radius: ${cornerLargeControlRest};
   }
 
   :host(${largeState}${iconOnlyState}) {
@@ -189,23 +210,12 @@ export const baseButtonStyles = css`
     width: 24px;
   }
 
-  :host(${outlineState}) {
-    background-color: ${backgroundControlOutlineRest};
-    border-color: ${strokeControlOutlineGradientStop2Rest};
-    border-width: ${strokeWidthControlOutlineRest};
-    color: ${foregroundControlOnOutlineRest};
+  :host(:is(${circularState}, ${circularState}:focus-visible)) {
+    border-radius: ${cornerControlCircular};
   }
-  :host(${outlineState}:hover) {
-    background-color: ${backgroundControlOutlineHover};
-    border-color: ${strokeControlOutlineGradientStop2Hover};
-    border-width: ${strokeWidthControlOutlineHover};
-    color: ${foregroundControlOnOutlineHover};
-  }
-  :host(${outlineState}:is(:hover, :hover:active)) {
-    background-color: ${backgroundControlOutlinePressed};
-    border-color: ${strokeControlOutlineGradientStop2Pressed};
-    border-width: ${strokeWidthControlOutlinePressed};
-    color: ${foregroundControlOnOutlinePressed};
+
+  :host(:is(${squareState}, ${squareState}:focus-visible)) {
+    border-radius: ${cornerControlNone};
   }
 
   :host(${primaryState}) {
@@ -237,23 +247,23 @@ export const baseButtonStyles = css`
       0 0 0 2px ${controlFocusOuterStrokeColor};
   }
 
-  :host(${transparentState}) {
-    background-color: ${nullColor0};
-    color: ${foregroundControlOnTransparentRest};
+  :host(${outlineState}) {
+    background-color: ${backgroundControlOutlineRest};
+    border-color: ${strokeControlOutlineGradientStop2Rest};
+    border-width: ${strokeWidthControlOutlineRest};
+    color: ${foregroundControlOnOutlineRest};
   }
-
-  :host(${transparentState}:hover) {
-    background-color: ${nullColor1};
-    color: ${foregroundControlOnTransparentHover};
+  :host(${outlineState}:hover) {
+    background-color: ${backgroundControlOutlineHover};
+    border-color: ${strokeControlOutlineGradientStop2Hover};
+    border-width: ${strokeWidthControlOutlineHover};
+    color: ${foregroundControlOnOutlineHover};
   }
-
-  :host(${transparentState}:hover:active) {
-    background-color: ${nullColor2};
-    color: ${foregroundControlOnTransparentPressed};
-  }
-
-  :host(:is(${transparentState}, ${transparentState}:is(:hover, :active))) {
-    border-color: transparent;
+  :host(${outlineState}:is(:hover, :hover:active)) {
+    background-color: ${backgroundControlOutlinePressed};
+    border-color: ${strokeControlOutlineGradientStop2Pressed};
+    border-width: ${strokeWidthControlOutlinePressed};
+    color: ${foregroundControlOnOutlinePressed};
   }
 
   :host(${subtleState}) {
@@ -299,6 +309,17 @@ export const styles = css`
     border-color: transparent;
   }
 
+  :host(${subtleState}:is(:disabled, [disabled-focusable])),
+  :host(
+      ${subtleState}:is(:disabled, [disabled-focusable]):is(
+          :hover,
+          :hover:active
+        )
+    ) {
+    border-color: transparent;
+    background-color: ${nullColor0};
+  }
+
   :host(${outlineState}:is(:disabled, [disabled-focusable])),
   :host(
       ${outlineState}:is(:disabled, [disabled-focusable]):is(
@@ -310,17 +331,6 @@ export const styles = css`
     border-color: ${strokeControlOutlineGradientStop2Disabled};
     border-width: ${strokeWidthControlOutlineRest};
     color: ${foregroundControlOnOutlineDisabled};
-  }
-
-  :host(${transparentState}:is(:disabled, [disabled-focusable])),
-  :host(
-      ${transparentState}:is(:disabled, [disabled-focusable]):is(
-          :hover,
-          :hover:active
-        )
-    ) {
-    border-color: transparent;
-    background-color: ${nullColor0};
   }
 `.withBehaviors(
   forcedColorsStylesheetBehavior(css`

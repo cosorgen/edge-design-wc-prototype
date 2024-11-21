@@ -1,4 +1,8 @@
-import { BaseButton, type StartEnd } from '@fluentui/web-components';
+import {
+  BaseButton,
+  ButtonShape,
+  type StartEnd,
+} from '@fluentui/web-components';
 import { toggleState } from '@mai-ui/component-framework/toggle-state.js';
 import { attr } from '@microsoft/fast-element';
 import type { ButtonAppearance, ButtonSize } from './button.options.js';
@@ -42,6 +46,33 @@ export class Button extends BaseButton implements StartEnd {
   public appearanceChanged(
     prev: ButtonAppearance | undefined,
     next: ButtonAppearance | undefined,
+  ) {
+    if (prev) {
+      toggleState(this.elementInternals, `${prev}`, false);
+    }
+    if (next) {
+      toggleState(this.elementInternals, `${next}`, true);
+    }
+  }
+
+  /**
+   * The shape of the button.
+   *
+   * @public
+   * @remarks
+   * HTML Attribute: `shape`
+   */
+  @attr
+  public shape?: ButtonShape;
+
+  /**
+   * Handles changes to shape attribute custom states
+   * @param prev - the previous state
+   * @param next - the next state
+   */
+  public shapeChanged(
+    prev: ButtonShape | undefined,
+    next: ButtonShape | undefined,
   ) {
     if (prev) {
       toggleState(this.elementInternals, `${prev}`, false);
