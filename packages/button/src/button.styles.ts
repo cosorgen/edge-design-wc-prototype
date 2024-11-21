@@ -153,11 +153,11 @@ export const baseButtonStyles = css`
     width: 20px;
   }
 
-  :is([slot='start'], ::slotted([slot='start'])) {
+  ::slotted(:is([slot='start'])) {
     margin-inline-end: var(--icon-spacing);
   }
 
-  :is([slot='end'], ::slotted([slot='end'])) {
+  ::slotted(:is([slot='end'])) {
     margin-inline-start: var(--icon-spacing);
     flex-shrink: 0;
   }
