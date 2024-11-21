@@ -10,7 +10,6 @@ import {
   spacingHorizontalXS,
   shadow2,
   spacingVerticalSNudge,
-  borderRadiusLarge,
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/button.js';
@@ -134,10 +133,6 @@ const styles = css`
     height: calc(100% + (2 * ${spacingFrame}));
     margin-block-end: calc(0px - ${spacingFrame});
     min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
-  }
-
-  mai-button {
-    border-radius: ${borderRadiusLarge};
   }
 
   phx-divider,

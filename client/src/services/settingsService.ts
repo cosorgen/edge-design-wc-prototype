@@ -12,7 +12,7 @@ export default class EdgeSettingsSerivce {
   @observable showLegacyNewTab = false;
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = false;
-  @observable edgeTheme: 'kumo' | 'phoenix' | 'fluent' = 'phoenix';
+  @observable edgeTheme: 'kumo' | 'phoenix' | 'fluent' = 'kumo';
 
   constructor() {
     // Load settings from local storage
@@ -39,7 +39,7 @@ export default class EdgeSettingsSerivce {
       this.showLegacyNewTab;
     this.showCopilotNTP =
       url.searchParams.get('showCopilotNTP') === 'true' || this.showCopilotNTP;
-    this.showLegacyCopilot && this.pinToolbarItem('Legacy Copilot');
+    if (this.showLegacyCopilot) this.pinToolbarItem('Legacy Copilot');
 
     this.truncateURL =
       url.searchParams.get('truncateURL') === 'true' || this.truncateURL;
@@ -83,9 +83,8 @@ export default class EdgeSettingsSerivce {
 
   setShowLegacyCopilot(show: boolean) {
     this.showLegacyCopilot = show;
-    show
-      ? this.pinToolbarItem('Legacy Copilot')
-      : this.unpinToolbarItem('Legacy Copilot');
+    if (show) this.pinToolbarItem('Legacy Copilot');
+    else this.unpinToolbarItem('Legacy Copilot');
     this.setSettingsInURL();
   }
 
