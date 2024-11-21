@@ -39,6 +39,7 @@ const template = html<EdgeNewTab>`
   <div id="content">
     <div id="composer-placeholder"></div>
     <div id="main">
+      <mai-button appearance="primary">Test MAI Button </mai-button>
       <div id="header">
         <svg>
           <use href="img/edge/icons.svg#copilot-20-regular" />

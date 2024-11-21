@@ -10,7 +10,7 @@ export declare interface PhoenixBorderRadiusTokens {
 }
 
 export const win11BorderRadius: PhoenixBorderRadiusTokens = {
-  borderRadiusLayerApp: '12px',
+  borderRadiusLayerApp: '8px',
   borderRadiusLayerBase: '8px',
   borderRadiusLayerCard: '8px',
   borderRadiusLayerDialog: '8px',

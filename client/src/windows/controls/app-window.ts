@@ -1,4 +1,5 @@
 import {
+  borderRadiusMedium,
   curveDecelerateMax,
   durationSlow,
   shadow28,
@@ -94,7 +95,7 @@ const styles = css`
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border-radius: 12px; /* override from the frame sprint */
+    border-radius: ${borderRadiusMedium};
     box-shadow: ${shadow28};
   }
 

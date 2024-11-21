@@ -18,6 +18,8 @@
     "packages/divider",
     "packages/menu",
     "packages/phoenix-theme",
+    "packages/kumo-theme",
+    "packages/fluent-theme",
     "client",
     "server"
   ],

@@ -21,7 +21,19 @@ import {
   phoenixDarkThemeSolidWin11,
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
-import { setThemeFor } from '@phoenixui/web-components';
+import {
+  kumoLightTheme,
+  kumoDarkTheme,
+  kumoLightThemeSolid,
+  kumoDarkThemeSolid,
+  setThemeFor,
+} from '@mai-ui/kumo-theme';
+import {
+  fluent2LightTheme,
+  fluent2DarkTheme,
+  fluent2LightThemeSolid,
+  fluent2DarkThemeSolid,
+} from '@mai-ui/fluent-theme';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -195,8 +207,10 @@ export class MicrosoftEdge extends FASTElement {
     if (
       propertyName === 'theme' ||
       propertyName === 'transparency' ||
-      propertyName === 'frameSpacing'
+      propertyName === 'frameSpacing' ||
+      propertyName === 'edgeTheme'
     ) {
+      this.clearTheme();
       this.setTheme();
     }
   }
@@ -216,22 +230,22 @@ export class MicrosoftEdge extends FASTElement {
       },
       kumo: {
         reduced: {
-          light: phoenixLightThemeSolidWin11,
-          dark: phoenixDarkThemeSolidWin11,
+          light: kumoLightThemeSolid,
+          dark: kumoDarkThemeSolid,
         },
         normal: {
-          light: phoenixLightThemeWin11,
-          dark: phoenixDarkThemeWin11,
+          light: kumoLightTheme,
+          dark: kumoDarkTheme,
         },
       },
       fluent: {
         reduced: {
-          light: phoenixLightThemeSolidWin11,
-          dark: phoenixDarkThemeSolidWin11,
+          light: fluent2LightThemeSolid,
+          dark: fluent2DarkThemeSolid,
         },
         normal: {
-          light: phoenixLightThemeWin11,
-          dark: phoenixDarkThemeWin11,
+          light: fluent2LightTheme,
+          dark: fluent2DarkTheme,
         },
       },
     };
@@ -240,7 +254,14 @@ export class MicrosoftEdge extends FASTElement {
       themes[this.ss.edgeTheme][this.ws.transparency][themeKey];
     selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
 
-    setThemeFor(this.shadowRoot!, selectedTheme);
+    setThemeFor(
+      this.shadowRoot!,
+      selectedTheme as unknown as Record<string, unknown>,
+    );
+  }
+
+  clearTheme() {
+    this.shadowRoot!.adoptedStyleSheets.pop();
   }
 
   shouldFavoritesBarRender() {

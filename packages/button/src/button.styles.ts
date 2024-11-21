@@ -27,8 +27,7 @@ import {
   backgroundControlSubtleHover,
   backgroundControlSubtlePressed,
   backgroundControlSubtleRest,
-  controlFabBgFgShadow,
-  controlFabBgFgShadowCss,
+  controlFocusInnerStrokeColor,
   controlFocusInnerStrokeWidth,
   controlFocusOuterStrokeColor,
   controlFocusOuterStrokeWidth,
@@ -39,8 +38,8 @@ import {
   cornerControlRest,
   cornerLargeControlRest,
   cornerSmallControlRest,
-  curveEasyEase,
-  durationFaster,
+  curveControlStateTransition,
+  durationControlStateTransition,
   foregroundControlNeutralPrimaryDisabled,
   foregroundControlNeutralPrimaryHover,
   foregroundControlNeutralPrimaryPressed,
@@ -57,15 +56,14 @@ import {
   paddingControlHorizontalDefault,
   paddingLargeControlVertical,
   paddingSmallControlVertical,
-  shadow4,
-  strokeControlOnNeutralGradientStop2Disabled,
-  strokeControlOnNeutralGradientStop2Hover,
-  strokeControlOnNeutralGradientStop2Pressed,
-  strokeControlOnNeutralGradientStop2Rest,
-  strokeControlOutlineGradientStop2Disabled,
-  strokeControlOutlineGradientStop2Hover,
-  strokeControlOutlineGradientStop2Pressed,
-  strokeControlOutlineGradientStop2Rest,
+  strokeControlNoneHover,
+  strokeControlNonePressed,
+  strokeControlNoneRest,
+  strokeControlOnNeutralDisabled,
+  strokeControlOutlineDisabled,
+  strokeControlOutlineHover,
+  strokeControlOutlinePressed,
+  strokeControlOutlineRest,
   strokeWidthControlOutlineHover,
   strokeWidthControlOutlinePressed,
   strokeWidthControlOutlineRest,
@@ -90,7 +88,6 @@ export const baseButtonStyles = css`
 
   :host {
     --icon-spacing: ${gapControlDefault};
-    ${controlFabBgFgShadowCss};
     position: relative;
     contain: layout style;
     vertical-align: middle;
@@ -104,8 +101,7 @@ export const baseButtonStyles = css`
     outline-style: none;
     background-color: ${backgroundControlNeutralRest};
     color: ${foregroundControlNeutralPrimaryRest};
-    border: ${controlFocusInnerStrokeWidth} solid
-      ${strokeControlOnNeutralGradientStop2Rest};
+    border: ${controlFocusInnerStrokeWidth} solid ${strokeControlNoneRest};
     padding: 0 ${paddingControlHorizontalDefault};
     min-width: 96px;
     border-radius: ${cornerControlRest};
@@ -113,12 +109,11 @@ export const baseButtonStyles = css`
     font-family: ${textStyleDefaultRegularFontFamily};
     font-weight: ${textControlButtonWeight};
     line-height: ${textRampBody2LineHeight};
-    transition-duration: ${durationFaster};
+    transition-duration: ${durationControlStateTransition};
     transition-property: background, border, color;
-    transition-timing-function: ${curveEasyEase};
+    transition-timing-function: ${curveControlStateTransition};
     cursor: pointer;
     user-select: none;
-    box-shadow: var(--part-button-shadow-rest, none);
   }
 
   .content {
@@ -127,27 +122,23 @@ export const baseButtonStyles = css`
 
   :host(:hover) {
     background-color: ${backgroundControlNeutralHover};
-    border-color: ${strokeControlOnNeutralGradientStop2Hover};
+    border-color: ${strokeControlNoneHover};
     border-radius: ${cornerControlHover};
     color: ${foregroundControlNeutralPrimaryHover};
-    box-shadow: var(--part-button-shadow-hover, none);
   }
 
   :host(:hover:active) {
     background-color: ${backgroundControlNeutralPressed};
     color: ${foregroundControlNeutralPrimaryPressed};
-    border-color: ${strokeControlOnNeutralGradientStop2Pressed};
+    border-color: ${strokeControlNonePressed};
     border-radius: ${cornerControlPressed};
     outline-style: none;
-    box-shadow: var(--part-button-shadow-pressed, none);
   }
 
   :host(:focus-visible) {
-    border-color: ${nullColor3};
+    border-color: ${controlFocusInnerStrokeColor};
     outline: ${controlFocusOuterStrokeWidth} solid ${nullColor3};
-    box-shadow:
-      ${shadow4},
-      0 0 0 2px ${controlFocusOuterStrokeColor};
+    box-shadow: 0 0 0 2px ${controlFocusOuterStrokeColor};
   }
 
   @media screen and (prefers-reduced-motion: reduce) {
@@ -223,19 +214,16 @@ export const baseButtonStyles = css`
   :host(${primaryState}) {
     background-color: ${backgroundControlBrandRest};
     color: ${foregroundControlOnBrandRest};
-    box-shadow: var(--part-button-shadow-primary-rest, none);
     border-color: transparent;
   }
 
   :host(${primaryState}:hover) {
     background-color: ${backgroundControlBrandHover};
-    box-shadow: var(--part-button-shadow-primary-hover, none);
   }
 
   :host(${primaryState}:is(:hover, :hover:active)) {
     border-color: transparent;
     color: ${foregroundControlOnBrandRest};
-    box-shadow: var(--part-button-shadow-primary-pressed, none);
   }
 
   :host(${primaryState}:hover:active) {
@@ -243,27 +231,25 @@ export const baseButtonStyles = css`
   }
 
   :host(${primaryState}:focus-visible) {
-    border-color: ${foregroundControlOnBrandRest};
-    box-shadow:
-      ${controlFabBgFgShadow},
-      0 0 0 2px ${controlFocusOuterStrokeColor};
+    border-color: ${controlFocusInnerStrokeColor};
+    box-shadow: 0 0 0 2px ${controlFocusOuterStrokeColor};
   }
 
   :host(${outlineState}) {
     background-color: ${backgroundControlOutlineRest};
-    border-color: ${strokeControlOutlineGradientStop2Rest};
+    border-color: ${strokeControlOutlineRest};
     border-width: ${strokeWidthControlOutlineRest};
     color: ${foregroundControlOnOutlineRest};
   }
   :host(${outlineState}:hover) {
     background-color: ${backgroundControlOutlineHover};
-    border-color: ${strokeControlOutlineGradientStop2Hover};
+    border-color: ${strokeControlOutlineHover};
     border-width: ${strokeWidthControlOutlineHover};
     color: ${foregroundControlOnOutlineHover};
   }
   :host(${outlineState}:is(:hover, :hover:active)) {
     background-color: ${backgroundControlOutlinePressed};
-    border-color: ${strokeControlOutlineGradientStop2Pressed};
+    border-color: ${strokeControlOutlinePressed};
     border-width: ${strokeWidthControlOutlinePressed};
     color: ${foregroundControlOnOutlinePressed};
   }
@@ -296,7 +282,7 @@ export const styles = css`
     :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable]):hover),
     :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable]):hover:active) {
     background-color: ${backgroundControlNeutralDisabled};
-    border-color: ${strokeControlOnNeutralGradientStop2Disabled};
+    border-color: ${strokeControlOnNeutralDisabled};
     color: ${foregroundControlNeutralPrimaryDisabled};
     cursor: not-allowed;
   }
@@ -330,7 +316,7 @@ export const styles = css`
         )
     ) {
     background-color: ${backgroundControlOutlineDisabled};
-    border-color: ${strokeControlOutlineGradientStop2Disabled};
+    border-color: ${strokeControlOutlineDisabled};
     border-width: ${strokeWidthControlOutlineRest};
     color: ${foregroundControlOnOutlineDisabled};
   }

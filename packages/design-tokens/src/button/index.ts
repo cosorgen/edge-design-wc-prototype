@@ -25,14 +25,10 @@ export const foregroundControlOnOutlineRest = "var(--smtc-foreground-control-neu
 export const foregroundControlOnOutlineHover = "var(--smtc-foreground-control-neutral-primary-hover, var(--colorNeutralForeground1Hover))";
 export const foregroundControlOnOutlinePressed = "var(--smtc-foreground-control-neutral-primary-pressed, var(--colorNeutralForeground1Pressed))";
 export const foregroundControlOnOutlineDisabled = "var(--smtc-foreground-control-neutral-primary-disabled, var(--colorNeutralForegroundDisabled))";
-export const strokeControlOnNeutralGradientStop2Rest = "var(--ctrl-stroke-control-on-neutral-gradient-stop-2-rest, var(--smtc-stroke-control-on-neutral-gradient-stop-2-rest, var(--colorNeutralStroke1)))";
-export const strokeControlOnNeutralGradientStop2Hover = "var(--ctrl-stroke-control-on-neutral-gradient-stop-2-hover, var(--smtc-stroke-control-on-neutral-gradient-stop-2-hover, var(--colorNeutralStroke1Hover)))";
-export const strokeControlOnNeutralGradientStop2Pressed = "var(--ctrl-stroke-control-on-neutral-gradient-stop-2-pressed, var(--smtc-stroke-control-on-neutral-gradient-stop-2-pressed, var(--colorNeutralStroke1Pressed)))";
-export const strokeControlOnNeutralGradientStop2Disabled = "var(--ctrl-stroke-control-on-neutral-gradient-stop-2-disabled, var(--smtc-stroke-control-on-neutral-gradient-stop-2-disabled, var(--colorNeutralStrokeDisabled)))";
-export const strokeControlOutlineGradientStop2Rest = "var(--smtc-stroke-control-outline-rest, var(--colorNeutralStroke1))";
-export const strokeControlOutlineGradientStop2Hover = "var(--smtc-stroke-control-outline-hover, var(--colorNeutralStroke1Hover))";
-export const strokeControlOutlineGradientStop2Pressed = "var(--smtc-stroke-control-outline-pressed, var(--colorNeutralStroke1Pressed))";
-export const strokeControlOutlineGradientStop2Disabled = "var(--smtc-stroke-control-outline-disabled, var(--colorNeutralStrokeDisabled))";
+export const strokeControlOnNeutralRest = "var(--ctrl-stroke-control-on-neutral-rest, var(--smtc-stroke-control-on-neutral-rest, var(--colorNeutralStroke1)))";
+export const strokeControlOnNeutralHover = "var(--ctrl-stroke-control-on-neutral-hover, var(--smtc-stroke-control-on-neutral-hover, var(--colorNeutralStroke1Hover)))";
+export const strokeControlOnNeutralPressed = "var(--ctrl-stroke-control-on-neutral-pressed, var(--smtc-stroke-control-on-neutral-pressed, var(--colorNeutralStroke1Pressed)))";
+export const strokeControlOnNeutralDisabled = "var(--ctrl-stroke-control-on-neutral-disabled, var(--smtc-stroke-control-on-neutral-disabled, var(--colorNeutralStrokeDisabled)))";
 export const strokeControlOutlineRest = "var(--smtc-stroke-control-outline-rest, var(--colorNeutralStroke1))";
 export const strokeControlOutlineHover = "var(--smtc-stroke-control-outline-hover, var(--colorNeutralStroke1Hover))";
 export const strokeControlOutlinePressed = "var(--smtc-stroke-control-outline-pressed, var(--colorNeutralStroke1Pressed))";
@@ -40,28 +36,18 @@ export const strokeControlOutlineDisabled = "var(--smtc-stroke-control-outline-d
 export const strokeWidthControlOutlineRest = "var(--smtc-stroke-width-default, var(--strokeWidthThin))";
 export const strokeWidthControlOutlineHover = "var(--smtc-stroke-width-default, var(--strokeWidthThin))";
 export const strokeWidthControlOutlinePressed = "var(--smtc-stroke-width-default, var(--strokeWidthThin))";
+export const controlFocusInnerStrokeColor = "var(--smtc-control-focus-inner-stroke-color, var(--colorStrokeFocus1))";
 export const controlFocusOuterStrokeColor = "var(--smtc-control-focus-outer-stroke-color, var(--colorStrokeFocus2))";
 export const nullColor0 = "var(--smtc-null-color, var(--colorTransparentBackground))";
 export const nullColor1 = "var(--smtc-null-color, var(--colorTransparentBackgroundHover))";
 export const nullColor2 = "var(--smtc-null-color, var(--colorTransparentBackgroundPressed))";
 export const nullColor3 = "var(--smtc-null-color, var(--colorTransparentStroke))";
-// No semantic token available
-export const curveEasyEase = "var(--curveEasyEase)";
-// No semantic token available
-export const durationFaster = "var(--durationFaster)";
 export const textStyleDefaultRegularFontFamily = "var(--smtc-text-style-default-regular-font-family, var(--fontFamilyBase))";
 export const textRampBody2FontSize = "var(--smtc-text-ramp-body-2-font-size, var(--fontSizeBase300))";
 export const textControlButtonWeight = "var(--ctrl-text-control-button-weight, var(--smtc-text-control-button-weight, var(--fontWeightSemibold)))";
 export const textRampBody2LineHeight = "var(--smtc-text-ramp-body-2-line-height, var(--lineHeightBase300))";
 // No semantic token available, requires large state
 export const lineHeightBase400 = "var(--lineHeightBase400)";
-// The semantic tokens needed are a combination of tokens, one consolidated token will be set and used in the component
-export const controlFabBgFgShadow = "var(--smtc-internal-control-fab-bg-fg-shadow, var(--shadow2))";
-export const controlFabBgFgShadowCss = "--smtc-internal-control-fab-bg-fg-shadow: 0 var(--smtc-control-fab-bg-fg-shadow-key-rest-y) var(--smtc-control-fab-bg-fg-shadow-key-rest-blur) var(--smtc-control-fab-bg-fg-shadow-key-rest-color), 0 var(--smtc-control-fab-bg-fg-shadow-ambient-y) var(--smtc-control-fab-bg-fg-shadow-ambient-blur) var(--smtc-control-fab-bg-fg-shadow-ambient-color)";
-// Get clarity on this, should be similar to shadow2 however additional shadow tokens do not seem to be available
-export const shadow4 = "var(--shadow4)";
-// No semantic token available, requires large state
-export const spacingHorizontalL = "var(--spacingHorizontalL)";
 export const paddingControlHorizontalDefault = "var(--smtc-padding-control-horizontal-default, var(--spacingHorizontalM))";
 export const gapControlDefault = "var(--smtc-gap-control-default, var(--spacingHorizontalSNudge))";
 export const controlFocusOuterStrokeWidth = "var(--smtc-control-focus-outer-stroke-width, var(--strokeWidthThick))";
@@ -86,3 +72,8 @@ export const paddingLargeControlVertical = "var(--smtc-padding-large-control-ver
 export const textRampBody3FontSize = "var(--smtc-text-ramp-body-3-font-size, var(--fontSizeBase400))";
 export const textRampBody3LineHeight = "var(--smtc-text-ramp-body-3-line-height, var(--lineHeightBase400))";
 export const textRampBody3FontWeight = "var(--smtc-text-ramp-body-3-font-weight, var(--fontWeightRegular))";
+export const curveControlStateTransition = "var(--smtc-curve-control-state-transition, var(--curveEasyEase))";
+export const durationControlStateTransition = "var(--smtc-duration-control-state-transition, var(--durationFaster))";
+export const strokeControlNoneRest = "var(--smtc-stroke-control-none-rest, var(--colorSubtleBackground))";
+export const strokeControlNoneHover = "var(--smtc-stroke-control-none-hover, var(--colorSubtleBackground))";
+export const strokeControlNonePressed = "var(--smtc-stroke-control-none-pressed, var(--colorSubtleBackground))";
