@@ -44,87 +44,65 @@ function getExportCSS(dependency) {
   return `${startCSSString}--smtc-${dependency.smtc}: ${dependency.smtc_css}${endCSSString}`;
 }
 
-async function writeTSFiles() {
-  // Get the list of component JSON files in src
-  const components = fs
-    .readdirSync(path.resolve(__dirname, 'src'), {
-      withFileTypes: true,
-    })
-    .filter((entry) => entry.isFile() && entry.name.endsWith('.json'))
-    .map((file) => file.name.replace('.json', ''));
+function buildFile(component) {
+  const data = fs.readFileSync(
+    path.resolve(__dirname, 'src', `${component}.json`),
+    'utf-8',
+  );
+  const dependencies = JSON.parse(data);
+  if (dependencies) {
+    let content = '';
+    const names = [];
 
-  components.map(async (component) => {
-    try {
-      const dependencies = await import(`../src/${component}.json`, {
-        assert: { type: 'json' },
-      });
-
-      if (dependencies) {
-        let content = '';
-        const names = [];
-
-        const buildDependencies = async (dependency) => {
-          console.log(`${component}:${dependency.name}`);
-          if (dependency.extends) {
-            console.log(`Extending ${dependency.extends}...`);
-            const extendsDependencies = await import(
-              `../src/${dependency.extends}.json`,
-              {
-                assert: { type: 'json' },
-              }
-            );
-
-            if (extendsDependencies) {
-              console.log(`Loaded ${dependency.extends}...`);
-              extendsDependencies.default.forEach(buildDependencies);
-            }
-          }
-
-          let name = dependency.name;
-
-          if (names.includes(name)) {
-            const err = new Error(`The name ${name} has already been used.`);
-            console.error(err);
-            throw err;
-          }
-
-          content += getExportConst(dependency);
-
-          if (dependency.smtc_css) {
-            content += getExportCSS(dependency);
-          }
-
-          names.push(name);
-        };
-
-        dependencies.default.forEach(buildDependencies);
-
-        // Write out component js file
-        console.log(`Writing ${component}...`);
-        fs.writeFileSync(
-          path.resolve(__dirname, OUTPUT_DIR, 'esm', `${component}.js`),
-          content,
-          { type: 'utf-8' },
-        );
-
-        // Convert to .d.ts file
-        const dtsContent = content
-          .replace(/export const/gm, 'export declare const')
-          .replace(/\s=/gm, ':')
-          .replace(/".+"/gm, 'string')
-          .replace(/^\/\/.+\n/gm, '');
-
-        // Write out component d.ts file
-        fs.writeFileSync(
-          path.resolve(__dirname, OUTPUT_DIR, 'dts', `${component}.d.ts`),
-          dtsContent,
-          { type: 'utf-8' },
-        );
+    dependencies.forEach((dependency) => {
+      if (dependency.extends) {
+        content += buildFile(dependency.extends);
+        return;
       }
-    } catch (e) {
-      console.error(e);
-    }
-  });
+
+      let name = dependency.name;
+
+      if (names.includes(name)) {
+        const err = new Error(`The name ${name} has already been used.`);
+        console.error(err);
+        throw err;
+      }
+
+      content += getExportConst(dependency);
+
+      if (dependency.smtc_css) {
+        content += getExportCSS(dependency);
+      }
+
+      names.push(name);
+    });
+
+    return content;
+  } else {
+    console.error(`No dependencies found for ${component}.json. Skipping...`);
+  }
+}
+
+function writeFiles(component, content) {
+  fs.writeFileSync(
+    path.resolve(__dirname, OUTPUT_DIR, 'esm', `${component}.js`),
+    content,
+    { type: 'utf-8' },
+  );
+
+  // Convert to .d.ts file
+  const dtsContent = content
+    .replace(/export const/gm, 'export declare const')
+    .replace(/\s=/gm, ':')
+    .replace(/".+"/gm, 'string')
+    .replace(/^\/\/.+\n/gm, '');
+
+  // Write out component d.ts file
+  fs.writeFileSync(
+    path.resolve(__dirname, OUTPUT_DIR, 'dts', `${component}.d.ts`),
+    dtsContent,
+    { type: 'utf-8' },
+  );
 }
 
 // Create out dir if it doesn't exist or else clean it
@@ -135,4 +113,16 @@ fs.mkdirSync(path.resolve(__dirname, OUTPUT_DIR));
 fs.mkdirSync(path.resolve(__dirname, OUTPUT_DIR, 'esm'));
 fs.mkdirSync(path.resolve(__dirname, OUTPUT_DIR, 'dts'));
 
-writeTSFiles();
+// Get the list of component JSON files in src
+const components = fs
+  .readdirSync(path.resolve(__dirname, 'src'), {
+    withFileTypes: true,
+  })
+  .filter((entry) => entry.isFile() && entry.name.endsWith('.json'))
+  .map((file) => file.name.replace('.json', ''));
+
+components.forEach((component) => {
+  console.log(`Building ${component}...`);
+  const fileContent = buildFile(component);
+  writeFiles(component, fileContent);
+});

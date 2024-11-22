@@ -7,17 +7,13 @@
   "license": "UNLICENSED",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/dts/design-tokens.d.ts",
-      "default": "./dist/esm/design-tokens.js"
-    },
     "./button.js": {
-      "types": "./dist/dts/button/index.d.ts",
-      "default": "./dist/esm/button/index.js"
+      "types": "./dist/dts/button.d.ts",
+      "default": "./dist/esm/button.js"
     },
     "./toggle-button.js": {
-      "types": "./dist/dts/toggle-button/index.d.ts",
-      "default": "./dist/esm/toggle-button/index.js"
+      "types": "./dist/dts/toggle-button.d.ts",
+      "default": "./dist/esm/toggle-button.js"
     },
     "./package.json": "./package.json"
   },
