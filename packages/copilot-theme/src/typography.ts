@@ -4,7 +4,7 @@ export { typographyStyles } from '@fluentui/tokens';
 
 export const fontFamilyOverrides: Partial<FontFamilyTokens> = {
   fontFamilyBase:
-    '"Segoe UI Variable Display", "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif',
+    'Ginto, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
 };
 
 export type CopilotTypographyTokens = {
