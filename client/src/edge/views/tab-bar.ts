@@ -12,8 +12,7 @@ import {
   spacingVerticalSNudge,
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/toggle-button.js';
+import '@mai-ui/button/define.js';
 import '@phoenixui/web-components/divider.js';
 import '../controls/horizontal-tab.js';
 import { TabService } from '#services/tabService.js';

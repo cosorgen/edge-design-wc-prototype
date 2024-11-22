@@ -13,7 +13,7 @@ import {
   spacingHorizontalXS,
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/toggle-button/define.js';
 import '@mai-ui/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
@@ -135,7 +135,7 @@ const template = html<Toolbar>`
           <identity-flyout></identity-flyout>
         </flyout-menu>
         <flyout-menu>
-          <phx-toggle-button
+          <mai-toggle-button
             size="medium"
             appearance="subtle"
             icon-only
@@ -144,7 +144,7 @@ const template = html<Toolbar>`
             <svg>
               <use href="img/edge/icons.svg#more-horizontal-20-regular" />
             </svg>
-          </phx-toggle-button>
+          </mai-toggle-button>
           <more-menu
             managed
             @moreaction="${(x, c) =>
@@ -154,7 +154,7 @@ const template = html<Toolbar>`
         ${when(
           (x) => x.ess.showLegacyCopilot,
           html`
-            <phx-toggle-button
+            <mai-toggle-button
               appearance="subtle"
               icon-only
               slot="trigger"
@@ -163,7 +163,7 @@ const template = html<Toolbar>`
                 x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
             >
               <img width="20px" src="./img/edge/copilotAppLight.png" />
-            </phx-toggle-button>
+            </mai-toggle-button>
           `,
         )}
       `,

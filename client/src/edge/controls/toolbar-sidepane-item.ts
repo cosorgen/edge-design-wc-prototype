@@ -6,11 +6,10 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
+import '@mai-ui/toggle-button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import { colorNeutralForeground1 } from '@mai-ui/phoenix-theme';
 import apps from '../installedApps.js';
 
 function toCamelCase(str: string) {
@@ -22,7 +21,7 @@ function toCamelCase(str: string) {
 
 const template = html<ToolbarSidepaneItem>`
   <flyout-menu @toggle="${(x) => x.handleFlyoutToggle()}">
-    <phx-toggle-button
+    <mai-toggle-button
       appearance="subtle"
       icon-only
       slot="trigger"
@@ -39,7 +38,7 @@ const template = html<ToolbarSidepaneItem>`
           src="./img/edge/${(x) => toCamelCase(x.id)}AppLight.png"
         />`,
       )}
-    </phx-toggle-button>
+    </mai-toggle-button>
     <context-menu slot="context">
       <menu-item @click="${(x) => x.handlePinToggle()}">
         ${(x) => (x.pinned ? 'Hide from toolbar' : 'Always show in toolbar')}
@@ -48,11 +47,7 @@ const template = html<ToolbarSidepaneItem>`
   </flyout-menu>
 `;
 
-const styles = css`
-  phx-toggle-button {
-    color: ${colorNeutralForeground1};
-  }
-`;
+const styles = css``;
 
 @customElement({
   name: 'toolbar-sidepane-item',
@@ -67,7 +62,7 @@ export class ToolbarSidepaneItem extends FASTElement {
   handleFlyoutToggle() {
     // Don't allow the context menu closing to affect the toggle state
     this.shadowRoot
-      ?.querySelector('phx-toggle-button')
+      ?.querySelector('mai-toggle-button')
       ?.setAttribute('pressed', this.pressed.toString());
   }
 

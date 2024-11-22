@@ -51,8 +51,7 @@ import {
   foregroundControlOnOutlineRest,
   gapControlDefault,
   gapSmallControlDefault,
-  nullColor0,
-  nullColor3,
+  nullColor,
   paddingControlHorizontalDefault,
   paddingLargeControlVertical,
   paddingSmallControlVertical,
@@ -137,7 +136,7 @@ export const baseButtonStyles = css`
 
   :host(:focus-visible) {
     border-color: ${controlFocusInnerStrokeColor};
-    outline: ${controlFocusOuterStrokeWidth} solid ${nullColor3};
+    outline: ${controlFocusOuterStrokeWidth} solid ${nullColor};
     box-shadow: 0 0 0 2px ${controlFocusOuterStrokeColor};
   }
 
@@ -305,7 +304,7 @@ export const styles = css`
         )
     ) {
     border-color: transparent;
-    background-color: ${nullColor0};
+    background-color: ${nullColor};
   }
 
   :host(${outlineState}:is(:disabled, [disabled-focusable])),

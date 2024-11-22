@@ -214,24 +214,9 @@
     "f2": "colorStrokeFocus2"
   },
   {
-    "name": "nullColor0",
+    "name": "nullColor",
     "smtc": "null-color",
     "f2": "colorTransparentBackground"
-  },
-  {
-    "name": "nullColor1",
-    "smtc": "null-color",
-    "f2": "colorTransparentBackgroundHover"
-  },
-  {
-    "name": "nullColor2",
-    "smtc": "null-color",
-    "f2": "colorTransparentBackgroundPressed"
-  },
-  {
-    "name": "nullColor3",
-    "smtc": "null-color",
-    "f2": "colorTransparentStroke"
   },
   {
     "name": "textStyleDefaultRegularFontFamily",
@@ -387,16 +372,16 @@
   {
     "name": "strokeControlNoneRest",
     "smtc": "stroke-control-none-rest",
-    "f2": "colorSubtleBackground"
+    "f2": "colorTransparentStroke"
   },
   {
     "name": "strokeControlNoneHover",
     "smtc": "stroke-control-none-hover",
-    "f2": "colorSubtleBackground"
+    "f2": "colorTransparentStroke"
   },
   {
     "name": "strokeControlNonePressed",
     "smtc": "stroke-control-none-pressed",
-    "f2": "colorSubtleBackground"
+    "f2": "colorTransparentStroke"
   }
 ]

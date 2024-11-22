@@ -5,21 +5,20 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
+import '@mai-ui/toggle-button/define.js';
 import './flyout-menu.js';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
   borderRadiusLayerDialog,
   colorNeutralForeground1,
-  colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalL,
 } from '@mai-ui/phoenix-theme';
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">
-    <phx-toggle-button
+    <mai-toggle-button
       size="small"
       appearance="subtle"
       shape="circular"
@@ -28,16 +27,12 @@ const template = html<OmniboxActionFlyout>`
       @click="${(x, c) => x.handleTriggrClick(c.event)}"
     >
       <slot name="trigger-content"></slot>
-    </phx-toggle-button>
+    </mai-toggle-button>
     <slot></slot>
   </flyout-menu>
 `;
 
 const styles = css`
-  phx-toggle-button {
-    color: ${colorNeutralForegroundHint};
-  }
-
   ::slotted(.flyout-menu) {
     width: 256px;
     height: 300px;

@@ -6,7 +6,7 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
+import '@mai-ui/toggle-button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
@@ -25,7 +25,7 @@ const template = html<ToolbarFlyoutItem>`
     @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
     ?initially-open="${(x) => x.initOpen}"
   >
-    <phx-toggle-button appearance="subtle" icon-only slot="trigger">
+    <mai-toggle-button appearance="subtle" icon-only slot="trigger">
       ${when(
         (x) => apps[x.id].iconId,
         html`<svg>
@@ -36,7 +36,7 @@ const template = html<ToolbarFlyoutItem>`
           src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
         />`,
       )}
-    </phx-toggle-button>
+    </mai-toggle-button>
     ${(x) => apps[x.id].template}
     <context-menu slot="context">
       ${when(
@@ -57,10 +57,6 @@ const template = html<ToolbarFlyoutItem>`
 `;
 
 const styles = css`
-  phx-toggle-button {
-    color: ${colorNeutralForeground1};
-  }
-
   .flyout-menu {
     width: 256px;
     height: 300px;

@@ -6,5 +6,35 @@
     "name": "backgroundControlNeutralSelected",
     "smtc": "background-control-neutral-selected",
     "f2": "colorNeutralBackground1Selected"
+  },
+  {
+    "name": "strokeControlNoneSelected",
+    "smtc": "stroke-control-none-selected",
+    "f2": "colorTransparentStroke"
+  },
+  {
+    "name": "foregroundControlNeutralSelected",
+    "smtc": "foreground-control-neutral-selected",
+    "f2": "colorNeutralForeground1Selected"
+  },
+  {
+    "name": "backgroundControlBrandSelected",
+    "smtc": "background-control-brand-selected",
+    "f2": "colorBrandBackground1Selected"
+  },
+  {
+    "name": "foregroundControlOnBrandSelected",
+    "smtc": "foreground-control-on-brand-selected",
+    "f2": "colorNeutralForegroundOnBrand"
+  },
+  {
+    "name": "backgroundControlSubtleSelected",
+    "smtc": "background-control-subtle-selected",
+    "f2": "colorSubtleBackgroundSelected"
+  },
+  {
+    "name": "backgroundControlOutlineSelected",
+    "smtc": "background-control-outline-selected",
+    "f2": "colorTransparentBackgroundSelected"
   }
 ]

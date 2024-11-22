@@ -6,8 +6,6 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
-import '@phoenixui/web-components/button.js';
 import {
   borderRadiusMedium,
   colorNeutralForeground1,

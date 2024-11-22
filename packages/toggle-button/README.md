@@ -1,4 +1,4 @@
-# Button
+# Toggle Button
 
 ## Design tokens
 

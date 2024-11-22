@@ -1,7 +1,6 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '../../windows/controls/mica-material.js';
 import './copilot-composer.js';
-import '@phoenixui/web-components/button.js';
 import '../controls/newtab-card.js';
 import '../controls/newtab-chip.js';
 import '../controls/newtab-composer.js';
@@ -39,7 +38,6 @@ const template = html<EdgeNewTab>`
   <div id="content">
     <div id="composer-placeholder"></div>
     <div id="main">
-      <mai-button appearance="primary">Test MAI Button </mai-button>
       <div id="header">
         <svg>
           <use href="img/edge/icons.svg#copilot-20-regular" />

@@ -25,7 +25,7 @@ import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
-import '@phoenixui/web-components/toggle-button.js';
+import '@mai-ui/toggle-button/define.js';
 
 const template = html` <div
     id="window-grabber"
@@ -37,7 +37,7 @@ const template = html` <div
       ? html`
           <div class="group" id="pill-menu">
             <flyout-menu>
-              <phx-toggle-button
+              <mai-toggle-button
                 size="small"
                 appearance="subtle"
                 shape="circular"
@@ -47,7 +47,7 @@ const template = html` <div
                 <svg>
                   <use href="img/edge/icons.svg#more-horizontal-20-regular" />
                 </svg>
-              </phx-toggle-button>
+              </mai-toggle-button>
               <more-menu
                 managed
                 @moreaction="${(x, c) =>

@@ -1,5 +1,5 @@
 import { css } from '@microsoft/fast-element';
-import { styles as ButtonStyles } from '../../button/src/button.styles.js';
+import { styles as ButtonStyles } from '@mai-ui/button/styles.js';
 import { forcedColorsStylesheetBehavior } from '@fluentui/web-components/utilities.js';
 import {
   outlineState,
@@ -7,7 +7,25 @@ import {
   primaryState,
   subtleState,
 } from '@mai-ui/component-framework/states.js';
-import { backgroundControlNeutralSelected } from '@mai-ui/design-tokens/toggle-button.js';
+import {
+  backgroundControlNeutralSelected,
+  strokeControlNonePressed,
+  strokeControlNoneHover,
+  backgroundControlNeutralHover,
+  backgroundControlNeutralPressed,
+  backgroundControlBrandHover,
+  backgroundControlBrandPressed,
+  backgroundControlSubtlePressed,
+  backgroundControlSubtleHover,
+  backgroundControlOutlineHover,
+  backgroundControlOutlinePressed,
+  backgroundControlOutlineSelected,
+  backgroundControlSubtleSelected,
+  foregroundControlOnBrandSelected,
+  backgroundControlBrandSelected,
+  strokeControlNoneSelected,
+  foregroundControlNeutralSelected,
+} from '@mai-ui/design-tokens/toggle-button.js';
 
 /**
  * The styles for the ToggleButton component.
@@ -21,61 +39,57 @@ export const styles = css`
 
   :host(${pressedState}) {
     background-color: ${backgroundControlNeutralSelected};
-    border-color: ${strokeControlNonePre};
-    color: ${colorNeutralForeground1};
+    border-color: ${strokeControlNoneSelected};
+    color: ${foregroundControlNeutralSelected};
   }
 
   :host(${pressedState}:hover) {
-    border-color: ${colorNeutralStroke1Hover};
-    background-color: ${colorNeutralBackground1Hover};
+    border-color: ${strokeControlNoneHover};
+    background-color: ${backgroundControlNeutralHover};
   }
 
   :host(${pressedState}:active) {
-    border-color: ${colorNeutralStroke1Pressed};
-    background-color: ${colorNeutralBackground1Pressed};
+    border-color: ${strokeControlNonePressed};
+    background-color: ${backgroundControlNeutralPressed};
   }
 
   :host(${pressedState}${primaryState}) {
     border-color: transparent;
-    background-color: ${colorBrandBackgroundSelected};
-    color: ${colorNeutralForegroundOnBrand};
+    background-color: ${backgroundControlBrandSelected};
+    color: ${foregroundControlOnBrandSelected};
   }
 
   :host(${pressedState}${primaryState}:hover) {
-    background-color: ${colorBrandBackgroundHover};
+    background-color: ${backgroundControlBrandHover};
   }
 
   :host(${pressedState}${primaryState}:active) {
-    background-color: ${colorBrandBackgroundPressed};
+    background-color: ${backgroundControlBrandPressed};
   }
 
   :host(${pressedState}${subtleState}) {
     border-color: transparent;
-    background-color: ${colorSubtleBackgroundSelected};
-    color: ${colorNeutralForeground2Selected};
+    background-color: ${backgroundControlSubtleSelected};
   }
 
   :host(${pressedState}${subtleState}:hover) {
-    background-color: ${colorSubtleBackgroundHover};
-    color: ${colorNeutralForeground2Hover};
+    background-color: ${backgroundControlSubtleHover};
   }
 
   :host(${pressedState}${subtleState}:active) {
-    background-color: ${colorSubtleBackgroundPressed};
-    color: ${colorNeutralForeground2Pressed};
+    background-color: ${backgroundControlSubtlePressed};
   }
 
-  :host(${pressedState}${outlineState}),
-  :host(${pressedState}${transparentState}) {
-    background-color: ${colorTransparentBackgroundSelected};
+  :host(${pressedState}${outlineState}) {
+    background-color: ${backgroundControlOutlineSelected};
   }
 
   :host(${pressedState}${outlineState}:hover) {
-    background-color: ${colorTransparentBackgroundHover};
+    background-color: ${backgroundControlOutlineHover};
   }
 
   :host(${pressedState}${outlineState}:active) {
-    background-color: ${colorTransparentBackgroundPressed};
+    background-color: ${backgroundControlOutlinePressed};
   }
 `.withBehaviors(
   forcedColorsStylesheetBehavior(css`
