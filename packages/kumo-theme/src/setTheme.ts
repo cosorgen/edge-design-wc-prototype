@@ -1,35 +1,18 @@
-import { kumoBorderRadius } from './borderRadius.js';
-import { kumoLightThemeColors } from './colors.js';
-import { kumoCurveTokens, kumoDurationTokens } from './motion.js';
-import { kumoSpacingTokens } from './spacingTokens.js';
-import { kumoTypographyTokens } from './typography.js';
+import { tokens } from './tokens.js';
 
-function camelCaseToKebabCase(str: string) {
-  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
-}
-
-const kumoTokens = [
-  ...Object.keys(kumoBorderRadius),
-  ...Object.keys(kumoLightThemeColors),
-  ...Object.keys(kumoDurationTokens),
-  ...Object.keys(kumoCurveTokens),
-  ...Object.keys(kumoSpacingTokens),
-  ...Object.keys(kumoTypographyTokens),
-];
-
-export function setThemeFor(
+export function setThemeFor<Theme>(
   element: Document | ShadowRoot = document,
-  theme: Record<string, unknown>,
+  theme: Theme,
 ) {
   const sheet = new CSSStyleSheet();
-  const tokenNames = Object.keys(theme);
+  const tokenNames = Object.keys(theme as Record<string, unknown>);
   let data = '';
   tokenNames.forEach((name) => {
-    if (kumoTokens.includes(name)) {
-      data += `--smtc-${camelCaseToKebabCase(name)}: ${theme[name]};`;
-    } else {
-      data += `--${name}: ${theme[name]};`;
-    }
+    data +=
+      tokens[name].replace('var(', '').replace(')', '') +
+      ':' +
+      theme[name as keyof Theme] +
+      ';';
   });
   sheet.replaceSync(
     `:${element instanceof ShadowRoot ? 'host' : 'root'} {${data}}`,

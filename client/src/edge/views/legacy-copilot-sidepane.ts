@@ -7,8 +7,8 @@ import {
   spacingHorizontalM,
   spacingVerticalM,
   spacingVerticalXXL,
+  backgroundPageGradient,
 } from '@mai-ui/copilot-theme';
-import { backgroundPageGradient } from '@mai-ui/design-tokens/copilot-sidepane.js';
 import '../controls/sidepane-header.js';
 import '../controls/copilot-design-provider.js';
 import './copilot-composer.js';

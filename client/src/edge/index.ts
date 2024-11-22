@@ -249,15 +249,12 @@ export class MicrosoftEdge extends FASTElement {
         },
       },
     };
+    const designSystem = themes[this.ss.edgeTheme];
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    const selectedTheme =
-      themes[this.ss.edgeTheme][this.ws.transparency][themeKey];
+    const selectedTheme = designSystem[this.ws.transparency][themeKey];
     selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
 
-    setThemeFor(
-      this.shadowRoot!,
-      selectedTheme as unknown as Record<string, unknown>,
-    );
+    setThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   clearTheme() {
