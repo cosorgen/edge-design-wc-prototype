@@ -8,8 +8,11 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { setThemeFor } from '@phoenixui/web-components';
-import { copilotLightTheme, copilotDarkTheme } from '../copilotDesignSystem.js';
+import {
+  copilotLightTheme,
+  copilotDarkTheme,
+  setThemeFor,
+} from '@mai-ui/copilot-theme';
 
 const template = html` <slot></slot> `;
 
@@ -52,6 +55,9 @@ export class CopilotDesignProvider extends FASTElement {
     const themeSelection =
       this.ess.theme === 'system' ? this.ws.theme : this.ess.theme;
 
-    setThemeFor(this.shadowRoot!, themes[themeSelection]);
+    setThemeFor(
+      this.shadowRoot!,
+      themes[themeSelection] as unknown as Record<string, unknown>,
+    );
   }
 }

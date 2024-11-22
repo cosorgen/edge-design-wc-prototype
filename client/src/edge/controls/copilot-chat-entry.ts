@@ -28,13 +28,13 @@ import {
   spacingVerticalXS,
   spacingVerticalXXS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
+  backgroundControlBrandRest,
+} from '@mai-ui/copilot-theme';
+import '@mai-ui/button/define.js';
 import '@phoenixui/web-components/spinner.js';
 import showdown from 'showdown';
 import dompurify from 'dompurify';
 import moment from 'moment';
-import { colorLoadingSpinner } from '../copilotDesignSystem.js';
 
 const template = html`<div id="message">
     ${(x) => {
@@ -150,7 +150,7 @@ const styles = css`
     display: none;
     width: 64px;
     height: 64px;
-    background-color: ${colorLoadingSpinner};
+    background-color: ${backgroundControlBrandRest};
     mask: url(img/edge/copilotLoading.gif);
     mask-size: cover;
     mask-repeat: no-repeat;

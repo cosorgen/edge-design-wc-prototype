@@ -11,7 +11,7 @@ import {
   acrylicBackgroundLuminosity,
   colorNeutralForeground1,
   shadow2,
-} from '@mai-ui/phoenix-theme';
+} from '@mai-ui/copilot-theme';
 import '../controls/copilot-design-provider.js';
 import './copilot-chat.js';
 import { inject } from '@microsoft/fast-element/di.js';

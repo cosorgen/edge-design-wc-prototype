@@ -14,6 +14,7 @@
     "packages/phoenix-theme",
     "packages/kumo-theme",
     "packages/fluent-theme",
+    "packages/copilot-theme",
     "client",
     "server"
   ],

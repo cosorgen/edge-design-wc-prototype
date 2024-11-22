@@ -7,11 +7,11 @@ import {
   spacingHorizontalM,
   spacingVerticalM,
   spacingVerticalXXL,
-} from '@mai-ui/phoenix-theme';
+  backgroundPageGradient,
+} from '@mai-ui/copilot-theme';
 import '../controls/sidepane-header.js';
 import '../controls/copilot-design-provider.js';
 import './copilot-composer.js';
-import { backgroundGradient } from '../copilotDesignSystem.js';
 
 const template = html`
   <copilot-design-provider>
@@ -54,7 +54,7 @@ const styles = css`
   copilot-design-provider {
     position: absolute;
     inset: 0;
-    background: linear-gradient(${backgroundGradient});
+    background: linear-gradient(${backgroundPageGradient});
     padding-block-start: 50px; /* Account for the sidepane header */
     padding-block-end: 120px; /* Account for the composer */
   }
