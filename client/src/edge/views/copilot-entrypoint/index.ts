@@ -444,7 +444,7 @@ export class CopilotEntrypoint extends FASTElement {
     const composer = this._composerElement?.children[0] as HTMLElement;
 
     // Focus the input when the composer is expanded
-    this.active && composer?.focus();
+    if (this.active) composer?.focus();
 
     // Reset the expanded height and width when composer is closed
     if (!this.active) {

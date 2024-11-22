@@ -6,8 +6,6 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   colorLayerBackgroundDialog,
   colorNeutralForeground1,
   shadow28,
@@ -17,7 +15,8 @@ import {
   strokeWidthThin,
   typographyStyles,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
+import '../../windows/controls/acrylic-material.js';
 import '../controls/copilot-chat-entry.js';
 import '../controls/copilot-design-provider.js';
 import '../controls/copilot-input.js';
@@ -30,6 +29,7 @@ import { CopilotInput } from '../controls/copilot-input.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const template = html<CopilotComposer>`
+  <acrylic-material></acrylic-material>
   <copilot-design-provider>
     <copilot-chat
       inline
@@ -80,20 +80,28 @@ const template = html<CopilotComposer>`
 `;
 
 const styles = css`
+  :host {
+    display: block;
+    position: relative;
+  }
+
+  acrylic-material {
+    border-radius: 28px;
+    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
+    box-shadow: ${shadow28};
+    overflow: hidden;
+  }
+
   copilot-design-provider {
+    position: relative;
     box-sizing: border-box;
     width: 100%;
+    min-width: 16px;
+    min-height: 16px;
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
-    border-radius: 28px;
-    box-shadow: ${shadow28};
-    overflow: hidden;
 
     color: ${colorNeutralForeground1};
     font-weight: ${typographyStyles.body2.fontWeight};
@@ -198,7 +206,7 @@ export class CopilotComposer extends FASTElement {
     this._chatElement?.clearChat();
     this._inputElement?.clearInput();
     this.cs.activeThreadId = undefined;
-    notify && this.$emit('close');
+    if (notify) this.$emit('close');
   }
 
   updateContext() {
