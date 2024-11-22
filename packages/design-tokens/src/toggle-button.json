@@ -1,0 +1,10 @@
+[
+  {
+    "extends": "button"
+  },
+  {
+    "name": "backgroundControlNeutralSelected",
+    "smtc": "background-control-neutral-selected",
+    "f2": "colorNeutralBackground1Selected"
+  }
+]

@@ -11,6 +11,7 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.resolve(path.dirname(__filename), '../');
+const OUTPUT_DIR = 'dist';
 
 function getCSSVar(name, fallback, prefix) {
   return `var(--${prefix ? `${prefix}-` : ''}${name}${fallback ? `, ${fallback}` : ''})`;
@@ -44,28 +45,41 @@ function getExportCSS(dependency) {
 }
 
 async function writeTSFiles() {
-  const getDirectories = (source) =>
-    fs
-      .readdirSync(source, { withFileTypes: true })
-      .filter((dirent) => dirent.isDirectory())
-      .map((dirent) => dirent.name);
-
-  const components = getDirectories(path.resolve(__dirname, './src'));
+  // Get the list of component JSON files in src
+  const components = fs
+    .readdirSync(path.resolve(__dirname, 'src'), {
+      withFileTypes: true,
+    })
+    .filter((entry) => entry.isFile() && entry.name.endsWith('.json'))
+    .map((file) => file.name.replace('.json', ''));
 
   components.map(async (component) => {
     try {
-      const dependencies = await import(
-        `../src/${component}/dependencies.json`,
-        {
-          assert: { type: 'json' },
-        }
-      );
+      const dependencies = await import(`../src/${component}.json`, {
+        assert: { type: 'json' },
+      });
 
       if (dependencies) {
         let content = '';
         const names = [];
 
-        dependencies.default.forEach((dependency) => {
+        const buildDependencies = async (dependency) => {
+          console.log(`${component}:${dependency.name}`);
+          if (dependency.extends) {
+            console.log(`Extending ${dependency.extends}...`);
+            const extendsDependencies = await import(
+              `../src/${dependency.extends}.json`,
+              {
+                assert: { type: 'json' },
+              }
+            );
+
+            if (extendsDependencies) {
+              console.log(`Loaded ${dependency.extends}...`);
+              extendsDependencies.default.forEach(buildDependencies);
+            }
+          }
+
           let name = dependency.name;
 
           if (names.includes(name)) {
@@ -81,11 +95,29 @@ async function writeTSFiles() {
           }
 
           names.push(name);
-        });
+        };
 
+        dependencies.default.forEach(buildDependencies);
+
+        // Write out component js file
+        console.log(`Writing ${component}...`);
         fs.writeFileSync(
-          path.resolve(__dirname, `./src/${component}/index.ts`),
+          path.resolve(__dirname, OUTPUT_DIR, 'esm', `${component}.js`),
           content,
+          { type: 'utf-8' },
+        );
+
+        // Convert to .d.ts file
+        const dtsContent = content
+          .replace(/export const/gm, 'export declare const')
+          .replace(/\s=/gm, ':')
+          .replace(/".+"/gm, 'string')
+          .replace(/^\/\/.+\n/gm, '');
+
+        // Write out component d.ts file
+        fs.writeFileSync(
+          path.resolve(__dirname, OUTPUT_DIR, 'dts', `${component}.d.ts`),
+          dtsContent,
           { type: 'utf-8' },
         );
       }
@@ -94,5 +126,13 @@ async function writeTSFiles() {
     }
   });
 }
+
+// Create out dir if it doesn't exist or else clean it
+if (fs.existsSync(path.resolve(__dirname, OUTPUT_DIR))) {
+  fs.rmSync(path.resolve(__dirname, OUTPUT_DIR), { recursive: true });
+}
+fs.mkdirSync(path.resolve(__dirname, OUTPUT_DIR));
+fs.mkdirSync(path.resolve(__dirname, OUTPUT_DIR, 'esm'));
+fs.mkdirSync(path.resolve(__dirname, OUTPUT_DIR, 'dts'));
 
 writeTSFiles();

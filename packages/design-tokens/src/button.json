@@ -255,11 +255,6 @@
     "f2": "lineHeightBase300"
   },
   {
-    "name": "lineHeightBase400",
-    "$comment": "No semantic token available, requires large state",
-    "f2": "lineHeightBase400"
-  },
-  {
     "name": "paddingControlHorizontalDefault",
     "smtc": "padding-control-horizontal-default",
     "f2": "spacingHorizontalM"
@@ -276,131 +271,157 @@
   },
   {
     "name": "controlFocusInnerStrokeWidth",
+    "$comment": "Added by cosorgen",
     "smtc": "control-focus-inner-stroke-width",
     "f2": "strokeWidthThin"
   },
   {
     "name": "cornerControlRest",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-control-rest",
     "f2": "borderRadiusMedium"
   },
   {
     "name": "cornerControlHover",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-control-hover",
     "f2": "borderRadiusMedium"
   },
   {
     "name": "cornerControlPressed",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-control-pressed",
     "f2": "borderRadiusMedium"
   },
   {
     "name": "cornerSmallControlRest",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-small-control-rest",
     "f2": "borderRadiusSmall"
   },
   {
     "name": "cornerSmallControlHover",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-small-control-hover",
     "f2": "borderRadiusSmall"
   },
   {
     "name": "cornerSmallControlPressed",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-small-control-pressed",
     "f2": "borderRadiusSmall"
   },
   {
     "name": "cornerLargeControlRest",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-large-control-rest",
     "f2": "borderRadiusLarge"
   },
   {
     "name": "cornerLargeControlHover",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-large-control-hover",
     "f2": "borderRadiusLarge"
   },
   {
     "name": "cornerLargeControlPressed",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-large-control-pressed",
     "f2": "borderRadiusLarge"
   },
   {
     "name": "cornerControlCircular",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-control-circular",
     "f2": "borderRadiusCircular"
   },
   {
     "name": "cornerControlNone",
+    "$comment": "Added by cosorgen",
     "smtc": "corner-control-none",
     "f2": "borderRadiusNone"
   },
   {
     "name": "gapSmallControlDefault",
+    "$comment": "Added by cosorgen",
     "smtc": "gap-small-control-default",
     "f2": "spacingHorizontalXS"
   },
   {
     "name": "paddingSmallControlVertical",
+    "$comment": "Added by cosorgen",
     "smtc": "padding-small-control-vertical",
     "f2": "spacingHorizontalS"
   },
   {
     "name": "textRampCaption1FontSize",
+    "$comment": "Added by cosorgen",
     "smtc": "text-ramp-caption-1-font-size",
     "f2": "fontSizeBase200"
   },
   {
     "name": "textRampCaption1LineHeight",
+    "$comment": "Added by cosorgen",
     "smtc": "text-ramp-caption-1-line-height",
     "f2": "lineHeightBase200"
   },
   {
     "name": "textRampCaption1FontWeight",
+    "$comment": "Added by cosorgen",
     "smtc": "text-ramp-caption-1-font-weight",
     "f2": "fontWeightRegular"
   },
   {
     "name": "paddingLargeControlVertical",
+    "$comment": "Added by cosorgen",
     "smtc": "padding-large-control-vertical",
     "f2": "spacingHorizontalL"
   },
   {
     "name": "textRampBody3FontSize",
+    "$comment": "Added by cosorgen",
     "smtc": "text-ramp-body-3-font-size",
     "f2": "fontSizeBase400"
   },
   {
     "name": "textRampBody3LineHeight",
+    "$comment": "Added by cosorgen",
     "smtc": "text-ramp-body-3-line-height",
     "f2": "lineHeightBase400"
   },
   {
     "name": "textRampBody3FontWeight",
+    "$comment": "Added by cosorgen",
     "smtc": "text-ramp-body-3-font-weight",
     "f2": "fontWeightRegular"
   },
   {
     "name": "curveControlStateTransition",
+    "$comment": "Added by cosorgen",
     "smtc": "curve-control-state-transition",
     "f2": "curveEasyEase"
   },
   {
     "name": "durationControlStateTransition",
+    "$comment": "Added by cosorgen",
     "smtc": "duration-control-state-transition",
     "f2": "durationFaster"
   },
   {
     "name": "strokeControlNoneRest",
+    "$comment": "Added by cosorgen",
     "smtc": "stroke-control-none-rest",
     "f2": "colorSubtleBackground"
   },
   {
     "name": "strokeControlNoneHover",
+    "$comment": "Added by cosorgen",
     "smtc": "stroke-control-none-hover",
     "f2": "colorSubtleBackground"
   },
   {
     "name": "strokeControlNonePressed",
+    "$comment": "Added by cosorgen",
     "smtc": "stroke-control-none-pressed",
     "f2": "colorSubtleBackground"
   }

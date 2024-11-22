@@ -5,5 +5,11 @@
         "declarationDir": "dist/dts",
         "outDir": "dist/esm"
     },
-    "include": ["src/**/*.ts"]
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "src/**/*.pw.spec.ts",
+        "src/**/*.stories.ts"
+    ]
 }

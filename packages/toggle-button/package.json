@@ -1,0 +1,57 @@
+{
+    "name": "@mai-ui/toggle-button",
+    "version": "0.0.1",
+    "author": "Microsoft",
+    "description": "MAI Design toggle button custom element",
+    "license": "UNLICENSED",
+    "type": "module",
+    "private": true,
+    "exports": {
+        ".": {
+            "types": "./dist/dts/index.d.ts",
+            "default": "./dist/esm/index.js"
+        },
+        "./definition.js": {
+            "types": "./dist/dts/button.definition.d.ts",
+            "default": "./dist/esm/button.definition.js"
+        },
+        "./template.js": {
+            "types": "./dist/dts/button.template.d.ts",
+            "default": "./dist/esm/button.template.js"
+        },
+        "./styles.js": {
+            "types": "./dist/dts/button.styles.d.ts",
+            "default": "./dist/esm/button.styles.js"
+        },
+        "./define.js": {
+            "types": "./dist/dts/define.d.ts",
+            "default": "./dist/esm/define.js"
+        },
+        "./options.js": {
+            "types": "./dist/dts/button.options.d.ts",
+            "default": "./dist/esm/button.options.js"
+        },
+        "./package.json": "./package.json"
+    },
+    "sideEffects": [
+        "./dist/esm/define.js"
+    ],
+    "files": [
+        "*.md",
+        "dist/*.js",
+        "dist/*.d.ts"
+    ],
+    "dependencies": {
+        "@mai-ui/component-framework": "^0.0.1",
+        "@mai-ui/design-tokens": "^0.0.1"
+    },
+    "peerDependencies": {
+        "@fluentui/web-components": ">= 3.0.0-beta.63 || ^3.0.0",
+        "@microsoft/fast-element": "^2.0.0"
+    },
+    "scripts": {
+        "build": "npm run build:tsc",
+        "build:tsc": "tsc -p tsconfig.build.json",
+        "clean": "rimraf dist"
+    }
+}
