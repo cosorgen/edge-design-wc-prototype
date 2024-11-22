@@ -22,7 +22,7 @@ export declare interface KumoBorderRadiusTokens {
   cornerControlRest: string;
   cornerControlHover: string;
   cornerControlPressed: string;
-  conrnerSmallControlRest: string;
+  cornerSmallControlRest: string;
   cornerSmallControlHover: string;
   cornerSmallControlPressed: string;
   cornerLargeControlRest: string;
@@ -34,7 +34,7 @@ export const kumoBorderRadius: KumoBorderRadiusTokens = {
   cornerControlRest: '12px',
   cornerControlHover: '12px',
   cornerControlPressed: '12px',
-  conrnerSmallControlRest: '8px',
+  cornerSmallControlRest: '8px',
   cornerSmallControlHover: '8px',
   cornerSmallControlPressed: '8px',
   cornerLargeControlRest: '12px',
