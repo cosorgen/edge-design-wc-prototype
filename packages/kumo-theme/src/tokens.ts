@@ -1,4 +1,4 @@
-import { Theme } from '@fluentui/tokens';
+import { themeToTokensObject } from '@mai-ui/design-tokens/utilities.js';
 import { kumoLightTheme } from './themes.js';
 import { kumoBorderRadius } from './borderRadius.js';
 import { kumoLightThemeColors } from './colors.js';

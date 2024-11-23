@@ -99,7 +99,6 @@ const components = fs
 
 // Write out each component file
 let mainFileContent = '';
-
 components.forEach((component) => {
   console.log(`Building ${component}...`);
   const fileContent = buildFile(component);
@@ -116,7 +115,8 @@ mainFileContent = mainFileContent
 // Export all tokens as a single object
 let tokenObject = '\nexport const tokens = {\n';
 mainFileContent.split('\n').forEach((token) => {
-  tokenObject += `  ${token.replace('export const ', '').replace(' =', ':').replace(';', ',')}\n`;
+  const tokenName = token.split(' = ')[0].replace('export const ', '');
+  if (tokenName) tokenObject += `  ${tokenName},\n`;
 });
 tokenObject += '};';
 mainFileContent += tokenObject;

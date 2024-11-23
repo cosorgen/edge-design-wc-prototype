@@ -1,4 +1,4 @@
-import { themeToTokensObject } from '@fluentui/tokens';
+import { themeToTokensObject } from '@mai-ui/design-tokens/utilities.js';
 import { fluent2LightTheme } from './themes.js';
 
 // Types
