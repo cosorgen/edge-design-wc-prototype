@@ -34,22 +34,5 @@ export const kumoTokens = [
   ...Object.keys(kumoTypographyTokens),
 ];
 
-export function camelCaseToKebabCase(str: string) {
-  return str.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
-}
-
-export function themeToTokensObject(theme: Theme) {
-  const tokens: Record<string, string> = {};
-  const keys = Object.keys(theme);
-  for (const key of keys) {
-    if (kumoTokens.includes(key)) {
-      tokens[key] = `var(--smtc-${camelCaseToKebabCase(key)})`;
-    } else {
-      tokens[key] = `var(--${String(key)})`;
-    }
-  }
-  return tokens;
-}
-
 // Huge tokens object
 export const tokens = themeToTokensObject(kumoLightTheme);
