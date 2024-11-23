@@ -292,6 +292,8 @@ export declare interface CopilotColorTokens {
   strokeControlOutlineRest: string;
   strokeControlOutlineSelected: string;
   backgroundPageGradient: string;
+  foregroundComposerInputHint: string;
+  foregroundComposerInputRest: string;
 }
 
 export const copilotLightThemeColors: CopilotColorTokens = {
@@ -338,6 +340,8 @@ export const copilotLightThemeColors: CopilotColorTokens = {
   strokeControlOutlineSelected: '#C6CBD1',
   backgroundPageGradient:
     '180deg, #FCF9F6 0%, #FCF9F6 60%, #FBEBE0 99%, #FDE5CD 100%',
+  foregroundComposerInputHint: '#33302E',
+  foregroundComposerInputRest: '#282523',
 };
 
 export const copilotDarkThemeColors: CopilotColorTokens = {
@@ -384,4 +388,6 @@ export const copilotDarkThemeColors: CopilotColorTokens = {
   strokeControlOutlineSelected: '#5A5E63',
   backgroundPageGradient:
     '180deg, rgba(16, 21, 36, 0.8) 0%, rgba(16, 21, 36, 0.8) 80%, rgba(16, 21, 36, 0.8) 100%',
+  foregroundComposerInputHint: '#E3CBBC',
+  foregroundComposerInputRest: '#F2DDCC',
 };

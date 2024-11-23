@@ -4,7 +4,7 @@ export { typographyStyles } from '@fluentui/tokens';
 
 export const fontFamilyOverrides: Partial<FontFamilyTokens> = {
   fontFamilyBase:
-    'Ginto, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+    '"Ginto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
 };
 
 export type CopilotTypographyTokens = {
@@ -17,7 +17,10 @@ export type CopilotTypographyTokens = {
   textRampCaption1FontSize: string;
   textRampCaption1FontWeight: string;
   textRampCaption1LineHeight: string;
-  textStyleDefaultRegularFontFamily: string;
+  textComposerInputFontSize: string;
+  textComposerInputFontWeight: string;
+  textComposerInputLineHeight: string;
+  textComposerInputFontVariationSettings: string;
 };
 
 export const copilotTypographyTokens: CopilotTypographyTokens = {
@@ -30,6 +33,8 @@ export const copilotTypographyTokens: CopilotTypographyTokens = {
   textRampCaption1FontSize: '12px',
   textRampCaption1FontWeight: '400',
   textRampCaption1LineHeight: '16px',
-  textStyleDefaultRegularFontFamily:
-    '"Segoe UI Variable Display", "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif',
+  textComposerInputFontSize: '17px',
+  textComposerInputFontWeight: '410',
+  textComposerInputLineHeight: '26px',
+  textComposerInputFontVariationSettings: '"opsz" 40, "wght" 410',
 };

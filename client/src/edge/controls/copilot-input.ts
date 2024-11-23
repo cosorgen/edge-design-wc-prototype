@@ -8,12 +8,17 @@ import {
 import {
   colorLayerBackgroundDialog,
   colorNeutralForeground1,
-  colorNeutralForegroundHint,
   curveEasyEaseMax,
   durationNormal,
   spacingHorizontalXL,
   spacingVerticalM,
-} from '@mai-ui/phoenix-theme';
+  textComposerInputFontSize,
+  textComposerInputLineHeight,
+  textComposerInputFontWeight,
+  textComposerInputFontVariationSettings,
+  foregroundComposerInputHint,
+  foregroundComposerInputRest,
+} from '@mai-ui/copilot-theme';
 import '@phoenixui/web-components/button.js';
 
 const template = html<CopilotInput>`
@@ -82,13 +87,15 @@ const styles = css`
     overflow-y: auto;
     overflow-x: hidden;
 
-    font-size: 18px;
-    line-height: 26px;
-    color: ${colorNeutralForeground1};
+    font-size: ${textComposerInputFontSize};
+    line-height: ${textComposerInputLineHeight};
+    font-weight: ${textComposerInputFontWeight};
+    font-variation-settings: ${textComposerInputFontVariationSettings};
+    color: ${foregroundComposerInputRest};
 
     &:empty::before {
       content: attr(placeholder);
-      color: ${colorNeutralForegroundHint};
+      color: ${foregroundComposerInputHint};
       cursor: text;
       white-space: nowrap;
       text-overflow: ellipsis;
