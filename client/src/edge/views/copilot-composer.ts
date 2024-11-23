@@ -14,7 +14,8 @@ import {
   spacingVerticalXS,
   strokeWidthThin,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+  cornerComposerRest,
+} from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
 import '../controls/copilot-chat-entry.js';
@@ -29,8 +30,8 @@ import { CopilotInput } from '../controls/copilot-input.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 
 const template = html<CopilotComposer>`
-  <acrylic-material></acrylic-material>
   <copilot-design-provider>
+    <acrylic-material></acrylic-material>
     <copilot-chat
       inline
       ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
@@ -80,18 +81,6 @@ const template = html<CopilotComposer>`
 `;
 
 const styles = css`
-  :host {
-    display: block;
-    position: relative;
-  }
-
-  acrylic-material {
-    border-radius: 28px;
-    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
-    box-shadow: ${shadow28};
-    overflow: hidden;
-  }
-
   copilot-design-provider {
     position: relative;
     box-sizing: border-box;
@@ -108,6 +97,13 @@ const styles = css`
     font-family: ${typographyStyles.body2.fontFamily};
     font-size: ${typographyStyles.body2.fontSize};
     line-height: ${typographyStyles.body2.lineHeight};
+  }
+
+  acrylic-material {
+    border-radius: ${cornerComposerRest};
+    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
+    box-shadow: ${shadow28};
+    overflow: hidden;
   }
 
   copilot-chat[hidden] {

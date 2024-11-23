@@ -55,9 +55,6 @@ export class CopilotDesignProvider extends FASTElement {
     const themeSelection =
       this.ess.theme === 'system' ? this.ws.theme : this.ess.theme;
 
-    setThemeFor(
-      this.shadowRoot!,
-      themes[themeSelection] as unknown as Record<string, unknown>,
-    );
+    setThemeFor(this.shadowRoot!, themes[themeSelection]);
   }
 }

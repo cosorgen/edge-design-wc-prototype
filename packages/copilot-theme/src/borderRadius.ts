@@ -18,6 +18,10 @@ export const phoenixBorderRadius: PhoenixBorderRadiusTokens = {
   borderRadiusLayerPill: '99px',
 };
 
+export const borderRadiusOverrides: Partial<BorderRadiusTokens> = {
+  borderRadiusLarge: '8px',
+};
+
 export declare interface CopilotBorderRadiusTokens {
   cornerControlRest: string;
   cornerControlHover: string;
@@ -28,6 +32,7 @@ export declare interface CopilotBorderRadiusTokens {
   cornerLargeControlRest: string;
   cornerLargeControlHover: string;
   cornerLargeControlPressed: string;
+  cornerComposerRest: string;
 }
 
 export const copilotBorderRadius: CopilotBorderRadiusTokens = {
@@ -40,8 +45,5 @@ export const copilotBorderRadius: CopilotBorderRadiusTokens = {
   cornerLargeControlRest: '12px',
   cornerLargeControlHover: '12px',
   cornerLargeControlPressed: '12px',
-};
-
-export const borderRadiusOverrides: Partial<BorderRadiusTokens> = {
-  borderRadiusLarge: '8px',
+  cornerComposerRest: '28px',
 };
