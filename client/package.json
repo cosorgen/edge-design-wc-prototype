@@ -9,7 +9,12 @@
   "license": "MIT",
   "dependencies": {
     "@microsoft/fast-element": "^2.0.0",
-    "@phoenixui/web-components": "^0.3.18",
+    "@mai-ui/button": "^0.0.1",
+    "@mai-ui/toggle-button": "^0.0.1",
+    "@mai-ui/phoenix-theme": "^0.0.1",
+    "@mai-ui/kumo-theme": "^0.0.1",
+    "@mai-ui/fluent-theme": "^0.0.1",
+    "@mai-ui/copilot-theme": "^0.0.1",
     "dompurify": "^3.1.7",
     "moment": "^2.30.1",
     "showdown": "^2.1.0"

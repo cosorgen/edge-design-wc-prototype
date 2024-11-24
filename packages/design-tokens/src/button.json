@@ -1,387 +1,298 @@
 [
   {
     "name": "backgroundControlBrandRest",
-    "smtc": "background-control-brand-rest",
     "f2": "colorBrandBackground"
   },
   {
     "name": "backgroundControlBrandHover",
-    "smtc": "background-control-brand-hover",
     "f2": "colorBrandBackgroundHover"
   },
   {
     "name": "backgroundControlBrandPressed",
-    "smtc": "background-control-brand-pressed",
     "f2": "colorBrandBackgroundPressed"
   },
   {
     "name": "backgroundControlNeutralRest",
-    "smtc": "background-control-neutral-rest",
     "f2": "colorNeutralBackground1"
   },
   {
     "name": "backgroundControlNeutralHover",
-    "smtc": "background-control-neutral-hover",
     "f2": "colorNeutralBackground1Hover"
   },
   {
     "name": "backgroundControlNeutralPressed",
-    "smtc": "background-control-neutral-pressed",
     "f2": "colorNeutralBackground1Pressed"
   },
   {
     "name": "backgroundControlNeutralDisabled",
-    "smtc": "background-control-neutral-disabled",
     "f2": "colorNeutralBackgroundDisabled"
   },
   {
     "name": "backgroundControlOutlineRest",
-    "smtc": "background-control-outline-rest",
     "f2": "colorNeutralBackground1"
   },
   {
     "name": "backgroundControlOutlineHover",
-    "smtc": "background-control-outline-hover",
     "f2": "colorNeutralBackground1Hover"
   },
   {
     "name": "backgroundControlOutlinePressed",
-    "smtc": "background-control-outline-pressed",
     "f2": "colorNeutralBackground1Pressed"
   },
   {
     "name": "backgroundControlOutlineDisabled",
-    "smtc": "background-control-outline-disabled",
     "f2": "colorNeutralBackgroundDisabled"
   },
   {
     "name": "backgroundControlSubtleRest",
-    "smtc": "background-control-subtle-rest",
     "f2": "colorSubtleBackground"
   },
   {
     "name": "backgroundControlSubtleHover",
-    "smtc": "background-control-subtle-hover",
     "f2": "colorSubtleBackgroundHover"
   },
   {
     "name": "backgroundControlSubtlePressed",
-    "smtc": "background-control-subtle-pressed",
     "f2": "colorSubtleBackgroundPressed"
   },
   {
     "name": "backgroundControlSubtleDisabled",
-    "smtc": "background-control-subtle-disabled",
     "f2": "colorNeutralBackgroundDisabled"
   },
   {
     "name": "foregroundControlNeutralPrimaryRest",
-    "smtc": "foreground-control-neutral-primary-rest",
     "f2": "colorNeutralForeground1"
   },
   {
     "name": "foregroundControlNeutralPrimaryHover",
-    "smtc": "foreground-control-neutral-primary-hover",
     "f2": "colorNeutralForeground1Hover"
   },
   {
     "name": "foregroundControlNeutralPrimaryPressed",
-    "smtc": "foreground-control-neutral-primary-pressed",
     "f2": "colorNeutralForeground1Pressed"
   },
   {
     "name": "foregroundControlOnTransparentRest",
-    "ctrl": true,
-    "smtc": "foreground-control-on-transparent-rest",
     "f2": "colorNeutralForeground2"
   },
   {
     "name": "foregroundControlOnTransparentHover",
-    "ctrl": true,
-    "smtc": "foreground-control-on-transparent-hover",
     "f2": "colorNeutralForeground2BrandHover"
   },
   {
     "name": "foregroundControlOnTransparentPressed",
-    "ctrl": true,
-    "smtc": "foreground-control-on-transparent-pressed",
     "f2": "colorNeutralForeground2BrandPressed"
   },
   {
     "name": "foregroundControlNeutralPrimaryDisabled",
-    "smtc": "foreground-control-neutral-primary-disabled",
     "f2": "colorNeutralForegroundDisabled"
   },
   {
     "name": "foregroundControlOnBrandRest",
-    "smtc": "foreground-control-on-brand-rest",
     "f2": "colorNeutralForegroundOnBrand"
   },
   {
     "name": "foregroundControlOnOutlineRest",
-    "optiona": "foreground-control-on-outline-rest",
-    "smtc": "foreground-control-neutral-primary-rest",
     "f2": "colorNeutralForeground1"
   },
   {
     "name": "foregroundControlOnOutlineHover",
-    "optiona": "foreground-control-on-outline-hover",
-    "smtc": "foreground-control-neutral-primary-hover",
     "f2": "colorNeutralForeground1Hover"
   },
   {
     "name": "foregroundControlOnOutlinePressed",
-    "optiona": "foreground-control-on-outline-pressed",
-    "smtc": "foreground-control-neutral-primary-pressed",
     "f2": "colorNeutralForeground1Pressed"
   },
   {
     "name": "foregroundControlOnOutlineDisabled",
-    "optiona": "foreground-control-on-outline-disabled",
-    "smtc": "foreground-control-neutral-primary-disabled",
     "f2": "colorNeutralForegroundDisabled"
   },
   {
     "name": "strokeControlOnNeutralRest",
-    "ctrl": true,
-    "smtc": "stroke-control-on-neutral-rest",
     "f2": "colorNeutralStroke1"
   },
   {
     "name": "strokeControlOnNeutralHover",
-    "ctrl": true,
-    "smtc": "stroke-control-on-neutral-hover",
     "f2": "colorNeutralStroke1Hover"
   },
   {
     "name": "strokeControlOnNeutralPressed",
-    "ctrl": true,
-    "smtc": "stroke-control-on-neutral-pressed",
     "f2": "colorNeutralStroke1Pressed"
   },
   {
     "name": "strokeControlOnNeutralDisabled",
-    "ctrl": true,
-    "smtc": "stroke-control-on-neutral-disabled",
     "f2": "colorNeutralStrokeDisabled"
   },
   {
     "name": "strokeControlOutlineRest",
-    "smtc": "stroke-control-outline-rest",
     "f2": "colorNeutralStroke1"
   },
   {
     "name": "strokeControlOutlineHover",
-    "smtc": "stroke-control-outline-hover",
     "f2": "colorNeutralStroke1Hover"
   },
   {
     "name": "strokeControlOutlinePressed",
-    "smtc": "stroke-control-outline-pressed",
     "f2": "colorNeutralStroke1Pressed"
   },
   {
     "name": "strokeControlOutlineDisabled",
-    "smtc": "stroke-control-outline-disabled",
     "f2": "colorNeutralStrokeDisabled"
   },
   {
     "name": "strokeWidthControlOutlineRest",
-    "optional": "stroke-width-control-outline-rest",
-    "smtc": "stroke-width-default",
     "f2": "strokeWidthThin"
   },
   {
     "name": "strokeWidthControlOutlineHover",
-    "optional": "stroke-width-control-outline-hover",
-    "smtc": "stroke-width-default",
     "f2": "strokeWidthThin"
   },
   {
     "name": "strokeWidthControlOutlinePressed",
-    "optional": "stroke-width-control-outline-pressed",
-    "smtc": "stroke-width-default",
     "f2": "strokeWidthThin"
   },
   {
     "name": "controlFocusInnerStrokeColor",
-    "smtc": "control-focus-inner-stroke-color",
     "f2": "colorStrokeFocus1"
   },
   {
     "name": "controlFocusOuterStrokeColor",
-    "smtc": "control-focus-outer-stroke-color",
     "f2": "colorStrokeFocus2"
   },
   {
     "name": "nullColor",
-    "smtc": "null-color",
     "f2": "colorTransparentBackground"
   },
   {
     "name": "textStyleDefaultRegularFontFamily",
-    "smtc": "text-style-default-regular-font-family",
     "f2": "fontFamilyBase"
   },
   {
     "name": "textRampBody2FontSize",
-    "smtc": "text-ramp-body-2-font-size",
     "f2": "fontSizeBase300"
   },
   {
     "name": "textControlButtonWeight",
-    "ctrl": true,
-    "smtc": "text-control-button-weight",
     "f2": "fontWeightSemibold"
   },
   {
     "name": "textRampBody2LineHeight",
-    "smtc": "text-ramp-body-2-line-height",
     "f2": "lineHeightBase300"
   },
   {
     "name": "paddingControlHorizontalDefault",
-    "smtc": "padding-control-horizontal-default",
     "f2": "spacingHorizontalM"
   },
   {
     "name": "gapControlDefault",
-    "smtc": "gap-control-default",
     "f2": "spacingHorizontalSNudge"
   },
   {
     "name": "controlFocusOuterStrokeWidth",
-    "smtc": "control-focus-outer-stroke-width",
     "f2": "strokeWidthThick"
   },
   {
     "name": "controlFocusInnerStrokeWidth",
-    "smtc": "control-focus-inner-stroke-width",
     "f2": "strokeWidthThin"
   },
   {
     "name": "cornerControlRest",
-    "smtc": "corner-control-rest",
     "f2": "borderRadiusMedium"
   },
   {
     "name": "cornerControlHover",
-    "smtc": "corner-control-hover",
     "f2": "borderRadiusMedium"
   },
   {
     "name": "cornerControlPressed",
-    "smtc": "corner-control-pressed",
     "f2": "borderRadiusMedium"
   },
   {
     "name": "cornerSmallControlRest",
-    "smtc": "corner-small-control-rest",
     "f2": "borderRadiusSmall"
   },
   {
     "name": "cornerSmallControlHover",
-    "smtc": "corner-small-control-hover",
     "f2": "borderRadiusSmall"
   },
   {
     "name": "cornerSmallControlPressed",
-    "smtc": "corner-small-control-pressed",
     "f2": "borderRadiusSmall"
   },
   {
     "name": "cornerLargeControlRest",
-    "smtc": "corner-large-control-rest",
     "f2": "borderRadiusLarge"
   },
   {
     "name": "cornerLargeControlHover",
-    "smtc": "corner-large-control-hover",
     "f2": "borderRadiusLarge"
   },
   {
     "name": "cornerLargeControlPressed",
-    "smtc": "corner-large-control-pressed",
     "f2": "borderRadiusLarge"
   },
   {
     "name": "cornerControlCircular",
-    "smtc": "corner-control-circular",
     "f2": "borderRadiusCircular"
   },
   {
     "name": "cornerControlNone",
-    "smtc": "corner-control-none",
     "f2": "borderRadiusNone"
   },
   {
     "name": "gapSmallControlDefault",
-    "smtc": "gap-small-control-default",
     "f2": "spacingHorizontalXS"
   },
   {
     "name": "paddingSmallControlVertical",
-    "smtc": "padding-small-control-vertical",
     "f2": "spacingHorizontalS"
   },
   {
     "name": "textRampCaption1FontSize",
-    "smtc": "text-ramp-caption-1-font-size",
     "f2": "fontSizeBase200"
   },
   {
     "name": "textRampCaption1LineHeight",
-    "smtc": "text-ramp-caption-1-line-height",
     "f2": "lineHeightBase200"
   },
   {
     "name": "textRampCaption1FontWeight",
-    "smtc": "text-ramp-caption-1-font-weight",
     "f2": "fontWeightRegular"
   },
   {
     "name": "paddingLargeControlVertical",
-    "smtc": "padding-large-control-vertical",
     "f2": "spacingHorizontalL"
   },
   {
     "name": "textRampBody3FontSize",
-    "smtc": "text-ramp-body-3-font-size",
     "f2": "fontSizeBase400"
   },
   {
     "name": "textRampBody3LineHeight",
-    "smtc": "text-ramp-body-3-line-height",
     "f2": "lineHeightBase400"
   },
   {
     "name": "textRampBody3FontWeight",
-    "smtc": "text-ramp-body-3-font-weight",
     "f2": "fontWeightRegular"
   },
   {
     "name": "curveControlStateTransition",
-    "smtc": "curve-control-state-transition",
     "f2": "curveEasyEase"
   },
   {
     "name": "durationControlStateTransition",
-    "smtc": "duration-control-state-transition",
     "f2": "durationFaster"
   },
   {
     "name": "strokeControlNoneRest",
-    "smtc": "stroke-control-none-rest",
     "f2": "colorTransparentStroke"
   },
   {
     "name": "strokeControlNoneHover",
-    "smtc": "stroke-control-none-hover",
     "f2": "colorTransparentStroke"
   },
   {
     "name": "strokeControlNonePressed",
-    "smtc": "stroke-control-none-pressed",
     "f2": "colorTransparentStroke"
   }
 ]

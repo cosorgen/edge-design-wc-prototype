@@ -29,9 +29,6 @@
     },
     "./package.json": "./package.json"
   },
-  "dependencies": {
-    "@mai-ui/design-tokens": "^0.0.1"
-  },
   "scripts": {
     "build": "npm run clean && npm run build:tsc",
     "build:tsc": "tsc -p tsconfig.build.json",

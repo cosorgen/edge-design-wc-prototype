@@ -8,39 +8,34 @@
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { camelCaseToKebabCase } from '@mai-ui/utilities';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.resolve(path.dirname(__filename), '../');
 
 function getCSSVar(name, fallback, prefix) {
-  return `var(--${prefix ? `${prefix}-` : ''}${name}${fallback ? `, ${fallback}` : ''})`;
+  if (!name) return;
+
+  let output = '';
+  if (prefix) {
+    output += `${prefix}-`;
+  }
+  output += camelCaseToKebabCase(name);
+  if (fallback) {
+    output += `, ${fallback}`;
+  }
+  return `var(--${output})`;
 }
 
 function getExportConst(dependency) {
-  const startCSSString = `export const ${dependency.name} = "`;
-  const endCSSString = `";\n`;
-  let commentString = '';
-
+  let output = '';
   if (dependency.$comment) {
-    commentString = `// ${dependency.$comment}\n`;
+    output += `// ${dependency.$comment}\n`;
   }
-
-  if (dependency.smtc) {
-    if (dependency.ctrl) {
-      return `${commentString}${startCSSString}${getCSSVar(dependency.smtc, getCSSVar(dependency.smtc, getCSSVar(dependency.f2), 'smtc'), 'ctrl')}${endCSSString}`;
-    } else {
-      return `${commentString}${startCSSString}${getCSSVar(dependency.smtc, getCSSVar(dependency.f2), 'smtc')}${endCSSString}`;
-    }
-  } else {
-    return `${commentString}${startCSSString}${getCSSVar(dependency.f2)}${endCSSString}`;
-  }
-}
-
-function getExportCSS(dependency) {
-  const startCSSString = `export const ${dependency.name}Css = "`;
-  const endCSSString = `";\n`;
-
-  return `${startCSSString}--smtc-${dependency.smtc}: ${dependency.smtc_css}${endCSSString}`;
+  output += `export const ${dependency.name} = "`;
+  output += getCSSVar(dependency.name, getCSSVar(dependency.f2), 'smtc');
+  output += `";\n`;
+  return output;
 }
 
 function buildFile(component) {
@@ -68,11 +63,6 @@ function buildFile(component) {
       }
 
       content += getExportConst(dependency);
-
-      if (dependency.smtc_css) {
-        content += getExportCSS(dependency);
-      }
-
       names.push(name);
     });
 

@@ -1,10 +1,5 @@
 import { tokens as SMTC } from './tokens.js';
-
-export function camelCaseToKebabCase(str: string) {
-  return str
-    .replace(/[A-Z]/gm, (letter) => `-${letter.toLowerCase()}`)
-    .replace(/([0-9])[0-9]*/gm, (number) => `-${number}`);
-}
+import { camelCaseToKebabCase } from '@mai-ui/utilities';
 
 export function themeToTokensObject<T>(theme: T) {
   const tokens: Record<string, string> = {};
