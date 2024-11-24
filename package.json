@@ -7,8 +7,8 @@
   "author": "",
   "license": "MIT",
   "workspaces": [
-    "packages/component-framework",
     "packages/utilities",
+    "packages/component-framework",
     "packages/design-tokens",
     "packages/button",
     "packages/toggle-button",

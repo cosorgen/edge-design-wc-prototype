@@ -26,7 +26,6 @@ import {
   kumoDarkTheme,
   kumoLightThemeSolid,
   kumoDarkThemeSolid,
-  setThemeFor,
 } from '@mai-ui/kumo-theme';
 import {
   fluent2LightTheme,
@@ -34,6 +33,7 @@ import {
   fluent2LightThemeSolid,
   fluent2DarkThemeSolid,
 } from '@mai-ui/fluent-theme';
+import { setThemeFor } from '@mai-ui/component-framework';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';

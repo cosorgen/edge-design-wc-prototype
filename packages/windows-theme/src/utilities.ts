@@ -1,4 +1,4 @@
-export type PhoenixUtilityTokens = {
+export type WindowsUtilityTokens = {
   colorScrollbarForeground: string;
   colorScrollbarForegroundHover: string;
   colorScrollbarForegroundPressed: string;
@@ -6,7 +6,7 @@ export type PhoenixUtilityTokens = {
   colorBackgroundOverlay: string;
 };
 
-export const lightThemeUtilities: PhoenixUtilityTokens = {
+export const lightThemeUtilityTokens: WindowsUtilityTokens = {
   colorScrollbarForeground: '#00000072',
   colorScrollbarForegroundHover: '#0000009b',
   colorScrollbarForegroundPressed: '#0000009e',
@@ -14,7 +14,7 @@ export const lightThemeUtilities: PhoenixUtilityTokens = {
   colorBackgroundOverlay: '#00000066',
 };
 
-export const darkThemeUtilities: PhoenixUtilityTokens = {
+export const darkThemeUtilityTokens: WindowsUtilityTokens = {
   colorScrollbarForeground: '#ffffff8b',
   colorScrollbarForegroundHover: '#ffffff8b',
   colorScrollbarForegroundPressed: '#ffffff8b',
@@ -22,7 +22,7 @@ export const darkThemeUtilities: PhoenixUtilityTokens = {
   colorBackgroundOverlay: '#00000080',
 };
 
-export const hcThemeUtilities: PhoenixUtilityTokens = {
+export const hcThemeUtilityTokens: WindowsUtilityTokens = {
   colorScrollbarForeground: '#000000',
   colorScrollbarForegroundHover: '#ffffff',
   colorScrollbarForegroundPressed: '#ffffff',

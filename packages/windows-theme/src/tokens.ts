@@ -1,5 +1,5 @@
 import { themeToTokensObject } from '@mai-ui/design-tokens/utilities.js';
-import { phoenixLightThemeWin11 } from './themes.js';
+import { windowsLightTheme } from './themes.js';
 
 // Types
 export {
@@ -21,4 +21,4 @@ export {
 } from '@fluentui/tokens';
 
 // Huge tokens object
-export const tokens = themeToTokensObject(phoenixLightThemeWin11);
+export const tokens = themeToTokensObject(windowsLightTheme);

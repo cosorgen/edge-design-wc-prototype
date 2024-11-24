@@ -1,4 +1,4 @@
-export declare interface PhoenixShadowTokens {
+export declare interface WindowsShadowTokens {
   shadowBaseX: string;
   shadowDiffuseX: string;
 
@@ -40,7 +40,7 @@ export declare interface PhoenixShadowTokens {
   shadowBaseLayerDiffuseBlur: string;
 }
 
-export const lightThemeShadows: PhoenixShadowTokens = {
+export const lightThemeShadowTokens: WindowsShadowTokens = {
   shadowBaseX: '0px',
   shadowDiffuseX: '0px',
 
@@ -84,7 +84,7 @@ export const lightThemeShadows: PhoenixShadowTokens = {
   shadowBaseLayerDiffuseBlur: '64px',
 };
 
-export const darkThemeShadows: PhoenixShadowTokens = {
+export const darkThemeShadowTokens: WindowsShadowTokens = {
   shadowBaseX: '0px',
   shadowDiffuseX: '0px',
 

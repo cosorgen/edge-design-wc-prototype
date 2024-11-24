@@ -8,11 +8,8 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  copilotLightTheme,
-  copilotDarkTheme,
-  setThemeFor,
-} from '@mai-ui/copilot-theme';
+import { copilotLightTheme, copilotDarkTheme } from '@mai-ui/copilot-theme';
+import { setThemeFor } from '@mai-ui/component-framework';
 
 const template = html` <slot></slot> `;
 

@@ -1,7 +1,7 @@
-import { brandVariants } from './brandVariants.js';
+import { brandWeb } from './brandVariants.js';
 import { type ColorTokens } from '@fluentui/tokens';
 
-export declare interface PhoenixColorTokens {
+export declare interface WindowsColorTokens {
   colorBrandForeground1Hover: string;
   colorBrandForeground1Pressed: string;
   colorBrandForeground1Selected: string;
@@ -42,14 +42,14 @@ export declare interface PhoenixColorTokens {
   colorLayerOmniboxBackgroundHover: string;
 }
 
-export const lightThemeColors: PhoenixColorTokens = {
-  colorBrandForeground1Hover: brandVariants[70],
-  colorBrandForeground1Pressed: brandVariants[60],
-  colorBrandForeground1Selected: brandVariants[80],
-  colorBrandForeground2Selected: brandVariants[70],
-  colorBrandStroke: brandVariants[80],
-  colorBrandStrokeHover: brandVariants[70],
-  colorBrandStrokePressed: brandVariants[60],
+export const lightThemeColorTokens: WindowsColorTokens = {
+  colorBrandForeground1Hover: brandWeb[70],
+  colorBrandForeground1Pressed: brandWeb[60],
+  colorBrandForeground1Selected: brandWeb[80],
+  colorBrandForeground2Selected: brandWeb[70],
+  colorBrandStroke: brandWeb[80],
+  colorBrandStrokeHover: brandWeb[70],
+  colorBrandStrokePressed: brandWeb[60],
   colorLabelBerry: '#C239B3',
   colorLabelBlue: '#296EEB',
   colorLabelBrass: '#986F0B',
@@ -83,12 +83,12 @@ export const lightThemeColors: PhoenixColorTokens = {
   colorLayerOmniboxBackgroundHover: '#EBEEF1',
 };
 
-export const lightThemeSolidColors: Partial<PhoenixColorTokens> = {
+export const lightThemeSolidColorTokens: Partial<WindowsColorTokens> = {
   colorLayerBackgroundBase: '#FAFAFA',
 };
 
-export const lightThemeColorOverrides: Partial<ColorTokens> = {
-  colorBrandForeground2Pressed: brandVariants[40],
+export const lightThemeColorTokenOverrides: Partial<ColorTokens> = {
+  colorBrandForeground2Pressed: brandWeb[40],
   colorNeutralBackground1: '#FFFFFFB3',
   colorNeutralBackground1Hover: '#0000000A',
   colorNeutralBackground1Pressed: '#0000001F',
@@ -145,14 +145,14 @@ export const lightThemeColorOverrides: Partial<ColorTokens> = {
   colorNeutralCardBackgroundHover: '#FAFAFA',
 };
 
-export const darkThemeColors: PhoenixColorTokens = {
-  colorBrandForeground1Hover: brandVariants[120],
-  colorBrandForeground1Pressed: brandVariants[130],
-  colorBrandForeground1Selected: brandVariants[110],
-  colorBrandForeground2Selected: brandVariants[120],
-  colorBrandStroke: brandVariants[110],
-  colorBrandStrokeHover: brandVariants[120],
-  colorBrandStrokePressed: brandVariants[130],
+export const darkThemeColorTokens: WindowsColorTokens = {
+  colorBrandForeground1Hover: brandWeb[120],
+  colorBrandForeground1Pressed: brandWeb[130],
+  colorBrandForeground1Selected: brandWeb[110],
+  colorBrandForeground2Selected: brandWeb[120],
+  colorBrandStroke: brandWeb[110],
+  colorBrandStrokeHover: brandWeb[120],
+  colorBrandStrokePressed: brandWeb[130],
   colorLabelBerry: '#CF87DA',
   colorLabelBlue: '#69A1FA',
   colorLabelBrass: '#C1A256',
@@ -186,18 +186,18 @@ export const darkThemeColors: PhoenixColorTokens = {
   colorLayerOmniboxBackgroundHover: '#000000',
 };
 
-export const darkThemeSolidColors: Partial<PhoenixColorTokens> = {
+export const darkThemeSolidColorTokens: Partial<WindowsColorTokens> = {
   colorLayerBackgroundBase: '#1F1F1F',
 };
 
-export const darkThemeColorOverrides: Partial<ColorTokens> = {
-  colorBrandBackground2: brandVariants[40],
-  colorBrandForeground1: brandVariants[110],
-  colorBrandForeground2: brandVariants[120],
-  colorBrandForeground2Pressed: brandVariants[110],
-  colorBrandForegroundLink: brandVariants[110],
-  colorBrandForegroundLinkHover: brandVariants[120],
-  colorBrandForegroundLinkSelected: brandVariants[110],
+export const darkThemeColorTokenOverrides: Partial<ColorTokens> = {
+  colorBrandBackground2: brandWeb[40],
+  colorBrandForeground1: brandWeb[110],
+  colorBrandForeground2: brandWeb[120],
+  colorBrandForeground2Pressed: brandWeb[110],
+  colorBrandForegroundLink: brandWeb[110],
+  colorBrandForegroundLinkHover: brandWeb[120],
+  colorBrandForegroundLinkSelected: brandWeb[110],
   colorNeutralBackground1: '#FFFFFF0B',
   colorNeutralBackground1Hover: '#FFFFFF22',
   colorNeutralBackground1Pressed: '#FFFFFF00',

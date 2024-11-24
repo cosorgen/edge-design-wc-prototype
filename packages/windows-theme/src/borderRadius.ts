@@ -9,7 +9,7 @@ export declare interface WindowsBorderRadiusTokens {
   borderRadiusLayerPill: string;
 }
 
-export const win11BorderRadius: WindowsBorderRadiusTokens = {
+export const borderRadiusTokens: WindowsBorderRadiusTokens = {
   borderRadiusLayerApp: '8px',
   borderRadiusLayerBase: '8px',
   borderRadiusLayerCard: '8px',
@@ -18,6 +18,6 @@ export const win11BorderRadius: WindowsBorderRadiusTokens = {
   borderRadiusLayerPill: '99px',
 };
 
-export const win11BorderRadiusOverrides: Partial<BorderRadiusTokens> = {
+export const borderRadiusTokenOverrides: Partial<BorderRadiusTokens> = {
   borderRadiusLarge: '8px',
 };

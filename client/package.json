@@ -9,6 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "@microsoft/fast-element": "^2.0.0",
+    "@mai-ui/component-framework": "^0.0.1",
     "@mai-ui/button": "^0.0.1",
     "@mai-ui/toggle-button": "^0.0.1",
     "@mai-ui/phoenix-theme": "^0.0.1",

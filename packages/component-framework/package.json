@@ -33,5 +33,8 @@
     "build": "npm run clean && npm run build:tsc",
     "build:tsc": "tsc -p tsconfig.build.json",
     "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "@mai-ui/utilities": "^0.0.1"
   }
 }

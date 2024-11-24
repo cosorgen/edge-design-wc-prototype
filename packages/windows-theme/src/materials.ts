@@ -1,4 +1,4 @@
-export declare interface PhoenixMaterialTokens {
+export declare interface WindowsMaterialTokens {
   acrylicBackgroundBlur: string;
   acrylicBackgroundLuminosity: string;
   acrylicBackgroundColor: string;
@@ -13,7 +13,7 @@ export declare interface PhoenixMaterialTokens {
   tabBarBackgroundNormal: string;
 }
 
-export const lightThemeMaterials: PhoenixMaterialTokens = {
+export const lightThemeMaterialTokens: WindowsMaterialTokens = {
   acrylicBackgroundBlur: '60px',
   acrylicBackgroundLuminosity: '#FCFCFCD9',
   acrylicBackgroundColor: '#00000000',
@@ -28,7 +28,7 @@ export const lightThemeMaterials: PhoenixMaterialTokens = {
   tabBarBackgroundNormal: '#00000000',
 };
 
-export const lightThemeSolidMaterials: PhoenixMaterialTokens = {
+export const lightThemeSolidMaterialTokens: WindowsMaterialTokens = {
   acrylicBackgroundBlur: '0px',
   acrylicBackgroundLuminosity: '#00000000',
   acrylicBackgroundColor: '#00000000',
@@ -43,7 +43,7 @@ export const lightThemeSolidMaterials: PhoenixMaterialTokens = {
   tabBarBackgroundNormal: '#DCDEE0',
 };
 
-export const darkThemeMaterials: PhoenixMaterialTokens = {
+export const darkThemeMaterialTokens: WindowsMaterialTokens = {
   acrylicBackgroundBlur: '60px',
   acrylicBackgroundLuminosity: '#2C2C2CF5',
   acrylicBackgroundColor: '#2C2C2C26',
@@ -58,7 +58,7 @@ export const darkThemeMaterials: PhoenixMaterialTokens = {
   tabBarBackgroundNormal: '#00000000',
 };
 
-export const darkThemeSolidMaterials: PhoenixMaterialTokens = {
+export const darkThemeSolidMaterialTokens: WindowsMaterialTokens = {
   acrylicBackgroundBlur: '0px',
   acrylicBackgroundLuminosity: '#00000000',
   acrylicBackgroundColor: '#00000000',

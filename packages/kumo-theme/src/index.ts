@@ -96,5 +96,3 @@ export {
   createHighContrastTheme,
   type Theme,
 } from './themes.js';
-
-export { setThemeFor } from './setTheme.js';

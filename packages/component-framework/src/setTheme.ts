@@ -1,16 +1,14 @@
+import { camelCaseToKebabCase } from '@mai-ui/utilities';
+
 export function setThemeFor<Theme>(
   element: Document | ShadowRoot = document,
   theme: Theme,
 ) {
   const sheet = new CSSStyleSheet();
-  const tokens = Object.entries(theme as Record<string, string>);
-  let data = '';
-  tokens.forEach(([name, value]) => {
-    data +=
-      value.replace('var(', '').replace(')', '') +
-      ':' +
-      theme[name as keyof Theme] +
-      ';';
+  const tokens = Object.keys(theme as Record<string, unknown>);
+  let data = ''; 
+  tokens.forEach((name) => {
+    data += `--${camelCaseToKebabCase(name)}: ${String(theme[name as keyof Theme])};`;
   });
   sheet.replaceSync(
     `:${element instanceof ShadowRoot ? 'host' : 'root'} {${data}}`,
