@@ -1,15 +1,13 @@
-import { tokens } from './tokens.js';
-
 export function setThemeFor<Theme>(
   element: Document | ShadowRoot = document,
   theme: Theme,
 ) {
   const sheet = new CSSStyleSheet();
-  const tokenNames = Object.keys(theme as Record<string, unknown>);
+  const tokens = Object.entries(theme as Record<string, string>);
   let data = '';
-  tokenNames.forEach((name) => {
+  tokens.forEach(([name, value]) => {
     data +=
-      tokens[name].replace('var(', '').replace(')', '') +
+      value.replace('var(', '').replace(')', '') +
       ':' +
       theme[name as keyof Theme] +
       ';';
@@ -18,4 +16,8 @@ export function setThemeFor<Theme>(
     `:${element instanceof ShadowRoot ? 'host' : 'root'} {${data}}`,
   );
   element.adoptedStyleSheets.push(sheet);
+}
+
+export function setTheme<Theme>(theme: Theme) {
+  setThemeFor(document, theme);
 }

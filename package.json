@@ -16,6 +16,7 @@
     "packages/kumo-theme",
     "packages/fluent-theme",
     "packages/copilot-theme",
+    "packages/windows-theme",
     "client",
     "server"
   ],
