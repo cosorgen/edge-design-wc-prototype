@@ -26,7 +26,7 @@ esbuild
     const exportMatches = fs
       .readFileSync(join(__dirname, '../dist/esm/index.js'), 'utf8')
       .match(/export\s*{.+};/s)[0]
-      .matchAll(/\s+(.+),/gm);
+      .matchAll(/^\s+(.+[^,]),?$/gm);
 
     for (const match of exportMatches) {
       exportList.push(match[1]);

@@ -1,4 +1,3 @@
-import { setTheme as PUISetTheme } from '@phoenixui/web-components';
 import {
   Theme,
   phoenixDarkThemeSolidWin11,
@@ -6,7 +5,6 @@ import {
   phoenixLightThemeSolidWin11,
   phoenixLightThemeWin11,
 } from '@mai-ui/phoenix-theme';
-import { OSTheme, OSTransparency } from '../services/windowsService.js';
 
 export type WindowsTokens = {
   colorShellFillTaksbarItemPrimary: string;
@@ -101,14 +99,6 @@ const windowsDarkThemeSolid: WindowsTheme = {
   colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
   colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
 };
-
-export function setTheme(theme: OSTheme, transparency: OSTransparency) {
-  const themes = {
-    light: { reduced: windowsLightThemeSolid, normal: windowsLightTheme },
-    dark: { reduced: windowsDarkThemeSolid, normal: windowsDarkTheme },
-  };
-  PUISetTheme(themes[theme][transparency]);
-}
 
 export const colorShellFillTaksbarItemPrimary =
   'var(--colorShellFillTaksbarItemPrimary)';

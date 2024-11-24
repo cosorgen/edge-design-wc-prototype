@@ -46,7 +46,6 @@ export declare type Theme = FUITheme &
   WindowsBorderRadiusTokens &
   WindowsUtilityTokens;
 
-// Windows 11 with support for transparent materials
 export const windowsLightTheme: Theme = {
   ...createLightTheme(brandWeb),
   ...lightThemeColorTokenOverrides,
@@ -71,7 +70,6 @@ export const windowsDarkTheme: Theme = {
   ...darkThemeUtilityTokens,
 };
 
-// Windows 11 **without** support for transparent materials
 export const windowsLightThemeSolid: Theme = {
   ...createLightTheme(brandWeb),
   ...lightThemeColorTokenOverrides,

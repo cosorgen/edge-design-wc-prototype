@@ -90,7 +90,6 @@ const components = fs
 // Write out each component file
 let mainFileContent = '';
 components.forEach((component) => {
-  console.log(`Building ${component}...`);
   const fileContent = buildFile(component);
   mainFileContent += fileContent;
   writeFile(component, fileContent);

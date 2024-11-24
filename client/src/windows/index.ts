@@ -14,8 +14,12 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   colorNeutralForeground1,
-} from '@mai-ui/phoenix-theme';
-import { setTheme } from './designSystem.js';
+  windowsLightTheme,
+  windowsDarkTheme,
+  windowsDarkThemeSolid,
+  windowsLightThemeSolid,
+} from '@mai-ui/windows-theme';
+import { setThemeFor } from '@mai-ui/component-framework';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/task-bar.js';
@@ -131,7 +135,11 @@ export class WindowsShell extends FASTElement {
   }
 
   setTheme() {
-    setTheme(this.ws.theme, this.ws.transparency);
+    const themes = {
+      light: { reduced: windowsLightThemeSolid, normal: windowsLightTheme },
+      dark: { reduced: windowsDarkThemeSolid, normal: windowsDarkTheme },
+    };
+    setThemeFor(this.shadowRoot!, themes[this.ws.theme][this.ws.transparency]);
   }
 
   handleTaskbarButtonClick(appName: string) {
