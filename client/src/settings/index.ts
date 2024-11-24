@@ -27,19 +27,12 @@ import {
   colorSubtleBackgroundHover,
   colorSubtleBackgroundSelected,
   colorBrandForeground1,
-  spacingVerticalL,
   borderRadiusSmall,
   spacingHorizontalM,
   spacingVerticalS,
 } from '@mai-ui/phoenix-theme';
 import '../windows/controls/mica-material.js';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/label.js';
-import '@phoenixui/web-components/radio-group.js';
-import '@phoenixui/web-components/radio.js';
-import '@phoenixui/web-components/text-input.js';
-import '@phoenixui/web-components/switch.js';
-import '@phoenixui/web-components/field.js';
+import '@mai-ui/button/define.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -49,7 +42,6 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
-import { Checkbox } from '@phoenixui/web-components';
 import { TabService } from '#servicestabService.js';
 import { CopilotService } from '#servicescopilotService.js';
 
@@ -561,43 +553,46 @@ export class WindowsSettings extends FASTElement {
 
   toggleShowLegacyCopilot() {
     this.ss.setShowLegacyCopilot(
-      (this.shadowRoot?.querySelector('#legacy-copilot') as Checkbox)
+      (this.shadowRoot?.querySelector('#legacy-copilot') as HTMLInputElement)
         ?.checked || false,
     );
   }
 
   toggleShowCopilotNTP() {
     this.ss.setShowCopilotNTP(
-      (this.shadowRoot?.querySelector('#show-copilot-ntp') as Checkbox)
+      (this.shadowRoot?.querySelector('#show-copilot-ntp') as HTMLInputElement)
         ?.checked || false,
     );
   }
 
   toggleTruncateUrl() {
     this.ss.setTruncateURL(
-      (this.shadowRoot?.querySelector('#truncate-url') as Checkbox)?.checked ||
-        false,
+      (this.shadowRoot?.querySelector('#truncate-url') as HTMLInputElement)
+        ?.checked || false,
     );
   }
 
   toggleShowLegacyNewTab() {
     this.ss.setShowLegacyNewTab(
-      (this.shadowRoot?.querySelector('#legacy-newtab') as Checkbox)?.checked ||
-        false,
+      (this.shadowRoot?.querySelector('#legacy-newtab') as HTMLInputElement)
+        ?.checked || false,
     );
   }
 
   toggleshowMenusInL1() {
     this.ss.setShowMenusInL1(
-      (this.shadowRoot?.querySelector('#show-menus-l0') as Checkbox)?.checked ||
-        false,
+      (this.shadowRoot?.querySelector('#show-menus-l0') as HTMLInputElement)
+        ?.checked || false,
     );
   }
 
   toggleFullWidthOmnibox() {
     this.ss.setFullWidthOmnibox(
-      (this.shadowRoot?.querySelector('#full-width-omnibox') as Checkbox)
-        ?.checked || false,
+      (
+        this.shadowRoot?.querySelector(
+          '#full-width-omnibox',
+        ) as HTMLInputElement
+      )?.checked || false,
     );
   }
 
@@ -633,15 +628,18 @@ export class WindowsSettings extends FASTElement {
 
   toggleShowComposerHint() {
     this.cs.setShowHint(
-      (this.shadowRoot?.querySelector('#composer-hint') as Checkbox)?.checked ||
-        false,
+      (this.shadowRoot?.querySelector('#composer-hint') as HTMLInputElement)
+        ?.checked || false,
     );
   }
 
   toggleAutoOpenComposer() {
     this.cs.setAutoOpen(
-      (this.shadowRoot?.querySelector('#composer-auto-open') as Checkbox)
-        ?.checked || false,
+      (
+        this.shadowRoot?.querySelector(
+          '#composer-auto-open',
+        ) as HTMLInputElement
+      )?.checked || false,
     );
   }
 
@@ -663,7 +661,7 @@ export class WindowsSettings extends FASTElement {
       (
         this.shadowRoot?.querySelector(
           '#copilot-sidepane-background',
-        ) as Checkbox
+        ) as HTMLInputElement
       )?.checked || false,
     );
   }
