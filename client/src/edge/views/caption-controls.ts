@@ -10,7 +10,7 @@ import {
   colorShellFillCaptionControlPrimaryPressed,
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
-} from '../../windows/designSystem.js';
+} from '@mai-ui/windows-theme';
 import {
   borderRadiusCircular,
   spacingHorizontalS,

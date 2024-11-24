@@ -4,7 +4,7 @@ import {
   durationSlow,
   shadow28,
   shadowBaseLayer,
-} from '@mai-ui/phoenix-theme';
+} from '@mai-ui/windows-theme';
 import {
   FASTElement,
   attr,

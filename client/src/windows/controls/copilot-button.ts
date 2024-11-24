@@ -2,11 +2,9 @@ import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import {
   borderRadiusSmall,
   colorNeutralForeground1,
-} from '@mai-ui/phoenix-theme';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@mai-ui/windows-theme';
 
 const template = html<CopilotButton>`
   <button>

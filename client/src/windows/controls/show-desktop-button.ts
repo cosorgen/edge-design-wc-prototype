@@ -1,9 +1,10 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, spacingHorizontalM } from '@mai-ui/phoenix-theme';
 import {
+  borderRadiusSmall,
+  spacingHorizontalM,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@mai-ui/windows-theme';
 
 const styles = css`
   button {

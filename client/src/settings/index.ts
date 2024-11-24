@@ -5,6 +5,8 @@ import {
   customElement,
   observable,
 } from '@microsoft/fast-element';
+import '../windows/controls/mica-material.js';
+import '@mai-ui/button/define.js';
 import {
   borderRadiusMedium,
   colorBrandStroke,
@@ -30,15 +32,11 @@ import {
   borderRadiusSmall,
   spacingHorizontalM,
   spacingVerticalS,
-} from '@mai-ui/phoenix-theme';
-import '../windows/controls/mica-material.js';
-import '@mai-ui/button/define.js';
-import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
-} from '../windows/designSystem.js';
+} from '@mai-ui/windows-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';

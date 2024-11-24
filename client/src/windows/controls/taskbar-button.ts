@@ -1,6 +1,7 @@
 import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, strokeWidthThin } from '@mai-ui/phoenix-theme';
 import {
+  borderRadiusSmall,
+  strokeWidthThin,
   colorShellFillTaskbarItemIndicator,
   colorShellFillTaksbarItemPrimary,
   colorShellFillTaksbarItemSecondary,
@@ -8,7 +9,7 @@ import {
   colorShellStrokeTaskbarItemSecondary,
   colorShellStrokeTaskbarItemQuinary,
   colorFillAccent,
-} from '../designSystem.js';
+} from '@mai-ui/windows-theme';
 
 const template = html`
   <button>

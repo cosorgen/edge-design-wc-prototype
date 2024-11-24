@@ -19,5 +19,7 @@ export const borderRadiusTokens: WindowsBorderRadiusTokens = {
 };
 
 export const borderRadiusTokenOverrides: Partial<BorderRadiusTokens> = {
-  borderRadiusLarge: '8px',
+  borderRadiusSmall: '4px',
+  borderRadiusMedium: '8px',
+  borderRadiusLarge: '16px',
 };

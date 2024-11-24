@@ -4,6 +4,7 @@ export type WindowsUtilityTokens = {
   colorScrollbarForegroundPressed: string;
   colorScrollbarOverlay: string;
   colorBackgroundOverlay: string;
+  desktopBackground: string;
 };
 
 export const lightThemeUtilityTokens: WindowsUtilityTokens = {
@@ -12,6 +13,7 @@ export const lightThemeUtilityTokens: WindowsUtilityTokens = {
   colorScrollbarForegroundPressed: '#0000009e',
   colorScrollbarOverlay: '#00000080',
   colorBackgroundOverlay: '#00000066',
+  desktopBackground: 'url(img/windows/desktopLight.jpg)',
 };
 
 export const darkThemeUtilityTokens: WindowsUtilityTokens = {
@@ -20,6 +22,7 @@ export const darkThemeUtilityTokens: WindowsUtilityTokens = {
   colorScrollbarForegroundPressed: '#ffffff8b',
   colorScrollbarOverlay: '#ffffff99',
   colorBackgroundOverlay: '#00000080',
+  desktopBackground: 'url(img/windows/desktopDark.jpg)',
 };
 
 export const hcThemeUtilityTokens: WindowsUtilityTokens = {
@@ -28,4 +31,5 @@ export const hcThemeUtilityTokens: WindowsUtilityTokens = {
   colorScrollbarForegroundPressed: '#ffffff',
   colorScrollbarOverlay: '#00000080',
   colorBackgroundOverlay: '#00000080',
+  desktopBackground: 'url(img/windows/desktopDark.jpg)',
 };

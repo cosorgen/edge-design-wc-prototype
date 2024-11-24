@@ -13,11 +13,9 @@ import {
   fontWeightRegular,
   lineHeightBase200,
   spacingHorizontalS,
-} from '@mai-ui/phoenix-theme';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@mai-ui/windows-theme';
 
 const template = html<ClockWidget>`
   <button>

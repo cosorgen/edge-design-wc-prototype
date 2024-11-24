@@ -4,7 +4,7 @@ import {
   acrylicBackgroundColor,
   acrylicBackgroundLuminosity,
   acrylicBackgroundNormal,
-} from '@phoenixui/themes';
+} from '@mai-ui/windows-theme';
 
 const template = html<AcrylicMaterial>`
   <div id="luminosity"></div>

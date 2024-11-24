@@ -34,12 +34,17 @@ export declare interface WindowsColorTokens {
   colorNeutralBackgroundFloatingPressed: string;
   colorNeutralBackgroundFloatingSelected: string;
   colorNeutralBackgroundFloatingDisabled: string;
-  colorAiFlair1: string;
-  colorAiFlair2: string;
-  colorAiFlair3: string;
-  colorLayerBackgroundPillMenu: string;
-  colorLayerOmniboxBackground: string;
-  colorLayerOmniboxBackgroundHover: string;
+  colorShellFillCaptionControlPrimaryHover: string;
+  colorShellFillCaptionControlPrimaryPressed: string;
+  colorShellForegroundCaptionControlPrimaryHover: string;
+  colorShellForegroundCaptionControlPrimaryPressed: string;
+  colorShellFillTaksbarItemPrimary: string;
+  colorShellFillTaksbarItemSecondary: string;
+  colorShellFillTaksbarItemTeritary: string;
+  colorShellStrokeTaskbarItemQuinary: string;
+  colorShellStrokeTaskbarItemSecondary: string;
+  colorShellFillTaskbarItemIndicator: string;
+  colorFillAccent: string;
 }
 
 export const lightThemeColorTokens: WindowsColorTokens = {
@@ -75,12 +80,17 @@ export const lightThemeColorTokens: WindowsColorTokens = {
   colorNeutralForegroundDisabledOnBrand: '#FFFFFF85',
   colorNeutralForegroundHint: '#0000008F',
   colorNeutralForegroundOnLabel: '#FFFFFF',
-  colorAiFlair1: '#296EEB',
-  colorAiFlair2: '#6CEBE2',
-  colorAiFlair3: '#34CFA9',
-  colorLayerBackgroundPillMenu: '#ffffff80',
-  colorLayerOmniboxBackground: '#F1F3F6',
-  colorLayerOmniboxBackgroundHover: '#EBEEF1',
+  colorShellFillTaksbarItemPrimary: '#FFFFFFB2',
+  colorShellFillTaksbarItemSecondary: '#FFFFFF80',
+  colorShellFillTaksbarItemTeritary: '#FFFFFF4D',
+  colorShellStrokeTaskbarItemSecondary: '#0000000f',
+  colorShellStrokeTaskbarItemQuinary: '#00000005',
+  colorShellFillTaskbarItemIndicator: '#00000070',
+  colorFillAccent: '#005FB8',
+  colorShellFillCaptionControlPrimaryHover: '#C42B1C',
+  colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
+  colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
+  colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
 };
 
 export const lightThemeSolidColorTokens: Partial<WindowsColorTokens> = {
@@ -178,12 +188,17 @@ export const darkThemeColorTokens: WindowsColorTokens = {
   colorNeutralBackgroundFloatingPressed: '#1F1F1F',
   colorNeutralBackgroundFloatingSelected: '#1F1F1F',
   colorNeutralBackgroundFloatingDisabled: '#141414',
-  colorAiFlair1: '#4D8DFA',
-  colorAiFlair2: '#6CEBE2',
-  colorAiFlair3: '#34CFA9',
-  colorLayerBackgroundPillMenu: '#2C2C2C',
-  colorLayerOmniboxBackground: '#0E0E0E',
-  colorLayerOmniboxBackgroundHover: '#000000',
+  colorShellFillTaksbarItemPrimary: '#FFFFFF15',
+  colorShellFillTaksbarItemSecondary: '#FFFFFF0F',
+  colorShellFillTaksbarItemTeritary: '#FFFFFF0B',
+  colorShellStrokeTaskbarItemSecondary: '#FFFFFF1A',
+  colorShellStrokeTaskbarItemQuinary: '#FFFFFF0F',
+  colorShellFillTaskbarItemIndicator: '#FFFFFF63',
+  colorFillAccent: '#005FB8',
+  colorShellFillCaptionControlPrimaryHover: '#C42B1C',
+  colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
+  colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
+  colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
 };
 
 export const darkThemeSolidColorTokens: Partial<WindowsColorTokens> = {

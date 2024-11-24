@@ -4,11 +4,9 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   colorNeutralForeground1,
-} from '@mai-ui/phoenix-theme';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@mai-ui/windows-theme';
 
 const template = html<SystemTray>`
   <button>

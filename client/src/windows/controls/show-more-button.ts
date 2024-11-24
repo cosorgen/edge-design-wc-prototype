@@ -3,11 +3,9 @@ import {
   borderRadiusSmall,
   colorNeutralForeground1,
   spacingHorizontalXS,
-} from '@mai-ui/phoenix-theme';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@mai-ui/windows-theme';
 
 const template = html<ShowMoreButton>`
   <button>
