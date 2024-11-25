@@ -25,17 +25,17 @@ export const curveTokenOverrides: Partial<CurveTokens> = {
 };
 
 export type KumoDurationTokens = {
-  durationControlStateTransition: string;
+  smtcDurationControlStateTransition: string;
 };
 
 export type KumoCurveTokens = {
-  curveControlStateTransition: string;
+  smtcCurveControlStateTransition: string;
 };
 
 export const kumoDurationTokens: KumoDurationTokens = {
-  durationControlStateTransition: '100ms',
+  smtcDurationControlStateTransition: '100ms',
 };
 
 export const kumoCurveTokens: KumoCurveTokens = {
-  curveControlStateTransition: 'cubic-bezier(0.33,0,0.67,1)',
+  smtcCurveControlStateTransition: 'cubic-bezier(0.33,0,0.67,1)',
 };

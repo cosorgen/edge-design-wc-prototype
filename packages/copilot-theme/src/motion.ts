@@ -25,17 +25,17 @@ export const curveTokenOverrides: Partial<CurveTokens> = {
 };
 
 export type CopilotDurationTokens = {
-  durationControlStateTransition: string;
+  smtcDurationControlStateTransition: string;
 };
 
 export type CopilotCurveTokens = {
-  curveControlStateTransition: string;
+  smtcCurveControlStateTransition: string;
 };
 
 export const copilotDurationTokens: CopilotDurationTokens = {
-  durationControlStateTransition: '100ms',
+  smtcDurationControlStateTransition: '100ms',
 };
 
 export const copilotCurveTokens: CopilotCurveTokens = {
-  curveControlStateTransition: 'cubic-bezier(0.33,0,0.67,1)',
+  smtcCurveControlStateTransition: 'cubic-bezier(0.33,0,0.67,1)',
 };

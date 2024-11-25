@@ -12,12 +12,12 @@ import {
   durationNormal,
   spacingHorizontalXL,
   spacingVerticalM,
-  textComposerInputFontSize,
-  textComposerInputLineHeight,
-  textComposerInputFontWeight,
-  textComposerInputFontVariationSettings,
-  foregroundComposerInputHint,
-  foregroundComposerInputRest,
+  smtcTextComposerInputFontSize,
+  smtcTextComposerInputLineHeight,
+  smtcTextComposerInputFontWeight,
+  smtcTextComposerInputFontVariationSettings,
+  smtcForegroundComposerInputHint,
+  smtcForegroundComposerInputRest,
 } from '@mai-ui/copilot-theme';
 import '@phoenixui/web-components/button.js';
 
@@ -87,15 +87,15 @@ const styles = css`
     overflow-y: auto;
     overflow-x: hidden;
 
-    font-size: ${textComposerInputFontSize};
-    line-height: ${textComposerInputLineHeight};
-    font-weight: ${textComposerInputFontWeight};
-    font-variation-settings: ${textComposerInputFontVariationSettings};
-    color: ${foregroundComposerInputRest};
+    font-size: ${smtcTextComposerInputFontSize};
+    line-height: ${smtcTextComposerInputLineHeight};
+    font-weight: ${smtcTextComposerInputFontWeight};
+    font-variation-settings: ${smtcTextComposerInputFontVariationSettings};
+    color: ${smtcForegroundComposerInputRest};
 
     &:empty::before {
       content: attr(placeholder);
-      color: ${foregroundComposerInputHint};
+      color: ${smtcForegroundComposerInputHint};
       cursor: text;
       white-space: nowrap;
       text-overflow: ellipsis;

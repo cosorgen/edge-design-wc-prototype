@@ -14,7 +14,7 @@ import {
   spacingVerticalXS,
   strokeWidthThin,
   typographyStyles,
-  cornerComposerRest,
+  smtcCornerComposerRest,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
@@ -100,7 +100,7 @@ const styles = css`
   }
 
   acrylic-material {
-    border-radius: ${cornerComposerRest};
+    border-radius: ${smtcCornerComposerRest};
     border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
     box-shadow: ${shadow28};
     overflow: hidden;

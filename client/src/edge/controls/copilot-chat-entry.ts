@@ -28,7 +28,7 @@ import {
   spacingVerticalXS,
   spacingVerticalXXS,
   typographyStyles,
-  backgroundControlBrandRest,
+  smtcBackgroundControlBrandRest,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '@phoenixui/web-components/spinner.js';
@@ -150,7 +150,7 @@ const styles = css`
     display: none;
     width: 64px;
     height: 64px;
-    background-color: ${backgroundControlBrandRest};
+    background-color: ${smtcBackgroundControlBrandRest};
     mask: url(img/edge/copilotLoading.gif);
     mask-size: cover;
     mask-repeat: no-repeat;

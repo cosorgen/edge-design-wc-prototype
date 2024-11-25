@@ -8,33 +8,33 @@ export const fontFamilyOverrides: Partial<FontFamilyTokens> = {
 };
 
 export type CopilotTypographyTokens = {
-  textControlButtonWeight: string;
-  textRampBody2FontSize: string;
-  textRampBody2LineHeight: string;
-  textRampBody3FontSize: string;
-  textRampBody3FontWeight: string;
-  textRampBody3LineHeight: string;
-  textRampCaption1FontSize: string;
-  textRampCaption1FontWeight: string;
-  textRampCaption1LineHeight: string;
-  textComposerInputFontSize: string;
-  textComposerInputFontWeight: string;
-  textComposerInputLineHeight: string;
-  textComposerInputFontVariationSettings: string;
+  smtcTextControlButtonWeight: string;
+  smtcTextRampBody2FontSize: string;
+  smtcTextRampBody2LineHeight: string;
+  smtcTextRampBody3FontSize: string;
+  smtcTextRampBody3FontWeight: string;
+  smtcTextRampBody3LineHeight: string;
+  smtcTextRampCaption1FontSize: string;
+  smtcTextRampCaption1FontWeight: string;
+  smtcTextRampCaption1LineHeight: string;
+  smtcTextComposerInputFontSize: string;
+  smtcTextComposerInputFontWeight: string;
+  smtcTextComposerInputLineHeight: string;
+  smtcTextComposerInputFontVariationSettings: string;
 };
 
 export const copilotTypographyTokens: CopilotTypographyTokens = {
-  textControlButtonWeight: '400',
-  textRampBody2FontSize: '16px',
-  textRampBody2LineHeight: '24px',
-  textRampBody3FontSize: '18px',
-  textRampBody3FontWeight: '400',
-  textRampBody3LineHeight: '28px',
-  textRampCaption1FontSize: '12px',
-  textRampCaption1FontWeight: '400',
-  textRampCaption1LineHeight: '16px',
-  textComposerInputFontSize: '17px',
-  textComposerInputFontWeight: '410',
-  textComposerInputLineHeight: '26px',
-  textComposerInputFontVariationSettings: '"opsz" 40, "wght" 410',
+  smtcTextControlButtonWeight: '400',
+  smtcTextRampBody2FontSize: '16px',
+  smtcTextRampBody2LineHeight: '24px',
+  smtcTextRampBody3FontSize: '18px',
+  smtcTextRampBody3FontWeight: '400',
+  smtcTextRampBody3LineHeight: '28px',
+  smtcTextRampCaption1FontSize: '12px',
+  smtcTextRampCaption1FontWeight: '400',
+  smtcTextRampCaption1LineHeight: '16px',
+  smtcTextComposerInputFontSize: '17px',
+  smtcTextComposerInputFontWeight: '410',
+  smtcTextComposerInputLineHeight: '26px',
+  smtcTextComposerInputFontVariationSettings: '"opsz" 40, "wght" 410',
 };

@@ -23,27 +23,27 @@ export const borderRadiusOverrides: Partial<BorderRadiusTokens> = {
 };
 
 export declare interface CopilotBorderRadiusTokens {
-  cornerControlRest: string;
-  cornerControlHover: string;
-  cornerControlPressed: string;
-  cornerSmallControlRest: string;
-  cornerSmallControlHover: string;
-  cornerSmallControlPressed: string;
-  cornerLargeControlRest: string;
-  cornerLargeControlHover: string;
-  cornerLargeControlPressed: string;
-  cornerComposerRest: string;
+  smtcCornerControlRest: string;
+  smtcCornerControlHover: string;
+  smtcCornerControlPressed: string;
+  smtcCornerSmallControlRest: string;
+  smtcCornerSmallControlHover: string;
+  smtcCornerSmallControlPressed: string;
+  smtcCornerLargeControlRest: string;
+  smtcCornerLargeControlHover: string;
+  smtcCornerLargeControlPressed: string;
+  smtcCornerComposerRest: string;
 }
 
 export const copilotBorderRadius: CopilotBorderRadiusTokens = {
-  cornerControlRest: '12px',
-  cornerControlHover: '12px',
-  cornerControlPressed: '12px',
-  cornerSmallControlRest: '8px',
-  cornerSmallControlHover: '8px',
-  cornerSmallControlPressed: '8px',
-  cornerLargeControlRest: '12px',
-  cornerLargeControlHover: '12px',
-  cornerLargeControlPressed: '12px',
-  cornerComposerRest: '28px',
+  smtcCornerControlRest: '12px',
+  smtcCornerControlHover: '12px',
+  smtcCornerControlPressed: '12px',
+  smtcCornerSmallControlRest: '8px',
+  smtcCornerSmallControlHover: '8px',
+  smtcCornerSmallControlPressed: '8px',
+  smtcCornerLargeControlRest: '12px',
+  smtcCornerLargeControlHover: '12px',
+  smtcCornerLargeControlPressed: '12px',
+  smtcCornerComposerRest: '28px',
 };

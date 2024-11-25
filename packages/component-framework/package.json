@@ -35,7 +35,6 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@mai-ui/utilities": "^0.0.1",
-    "@mai-ui/design-tokens": "^0.0.1"
+    "@mai-ui/utilities": "^0.0.1"
   }
 }

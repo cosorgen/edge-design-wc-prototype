@@ -19,27 +19,27 @@ export const phoenixBorderRadius: PhoenixBorderRadiusTokens = {
 };
 
 export declare interface KumoBorderRadiusTokens {
-  cornerControlRest: string;
-  cornerControlHover: string;
-  cornerControlPressed: string;
-  cornerSmallControlRest: string;
-  cornerSmallControlHover: string;
-  cornerSmallControlPressed: string;
-  cornerLargeControlRest: string;
-  cornerLargeControlHover: string;
-  cornerLargeControlPressed: string;
+  smtcCornerControlRest: string;
+  smtcCornerControlHover: string;
+  smtcCornerControlPressed: string;
+  smtcCornerSmallControlRest: string;
+  smtcCornerSmallControlHover: string;
+  smtcCornerSmallControlPressed: string;
+  smtcCornerLargeControlRest: string;
+  smtcCornerLargeControlHover: string;
+  smtcCornerLargeControlPressed: string;
 }
 
 export const kumoBorderRadius: KumoBorderRadiusTokens = {
-  cornerControlRest: '12px',
-  cornerControlHover: '12px',
-  cornerControlPressed: '12px',
-  cornerSmallControlRest: '8px',
-  cornerSmallControlHover: '8px',
-  cornerSmallControlPressed: '8px',
-  cornerLargeControlRest: '12px',
-  cornerLargeControlHover: '12px',
-  cornerLargeControlPressed: '12px',
+  smtcCornerControlRest: '12px',
+  smtcCornerControlHover: '12px',
+  smtcCornerControlPressed: '12px',
+  smtcCornerSmallControlRest: '8px',
+  smtcCornerSmallControlHover: '8px',
+  smtcCornerSmallControlPressed: '8px',
+  smtcCornerLargeControlRest: '12px',
+  smtcCornerLargeControlHover: '12px',
+  smtcCornerLargeControlPressed: '12px',
 };
 
 export const borderRadiusOverrides: Partial<BorderRadiusTokens> = {

@@ -7,29 +7,29 @@ export const phoenixSpacingTokens: PhoenixSpacingTokens = {
 };
 
 export type KumoSpacingTokens = {
-  gapControlDefault: string;
-  gapSmallControlDefault: string;
-  paddingControlHorizontalDefault: string;
-  paddingLargeControlVertical: string;
-  paddingSmallControlVertical: string;
-  strokeWidthControlOutlineHover: string;
-  strokeWidthControlOutlinePressed: string;
-  strokeWidthControlOutlineRest: string;
-  strokeWidthControlOutlineSelected: string;
-  controlFocusInnerStrokeWidth: string;
-  controlFocusOuterStrokeWidth: string;
+  smtcControlFocusInnerStrokeWidth: string;
+  smtcControlFocusOuterStrokeWidth: string;
+  smtcGapControlDefault: string;
+  smtcGapSmallControlDefault: string;
+  smtcPaddingControlHorizontalDefault: string;
+  smtcPaddingLargeControlVertical: string;
+  smtcPaddingSmallControlVertical: string;
+  smtcStrokeWidthControlOutlineHover: string;
+  smtcStrokeWidthControlOutlinePressed: string;
+  smtcStrokeWidthControlOutlineRest: string;
+  smtcStrokeWidthControlOutlineSelected: string;
 };
 
 export const kumoSpacingTokens: KumoSpacingTokens = {
-  gapControlDefault: '6px',
-  gapSmallControlDefault: '4px',
-  paddingControlHorizontalDefault: '12px',
-  paddingLargeControlVertical: '16px',
-  paddingSmallControlVertical: '8px',
-  strokeWidthControlOutlineHover: '1px',
-  strokeWidthControlOutlinePressed: '1px',
-  strokeWidthControlOutlineRest: '1px',
-  strokeWidthControlOutlineSelected: '1px',
-  controlFocusInnerStrokeWidth: '1px',
-  controlFocusOuterStrokeWidth: '2px',
+  smtcControlFocusInnerStrokeWidth: '1px',
+  smtcControlFocusOuterStrokeWidth: '2px',
+  smtcGapControlDefault: '6px',
+  smtcGapSmallControlDefault: '4px',
+  smtcPaddingControlHorizontalDefault: '12px',
+  smtcPaddingLargeControlVertical: '16px',
+  smtcPaddingSmallControlVertical: '8px',
+  smtcStrokeWidthControlOutlineHover: '1px',
+  smtcStrokeWidthControlOutlinePressed: '1px',
+  smtcStrokeWidthControlOutlineRest: '1px',
+  smtcStrokeWidthControlOutlineSelected: '1px',
 };

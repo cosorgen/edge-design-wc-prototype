@@ -1,10 +1,5 @@
 import { themeToTokensObject } from '@mai-ui/design-tokens/utilities.js';
 import { kumoLightTheme } from './themes.js';
-import { kumoBorderRadius } from './borderRadius.js';
-import { kumoLightThemeColors } from './colors.js';
-import { kumoCurveTokens, kumoDurationTokens } from './motion.js';
-import { kumoSpacingTokens } from './spacingTokens.js';
-import { kumoTypographyTokens } from './typography.js';
 
 // Types
 export {
@@ -24,15 +19,6 @@ export {
   // type ColorStatusTokens, not exported for some reason
   type ColorTokens,
 } from '@fluentui/tokens';
-
-export const kumoTokens = [
-  ...Object.keys(kumoBorderRadius),
-  ...Object.keys(kumoLightThemeColors),
-  ...Object.keys(kumoDurationTokens),
-  ...Object.keys(kumoCurveTokens),
-  ...Object.keys(kumoSpacingTokens),
-  ...Object.keys(kumoTypographyTokens),
-];
 
 // Huge tokens object
 export const tokens = themeToTokensObject(kumoLightTheme);
