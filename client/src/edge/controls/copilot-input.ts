@@ -7,7 +7,6 @@ import {
 } from '@microsoft/fast-element';
 import {
   colorLayerBackgroundDialog,
-  colorNeutralForeground1,
   curveEasyEaseMax,
   durationNormal,
   spacingHorizontalXL,
@@ -18,6 +17,11 @@ import {
   smtcTextComposerInputFontVariationSettings,
   smtcForegroundComposerInputHint,
   smtcForegroundComposerInputRest,
+  smtcCornerComposerInputRest,
+  smtcBackgroundSendButtonRest,
+  smtcBackgroundSendButtonHover,
+  smtcBackgroundSendButtonPressed,
+  smtcForegroundSendButtonRest,
 } from '@mai-ui/copilot-theme';
 import '@phoenixui/web-components/button.js';
 
@@ -48,17 +52,23 @@ const styles = css`
     flex: 1;
     flex-direction: row;
     align-items: center;
+    border-radius: ${smtcCornerComposerInputRest};
+    overflow: hidden;
   }
 
   #send {
     position: absolute;
     right: 6px;
     bottom: 6px;
-    border-radius: 14px;
-    color: ${colorNeutralForeground1};
+
+    /* Overrides for button tokens */
+    --smtc-background-control-brand-rest: ${smtcBackgroundSendButtonRest};
+    --smtc-background-control-brand-hover: ${smtcBackgroundSendButtonHover};
+    --smtc-background-control-brand-pressed: ${smtcBackgroundSendButtonPressed};
+    --smtc-foreground-control-on-brand-rest: ${smtcForegroundSendButtonRest};
 
     display: none;
-    transform: translateY(8px);
+    transform: translateX(40px);
     opacity: 0;
     transition:
       transform ${durationNormal} ${curveEasyEaseMax},
@@ -68,7 +78,7 @@ const styles = css`
 
   [contenteditable]:not(:empty) + #send {
     display: inline-flex; /* reset display */
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
   }
 
@@ -78,7 +88,7 @@ const styles = css`
     min-width: 206px;
     border: none;
     background: ${colorLayerBackgroundDialog};
-    border-radius: 20px;
+    border-radius: ${smtcCornerComposerInputRest};
     padding-block: ${spacingVerticalM};
     padding-inline-start: ${spacingHorizontalXL};
     padding-inline-end: 64px;
@@ -113,7 +123,7 @@ const styles = css`
 
   @starting-style {
     [contenteditable]:not(:empty) + #send {
-      transform: translateY(8px);
+      transform: translateX(40px);
       opacity: 0;
     }
   }

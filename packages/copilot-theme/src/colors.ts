@@ -294,6 +294,10 @@ export declare interface CopilotColorTokens {
   smtcStrokeControlOutlinePressed: string;
   smtcStrokeControlOutlineRest: string;
   smtcStrokeControlOutlineSelected: string;
+  smtcBackgroundSendButtonRest: string;
+  smtcBackgroundSendButtonHover: string;
+  smtcBackgroundSendButtonPressed: string;
+  smtcForegroundSendButtonRest: string;
 }
 
 export const copilotLightThemeColors: CopilotColorTokens = {
@@ -342,6 +346,10 @@ export const copilotLightThemeColors: CopilotColorTokens = {
     '180deg, #FCF9F6 0%, #FCF9F6 60%, #FBEBE0 99%, #FDE5CD 100%',
   smtcForegroundComposerInputHint: '#7B7572',
   smtcForegroundComposerInputRest: '#282523',
+  smtcBackgroundSendButtonRest: ' #ffd2a7',
+  smtcBackgroundSendButtonHover: '#e3b388',
+  smtcBackgroundSendButtonPressed: '#fee0c3',
+  smtcForegroundSendButtonRest: '#33302e',
 };
 
 export const copilotDarkThemeColors: CopilotColorTokens = {
@@ -390,4 +398,8 @@ export const copilotDarkThemeColors: CopilotColorTokens = {
     '180deg, rgba(16, 21, 36, 0.8) 0%, rgba(16, 21, 36, 0.8) 80%, rgba(16, 21, 36, 0.8) 100%',
   smtcForegroundComposerInputHint: '#F7DBD1AB',
   smtcForegroundComposerInputRest: '#F2DDCC',
+  smtcBackgroundSendButtonRest: '#455172',
+  smtcBackgroundSendButtonHover: '#505B7B',
+  smtcBackgroundSendButtonPressed: '#313A52',
+  smtcForegroundSendButtonRest: '#F2DDCC',
 };
