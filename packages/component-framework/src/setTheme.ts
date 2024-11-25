@@ -1,4 +1,5 @@
 import { camelCaseToKebabCase } from '@mai-ui/utilities';
+import { tokens as semanticTokens } from '@mai-ui/design-tokens/tokens.js';
 
 export function setThemeFor<Theme>(
   element: Document | ShadowRoot = document,
@@ -6,9 +7,13 @@ export function setThemeFor<Theme>(
 ) {
   const sheet = new CSSStyleSheet();
   const tokens = Object.keys(theme as Record<string, unknown>);
-  let data = ''; 
+  let data = '';
   tokens.forEach((name) => {
-    data += `--${camelCaseToKebabCase(name)}: ${String(theme[name as keyof Theme])};`;
+    if (name in semanticTokens) {
+      data += `--smtc-${camelCaseToKebabCase(name)}: ${String(theme[name as keyof Theme])};`;
+    } else {
+      data += `--${camelCaseToKebabCase(name)}: ${String(theme[name as keyof Theme])};`;
+    }
   });
   sheet.replaceSync(
     `:${element instanceof ShadowRoot ? 'host' : 'root'} {${data}}`,

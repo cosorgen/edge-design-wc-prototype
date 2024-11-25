@@ -8,8 +8,8 @@
   "license": "MIT",
   "workspaces": [
     "packages/utilities",
-    "packages/component-framework",
     "packages/design-tokens",
+    "packages/component-framework",
     "packages/button",
     "packages/toggle-button",
     "packages/phoenix-theme",
