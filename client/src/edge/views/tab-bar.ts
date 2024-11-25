@@ -84,11 +84,6 @@ const template = html<TabBar>`
 
 const styles = css`
   :host {
-    --smtc-corner-control-rest: 4px;
-    --smtc-corner-control-hover: 4px;
-    --smtc-corner-control-pressed: 4px;
-    --smtc-corner-control-selected: 4px;
-
     display: block;
     user-select: none;
     position: relative; /* for positioning shadow */
@@ -106,6 +101,15 @@ const styles = css`
     flex-direction: row;
     align-items: flex-end;
     gap: ${spacingFrame};
+
+    & > mai-button,
+    & > .group > mai-button {
+      /* Only direct buttons on the frame need override */
+      --smtc-corner-control-rest: 8px;
+      --smtc-corner-control-hover: 8px;
+      --smtc-corner-control-pressed: 8px;
+      --smtc-corner-control-selected: 8px;
+    }
   }
 
   .group {

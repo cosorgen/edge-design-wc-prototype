@@ -110,8 +110,8 @@ export const styles = css`
     justify-content: flex-end;
   }
 
-  [name='actions']::slotted(mai-button) {
-    color: ${colorNeutralForegroundHint};
+  [name='actions']::slotted(*) {
+    --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
   }
 
   :host([dropdown-open]) #actions {

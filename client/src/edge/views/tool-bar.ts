@@ -173,11 +173,6 @@ const template = html<Toolbar>`
 
 const styles = css`
   :host {
-    --smtc-corner-control-rest: 4px;
-    --smtc-corner-control-hover: 4px;
-    --smtc-corner-control-pressed: 4px;
-    --smtc-corner-control-selected: 4px;
-
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
@@ -191,6 +186,14 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalXS};
+
+    mai-button {
+      /* Only direct buttons on toolbar need override */
+      --smtc-corner-control-rest: 8px;
+      --smtc-corner-control-hover: 8px;
+      --smtc-corner-control-pressed: 8px;
+      --smtc-corner-control-selected: 8px;
+    }
   }
 
   .right {

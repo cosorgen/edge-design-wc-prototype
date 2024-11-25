@@ -73,6 +73,12 @@ const styles = css`
     width: 260px;
     min-width: 16px;
     height: 32px;
+
+    /* Override corner for close button */
+    --smtc-corner-small-control-rest: 4px;
+    --smtc-corner-small-control-hover: 4px;
+    --smtc-corner-small-control-pressed: 4px;
+    --smtc-corner-small-control-selected: 4px;
   }
 
   :host([active]) {
