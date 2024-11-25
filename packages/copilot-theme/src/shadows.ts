@@ -127,3 +127,18 @@ export const darkThemeShadows: PhoenixShadowTokens = {
   shadowBaseLayerDiffuseY: '32px',
   shadowBaseLayerDiffuseBlur: '64px',
 };
+
+export type CopilotShadowTokens = {
+  smtcShadowLarge: string;
+  smtcShadowSmall: string;
+};
+
+export const copilotLightShadows: CopilotShadowTokens = {
+  smtcShadowLarge: '0px 16px 24px -2px rgba(0, 0, 0, 0.12)',
+  smtcShadowSmall: '0px 0.5px 3px 0px rgba(0, 0, 0, 0.20)',
+};
+
+export const copilotDarkShadows: CopilotShadowTokens = {
+  smtcShadowLarge: '0px 16px 24px -2px rgba(0, 0, 0, 0.3)',
+  smtcShadowSmall: '0px 0.5px 3px 0px rgba(0, 0, 0, 0.40)',
+};

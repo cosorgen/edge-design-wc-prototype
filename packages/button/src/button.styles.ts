@@ -76,6 +76,15 @@ import {
   smtcTextRampCaption1FontWeight,
   smtcTextRampCaption1LineHeight,
   smtcTextStyleDefaultRegularFontFamily,
+  smtcShadowControlPrimaryRest,
+  smtcShadowControlPrimaryHover,
+  smtcShadowControlPrimaryPressed,
+  smtcShadowControlNeutralRest,
+  smtcShadowControlNeutralHover,
+  smtcShadowControlNeutralPressed,
+  smtcShadowControlSubtleRest,
+  smtcShadowControlSubtleHover,
+  smtcShadowControlSubtlePressed,
 } from './button.tokens.js';
 import { css } from '@microsoft/fast-element';
 
@@ -100,7 +109,8 @@ export const baseButtonStyles = css`
     outline-style: none;
     background-color: ${smtcBackgroundControlNeutralRest};
     color: ${smtcForegroundControlNeutralPrimaryRest};
-    border: ${smtcControlFocusInnerStrokeWidth} solid ${smtcStrokeControlNoneRest};
+    border: ${smtcControlFocusInnerStrokeWidth} solid
+      ${smtcStrokeControlNoneRest};
     padding: 0 ${smtcPaddingControlHorizontalDefault};
     min-width: 96px;
     border-radius: ${smtcCornerControlRest};
@@ -113,6 +123,7 @@ export const baseButtonStyles = css`
     transition-timing-function: ${smtcCurveControlStateTransition};
     cursor: pointer;
     user-select: none;
+    box-shadow: ${smtcShadowControlNeutralRest};
   }
 
   .content {
@@ -124,6 +135,7 @@ export const baseButtonStyles = css`
     border-color: ${smtcStrokeControlNoneHover};
     border-radius: ${smtcCornerControlHover};
     color: ${smtcForegroundControlNeutralPrimaryHover};
+    box-shadow: ${smtcShadowControlNeutralHover};
   }
 
   :host(:hover:active) {
@@ -132,12 +144,15 @@ export const baseButtonStyles = css`
     border-color: ${smtcStrokeControlNonePressed};
     border-radius: ${smtcCornerControlPressed};
     outline-style: none;
+    box-shadow: ${smtcShadowControlNeutralPressed};
   }
 
   :host(:focus-visible) {
     border-color: ${smtcControlFocusInnerStrokeColor};
     outline: ${smtcControlFocusOuterStrokeWidth} solid ${smtcNullColor};
-    box-shadow: 0 0 0 2px ${smtcControlFocusOuterStrokeColor};
+    box-shadow:
+      0 0 0 2px ${smtcControlFocusOuterStrokeColor},
+      ${smtcShadowControlNeutralRest};
   }
 
   @media screen and (prefers-reduced-motion: reduce) {
@@ -214,10 +229,12 @@ export const baseButtonStyles = css`
     background-color: ${smtcBackgroundControlBrandRest};
     color: ${smtcForegroundControlOnBrandRest};
     border-color: transparent;
+    box-shadow: ${smtcShadowControlPrimaryRest};
   }
 
   :host(${primaryState}:hover) {
     background-color: ${smtcBackgroundControlBrandHover};
+    box-shadow: ${smtcShadowControlPrimaryHover};
   }
 
   :host(${primaryState}:is(:hover, :hover:active)) {
@@ -227,11 +244,14 @@ export const baseButtonStyles = css`
 
   :host(${primaryState}:hover:active) {
     background-color: ${smtcBackgroundControlBrandPressed};
+    box-shadow: ${smtcShadowControlPrimaryPressed};
   }
 
   :host(${primaryState}:focus-visible) {
     border-color: ${smtcControlFocusInnerStrokeColor};
-    box-shadow: 0 0 0 2px ${smtcControlFocusOuterStrokeColor};
+    box-shadow:
+      0 0 0 2px ${smtcControlFocusOuterStrokeColor},
+      ${smtcShadowControlPrimaryRest};
   }
 
   :host(${outlineState}) {
@@ -239,33 +259,46 @@ export const baseButtonStyles = css`
     border-color: ${smtcStrokeControlOutlineRest};
     border-width: ${smtcStrokeWidthControlOutlineRest};
     color: ${smtcForegroundControlOnOutlineRest};
+    box-shadow: none;
   }
   :host(${outlineState}:hover) {
     background-color: ${smtcBackgroundControlOutlineHover};
     border-color: ${smtcStrokeControlOutlineHover};
     border-width: ${smtcStrokeWidthControlOutlineHover};
     color: ${smtcForegroundControlOnOutlineHover};
+    box-shadow: none;
   }
   :host(${outlineState}:is(:hover, :hover:active)) {
     background-color: ${smtcBackgroundControlOutlinePressed};
     border-color: ${smtcStrokeControlOutlinePressed};
     border-width: ${smtcStrokeWidthControlOutlinePressed};
     color: ${smtcForegroundControlOnOutlinePressed};
+    box-shadow: none;
   }
 
   :host(${subtleState}) {
     background-color: ${smtcBackgroundControlSubtleRest};
     border-color: transparent;
+    box-shadow: ${smtcShadowControlSubtleRest};
   }
 
   :host(${subtleState}:hover) {
     background-color: ${smtcBackgroundControlSubtleHover};
     border-color: transparent;
+    box-shadow: ${smtcShadowControlSubtleHover};
   }
 
   :host(${subtleState}:hover:active) {
     background-color: ${smtcBackgroundControlSubtlePressed};
     border-color: transparent;
+    box-shadow: ${smtcShadowControlSubtlePressed};
+  }
+
+  :host(${subtleState}:focus-visible) {
+    border-color: ${smtcControlFocusInnerStrokeColor};
+    box-shadow:
+      0 0 0 2px ${smtcControlFocusOuterStrokeColor},
+      ${smtcShadowControlSubtleRest};
   }
 `;
 

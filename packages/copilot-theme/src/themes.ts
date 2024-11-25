@@ -27,7 +27,10 @@ import {
 import {
   lightThemeShadows,
   darkThemeShadows,
+  copilotDarkShadows,
+  copilotLightShadows,
   type PhoenixShadowTokens,
+  type CopilotShadowTokens,
 } from './shadows.js';
 import {
   copilotBorderRadius,
@@ -69,6 +72,7 @@ export declare type Theme = FUITheme &
   PhoenixColorTokens &
   CopilotColorTokens &
   PhoenixShadowTokens &
+  CopilotShadowTokens &
   PhoenixBorderRadiusTokens &
   CopilotBorderRadiusTokens &
   PhoenixCurveTokens &
@@ -92,6 +96,7 @@ export const copilotLightTheme: Theme = {
   ...lightThemeColors,
   ...copilotLightThemeColors,
   ...lightThemeShadows,
+  ...copilotLightShadows,
   ...curveTokens,
   ...copilotCurveTokens,
   ...durationTokens,
@@ -113,6 +118,7 @@ export const copilotDarkTheme: Theme = {
   ...darkThemeColors,
   ...copilotDarkThemeColors,
   ...darkThemeShadows,
+  ...copilotDarkShadows,
   ...curveTokens,
   ...copilotCurveTokens,
   ...durationTokens,
@@ -136,6 +142,7 @@ export const copilotLightThemeSolid: Theme = {
   ...copilotLightThemeColors,
   ...lightThemeSolidColors,
   ...lightThemeShadows,
+  ...copilotLightShadows,
   ...curveTokens,
   ...copilotCurveTokens,
   ...durationTokens,
@@ -158,6 +165,7 @@ export const copilotDarkThemeSolid: Theme = {
   ...copilotDarkThemeColors,
   ...darkThemeSolidColors,
   ...darkThemeShadows,
+  ...copilotDarkShadows,
   ...curveTokens,
   ...copilotCurveTokens,
   ...durationTokens,
@@ -180,6 +188,7 @@ export function createHighContrastTheme(): Theme {
     ...copilotDarkThemeColors,
     ...darkThemeSolidColors,
     ...darkThemeShadows,
+    ...copilotDarkShadows,
     ...phoenixBorderRadius,
     ...copilotBorderRadius,
     ...curveTokens,

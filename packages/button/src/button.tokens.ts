@@ -72,6 +72,16 @@ export const smtcTextRampCaption1FontSize = 'var(--smtc-text-ramp-caption-1-font
 export const smtcTextRampCaption1FontWeight = 'var(--smtc-text-ramp-caption-1-font-weight, var(--font-weight-regular))';
 export const smtcTextRampCaption1LineHeight = 'var(--smtc-text-ramp-caption-1-line-height, var(--line-height-base-200))';
 export const smtcTextStyleDefaultRegularFontFamily = 'var(--smtc-text-style-default-regular-font-family, var(--font-family-base))';
+export const smtcShadowControlPrimaryRest = 'var(--smtc-shadow-control-primary-rest, 0px 0px 0px transparent)';
+export const smtcShadowControlPrimaryHover = 'var(--smtc-shadow-control-primary-hover, 0px 0px 0px transparent)';
+export const smtcShadowControlPrimaryPressed = 'var(--smtc-shadow-control-primary-pressed, 0px 0px 0px transparent)';
+export const smtcShadowControlNeutralRest = 'var(--smtc-shadow-control-neutral-rest, 0px 0px 0px transparent)';
+export const smtcShadowControlNeutralHover = 'var(--smtc-shadow-control-neutral-hover, 0px 0px 0px transparent)';
+export const smtcShadowControlNeutralPressed = 'var(--smtc-shadow-control-neutral-pressed, 0px 0px 0px transparent)';
+export const smtcShadowControlSubtleRest = 'var(--smtc-shadow-control-subtle-rest, 0px 0px 0px transparent)';
+export const smtcShadowControlSubtleHover = 'var(--smtc-shadow-control-subtle-hover, 0px 0px 0px transparent)';
+export const smtcShadowControlSubtlePressed = 'var(--smtc-shadow-control-subtle-pressed, 0px 0px 0px transparent)';
+
 
 export const required = {
   smtcBackgroundControlBrandHover,
@@ -148,5 +158,14 @@ export const required = {
   smtcTextRampCaption1FontWeight,
   smtcTextRampCaption1LineHeight,
   smtcTextStyleDefaultRegularFontFamily,
+  smtcShadowControlPrimaryRest,
+  smtcShadowControlPrimaryHover,
+  smtcShadowControlPrimaryPressed,
+  smtcShadowControlNeutralRest,
+  smtcShadowControlNeutralHover,
+  smtcShadowControlNeutralPressed,
+  smtcShadowControlSubtleRest,
+  smtcShadowControlSubtleHover,
+  smtcShadowControlSubtlePressed,
 };
 export const optional = {};

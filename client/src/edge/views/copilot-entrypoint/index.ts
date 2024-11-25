@@ -39,7 +39,7 @@ import blockCenterStyles from './block-center-styles.js';
 import blockSidepaneStyles from './block-sidepane-styles.js';
 
 const DEFAULT_COMPOSER_WIDTH = '512px';
-const DEFAULT_COMPOSER_HEIGHT = '68px';
+const DEFAULT_COMPOSER_HEIGHT = '64px';
 
 const template = html<CopilotEntrypoint>` ${when(
     (x) => x.cs.showHint,
@@ -96,7 +96,7 @@ const styles = css`
     --composer-retracted-width: 160px;
     --composer-min-width: 404px;
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
-    --composer-retracted-height: 68px;
+    --composer-retracted-height: ${DEFAULT_COMPOSER_HEIGHT};
     --ntp-inset: 24px;
     --sidepane-width: 376px;
 

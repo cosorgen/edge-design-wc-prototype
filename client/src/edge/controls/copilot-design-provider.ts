@@ -1,6 +1,3 @@
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import WindowsService from '#serviceswindowsService.js';
 import {
   html,
   FASTElement,
@@ -10,6 +7,9 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import { copilotLightTheme, copilotDarkTheme } from '@mai-ui/copilot-theme';
 import { setThemeFor } from '@mai-ui/component-framework';
+import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
+import WindowsService from '#serviceswindowsService.js';
 
 const template = html` <slot></slot> `;
 

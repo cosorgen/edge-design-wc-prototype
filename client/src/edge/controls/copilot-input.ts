@@ -178,8 +178,8 @@ export class CopilotInput extends FASTElement {
       return;
     }
     if (e.key === 'Escape') {
-      this.handleClose();
-      return;
+      this._inputElement?.blur();
+      return true;
     }
 
     return true;

@@ -6,15 +6,15 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import {
-  colorLayerBackgroundDialog,
   colorNeutralForeground1,
-  shadow28,
   spacingHorizontalS,
   spacingHorizontalXS,
   spacingVerticalXS,
   strokeWidthThin,
   typographyStyles,
   smtcCornerComposerRest,
+  smtcEffectInnerShineStrong,
+  smtcShadowLarge,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
@@ -38,8 +38,13 @@ const template = html<CopilotComposer>`
     ></copilot-chat>
     <div id="input-row">
       <div id="start">
-        <mai-button appearance="subtle" size="large" icon-only>
+        <mai-button appearance="subtle" size="large" id="home" icon-only>
           <img src="img/edge/copilot-icon.svg" />
+        </mai-button>
+        <mai-button appearance="subtle" size="large" id="add" icon-only>
+          <svg>
+            <use x="2" y="2" href="img/edge/icons.svg#add-24-regular" />
+          </svg>
         </mai-button>
       </div>
       <copilot-input
@@ -49,12 +54,7 @@ const template = html<CopilotComposer>`
         @close="${(x) => x.handleClose()}"
       ></copilot-input>
       <div id="end">
-        <mai-button appearance="subtle" size="large" icon-only slot="end">
-          <svg>
-            <use x="2" y="2" href="img/edge/icons.svg#add-24-regular" />
-          </svg>
-        </mai-button>
-        <mai-button appearance="subtle" size="large" icon-only slot="end">
+        <mai-button appearance="subtle" size="large" icon-only>
           <svg>
             <use x="2" y="2" href="img/edge/icons.svg#mic-new-24-regular" />
           </svg>
@@ -63,7 +63,6 @@ const template = html<CopilotComposer>`
           appearance="subtle"
           size="large"
           icon-only
-          slot="end"
           @click="${(x) => x.handleClose(true)}"
           class="${(x) =>
             x.ews.activeSidepaneAppId === 'Copilot' ||
@@ -100,9 +99,10 @@ const styles = css`
   }
 
   acrylic-material {
+    box-sizing: border-box;
     border-radius: ${smtcCornerComposerRest};
-    border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
-    box-shadow: ${shadow28};
+    border: ${strokeWidthThin} solid ${smtcEffectInnerShineStrong};
+    box-shadow: ${smtcShadowLarge};
     overflow: hidden;
   }
 
@@ -116,6 +116,7 @@ const styles = css`
     align-items: flex-end;
     gap: ${spacingHorizontalXS};
     padding: ${spacingHorizontalS};
+    overflow: hidden;
   }
 
   #start,
@@ -123,9 +124,29 @@ const styles = css`
     display: flex;
     flex-direction: row;
     padding-block: ${spacingVerticalXS};
+  }
 
-    .hidden {
-      display: none;
+  #end {
+    opacity: 1;
+    transform: translateX(0);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      display 0.2s allow-discrete;
+  }
+
+  #input-row:has(copilot-input:focus-within) #end,
+  #input-row:has(copilot-input:focus-within) #home {
+    opacity: 0;
+    transform: translateX(80px);
+    display: none;
+  }
+
+  @starting-styles {
+    #end {
+      opacity: 1;
+      transform: translateX(0);
+      display: flex;
     }
   }
 `;

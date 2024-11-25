@@ -301,6 +301,7 @@ export declare interface CopilotColorTokens {
   smtcForegroundSendButtonHover: string;
   smtcForegroundSendButtonPressed: string;
   smtcBackgroundComposerInputRest: string;
+  smtcEffectInnerShineStrong: string;
 }
 
 export const copilotLightThemeColors: CopilotColorTokens = {
@@ -356,6 +357,7 @@ export const copilotLightThemeColors: CopilotColorTokens = {
   smtcForegroundSendButtonHover: '',
   smtcForegroundSendButtonPressed: '',
   smtcBackgroundComposerInputRest: '#FFFFFFE5',
+  smtcEffectInnerShineStrong: '#FFFFFF',
 };
 
 export const copilotDarkThemeColors: CopilotColorTokens = {
@@ -411,4 +413,5 @@ export const copilotDarkThemeColors: CopilotColorTokens = {
   smtcForegroundSendButtonHover: '',
   smtcForegroundSendButtonPressed: '',
   smtcBackgroundComposerInputRest: '#00000080',
+  smtcEffectInnerShineStrong: '#FFFFFF0D',
 };
