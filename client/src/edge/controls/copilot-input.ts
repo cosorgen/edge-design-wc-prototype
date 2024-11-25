@@ -6,7 +6,6 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  curveEasyEaseMax,
   durationNormal,
   spacingHorizontalXL,
   smtcTextComposerInputFontSize,
@@ -26,6 +25,7 @@ import {
   smtcCornerComposerSendButtonRest,
   smtcCornerComposerSendButtonHover,
   smtcCornerComposerSendButtonPressed,
+  curveEasyEase,
 } from '@mai-ui/copilot-theme';
 import '@phoenixui/web-components/button.js';
 
@@ -82,15 +82,15 @@ const styles = css`
     box-shadow: 0px 0.5px 1px 0.5px #0000000a;
 
     display: none;
-    transform: translateX(40px);
+    transform: translateX(120px);
     opacity: 0;
     transition:
-      transform ${durationNormal} ${curveEasyEaseMax},
-      opacity ${durationNormal} ${curveEasyEaseMax},
-      display ${durationNormal} ${curveEasyEaseMax} allow-discrete;
+      transform ${durationNormal} ${curveEasyEase},
+      opacity ${durationNormal} ${curveEasyEase},
+      display ${durationNormal} ${curveEasyEase} allow-discrete;
   }
 
-  [contenteditable]:not(:empty) + #send {
+  :host(:not([empty])) #send {
     display: inline-flex; /* reset display */
     transform: translateX(0);
     opacity: 1;
@@ -125,7 +125,7 @@ const styles = css`
     }
   }
 
-  [contenteditable]:empty {
+  :host([empty]) [contenteditable] {
     padding-inline-end: ${spacingHorizontalXL};
   }
 
@@ -134,8 +134,8 @@ const styles = css`
   }
 
   @starting-style {
-    [contenteditable]:not(:empty) + #send {
-      transform: translateX(40px);
+    :host(:not([empty])) #send {
+      transform: translateX(120px);
       opacity: 0;
     }
   }
@@ -148,6 +148,7 @@ const styles = css`
 })
 export class CopilotInput extends FASTElement {
   @attr placeholder = '';
+  @attr({ mode: 'boolean' }) empty = true;
   _inputElement: HTMLInputElement | null = null;
 
   connectedCallback(): void {
@@ -179,7 +180,7 @@ export class CopilotInput extends FASTElement {
     }
     if (e.key === 'Escape') {
       this._inputElement?.blur();
-      return true;
+      return;
     }
 
     return true;
@@ -194,6 +195,12 @@ export class CopilotInput extends FASTElement {
       this._inputElement!.innerHTML = ''; // need to clear innerHTML to show the placeholder
     }
 
+    if (this._inputElement?.innerText) {
+      this.empty = false;
+    } else {
+      this.empty = true;
+    }
+
     return true;
   }
 
@@ -206,7 +213,7 @@ export class CopilotInput extends FASTElement {
     const message = this._inputElement.innerText;
     if (!message) return;
     this.$emit('submit', message);
-    this._inputElement.innerHTML = '';
+    this.clearInput();
   }
 
   handleClose() {
@@ -217,5 +224,6 @@ export class CopilotInput extends FASTElement {
   clearInput() {
     if (!this._inputElement) return;
     this._inputElement.innerHTML = '';
+    this.empty = true;
   }
 }

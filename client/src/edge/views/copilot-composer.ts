@@ -15,6 +15,8 @@ import {
   smtcCornerComposerRest,
   smtcEffectInnerShineStrong,
   smtcShadowLarge,
+  durationNormal,
+  curveEasyEase,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
@@ -126,28 +128,23 @@ const styles = css`
     padding-block: ${spacingVerticalXS};
   }
 
-  #end {
+  #end,
+  #home {
     opacity: 1;
-    transform: translateX(0);
+    margin-inline-end: 0px;
     transition:
-      opacity 0.2s,
-      transform 0.2s,
-      display 0.2s allow-discrete;
+      opacity ${durationNormal} ${curveEasyEase},
+      margin-inline ${durationNormal} ${curveEasyEase};
   }
 
-  #input-row:has(copilot-input:focus-within) #end,
-  #input-row:has(copilot-input:focus-within) #home {
+  #input-row:has(copilot-input:not([empty])) #end {
     opacity: 0;
-    transform: translateX(80px);
-    display: none;
+    margin-inline-end: -80px;
   }
 
-  @starting-styles {
-    #end {
-      opacity: 1;
-      transform: translateX(0);
-      display: flex;
-    }
+  #input-row:has(copilot-input:not([empty])) #home {
+    opacity: 0;
+    margin-inline-start: -40px;
   }
 `;
 
