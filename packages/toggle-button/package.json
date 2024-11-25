@@ -31,6 +31,10 @@
       "types": "./dist/dts/toggle-button.options.d.ts",
       "default": "./dist/esm/toggle-button.options.js"
     },
+    "./tokens.js": {
+      "types": "./dist/dts/toggle-button.options.d.ts",
+      "default": "./dist/esm/toggle-button.options.js"
+    },
     "./package.json": "./package.json"
   },
   "sideEffects": [
@@ -43,7 +47,6 @@
   ],
   "dependencies": {
     "@mai-ui/component-framework": "^0.0.1",
-    "@mai-ui/design-tokens": "^0.0.1",
     "@mai-ui/button": "^0.0.1"
   },
   "peerDependencies": {

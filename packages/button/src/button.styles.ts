@@ -13,70 +13,70 @@ import {
   subtleState,
 } from '@mai-ui/component-framework/states.js';
 import {
-  backgroundControlBrandHover,
-  backgroundControlBrandPressed,
-  backgroundControlBrandRest,
-  backgroundControlNeutralDisabled,
-  backgroundControlNeutralHover,
-  backgroundControlNeutralPressed,
-  backgroundControlNeutralRest,
-  backgroundControlOutlineDisabled,
-  backgroundControlOutlineHover,
-  backgroundControlOutlinePressed,
-  backgroundControlOutlineRest,
-  backgroundControlSubtleHover,
-  backgroundControlSubtlePressed,
-  backgroundControlSubtleRest,
-  controlFocusInnerStrokeColor,
-  controlFocusInnerStrokeWidth,
-  controlFocusOuterStrokeColor,
-  controlFocusOuterStrokeWidth,
-  cornerControlCircular,
-  cornerControlHover,
-  cornerControlNone,
-  cornerControlPressed,
-  cornerControlRest,
-  cornerLargeControlRest,
-  cornerSmallControlRest,
-  curveControlStateTransition,
-  durationControlStateTransition,
-  foregroundControlNeutralPrimaryDisabled,
-  foregroundControlNeutralPrimaryHover,
-  foregroundControlNeutralPrimaryPressed,
-  foregroundControlNeutralPrimaryRest,
-  foregroundControlOnBrandRest,
-  foregroundControlOnOutlineDisabled,
-  foregroundControlOnOutlineHover,
-  foregroundControlOnOutlinePressed,
-  foregroundControlOnOutlineRest,
-  gapControlDefault,
-  gapSmallControlDefault,
-  nullColor,
-  paddingControlHorizontalDefault,
-  paddingLargeControlVertical,
-  paddingSmallControlVertical,
-  strokeControlNoneHover,
-  strokeControlNonePressed,
-  strokeControlNoneRest,
-  strokeControlOnNeutralDisabled,
-  strokeControlOutlineDisabled,
-  strokeControlOutlineHover,
-  strokeControlOutlinePressed,
-  strokeControlOutlineRest,
-  strokeWidthControlOutlineHover,
-  strokeWidthControlOutlinePressed,
-  strokeWidthControlOutlineRest,
-  textControlButtonWeight,
-  textRampBody2FontSize,
-  textRampBody2LineHeight,
-  textRampBody3FontSize,
-  textRampBody3FontWeight,
-  textRampBody3LineHeight,
-  textRampCaption1FontSize,
-  textRampCaption1FontWeight,
-  textRampCaption1LineHeight,
-  textStyleDefaultRegularFontFamily,
-} from '@mai-ui/design-tokens/button.js';
+  smtcBackgroundControlBrandHover,
+  smtcBackgroundControlBrandPressed,
+  smtcBackgroundControlBrandRest,
+  smtcBackgroundControlNeutralDisabled,
+  smtcBackgroundControlNeutralHover,
+  smtcBackgroundControlNeutralPressed,
+  smtcBackgroundControlNeutralRest,
+  smtcBackgroundControlOutlineDisabled,
+  smtcBackgroundControlOutlineHover,
+  smtcBackgroundControlOutlinePressed,
+  smtcBackgroundControlOutlineRest,
+  smtcBackgroundControlSubtleHover,
+  smtcBackgroundControlSubtlePressed,
+  smtcBackgroundControlSubtleRest,
+  smtcControlFocusInnerStrokeColor,
+  smtcControlFocusInnerStrokeWidth,
+  smtcControlFocusOuterStrokeColor,
+  smtcControlFocusOuterStrokeWidth,
+  smtcCornerControlCircular,
+  smtcCornerControlHover,
+  smtcCornerControlNone,
+  smtcCornerControlPressed,
+  smtcCornerControlRest,
+  smtcCornerLargeControlRest,
+  smtcCornerSmallControlRest,
+  smtcCurveControlStateTransition,
+  smtcDurationControlStateTransition,
+  smtcForegroundControlNeutralPrimaryDisabled,
+  smtcForegroundControlNeutralPrimaryHover,
+  smtcForegroundControlNeutralPrimaryPressed,
+  smtcForegroundControlNeutralPrimaryRest,
+  smtcForegroundControlOnBrandRest,
+  smtcForegroundControlOnOutlineDisabled,
+  smtcForegroundControlOnOutlineHover,
+  smtcForegroundControlOnOutlinePressed,
+  smtcForegroundControlOnOutlineRest,
+  smtcGapControlDefault,
+  smtcGapSmallControlDefault,
+  smtcNullColor,
+  smtcPaddingControlHorizontalDefault,
+  smtcPaddingLargeControlVertical,
+  smtcPaddingSmallControlVertical,
+  smtcStrokeControlNoneHover,
+  smtcStrokeControlNonePressed,
+  smtcStrokeControlNoneRest,
+  smtcStrokeControlOnNeutralDisabled,
+  smtcStrokeControlOutlineDisabled,
+  smtcStrokeControlOutlineHover,
+  smtcStrokeControlOutlinePressed,
+  smtcStrokeControlOutlineRest,
+  smtcStrokeWidthControlOutlineHover,
+  smtcStrokeWidthControlOutlinePressed,
+  smtcStrokeWidthControlOutlineRest,
+  smtcTextControlButtonWeight,
+  smtcTextRampBody2FontSize,
+  smtcTextRampBody2LineHeight,
+  smtcTextRampBody3FontSize,
+  smtcTextRampBody3FontWeight,
+  smtcTextRampBody3LineHeight,
+  smtcTextRampCaption1FontSize,
+  smtcTextRampCaption1FontWeight,
+  smtcTextRampCaption1LineHeight,
+  smtcTextStyleDefaultRegularFontFamily,
+} from './button.tokens.js';
 import { css } from '@microsoft/fast-element';
 
 /**
@@ -86,7 +86,7 @@ export const baseButtonStyles = css`
   ${display('inline-flex')}
 
   :host {
-    --icon-spacing: ${gapControlDefault};
+    --icon-spacing: ${smtcGapControlDefault};
     position: relative;
     contain: layout style;
     vertical-align: middle;
@@ -98,19 +98,19 @@ export const baseButtonStyles = css`
     margin: 0;
     min-height: 32px;
     outline-style: none;
-    background-color: ${backgroundControlNeutralRest};
-    color: ${foregroundControlNeutralPrimaryRest};
-    border: ${controlFocusInnerStrokeWidth} solid ${strokeControlNoneRest};
-    padding: 0 ${paddingControlHorizontalDefault};
+    background-color: ${smtcBackgroundControlNeutralRest};
+    color: ${smtcForegroundControlNeutralPrimaryRest};
+    border: ${smtcControlFocusInnerStrokeWidth} solid ${smtcStrokeControlNoneRest};
+    padding: 0 ${smtcPaddingControlHorizontalDefault};
     min-width: 96px;
-    border-radius: ${cornerControlRest};
-    font-size: ${textRampBody2FontSize};
-    font-family: ${textStyleDefaultRegularFontFamily};
-    font-weight: ${textControlButtonWeight};
-    line-height: ${textRampBody2LineHeight};
-    transition-duration: ${durationControlStateTransition};
+    border-radius: ${smtcCornerControlRest};
+    font-size: ${smtcTextRampBody2FontSize};
+    font-family: ${smtcTextStyleDefaultRegularFontFamily};
+    font-weight: ${smtcTextControlButtonWeight};
+    line-height: ${smtcTextRampBody2LineHeight};
+    transition-duration: ${smtcDurationControlStateTransition};
     transition-property: background, border, color;
-    transition-timing-function: ${curveControlStateTransition};
+    transition-timing-function: ${smtcCurveControlStateTransition};
     cursor: pointer;
     user-select: none;
   }
@@ -120,24 +120,24 @@ export const baseButtonStyles = css`
   }
 
   :host(:hover) {
-    background-color: ${backgroundControlNeutralHover};
-    border-color: ${strokeControlNoneHover};
-    border-radius: ${cornerControlHover};
-    color: ${foregroundControlNeutralPrimaryHover};
+    background-color: ${smtcBackgroundControlNeutralHover};
+    border-color: ${smtcStrokeControlNoneHover};
+    border-radius: ${smtcCornerControlHover};
+    color: ${smtcForegroundControlNeutralPrimaryHover};
   }
 
   :host(:hover:active) {
-    background-color: ${backgroundControlNeutralPressed};
-    color: ${foregroundControlNeutralPrimaryPressed};
-    border-color: ${strokeControlNonePressed};
-    border-radius: ${cornerControlPressed};
+    background-color: ${smtcBackgroundControlNeutralPressed};
+    color: ${smtcForegroundControlNeutralPrimaryPressed};
+    border-color: ${smtcStrokeControlNonePressed};
+    border-radius: ${smtcCornerControlPressed};
     outline-style: none;
   }
 
   :host(:focus-visible) {
-    border-color: ${controlFocusInnerStrokeColor};
-    outline: ${controlFocusOuterStrokeWidth} solid ${nullColor};
-    box-shadow: 0 0 0 2px ${controlFocusOuterStrokeColor};
+    border-color: ${smtcControlFocusInnerStrokeColor};
+    outline: ${smtcControlFocusOuterStrokeWidth} solid ${smtcNullColor};
+    box-shadow: 0 0 0 2px ${smtcControlFocusOuterStrokeColor};
   }
 
   @media screen and (prefers-reduced-motion: reduce) {
@@ -167,14 +167,14 @@ export const baseButtonStyles = css`
   }
 
   :host(${smallState}) {
-    --icon-spacing: ${gapSmallControlDefault};
+    --icon-spacing: ${smtcGapSmallControlDefault};
     min-height: 24px;
     min-width: 64px;
-    padding: 0 ${paddingSmallControlVertical};
-    border-radius: ${cornerSmallControlRest};
-    font-size: ${textRampCaption1FontSize};
-    line-height: ${textRampCaption1LineHeight};
-    font-weight: ${textRampCaption1FontWeight};
+    padding: 0 ${smtcPaddingSmallControlVertical};
+    border-radius: ${smtcCornerSmallControlRest};
+    font-size: ${smtcTextRampCaption1FontSize};
+    line-height: ${smtcTextRampCaption1LineHeight};
+    font-weight: ${smtcTextRampCaption1FontWeight};
   }
 
   :host(${smallState}${iconOnlyState}) {
@@ -184,11 +184,11 @@ export const baseButtonStyles = css`
 
   :host(${largeState}) {
     min-height: 40px;
-    padding: 0 ${paddingLargeControlVertical};
-    font-size: ${textRampBody3FontSize};
-    line-height: ${textRampBody3LineHeight};
-    font-weight: ${textRampBody3FontWeight};
-    border-radius: ${cornerLargeControlRest};
+    padding: 0 ${smtcPaddingLargeControlVertical};
+    font-size: ${smtcTextRampBody3FontSize};
+    line-height: ${smtcTextRampBody3LineHeight};
+    font-weight: ${smtcTextRampBody3FontWeight};
+    border-radius: ${smtcCornerLargeControlRest};
   }
 
   :host(${largeState}${iconOnlyState}) {
@@ -203,68 +203,68 @@ export const baseButtonStyles = css`
   }
 
   :host(:is(${circularState}, ${circularState}:focus-visible)) {
-    border-radius: ${cornerControlCircular};
+    border-radius: ${smtcCornerControlCircular};
   }
 
   :host(:is(${squareState}, ${squareState}:focus-visible)) {
-    border-radius: ${cornerControlNone};
+    border-radius: ${smtcCornerControlNone};
   }
 
   :host(${primaryState}) {
-    background-color: ${backgroundControlBrandRest};
-    color: ${foregroundControlOnBrandRest};
+    background-color: ${smtcBackgroundControlBrandRest};
+    color: ${smtcForegroundControlOnBrandRest};
     border-color: transparent;
   }
 
   :host(${primaryState}:hover) {
-    background-color: ${backgroundControlBrandHover};
+    background-color: ${smtcBackgroundControlBrandHover};
   }
 
   :host(${primaryState}:is(:hover, :hover:active)) {
     border-color: transparent;
-    color: ${foregroundControlOnBrandRest};
+    color: ${smtcForegroundControlOnBrandRest};
   }
 
   :host(${primaryState}:hover:active) {
-    background-color: ${backgroundControlBrandPressed};
+    background-color: ${smtcBackgroundControlBrandPressed};
   }
 
   :host(${primaryState}:focus-visible) {
-    border-color: ${controlFocusInnerStrokeColor};
-    box-shadow: 0 0 0 2px ${controlFocusOuterStrokeColor};
+    border-color: ${smtcControlFocusInnerStrokeColor};
+    box-shadow: 0 0 0 2px ${smtcControlFocusOuterStrokeColor};
   }
 
   :host(${outlineState}) {
-    background-color: ${backgroundControlOutlineRest};
-    border-color: ${strokeControlOutlineRest};
-    border-width: ${strokeWidthControlOutlineRest};
-    color: ${foregroundControlOnOutlineRest};
+    background-color: ${smtcBackgroundControlOutlineRest};
+    border-color: ${smtcStrokeControlOutlineRest};
+    border-width: ${smtcStrokeWidthControlOutlineRest};
+    color: ${smtcForegroundControlOnOutlineRest};
   }
   :host(${outlineState}:hover) {
-    background-color: ${backgroundControlOutlineHover};
-    border-color: ${strokeControlOutlineHover};
-    border-width: ${strokeWidthControlOutlineHover};
-    color: ${foregroundControlOnOutlineHover};
+    background-color: ${smtcBackgroundControlOutlineHover};
+    border-color: ${smtcStrokeControlOutlineHover};
+    border-width: ${smtcStrokeWidthControlOutlineHover};
+    color: ${smtcForegroundControlOnOutlineHover};
   }
   :host(${outlineState}:is(:hover, :hover:active)) {
-    background-color: ${backgroundControlOutlinePressed};
-    border-color: ${strokeControlOutlinePressed};
-    border-width: ${strokeWidthControlOutlinePressed};
-    color: ${foregroundControlOnOutlinePressed};
+    background-color: ${smtcBackgroundControlOutlinePressed};
+    border-color: ${smtcStrokeControlOutlinePressed};
+    border-width: ${smtcStrokeWidthControlOutlinePressed};
+    color: ${smtcForegroundControlOnOutlinePressed};
   }
 
   :host(${subtleState}) {
-    background-color: ${backgroundControlSubtleRest};
+    background-color: ${smtcBackgroundControlSubtleRest};
     border-color: transparent;
   }
 
   :host(${subtleState}:hover) {
-    background-color: ${backgroundControlSubtleHover};
+    background-color: ${smtcBackgroundControlSubtleHover};
     border-color: transparent;
   }
 
   :host(${subtleState}:hover:active) {
-    background-color: ${backgroundControlSubtlePressed};
+    background-color: ${smtcBackgroundControlSubtlePressed};
     border-color: transparent;
   }
 `;
@@ -280,9 +280,9 @@ export const styles = css`
   :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable])),
     :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable]):hover),
     :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable]):hover:active) {
-    background-color: ${backgroundControlNeutralDisabled};
-    border-color: ${strokeControlOnNeutralDisabled};
-    color: ${foregroundControlNeutralPrimaryDisabled};
+    background-color: ${smtcBackgroundControlNeutralDisabled};
+    border-color: ${smtcStrokeControlOnNeutralDisabled};
+    color: ${smtcForegroundControlNeutralPrimaryDisabled};
     cursor: not-allowed;
   }
 
@@ -304,7 +304,7 @@ export const styles = css`
         )
     ) {
     border-color: transparent;
-    background-color: ${nullColor};
+    background-color: ${smtcNullColor};
   }
 
   :host(${outlineState}:is(:disabled, [disabled-focusable])),
@@ -314,10 +314,10 @@ export const styles = css`
           :hover:active
         )
     ) {
-    background-color: ${backgroundControlOutlineDisabled};
-    border-color: ${strokeControlOutlineDisabled};
-    border-width: ${strokeWidthControlOutlineRest};
-    color: ${foregroundControlOnOutlineDisabled};
+    background-color: ${smtcBackgroundControlOutlineDisabled};
+    border-color: ${smtcStrokeControlOutlineDisabled};
+    border-width: ${smtcStrokeWidthControlOutlineRest};
+    color: ${smtcForegroundControlOnOutlineDisabled};
   }
 `.withBehaviors(
   forcedColorsStylesheetBehavior(css`

@@ -8,24 +8,24 @@ import {
   subtleState,
 } from '@mai-ui/component-framework/states.js';
 import {
-  backgroundControlNeutralSelected,
-  strokeControlNonePressed,
-  strokeControlNoneHover,
-  backgroundControlNeutralHover,
-  backgroundControlNeutralPressed,
-  backgroundControlBrandHover,
-  backgroundControlBrandPressed,
-  backgroundControlSubtlePressed,
-  backgroundControlSubtleHover,
-  backgroundControlOutlineHover,
-  backgroundControlOutlinePressed,
-  backgroundControlOutlineSelected,
-  backgroundControlSubtleSelected,
-  foregroundControlOnBrandSelected,
-  backgroundControlBrandSelected,
-  strokeControlNoneSelected,
-  foregroundControlNeutralSelected,
-} from '@mai-ui/design-tokens/toggle-button.js';
+  smtcBackgroundControlNeutralSelected,
+  smtcStrokeControlNonePressed,
+  smtcStrokeControlNoneHover,
+  smtcBackgroundControlNeutralHover,
+  smtcBackgroundControlNeutralPressed,
+  smtcBackgroundControlBrandHover,
+  smtcBackgroundControlBrandPressed,
+  smtcBackgroundControlSubtlePressed,
+  smtcBackgroundControlSubtleHover,
+  smtcBackgroundControlOutlineHover,
+  smtcBackgroundControlOutlinePressed,
+  smtcBackgroundControlOutlineSelected,
+  smtcBackgroundControlSubtleSelected,
+  smtcForegroundControlOnBrandSelected,
+  smtcBackgroundControlBrandSelected,
+  smtcStrokeControlNoneSelected,
+  smtcForegroundControlNeutralSelected,
+} from './toggle-button.tokens.js';
 
 /**
  * The styles for the ToggleButton component.
@@ -38,58 +38,58 @@ export const styles = css`
   ${ButtonStyles}
 
   :host(${pressedState}) {
-    background-color: ${backgroundControlNeutralSelected};
-    border-color: ${strokeControlNoneSelected};
-    color: ${foregroundControlNeutralSelected};
+    background-color: ${smtcBackgroundControlNeutralSelected};
+    border-color: ${smtcStrokeControlNoneSelected};
+    color: ${smtcForegroundControlNeutralSelected};
   }
 
   :host(${pressedState}:hover) {
-    border-color: ${strokeControlNoneHover};
-    background-color: ${backgroundControlNeutralHover};
+    border-color: ${smtcStrokeControlNoneHover};
+    background-color: ${smtcBackgroundControlNeutralHover};
   }
 
   :host(${pressedState}:active) {
-    border-color: ${strokeControlNonePressed};
-    background-color: ${backgroundControlNeutralPressed};
+    border-color: ${smtcStrokeControlNonePressed};
+    background-color: ${smtcBackgroundControlNeutralPressed};
   }
 
   :host(${pressedState}${primaryState}) {
     border-color: transparent;
-    background-color: ${backgroundControlBrandSelected};
-    color: ${foregroundControlOnBrandSelected};
+    background-color: ${smtcBackgroundControlBrandSelected};
+    color: ${smtcForegroundControlOnBrandSelected};
   }
 
   :host(${pressedState}${primaryState}:hover) {
-    background-color: ${backgroundControlBrandHover};
+    background-color: ${smtcBackgroundControlBrandHover};
   }
 
   :host(${pressedState}${primaryState}:active) {
-    background-color: ${backgroundControlBrandPressed};
+    background-color: ${smtcBackgroundControlBrandPressed};
   }
 
   :host(${pressedState}${subtleState}) {
     border-color: transparent;
-    background-color: ${backgroundControlSubtleSelected};
+    background-color: ${smtcBackgroundControlSubtleSelected};
   }
 
   :host(${pressedState}${subtleState}:hover) {
-    background-color: ${backgroundControlSubtleHover};
+    background-color: ${smtcBackgroundControlSubtleHover};
   }
 
   :host(${pressedState}${subtleState}:active) {
-    background-color: ${backgroundControlSubtlePressed};
+    background-color: ${smtcBackgroundControlSubtlePressed};
   }
 
   :host(${pressedState}${outlineState}) {
-    background-color: ${backgroundControlOutlineSelected};
+    background-color: ${smtcBackgroundControlOutlineSelected};
   }
 
   :host(${pressedState}${outlineState}:hover) {
-    background-color: ${backgroundControlOutlineHover};
+    background-color: ${smtcBackgroundControlOutlineHover};
   }
 
   :host(${pressedState}${outlineState}:active) {
-    background-color: ${backgroundControlOutlinePressed};
+    background-color: ${smtcBackgroundControlOutlinePressed};
   }
 `.withBehaviors(
   forcedColorsStylesheetBehavior(css`
