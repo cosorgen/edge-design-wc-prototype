@@ -173,6 +173,11 @@ const template = html<Toolbar>`
 
 const styles = css`
   :host {
+    --smtc-corner-control-rest: 4px;
+    --smtc-corner-control-hover: 4px;
+    --smtc-corner-control-pressed: 4px;
+    --smtc-corner-control-selected: 4px;
+
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
@@ -279,7 +284,8 @@ export class Toolbar extends FASTElement {
 
   toggleFlyout(id: string, event: Event) {
     if (!(event instanceof CustomEvent)) return;
-    event.detail ? this.ews.openToolbarItem(id) : this.ews.closeToolbarItem();
+    if (event.detail) this.ews.openToolbarItem(id);
+    else this.ews.closeToolbarItem();
   }
 
   toggleSidepane(id: string) {
@@ -294,7 +300,8 @@ export class Toolbar extends FASTElement {
 
   togglePinToolbarItem(id: string, event: Event) {
     if (!(event instanceof CustomEvent)) return;
-    event.detail ? this.ess.pinToolbarItem(id) : this.ess.unpinToolbarItem(id);
+    if (event.detail) this.ess.pinToolbarItem(id);
+    else this.ess.unpinToolbarItem(id);
   }
 
   handleOmniboxActionClick(id: string, e: Event) {

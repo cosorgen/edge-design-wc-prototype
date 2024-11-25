@@ -84,6 +84,11 @@ const template = html<TabBar>`
 
 const styles = css`
   :host {
+    --smtc-corner-control-rest: 4px;
+    --smtc-corner-control-hover: 4px;
+    --smtc-corner-control-pressed: 4px;
+    --smtc-corner-control-selected: 4px;
+
     display: block;
     user-select: none;
     position: relative; /* for positioning shadow */
