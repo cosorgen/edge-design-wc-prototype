@@ -69,4 +69,6 @@ export {
   type Theme,
 } from './themes.js';
 
-export { typographyStyles, type BrandVariants } from '@fluentui/tokens';
+export { type BrandVariants } from '@fluentui/tokens';
+
+export { typographyStyles } from './typographyStyles.js';

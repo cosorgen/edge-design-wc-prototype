@@ -1,7 +1,5 @@
 import { type FontFamilyTokens } from '@fluentui/tokens';
 
-export { typographyStyles } from '@fluentui/tokens';
-
 export const fontFamilyOverrides: Partial<FontFamilyTokens> = {
   fontFamilyBase:
     '"Ginto", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',

@@ -1,5 +1,4 @@
 import { type FontFamilyTokens } from '@fluentui/tokens';
-export { typographyStyles } from '@fluentui/tokens';
 
 export const fontFamilyTokenOverrides: Partial<FontFamilyTokens> = {
   fontFamilyBase:

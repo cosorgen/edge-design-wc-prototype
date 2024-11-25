@@ -78,11 +78,12 @@ export {
 } from './spacingTokens.js';
 
 export {
-  typographyStyles,
   fontFamilyOverrides,
   copilotTypographyTokens,
   type CopilotTypographyTokens,
 } from './typography.js';
+
+export { typographyStyles } from './typographyStyles.js';
 
 export { edgeBrandVariants } from './brandVariants.js';
 

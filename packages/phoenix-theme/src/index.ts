@@ -68,10 +68,11 @@ export {
 } from './utilities.js';
 
 export {
-  typographyStyles,
   macFontFamilyOverrides,
   windowsFontFamilyOverrides,
 } from './typography.js';
+
+export { typographyStyles } from './typographyStyles.js';
 
 export { brandVariants } from './brandVariants.js';
 

@@ -1,7 +1,5 @@
 import { type FontFamilyTokens } from '@fluentui/tokens';
 
-export { typographyStyles } from '@fluentui/tokens';
-
 export const fontFamilyOverrides: Partial<FontFamilyTokens> = {
   fontFamilyBase:
     '"Segoe UI Variable Display", "Segoe UI", "Segoe UI Web (West European)", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif',

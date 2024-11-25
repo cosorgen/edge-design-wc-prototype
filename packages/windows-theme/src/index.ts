@@ -36,7 +36,9 @@ export {
   type WindowsUtilityTokens,
 } from './utilities.js';
 
-export { typographyStyles, fontFamilyTokenOverrides } from './typography.js';
+export { fontFamilyTokenOverrides } from './typography.js';
+
+export { typographyStyles } from './typographyStyles.js';
 
 export { brandWeb } from './brandVariants.js';
 
