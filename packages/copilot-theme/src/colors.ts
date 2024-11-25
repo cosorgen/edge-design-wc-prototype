@@ -298,6 +298,9 @@ export declare interface CopilotColorTokens {
   smtcBackgroundSendButtonHover: string;
   smtcBackgroundSendButtonPressed: string;
   smtcForegroundSendButtonRest: string;
+  smtcForegroundSendButtonHover: string;
+  smtcForegroundSendButtonPressed: string;
+  smtcBackgroundComposerInputRest: string;
 }
 
 export const copilotLightThemeColors: CopilotColorTokens = {
@@ -350,6 +353,9 @@ export const copilotLightThemeColors: CopilotColorTokens = {
   smtcBackgroundSendButtonHover: '#e3b388',
   smtcBackgroundSendButtonPressed: '#fee0c3',
   smtcForegroundSendButtonRest: '#33302e',
+  smtcForegroundSendButtonHover: '',
+  smtcForegroundSendButtonPressed: '',
+  smtcBackgroundComposerInputRest: '#FFFFFFE5',
 };
 
 export const copilotDarkThemeColors: CopilotColorTokens = {
@@ -402,4 +408,7 @@ export const copilotDarkThemeColors: CopilotColorTokens = {
   smtcBackgroundSendButtonHover: '#505B7B',
   smtcBackgroundSendButtonPressed: '#313A52',
   smtcForegroundSendButtonRest: '#F2DDCC',
+  smtcForegroundSendButtonHover: '',
+  smtcForegroundSendButtonPressed: '',
+  smtcBackgroundComposerInputRest: '#00000080',
 };

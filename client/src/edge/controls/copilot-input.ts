@@ -6,11 +6,9 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  colorLayerBackgroundDialog,
   curveEasyEaseMax,
   durationNormal,
   spacingHorizontalXL,
-  spacingVerticalM,
   smtcTextComposerInputFontSize,
   smtcTextComposerInputLineHeight,
   smtcTextComposerInputFontWeight,
@@ -22,6 +20,12 @@ import {
   smtcBackgroundSendButtonHover,
   smtcBackgroundSendButtonPressed,
   smtcForegroundSendButtonRest,
+  smtcBackgroundComposerInputRest,
+  smtcForegroundSendButtonHover,
+  smtcForegroundSendButtonPressed,
+  smtcCornerComposerSendButtonRest,
+  smtcCornerComposerSendButtonHover,
+  smtcCornerComposerSendButtonPressed,
 } from '@mai-ui/copilot-theme';
 import '@phoenixui/web-components/button.js';
 
@@ -60,12 +64,22 @@ const styles = css`
     position: absolute;
     right: 6px;
     bottom: 6px;
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
 
     /* Overrides for button tokens */
     --smtc-background-control-brand-rest: ${smtcBackgroundSendButtonRest};
     --smtc-background-control-brand-hover: ${smtcBackgroundSendButtonHover};
     --smtc-background-control-brand-pressed: ${smtcBackgroundSendButtonPressed};
     --smtc-foreground-control-on-brand-rest: ${smtcForegroundSendButtonRest};
+    --smtc-foreground-control-on-brand-hover: ${smtcForegroundSendButtonHover};
+    --smtc-foreground-control-on-brand-pressed: ${smtcForegroundSendButtonPressed};
+    --smtc-corner-control-rest: ${smtcCornerComposerSendButtonRest};
+    --smtc-corner-control-hover: ${smtcCornerComposerSendButtonHover};
+    --smtc-corner-control-pressed: ${smtcCornerComposerSendButtonPressed};
+    box-shadow: 0px 0.5px 1px 0.5px #0000000a;
 
     display: none;
     transform: translateX(40px);
@@ -87,15 +101,13 @@ const styles = css`
     box-sizing: border-box;
     min-width: 206px;
     border: none;
-    background: ${colorLayerBackgroundDialog};
+    background: ${smtcBackgroundComposerInputRest};
     border-radius: ${smtcCornerComposerInputRest};
-    padding-block: ${spacingVerticalM};
+    padding-block: 11px; /* Not in system to make height 48px */
     padding-inline-start: ${spacingHorizontalXL};
     padding-inline-end: 64px;
-    box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
-    height: 50px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
 
     font-size: ${smtcTextComposerInputFontSize};
     line-height: ${smtcTextComposerInputLineHeight};
