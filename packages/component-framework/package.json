@@ -11,21 +11,9 @@
       "types": "./dist/dts/index.d.ts",
       "default": "./dist/esm/index.js"
     },
-    "./design-system.js": {
-      "types": "./dist/dts/design-system.d.ts",
-      "default": "./dist/esm/design-system.js"
-    },
-    "./get-initials.js": {
-      "types": "./dist/dts/get-initials.d.ts",
-      "default": "./dist/esm/get-initials.js"
-    },
-    "./states.js": {
-      "types": "./dist/dts/states.d.ts",
-      "default": "./dist/esm/states.js"
-    },
-    "./toggle-state.js": {
-      "types": "./dist/dts/toggle-state.d.ts",
-      "default": "./dist/esm/toggle-state.js"
+    "./*.js": {
+      "types": "./dist/dts/*.d.ts",
+      "default": "./dist/esm/*.js"
     },
     "./package.json": "./package.json"
   },

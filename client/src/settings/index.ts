@@ -7,6 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import '../windows/controls/mica-material.js';
 import '@mai-ui/button/define.js';
+import '@mai-ui/text-input/define.js';
 import {
   borderRadiusMedium,
   colorBrandStroke,
@@ -172,13 +173,13 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="frame-spacing">Frame spacing</label>
-            <phx-text-input
+            <mai-text-input
               id="frame-spacing"
               type="number"
               value="${(x) => parseInt(x.ss.frameSpacing)}"
               @change="${(x) => x.updateFrameSpacing()}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
         </div>
 
@@ -267,13 +268,13 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="shopping-trigger">Shopping trigger URL</label>
-            <phx-text-input
+            <mai-text-input
               id="shopping-trigger"
               type="text"
               value="${(x) => x.ts.shoppingTriggerURL}"
               @blur="${(x) => x.updateShoppingTrigger()}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
         </div>
 
@@ -330,14 +331,14 @@ const template = html<WindowsSettings>`
             <label for="composer-auto-open-delay"
               >Composer auto open delay (ms)</label
             >
-            <phx-text-input
+            <mai-text-input
               id="composer-auto-open-delay"
               type="number"
               value="${(x) => x.cs.autoOpenDelay}"
               @change="${(x) => x.updateComposerAutoOpenDelay()}"
               ?disabled="${(x) => !x.cs.autoOpen}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
           <div class="entry">
             <label for="copilot-sidepane-background">
