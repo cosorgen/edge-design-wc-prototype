@@ -8,6 +8,7 @@ import {
 import '../windows/controls/mica-material.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/text-input/define.js';
+import '@mai-ui/switch/define.js';
 import {
   borderRadiusMedium,
   colorBrandStroke,
@@ -215,12 +216,12 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="show-menus-l0">Show menus in L1</label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="show-menus-l0"
               ?checked="${(x) => x.ss.showMenusInL1}"
               @change="${(x) => x.toggleshowMenusInL1()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
@@ -251,20 +252,20 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="truncate-url">Truncate URL</label>
-            <phx-switch
+            <mai-switch
               id="truncate-url"
               ?checked="${(x) => x.ss.truncateURL}"
               @change="${(x) => x.toggleTruncateUrl()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="full-width-omnibox">Full width omnibox</label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="full-width-omnibox"
               ?checked="${(x) => x.ss.fullWidthOmnibox}"
               @change="${(x) => x.toggleFullWidthOmnibox()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="shopping-trigger">Shopping trigger URL</label>
@@ -283,20 +284,20 @@ const template = html<WindowsSettings>`
           <h2>New tab pages</h2>
           <div class="entry">
             <label for="legacy-newtab"> Show legacy new tab page </label>
-            <phx-switch
+            <mai-switch
               id="legacy-newtab"
               ?checked="${(x) => x.ss.showLegacyNewTab}"
               @change="${(x) => x.toggleShowLegacyNewTab()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="show-copilot-ntp"> Show copilot new tab page </label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="show-copilot-ntp"
               ?checked="${(x) => x.ss.showCopilotNTP}"
               @change="${(x) => x.toggleShowCopilotNTP()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
         </div>
 
@@ -305,27 +306,27 @@ const template = html<WindowsSettings>`
           <h2>Copilot</h2>
           <div class="entry">
             <label for="legacy-copilot"> Show legacy copilot </label>
-            <phx-switch
+            <mai-switch
               id="legacy-copilot"
               ?checked="${(x) => x.ss.showLegacyCopilot}"
               @change="${(x) => x.toggleShowLegacyCopilot()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="composer-hint"> Show composer hint </label>
-            <phx-switch
+            <mai-switch
               id="composer-hint"
               ?checked="${(x) => x.cs.showHint}"
               @change="${(x) => x.toggleShowComposerHint()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="legacy-newtab"> Auto open composer on hover </label>
-            <phx-switch
+            <mai-switch
               id="composer-auto-open"
               ?checked="${(x) => x.cs.autoOpen}"
               @change="${(x) => x.toggleAutoOpenComposer()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="composer-auto-open-delay"
@@ -344,11 +345,11 @@ const template = html<WindowsSettings>`
             <label for="copilot-sidepane-background">
               Copilot sidepane background
             </label>
-            <phx-switch
+            <mai-switch
               id="copilot-sidepane-background"
               ?checked="${(x) => x.cs.sidepaneBackground}"
               @change="${(x) => x.toggleShowSidepaneBackground()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
         </div>
       </div>

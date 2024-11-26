@@ -1,4 +1,4 @@
-# Text input
+# Switch
 
 ## Design tokens
 

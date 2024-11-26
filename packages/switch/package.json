@@ -1,0 +1,60 @@
+{
+  "name": "@mai-ui/switch",
+  "version": "0.0.1",
+  "author": "Microsoft",
+  "description": "MAI Design switch custom element",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/dts/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "./definition.js": {
+      "types": "./dist/dts/switch.definition.d.ts",
+      "default": "./dist/esm/switch.definition.js"
+    },
+    "./template.js": {
+      "types": "./dist/dts/switch.template.d.ts",
+      "default": "./dist/esm/switch.template.js"
+    },
+    "./styles.js": {
+      "types": "./dist/dts/switch.styles.d.ts",
+      "default": "./dist/esm/switch.styles.js"
+    },
+    "./define.js": {
+      "types": "./dist/dts/define.d.ts",
+      "default": "./dist/esm/define.js"
+    },
+    "./options.js": {
+      "types": "./dist/dts/switch.options.d.ts",
+      "default": "./dist/esm/switch.options.js"
+    },
+    "./tokens.js": {
+      "types": "./dist/dts/switch.tokens.d.ts",
+      "default": "./dist/esm/switch.tokens.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "sideEffects": [
+    "./dist/esm/define.js"
+  ],
+  "files": [
+    "*.md",
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "dependencies": {
+    "@mai-ui/component-framework": "^0.0.1"
+  },
+  "peerDependencies": {
+    "@fluentui/web-components": ">= 3.0.0-beta.63 || ^3.0.0",
+    "@microsoft/fast-element": "^2.0.0"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build:tsc",
+    "build:tsc": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist"
+  }
+}
