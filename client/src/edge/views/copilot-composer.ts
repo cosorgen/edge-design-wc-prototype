@@ -243,6 +243,10 @@ export class CopilotComposer extends FASTElement {
     this._inputElement?.focus();
   }
 
+  blur() {
+    this._inputElement?.blur();
+  }
+
   setCSSVariables() {
     // Wait for button condition
     Updates.enqueue(() => {
