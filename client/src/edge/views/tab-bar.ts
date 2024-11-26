@@ -88,7 +88,7 @@ const styles = css`
     user-select: none;
     position: relative; /* for positioning shadow */
     width: calc(
-      100% - ${(x) => (x.ews.activeSidepaneAppId !== null ? '0px' : '186px')}
+      100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')}
     );
   }
 

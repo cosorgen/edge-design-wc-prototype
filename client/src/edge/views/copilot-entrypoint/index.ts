@@ -399,7 +399,11 @@ export class CopilotEntrypoint extends FASTElement {
   addEventListeners(): void {
     this._composerElement?.addEventListener(
       'transitionend',
-      this.handleComposerTransitionEnd,
+      this.handleComposerOpacityTransitionEnd,
+    );
+    this._composerElement?.addEventListener(
+      'transitionend',
+      this.handleComposerWidthTransitionEnd,
     );
     Observable.getNotifier(this.ews).subscribe(this, 'viewportSize');
     Observable.getNotifier(this.cs).subscribe(this, 'activeThreadId');
@@ -408,7 +412,11 @@ export class CopilotEntrypoint extends FASTElement {
   removeEventListeners(): void {
     this._composerElement?.removeEventListener(
       'transitionend',
-      this.handleComposerTransitionEnd,
+      this.handleComposerOpacityTransitionEnd,
+    );
+    this._composerElement?.removeEventListener(
+      'transitionend',
+      this.handleComposerWidthTransitionEnd,
     );
     Observable.getNotifier(this.ews).unsubscribe(this);
     Observable.getNotifier(this.cs).unsubscribe(this);
@@ -444,9 +452,9 @@ export class CopilotEntrypoint extends FASTElement {
     this.toggleActive();
   };
 
-  handleComposerTransitionEnd = (e: TransitionEvent) => {
+  handleComposerOpacityTransitionEnd = (e: TransitionEvent) => {
     if (e.composedPath()[0] !== this._composerElement) return;
-    if (e.propertyName !== 'opacity') return; // only fire once
+    if (e.propertyName !== 'opacity') return; // only fire on show/hide
     const composer = this._composerElement?.children[0] as HTMLElement;
 
     // Focus the input when the composer is expanded
@@ -463,6 +471,11 @@ export class CopilotEntrypoint extends FASTElement {
         DEFAULT_COMPOSER_WIDTH,
       );
     }
+  };
+
+  handleComposerWidthTransitionEnd = (e: TransitionEvent) => {
+    if (e.composedPath()[0] !== this._composerElement) return;
+    if (e.propertyName !== 'width') return; // Fire for every width change
 
     // Set sidepane open state when composer is dragged to the side
     if (
