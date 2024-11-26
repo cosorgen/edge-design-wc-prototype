@@ -182,7 +182,7 @@ export class CopilotComposer extends FASTElement {
       'copilot-input',
     ) as CopilotInput;
     this._chatElement = this.shadowRoot?.querySelector(
-      'copilot-inline-chat',
+      'copilot-chat',
     ) as CopilotChat;
   }
 
