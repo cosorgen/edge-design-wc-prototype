@@ -252,7 +252,6 @@ export class CopilotComposer extends FASTElement {
           '#end',
         ) as HTMLElement;
         const { width } = endActions.getBoundingClientRect();
-        console.log('setCSSVariables', width);
         this.style.setProperty('--end-actions-width', `-${width}px`);
       });
     });

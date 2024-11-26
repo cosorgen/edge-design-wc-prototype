@@ -24,12 +24,12 @@ import {
   spacingVerticalXS,
   spacingVerticalXXS,
   typographyStyles,
-  smtcBackgroundControlBrandRest,
   smtcBackgroundMessageBubble,
   smtcForegroundMessageBubble,
   smtcCornerMessageBubble,
   smtcPaddingBlockMessageBubble,
   smtcPaddingInlineMessageBubble,
+  smtcBackgroundSpinnerRest,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import showdown from 'showdown';
@@ -151,7 +151,7 @@ const styles = css`
     display: none;
     width: 64px;
     height: 64px;
-    background-color: ${smtcBackgroundControlBrandRest};
+    background-color: ${smtcBackgroundSpinnerRest};
     mask: url(img/edge/copilotLoading.gif);
     mask-size: cover;
     mask-repeat: no-repeat;

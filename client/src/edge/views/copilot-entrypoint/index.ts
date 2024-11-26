@@ -38,7 +38,8 @@ import blockEndStyles from './block-end-styles.js';
 import blockCenterStyles from './block-center-styles.js';
 import blockSidepaneStyles from './block-sidepane-styles.js';
 
-const DEFAULT_COMPOSER_WIDTH = '512px';
+const DEFAULT_COMPOSER_WIDTH = '370px';
+const DEFAULT_COMPOSER_EXPANDED_WIDTH = '680px';
 const DEFAULT_COMPOSER_HEIGHT = '64px';
 
 const template = html<CopilotEntrypoint>` ${when(
@@ -60,7 +61,11 @@ const template = html<CopilotEntrypoint>` ${when(
     id="composer"
     @mousedown="${(x, c) => x.handleComposerMouseDown(c.event)}"
   >
-    <copilot-composer @close="${(x) => x.toggleActive()}"></copilot-composer>
+    <copilot-composer
+      @close="${(x) => x.toggleActive()}"
+      @focus="${(x) => x.handleComposerFocus()}"
+      @blur="${(x) => x.handleComposerBlur()}"
+    ></copilot-composer>
     <div
       class="resize"
       id="top"
@@ -94,7 +99,7 @@ const styles = css`
     --grabber-height: 4px;
     --composer-expanded-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-retracted-width: 160px;
-    --composer-min-width: 404px;
+    --composer-min-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: ${DEFAULT_COMPOSER_HEIGHT};
     --ntp-inset: 24px;
@@ -188,7 +193,7 @@ const styles = css`
     border-radius: ${borderRadiusCircular};
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
+    backdrop-filter: blur(calc(${acrylicBackgroundBlur} / 2));
     border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
     box-shadow: ${shadow16};
 
@@ -313,7 +318,7 @@ const styles = css`
     inset-block-end: calc(${spacingFrame} + var(--ntp-inset));
     background: ${acrylicBackgroundLuminosity};
     background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
+    backdrop-filter: blur(calc(${acrylicBackgroundBlur} / 2));
     border: ${strokeWidthThin} solid ${colorLayerBackgroundDialog};
     border-radius: ${borderRadiusLarge};
     box-shadow: ${shadow28};
@@ -441,6 +446,7 @@ export class CopilotEntrypoint extends FASTElement {
 
   handleComposerTransitionEnd = (e: TransitionEvent) => {
     if (e.composedPath()[0] !== this._composerElement) return;
+    if (e.propertyName !== 'opacity') return; // only fire once
     const composer = this._composerElement?.children[0] as HTMLElement;
 
     // Focus the input when the composer is expanded
@@ -621,5 +627,16 @@ export class CopilotEntrypoint extends FASTElement {
         DEFAULT_COMPOSER_HEIGHT,
       );
     }
+  }
+
+  handleComposerFocus() {
+    this.style.setProperty(
+      '--composer-expanded-width',
+      DEFAULT_COMPOSER_EXPANDED_WIDTH,
+    );
+  }
+
+  handleComposerBlur() {
+    this.style.setProperty('--composer-expanded-width', DEFAULT_COMPOSER_WIDTH);
   }
 }

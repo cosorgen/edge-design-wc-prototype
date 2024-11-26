@@ -304,6 +304,7 @@ export declare interface CopilotColorTokens {
   smtcEffectInnerShineStrong: string;
   smtcBackgroundMessageBubble: string;
   smtcForegroundMessageBubble: string;
+  smtcBackgroundSpinnerRest: string;
 }
 
 export const copilotLightThemeColors: CopilotColorTokens = {
@@ -362,6 +363,7 @@ export const copilotLightThemeColors: CopilotColorTokens = {
   smtcEffectInnerShineStrong: '#FFFFFF',
   smtcBackgroundMessageBubble: '#FEE5CE',
   smtcForegroundMessageBubble: '#33302E',
+  smtcBackgroundSpinnerRest: 'rgba(239, 183, 161, 1);',
 };
 
 export const copilotDarkThemeColors: CopilotColorTokens = {
@@ -420,4 +422,5 @@ export const copilotDarkThemeColors: CopilotColorTokens = {
   smtcEffectInnerShineStrong: '#FFFFFF0D',
   smtcBackgroundMessageBubble: '#1D2439',
   smtcForegroundMessageBubble: '#E3CBBC',
+  smtcBackgroundSpinnerRest: 'rgba(75, 92, 146, 1);',
 };

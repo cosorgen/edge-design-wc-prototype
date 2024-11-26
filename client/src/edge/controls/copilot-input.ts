@@ -82,7 +82,7 @@ const styles = css`
     box-shadow: 0px 0.5px 1px 0.5px #0000000a;
 
     display: none;
-    transform: translateX(calc(var(--end-actions-width, 80px) + 40px));
+    transform: translateX(calc(-1 * var(--end-actions-width, -80px) + 40px));
     opacity: 0;
     transition:
       transform ${durationNormal} ${curveEasyEase},
@@ -135,7 +135,7 @@ const styles = css`
 
   @starting-style {
     :host(:not([empty])) #send {
-      transform: translateX(120px);
+      transform: translateX(calc(-1 * var(--end-actions-width, -80px) + 40px));
       opacity: 0;
     }
   }
