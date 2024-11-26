@@ -28,10 +28,12 @@ import './controls/mica-material.js';
 import './controls/app-window.js';
 import '../edge/index.js';
 import '../settings/index.js';
+import '../slides/index.js';
 
 const appTemplates: Record<string, ViewTemplate> = {
   'Microsoft Edge': html`<microsoft-edge></microsoft-edge>`,
   Settings: html`<windows-settings></windows-settings>`,
+  Slides: html`<figma-slides></figma-slides>`,
 };
 
 const styles = css`
@@ -151,30 +153,30 @@ export class WindowsShell extends FASTElement {
       this.ws.openWindow(appName);
       return;
     }
-
-    // if there's one window open
-    if (windows.length === 1) {
-      // if it's minimized, restore it
-      if (windows[0].minimized) {
-        this.ws.minimizeWindow(windows[0].id, false);
-        return;
-      }
-      // if it's not active, activate it
-      if (windows[0].id !== this.ws.activeWindowId) {
-        this.ws.activateWindow(windows[0].id);
-        return;
-      }
-      // if it's active, minimize it
-      this.ws.minimizeWindow(windows[0].id);
+  
+    // handle the case of a single window
+    const [window] = windows;
+  
+    // if the window is minimized, restore it and activate it
+    if (window.minimized) {
+      this.ws.minimizeWindow(window.id, false);  // restore the window
+      this.ws.activateWindow(window.id);  // ensure the window is activated and brought to the front
       return;
     }
-
-    // if there are multiple windows open
-    return;
+  
+    // if the window is not active, activate it and bring it to the front
+    if (window.id !== this.ws.activeWindowId) {
+      this.ws.activateWindow(window.id);  // activate the window to bring it to the front
+      return;
+    }
+  
+    // if the window is already active, minimize it
+    this.ws.minimizeWindow(window.id);
   }
 
   handleWindowMove(e: CustomEvent) {
     const { id, width, height, xPos, yPos } = e.detail;
     this.ws.moveWindow(id, width, height, xPos, yPos);
   }
+
 }
