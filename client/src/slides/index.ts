@@ -61,7 +61,6 @@ export class FigmaSlidesElement extends FASTElement {
     const isMaximized = !this.windowIsMaximized();
     this.ws.maximizeWindow(this.ws.activeWindowId, isMaximized);
     this.windowMaximized = isMaximized; // Update local state
-    this.ws.activateWindow(this.ws.activeWindowId);
   }
   
   minimizeWindow() {
