@@ -30,7 +30,7 @@ export const lightThemeMaterials: PhoenixMaterialTokens = {
 
 export const lightThemeSolidMaterials: PhoenixMaterialTokens = {
   acrylicBackgroundBlur: '0px',
-  acrylicBackgroundLuminosity: '#00000000',
+  acrylicBackgroundLuminosity: '#F5F5F5',
   acrylicBackgroundColor: '#00000000',
   acrylicBackgroundNormal: '#F5F5F5',
   tabActiveBackgroundBlur: '0px',
@@ -60,7 +60,7 @@ export const darkThemeMaterials: PhoenixMaterialTokens = {
 
 export const darkThemeSolidMaterials: PhoenixMaterialTokens = {
   acrylicBackgroundBlur: '0px',
-  acrylicBackgroundLuminosity: '#00000000',
+  acrylicBackgroundLuminosity: '#141414',
   acrylicBackgroundColor: '#00000000',
   acrylicBackgroundNormal: '#141414',
   tabActiveBackgroundBlur: '0px',

@@ -44,8 +44,8 @@ export const lightThemeSolidMaterials: PhoenixMaterialTokens = {
 };
 
 export const darkThemeMaterials: PhoenixMaterialTokens = {
-  acrylicBackgroundBlur: '60px',
-  acrylicBackgroundLuminosity: '#2C2C2CF5',
+  acrylicBackgroundBlur: '0px',
+  acrylicBackgroundLuminosity: '#141414',
   acrylicBackgroundColor: '#2C2C2C26',
   acrylicBackgroundNormal: '#00000000',
   tabActiveBackgroundBlur: '240px',
@@ -60,7 +60,7 @@ export const darkThemeMaterials: PhoenixMaterialTokens = {
 
 export const darkThemeSolidMaterials: PhoenixMaterialTokens = {
   acrylicBackgroundBlur: '0px',
-  acrylicBackgroundLuminosity: '#00000000',
+  acrylicBackgroundLuminosity: '#141414',
   acrylicBackgroundColor: '#00000000',
   acrylicBackgroundNormal: '#141414',
   tabActiveBackgroundBlur: '0px',
