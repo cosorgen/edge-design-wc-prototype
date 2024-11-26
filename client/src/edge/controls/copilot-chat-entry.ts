@@ -119,6 +119,7 @@ const styles = css`
 
   #actions {
     width: 100%;
+    position: relative; /* Fix for using MAI buttons */
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalXS};

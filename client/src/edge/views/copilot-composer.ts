@@ -122,7 +122,8 @@ const styles = css`
     align-items: flex-end;
     gap: ${spacingHorizontalXS};
     padding: ${spacingHorizontalS};
-    overflow: hidden;
+    overflow: hidden; /* For button animations */
+    min-height: fit-content; /* Do not collapse since we have overflow hidden */
   }
 
   #start,
