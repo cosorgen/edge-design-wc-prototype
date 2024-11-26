@@ -37,6 +37,7 @@ export declare interface CopilotBorderRadiusTokens {
   smtcCornerComposerSendButtonRest: string;
   smtcCornerComposerSendButtonHover: string;
   smtcCornerComposerSendButtonPressed: string;
+  smtcCornerMessageBubble: string;
 }
 
 export const copilotBorderRadius: CopilotBorderRadiusTokens = {
@@ -54,4 +55,5 @@ export const copilotBorderRadius: CopilotBorderRadiusTokens = {
   smtcCornerComposerSendButtonRest: '14px',
   smtcCornerComposerSendButtonHover: '14px',
   smtcCornerComposerSendButtonPressed: '14px',
+  smtcCornerMessageBubble: '12px',
 };

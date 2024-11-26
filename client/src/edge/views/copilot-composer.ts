@@ -4,6 +4,8 @@ import {
   FASTElement,
   customElement,
   Observable,
+  when,
+  Updates,
 } from '@microsoft/fast-element';
 import {
   colorNeutralForeground1,
@@ -61,21 +63,23 @@ const template = html<CopilotComposer>`
             <use x="2" y="2" href="img/edge/icons.svg#mic-new-24-regular" />
           </svg>
         </mai-button>
-        <mai-button
-          appearance="subtle"
-          size="large"
-          icon-only
-          @click="${(x) => x.handleClose(true)}"
-          class="${(x) =>
-            x.ews.activeSidepaneAppId === 'Copilot' ||
-            x.ews.activeSidepaneAppId === 'Legacy Copilot'
-              ? 'hidden'
-              : 'show'}"
-        >
-          <svg>
-            <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
-          </svg>
-        </mai-button>
+        ${when(
+          (x) =>
+            x.ews.activeSidepaneAppId !== 'Copilot' &&
+            x.ews.activeSidepaneAppId !== 'Legacy Copilot',
+          html`
+            <mai-button
+              appearance="subtle"
+              size="large"
+              icon-only
+              @click="${(x) => x.handleClose(true)}"
+            >
+              <svg>
+                <use x="2" y="2" href="img/edge/icons.svg#dismiss-24-regular" />
+              </svg>
+            </mai-button>
+          `,
+        )}
       </div>
     </div>
   </copilot-design-provider>
@@ -139,7 +143,7 @@ const styles = css`
 
   #input-row:has(copilot-input:not([empty])) #end {
     opacity: 0;
-    margin-inline-end: -80px;
+    margin-inline-end: var(--end-actions-width, -80px);
   }
 
   #input-row:has(copilot-input:not([empty])) #home {
@@ -164,6 +168,7 @@ export class CopilotComposer extends FASTElement {
     super.connectedCallback();
     this.setElements();
     this.addEventListeners();
+    this.setCSSVariables();
   }
 
   disconnectedCallback(): void {
@@ -188,15 +193,20 @@ export class CopilotComposer extends FASTElement {
 
   addEventListeners() {
     Observable.getNotifier(this.ts).subscribe(this, 'activeTabId');
+    Observable.getNotifier(this.ews).subscribe(this, 'activeSidepaneAppId');
   }
 
   removeEventListeners() {
     Observable.getNotifier(this.cs).unsubscribe(this);
+    Observable.getNotifier(this.ews).unsubscribe(this);
   }
 
   handleChange(subject: unknown, key: string) {
     if (key === 'activeTabId' || key === 'tabsById') {
       this.updateContext();
+    }
+    if (key === 'activeSidepaneAppId') {
+      this.setCSSVariables();
     }
   }
 
@@ -231,5 +241,15 @@ export class CopilotComposer extends FASTElement {
 
   focus() {
     this._inputElement?.focus();
+  }
+
+  setCSSVariables() {
+    Updates.enqueue(() => {
+      const endActions = this.shadowRoot?.querySelector('#end') as HTMLElement;
+      this.style.setProperty(
+        '--end-actions-width',
+        `-${endActions.offsetWidth}px`,
+      );
+    });
   }
 }

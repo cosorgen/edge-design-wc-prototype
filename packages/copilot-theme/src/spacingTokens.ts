@@ -18,6 +18,8 @@ export type CopilotSpacingTokens = {
   smtcStrokeWidthControlOutlineSelected: string;
   smtcControlFocusInnerStrokeWidth: string;
   smtcControlFocusOuterStrokeWidth: string;
+  smtcPaddingBlockMessageBubble: string;
+  smtcPaddingInlineMessageBubble: string;
 };
 
 export const copilotSpacingTokens: CopilotSpacingTokens = {
@@ -32,4 +34,6 @@ export const copilotSpacingTokens: CopilotSpacingTokens = {
   smtcStrokeWidthControlOutlineSelected: '1px',
   smtcControlFocusInnerStrokeWidth: '1px',
   smtcControlFocusOuterStrokeWidth: '2px',
+  smtcPaddingBlockMessageBubble: '12px',
+  smtcPaddingInlineMessageBubble: '18px',
 };

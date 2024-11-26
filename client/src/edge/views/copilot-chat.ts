@@ -14,7 +14,7 @@ import {
   spacingVerticalXL,
   spacingVerticalXXL,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@mai-ui/copilot-theme';
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';

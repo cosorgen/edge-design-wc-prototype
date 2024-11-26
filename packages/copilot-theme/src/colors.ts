@@ -104,10 +104,10 @@ export const lightThemeColorOverrides: Partial<ColorTokens> = {
   colorNeutralBackground4: '#0000000F',
   colorNeutralBackground5: '#00000014',
   colorNeutralBackgroundDisabled: '#0000000F',
-  colorNeutralForeground1: '#000000DB',
-  colorNeutralForeground1Hover: '#000000DB',
-  colorNeutralForeground1Pressed: '#000000DB',
-  colorNeutralForeground1Selected: '#000000DB',
+  colorNeutralForeground1: '#33302E',
+  colorNeutralForeground1Hover: '#33302E',
+  colorNeutralForeground1Pressed: '#33302E',
+  colorNeutralForeground1Selected: '#33302E',
   colorNeutralForeground2: '#000000BD',
   colorNeutralForeground2Hover: '#000000DB',
   colorNeutralForeground2Pressed: '#000000DB',
@@ -212,10 +212,10 @@ export const darkThemeColorOverrides: Partial<ColorTokens> = {
   colorNeutralBackground3Selected: '#3A3A3A9E',
   colorNeutralBackground4: '#3A3A3A2E',
   colorNeutralBackgroundDisabled: '#3A3A3A4D',
-  colorNeutralForeground1: '#FFFFFF',
-  colorNeutralForeground1Hover: '#FFFFFF',
-  colorNeutralForeground1Pressed: '#FFFFFF',
-  colorNeutralForeground1Selected: '#FFFFFF',
+  colorNeutralForeground1: '#E3CBBC',
+  colorNeutralForeground1Hover: '#E3CBBC',
+  colorNeutralForeground1Pressed: '#E3CBBC',
+  colorNeutralForeground1Selected: '#E3CBBC',
   colorNeutralForeground2: '#FFFFFFD6',
   colorNeutralForeground2Hover: '#FFFFFF',
   colorNeutralForeground2Pressed: '#FFFFFF',
@@ -302,6 +302,8 @@ export declare interface CopilotColorTokens {
   smtcForegroundSendButtonPressed: string;
   smtcBackgroundComposerInputRest: string;
   smtcEffectInnerShineStrong: string;
+  smtcBackgroundMessageBubble: string;
+  smtcForegroundMessageBubble: string;
 }
 
 export const copilotLightThemeColors: CopilotColorTokens = {
@@ -358,6 +360,8 @@ export const copilotLightThemeColors: CopilotColorTokens = {
   smtcForegroundSendButtonPressed: '',
   smtcBackgroundComposerInputRest: '#FFFFFFE5',
   smtcEffectInnerShineStrong: '#FFFFFF',
+  smtcBackgroundMessageBubble: '#FEE5CE',
+  smtcForegroundMessageBubble: '#33302E',
 };
 
 export const copilotDarkThemeColors: CopilotColorTokens = {
@@ -414,4 +418,6 @@ export const copilotDarkThemeColors: CopilotColorTokens = {
   smtcForegroundSendButtonPressed: '',
   smtcBackgroundComposerInputRest: '#00000080',
   smtcEffectInnerShineStrong: '#FFFFFF0D',
+  smtcBackgroundMessageBubble: '#1D2439',
+  smtcForegroundMessageBubble: '#E3CBBC',
 };
