@@ -12,6 +12,7 @@ import {
   acrylicBackgroundLuminosity,
   borderRadiusLayerDialog,
   colorNeutralForeground1,
+  colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalL,
 } from '@mai-ui/phoenix-theme';
@@ -43,6 +44,10 @@ const styles = css`
     border-radius: ${borderRadiusLayerDialog};
     box-shadow: ${shadow28};
     color: ${colorNeutralForeground1};
+  }
+
+  flyout-menu > mai-toggle-button {
+    --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
   }
 `;
 

@@ -258,6 +258,7 @@ export declare interface KumoColorTokens {
   smtcBackgroundControlNeutralHover: string;
   smtcBackgroundControlNeutralPressed: string;
   smtcBackgroundControlNeutralRest: string;
+  smtcBackgroundControlNeutralDarkerRest: string;
   smtcBackgroundControlNeutralSelected: string;
   smtcBackgroundControlOutlineDisabled: string;
   smtcBackgroundControlOutlineHover: string;
@@ -291,6 +292,13 @@ export declare interface KumoColorTokens {
   smtcStrokeControlOutlinePressed: string;
   smtcStrokeControlOutlineRest: string;
   smtcStrokeControlOutlineSelected: string;
+  smtcStrokeTextInputOutlineRest: string;
+  smtcStrokeTextInputOutlineHover: string;
+  smtcStrokeTextInputOutlinePressed: string;
+  smtcStrokeTextInputAccessibleRest: string;
+  smtcStrokeTextInputAccessibleHover: string;
+  smtcStrokeTextInputAccessiblePressed: string;
+  smtcStrokeTextInputFocused: string;
 }
 
 export const kumoLightThemeColors: KumoColorTokens = {
@@ -302,6 +310,7 @@ export const kumoLightThemeColors: KumoColorTokens = {
   smtcBackgroundControlNeutralHover: '#EAEFF5',
   smtcBackgroundControlNeutralPressed: '#D3D8DE',
   smtcBackgroundControlNeutralRest: '#F6F9FC',
+  smtcBackgroundControlNeutralDarkerRest: '#F6F9FC',
   smtcBackgroundControlNeutralSelected: '#DDE2E8',
   smtcBackgroundControlOutlineDisabled: 'transparent',
   smtcBackgroundControlOutlineHover: 'transparent',
@@ -335,6 +344,13 @@ export const kumoLightThemeColors: KumoColorTokens = {
   smtcStrokeControlOutlinePressed: '#A7ABB1',
   smtcStrokeControlOutlineRest: '#C6CBD1',
   smtcStrokeControlOutlineSelected: '#C6CBD1',
+  smtcStrokeTextInputOutlineRest: 'transparent',
+  smtcStrokeTextInputOutlineHover: 'transparent',
+  smtcStrokeTextInputOutlinePressed: 'transparent',
+  smtcStrokeTextInputAccessibleRest: 'transparent',
+  smtcStrokeTextInputAccessibleHover: 'transparent',
+  smtcStrokeTextInputAccessiblePressed: 'transparent',
+  smtcStrokeTextInputFocused: '#23272B',
 };
 
 export const kumoDarkThemeColors: KumoColorTokens = {
@@ -346,6 +362,7 @@ export const kumoDarkThemeColors: KumoColorTokens = {
   smtcBackgroundControlNeutralHover: '#2D3135',
   smtcBackgroundControlNeutralPressed: '#3F4348',
   smtcBackgroundControlNeutralRest: '#26292E',
+  smtcBackgroundControlNeutralDarkerRest: '#26292E',
   smtcBackgroundControlNeutralSelected: '#282C30',
   smtcBackgroundControlOutlineDisabled: 'transparent',
   smtcBackgroundControlOutlineHover: 'transparent',
@@ -379,4 +396,11 @@ export const kumoDarkThemeColors: KumoColorTokens = {
   smtcStrokeControlOutlinePressed: '#5F6469',
   smtcStrokeControlOutlineRest: '#5A5E63',
   smtcStrokeControlOutlineSelected: '#5A5E63',
+  smtcStrokeTextInputOutlineRest: 'transparent',
+  smtcStrokeTextInputOutlineHover: 'transparent',
+  smtcStrokeTextInputOutlinePressed: 'transparent',
+  smtcStrokeTextInputAccessibleRest: 'transparent',
+  smtcStrokeTextInputAccessibleHover: 'transparent',
+  smtcStrokeTextInputAccessiblePressed: 'transparent',
+  smtcStrokeTextInputFocused: '#F6F9FC',
 };

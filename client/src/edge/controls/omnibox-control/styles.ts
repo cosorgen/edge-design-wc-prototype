@@ -4,7 +4,6 @@ import {
   borderRadiusLayerDialog,
   colorBrandStroke1,
   colorLayerBackgroundDialog,
-  colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalNone,
   spacingHorizontalXS,
@@ -108,10 +107,6 @@ export const styles = css`
 
   #actions {
     justify-content: flex-end;
-  }
-
-  [name='actions']::slotted(*) {
-    --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
   }
 
   :host([dropdown-open]) #actions {

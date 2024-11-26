@@ -48,7 +48,7 @@ const template = html<ToolbarSidepaneItem>`
 `;
 
 const styles = css`
-  :host {
+  flyout-menu > mai-toggle-button {
     /* Override button corner radius */
     --smtc-corner-control-rest: 8px;
     --smtc-corner-control-hover: 8px;

@@ -1,23 +1,13 @@
 import type { ElementStyles } from '@microsoft/fast-element';
 import { css } from '@microsoft/fast-element';
 import {
-  borderRadiusMedium,
-  colorCompoundBrandStroke,
-  colorCompoundBrandStrokePressed,
-  colorNeutralBackground1,
-  colorNeutralBackground3,
+  colorBrandStrokePressed,
   colorNeutralBackgroundInverted,
   colorNeutralForeground1,
   colorNeutralForeground3,
-  colorNeutralForeground4,
+  colorNeutralForegroundHint,
   colorNeutralForegroundDisabled,
   colorNeutralForegroundInverted,
-  colorNeutralStroke1,
-  colorNeutralStroke1Hover,
-  colorNeutralStroke1Pressed,
-  colorNeutralStrokeAccessible,
-  colorNeutralStrokeAccessibleHover,
-  colorNeutralStrokeAccessiblePressed,
   colorNeutralStrokeDisabled,
   colorPaletteRedBorder2,
   colorTransparentBackground,
@@ -37,7 +27,12 @@ import {
   lineHeightBase200,
   lineHeightBase300,
   lineHeightBase400,
-  shadow2,
+  smtcBackgroundControlNeutralDarkerRest,
+  smtcBackgroundControlNeutralRest,
+  smtcCornerControlRest,
+  smtcShadowTextInputRest,
+  smtcStrokeTextInputAccessibleRest,
+  smtcStrokeTextInputOutlineRest,
   spacingHorizontalM,
   spacingHorizontalMNudge,
   spacingHorizontalS,
@@ -46,6 +41,11 @@ import {
   spacingHorizontalXXS,
   spacingVerticalXS,
   strokeWidthThin,
+  smtcStrokeTextInputOutlineHover,
+  smtcStrokeTextInputAccessibleHover,
+  smtcStrokeTextInputOutlinePressed,
+  smtcStrokeTextInputAccessiblePressed,
+  smtcStrokeTextInputFocused,
 } from './text-input.tokens.js';
 import { display } from '@mai-ui/component-framework/display.js';
 import {
@@ -87,10 +87,10 @@ export const styles: ElementStyles = css`
 
   .root {
     align-items: center;
-    background-color: ${colorNeutralBackground1};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
-    border-bottom-color: ${colorNeutralStrokeAccessible};
-    border-radius: ${borderRadiusMedium};
+    background-color: ${smtcBackgroundControlNeutralRest};
+    border: ${strokeWidthThin} solid ${smtcStrokeTextInputOutlineRest};
+    border-bottom-color: ${smtcStrokeTextInputAccessibleRest};
+    border-radius: ${smtcCornerControlRest};
     box-sizing: border-box;
     height: 32px;
     display: inline-flex;
@@ -109,13 +109,11 @@ export const styles: ElementStyles = css`
     box-sizing: border-box;
     content: '';
     position: absolute;
-    left: -1px;
-    bottom: 0px;
-    right: -1px;
-    height: max(2px, ${borderRadiusMedium});
-    border-radius: 0 0 ${borderRadiusMedium} ${borderRadiusMedium};
-    border-bottom: 2px solid ${colorCompoundBrandStroke};
-    clip-path: inset(calc(100% - 2px) 1px 0px);
+    inset: -1px;
+    border-bottom-right-radius: ${smtcCornerControlRest};
+    border-bottom-left-radius: ${smtcCornerControlRest};
+    border-bottom: 2px solid ${smtcStrokeTextInputFocused};
+    pointer-events: none;
     transform: scaleX(0);
     transition-property: transform;
     transition-duration: ${durationUltraFast};
@@ -126,7 +124,7 @@ export const styles: ElementStyles = css`
     height: 100%;
     box-sizing: border-box;
     color: ${colorNeutralForeground1};
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${smtcCornerControlRest};
     background: ${colorTransparentBackground};
     font-family: ${fontFamilyBase};
     font-weight: ${fontWeightRegular};
@@ -139,7 +137,7 @@ export const styles: ElementStyles = css`
     border: 0;
   }
   .control::placeholder {
-    color: ${colorNeutralForeground4};
+    color: ${colorNeutralForegroundHint};
   }
   :host ::slotted([slot='start']),
   :host ::slotted([slot='end']) {
@@ -157,11 +155,11 @@ export const styles: ElementStyles = css`
     gap: ${spacingHorizontalXS};
   }
   :host(:hover) .root {
-    border-color: ${colorNeutralStroke1Hover};
-    border-bottom-color: ${colorNeutralStrokeAccessibleHover};
+    border-color: ${smtcStrokeTextInputOutlineHover};
+    border-bottom-color: ${smtcStrokeTextInputAccessibleHover};
   }
   :host(:active) .root {
-    border-color: ${colorNeutralStroke1Pressed};
+    border-color: ${smtcStrokeTextInputOutlinePressed};
   }
   :host(:focus-within) .root {
     outline: transparent solid 2px;
@@ -174,10 +172,10 @@ export const styles: ElementStyles = css`
     transition-delay: ${curveDecelerateMid};
   }
   :host(:focus-within:active) .root:after {
-    border-bottom-color: ${colorCompoundBrandStrokePressed};
+    border-bottom-color: ${colorBrandStrokePressed};
   }
   :host(${outlineState}:focus-within) .root {
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    border: ${strokeWidthThin} solid ${smtcStrokeTextInputOutlinePressed};
   }
   :host(:focus-within) .control {
     color: ${colorNeutralForeground1};
@@ -227,17 +225,17 @@ export const styles: ElementStyles = css`
     background: ${colorTransparentBackground};
     border: 0;
     border-radius: 0;
-    border-bottom: ${strokeWidthThin} solid ${colorNeutralStrokeAccessible};
+    border-bottom: ${strokeWidthThin} solid ${smtcStrokeTextInputAccessibleRest};
   }
   :host(${underlineState}:hover) .root {
-    border-bottom-color: ${colorNeutralStrokeAccessibleHover};
+    border-bottom-color: ${smtcStrokeTextInputAccessibleHover};
   }
   :host(${underlineState}:active) .root {
-    border-bottom-color: ${colorNeutralStrokeAccessiblePressed};
+    border-bottom-color: ${smtcStrokeTextInputAccessiblePressed};
   }
   :host(${underlineState}:focus-within) .root {
     border: 0;
-    border-bottom-color: ${colorNeutralStrokeAccessiblePressed};
+    border-bottom-color: ${smtcStrokeTextInputAccessiblePressed};
   }
   :host(${underlineState}[disabled]) .root {
     border-bottom-color: ${colorNeutralStrokeDisabled};
@@ -245,13 +243,13 @@ export const styles: ElementStyles = css`
   :host(${filledLighterState}) .root,
   :host(${filledDarkerState}) .root {
     border: ${strokeWidthThin} solid ${colorTransparentStroke};
-    box-shadow: ${shadow2};
+    box-shadow: ${smtcShadowTextInputRest};
   }
   :host(${filledLighterState}) .root {
-    background: ${colorNeutralBackground1};
+    background: ${smtcBackgroundControlNeutralRest};
   }
   :host(${filledDarkerState}) .root {
-    background: ${colorNeutralBackground3};
+    background: ${smtcBackgroundControlNeutralDarkerRest};
   }
   :host(${filledLighterState}:hover) .root,
   :host(${filledDarkerState}:hover) .root {
@@ -260,6 +258,6 @@ export const styles: ElementStyles = css`
   :host(${filledLighterState}:active) .root,
   :host(${filledDarkerState}:active) .root {
     border-color: ${colorTransparentStrokeInteractive};
-    background: ${colorNeutralBackground3};
+    background: ${smtcBackgroundControlNeutralDarkerRest};
   }
 `;
