@@ -16,15 +16,15 @@ const template = html<FigmaSlidesElement>`
   ></mica-material>
   <div id="content">
     <div id="body">
-      <iframe
-        style="border: 1px solid rgba(0, 0, 0, 0.1);"
-        width="100%"
-        height="100%"
-        src="https://embed.figma.com/proto/7oYu0FjQZgK7ftbHzYPIA2/Aurora-Mustafa-TPA?node-id=412-11751&node-type=canvas&scaling=scale-down&content-scaling=fixed&page-id=33%3A4917&embed-host=share"
+    <iframe 
+        style="border: 1px solid rgba(0, 0, 0, 0.1);" 
+        width="100%" 
+        height="100%" 
+        src="https://embed.figma.com/proto/7oYu0FjQZgK7ftbHzYPIA2/Aurora-Mustafa-TPA?node-id=412-11751&node-type=canvas&scaling=scale-fit&content-scaling=fixed&page-id=33%3A4917&embed-host=share&hide-ui=true" 
         allowfullscreen
         sandbox="allow-scripts allow-same-origin"
-      >
-      </iframe>
+    >
+    </iframe>
     </div>
   </div>
 `;
@@ -42,9 +42,8 @@ const styles = css`
   #body {
     display: flex;
     flex-direction: column;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Allow scrolling if needed */
+    width: 100%;
+    height: 100%;
   }
 `;
 
