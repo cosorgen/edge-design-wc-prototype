@@ -244,12 +244,17 @@ export class CopilotComposer extends FASTElement {
   }
 
   setCSSVariables() {
+    // Wait for button condition
     Updates.enqueue(() => {
-      const endActions = this.shadowRoot?.querySelector('#end') as HTMLElement;
-      this.style.setProperty(
-        '--end-actions-width',
-        `-${endActions.offsetWidth}px`,
-      );
+      // Wait for button to render after condition
+      Updates.enqueue(() => {
+        const endActions = this.shadowRoot?.querySelector(
+          '#end',
+        ) as HTMLElement;
+        const { width } = endActions.getBoundingClientRect();
+        console.log('setCSSVariables', width);
+        this.style.setProperty('--end-actions-width', `-${width}px`);
+      });
     });
   }
 }
