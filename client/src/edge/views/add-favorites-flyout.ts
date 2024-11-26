@@ -6,9 +6,9 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import '@phoenixui/web-components/text-input.js';
-import { TextInput } from '@phoenixui/web-components/text-input.js';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/text-input/define.js';
+import { TextInput } from '@mai-ui/text-input';
+import '@mai-ui/button/define.js';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
@@ -28,14 +28,14 @@ const template = html<AddFavoritesInputs>`
   <div class="favorite-title">Favorite added</div>
   <div class="input-group">
     <label for="favorite-name">Name</label>
-    <phx-text-input
+    <mai-text-input
       id="favorite-name"
       value="${(x) => x.getPageTitle()}"
-    ></phx-text-input>
+    ></mai-text-input>
   </div>
   <div class="input-group">
     <label for="favorite-folder">Folder</label>
-    <phx-text-input id="favorite-folder" placeholder="Select folder" disabled>
+    <mai-text-input id="favorite-folder" placeholder="Select folder" disabled>
       <span slot="start">
         <svg>
           <use href="./img/edge/icons.svg#folder-20-regular" />
@@ -46,7 +46,7 @@ const template = html<AddFavoritesInputs>`
           <use href="./img/edge/icons.svg#down-chevron-20-regular" />
         </svg>
       </span>
-    </phx-text-input>
+    </mai-text-input>
   </div>
   <div class="footer">
     <mai-button @click="${(x) => x.closeFlyout()}"> More </mai-button>
@@ -97,7 +97,7 @@ const styles = css`
     flex: 0 0 auto;
   }
 
-  phx-text-input {
+  mai-text-input {
     width: 280px;
     display: flex;
     align-items: center;
@@ -199,7 +199,7 @@ export class AddFavoritesInputs extends FASTElement {
     if (favorite) {
       this.fs.removeFavorite(favorite);
       const title = (
-        this.shadowRoot?.querySelector('phx-text-input') as TextInput
+        this.shadowRoot?.querySelector('mai-text-input') as TextInput
       )?.value;
       this.addFavorite(title);
     }

@@ -31,8 +31,8 @@ import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';
 import '@phoenixui/web-components/divider.js';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/text-input.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
 
 const defaultItems: MoreMenuEntry[] = [
@@ -159,7 +159,7 @@ const defaultItems: MoreMenuEntry[] = [
 ];
 
 const template = html<MoreMenu>`
-  <phx-text-input
+  <mai-text-input
     appearance="filled-darker"
     placeholder="Search"
     @keyup="${(x, c) => x.handleInputKeyUp(c.event as KeyboardEvent)}"
@@ -175,7 +175,7 @@ const template = html<MoreMenu>`
         </svg>
       </button>`,
     )}
-  </phx-text-input>
+  </mai-text-input>
   <div id="menu-items">
     ${repeat(
       (x) => x.items,
@@ -349,7 +349,7 @@ export default class MoreMenu extends FASTElement {
 
   setElements() {
     this._inputElement = this.shadowRoot?.querySelector(
-      'phx-text-input',
+      'mai-text-input',
     ) as HTMLInputElement;
   }
 

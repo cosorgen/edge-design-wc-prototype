@@ -57,6 +57,14 @@ const template = html<ToolbarFlyoutItem>`
 `;
 
 const styles = css`
+  :host {
+    /* Override button corner radius */
+    --smtc-corner-control-rest: 8px;
+    --smtc-corner-control-hover: 8px;
+    --smtc-corner-control-pressed: 8px;
+    --smtc-corner-control-selected: 8px;
+  }
+
   .flyout-menu {
     width: 256px;
     height: 300px;

@@ -47,7 +47,15 @@ const template = html<ToolbarSidepaneItem>`
   </flyout-menu>
 `;
 
-const styles = css``;
+const styles = css`
+  :host {
+    /* Override button corner radius */
+    --smtc-corner-control-rest: 8px;
+    --smtc-corner-control-hover: 8px;
+    --smtc-corner-control-pressed: 8px;
+    --smtc-corner-control-selected: 8px;
+  }
+`;
 
 @customElement({
   name: 'toolbar-sidepane-item',

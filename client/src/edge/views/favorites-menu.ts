@@ -31,7 +31,7 @@ import {
 } from '@mai-ui/phoenix-theme';
 import '@phoenixui/web-components/accordion.js';
 import '@phoenixui/web-components/accordion-item.js';
-import '@phoenixui/web-components/text-input.js';
+import '@mai-ui/text-input/define.js';
 import { spacingHorizontalXXS } from '@mai-ui/phoenix-theme';
 
 const template = html<FavoritesMenu>`
@@ -75,7 +75,7 @@ const template = html<FavoritesMenu>`
     </div>
   </div>
   <div id="content">
-    <phx-text-input
+    <mai-text-input
       appearance="filled-darker"
       placeholder="Search"
       @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
@@ -90,7 +90,7 @@ const template = html<FavoritesMenu>`
           <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
         </button>`,
       )}
-    </phx-text-input>
+    </mai-text-input>
     <phx-accordion>
       <phx-accordion-item expanded>
         <span slot="heading" class="folder-heading">
@@ -195,7 +195,7 @@ const styles = css`
     line-height: ${typographyStyles.body1.lineHeight};
   }
 
-  phx-text-input {
+  mai-text-input {
     display: flex;
     align-items: center;
   }
@@ -249,7 +249,7 @@ export class FavoritesMenu extends FASTElement {
 
   setElements() {
     this._inputElement = this.shadowRoot?.querySelector(
-      'phx-text-input',
+      'mai-text-input',
     ) as HTMLInputElement;
   }
 
