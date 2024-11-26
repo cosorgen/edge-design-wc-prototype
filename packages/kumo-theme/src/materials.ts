@@ -14,10 +14,10 @@ export declare interface PhoenixMaterialTokens {
 }
 
 export const lightThemeMaterials: PhoenixMaterialTokens = {
-  acrylicBackgroundBlur: '60px',
-  acrylicBackgroundLuminosity: '#FCFCFCD9',
+  acrylicBackgroundBlur: '0px',
+  acrylicBackgroundLuminosity: '#FFFFFF',
   acrylicBackgroundColor: '#00000000',
-  acrylicBackgroundNormal: '#00000000',
+  acrylicBackgroundNormal: '#FFFFFF',
   tabActiveBackgroundBlur: '240px',
   tabActiveBackgroundLuminosity: '#EBEBEB',
   tabActiveBackgroundColor: '#EBEBEB80',
@@ -30,9 +30,9 @@ export const lightThemeMaterials: PhoenixMaterialTokens = {
 
 export const lightThemeSolidMaterials: PhoenixMaterialTokens = {
   acrylicBackgroundBlur: '0px',
-  acrylicBackgroundLuminosity: '#00000000',
+  acrylicBackgroundLuminosity: '#FFFFFF',
   acrylicBackgroundColor: '#00000000',
-  acrylicBackgroundNormal: '#F5F5F5',
+  acrylicBackgroundNormal: '#FFFFFF',
   tabActiveBackgroundBlur: '0px',
   tabActiveBackgroundLuminosity: '#00000000',
   tabActiveBackgroundColor: '#00000000',
