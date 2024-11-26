@@ -51,7 +51,5 @@ export default [
   {
     name: 'Slides',
     lightIcon: 'img/windows/figma-24.svg',
-    width: window.innerWidth,
-    height: window.innerHeight,
   },
 ] as App[];
