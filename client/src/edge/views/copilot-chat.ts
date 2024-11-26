@@ -93,7 +93,7 @@ export class CopilotChat extends FASTElement {
   }
 
   addEventListeners() {
-    Observable.getNotifier(this.cs).subscribe(this, 'threadsById');
+    Observable.getNotifier(this.cs).subscribe(this);
     this._updateInterval = setInterval(() => this.updateChat(), 60000); // update chat every minute for time updates
     this._chatElement?.addEventListener('scroll', this.toggleChatScrollLock);
   }
@@ -105,65 +105,76 @@ export class CopilotChat extends FASTElement {
   }
 
   handleChange(subject: unknown, key: string) {
-    if (key === 'threadsById') {
+    if (key === 'threadsById' || key === 'activeThreadId') {
       this.updateChat();
     }
   }
 
   updateChat() {
-    if (this.cs.activeThreadId && this._chatElement) {
-      const messages = this.cs.threadsById[this.cs.activeThreadId].messages;
-      const messageIds = Object.keys(messages);
+    if (this._chatElement) {
+      if (
+        this.cs.activeThreadId &&
+        this.cs.threadsById[this.cs.activeThreadId]
+      ) {
+        const messages = this.cs.threadsById[this.cs.activeThreadId].messages;
+        const messageIds = Object.keys(messages);
 
-      // Skip the first two messages since it's the user input and system prompt
-      let foundFirstUserMessage = false;
-      for (let x = 0; x < messageIds.length; x++) {
-        const message = messages[messageIds[x]];
-        if (message.id === 'system-prompt') continue; // skip system prompt
-        if (message.role === 'context') continue; // skip context messages
-        if (!foundFirstUserMessage && message.role === 'user' && this.inline) {
-          foundFirstUserMessage = true;
-          continue;
-        }
-
-        let entry = this._chatElement.querySelector(
-          `#${message.id}`,
-        ) as CopilotChatEntry;
-        if (!entry) {
-          entry = document.createElement(
-            'copilot-chat-entry',
-          ) as CopilotChatEntry;
-          entry.setAttribute('id', message.id);
-          entry.setAttribute('inline', '');
-          if (message.role === 'system') entry.setAttribute('system', '');
-          this._chatElement.appendChild(entry);
-        }
-
-        if (message.status === 'pending') {
-          entry.setAttribute('pending', '');
-        } else {
-          entry.message = message.content;
-          entry.removeAttribute('pending');
-          entry.setAttribute(
-            'style',
-            `--text-transition-duration: ${Math.min(2000, message.content.split(' ').length * 100)}ms`,
-          );
-        }
-
-        // Update time regardless of message change
-        entry.timestamp = message.timestamp;
-
-        Updates.enqueue(() => {
-          if (this._lockChatScroll && this._chatElement) {
-            const lastMessage = this._chatElement?.lastElementChild;
-            if (lastMessage) {
-              lastMessage.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start',
-              });
-            }
+        // Skip the first two messages since it's the user input and system prompt
+        let foundFirstUserMessage = false;
+        for (let x = 0; x < messageIds.length; x++) {
+          const message = messages[messageIds[x]];
+          if (message.id === 'system-prompt') continue; // skip system prompt
+          if (message.role === 'context') continue; // skip context messages
+          if (
+            !foundFirstUserMessage &&
+            message.role === 'user' &&
+            this.inline
+          ) {
+            foundFirstUserMessage = true;
+            continue;
           }
-        });
+
+          let entry = this._chatElement.querySelector(
+            `#${message.id}`,
+          ) as CopilotChatEntry;
+          if (!entry) {
+            entry = document.createElement(
+              'copilot-chat-entry',
+            ) as CopilotChatEntry;
+            entry.setAttribute('id', message.id);
+            entry.setAttribute('inline', '');
+            if (message.role === 'system') entry.setAttribute('system', '');
+            this._chatElement.appendChild(entry);
+          }
+
+          if (message.status === 'pending') {
+            entry.setAttribute('pending', '');
+          } else {
+            entry.message = message.content;
+            entry.removeAttribute('pending');
+            entry.setAttribute(
+              'style',
+              `--text-transition-duration: ${Math.min(2000, message.content.split(' ').length * 100)}ms`,
+            );
+          }
+
+          // Update time regardless of message change
+          entry.timestamp = message.timestamp;
+
+          Updates.enqueue(() => {
+            if (this._lockChatScroll && this._chatElement) {
+              const lastMessage = this._chatElement?.lastElementChild;
+              if (lastMessage) {
+                lastMessage.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'start',
+                });
+              }
+            }
+          });
+        }
+      } else {
+        this.clearChat();
       }
     }
   }
