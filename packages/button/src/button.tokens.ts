@@ -25,9 +25,9 @@ export const borderRadiusNone = 'var(--border-radius-none)';
 export const durationFaster = 'var(--duration-faster)';
 export const curveEasyEase = 'var(--curve-easy-ease)';
 export const colorNeutralForegroundOnBrand = 'var(--color-neutral-foreground-on-brand)';
-export const colorNeutralForegroundBrand2 = 'var(--color-neutral-foreground-brand-2)';
-export const colorNeutralForegroundBrand2Hover = 'var(--color-neutral-foreground-brand-2-hover)';
-export const colorNeutralForegroundBrand2Pressed = 'var(--color-neutral-foreground-brand-2-pressed)';
+export const colorNeutralForeground2 = 'var(--color-neutral-foreground-2)';
+export const colorNeutralForeground2BrandHover = 'var(--color-neutral-foreground-2-brand-hover)';
+export const colorNeutralForeground2BrandPressed = 'var(--color-neutral-foreground-2-brand-pressed)';
 export const spacingHorizontalSNudge = 'var(--spacing-horizontal-s-nudge)';
 export const spacingHorizontalXS = 'var(--spacing-horizontal-x-s)';
 export const spacingHorizontalM = 'var(--spacing-horizontal-m)';
@@ -89,9 +89,9 @@ export const smtcForegroundControlOnOutlineDisabled = `var(--smtc-foreground-con
 export const smtcForegroundControlOnOutlineHover = `var(--smtc-foreground-control-on-outline-hover, ${colorNeutralForeground1Hover})`;
 export const smtcForegroundControlOnOutlinePressed = `var(--smtc-foreground-control-on-outline-pressed, ${colorNeutralForeground1Pressed})`;
 export const smtcForegroundControlOnOutlineRest = `var(--smtc-foreground-control-on-outline-rest, ${colorNeutralForeground1})`;
-export const smtcForegroundControlOnTransparentHover = `var(--smtc-foreground-control-on-transparent-hover, ${colorNeutralForegroundBrand2Hover})`;
-export const smtcForegroundControlOnTransparentPressed = `var(--smtc-foreground-control-on-transparent-pressed, ${colorNeutralForegroundBrand2Pressed})`;
-export const smtcForegroundControlOnTransparentRest = `var(--smtc-foreground-control-on-transparent-rest, ${colorNeutralForegroundBrand2})`;
+export const smtcForegroundControlOnTransparentHover = `var(--smtc-foreground-control-on-transparent-hover, ${colorNeutralForeground2BrandHover})`;
+export const smtcForegroundControlOnTransparentPressed = `var(--smtc-foreground-control-on-transparent-pressed, ${colorNeutralForeground2BrandPressed})`;
+export const smtcForegroundControlOnTransparentRest = `var(--smtc-foreground-control-on-transparent-rest, ${colorNeutralForeground2})`;
 export const smtcGapControlDefault = `var(--smtc-gap-control-default, ${spacingHorizontalSNudge})`;
 export const smtcGapSmallControlDefault = `var(--smtc-gap-small-control-default, ${spacingHorizontalXS})`;
 export const smtcNullColor = `var(--smtc-null-color, ${colorTransparentBackground})`;
@@ -158,9 +158,9 @@ export const required = {
   durationFaster,
   curveEasyEase,
   colorNeutralForegroundOnBrand,
-  colorNeutralForegroundBrand2,
-  colorNeutralForegroundBrand2Hover,
-  colorNeutralForegroundBrand2Pressed,
+  colorNeutralForeground2,
+  colorNeutralForeground2BrandHover,
+  colorNeutralForeground2BrandPressed,
   spacingHorizontalSNudge,
   spacingHorizontalXS,
   spacingHorizontalM,
