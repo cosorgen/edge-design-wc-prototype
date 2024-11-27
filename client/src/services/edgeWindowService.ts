@@ -29,12 +29,10 @@ export default class EdgeWindowService {
   openSidepaneApp(id: string) {
     if (this.activeSidepaneAppId !== id) {
       this.activeSidepaneAppId = id;
-      this.openToolbarItem(id);
     }
   }
 
   closeSidepaneApp() {
     this.activeSidepaneAppId = undefined;
-    this.closeToolbarItem();
   }
 }

@@ -181,19 +181,21 @@ const styles = css`
   }
 
   .group {
-    flex: 1;
+    flex: ${(x) => (x.ess.fullWidthOmnibox ? 'none' : '1')};
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalXS};
+  }
 
-    mai-button {
-      /* Only direct buttons on toolbar need override */
-      --smtc-corner-control-rest: 8px;
-      --smtc-corner-control-hover: 8px;
-      --smtc-corner-control-pressed: 8px;
-      --smtc-corner-control-selected: 8px;
-    }
+  flyout-menu > mai-toggle-button,
+  .group > mai-button,
+  .group > mai-toggle-button {
+    /* Only direct buttons on toolbar need override */
+    --smtc-corner-control-rest: 8px;
+    --smtc-corner-control-hover: 8px;
+    --smtc-corner-control-pressed: 8px;
+    --smtc-corner-control-selected: 8px;
   }
 
   .right {
@@ -260,11 +262,17 @@ export class Toolbar extends FASTElement {
       );
     });
 
-    // Remove copilot if it's disabled
+    // Remove legacy copilot if it's not enabled or
+    // if menus are in L1 (needed for correct order)
     if (!this.ess.showLegacyCopilot || this.ess.showMenusInL1)
       this._derivedToolbarItems = this._derivedToolbarItems.filter(
         (id) => id !== 'Legacy Copilot',
       );
+
+    // Remove new copilot always
+    this._derivedToolbarItems = this._derivedToolbarItems.filter(
+      (id) => id !== 'Copilot',
+    );
 
     return this._derivedToolbarItems;
   }

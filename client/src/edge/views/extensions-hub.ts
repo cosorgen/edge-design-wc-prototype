@@ -137,17 +137,18 @@ export class ExtensionsHub extends FASTElement {
   @observable extensions = ['Search', 'Grammarly', 'AdBlocker', 'Tools'];
 
   handleExtensionClick(id: string, type: ToolbarApp['type']) {
-    type === 'sidepane'
-      ? this.ews.openSidepaneApp(id)
-      : this.ews.openToolbarItem(id);
+    if (type === 'sidepane') {
+      this.ews.openSidepaneApp(id);
+      this.ews.closeToolbarItem(); // close self
+    } else this.ews.openToolbarItem(id);
   }
 
   handleExtensionPin(event: Event, extension: string) {
     event.stopPropagation();
 
-    this.ess.pinnedToolbarItems.includes(extension)
-      ? this.ess.unpinToolbarItem(extension)
-      : this.ess.pinToolbarItem(extension);
+    if (this.ess.pinnedToolbarItems.includes(extension))
+      this.ess.unpinToolbarItem(extension);
+    else this.ess.pinToolbarItem(extension);
 
     return false; // Prevent the click event from bubbling up
   }

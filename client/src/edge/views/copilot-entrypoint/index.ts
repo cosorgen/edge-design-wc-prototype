@@ -483,11 +483,11 @@ export class CopilotEntrypoint extends FASTElement {
       this.blockPosition === 'sidepane' &&
       this.inlinePosition === 'sidepane'
     ) {
-      this.ews.activeSidepaneAppId = 'Copilot';
+      this.ews.openSidepaneApp('Copilot');
       this.cs.composerOverPage = false;
     } else {
       if (this.ews.activeSidepaneAppId === 'Copilot') {
-        this.ews.activeSidepaneAppId = undefined;
+        this.ews.closeSidepaneApp();
         this.cs.composerOverPage = true;
       }
     }
