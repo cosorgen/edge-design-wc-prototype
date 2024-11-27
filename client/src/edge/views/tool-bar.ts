@@ -198,6 +198,7 @@ const styles = css`
 
   .right {
     justify-content: flex-end;
+    min-width: 68px; /* Make equal with left side buttons */
   }
 `;
 

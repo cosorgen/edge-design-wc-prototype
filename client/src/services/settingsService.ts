@@ -10,8 +10,8 @@ export default class EdgeSettingsSerivce {
   @observable pinnedToolbarItems: string[] = [];
   @observable frameSpacing = '4px';
   @observable showLegacyNewTab = false;
-  @observable showMenusInL1 = true;
-  @observable fullWidthOmnibox = false;
+  @observable showMenusInL1 = false;
+  @observable fullWidthOmnibox = true;
   @observable edgeTheme: 'kumo' | 'phoenix' | 'fluent' = 'kumo';
 
   constructor() {
@@ -20,34 +20,41 @@ export default class EdgeSettingsSerivce {
   }
 
   getSettingsFromURL() {
-    const url = new URL(window.location.href);
+    const { searchParams } = new URL(window.location.href);
     this.showFavoritesBar =
-      (url.searchParams.get('showFavoritesBar') as
-        | 'always'
-        | 'newtab'
-        | 'never') || this.showFavoritesBar;
+      (searchParams.get('showFavoritesBar') as 'always' | 'newtab' | 'never') ||
+      this.showFavoritesBar;
 
     this.edgeTheme =
-      (url.searchParams.get('edgeTheme') as 'kumo' | 'phoenix' | 'fluent') ||
+      (searchParams.get('edgeTheme') as 'kumo' | 'phoenix' | 'fluent') ||
       this.edgeTheme;
 
-    this.showLegacyCopilot =
-      url.searchParams.get('showLegacyCopilot') === 'true' ||
-      this.showLegacyCopilot;
-    this.showLegacyNewTab =
-      url.searchParams.get('showLegacyNewTab') === 'true' ||
-      this.showLegacyNewTab;
-    this.showCopilotNTP =
-      url.searchParams.get('showCopilotNTP') === 'true' || this.showCopilotNTP;
+    this.showLegacyCopilot = searchParams.has('showLegacyCopilot')
+      ? searchParams.get('showLegacyCopilot') === 'true'
+      : this.showLegacyCopilot;
+
+    this.showLegacyNewTab = searchParams.has('showLegacyNewTab')
+      ? searchParams.get('showLegacyNewTab') === 'true'
+      : this.showLegacyNewTab;
+
+    this.showCopilotNTP = searchParams.has('showCopilotNTP')
+      ? searchParams.get('showCopilotNTP') === 'true'
+      : this.showCopilotNTP;
     if (this.showLegacyCopilot) this.pinToolbarItem('Legacy Copilot');
 
-    this.truncateURL =
-      url.searchParams.get('truncateURL') === 'true' || this.truncateURL;
+    this.truncateURL = searchParams.has('truncateURL')
+      ? searchParams.get('truncateURL') === 'true'
+      : this.truncateURL;
 
-    this.frameSpacing =
-      url.searchParams.get('frameSpacing') || this.frameSpacing;
-    this.showMenusInL1 = url.searchParams.get('showMenusInL1') === 'true';
-    this.fullWidthOmnibox = url.searchParams.get('fullWidthOmnibox') === 'true';
+    this.frameSpacing = searchParams.get('frameSpacing') || this.frameSpacing;
+
+    this.showMenusInL1 = searchParams.has('showMenusInL1')
+      ? searchParams.get('showMenusInL1') === 'true'
+      : this.showMenusInL1;
+
+    this.fullWidthOmnibox = searchParams.has('fullWidthOmnibox')
+      ? searchParams.get('fullWidthOmnibox') === 'true'
+      : this.fullWidthOmnibox;
   }
 
   setSettingsInURL() {
