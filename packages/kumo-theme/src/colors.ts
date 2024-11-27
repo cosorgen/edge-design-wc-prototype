@@ -282,10 +282,10 @@ export declare interface KumoColorTokens {
   smtcForegroundControlOnOutlineRest: string;
   smtcNullColor0: string;
   smtcNullColor3: string;
-  smtcStrokeControlNoneHover: string;
-  smtcStrokeControlNonePressed: string;
-  smtcStrokeControlNoneRest: string;
-  smtcStrokeControlNoneSelected: string;
+  smtcStrokeControlNeutralHover: string;
+  smtcStrokeControlNeutralPressed: string;
+  smtcStrokeControlNeutralRest: string;
+  smtcStrokeControlNeutralSelected: string;
   smtcStrokeControlOnNeutralDisabled: string;
   smtcStrokeControlOutlineDisabled: string;
   smtcStrokeControlOutlineHover: string;
@@ -334,10 +334,10 @@ export const kumoLightThemeColors: KumoColorTokens = {
   smtcForegroundControlOnOutlineRest: '#474B50',
   smtcNullColor0: 'transparent',
   smtcNullColor3: 'transparent',
-  smtcStrokeControlNoneHover: 'transparent',
-  smtcStrokeControlNonePressed: 'transparent',
-  smtcStrokeControlNoneSelected: 'transparent',
-  smtcStrokeControlNoneRest: 'transparent',
+  smtcStrokeControlNeutralHover: 'transparent',
+  smtcStrokeControlNeutralPressed: 'transparent',
+  smtcStrokeControlNeutralSelected: 'transparent',
+  smtcStrokeControlNeutralRest: 'transparent',
   smtcStrokeControlOnNeutralDisabled: '#DADEE5',
   smtcStrokeControlOutlineDisabled: '#DADEE5',
   smtcStrokeControlOutlineHover: '#BDC1C7',
@@ -386,10 +386,10 @@ export const kumoDarkThemeColors: KumoColorTokens = {
   smtcForegroundControlOnOutlineRest: '#FFFFFF',
   smtcNullColor0: 'transparent',
   smtcNullColor3: 'transparent',
-  smtcStrokeControlNoneHover: 'transparent',
-  smtcStrokeControlNonePressed: 'transparent',
-  smtcStrokeControlNoneSelected: 'transparent',
-  smtcStrokeControlNoneRest: 'transparent',
+  smtcStrokeControlNeutralHover: 'transparent',
+  smtcStrokeControlNeutralPressed: 'transparent',
+  smtcStrokeControlNeutralSelected: 'transparent',
+  smtcStrokeControlNeutralRest: 'transparent',
   smtcStrokeControlOnNeutralDisabled: '#3A3D42',
   smtcStrokeControlOutlineDisabled: '#3A3D42',
   smtcStrokeControlOutlineHover: '#686C72',

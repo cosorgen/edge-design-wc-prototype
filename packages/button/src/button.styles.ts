@@ -55,10 +55,7 @@ import {
   smtcPaddingControlHorizontalDefault,
   smtcPaddingLargeControlVertical,
   smtcPaddingSmallControlVertical,
-  smtcStrokeControlNoneHover,
-  smtcStrokeControlNonePressed,
-  smtcStrokeControlNoneRest,
-  smtcStrokeControlOnNeutralDisabled,
+  smtcStrokeControlNeutralDisabled,
   smtcStrokeControlOutlineDisabled,
   smtcStrokeControlOutlineHover,
   smtcStrokeControlOutlinePressed,
@@ -85,6 +82,9 @@ import {
   smtcShadowControlSubtleRest,
   smtcShadowControlSubtleHover,
   smtcShadowControlSubtlePressed,
+  smtcStrokeControlNeutralRest,
+  smtcStrokeControlNeutralHover,
+  smtcStrokeControlNeutralPressed,
 } from './button.tokens.js';
 import { css } from '@microsoft/fast-element';
 
@@ -110,7 +110,7 @@ export const baseButtonStyles = css`
     background-color: ${smtcBackgroundControlNeutralRest};
     color: ${smtcForegroundControlNeutralPrimaryRest};
     border: ${smtcControlFocusInnerStrokeWidth} solid
-      ${smtcStrokeControlNoneRest};
+      ${smtcStrokeControlNeutralRest};
     padding: 0 ${smtcPaddingControlHorizontalDefault};
     min-width: 96px;
     border-radius: ${smtcCornerControlRest};
@@ -132,7 +132,7 @@ export const baseButtonStyles = css`
 
   :host(:hover) {
     background-color: ${smtcBackgroundControlNeutralHover};
-    border-color: ${smtcStrokeControlNoneHover};
+    border-color: ${smtcStrokeControlNeutralHover};
     border-radius: ${smtcCornerControlHover};
     color: ${smtcForegroundControlNeutralPrimaryHover};
     box-shadow: ${smtcShadowControlNeutralHover};
@@ -141,7 +141,7 @@ export const baseButtonStyles = css`
   :host(:hover:active) {
     background-color: ${smtcBackgroundControlNeutralPressed};
     color: ${smtcForegroundControlNeutralPrimaryPressed};
-    border-color: ${smtcStrokeControlNonePressed};
+    border-color: ${smtcStrokeControlNeutralPressed};
     border-radius: ${smtcCornerControlPressed};
     outline-style: none;
     box-shadow: ${smtcShadowControlNeutralPressed};
@@ -314,7 +314,7 @@ export const styles = css`
     :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable]):hover),
     :host(:is(:disabled, [disabled-focusable], [appearance]:disabled, [appearance][disabled-focusable]):hover:active) {
     background-color: ${smtcBackgroundControlNeutralDisabled};
-    border-color: ${smtcStrokeControlOnNeutralDisabled};
+    border-color: ${smtcStrokeControlNeutralDisabled};
     color: ${smtcForegroundControlNeutralPrimaryDisabled};
     cursor: not-allowed;
   }

@@ -10,7 +10,7 @@ export const smtcBackgroundControlOutlineSelected = "var(--smtc-background-contr
 export const smtcBackgroundControlSubtleSelected = "var(--smtc-background-control-subtle-selected, var(--color-subtle-background-selected))";
 export const smtcForegroundControlNeutralSelected = "var(--smtc-foreground-control-neutral-selected, var(--color-neutral-foreground-1-selected))";
 export const smtcForegroundControlOnBrandSelected = "var(--smtc-foreground-control-on-brand-selected, var(--color-neutral-foreground-on-brand))";
-export const smtcStrokeControlNoneSelected = "var(--smtc-stroke-control-none-selected, var(--color-transparent-stroke))";
+export const smtcStrokeControlNeutralSelected = "var(--smtc-stroke-control-neutral-selected, var(--color-neutral-stroke-1-selected))";
 
 export const reqired = {
   ...buttonRequired,
@@ -20,7 +20,7 @@ export const reqired = {
   smtcBackgroundControlSubtleSelected,
   smtcForegroundControlNeutralSelected,
   smtcForegroundControlOnBrandSelected,
-  smtcStrokeControlNoneSelected,
+  smtcStrokeControlNeutralSelected,
 };
 export const optional = {
   ...buttonOptional,

@@ -1,3 +1,5 @@
+export const colorNeutralStroke1 = 'var(--color-neutral-stroke-1)';
+
 export const smtcBackgroundControlBrandHover = 'var(--smtc-background-control-brand-hover, var(--color-brand-background-hover))';
 export const smtcBackgroundControlBrandPressed = 'var(--smtc-background-control-brand-pressed, var(--color-brand-background-pressed))';
 export const smtcBackgroundControlBrandRest = 'var(--smtc-background-control-brand-rest, var(--color-brand-background))';
@@ -48,13 +50,10 @@ export const smtcNullColor = 'var(--smtc-null-color, var(--color-transparent-bac
 export const smtcPaddingControlHorizontalDefault = 'var(--smtc-padding-control-horizontal-default, var(--spacing-horizontal-m))';
 export const smtcPaddingLargeControlVertical = 'var(--smtc-padding-large-control-vertical, var(--spacing-horizontal-l))';
 export const smtcPaddingSmallControlVertical = 'var(--smtc-padding-small-control-vertical, var(--spacing-horizontal-s))';
-export const smtcStrokeControlNoneHover = 'var(--smtc-stroke-control-none-hover, var(--color-transparent-stroke))';
-export const smtcStrokeControlNonePressed = 'var(--smtc-stroke-control-none-pressed, var(--color-transparent-stroke))';
-export const smtcStrokeControlNoneRest = 'var(--smtc-stroke-control-none-rest, var(--color-transparent-stroke))';
-export const smtcStrokeControlOnNeutralDisabled = 'var(--smtc-stroke-control-on-neutral-disabled, var(--color-neutral-stroke-disabled))';
-export const smtcStrokeControlOnNeutralHover = 'var(--smtc-stroke-control-on-neutral-hover, var(--color-neutral-stroke-1-hover))';
-export const smtcStrokeControlOnNeutralPressed = 'var(--smtc-stroke-control-on-neutral-pressed, var(--color-neutral-stroke-1-pressed))';
-export const smtcStrokeControlOnNeutralRest = 'var(--smtc-stroke-control-on-neutral-rest, var(--color-neutral-stroke-1))';
+export const smtcStrokeControlNeutralDisabled = 'var(--smtc-stroke-control-neutral-disabled, var(--color-neutral-stroke-disabled))';
+export const smtcStrokeControlNeutralHover = 'var(--smtc-stroke-control-neutral-hover, var(--color-neutral-stroke-1-hover))';
+export const smtcStrokeControlNeutralPressed = 'var(--smtc-stroke-control-neutral-pressed, var(--color-neutral-stroke-1-pressed))';
+export const smtcStrokeControlNeutralRest = 'var(--smtc-stroke-control-neutral-rest, var(--color-neutral-stroke-1))';
 export const smtcStrokeControlOutlineDisabled = 'var(--smtc-stroke-control-outline-disabled, var(--color-neutral-stroke-disabled))';
 export const smtcStrokeControlOutlineHover = 'var(--smtc-stroke-control-outline-hover, var(--color-neutral-stroke-1-hover))';
 export const smtcStrokeControlOutlinePressed = 'var(--smtc-stroke-control-outline-pressed, var(--color-neutral-stroke-1-pressed))';
@@ -84,6 +83,7 @@ export const smtcShadowControlSubtlePressed = 'var(--smtc-shadow-control-subtle-
 
 
 export const required = {
+  colorNeutralStroke1,
   smtcBackgroundControlBrandHover,
   smtcBackgroundControlBrandPressed,
   smtcBackgroundControlBrandRest,
@@ -134,13 +134,10 @@ export const required = {
   smtcPaddingControlHorizontalDefault,
   smtcPaddingLargeControlVertical,
   smtcPaddingSmallControlVertical,
-  smtcStrokeControlNoneHover,
-  smtcStrokeControlNonePressed,
-  smtcStrokeControlNoneRest,
-  smtcStrokeControlOnNeutralDisabled,
-  smtcStrokeControlOnNeutralHover,
-  smtcStrokeControlOnNeutralPressed,
-  smtcStrokeControlOnNeutralRest,
+  smtcStrokeControlNeutralDisabled,
+  smtcStrokeControlNeutralHover,
+  smtcStrokeControlNeutralPressed,
+  smtcStrokeControlNeutralRest,
   smtcStrokeControlOutlineDisabled,
   smtcStrokeControlOutlineHover,
   smtcStrokeControlOutlinePressed,
@@ -168,4 +165,6 @@ export const required = {
   smtcShadowControlSubtleHover,
   smtcShadowControlSubtlePressed,
 };
-export const optional = {};
+export const optional = {
+  smtcStrokeControlNeutralRest
+};

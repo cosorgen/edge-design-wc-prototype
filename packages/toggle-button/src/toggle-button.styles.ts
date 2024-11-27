@@ -9,8 +9,6 @@ import {
 } from '@mai-ui/component-framework/states.js';
 import {
   smtcBackgroundControlNeutralSelected,
-  smtcStrokeControlNonePressed,
-  smtcStrokeControlNoneHover,
   smtcBackgroundControlNeutralHover,
   smtcBackgroundControlNeutralPressed,
   smtcBackgroundControlBrandHover,
@@ -23,8 +21,10 @@ import {
   smtcBackgroundControlSubtleSelected,
   smtcForegroundControlOnBrandSelected,
   smtcBackgroundControlBrandSelected,
-  smtcStrokeControlNoneSelected,
   smtcForegroundControlNeutralSelected,
+  smtcStrokeControlNeutralSelected,
+  smtcStrokeControlNeutralHover,
+  smtcStrokeControlNeutralPressed,
 } from './toggle-button.tokens.js';
 
 /**
@@ -39,17 +39,17 @@ export const styles = css`
 
   :host(${pressedState}) {
     background-color: ${smtcBackgroundControlNeutralSelected};
-    border-color: ${smtcStrokeControlNoneSelected};
+    border-color: ${smtcStrokeControlNeutralSelected};
     color: ${smtcForegroundControlNeutralSelected};
   }
 
   :host(${pressedState}:hover) {
-    border-color: ${smtcStrokeControlNoneHover};
+    border-color: ${smtcStrokeControlNeutralHover};
     background-color: ${smtcBackgroundControlNeutralHover};
   }
 
   :host(${pressedState}:active) {
-    border-color: ${smtcStrokeControlNonePressed};
+    border-color: ${smtcStrokeControlNeutralPressed};
     background-color: ${smtcBackgroundControlNeutralPressed};
   }
 
