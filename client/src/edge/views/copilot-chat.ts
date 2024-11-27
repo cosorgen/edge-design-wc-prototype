@@ -4,16 +4,15 @@ import {
   FASTElement,
   customElement,
   Observable,
-  Updates,
   attr,
+  Updates,
 } from '@microsoft/fast-element';
 import {
   colorScrollbarForeground,
-  curveEasyEaseMax,
-  durationUltraSlow,
   spacingVerticalXL,
   spacingVerticalXXL,
   spacingFrame,
+  spacingVerticalM,
 } from '@mai-ui/copilot-theme';
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
@@ -34,16 +33,13 @@ const styles = css`
     max-height: 100%;
   }
 
-  #chat {
-    height: 0px;
-    transition: height ${durationUltraSlow} ${curveEasyEaseMax};
-  }
-
   #chat:not(:empty) {
     padding: ${spacingVerticalXL};
     padding-block-end: calc(68px + ${spacingFrame});
-    height: fit-content;
-    max-height: calc(100% - ${spacingVerticalXXL});
+    height: calc(
+      100% - ${spacingVerticalXL} -
+        (64px + ${spacingFrame} + ${spacingVerticalM})
+    );
     display: flex;
     flex-direction: column;
     overflow: hidden auto;
@@ -54,6 +50,7 @@ const styles = css`
   :host([inline]) #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
     padding-block-end: 0;
+    height: calc(100% - ${spacingVerticalXXL});
   }
 `;
 
@@ -145,6 +142,17 @@ export class CopilotChat extends FASTElement {
             entry.setAttribute('inline', '');
             if (message.role === 'system') entry.setAttribute('system', '');
             this._chatElement.appendChild(entry);
+
+            // Scroll message into view if it's the last message
+            if (x === messageIds.length - 1) {
+              Updates.enqueue(() => {
+                console.log('scrolling into view', entry);
+                entry.scrollIntoView({
+                  behavior: 'smooth',
+                  block: 'nearest',
+                });
+              });
+            }
           }
 
           if (message.status === 'pending') {
@@ -160,18 +168,6 @@ export class CopilotChat extends FASTElement {
 
           // Update time regardless of message change
           entry.timestamp = message.timestamp;
-
-          Updates.enqueue(() => {
-            if (this._lockChatScroll && this._chatElement) {
-              const lastMessage = this._chatElement?.lastElementChild;
-              if (lastMessage) {
-                lastMessage.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'start',
-                });
-              }
-            }
-          });
         }
       } else {
         this.clearChat();
