@@ -13,7 +13,6 @@ export type FavoriteFolder = {
   children?: (Favorite | FavoriteFolder)[];
 };
 
-// Global state for the Edge browser
 export default class FavoritesService {
   @observable favorites: (Favorite | FavoriteFolder)[] = [
     {
@@ -64,26 +63,12 @@ export default class FavoritesService {
     },
   ];
 
-  private observers: Function[] = [];
-
-  addObserver(observer: Function) {
-    this.observers.push(observer);
-  }
-
-  removeObserver(observer: Function) {
-    this.observers = this.observers.filter((obs) => obs !== observer);
-  }
-
   addFavorite(favorite: Favorite) {
     this.favorites = [...this.favorites, favorite];
-    console.log('Added favorite:', this.favorites);
-    this.notifyObservers();
   }
 
   removeFavorite(favorite: Favorite | FavoriteFolder) {
     this.favorites = this.favorites.filter((f) => f.title !== favorite.title);
-    console.log('Removed favorite:', this.favorites);
-    this.notifyObservers();
   }
 
   isFavorite(url: string): boolean {
@@ -93,9 +78,5 @@ export default class FavoritesService {
       }
       return false; // Ignore folders
     });
-  }
-
-  private notifyObservers() {
-    this.observers.forEach((obs) => obs());
   }
 }

@@ -7,6 +7,7 @@ import {
   repeat,
   when,
   attr,
+  volatile,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import FavoritesService, {
@@ -185,6 +186,11 @@ const styles = css`
     max-width: none !important;
   }
 
+  phx-accordion-item::part(heading),
+  phx-accordion-item::part(button) {
+    height: 32px;
+  }
+
   favorites-item::part(favorite-button) {
     height: 32px !important;
     gap: ${spacingHorizontalMNudge};
@@ -226,25 +232,18 @@ export class FavoritesMenu extends FASTElement {
   @inject(FavoritesService) fs!: FavoritesService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
-
-  @observable favorites: (Favorite | FavoriteFolder)[] = [];
   @observable searchValue = '';
   @observable menuVisible = true;
   _inputElement: HTMLInputElement | null = null;
 
   connectedCallback() {
     super.connectedCallback();
-    this.loadFavorites();
-    requestAnimationFrame(() => {
-      this.overrideHeadingStyles(); // Call here to set the initial height
-    });
-    this.fs.addObserver(this.loadFavorites.bind(this));
+    this.setElements();
   }
 
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.unsetElements();
-    this.fs.removeObserver(this.loadFavorites.bind(this));
   }
 
   setElements() {
@@ -257,41 +256,20 @@ export class FavoritesMenu extends FASTElement {
     this._inputElement = null;
   }
 
-  loadFavorites() {
-    this.favorites = this.fs.favorites;
-  }
-
   handleInput(event: InputEvent) {
     this.searchValue = (event.target as HTMLInputElement).value;
-    this.overrideHeadingStyles();
   }
 
   clearSearch() {
     this.searchValue = '';
     this._inputElement!.value = '';
-    this.overrideHeadingStyles();
   }
 
-  overrideHeadingStyles() {
-    const accordionItems =
-      this.shadowRoot?.querySelectorAll('phx-accordion-item');
-
-    accordionItems?.forEach((item) => {
-      const heading = item.shadowRoot?.querySelector('.heading') as HTMLElement;
-      const button = item.shadowRoot?.querySelector('button') as HTMLElement;
-      if (heading) {
-        heading.style.height = '32px';
-      }
-      if (button) {
-        button.style.height = '32px';
-      }
-    });
-  }
-
+  @volatile
   get filteredFavorites() {
     const lowerCaseSearchValue = this.searchValue.toLowerCase();
 
-    return this.favorites.filter(
+    return this.fs.favorites.filter(
       (favorite) =>
         favorite.type === 'folder' ||
         favorite.title.toLowerCase().includes(lowerCaseSearchValue),
