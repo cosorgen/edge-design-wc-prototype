@@ -1,11 +1,14 @@
-export type App = {
+export type InstalledApp = {
   name: string;
   lightIcon: string;
   darkIcon?: string;
+  maximized?: boolean;
   width?: number;
   height?: number;
-  minHeight?: number;
   minWidth?: number;
+  minHeight?: number;
+  xPos?: number;
+  yPos?: number;
 };
 
 export default [
@@ -51,5 +54,6 @@ export default [
   {
     name: 'Slides',
     lightIcon: 'img/windows/figma-24.svg',
+    maximized: true,
   },
-] as App[];
+] as InstalledApp[];

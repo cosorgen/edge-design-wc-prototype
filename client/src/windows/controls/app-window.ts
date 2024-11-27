@@ -202,30 +202,54 @@ export class AppWindow extends FASTElement {
   @attr({ mode: 'boolean' }) dragging = false;
   @observable screenWidth = window.innerWidth;
   @observable screenHeight = window.innerHeight;
+  _appElement?: HTMLElement;
+  _contentElement?: HTMLElement;
 
   connectedCallback() {
     super.connectedCallback();
+    this.addEventListeners();
+    this.setElements();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('fullscreenchange', this.handleWindowResize);
+    this.unsetElements();
+  }
+
+  addEventListeners() {
     // Listen for window move events from child app
-    this.addEventListener('windowmovestart', () => {
-      this.mouseDown(0, 0, 1, 1);
-    });
-
+    this.addEventListener('windowmovestart', this.handleWindowMoveStart);
     // Listen for clicks on the window to bring it to the front
-    this.addEventListener('click', () => {
-      this.$emit('activate');
-    });
-
+    this.addEventListener('click', this.handleClick);
     // Listen for window resize event
     window.addEventListener('resize', this.handleWindowResize);
     window.addEventListener('fullscreenchange', this.handleWindowResize);
+  }
 
-    // Get slotted element and give it an id
-    const slottedElement = this.shadowRoot
+  removeEventListeners() {
+    this.removeEventListener('windowmovestart', this.handleWindowMoveStart);
+    this.removeEventListener('click', this.handleClick);
+    window.removeEventListener('resize', this.handleWindowResize);
+    window.removeEventListener('fullscreenchange', this.handleWindowResize);
+  }
+
+  setElements() {
+    this._appElement = this.shadowRoot
       ?.querySelector('slot')
-      ?.assignedElements()[0];
-    if (slottedElement) {
-      slottedElement.id = this.id;
-    }
+      ?.assignedElements()[0] as HTMLElement;
+    this._contentElement = this.shadowRoot?.querySelector(
+      '#content',
+    ) as HTMLElement;
+
+    if (this._appElement) this._appElement.id = this.id;
+  }
+
+  unsetElements() {
+    if (this._appElement) this._appElement.id = '';
+    this._appElement = undefined;
+    this._contentElement = undefined;
   }
 
   mouseDown(widthAmp: number, heightAmp: number, xAmp: number, yAmp: number) {
@@ -295,4 +319,16 @@ export class AppWindow extends FASTElement {
       yPos,
     });
   };
+
+  handleWindowMoveStart = () => {
+    this.mouseDown(0, 0, 1, 1);
+  };
+
+  handleClick = () => {
+    this.$emit('activate');
+  };
+
+  focus() {
+    this._appElement?.focus();
+  }
 }

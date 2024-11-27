@@ -153,23 +153,27 @@ export class WindowsShell extends FASTElement {
       this.ws.openWindow(appName);
       return;
     }
-  
+
     // handle the case of a single window
     const [window] = windows;
-  
+
     // if the window is minimized, restore it and activate it
     if (window.minimized) {
-      this.ws.minimizeWindow(window.id, false);  // restore the window
-      this.ws.activateWindow(window.id);  // ensure the window is activated and brought to the front
+      this.ws.minimizeWindow(window.id, false); // restore the window
+      this.ws.activateWindow(window.id); // ensure the window is activated and brought to the front
+      const appWindowElement = this.shadowRoot!.querySelector(
+        `app-window[id="${window.id}"]`,
+      ) as HTMLElement;
+      appWindowElement?.focus();
       return;
     }
-  
+
     // if the window is not active, activate it and bring it to the front
     if (window.id !== this.ws.activeWindowId) {
-      this.ws.activateWindow(window.id);  // activate the window to bring it to the front
+      this.ws.activateWindow(window.id); // activate the window to bring it to the front
       return;
     }
-  
+
     // if the window is already active, minimize it
     this.ws.minimizeWindow(window.id);
   }
@@ -178,5 +182,4 @@ export class WindowsShell extends FASTElement {
     const { id, width, height, xPos, yPos } = e.detail;
     this.ws.moveWindow(id, width, height, xPos, yPos);
   }
-
 }
