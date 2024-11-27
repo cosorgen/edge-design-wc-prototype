@@ -1,7 +1,6 @@
 import type { ElementStyles } from '@microsoft/fast-element';
 import { css } from '@microsoft/fast-element';
 import {
-  colorBrandStrokePressed,
   colorNeutralBackgroundInverted,
   colorNeutralForeground1,
   colorNeutralForeground3,
@@ -46,6 +45,7 @@ import {
   smtcStrokeTextInputOutlinePressed,
   smtcStrokeTextInputAccessiblePressed,
   smtcStrokeTextInputFocused,
+  smtcStrokeTextInputFocusedPressed,
 } from './text-input.tokens.js';
 import { display } from '@mai-ui/component-framework/display.js';
 import {
@@ -171,8 +171,8 @@ export const styles: ElementStyles = css`
     transition-duration: ${durationNormal};
     transition-delay: ${curveDecelerateMid};
   }
-  :host(:focus-within:active) .root:after {
-    border-bottom-color: ${colorBrandStrokePressed};
+  :host(:focus-within:active) .root::after {
+    border-bottom-color: ${smtcStrokeTextInputFocusedPressed};
   }
   :host(${outlineState}:focus-within) .root {
     border: ${strokeWidthThin} solid ${smtcStrokeTextInputOutlinePressed};

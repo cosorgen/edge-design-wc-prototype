@@ -13,7 +13,6 @@ import {
   colorLayerBackgroundDialog,
   borderRadiusLarge,
   shadow2,
-  colorLayerBackgroundApp,
   typographyStyles,
   phoenixLightThemeWin11,
   phoenixDarkThemeWin11,
@@ -38,6 +37,7 @@ import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#services/tabService.js';
+import '../windows/controls/mica-material.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
@@ -48,6 +48,7 @@ import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
+  <mica-material></mica-material>
   <div class="row">
     <caption-controls></caption-controls>
     <div class="column">
@@ -88,7 +89,6 @@ const styles = css`
     gap: ${spacingFrame};
     color: ${colorNeutralForeground1};
     fill: currentColor;
-    background-color: ${colorLayerBackgroundApp};
     padding: ${spacingFrame};
 
     font-family: ${typographyStyles.body1.fontFamily};

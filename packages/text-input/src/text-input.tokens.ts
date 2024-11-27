@@ -54,6 +54,8 @@ export const smtcStrokeTextInputAccessibleRest = `var(--smtc-stroke-text-input-a
 export const smtcStrokeTextInputAccessibleHover = `var(--smtc-stroke-text-input-accessible-hover, ${colorNeutralStrokeAccessibleHover})`;
 export const smtcStrokeTextInputAccessiblePressed = `var(--smtc-stroke-text-input-accessible-pressed, ${colorNeutralStrokeAccessiblePressed})`;
 export const smtcStrokeTextInputFocused = `var(--smtc-stroke-text-input-focused, ${colorBrandStroke})`;
+export const smtcStrokeTextInputFocusedPressed = `var(--smtc-stroke-text-input-focused-pressed, ${colorBrandStrokePressed})`;
+
 
 export const required = {
   borderRadiusMedium,
@@ -113,4 +115,5 @@ export const optional = {
   smtcStrokeTextInputAccessibleHover,
   smtcStrokeTextInputAccessiblePressed,
   smtcStrokeTextInputFocused,
+  smtcStrokeTextInputFocusedPressed,
 };
