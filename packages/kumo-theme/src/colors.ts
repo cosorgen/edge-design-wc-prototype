@@ -79,8 +79,8 @@ export const lightThemeColors: PhoenixColorTokens = {
   colorAiFlair2: '#6CEBE2',
   colorAiFlair3: '#34CFA9',
   colorLayerBackgroundPillMenu: '#ffffff80',
-  colorLayerOmniboxBackground: '#F1F3F6',
-  colorLayerOmniboxBackgroundHover: '#EBEEF1',
+  colorLayerOmniboxBackground: '#F5F5F5',
+  colorLayerOmniboxBackgroundHover: '#EBEBEB',
 };
 
 export const lightThemeSolidColors: Partial<PhoenixColorTokens> = {
