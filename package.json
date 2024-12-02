@@ -14,6 +14,7 @@
     "packages/toggle-button",
     "packages/text-input",
     "packages/switch",
+    "packages/divider",
     "packages/phoenix-theme",
     "packages/kumo-theme",
     "packages/fluent-theme",
