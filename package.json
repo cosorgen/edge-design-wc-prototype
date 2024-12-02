@@ -15,6 +15,7 @@
     "packages/text-input",
     "packages/switch",
     "packages/divider",
+    "packages/spinner",
     "packages/phoenix-theme",
     "packages/kumo-theme",
     "packages/fluent-theme",

@@ -29,7 +29,7 @@ import {
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
 import '@mai-ui/button/define.js';
-import '@phoenixui/web-components/spinner.js';
+import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
 
 const template = html<HorizontalTab>`
@@ -40,7 +40,7 @@ const template = html<HorizontalTab>`
     <div id="favicon" part="favicon">
       ${when(
         (x) => x.loading,
-        html`<phx-spinner size="tiny"></phx-spinner>`,
+        html`<mai-spinner size="tiny"></mai-spinner>`,
         html`<slot name="favicon">
           <svg width="16" height="16">
             <use
@@ -207,7 +207,7 @@ const styles = css`
     transform: rotate(90deg);
   }
 
-  phx-spinner {
+  mai-spinner {
     --size: 16px;
   }
 `;

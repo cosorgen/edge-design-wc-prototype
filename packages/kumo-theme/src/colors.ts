@@ -300,6 +300,8 @@ export declare interface KumoColorTokens {
   smtcStrokeTextInputAccessiblePressed: string;
   smtcStrokeTextInputFocused: string;
   smtcStrokeTextInputFocusedPressed: string;
+  smtcStrokeSpinnerTrack: string;
+  smtcStrokeSpinnerBrandForeground: string;
 }
 
 export const kumoLightThemeColors: KumoColorTokens = {
@@ -353,6 +355,8 @@ export const kumoLightThemeColors: KumoColorTokens = {
   smtcStrokeTextInputAccessiblePressed: 'transparent',
   smtcStrokeTextInputFocused: 'transparent',
   smtcStrokeTextInputFocusedPressed: 'transparent',
+  smtcStrokeSpinnerTrack: '#23272B80',
+  smtcStrokeSpinnerBrandForeground: '#23272B',
 };
 
 export const kumoDarkThemeColors: KumoColorTokens = {
@@ -406,4 +410,6 @@ export const kumoDarkThemeColors: KumoColorTokens = {
   smtcStrokeTextInputAccessiblePressed: 'transparent',
   smtcStrokeTextInputFocused: 'transparent',
   smtcStrokeTextInputFocusedPressed: 'transparent',
+  smtcStrokeSpinnerTrack: '#F6F9FC80',
+  smtcStrokeSpinnerBrandForeground: '#F6F9FC',
 };
