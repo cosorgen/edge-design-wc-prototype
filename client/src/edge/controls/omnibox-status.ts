@@ -11,8 +11,8 @@ import {
   colorNeutralForeground3,
   spacingHorizontalXS,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/divider.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/divider/define.js';
 
 /**
  * omnibox-status is a presentational component that renders
@@ -57,7 +57,7 @@ const template = html<OmniboxStatus>`
     )}
     <div part="label">${(x) => labels[x.type]}</div>
   </mai-button>
-  <phx-divider orientation="vertical"></phx-divider>
+  <mai-divider orientation="vertical"></mai-divider>
 `;
 
 const styles = css`
@@ -78,22 +78,22 @@ const styles = css`
     width: 20px;
   }
 
-  phx-divider {
+  mai-divider {
     min-height: 16px;
     height: 100%;
   }
 
-  phx-divider::before,
-  phx-divider::after {
+  mai-divider::before,
+  mai-divider::after {
     height: 100%;
     min-height: 8px;
   }
 
-  [icon-only] ~ phx-divider {
+  [icon-only] ~ mai-divider {
     display: none;
   }
 
-  :host(:hover) phx-divider {
+  :host(:hover) mai-divider {
     display: none;
   }
 `;

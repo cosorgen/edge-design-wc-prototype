@@ -9,7 +9,7 @@ import {
   typographyStyles,
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">

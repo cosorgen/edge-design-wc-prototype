@@ -13,7 +13,7 @@ import {
   spacingHorizontalM,
   spacingHorizontalS,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
     <div id="start">

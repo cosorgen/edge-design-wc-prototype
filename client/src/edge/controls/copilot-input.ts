@@ -27,7 +27,7 @@ import {
   smtcCornerComposerSendButtonPressed,
   curveEasyEase,
 } from '@mai-ui/copilot-theme';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
 
 const template = html<CopilotInput>`
   <div

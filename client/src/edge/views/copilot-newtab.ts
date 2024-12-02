@@ -1,5 +1,5 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
 import {
   borderRadiusCircular,
   colorLayerBackgroundDialog,

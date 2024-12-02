@@ -53,7 +53,7 @@ const styles = css`
     margin-inline-end: calc(0px - ${spacingHorizontalXS});
   }
 
-  phx-divider {
+  mai-divider {
     margin-block: ${spacingVerticalXS};
   }
 `;

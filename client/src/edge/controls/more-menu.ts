@@ -30,7 +30,7 @@ import {
 import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';
-import '@phoenixui/web-components/divider.js';
+import '@mai-ui/divider/define.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
@@ -181,7 +181,7 @@ const template = html<MoreMenu>`
       (x) => x.items,
       html<MoreMenuEntry>` ${when(
         (x) => x.type === 'divider',
-        html`<phx-divider></phx-divider>`,
+        html`<mai-divider></mai-divider>`,
       )}
       ${when(
         (x) => x.type === 'action',
@@ -213,7 +213,7 @@ const template = html<MoreMenu>`
     )}
     ${when(
       (x) => x.additionalSettings(),
-      html`<phx-divider></phx-divider>
+      html`<mai-divider></mai-divider>
         <div class="label" id="additional">
           Also ${(x) => x.additionalSettings()} results found in
           <phx-link inline>Settings</phx-link>
@@ -260,7 +260,7 @@ const styles = css`
     margin-inline-end: calc(0px - ${spacingHorizontalXS});
   }
 
-  phx-divider {
+  mai-divider {
     margin-block: ${spacingVerticalXS};
   }
 

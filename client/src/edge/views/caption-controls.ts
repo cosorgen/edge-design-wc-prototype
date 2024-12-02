@@ -1,5 +1,4 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import '@phoenixui/web-components/button.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import { TabService } from '#servicestabService.js';

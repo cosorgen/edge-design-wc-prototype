@@ -18,8 +18,8 @@ import {
   spacingHorizontalXS,
   typographyStyles,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/divider.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/divider/define.js';
 import '../controls/extension-hub-item.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
@@ -54,7 +54,7 @@ const template = html<ExtensionsHub>` <div id="header">
       </context-menu>
     </flyout-menu>
   </div>
-  <phx-divider appearance="strong"></phx-divider>
+  <mai-divider appearance="strong"></mai-divider>
   <div id="content">
     ${repeat(
       (x) => x.extensions,
@@ -71,7 +71,7 @@ const template = html<ExtensionsHub>` <div id="header">
         ${(x) => x}
       </extension-hub-item>`,
     )}
-    <phx-divider></phx-divider>
+    <mai-divider></mai-divider>
     <menu-item start-slot>
       <svg slot="start">
         <use href="./img/edge/icons.svg#puzzle-piece-20-regular" />
@@ -120,7 +120,7 @@ const styles = css`
     flex-direction: column;
     padding: ${spacingHorizontalXS};
 
-    phx-divider {
+    mai-divider {
       margin: ${spacingHorizontalXS} 0;
     }
   }

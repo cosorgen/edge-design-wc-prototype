@@ -13,7 +13,7 @@ import {
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
 import '@mai-ui/button/define.js';
-import '@phoenixui/web-components/divider.js';
+import '@mai-ui/divider/define.js';
 import '../controls/horizontal-tab.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
@@ -58,10 +58,10 @@ const template = html<TabBar>`
                   >`
                 : null}
           </horizontal-tab>
-          <phx-divider
+          <mai-divider
             orientation="vertical"
             appearance="strong"
-          ></phx-divider>`,
+          ></mai-divider>`,
       )}
     </div>
     <mai-button
@@ -87,9 +87,7 @@ const styles = css`
     display: block;
     user-select: none;
     position: relative; /* for positioning shadow */
-    width: calc(
-      100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')}
-    );
+    width: calc(100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')});
   }
 
   #content {
@@ -143,23 +141,23 @@ const styles = css`
     min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
-  phx-divider,
-  phx-divider:before,
-  phx-divider:after {
+  mai-divider,
+  mai-divider:before,
+  mai-divider:after {
     min-height: unset;
     height: unset;
   }
 
-  phx-divider {
+  mai-divider {
     margin-block: ${spacingVerticalSNudge};
     margin-inline: calc(0px - (${spacingFrame} / 2));
   }
 
-  horizontal-tab[active] + phx-divider,
-  phx-divider:has(+ horizontal-tab[active]),
-  horizontal-tab:hover + phx-divider,
-  phx-divider:has(+ horizontal-tab:hover),
-  #tabs:has(+ #add:hover) > phx-divider:last-of-type {
+  horizontal-tab[active] + mai-divider,
+  mai-divider:has(+ horizontal-tab[active]),
+  horizontal-tab:hover + mai-divider,
+  mai-divider:has(+ horizontal-tab:hover),
+  #tabs:has(+ #add:hover) > mai-divider:last-of-type {
     visibility: hidden;
   }
 `;

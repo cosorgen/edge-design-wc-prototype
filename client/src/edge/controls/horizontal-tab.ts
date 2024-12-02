@@ -28,7 +28,7 @@ import {
   spacingVerticalXXS,
   spacingFrame,
 } from '@mai-ui/phoenix-theme';
-import '@phoenixui/web-components/button.js';
+import '@mai-ui/button/define.js';
 import '@phoenixui/web-components/spinner.js';
 import '../../windows/controls/mica-material.js';
 
