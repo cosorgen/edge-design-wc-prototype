@@ -27,7 +27,10 @@ import {
 import {
   lightThemeShadows,
   darkThemeShadows,
+  lightThemeKumoShadows,
+  darkThemeKumoShadows,
   type PhoenixShadowTokens,
+  type KumoShadowTokens,
 } from './shadows.js';
 import {
   kumoBorderRadius,
@@ -69,6 +72,7 @@ export declare type Theme = FUITheme &
   PhoenixColorTokens &
   KumoColorTokens &
   PhoenixShadowTokens &
+  KumoShadowTokens &
   PhoenixBorderRadiusTokens &
   KumoBorderRadiusTokens &
   PhoenixCurveTokens &
@@ -92,6 +96,7 @@ export const kumoLightTheme: Theme = {
   ...lightThemeColors,
   ...kumoLightThemeColors,
   ...lightThemeShadows,
+  ...lightThemeKumoShadows,
   ...curveTokens,
   ...kumoCurveTokens,
   ...durationTokens,
@@ -113,6 +118,7 @@ export const kumoDarkTheme: Theme = {
   ...darkThemeColors,
   ...kumoDarkThemeColors,
   ...darkThemeShadows,
+  ...darkThemeKumoShadows,
   ...curveTokens,
   ...kumoCurveTokens,
   ...durationTokens,
@@ -136,6 +142,7 @@ export const kumoLightThemeSolid: Theme = {
   ...kumoLightThemeColors,
   ...lightThemeSolidColors,
   ...lightThemeShadows,
+  ...lightThemeKumoShadows,
   ...curveTokens,
   ...kumoCurveTokens,
   ...durationTokens,
@@ -158,6 +165,7 @@ export const kumoDarkThemeSolid: Theme = {
   ...kumoDarkThemeColors,
   ...darkThemeSolidColors,
   ...darkThemeShadows,
+  ...darkThemeKumoShadows,
   ...curveTokens,
   ...kumoCurveTokens,
   ...durationTokens,
@@ -180,6 +188,7 @@ export function createHighContrastTheme(): Theme {
     ...kumoDarkThemeColors,
     ...darkThemeSolidColors,
     ...darkThemeShadows,
+    ...darkThemeKumoShadows,
     ...phoenixBorderRadius,
     ...kumoBorderRadius,
     ...curveTokens,

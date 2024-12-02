@@ -127,3 +127,15 @@ export const darkThemeShadows: PhoenixShadowTokens = {
   shadowBaseLayerDiffuseY: '32px',
   shadowBaseLayerDiffuseBlur: '64px',
 };
+
+export type KumoShadowTokens = {
+  smtcShadowComposerRest: string;
+};
+
+export const lightThemeKumoShadows: KumoShadowTokens = {
+  smtcShadowComposerRest: '0px 8px 28px 0px rgba(0, 30, 68, 0.10)',
+};
+
+export const darkThemeKumoShadows: KumoShadowTokens = {
+  smtcShadowComposerRest: '0px 8px 28px 0px rgba(0, 30, 68, 0.10)',
+};

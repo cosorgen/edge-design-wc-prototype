@@ -29,7 +29,10 @@ export {
 export {
   darkThemeShadows,
   lightThemeShadows,
+  lightThemeKumoShadows,
+  darkThemeKumoShadows,
   type PhoenixShadowTokens,
+  type KumoShadowTokens,
 } from './shadows.js';
 
 export {

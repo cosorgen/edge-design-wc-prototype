@@ -45,5 +45,3 @@ export const kumoBorderRadius: KumoBorderRadiusTokens = {
 export const borderRadiusOverrides: Partial<BorderRadiusTokens> = {
   borderRadiusLarge: '8px',
 };
-
-

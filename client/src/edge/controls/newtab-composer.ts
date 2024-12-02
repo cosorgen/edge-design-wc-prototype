@@ -1,67 +1,79 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import {
   borderRadiusCircular,
-  colorLayerBackgroundDialog,
-  colorNeutralForeground1,
   colorNeutralForegroundHint,
   spacingHorizontalS,
-  spacingHorizontalXL,
-  spacingHorizontalXS,
 } from '@mai-ui/phoenix-theme';
+import {
+  colorNeutralCardBackground,
+  colorNeutralForeground2,
+  colorNeutralStroke1,
+  shadow16,
+  strokeWidthThin,
+  typographyStyles,
+} from '@mai-ui/kumo-theme';
 
 const template = html`
-  <div id="start"></div>
+  <div id="start">
+    <img src="img/edge/newtab2/search.svg" />
+  </div>
   <input
     type="text"
-    placeholder="Search or chat with Copilot"
+    placeholder="Search and explore"
     @keydown="${(x, c) => x.handleKeydown(c.event)}"
   />
   <div id="end">
     <slot name="end">
-      <mai-button appearance="subtle" size="large" icon-only>
+      <mai-button appearance="subtle" size="small" icon-only>
         <svg>
-          <use x="2" y="2" href="img/edge/icons.svg#add-20-regular" />
+          <use href="img/edge/icons.svg#mic-ntp-20-regular" />
         </svg>
       </mai-button>
-      <mai-button appearance="subtle" size="large" icon-only>
+      <mai-button appearance="subtle" size="small" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#headphones-24-regular" />
+          <use href="img/edge/icons.svg#camera-ntp-20-regular" />
         </svg> </mai-button
     ></slot>
   </div>
 `;
 
+const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
+const smtcCornerComposerRest = `var(--smtc-corner-composer-rest, ${borderRadiusCircular})`;
+const smtcStrokeComposerRest = `var(--smtc-stroke-composer-rest, ${colorNeutralStroke1})`;
+const smtcShadowComposerRest = `var(--smtc-shadow-composer-rest, ${shadow16})`;
+const smtcTextComposerFontFamily = `var(--smtc-text-composer-font-family, ${typographyStyles.body2.fontFamily})`;
+const smtcTextComposerFontSize = `var(--smtc-text-composer-font-size, ${typographyStyles.body2.fontSize})`;
+const smtcTextComposerWeight = `var(--smtc-text-composer-weight, ${typographyStyles.body2.fontWeight})`;
+const smtcTextComposerLineHeight = `var(--smtc-text-composer-line-height, ${typographyStyles.body2.lineHeight})`;
+const smtcTextComposerColor = `var(--smtc-text-composer-color, ${colorNeutralForeground2})`;
+
 const styles = css`
   :host {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
-    padding: ${spacingHorizontalS};
-    background: ${colorLayerBackgroundDialog};
-    border-radius: ${borderRadiusCircular};
-    box-shadow:
-      0px 104.789px 29.556px 0px rgba(0, 0, 0, 0),
-      0px 67.172px 26.869px 0px rgba(0, 0, 0, 0.01),
-      0px 37.616px 22.391px 0px rgba(0, 0, 0, 0.02),
-      0px 17.017px 17.017px 0px rgba(0, 0, 0, 0.04),
-      0px 4.478px 8.956px 0px rgba(0, 0, 0, 0.05);
+    gap: ${spacingHorizontalS};
+    padding: 16px 24px;
+    background: ${smtcBackgroundCardOnImageRest};
+    border: ${strokeWidthThin} solid ${smtcStrokeComposerRest};
+    border-radius: ${smtcCornerComposerRest};
+    box-shadow: ${smtcShadowComposerRest};
   }
 
   input {
     flex: 1;
     box-sizing: border-box;
-    height: 48px;
+    height: 24px;
     min-width: 156px;
     border: none;
-    background: ${colorLayerBackgroundDialog};
-    border-radius: 20px;
-    padding: ${spacingHorizontalXS};
-    padding-inline-start: ${spacingHorizontalXL};
+    background: none;
 
-    font-size: 18px;
-    line-height: 26px;
-    color: ${colorNeutralForeground1};
+    font-family: ${smtcTextComposerFontFamily};
+    font-size: ${smtcTextComposerFontSize};
+    font-weight: ${smtcTextComposerWeight};
+    line-height: ${smtcTextComposerLineHeight};
+    color: ${smtcTextComposerColor};
   }
 
   input:focus {
@@ -70,6 +82,14 @@ const styles = css`
 
   input:empty::placeholder {
     color: ${colorNeutralForegroundHint};
+  }
+
+  #start {
+    line-height: 0px;
+  }
+
+  #end {
+    --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
   }
 `;
 

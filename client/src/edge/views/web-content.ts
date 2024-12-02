@@ -62,12 +62,8 @@ const styles = css`
     overflow: hidden;
     z-index: 0; /* ensure content is under omnibox */
 
-    * {
+    :not([active]) {
       display: none;
-    }
-
-    [active] {
-      display: unset;
     }
   }
 `;
