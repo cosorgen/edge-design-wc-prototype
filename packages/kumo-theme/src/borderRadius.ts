@@ -28,6 +28,7 @@ export declare interface KumoBorderRadiusTokens {
   smtcCornerLargeControlRest: string;
   smtcCornerLargeControlHover: string;
   smtcCornerLargeControlPressed: string;
+  smtcCornerCardRest: string;
 }
 
 export const kumoBorderRadius: KumoBorderRadiusTokens = {
@@ -40,6 +41,7 @@ export const kumoBorderRadius: KumoBorderRadiusTokens = {
   smtcCornerLargeControlRest: '12px',
   smtcCornerLargeControlHover: '12px',
   smtcCornerLargeControlPressed: '12px',
+  smtcCornerCardRest: '20px',
 };
 
 export const borderRadiusOverrides: Partial<BorderRadiusTokens> = {

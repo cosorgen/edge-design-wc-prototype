@@ -12,14 +12,18 @@ import {
   borderRadiusCircular,
   colorNeutralCardBackground,
   colorNeutralCardBackgroundHover,
+  colorNeutralForeground1,
   colorNeutralForeground2,
+  colorNeutralForegroundStaticInverted,
   colorNeutralStroke1,
+  fontWeightRegular,
   shadow16,
   strokeWidthThin,
   typographyStyles,
 } from '@mai-ui/kumo-theme';
 import '../controls/newtab-composer.js';
 import '../controls/newtab-top-site.js';
+import { borderRadiusLarge } from '@mai-ui/phoenix-theme';
 
 const topSites = [
   {
@@ -77,6 +81,116 @@ const template = html<EdgeNewTab>` <div id="content">
       </button>
     </div>
   </div>
+  <div class="section">
+    <div class="section-header">
+      <h2>Let’s prepare for your day, Elena</h2>
+    </div>
+    <div class="section-content" id="today">
+      <div class="card" id="msn">
+        <h3>MSN Daily</h3>
+        <p>
+          Candidates focus on swing states, IRS introduces new 401(k) limits,
+          and more
+        </p>
+        <mai-button>
+          <svg width="20px" height="20px" slot="start">
+            <use
+              x="2px"
+              y="2px"
+              href="img/edge/icons.svg#headphones-20-regular"
+            />
+          </svg>
+          Listen
+        </mai-button>
+      </div>
+      <div class="card" id="todo">
+        <div id="todo-header">
+          <img />
+          <p>To Do</p>
+        </div>
+        <div id="todo-list">
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-info">
+              <div class="todo-title">Get tires checked</div>
+              <div class="todo-subtitle">
+                <div class="todo-list-name">Personal</div>
+                <div class="todo-due-date today">
+                  <svg>
+                    <use href="img/edge/icons.svg#calendar-10-regular" />
+                  </svg>
+                  Today
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-info">
+              <div class="todo-title">Buy new slippers</div>
+              <div class="todo-subtitle">
+                <div class="todo-list-name">Personal</div>
+                <div class="todo-due-date today">
+                  <svg>
+                    <use href="img/edge/icons.svg#calendar-10-regular" />
+                  </svg>
+                  Today
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-info">
+              <div class="todo-title">Finish business presentation</div>
+              <div class="todo-subtitle">
+                <div class="todo-list-name">Work</div>
+                <div class="todo-due-date today">
+                  <svg>
+                    <use href="img/edge/icons.svg#calendar-10-regular" />
+                  </svg>
+                  Today
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-info">
+              <div class="todo-title">Send invites for Q4 planning</div>
+              <div class="todo-subtitle">
+                <div class="todo-list-name">Work</div>
+                <div class="todo-due-date">
+                  <svg>
+                    <use href="img/edge/icons.svg#calendar-10-regular" />
+                  </svg>
+                  Tomorrow
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="todo-item">
+            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-info">
+              <div class="todo-title">Take the kids for a haircut</div>
+              <div class="todo-subtitle">
+                <div class="todo-list-name">Personal</div>
+                <div class="todo-due-date">
+                  <svg>
+                    <use href="img/edge/icons.svg#calendar-10-regular" />
+                  </svg>
+                  Tomorrow
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="weather"></div>
+      <div class="card" id="sports"></div>
+      <div class="card" id="election"></div>
+    </div>
+  </div>
 </div>`;
 
 const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
@@ -89,6 +203,7 @@ const smtcTextControlButtonWeight = `var(--smtc-text-control-button-weight, ${ty
 const smtcTextControlButtonLineHeight = `var(--smtc-text-control-button-line-height, ${typographyStyles.body1.lineHeight})`;
 const smtcTextControlButtonColor = `var(--smtc-text-control-button-color, ${colorNeutralForeground2})`;
 const smtcBackgroundCardOnImageHover = `var(--smtc-background-card-on-image-hover, ${colorNeutralCardBackgroundHover})`;
+const smtcCornerCardRest = `var(--smtc-corner-card-rest, ${borderRadiusLarge})`;
 
 const styles = css`
   :host {
@@ -96,6 +211,7 @@ const styles = css`
     height: 100%;
     display: block;
     overflow-y: auto;
+    overflow-x: hidden;
   }
 
   #content {
@@ -157,6 +273,93 @@ const styles = css`
 
   #lets-talk:hover {
     background: ${smtcBackgroundCardOnImageHover};
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 1024px;
+  }
+
+  .section-header {
+    width: 100%;
+
+    h2 {
+      margin: 0;
+      font-family: ${typographyStyles.title3.fontFamily};
+      font-size: ${typographyStyles.title3.fontSize};
+      font-weight: ${typographyStyles.title3.fontWeight};
+      line-height: ${typographyStyles.title3.lineHeight};
+      color: ${colorNeutralForeground1};
+    }
+  }
+
+  .section-content#today {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 20px;
+
+    :nth-child(1) {
+      grid-area: 1 / 1 / 3 / 2;
+    }
+
+    :nth-child(2) {
+      grid-area: 1 / 2 / 3 / 3;
+    }
+
+    :nth-child(3) {
+      grid-area: 1 / 3 / 3 / 4;
+    }
+  }
+
+  .card {
+    border-radius: ${smtcCornerCardRest};
+    padding: 16px;
+  }
+
+  .card#msn {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 200px;
+    background: linear-gradient(
+        0deg,
+        #ff314ce5 10%,
+        #ff314c99 40%,
+        #ff314c1a 90%
+      ),
+      url('img/edge/newtab2/msnBackground.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: ${colorNeutralForegroundStaticInverted};
+
+    h3 {
+      margin: 0;
+      margin-bottom: 6px;
+      font-size: ${typographyStyles.title3.fontSize};
+      font-weight: ${fontWeightRegular};
+      line-height: ${typographyStyles.title3.lineHeight};
+    }
+
+    p {
+      margin: 0;
+      margin-bottom: 12px;
+      font-size: ${typographyStyles.caption1.fontSize};
+      font-weight: ${typographyStyles.caption1.fontWeight};
+      line-height: ${typographyStyles.caption1.lineHeight};
+    }
+
+    mai-button {
+      width: fit-content;
+    }
+  }
+
+  .card#todo {
+    display: none;
   }
 `;
 

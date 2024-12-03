@@ -35,10 +35,10 @@ const styles = css`
     justify-content: center;
     gap: ${spacingVerticalS};
     padding: ${spacingVerticalS} ${spacingHorizontalXS};
-    cursor: pointer;
     background-color: ${smtcBackgroundCardOnImageRest};
     border-radius: ${smtcCornerControlRest};
     border: none;
+    cursor: pointer;
   }
 
   button:hover {
