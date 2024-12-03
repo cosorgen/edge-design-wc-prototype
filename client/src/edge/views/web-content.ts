@@ -14,7 +14,7 @@ import {
   colorLayerBackgroundApp,
   strokeWidthThin,
 } from '@mai-ui/phoenix-theme';
-import './edge-newtab.js';
+import './edge-newtab/index.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';
