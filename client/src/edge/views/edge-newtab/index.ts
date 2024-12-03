@@ -56,9 +56,7 @@ export class EdgeNewTab extends FASTElement {
         const scrollbarHeight =
           (1 / (this.scrollHeight / this.clientHeight)) * 100;
 
-        // Only set the CSS variables if the scrollbar is less than 100% of the viewport height
-        if (scrollbarHeight < 100) {
-          const data = `:host {
+        const data = `:host {
           --scrollbar-height: ${scrollbarHeight}%;
           --viewport-height: ${this.clientHeight}px;
           --viewport-width: ${this.clientWidth}px;
@@ -72,27 +70,24 @@ export class EdgeNewTab extends FASTElement {
         @keyframes scrollbar {
           from { top: 2px; } 
           to { top: calc(100% - ${this.clientHeight}px + 2px); } 
+        }
+          
+        #scrollbar {
+          display: ${scrollbarHeight < 100 ? 'block' : 'none'};
         }`;
 
-          const sheet = new CSSStyleSheet();
-          sheet.replaceSync(data);
+        const sheet = new CSSStyleSheet();
+        sheet.replaceSync(data);
 
-          if (!this._animationSheet) {
-            this.shadowRoot?.adoptedStyleSheets.push(sheet);
-          } else {
-            this.shadowRoot?.adoptedStyleSheets.pop();
-            this.shadowRoot?.adoptedStyleSheets.push(sheet);
-          }
-
-          // Save sheet for later removal
-          this._animationSheet = sheet;
+        if (!this._animationSheet) {
+          this.shadowRoot?.adoptedStyleSheets.push(sheet);
         } else {
-          // Remove sheet if it exists
-          if (this._animationSheet) {
-            this.shadowRoot?.adoptedStyleSheets.pop();
-            this._animationSheet = undefined;
-          }
+          this.shadowRoot?.adoptedStyleSheets.pop();
+          this.shadowRoot?.adoptedStyleSheets.push(sheet);
         }
+
+        // Save sheet for later removal
+        this._animationSheet = sheet;
       }
     });
   };

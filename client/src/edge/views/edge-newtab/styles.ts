@@ -13,6 +13,12 @@ import {
   typographyStyles,
   borderRadiusLarge,
   colorScrollbarForeground,
+  colorBrandForeground1,
+  colorNeutralForegroundHint,
+  colorNeutralStroke2,
+  colorStrokeFocus1,
+  colorStrokeFocus2,
+  strokeWidthThick,
 } from '@mai-ui/kumo-theme';
 
 const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
@@ -66,7 +72,6 @@ export const styles = css`
   }
 
   #scrollbar {
-    display: block;
     position: absolute;
     top: 2px;
     right: 2px;
@@ -173,13 +178,14 @@ export const styles = css`
   .card {
     border-radius: ${smtcCornerCardRest};
     padding: 16px;
+    overflow: hidden;
   }
 
   .card#msn {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    min-height: 336px;
+
     background: linear-gradient(
         0deg,
         #ff314ce5 10%,
@@ -214,5 +220,101 @@ export const styles = css`
   }
 
   .card#todo {
+    background: ${colorNeutralCardBackground};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke2};
+    display: flex;
+    flex-direction: column;
+  }
+
+  #todo-header {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+  }
+
+  #todo-header img {
+    width: 16px;
+    height: 16px;
+  }
+
+  #todo-header h4 {
+    margin: 0;
+    font-size: ${typographyStyles.body1Strong.fontSize};
+    font-weight: ${typographyStyles.body1Strong.fontWeight};
+    line-height: ${typographyStyles.body1Strong.lineHeight};
+  }
+
+  #todo-list {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .todo-item {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    padding: 10px;
+    border-bottom: ${strokeWidthThin} solid ${colorNeutralStroke1};
+  }
+
+  .todo-checkbox {
+    line-height: 0;
+    cursor: pointer;
+    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    border-radius: ${borderRadiusCircular};
+  }
+
+  .todo-checkbox:has(input:checked) {
+    background: ${colorBrandForeground1};
+    border-color: transparent;
+  }
+
+  .todo-checkbox:has(input:focus-visible) {
+    border: ${strokeWidthThin} solid ${colorStrokeFocus1};
+    outline: ${strokeWidthThick} solid ${colorStrokeFocus2};
+  }
+
+  .todo-checkbox input {
+    opacity: 0;
+  }
+
+  .todo-info {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .todo-title,
+  .toto-subtitle {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .todo-title {
+    font-size: ${typographyStyles.body2.fontSize};
+    font-weight: ${typographyStyles.body2.fontWeight};
+    line-height: ${typographyStyles.body2.lineHeight};
+  }
+
+  .todo-subtitle {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+    color: ${colorNeutralForegroundHint};
+  }
+
+  .todo-due-date.today {
+    color: ${colorBrandForeground1};
   }
 `;

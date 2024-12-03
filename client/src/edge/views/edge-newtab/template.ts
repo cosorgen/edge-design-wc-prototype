@@ -83,18 +83,21 @@ export const template = html` <div id="content">
       </div>
       <div class="card" id="todo">
         <div id="todo-header">
-          <img />
-          <p>To Do</p>
+          <img src="img/edge/newtab2/todo.svg" alt="Todo logo" />
+          <h4>To Do</h4>
         </div>
         <div id="todo-list">
           <div class="todo-item">
-            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-checkbox">
+              <input type="checkbox" class="todo-checkbox" />
+            </div>
             <div class="todo-info">
               <div class="todo-title">Get tires checked</div>
               <div class="todo-subtitle">
                 <div class="todo-list-name">Personal</div>
+                ·
                 <div class="todo-due-date today">
-                  <svg>
+                  <svg width="10px" height="10px">
                     <use href="img/edge/icons.svg#calendar-10-regular" />
                   </svg>
                   Today
@@ -103,13 +106,16 @@ export const template = html` <div id="content">
             </div>
           </div>
           <div class="todo-item">
-            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-checkbox">
+              <input type="checkbox" class="todo-checkbox" />
+            </div>
             <div class="todo-info">
               <div class="todo-title">Buy new slippers</div>
               <div class="todo-subtitle">
                 <div class="todo-list-name">Personal</div>
+                ·
                 <div class="todo-due-date today">
-                  <svg>
+                  <svg width="10px" height="10px">
                     <use href="img/edge/icons.svg#calendar-10-regular" />
                   </svg>
                   Today
@@ -118,13 +124,16 @@ export const template = html` <div id="content">
             </div>
           </div>
           <div class="todo-item">
-            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-checkbox">
+              <input type="checkbox" class="todo-checkbox" />
+            </div>
             <div class="todo-info">
               <div class="todo-title">Finish business presentation</div>
               <div class="todo-subtitle">
                 <div class="todo-list-name">Work</div>
+                ·
                 <div class="todo-due-date today">
-                  <svg>
+                  <svg width="10px" height="10px">
                     <use href="img/edge/icons.svg#calendar-10-regular" />
                   </svg>
                   Today
@@ -133,13 +142,16 @@ export const template = html` <div id="content">
             </div>
           </div>
           <div class="todo-item">
-            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-checkbox">
+              <input type="checkbox" class="todo-checkbox" />
+            </div>
             <div class="todo-info">
               <div class="todo-title">Send invites for Q4 planning</div>
               <div class="todo-subtitle">
                 <div class="todo-list-name">Work</div>
+                ·
                 <div class="todo-due-date">
-                  <svg>
+                  <svg width="10px" height="10px">
                     <use href="img/edge/icons.svg#calendar-10-regular" />
                   </svg>
                   Tomorrow
@@ -148,13 +160,16 @@ export const template = html` <div id="content">
             </div>
           </div>
           <div class="todo-item">
-            <input type="checkbox" class="todo-checkbox" />
+            <div class="todo-checkbox">
+              <input type="checkbox" class="todo-checkbox" />
+            </div>
             <div class="todo-info">
               <div class="todo-title">Take the kids for a haircut</div>
               <div class="todo-subtitle">
                 <div class="todo-list-name">Personal</div>
+                ·
                 <div class="todo-due-date">
-                  <svg>
+                  <svg width="10px" height="10px">
                     <use href="img/edge/icons.svg#calendar-10-regular" />
                   </svg>
                   Tomorrow
