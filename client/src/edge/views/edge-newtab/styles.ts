@@ -140,7 +140,7 @@ export const styles = css`
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 1024px;
+    max-width: 1298px;
   }
 
   .section-header {
@@ -316,5 +316,152 @@ export const styles = css`
 
   .todo-due-date.today {
     color: ${colorBrandForeground1};
+  }
+
+  .card#weather {
+    border-radius: 20.087px;
+    background: url(img/edge/newtab2/weatherBackground.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: ${colorNeutralForegroundStaticInverted};
+  }
+
+  #weather-header {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+  }
+
+  #weather-header h4 {
+    margin: 0;
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+  }
+
+  #weather-today {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  #weather-icon,
+  #weather-icon img {
+    width: 80px;
+    height: 80px;
+  }
+
+  #weather-temperature {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #weather-temperature h1 {
+    margin: 0;
+    font-size: ${typographyStyles.display.fontSize};
+    font-weight: ${typographyStyles.display.fontWeight};
+    line-height: 72px;
+  }
+
+  #weather-temperature p {
+    margin: 0;
+    font-size: ${typographyStyles.subtitle2.fontSize};
+    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    line-height: ${typographyStyles.subtitle2.lineHeight};
+  }
+
+  #weather-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #weather-details p {
+    margin: 0;
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+  }
+
+  #weather-details p:first-child {
+    margin-top: -32px;
+  }
+
+  #weather-hourly-title {
+    margin: 0;
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
+    margin-bottom: 12px;
+  }
+
+  #weather-hourly {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  .weather-hour {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 20px 10px;
+    border-radius: 10px;
+  }
+
+  .weather-hour img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .weather-hour p {
+    margin: 0;
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+  }
+
+  .weather-hour h5 {
+    margin: 0;
+    font-size: ${typographyStyles.subtitle2.fontSize};
+    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    line-height: ${typographyStyles.subtitle2.lineHeight};
+  }
+
+  .weather-hour .humidity {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .weather-hour .humidity svg {
+    margin-top: 2px;
+    width: 6px;
+    height: 10px;
+  }
+
+  .weather-hour .humidity p {
+    margin: 0;
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+  }
+
+  .card#sports {
+    background: green;
+  }
+
+  .card#election {
+    background: white;
   }
 `;

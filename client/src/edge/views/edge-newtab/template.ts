@@ -179,7 +179,87 @@ export const template = html` <div id="content">
           </div>
         </div>
       </div>
-      <div class="card" id="weather"></div>
+      <div class="card" id="weather">
+        <div id="weather-header">
+          <svg width="10px" height="10px">
+            <use href="img/edge/icons.svg#pin-10-regular" />
+          </svg>
+          <h4>Seattle, WA</h4>
+        </div>
+        <div id="weather-today">
+          <div id="weather-icon">
+            <img src="img/edge/newtab2/partlySunny.svg" alt="Sun with clouds" />
+          </div>
+          <div id="weather-temperature">
+            <h1>75°</h1>
+            <p>Partly sunny</p>
+          </div>
+          <div id="weather-details">
+            <p>H 81°</p>
+            <p>L 66°</p>
+          </div>
+        </div>
+        <h4 id="weather-hourly-title">
+          Hourly forecast
+        </h4>
+        <div id="weather-hourly">
+          <div class="weather-hour">
+            <p>Now</p>
+            <img src="img/edge/newtab2/partlySunny.svg" alt="Sun" />
+            <h5>75°</h5>
+            <div class="humidity">
+              <svg width="10px" height="10px">
+                <use href="img/edge/icons.svg#raindrop-10-filled" />
+              </svg>
+              <p>0%</p>
+            </div>
+          </div>
+          <div class="weather-hour">
+            <p>10am</p>
+            <img src="img/edge/newtab2/partlySunny.svg" alt="Cloud" />
+            <h5>72°</h5>
+            <div class="humidity">
+              <svg width="10px" height="10px">
+                <use href="img/edge/icons.svg#raindrop-10-filled" />
+                svg>
+              <p>0%</p>
+            </div>
+          </div>
+          <div class="weather-hour">
+            <p>11am</p>
+            <img src="img/edge/newtab2/sunny.svg" alt="Rain" />
+            <h5>68°</h5>
+            <div class="humidity">
+              <svg width="10px" height="10px">
+                <use href="img/edge/icons.svg#raindrop-10-filled" />
+                svg>
+              <p>0%</p>
+            </div>
+          </div>
+          <div class="weather-hour">
+            <p>12pm</p>
+            <img src="img/edge/newtab2/sunny.svg" alt="Sun" />
+            <h5>75°</h5>
+            <div class="humidity">
+              <svg width="10px" height="10px">
+                <use href="img/edge/icons.svg#raindrop-10-filled" />
+                svg>
+              <p>0%</p>
+            </div>
+          </div>
+          <div class="weather-hour">
+            <p>1pm</p>
+            <img src="img/edge/newtab2/partlySunny.svg" alt="Cloud" />
+            <h5>72°</h5>
+            <div class="humidity">
+              <svg width="10px" height="10px">
+                <use href="img/edge/icons.svg#raindrop-10-filled" />
+                svg>
+              <p>0%</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="card" id="sports"></div>
       <div class="card" id="election"></div>
     </div>
