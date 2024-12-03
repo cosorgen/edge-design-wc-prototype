@@ -32,6 +32,7 @@ const topSites = [
 
 export const template = html` <div id="content">
   <div id="background"></div>
+  <div id="scrollbar"><div></div></div>
   <div id="content-header">
     <newtab-composer
       @submit="${(x, c) => x.handleComposerSubmit(c.event)}"

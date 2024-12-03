@@ -12,6 +12,7 @@ import {
   strokeWidthThin,
   typographyStyles,
   borderRadiusLarge,
+  colorScrollbarForeground,
 } from '@mai-ui/kumo-theme';
 
 const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
@@ -33,6 +34,8 @@ export const styles = css`
     display: block;
     overflow-y: auto;
     overflow-x: hidden;
+    scrollbar-width: none;
+    scroll-timeline: --scrollbar-timeline y;
   }
 
   #content {
@@ -43,7 +46,7 @@ export const styles = css`
     align-items: center;
     width: 100%;
     height: fit-content;
-    min-height: 100%;
+    min-height: 500%;
     gap: 104px;
     padding: 104px;
   }
@@ -52,14 +55,45 @@ export const styles = css`
     position: absolute;
     top: 0;
     left: 0;
-    width: ${(x) => `${x.ews.viewportSize?.width - 1}px`};
-    height: ${(x) => `${x.ews.viewportSize?.height - 1}px`};
+    width: var(--viewport-width);
+    height: var(--viewport-height);
     background: linear-gradient(180deg, #ffffff80 0%, white 100%),
       url('img/edge/newtab2/background.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     z-index: -1;
+  }
+
+  #scrollbar {
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 4px;
+    height: calc(var(--viewport-height) - 4px);
+
+    opacity: 0;
+    transition: opacity 200ms 200ms;
+
+    animation-name: scrollbar;
+    animation-timing-function: linear;
+    animation-timeline: --scrollbar-timeline;
+  }
+
+  :host(:hover) #scrollbar {
+    opacity: 1;
+  }
+
+  #scrollbar > div {
+    position: relative;
+    width: 4px;
+    height: var(--scrollbar-height);
+    background: ${colorScrollbarForeground};
+    border-radius: 2px;
+    animation-name: scroller;
+    animation-timing-function: linear;
+    animation-timeline: --scrollbar-timeline;
   }
 
   #content-header {
