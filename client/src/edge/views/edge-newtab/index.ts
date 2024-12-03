@@ -56,7 +56,9 @@ export class EdgeNewTab extends FASTElement {
         const scrollbarHeight =
           (1 / (this.scrollHeight / this.clientHeight)) * 100;
 
-        const data = `:host {
+        // Only set the CSS variables if the scrollbar is less than 100% of the viewport height
+        if (scrollbarHeight < 100) {
+          const data = `:host {
           --scrollbar-height: ${scrollbarHeight}%;
           --viewport-height: ${this.clientHeight}px;
           --viewport-width: ${this.clientWidth}px;
@@ -72,17 +74,25 @@ export class EdgeNewTab extends FASTElement {
           to { top: calc(100% - ${this.clientHeight}px + 2px); } 
         }`;
 
-        const sheet = new CSSStyleSheet();
-        sheet.replaceSync(data);
+          const sheet = new CSSStyleSheet();
+          sheet.replaceSync(data);
 
-        if (!this._animationSheet) {
-          this.shadowRoot?.adoptedStyleSheets.push(sheet);
+          if (!this._animationSheet) {
+            this.shadowRoot?.adoptedStyleSheets.push(sheet);
+          } else {
+            this.shadowRoot?.adoptedStyleSheets.pop();
+            this.shadowRoot?.adoptedStyleSheets.push(sheet);
+          }
+
+          // Save sheet for later removal
+          this._animationSheet = sheet;
         } else {
-          this.shadowRoot?.adoptedStyleSheets.pop();
-          this.shadowRoot?.adoptedStyleSheets.push(sheet);
+          // Remove sheet if it exists
+          if (this._animationSheet) {
+            this.shadowRoot?.adoptedStyleSheets.pop();
+            this._animationSheet = undefined;
+          }
         }
-
-        this._animationSheet = sheet;
       }
     });
   };

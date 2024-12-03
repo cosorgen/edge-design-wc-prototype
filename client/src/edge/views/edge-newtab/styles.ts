@@ -46,7 +46,7 @@ export const styles = css`
     align-items: center;
     width: 100%;
     height: fit-content;
-    min-height: 500%;
+    min-height: 100%;
     gap: 104px;
     padding: 104px;
   }
@@ -214,6 +214,5 @@ export const styles = css`
   }
 
   .card#todo {
-    display: none;
   }
 `;
