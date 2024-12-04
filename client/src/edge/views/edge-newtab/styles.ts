@@ -20,6 +20,8 @@ import {
   colorStrokeFocus2,
   strokeWidthThick,
   borderRadiusMedium,
+  durationFast,
+  curveDecelerateMax,
 } from '@mai-ui/kumo-theme';
 
 const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
@@ -571,5 +573,63 @@ export const styles = css`
     font-size: ${typographyStyles.body1.fontSize};
     font-weight: ${typographyStyles.body1.fontWeight};
     line-height: ${typographyStyles.body1.lineHeight};
+  }
+
+  .section-content#trending {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      '. . . .'
+      '. . . .';
+    gap: 20px;
+  }
+
+  .article {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    border-radius: ${smtcCornerCardRest};
+    cursor: pointer;
+    transition: transform ${durationFast} ${curveDecelerateMax};
+  }
+
+  .article:hover {
+    transform: scale(1.02);
+  }
+
+  .article > img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: ${smtcCornerImageInCardRest};
+  }
+
+  .article-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .article-info h4 {
+    margin: 0;
+    font-size: ${typographyStyles.subtitle2.fontSize};
+    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    line-height: ${typographyStyles.subtitle2.lineHeight};
+  }
+
+  .article-byline {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    align-items: center;
+    color: ${colorNeutralForegroundHint};
+  }
+
+  .article-byline p {
+    margin: 0;
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
   }
 `;

@@ -300,15 +300,27 @@ export const template = html` <div id="content">
     </div>
     <div class="section-content" id="trending">
       <div class="article">
-        <img src="img/edge/newtab2/trending1.jpg" alt="Trending news 1" />
-        <div class="trending-info">
+        <img src="img/edge/newtab2/feed1.png" alt="Trending news 1" />
+        <div class="article-info">
           <div class="article-byline">
-            <img src="img/edge/newtab2/author.jpg" alt="Author" />
+            <img src="img/edge/newtab2/yahoo.svg" alt="Yahoo" />
             <p>Yahoo</p>
-            *
+            ·
             <p>5h</p>
           </div>
           <h4>Why Harris and Trump don’t want a Japanese company to buy US Steel</h4>
+        </div>
+      </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed2.png" alt="Trending news 2" />
+        <div class="article-info">
+          <div class="article-byline">
+            <img src="img/edge/newtab2/times.svg" alt="Times" />
+            <p>Times</p>
+            ·
+            <p>4d</p>
+          </div>
+          <h4>Social Security COLA 2025 Predictions Ahead of Decision</h4>
         </div>
       </div>
     </div>
