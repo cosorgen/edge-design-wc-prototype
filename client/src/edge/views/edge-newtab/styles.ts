@@ -19,6 +19,7 @@ import {
   colorStrokeFocus1,
   colorStrokeFocus2,
   strokeWidthThick,
+  borderRadiusMedium,
 } from '@mai-ui/kumo-theme';
 
 const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
@@ -32,6 +33,7 @@ const smtcTextControlButtonLineHeight = `var(--smtc-text-control-button-line-hei
 const smtcTextControlButtonColor = `var(--smtc-text-control-button-color, ${colorNeutralForeground2})`;
 const smtcBackgroundCardOnImageHover = `var(--smtc-background-card-on-image-hover, ${colorNeutralCardBackgroundHover})`;
 const smtcCornerCardRest = `var(--smtc-corner-card-rest, ${borderRadiusLarge})`;
+const smtcCornerImageInCardRest = `var(--smtc-corner-image-in-card-rest, ${borderRadiusMedium})`;
 
 export const styles = css`
   :host {
@@ -458,10 +460,116 @@ export const styles = css`
   }
 
   .card#sports {
-    background: green;
+    background: linear-gradient(0deg, #2f554ce5 0%, #2f554ce5 100%),
+      url('img/edge/newtab2/sports.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: ${colorNeutralForegroundStaticInverted};
+  }
+
+  #sports-header {
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+  }
+
+  #sports-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    height: 100%;
+  }
+
+  .sports-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+    font-size: ${typographyStyles.body2.fontSize};
+    font-weight: ${typographyStyles.body2.fontWeight};
+    line-height: ${typographyStyles.body2.lineHeight};
+  }
+
+  .sports-team img {
+    width: 40px;
+    height: 40px;
+  }
+
+  #sports-score {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+
+  #sports-score h1 {
+    margin: 0;
+    font-size: ${typographyStyles.largeTitle.fontSize};
+    font-weight: ${typographyStyles.largeTitle.fontWeight};
+    line-height: ${typographyStyles.largeTitle.lineHeight};
+  }
+
+  #sports-time {
+    background: #c50f1f;
+    padding: 12px;
+    padding-block: 4px 6px;
+    border-radius: ${borderRadiusCircular};
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
   }
 
   .card#election {
-    background: white;
+    background: ${colorNeutralCardBackground};
+    border: ${strokeWidthThin} solid ${colorNeutralStroke2};
+  }
+
+  #election-header {
+    margin-bottom: 12px;
+  }
+
+  #election-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #election-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #election-info h4 {
+    margin: 0;
+    font-size: ${typographyStyles.subtitle2.fontSize};
+    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    line-height: ${typographyStyles.subtitle2.lineHeight};
+  }
+
+  #election-info p {
+    margin: 0;
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
+  }
+
+  #election-content img {
+    width: 33%;
+    aspect-ratio: 1 / 1;
+    border-radius: ${smtcCornerImageInCardRest};
+  }
+
+  .section-header h3 {
+    margin: 0;
+    margin-top: 4px;
+    font-size: ${typographyStyles.body1.fontSize};
+    font-weight: ${typographyStyles.body1.fontWeight};
+    line-height: ${typographyStyles.body1.lineHeight};
   }
 `;

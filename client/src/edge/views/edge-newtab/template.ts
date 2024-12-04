@@ -260,8 +260,57 @@ export const template = html` <div id="content">
           </div>
         </div>
       </div>
-      <div class="card" id="sports"></div>
-      <div class="card" id="election"></div>
+      <div class="card" id="sports">
+        <div id="sports-header">
+          Premier league
+        </div>
+        <div id="sports-content">
+          <div class="sports-team">
+            <img src="img/edge/newtab2/liverpool.png" alt="Liverpool logo" />
+            Liverpool
+          </div>
+          <div id="sports-score">
+            <h1>1 - 0</h1>
+            <div id="sports-time">Live</div>
+          </div>
+          <div class="sports-team">
+            <img src="img/edge/newtab2/manutd.png" alt="Manchester United logo" />
+            Man Utd
+          </div>
+        </div>
+      </div>
+      <div class="card" id="election">
+        <div id="election-header">
+          2024 Election
+        </div>
+        <div id="election-content">
+          <div id="election-info">
+            <h4>Election day is tomorrow</h4>
+            <p>Explore your ballot & find your nearest dropbox</p>
+          </div>
+          <img src="img/edge/newtab2/election.jpg" alt="Election" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2>Trending news on MSN</h2>
+      <h3>Most read news across MSN</h3>
+    </div>
+    <div class="section-content" id="trending">
+      <div class="article">
+        <img src="img/edge/newtab2/trending1.jpg" alt="Trending news 1" />
+        <div class="trending-info">
+          <div class="article-byline">
+            <img src="img/edge/newtab2/author.jpg" alt="Author" />
+            <p>Yahoo</p>
+            *
+            <p>5h</p>
+          </div>
+          <h4>Why Harris and Trump don’t want a Japanese company to buy US Steel</h4>
+        </div>
+      </div>
     </div>
   </div>
 </div>`;
