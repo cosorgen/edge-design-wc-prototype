@@ -323,6 +323,76 @@ export const template = html` <div id="content">
           <h4>Social Security COLA 2025 Predictions Ahead of Decision</h4>
         </div>
       </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed3.png" alt="Trending news 3" />
+        <div class="article-info">
+          <div class="article-byline">
+            <img src="img/edge/newtab2/medium.svg" alt="Medium" />
+            <p>Medium</p>
+            ·
+            <p>4d</p>
+          </div>
+          <h4>Tua, Trevor Lawrence and the biggest contracts ever for Tier 3 QBs</h4>
+        </div>
+      </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed4.png" alt="Trending news 4" />
+        <div class="article-info">
+          <div class="article-byline">
+            <p>Amazon</p>
+            ·
+            <p>Ad</p>
+          </div>
+          <h4>Yinka Ilori unveils colourful North Face jackets "to smile in the face of a storm"</h4>
+        </div>
+      </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed5.png" alt="Trending news 5" />
+        <div class="article-info">
+          <div class="article-byline">
+            <img src="img/edge/newtab2/vox.svg" alt="Vox" />
+            <p>Vox</p>
+            ·
+            <p>2d</p>
+          </div>
+          <h4>OpenAI Unveils New ChatGPT That Can Reason Through Math and Science</h4>
+        </div>
+      </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed6.png" alt="Trending news 6" />
+        <div class="article-info">
+          <div class="article-byline">
+            <img src="img/edge/newtab2/hb.svg" alt="Hypebeast" />
+            <p>Hypebeast</p>
+            ·
+            <p>4d</p>
+          </div>
+          <h4>It’s time to break up with fast fashion</h4>
+        </div>
+      </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed7.png" alt="Trending news 7" />
+        <div class="article-info">
+          <div class="article-byline">
+            <p>Apple</p>
+            ·
+            <p>Ad</p>
+          </div>
+          <h4>New Apple devices at great price available now</h4>
+        </div>
+      </div>
+      <div class="article">
+        <img src="img/edge/newtab2/feed8.png" alt="Trending news 8" />
+        <div class="article-info">
+          <div class="article-byline">
+            <img src="img/edge/newtab2/cnn.svg" alt="CNN" />
+            <p>CNN</p>
+            ·
+            <p>1h</p>
+          </div>
+          <h4>BMW Unveils M Performance Parts for the New M5 Touring</h4>
+        </div>
+      </div>
     </div>
   </div>
 </div>`;

@@ -588,7 +588,7 @@ export const styles = css`
   .article {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     border-radius: ${smtcCornerCardRest};
     cursor: pointer;
     transition: transform ${durationFast} ${curveDecelerateMax};
