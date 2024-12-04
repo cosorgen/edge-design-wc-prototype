@@ -130,12 +130,15 @@ export const darkThemeShadows: PhoenixShadowTokens = {
 
 export type KumoShadowTokens = {
   smtcShadowComposerRest: string;
+  smtcShadowComposerInputRest: string;
 };
 
 export const lightThemeKumoShadows: KumoShadowTokens = {
   smtcShadowComposerRest: '0px 8px 28px 0px rgba(0, 30, 68, 0.10)',
+  smtcShadowComposerInputRest: '0px 1px 2px 0px rgba(0, 30, 68, 0.10) inset',
 };
 
 export const darkThemeKumoShadows: KumoShadowTokens = {
   smtcShadowComposerRest: '0px 8px 28px 0px rgba(0, 30, 68, 0.10)',
+  smtcShadowComposerInputRest: '0px 1px 2px 0px rgba(0, 30, 68, 0.10) inset',
 };

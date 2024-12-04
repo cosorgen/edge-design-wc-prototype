@@ -305,6 +305,7 @@ export declare interface KumoColorTokens {
   smtcBackgroundCardOnImageRest: string;
   smtcBackgroundCardOnImageHover: string;
   smtcStrokeComposerRest: string;
+  smtcBackgroundComposerInputRest: string;
 }
 
 export const kumoLightThemeColors: KumoColorTokens = {
@@ -363,6 +364,7 @@ export const kumoLightThemeColors: KumoColorTokens = {
   smtcBackgroundCardOnImageRest: '#FFFFFFCC',
   smtcBackgroundCardOnImageHover: '#FFFFFF',
   smtcStrokeComposerRest: '#ECF6FFCC',
+  smtcBackgroundComposerInputRest: '#F6F9FC',
 };
 
 export const kumoDarkThemeColors: KumoColorTokens = {
@@ -421,4 +423,5 @@ export const kumoDarkThemeColors: KumoColorTokens = {
   smtcBackgroundCardOnImageRest: '#000000CC',
   smtcBackgroundCardOnImageHover: '#000000',
   smtcStrokeComposerRest: '#ECF6FFCC',
+  smtcBackgroundComposerInputRest: '#000000',
 };

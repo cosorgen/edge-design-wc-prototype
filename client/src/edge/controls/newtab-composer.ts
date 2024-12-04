@@ -11,29 +11,26 @@ import {
   shadow16,
   strokeWidthThin,
   typographyStyles,
+  colorNeutralBackground1,
+  shadow2,
+  spacingVerticalMNudge,
+  spacingHorizontalXXL,
 } from '@mai-ui/kumo-theme';
 
 const template = html`
-  <div id="start">
-    <img src="img/edge/newtab2/search.svg" />
-  </div>
   <input
     type="text"
-    placeholder="Search and explore"
+    placeholder="Search Microsoft and the web"
     @keydown="${(x, c) => x.handleKeydown(c.event)}"
   />
   <div id="end">
     <slot name="end">
-      <mai-button appearance="subtle" size="small" icon-only>
+      <mai-button appearance="subtle" size="large" icon-only>
         <svg>
-          <use href="img/edge/icons.svg#mic-ntp-20-regular" />
+          <use x="2" y="2" href="img/edge/icons.svg#search-20-regular" />
         </svg>
       </mai-button>
-      <mai-button appearance="subtle" size="small" icon-only>
-        <svg>
-          <use href="img/edge/icons.svg#camera-ntp-20-regular" />
-        </svg> </mai-button
-    ></slot>
+    </slot>
   </div>
 `;
 
@@ -46,6 +43,8 @@ const smtcTextComposerFontSize = `var(--smtc-text-composer-font-size, ${typograp
 const smtcTextComposerWeight = `var(--smtc-text-composer-weight, ${typographyStyles.body2.fontWeight})`;
 const smtcTextComposerLineHeight = `var(--smtc-text-composer-line-height, ${typographyStyles.body2.lineHeight})`;
 const smtcTextComposerColor = `var(--smtc-text-composer-color, ${colorNeutralForeground2})`;
+const smtcBackgroundComposerInputRest = `var(--smtc-background-composer-input-rest, ${colorNeutralBackground1})`;
+const smtcShadowComposerInputRest = `var(--smtc-shadow-composer-input-rest, ${shadow2})`;
 
 const styles = css`
   :host {
@@ -54,7 +53,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${spacingHorizontalS};
-    padding: 16px 24px;
+    padding: ${spacingHorizontalS};
     background: ${smtcBackgroundCardOnImageRest};
     border: ${strokeWidthThin} solid ${smtcStrokeComposerRest};
     border-radius: ${smtcCornerComposerRest};
@@ -64,10 +63,13 @@ const styles = css`
   input {
     flex: 1;
     box-sizing: border-box;
-    height: 24px;
-    min-width: 156px;
+    height: 48px;
+    min-width: 582px;
     border: none;
-    background: none;
+    background: ${smtcBackgroundComposerInputRest};
+    border-radius: ${borderRadiusCircular};
+    box-shadow: ${smtcShadowComposerInputRest};
+    padding: ${spacingVerticalMNudge} ${spacingHorizontalXXL};
 
     font-family: ${smtcTextComposerFontFamily};
     font-size: ${smtcTextComposerFontSize};
@@ -82,14 +84,6 @@ const styles = css`
 
   input:empty::placeholder {
     color: ${colorNeutralForegroundHint};
-  }
-
-  #start {
-    line-height: 0px;
-  }
-
-  #end {
-    --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
   }
 `;
 

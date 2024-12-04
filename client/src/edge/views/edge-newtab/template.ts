@@ -32,7 +32,11 @@ const topSites = [
 
 export const template = html` <div id="content">
   <div id="background"></div>
-  <div id="scrollbar"><div></div></div>
+  <mai-button id="settings" size="large" appearance="subtle" icon-only>
+    <svg>
+      <use href="img/edge/icons.svg#settings-24-regular"></use>
+    </svg>
+  </mai-button>
   <div id="content-header">
     <newtab-composer
       @submit="${(x, c) => x.handleComposerSubmit(c.event)}"
@@ -53,33 +57,57 @@ export const template = html` <div id="content">
           <use x="2" y="2" href="img/edge/icons.svg#add-24-regular"></use>
         </svg>
       </newtab-top-site>
-      <button id="lets-talk">
-        <img src="img/edge/copilot-icon.svg" alt="Copilot icon" />
-        Let's talk
-      </button>
     </div>
   </div>
-  <div class="section">
-    <div class="section-header">
+  <div id="widgets">
+    <div id="widgets-header">
       <h2>Let’s prepare for your day, Elena</h2>
     </div>
-    <div class="section-content" id="today">
+    <div id="widgets-content">
       <div class="card" id="msn">
         <h3>MSN Daily</h3>
-        <p>
-          Candidates focus on swing states, IRS introduces new 401(k) limits,
-          and more
-        </p>
-        <mai-button>
-          <svg width="20px" height="20px" slot="start">
-            <use
-              x="2px"
-              y="2px"
-              href="img/edge/icons.svg#headphones-20-regular"
-            />
+        <div id="msn-content">
+          <svg>
+            <use href="img/edge/icons.svg#play-circle-24-filled"></use>
           </svg>
-          Listen
-        </mai-button>
+          <p>Thursday, Decemeber 5</p>
+        </div>
+      </div>
+      <div class="card" id="weather">
+        <div id="weather-header">
+          <svg width="10px" height="10px">
+            <use href="img/edge/icons.svg#pin-10-regular" />
+          </svg>
+          <h4>Seattle, WA</h4>
+        </div>
+        <div id="weather-content">
+          <div id="weather-today">
+            <div id="weather-icon">
+              <img
+                src="img/edge/newtab2/partlySunny.svg"
+                alt="Sun with clouds"
+              />
+            </div>
+            <div id="weather-temperature">
+              <h1>75°</h1>
+              <p>Partly sunny</p>
+            </div>
+            <div id="weather-details">
+              <p>H 81°</p>
+              <p>L 66°</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card" id="election">
+        <div id="election-header">2024 Election</div>
+        <div id="election-content">
+          <div id="election-info">
+            <h4>Election day is tomorrow</h4>
+            <p>Explore your ballot & find your nearest dropbox</p>
+          </div>
+          <img src="img/edge/newtab2/election.jpg" alt="Election" />
+        </div>
       </div>
       <div class="card" id="todo">
         <div id="todo-header">
@@ -177,220 +205,6 @@ export const template = html` <div id="content">
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="card" id="weather">
-        <div id="weather-header">
-          <svg width="10px" height="10px">
-            <use href="img/edge/icons.svg#pin-10-regular" />
-          </svg>
-          <h4>Seattle, WA</h4>
-        </div>
-        <div id="weather-today">
-          <div id="weather-icon">
-            <img src="img/edge/newtab2/partlySunny.svg" alt="Sun with clouds" />
-          </div>
-          <div id="weather-temperature">
-            <h1>75°</h1>
-            <p>Partly sunny</p>
-          </div>
-          <div id="weather-details">
-            <p>H 81°</p>
-            <p>L 66°</p>
-          </div>
-        </div>
-        <h4 id="weather-hourly-title">
-          Hourly forecast
-        </h4>
-        <div id="weather-hourly">
-          <div class="weather-hour">
-            <p>Now</p>
-            <img src="img/edge/newtab2/partlySunny.svg" alt="Sun" />
-            <h5>75°</h5>
-            <div class="humidity">
-              <svg width="10px" height="10px">
-                <use href="img/edge/icons.svg#raindrop-10-filled" />
-              </svg>
-              <p>0%</p>
-            </div>
-          </div>
-          <div class="weather-hour">
-            <p>10am</p>
-            <img src="img/edge/newtab2/partlySunny.svg" alt="Cloud" />
-            <h5>72°</h5>
-            <div class="humidity">
-              <svg width="10px" height="10px">
-                <use href="img/edge/icons.svg#raindrop-10-filled" />
-                svg>
-              <p>0%</p>
-            </div>
-          </div>
-          <div class="weather-hour">
-            <p>11am</p>
-            <img src="img/edge/newtab2/sunny.svg" alt="Rain" />
-            <h5>68°</h5>
-            <div class="humidity">
-              <svg width="10px" height="10px">
-                <use href="img/edge/icons.svg#raindrop-10-filled" />
-                svg>
-              <p>0%</p>
-            </div>
-          </div>
-          <div class="weather-hour">
-            <p>12pm</p>
-            <img src="img/edge/newtab2/sunny.svg" alt="Sun" />
-            <h5>75°</h5>
-            <div class="humidity">
-              <svg width="10px" height="10px">
-                <use href="img/edge/icons.svg#raindrop-10-filled" />
-                svg>
-              <p>0%</p>
-            </div>
-          </div>
-          <div class="weather-hour">
-            <p>1pm</p>
-            <img src="img/edge/newtab2/partlySunny.svg" alt="Cloud" />
-            <h5>72°</h5>
-            <div class="humidity">
-              <svg width="10px" height="10px">
-                <use href="img/edge/icons.svg#raindrop-10-filled" />
-                svg>
-              <p>0%</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card" id="sports">
-        <div id="sports-header">
-          Premier league
-        </div>
-        <div id="sports-content">
-          <div class="sports-team">
-            <img src="img/edge/newtab2/liverpool.png" alt="Liverpool logo" />
-            Liverpool
-          </div>
-          <div id="sports-score">
-            <h1>1 - 0</h1>
-            <div id="sports-time">Live</div>
-          </div>
-          <div class="sports-team">
-            <img src="img/edge/newtab2/manutd.png" alt="Manchester United logo" />
-            Man Utd
-          </div>
-        </div>
-      </div>
-      <div class="card" id="election">
-        <div id="election-header">
-          2024 Election
-        </div>
-        <div id="election-content">
-          <div id="election-info">
-            <h4>Election day is tomorrow</h4>
-            <p>Explore your ballot & find your nearest dropbox</p>
-          </div>
-          <img src="img/edge/newtab2/election.jpg" alt="Election" />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="section">
-    <div class="section-header">
-      <h2>Trending news on MSN</h2>
-      <h3>Most read news across MSN</h3>
-    </div>
-    <div class="section-content" id="trending">
-      <div class="article">
-        <img src="img/edge/newtab2/feed1.png" alt="Trending news 1" />
-        <div class="article-info">
-          <div class="article-byline">
-            <img src="img/edge/newtab2/yahoo.svg" alt="Yahoo" />
-            <p>Yahoo</p>
-            ·
-            <p>5h</p>
-          </div>
-          <h4>Why Harris and Trump don’t want a Japanese company to buy US Steel</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed2.png" alt="Trending news 2" />
-        <div class="article-info">
-          <div class="article-byline">
-            <img src="img/edge/newtab2/times.svg" alt="Times" />
-            <p>Times</p>
-            ·
-            <p>4d</p>
-          </div>
-          <h4>Social Security COLA 2025 Predictions Ahead of Decision</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed3.png" alt="Trending news 3" />
-        <div class="article-info">
-          <div class="article-byline">
-            <img src="img/edge/newtab2/medium.svg" alt="Medium" />
-            <p>Medium</p>
-            ·
-            <p>4d</p>
-          </div>
-          <h4>Tua, Trevor Lawrence and the biggest contracts ever for Tier 3 QBs</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed4.png" alt="Trending news 4" />
-        <div class="article-info">
-          <div class="article-byline">
-            <p>Amazon</p>
-            ·
-            <p>Ad</p>
-          </div>
-          <h4>Yinka Ilori unveils colourful North Face jackets "to smile in the face of a storm"</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed5.png" alt="Trending news 5" />
-        <div class="article-info">
-          <div class="article-byline">
-            <img src="img/edge/newtab2/vox.svg" alt="Vox" />
-            <p>Vox</p>
-            ·
-            <p>2d</p>
-          </div>
-          <h4>OpenAI Unveils New ChatGPT That Can Reason Through Math and Science</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed6.png" alt="Trending news 6" />
-        <div class="article-info">
-          <div class="article-byline">
-            <img src="img/edge/newtab2/hb.svg" alt="Hypebeast" />
-            <p>Hypebeast</p>
-            ·
-            <p>4d</p>
-          </div>
-          <h4>It’s time to break up with fast fashion</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed7.png" alt="Trending news 7" />
-        <div class="article-info">
-          <div class="article-byline">
-            <p>Apple</p>
-            ·
-            <p>Ad</p>
-          </div>
-          <h4>New Apple devices at great price available now</h4>
-        </div>
-      </div>
-      <div class="article">
-        <img src="img/edge/newtab2/feed8.png" alt="Trending news 8" />
-        <div class="article-info">
-          <div class="article-byline">
-            <img src="img/edge/newtab2/cnn.svg" alt="CNN" />
-            <p>CNN</p>
-            ·
-            <p>1h</p>
-          </div>
-          <h4>BMW Unveils M Performance Parts for the New M5 Touring</h4>
         </div>
       </div>
     </div>

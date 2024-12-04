@@ -4,8 +4,10 @@ import {
   colorNeutralCardBackground,
   colorNeutralCardBackgroundHover,
   colorNeutralForeground1,
+  colorNeutralStroke3,
   spacingHorizontalXS,
   spacingVerticalS,
+  strokeWidthThin,
 } from '@mai-ui/kumo-theme';
 
 const template = html`
@@ -16,14 +18,15 @@ const template = html`
 
 const smtcBackgroundCardOnImageRest = `var(--smtc-background-card-on-image-rest, ${colorNeutralCardBackground})`;
 const smtcBackgroundCardOnImageHover = `var(--smtc-background-card-on-image-hover, ${colorNeutralCardBackgroundHover})`;
-const smtcCornerControlRest = `var(--smtc-corner-control-rest, ${borderRadiusLarge})`;
+const smtcCornerTopSiteRest = `var(--smtc-corner-top-site-rest, ${borderRadiusLarge})`;
 const smtcForegroundCardOnImageRest = `var(--smtc-foreground-card-on-image-rest, ${colorNeutralForeground1})`;
+const smtcStrokeTopSiteRest = `var(--smtc-stroke-top-site-rest, ${colorNeutralStroke3})`;
 
 const styles = css`
   :host {
     display: block;
-    width: 56px;
-    height: 56px;
+    width: 64px;
+    height: 64px;
   }
 
   button {
@@ -36,8 +39,8 @@ const styles = css`
     gap: ${spacingVerticalS};
     padding: ${spacingVerticalS} ${spacingHorizontalXS};
     background-color: ${smtcBackgroundCardOnImageRest};
-    border-radius: ${smtcCornerControlRest};
-    border: none;
+    border-radius: ${smtcCornerTopSiteRest};
+    border: ${strokeWidthThin} solid ${smtcStrokeTopSiteRest};
     cursor: pointer;
   }
 

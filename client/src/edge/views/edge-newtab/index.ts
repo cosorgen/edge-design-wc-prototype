@@ -13,7 +13,6 @@ import { styles } from './styles.js';
 export class EdgeNewTab extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
-  _scrollerElement?: HTMLDivElement;
   _resizeObserver?: ResizeObserver;
   _animationSheet?: CSSStyleSheet;
 
@@ -31,14 +30,10 @@ export class EdgeNewTab extends FASTElement {
   }
 
   setElements(): void {
-    this._scrollerElement = this.shadowRoot?.querySelector(
-      '#scrollbar > div',
-    ) as HTMLDivElement;
     this._resizeObserver = new ResizeObserver(this.setCSSVariables);
   }
 
   unsetElements(): void {
-    this._scrollerElement = undefined;
     this._resizeObserver = undefined;
   }
 
@@ -52,43 +47,24 @@ export class EdgeNewTab extends FASTElement {
 
   setCSSVariables = () => {
     Updates.enqueue(() => {
-      if (this._scrollerElement) {
-        const scrollbarHeight =
-          (1 / (this.scrollHeight / this.clientHeight)) * 100;
-
-        const data = `:host {
-          --scrollbar-height: ${scrollbarHeight}%;
+      const data = `:host {
           --viewport-height: ${this.clientHeight}px;
           --viewport-width: ${this.clientWidth}px;
-        }
-
-        @keyframes scroller { 
-          from { top: 0%; } 
-          to { top: calc(100% - ${scrollbarHeight}%); }
-        }
-        
-        @keyframes scrollbar {
-          from { top: 2px; } 
-          to { top: calc(100% - ${this.clientHeight}px + 2px); } 
-        }
-          
-        #scrollbar {
-          display: ${scrollbarHeight < 100 ? 'block' : 'none'};
+          --spacing-ntp-feed-peek: 160px;
         }`;
 
-        const sheet = new CSSStyleSheet();
-        sheet.replaceSync(data);
+      const sheet = new CSSStyleSheet();
+      sheet.replaceSync(data);
 
-        if (!this._animationSheet) {
-          this.shadowRoot?.adoptedStyleSheets.push(sheet);
-        } else {
-          this.shadowRoot?.adoptedStyleSheets.pop();
-          this.shadowRoot?.adoptedStyleSheets.push(sheet);
-        }
-
-        // Save sheet for later removal
-        this._animationSheet = sheet;
+      if (!this._animationSheet) {
+        this.shadowRoot?.adoptedStyleSheets.push(sheet);
+      } else {
+        this.shadowRoot?.adoptedStyleSheets.pop();
+        this.shadowRoot?.adoptedStyleSheets.push(sheet);
       }
+
+      // Save sheet for later removal
+      this._animationSheet = sheet;
     });
   };
 
