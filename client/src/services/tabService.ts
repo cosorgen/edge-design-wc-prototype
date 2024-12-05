@@ -93,7 +93,7 @@ export class TabService {
       .then((res) => {
         const tab = this.tabsById[id];
         tab.title = res.title;
-        tab.favicon = res.favicon;
+        tab.favicon = res.favicon || 'img/edge/icons.svg#document-16-regular';
         this.tabsById = {
           ...this.tabsById,
           [tab.id]: tab,
