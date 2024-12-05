@@ -38,8 +38,11 @@ export default async (req: Request, res: Response) => {
     } else {
       // Call proxy API to get the page, this takes some time.
       // We'll also cache the response for next time.
+      if (!process.env.PROXY_API_ENDPOINT || !process.env.PROXY_API_KEY)
+        throwServerError('Proxy API not configured', 500);
+
       fetch(
-        `https://puppeteer-proxy.yellowwater-aef54d0d.westus2.azurecontainerapps.io/?url=${encodeURIComponent(
+        `${process.env.PROXY_API_ENDPOINT}/?url=${encodeURIComponent(
           url,
         )}&key=${process.env.PROXY_API_KEY}`,
         { signal: AbortSignal.timeout(60000) }, // 60 second timeout
