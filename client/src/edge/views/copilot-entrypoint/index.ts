@@ -65,6 +65,7 @@ const template = html<CopilotEntrypoint>` ${when(
       @close="${(x) => x.toggleActive()}"
       @focus="${(x) => x.handleComposerFocus()}"
       @blur="${(x) => x.handleComposerBlur()}"
+      @sizechanged="${(x, c) => x.handleComposerSizeChange(c.event)}"
     ></copilot-composer>
     <div
       class="resize"
@@ -406,7 +407,6 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       this.handleComposerWidthTransitionEnd,
     );
-    this.addEventListener('contentchanged', this.handleComposerContentChange);
     Observable.getNotifier(this.ews).subscribe(this, 'viewportSize');
   }
 
@@ -650,14 +650,18 @@ export class CopilotEntrypoint extends FASTElement {
     }
   }
 
-  handleComposerContentChange = (e: Event) => {
+  handleComposerSizeChange = (e: Event) => {
     if (!(e instanceof CustomEvent)) return;
 
-    const newSize = e.detail;
-    console.log('content changed', newSize);
-    this.style.setProperty(
-      '--composer-expanded-height',
-      `${parseInt(DEFAULT_COMPOSER_HEIGHT) + newSize}px`,
+    const { height } = e.detail;
+    console.log('Composer size changed', height);
+
+    let newHeight = height;
+    newHeight = Math.min(
+      newHeight,
+      this.ews.viewportSize?.height || window.innerHeight,
     );
+    newHeight = Math.max(newHeight, parseInt(DEFAULT_COMPOSER_HEIGHT));
+    this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
   };
 }

@@ -10,7 +10,6 @@ import {
 import {
   colorScrollbarForeground,
   spacingVerticalXL,
-  spacingVerticalXXL,
   spacingFrame,
   spacingVerticalM,
 } from '@mai-ui/copilot-theme';
@@ -19,7 +18,7 @@ import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import { CopilotService } from '#servicescopilotService.js';
 
-const template = html<CopilotChat>`<div id="chat"></div>`;
+const template = html<CopilotChat>``;
 
 const styles = css`
   :host {
@@ -28,12 +27,7 @@ const styles = css`
     overflow: hidden;
   }
 
-  :host([inline]) {
-    height: fit-content;
-    max-height: 100%;
-  }
-
-  #chat:not(:empty) {
+  :host(:not(:empty)) {
     padding: ${spacingVerticalXL};
     padding-block-end: calc(68px + ${spacingFrame});
     height: calc(
@@ -47,10 +41,7 @@ const styles = css`
     scrollbar-width: thin;
   }
 
-  :host([inline]) #chat:not(:empty) {
-    padding: ${spacingVerticalXXL};
-    padding-block-end: 0;
-    max-height: calc(100% - ${spacingVerticalXXL});
+  :host([inline]) {
     height: fit-content;
   }
 `;
@@ -64,12 +55,9 @@ export class CopilotChat extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @attr({ mode: 'boolean' }) inline = false;
   _updateInterval?: NodeJS.Timeout;
-  _chatElement?: HTMLElement;
-  _lockChatScroll = true;
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.setElements();
     this.addEventListeners();
     this.updateChat(); // Initial chat update
   }
@@ -77,29 +65,16 @@ export class CopilotChat extends FASTElement {
   disconnectedCallback(): void {
     super.disconnectedCallback();
     this.removeEventListeners();
-    this.unsetElements();
-  }
-
-  setElements() {
-    this._chatElement = this.shadowRoot?.querySelector(
-      '#chat',
-    ) as HTMLDivElement;
-  }
-
-  unsetElements() {
-    this._chatElement = undefined;
   }
 
   addEventListeners() {
     Observable.getNotifier(this.cs).subscribe(this);
     this._updateInterval = setInterval(() => this.updateChat(), 60000); // update chat every minute for time updates
-    this._chatElement?.addEventListener('scroll', this.toggleChatScrollLock);
   }
 
   removeEventListeners() {
     Observable.getNotifier(this.cs).unsubscribe(this);
     clearInterval(this._updateInterval);
-    this._chatElement?.removeEventListener('scroll', this.toggleChatScrollLock);
   }
 
   handleChange(subject: unknown, key: string) {
@@ -109,7 +84,7 @@ export class CopilotChat extends FASTElement {
   }
 
   updateChat() {
-    if (this._chatElement) {
+    if (this.shadowRoot) {
       if (
         this.cs.activeThreadId &&
         this.cs.threadsById[this.cs.activeThreadId]
@@ -132,7 +107,7 @@ export class CopilotChat extends FASTElement {
             continue;
           }
 
-          let entry = this._chatElement.querySelector(
+          let entry = this.shadowRoot.querySelector(
             `#${message.id}`,
           ) as CopilotChatEntry;
           if (!entry) {
@@ -142,7 +117,7 @@ export class CopilotChat extends FASTElement {
             entry.setAttribute('id', message.id);
             entry.setAttribute('inline', '');
             if (message.role === 'system') entry.setAttribute('system', '');
-            this._chatElement.appendChild(entry);
+            this.shadowRoot.appendChild(entry);
 
             // Scroll message into view if it's the last message
             if (x === messageIds.length - 1) {
@@ -174,19 +149,13 @@ export class CopilotChat extends FASTElement {
       }
 
       Updates.enqueue(() => {
-        this.$emit('contentchanged', this._chatElement?.clientHeight);
+        this.$emit('sizechanged', this.getBoundingClientRect());
       });
     }
   }
 
   clearChat() {
-    if (!this._chatElement) return;
-    this._chatElement.innerHTML = '';
+    if (!this.shadowRoot) return;
+    this.shadowRoot.innerHTML = '';
   }
-
-  toggleChatScrollLock = () => {
-    if (!this._chatElement) return;
-    const { scrollTop, scrollHeight, clientHeight } = this._chatElement;
-    this._lockChatScroll = scrollTop + clientHeight >= scrollHeight;
-  };
 }

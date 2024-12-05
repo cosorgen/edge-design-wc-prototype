@@ -19,6 +19,7 @@ import {
   smtcShadowLarge,
   durationNormal,
   curveEasyEase,
+  spacingVerticalXXL,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
@@ -36,10 +37,15 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 const template = html<CopilotComposer>`
   <copilot-design-provider>
     <acrylic-material></acrylic-material>
-    <copilot-chat
-      inline
+    <div
+      id="content-row"
       ?hidden="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
-    ></copilot-chat>
+    >
+      <copilot-chat
+        inline
+        @sizechanged="${(x, c) => x.handleChatSizeChange(c.event)}"
+      ></copilot-chat>
+    </div>
     <div id="input-row">
       <div id="start">
         <mai-button appearance="subtle" size="large" id="home" icon-only>
@@ -112,7 +118,15 @@ const styles = css`
     overflow: hidden;
   }
 
-  copilot-chat[hidden] {
+  #content-row {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: ${spacingVerticalXXL};
+    padding-block-end: 0;
+  }
+
+  #content-row[hidden] {
     display: none;
   }
 
@@ -163,6 +177,7 @@ export class CopilotComposer extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   _inputElement?: CopilotInput;
+  _inputRowElement?: HTMLDivElement;
   _chatElement?: CopilotChat;
 
   connectedCallback(): void {
@@ -185,11 +200,15 @@ export class CopilotComposer extends FASTElement {
     this._chatElement = this.shadowRoot?.querySelector(
       'copilot-chat',
     ) as CopilotChat;
+    this._inputRowElement = this.shadowRoot?.querySelector(
+      '#input-row',
+    ) as HTMLDivElement;
   }
 
   unsestElements() {
     this._inputElement = undefined;
     this._chatElement = undefined;
+    this._inputRowElement = undefined;
   }
 
   addEventListeners() {
@@ -260,5 +279,16 @@ export class CopilotComposer extends FASTElement {
         this.style.setProperty('--end-actions-width', `-${width}px`);
       });
     });
+  }
+
+  handleChatSizeChange(e: Event) {
+    if (!(e instanceof CustomEvent) || !this._inputRowElement) return;
+    e.stopPropagation();
+    const { height: chatHeight } = e.detail;
+    const height =
+      this._inputRowElement.clientHeight +
+      chatHeight +
+      (chatHeight > 0 ? 24 : 0); // 24px padding top
+    this.$emit('sizechanged', { height });
   }
 }
