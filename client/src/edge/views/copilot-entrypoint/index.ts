@@ -406,8 +406,8 @@ export class CopilotEntrypoint extends FASTElement {
       'transitionend',
       this.handleComposerWidthTransitionEnd,
     );
+    this.addEventListener('contentchanged', this.handleComposerContentChange);
     Observable.getNotifier(this.ews).subscribe(this, 'viewportSize');
-    Observable.getNotifier(this.cs).subscribe(this, 'activeThreadId');
   }
 
   removeEventListeners(): void {
@@ -420,15 +420,11 @@ export class CopilotEntrypoint extends FASTElement {
       this.handleComposerWidthTransitionEnd,
     );
     Observable.getNotifier(this.ews).unsubscribe(this);
-    Observable.getNotifier(this.cs).unsubscribe(this);
   }
 
   handleChange(subject: unknown, key: string): void {
     if (key === 'viewportSize') {
       this.setCSSVariables();
-    }
-    if (key === 'activeThreadId') {
-      this.resizeComposerForChat();
     }
   }
 
@@ -636,17 +632,6 @@ export class CopilotEntrypoint extends FASTElement {
     }
   }
 
-  resizeComposerForChat() {
-    if (this.cs.activeThreadId) {
-      this.style.setProperty('--composer-expanded-height', '256px');
-    } else {
-      this.style.setProperty(
-        '--composer-expanded-height',
-        DEFAULT_COMPOSER_HEIGHT,
-      );
-    }
-  }
-
   handleComposerFocus() {
     if (!this._hasResized) {
       this.style.setProperty(
@@ -664,4 +649,15 @@ export class CopilotEntrypoint extends FASTElement {
       );
     }
   }
+
+  handleComposerContentChange = (e: Event) => {
+    if (!(e instanceof CustomEvent)) return;
+
+    const newSize = e.detail;
+    console.log('content changed', newSize);
+    this.style.setProperty(
+      '--composer-expanded-height',
+      `${parseInt(DEFAULT_COMPOSER_HEIGHT) + newSize}px`,
+    );
+  };
 }

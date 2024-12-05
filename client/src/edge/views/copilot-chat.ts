@@ -50,7 +50,8 @@ const styles = css`
   :host([inline]) #chat:not(:empty) {
     padding: ${spacingVerticalXXL};
     padding-block-end: 0;
-    height: calc(100% - ${spacingVerticalXXL});
+    max-height: calc(100% - ${spacingVerticalXXL});
+    height: fit-content;
   }
 `;
 
@@ -146,7 +147,6 @@ export class CopilotChat extends FASTElement {
             // Scroll message into view if it's the last message
             if (x === messageIds.length - 1) {
               Updates.enqueue(() => {
-                console.log('scrolling into view', entry);
                 entry.scrollIntoView({
                   behavior: 'smooth',
                   block: 'nearest',
@@ -172,6 +172,10 @@ export class CopilotChat extends FASTElement {
       } else {
         this.clearChat();
       }
+
+      Updates.enqueue(() => {
+        this.$emit('contentchanged', this._chatElement?.clientHeight);
+      });
     }
   }
 
