@@ -365,6 +365,7 @@ export class CopilotEntrypoint extends FASTElement {
   _openTimeout?: NodeJS.Timeout;
   _dragStartGlobalX = 0;
   _dragStartGlobalY = 0;
+  _hasResized = false;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -471,6 +472,8 @@ export class CopilotEntrypoint extends FASTElement {
         '--composer-expanded-width',
         DEFAULT_COMPOSER_WIDTH,
       );
+
+      this._hasResized = false;
     }
   };
 
@@ -525,6 +528,7 @@ export class CopilotEntrypoint extends FASTElement {
 
     // Start the resize if it hasn't started yet
     if (!this.resizing) this.resizing = true;
+    this._hasResized = true;
 
     const deltaX = e.movementX * this._resizeX;
     const deltaY = e.movementY * this._resizeY;
@@ -644,13 +648,20 @@ export class CopilotEntrypoint extends FASTElement {
   }
 
   handleComposerFocus() {
-    this.style.setProperty(
-      '--composer-expanded-width',
-      DEFAULT_COMPOSER_EXPANDED_WIDTH,
-    );
+    if (!this._hasResized) {
+      this.style.setProperty(
+        '--composer-expanded-width',
+        DEFAULT_COMPOSER_EXPANDED_WIDTH,
+      );
+    }
   }
 
   handleComposerBlur() {
-    this.style.setProperty('--composer-expanded-width', DEFAULT_COMPOSER_WIDTH);
+    if (!this._hasResized) {
+      this.style.setProperty(
+        '--composer-expanded-width',
+        DEFAULT_COMPOSER_WIDTH,
+      );
+    }
   }
 }
