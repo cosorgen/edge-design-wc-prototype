@@ -41,6 +41,7 @@ import blockSidepaneStyles from './block-sidepane-styles.js';
 const DEFAULT_COMPOSER_WIDTH = '370px';
 const DEFAULT_COMPOSER_EXPANDED_WIDTH = '680px';
 const DEFAULT_COMPOSER_HEIGHT = '64px';
+const NTP_INSET = '24px';
 
 const template = html<CopilotEntrypoint>` ${when(
     (x) => x.cs.showHint,
@@ -103,7 +104,7 @@ const styles = css`
     --composer-min-width: ${DEFAULT_COMPOSER_WIDTH};
     --composer-expanded-height: ${DEFAULT_COMPOSER_HEIGHT};
     --composer-retracted-height: ${DEFAULT_COMPOSER_HEIGHT};
-    --ntp-inset: 24px;
+    --ntp-inset: ${NTP_INSET};
     --sidepane-width: 376px;
 
     position: absolute;
@@ -653,15 +654,15 @@ export class CopilotEntrypoint extends FASTElement {
   handleComposerSizeChange = (e: Event) => {
     if (!(e instanceof CustomEvent)) return;
 
-    const { height } = e.detail;
-    console.log('Composer size changed', height);
+    let maxHeight = this.ews.viewportSize?.height || window.innerHeight / 2;
+    maxHeight += parseInt(this.ess.frameSpacing);
+    maxHeight -= this.ntp ? 2 * parseInt(NTP_INSET) : 0;
 
+    const { height } = e.detail;
     let newHeight = height;
-    newHeight = Math.min(
-      newHeight,
-      this.ews.viewportSize?.height || window.innerHeight,
-    );
+    newHeight = Math.min(newHeight, maxHeight);
     newHeight = Math.max(newHeight, parseInt(DEFAULT_COMPOSER_HEIGHT));
+
     this.style.setProperty('--composer-expanded-height', `${newHeight}px`);
   };
 }

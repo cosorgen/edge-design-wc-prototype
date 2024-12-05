@@ -19,7 +19,6 @@ import {
   smtcShadowLarge,
   durationNormal,
   curveEasyEase,
-  spacingVerticalXXL,
 } from '@mai-ui/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
@@ -122,8 +121,8 @@ const styles = css`
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: ${spacingVerticalXXL};
-    padding-block-end: 0;
+    scrollbar-width: none;
+    border-radius: ${smtcCornerComposerRest} ${smtcCornerComposerRest} 0 0;
   }
 
   #content-row[hidden] {
@@ -285,10 +284,7 @@ export class CopilotComposer extends FASTElement {
     if (!(e instanceof CustomEvent) || !this._inputRowElement) return;
     e.stopPropagation();
     const { height: chatHeight } = e.detail;
-    const height =
-      this._inputRowElement.clientHeight +
-      chatHeight +
-      (chatHeight > 0 ? 24 : 0); // 24px padding top
+    const height = this._inputRowElement.clientHeight + chatHeight;
     this.$emit('sizechanged', { height });
   }
 }

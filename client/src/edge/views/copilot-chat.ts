@@ -12,6 +12,7 @@ import {
   spacingVerticalXL,
   spacingFrame,
   spacingVerticalM,
+  spacingVerticalXXL,
 } from '@mai-ui/copilot-theme';
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
@@ -27,7 +28,7 @@ const styles = css`
     overflow: hidden;
   }
 
-  :host(:not(:empty)) {
+  :host(:not([empty])) {
     padding: ${spacingVerticalXL};
     padding-block-end: calc(68px + ${spacingFrame});
     height: calc(
@@ -44,6 +45,11 @@ const styles = css`
   :host([inline]) {
     height: fit-content;
   }
+
+  :host([inline]:not([empty])) {
+    padding: ${spacingVerticalXXL};
+    padding-block-end: 0;
+  }
 `;
 
 @customElement({
@@ -54,6 +60,7 @@ const styles = css`
 export class CopilotChat extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @attr({ mode: 'boolean' }) inline = false;
+  @attr({ mode: 'boolean' }) empty = true;
   _updateInterval?: NodeJS.Timeout;
 
   connectedCallback(): void {
@@ -118,6 +125,7 @@ export class CopilotChat extends FASTElement {
             entry.setAttribute('inline', '');
             if (message.role === 'system') entry.setAttribute('system', '');
             this.shadowRoot.appendChild(entry);
+            this.empty = false;
 
             // Scroll message into view if it's the last message
             if (x === messageIds.length - 1) {
@@ -157,5 +165,6 @@ export class CopilotChat extends FASTElement {
   clearChat() {
     if (!this.shadowRoot) return;
     this.shadowRoot.innerHTML = '';
+    this.empty = true;
   }
 }
