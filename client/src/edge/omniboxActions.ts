@@ -46,7 +46,7 @@ export default {
           x.pageIsFavorite() ? `color: ${colorBrandForeground1};` : ''}"
       />
     </svg>
-    <add-favorites-flyout></add-favorites-flyout>
+    <add-favorites-omnibox-flyout></add-favorites-omnibox-flyout>
   </omnibox-action-flyout>`,
   shopping: html`<flyout-menu slot="actions">
     <shopping-button
