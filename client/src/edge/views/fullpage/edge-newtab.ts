@@ -194,6 +194,7 @@ const styles = css`
     position: relative;
     width: 100%;
     height: 100%;
+    background: black;
   }
 
   img#of-the-day {
@@ -203,7 +204,13 @@ const styles = css`
     width: 100%;
     height: 100%;
     object-fit: cover;
-    z-index: -1;
+    z-index: 0;
+
+    transition: opacity 500ms;
+  }
+
+  img#of-the-day[src=''] {
+    opacity: 0;
   }
 
   #content {
