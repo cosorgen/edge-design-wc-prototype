@@ -15,6 +15,7 @@ export type MoreMenuEntry = {
   type: 'action' | 'sub-menu' | 'divider' | 'zoom' | 'label';
   shortcut?: string;
   keywords?: string[];
+  icon?: string;
 };
 
 const template = html<MenuItem>` <button
@@ -56,15 +57,7 @@ const styles = css`
     background: ${colorSubtleBackgroundHover};
   }
 
-  #start,
-  #end {
-    display: none;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #start ::slotted(*) {
+  #start {
     width: 20px;
     height: 20px;
     line-height: 0;
@@ -75,9 +68,9 @@ const styles = css`
     margin-inline-start: ${spacingHorizontalL};
   }
 
-  :host([start-slot]) #start,
   :host([end-slot]) #end {
-    display: flex;
+    flex: 1;
+    text-align: end;
   }
 
   #content {
