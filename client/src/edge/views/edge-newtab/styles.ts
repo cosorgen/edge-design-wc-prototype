@@ -62,7 +62,7 @@ export const styles = css`
 
   #content-header {
     position: absolute;
-    bottom: 50%;
+    bottom: max(50%, 340px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,7 +82,8 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
+    padding-inline: 40px;
+    width: calc(100% - 80px);
     max-width: 1298px;
   }
 
