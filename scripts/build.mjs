@@ -4,17 +4,6 @@
 import * as esbuild from 'esbuild';
 import * as fs from 'fs';
 
-const buildServerApp = async () =>
-  esbuild.build({
-    entryPoints: ['./server/src/index.ts'],
-    bundle: true,
-    platform: 'node',
-    format: 'cjs',
-    outfile: './dist/index.cjs',
-    minify: true,
-    metafile: true,
-  });
-
 const buildClientApp = async () => {
   console.log('Copying static files from client/www to dist/www...');
   fs.cpSync('./client/www', './dist/www', { recursive: true }, (err) => {
@@ -39,15 +28,18 @@ console.log('Cleaning up the dist folder...');
 fs.rmSync('./dist', { recursive: true, force: true });
 console.log('Done.\n');
 
-console.log('Building server app...');
-let result = await buildServerApp();
-let meta = await esbuild.analyzeMetafile(result.metafile);
-console.log(meta);
+console.log('Copying server app...');
+fs.cpSync('./server', './dist', { recursive: true }, (err) => {
+  if (err) {
+    console.error('An error occurred while copying the server files.');
+    return console.error(err);
+  }
+});
 console.log('Done.\n');
 
 console.log('Building client app...');
-result = await buildClientApp();
-meta = await esbuild.analyzeMetafile(result.metafile);
+const result = await buildClientApp();
+const meta = await esbuild.analyzeMetafile(result.metafile);
 console.log(meta);
 console.log('Done.\n');
 
