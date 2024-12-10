@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.1",
   "description": "A web component based prototype for the Edge browser",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "author": "",
   "license": "MIT",
   "workspaces": [
