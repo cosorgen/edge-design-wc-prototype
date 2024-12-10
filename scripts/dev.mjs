@@ -24,13 +24,12 @@ let copyStaticFiles = {
   },
 };
 
-const serverAppContext = await esbuild.context({
-  entryPoints: ['./server/src/index.ts'],
-  bundle: true,
-  platform: 'node',
-  format: 'cjs',
-  outfile: './dist/index.js',
-  plugins: [copyStaticFiles],
+console.log('Copying server...\n');
+fs.cpSync('./server', './dist', { recursive: true }, (err) => {
+  if (err) {
+    console.error('An error occurred while copying the server files.');
+    return console.error(err);
+  }
 });
 
 const clientAppContext = await esbuild.context({
@@ -41,14 +40,10 @@ const clientAppContext = await esbuild.context({
   plugins: [copyStaticFiles],
 });
 
-console.log('Building server and client...\n');
-await serverAppContext.rebuild();
+console.log('Building client...\n');
 await clientAppContext.rebuild();
-
 await clientAppContext.watch();
 console.log('Watching client for changes...\n');
-await serverAppContext.watch();
-console.log('Watching server for changes...\n');
 
 const server = spawn('node', ['./dist/index.js'], { platform: 'node' });
 server.stdout.on('data', (data) => console.log(`${data}`));
