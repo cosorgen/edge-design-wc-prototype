@@ -15,6 +15,7 @@ module.exports = [
       '**/node_modules/*',
       '**/!.storybook/*',
       '**/eslint.config.js',
+      '**/server/*',
     ],
   },
   {
