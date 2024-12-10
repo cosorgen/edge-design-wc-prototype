@@ -13,6 +13,7 @@ import { colorLayerBackgroundApp, strokeWidthThin } from '@phoenixui/themes';
 // import './edge-newtab.js';
 import './edge-newtab-legacy.js';
 import './settings.js';
+import { TabService } from '#services/tabService.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   // newtab: html`<edge-newtab ?active="${(x) => x.active}"></edge-newtab>`,
