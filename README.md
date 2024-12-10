@@ -7,7 +7,7 @@ You need to add a .env file to the root of the project with the following:
 ```bash
 PORT='4000'
 PUBLIC_DIR='www'
-BING_APP_ENDPOINT='https://www.bingapis.com/api/v7/suggestions'
+BING_APP_ENDPOINT='https://www.bingapis.com/api/v7'
 BING_APP_ID='<id>'
 IMAGE_OF_THE_DAY_API_ENDPOINT='https://www.bing.com/HPImageArchive.aspx'
 WEATHER_APP_ENDPOINT='https://api.openweathermap.org/data/2.5/weather'
