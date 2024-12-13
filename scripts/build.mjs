@@ -1,23 +1,32 @@
 #!/usr/bin/env node
-/* global console */
+/* global console, process */
 
-import * as esbuild from 'esbuild';
-import * as fs from 'fs';
+import esbuild from 'esbuild';
+import fs from 'fs';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const PUBLIC_DIR = process.env.PUBLIC_DIR || 'public';
 
 const buildClientApp = async () => {
-  console.log('Copying static files from client/www to dist/www...');
-  fs.cpSync('./client/www', './dist/www', { recursive: true }, (err) => {
-    if (err) {
-      console.error('An error occurred while copying the folder.');
-      return console.error(err);
-    }
-    console.log('Done.');
-  });
+  console.log('Copying static files...');
+  fs.cpSync(
+    './client/www',
+    `./dist/${PUBLIC_DIR}`,
+    { recursive: true },
+    (err) => {
+      if (err) {
+        console.error('An error occurred while copying the folder.');
+        return console.error(err);
+      }
+      console.log('Done.');
+    },
+  );
 
   return esbuild.build({
     entryPoints: ['./client/src/index.ts'],
     bundle: true,
-    outfile: './dist/www/bundle.js',
+    outfile: `./dist/${PUBLIC_DIR}/bundle.js`,
     format: 'esm',
     minify: true,
     metafile: true,
