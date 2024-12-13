@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* global console */
 
-import * as fs from 'fs';
+import fs from 'fs';
 
 console.log('Cleaning up dist folders...');
 fs.rmSync('./dist', { recursive: true, force: true });
