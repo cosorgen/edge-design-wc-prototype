@@ -350,7 +350,7 @@ export default class MoreMenu extends FASTElement {
         this.ws.activateWindow(id);
         break;
       }
-      case 'Print':
+      case 'Print...':
         window.print(); // maybe see if we can print the current tab iframe?
         break;
       case 'Settings': {
@@ -362,7 +362,7 @@ export default class MoreMenu extends FASTElement {
         this.ts.activateTab(id);
         break;
       }
-      case 'Find on page':
+      case 'Find on Page...':
       case 'Screenshot':
       case 'New InPrivate window':
         break;

@@ -69,7 +69,6 @@ const styles = css`
   }
 
   :host([end-slot]) #end {
-    flex: 1;
     text-align: end;
   }
 

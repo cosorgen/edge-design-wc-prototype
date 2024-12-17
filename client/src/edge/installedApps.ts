@@ -49,7 +49,7 @@ export default {
     template: html`<browser-essentials-flyout></browser-essentials-flyout>`,
     iconId: 'heart-pulse-20-regular',
   },
-  Passwords: {
+  'Microsoft Password Manager': {
     type: 'flyout',
     template: html`<passwords-flyout></passwords-flyout>`,
     iconId: 'key-20-regular',
