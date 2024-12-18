@@ -35,8 +35,8 @@ const styles = css`
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 368px;
-    height: 298px;
+    width: 360px;
+    height: 207px;
   }
 
   img {

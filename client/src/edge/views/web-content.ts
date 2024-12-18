@@ -26,9 +26,9 @@ const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<edge-newtab
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab>`,
-  settings: html`<settings-page
+  settings: html`<edge-settings
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></settings-page>`,
+  ></edge-settings>`,
 };
 
 const template = html<WebContent>`
