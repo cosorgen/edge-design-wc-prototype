@@ -39,6 +39,14 @@ const template = html<FavoritesHubFlyout>`
     <div id="header">
       <span>Favorites</span>
       <div id="icons">
+      <phx-button
+        size="small"
+        appearance="subtle"
+        icon-only
+        @click="${(x) => x.toggleSearchInput()}"
+      >
+        <svg><use href="./img/edge/icons.svg#search-20-regular" /></svg>
+      </phx-button>
         <phx-button
           size="small"
           appearance="subtle"
@@ -76,22 +84,27 @@ const template = html<FavoritesHubFlyout>`
       </div>
     </div>
     <div id="body">
-      <phx-text-input
-        appearance="filled-darker"
-        placeholder="Search"
-        @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
-        value="${(x) => x.searchValue}"
-      >
-        <svg slot="start">
-          <use href="img/edge/icons.svg#search-20-regular" />
-        </svg>
-        ${when(
-          (x) => x.searchValue !== '',
-          html`<button slot="end" @click="${(x) => x.clearSearch()}">
-            <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
-          </button>`,
-        )}
-      </phx-text-input>
+      ${when(
+        (x) => x.isSearchInputVisible,
+        html`
+          <phx-text-input
+            appearance="filled-darker"
+            placeholder="Search"
+            @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
+            value="${(x) => x.searchValue}"
+          >
+            <svg slot="start">
+              <use href="img/edge/icons.svg#search-20-regular" />
+            </svg>
+            ${when(
+              (x) => x.searchValue !== '',
+              html`<button slot="end" @click="${(x) => x.clearSearch()}">
+                <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
+              </button>`,
+            )}
+          </phx-text-input>
+        `
+      )}
       <phx-accordion>
         <phx-accordion-item expanded>
           <span slot="heading" class="folder-heading">
@@ -237,6 +250,7 @@ export class FavoritesHubFlyout extends FASTElement {
   @observable favorites: (Favorite | FavoriteFolder)[] = [];
   @observable searchValue = '';
   @observable menuVisible = true;
+  @observable isSearchInputVisible = false;
   _inputElement: HTMLInputElement | null = null;
 
   connectedCallback() {
@@ -349,5 +363,9 @@ export class FavoritesHubFlyout extends FASTElement {
     const activeTab = this.ts.tabsById[activeTabId!];
     if (!activeTab) return false;
     return this.fs.favorites.some((f) => f.title === activeTab.title);
+  }
+
+  toggleSearchInput() {
+    this.isSearchInputVisible = !this.isSearchInputVisible; // Toggle visibility
   }
 }
