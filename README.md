@@ -41,12 +41,10 @@ npm install
 npm run dev
 ```
 
-If you get a 401 error from npm run the following:
+If you get a 401 error from `npm install` run the following:
 
 ```bash
-npx ado-npm-auth
+npm run preinstall
 ```
-
-> *Note*: You may need to remove the package scope in .npmrc for the script to work.
 
 http://localhost:4000 should automatically open and refresh to see your work.
