@@ -11,6 +11,7 @@
     "server"
   ],
   "scripts": {
+    "preinstall": "npx ado-npm-auth",
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "clean": "node scripts/clean.mjs",
