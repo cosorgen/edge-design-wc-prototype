@@ -38,7 +38,7 @@ fs.rmSync('./dist', { recursive: true, force: true });
 console.log('Done.\n');
 
 console.log('Copying server app...');
-fs.cpSync('./server', './dist', { recursive: true }, (err) => {
+fs.cpSync('./server/index.js', './dist/index.js', { force: true }, (err) => {
   if (err) {
     console.error('An error occurred while copying the server files.');
     return console.error(err);
