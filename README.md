@@ -41,4 +41,10 @@ npm install
 npm run dev
 ```
 
+If you get a 401 error from `npm install` run the following:
+
+```bash
+npm run preinstall
+```
+
 http://localhost:4000 should automatically open and refresh to see your work.

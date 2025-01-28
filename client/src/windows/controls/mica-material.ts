@@ -1,4 +1,11 @@
-import { FASTElement, customElement, html, css } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  html,
+  css,
+  observable,
+  attr,
+} from '@microsoft/fast-element';
 import { desktopBackground } from '../designSystem.js';
 import {
   tabActiveBackgroundBlur,
@@ -20,23 +27,34 @@ const template = html<MicaMaterial>`
 `;
 
 const styles = css`
+  :host {
+    display: block;
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(0px); /* Fix for overflow: hidden; */
+  }
+
   div {
     position: absolute;
     inset: 0;
   }
 
   #image {
+    inset-block-start: ${(x) => `${x.imgRect.top}px`};
+    inset-inline-start: ${(x) => `${x.imgRect.left}px`};
+    width: ${(x) => `${x.imgRect.width}px`};
+    height: ${(x) => `${x.imgRect.height}px`};
     background: ${desktopBackground};
     background-repeat: no-repeat;
-    background-size: contain;
-    background-position: top left;
+    background-size: cover;
+    background-position: center;
   }
 
   #blur {
     backdrop-filter: blur(calc(${tabActiveBackgroundBlur} / 2));
   }
 
-  :host([appearance='tabBar']) #blur {
+  :host([tab-bar]) #blur {
     backdrop-filter: blur(calc(${tabBarBackgroundBlur} / 2));
   }
 
@@ -45,7 +63,7 @@ const styles = css`
     mix-blend-mode: luminosity;
   }
 
-  :host([appearance='tabBar']) #luminosity {
+  :host([tab-bar]) #luminosity {
     background: ${tabBarBackgroundLuminosity};
   }
 
@@ -54,7 +72,7 @@ const styles = css`
     mix-blend-mode: color;
   }
 
-  :host([appearance='tabBar']) #color {
+  :host([tab-bar]) #color {
     background: ${tabBarBackgroundColor};
   }
 
@@ -62,7 +80,7 @@ const styles = css`
     background: ${tabActiveBackgroundNormal};
   }
 
-  :host([appearance='tabBar']) #normal {
+  :host([tab-bar]) #normal {
     background: ${tabBarBackgroundNormal};
   }
 
@@ -78,35 +96,45 @@ const styles = css`
 
 @customElement({ name: 'mica-material', template, styles })
 export class MicaMaterial extends FASTElement {
-  private resizeBackgroundImage(): void {
-    const imageElement = this.shadowRoot?.getElementById('image');
-    if (imageElement) {
-      const { innerWidth: width, innerHeight: height } = window;
-      const { top, left } = imageElement.getBoundingClientRect();
-      const aspectRatio = width / height;
-      let newWidth = width;
-      let newHeight = height;
-
-      const imageAspectRatio = 16 / 9;
-      if (imageAspectRatio < aspectRatio) {
-        newHeight = width / imageAspectRatio;
-      } else {
-        newWidth = height * imageAspectRatio;
-      }
-      imageElement.style.backgroundSize = `${newWidth}px ${newHeight}px`;
-      imageElement.style.backgroundPosition = `${(width - newWidth) / 2 - left}px ${(height - newHeight) / 2 - top}px`;
-    }
-  }
+  @attr({ mode: 'boolean', attribute: 'image-only' }) imageOnly = false;
+  @attr({ mode: 'boolean', attribute: 'tab-bar' }) tabBar = false;
+  @attr({ mode: 'boolean', attribute: 'full-fps' }) fullFPS = false;
+  @observable imgRect = { top: 0, left: 0, width: 0, height: 0 };
+  _frameCount = 0;
 
   connectedCallback(): void {
     super.connectedCallback();
-    this.resizeBackgroundImage();
-    window.requestAnimationFrame(() => this.resizeBackgroundImage()); // needed for bounding client rect
-    window.addEventListener('resize', this.resizeBackgroundImage.bind(this));
+    this.updateCoordinates();
   }
 
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    window.removeEventListener('resize', this.resizeBackgroundImage.bind(this));
-  }
+  updateCoordinates = () => {
+    if (!this.fullFPS) {
+      // Skip frames to reduce CPU usage
+      if (this._frameCount !== 5) {
+        this._frameCount++;
+        requestAnimationFrame(this.updateCoordinates);
+        return;
+      }
+      this._frameCount = 0;
+    }
+
+    const { top: thisTop, left: thisLeft } = this.getBoundingClientRect();
+    const top = -1 * thisTop;
+    const left = -1 * thisLeft;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    if (
+      this.imgRect.top === top &&
+      this.imgRect.left === left &&
+      this.imgRect.width === width &&
+      this.imgRect.height === height
+    ) {
+      requestAnimationFrame(this.updateCoordinates);
+      return;
+    }
+
+    this.imgRect = { top, left, width, height };
+    requestAnimationFrame(this.updateCoordinates);
+  };
 }

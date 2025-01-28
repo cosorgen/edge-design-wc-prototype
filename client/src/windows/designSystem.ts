@@ -1,10 +1,12 @@
 import { setTheme as PUISetTheme } from '@phoenixui/web-components';
 import {
   Theme,
+  phoenixDarkThemeSolidWin11,
   phoenixDarkThemeWin11,
+  phoenixLightThemeSolidWin11,
   phoenixLightThemeWin11,
 } from '@phoenixui/themes';
-import { OSTheme } from '../services/windowsService.js';
+import { OSTheme, OSTransparency } from '../services/windowsService.js';
 
 export type WindowsTokens = {
   colorShellFillTaksbarItemPrimary: string;
@@ -30,8 +32,6 @@ const commonThemeOverrides: Partial<WindowsTheme> = {
   borderRadiusSmall: '4px',
   borderRadiusMedium: '8px',
   borderRadiusLarge: '16px',
-  micaBackdropFilter: 'blur(120px) saturate(150%)',
-  micaBackgroundBlendMode: 'luminosity',
 };
 
 const windowsLightTheme: WindowsTheme = {
@@ -44,7 +44,23 @@ const windowsLightTheme: WindowsTheme = {
   colorShellStrokeTaskbarItemQuinary: '#00000005',
   colorShellFillTaskbarItemIndicator: '#00000070',
   colorFillAccent: '#005FB8',
-  micaBackgroundColor: 'rgba(243,243,243,0.7)',
+  desktopBackground: 'url(img/windows/desktopLight.jpg)',
+  colorShellFillCaptionControlPrimaryHover: '#C42B1C',
+  colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
+  colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
+  colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
+};
+
+const windowsLightThemeSolid: WindowsTheme = {
+  ...phoenixLightThemeSolidWin11,
+  ...commonThemeOverrides,
+  colorShellFillTaksbarItemPrimary: '#FFFFFFB2',
+  colorShellFillTaksbarItemSecondary: '#FFFFFF80',
+  colorShellFillTaksbarItemTeritary: '#FFFFFF4D',
+  colorShellStrokeTaskbarItemSecondary: '#0000000f',
+  colorShellStrokeTaskbarItemQuinary: '#00000005',
+  colorShellFillTaskbarItemIndicator: '#00000070',
+  colorFillAccent: '#005FB8',
   desktopBackground: 'url(img/windows/desktopLight.jpg)',
   colorShellFillCaptionControlPrimaryHover: '#C42B1C',
   colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
@@ -62,7 +78,6 @@ const windowsDarkTheme: WindowsTheme = {
   colorShellStrokeTaskbarItemQuinary: '#FFFFFF0F',
   colorShellFillTaskbarItemIndicator: '#FFFFFF63',
   colorFillAccent: '#005FB8',
-  micaBackgroundColor: 'rgba(32,32,32,0.7)',
   desktopBackground: 'url(img/windows/desktopDark.jpg)',
   colorShellFillCaptionControlPrimaryHover: '#C42B1C',
   colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
@@ -70,8 +85,29 @@ const windowsDarkTheme: WindowsTheme = {
   colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
 };
 
-export function setTheme(theme: OSTheme) {
-  PUISetTheme(theme === 'dark' ? windowsDarkTheme : windowsLightTheme);
+const windowsDarkThemeSolid: WindowsTheme = {
+  ...phoenixDarkThemeSolidWin11,
+  ...commonThemeOverrides,
+  colorShellFillTaksbarItemPrimary: '#FFFFFF15',
+  colorShellFillTaksbarItemSecondary: '#FFFFFF0F',
+  colorShellFillTaksbarItemTeritary: '#FFFFFF0B',
+  colorShellStrokeTaskbarItemSecondary: '#FFFFFF1A',
+  colorShellStrokeTaskbarItemQuinary: '#FFFFFF0F',
+  colorShellFillTaskbarItemIndicator: '#FFFFFF63',
+  colorFillAccent: '#005FB8',
+  desktopBackground: 'url(img/windows/desktopDark.jpg)',
+  colorShellFillCaptionControlPrimaryHover: '#C42B1C',
+  colorShellFillCaptionControlPrimaryPressed: '#C42B1CE5',
+  colorShellForegroundCaptionControlPrimaryHover: '#FFFFFF',
+  colorShellForegroundCaptionControlPrimaryPressed: '#FFFFFFB2',
+};
+
+export function setTheme(theme: OSTheme, transparency: OSTransparency) {
+  const themes = {
+    light: { reduced: windowsLightThemeSolid, normal: windowsLightTheme },
+    dark: { reduced: windowsDarkThemeSolid, normal: windowsDarkTheme },
+  };
+  PUISetTheme(themes[theme][transparency]);
 }
 
 export const colorShellFillTaksbarItemPrimary =
@@ -87,9 +123,6 @@ export const colorShellStrokeTaskbarItemSecondary =
 export const colorShellFillTaskbarItemIndicator =
   'var(--colorShellFillTaskbarItemIndicator)';
 export const colorFillAccent = 'var(--colorFillAccent)';
-export const micaBackdropFilter = 'var(--micaBackdropFilter)';
-export const micaBackgroundBlendMode = 'var(--micaBackgroundBlendMode)';
-export const micaBackgroundColor = 'var(--micaBackgroundColor)';
 export const desktopBackground = 'var(--desktopBackground)';
 export const colorShellFillCaptionControlPrimaryHover =
   'var(--colorShellFillCaptionControlPrimaryHover)';

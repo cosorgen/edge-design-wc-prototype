@@ -7,34 +7,36 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
-  spacingHorizontalXS,
-  spacingVerticalXXS,
-  spacingHorizontalS,
   shadow2,
-  spacingHorizontalXXS,
   spacingVerticalSNudge,
-  spacingHorizontalSNudge,
+  borderRadiusLarge,
 } from '@phoenixui/themes';
 import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/toggle-button.js';
 import '@phoenixui/web-components/divider.js';
-import '../controls/identity-control.js';
 import '../controls/horizontal-tab.js';
 import '../../windows/controls/mica-material.js';
-import { Tab, TabService } from '#services/tabService.js';
-import WindowsService, { Window } from '#services/windowsService.js';
-import {
-  colorShellFillCaptionControlPrimaryHover,
-  colorShellFillCaptionControlPrimaryPressed,
-  colorShellForegroundCaptionControlPrimaryHover,
-  colorShellForegroundCaptionControlPrimaryPressed,
-} from '../../windows/designSystem.js';
+import '../views/caption-controls.js';
+import '../controls/flyout-menu.js';
+import '../controls/identity-control.js';
+import '../controls/identity-flyout.js';
+import { TabService } from '#services/tabService.js';
+import WindowsService from '#services/windowsService.js';
+import EdgeWindowService from '#servicesedgeWindowService.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<TabBar>`
-  <mica-material appearance="tabBar"></mica-material>
+  <mica-material tab-bar></mica-material>
   <div id="shadow"></div>
   <div id="content">
-    <div class="group">
-      <identity-control></identity-control>
+    <div class="group" style="padding: 3px">
+      <flyout-menu>
+        <identity-control
+          appearance="signedIn"
+          slot="trigger"
+        ></identity-control>
+        <identity-flyout></identity-flyout>
+      </flyout-menu>
     </div>
     <div class="group">
       <phx-button appearance="subtle" icon-only>
@@ -50,19 +52,32 @@ const template = html<TabBar>`
     </div>
     <div id="tabs">
       ${repeat(
-        (x) => x.ts.tabs,
-        html<Tab>` <horizontal-tab
-            ?active="${(x) => x.active}"
-            ?loading="${(x) => x.loading}"
-            @activate="${(x, c) => c.parent.activateTab(x.id)}"
-            @close="${(x, c) => c.parent.closeTab(x.id)}"
+        (x) => x.ts.tabIds,
+        html<string>` <horizontal-tab
+            ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+            ?loading="${(x, c) => c.parent.ts.tabsById[x].loading}"
+            @activate="${(x, c) => c.parent.activateTab(x)}"
+            @close="${(x, c) => c.parent.closeTab(x)}"
           >
-            ${(x) =>
-              x.favicon
-                ? html`<img slot="favicon" src="${x.favicon}" />`
+            ${(x, c) =>
+              c.parent.ts.tabsById[x].favicon
+                ? html`
+                    ${c.parent.ts.tabsById[x].favicon.includes('.svg')
+                      ? html`<svg slot="favicon">
+                          <use href="${c.parent.ts.tabsById[x].favicon}"></use>
+                        </svg>`
+                      : html`<img
+                          slot="favicon"
+                          src="${c.parent.ts.tabsById[x].favicon}"
+                        />`}
+                  `
                 : null}
-            ${(x) =>
-              x.title ? html`<span slot="title">${x.title}</span>` : null}
+            ${(x, c) =>
+              c.parent.ts.tabsById[x].title
+                ? html`<span slot="title"
+                    >${c.parent.ts.tabsById[x].title}</span
+                  >`
+                : null}
           </horizontal-tab>
           <phx-divider
             orientation="vertical"
@@ -80,81 +95,40 @@ const template = html<TabBar>`
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
     </phx-button>
-    <div class="group" id="caption-controls" style="gap: 0;">
-      <phx-button
-        size="large"
-        appearance="subtle"
-        shape="square"
-        icon-only
-        @click="${(x) => x.minimizeWindow()}"
-      >
-        <svg>
-          <use
-            href="img/edge/icons.svg#chrome-minimize-20-regular"
-            x="2"
-            y="2"
-          />
-        </svg>
-      </phx-button>
-      <phx-button
-        size="large"
-        appearance="subtle"
-        shape="square"
-        icon-only
-        @click="${(x) => x.maximizeWindow()}"
-      >
-        <svg>
-          <use
-            href="${(x) =>
-              x.windowIsMaximized()
-                ? 'img/edge/icons.svg#chrome-restore-20-regular'
-                : 'img/edge/icons.svg#chrome-maximize-20-regular'}"
-            x="2"
-            y="2"
-          />
-        </svg>
-      </phx-button>
-      <phx-button
-        size="large"
-        appearance="subtle"
-        shape="square"
-        icon-only
-        @click="${(x) => x.closeWindow()}"
-      >
-        <svg>
-          <use href="img/edge/icons.svg#chrome-close-20-regular" x="2" y="2" />
-        </svg>
-      </phx-button>
-    </div>
+    <div
+      id="window-grabber"
+      @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
+      @mouseup="${(x, c) => x.handleContextMenu(c.event)}"
+    ></div>
+    <caption-controls></caption-controls>
   </div>
 `;
 
 const styles = css`
   :host {
     display: block;
-    overflow: hidden;
     user-select: none;
+    position: relative; /* for positioning shadow and mica */
   }
 
   #content {
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: flex-end;
-    gap: ${spacingHorizontalS};
-    padding: ${spacingVerticalSNudge} 156px ${spacingVerticalXXS}
-      ${spacingHorizontalXS};
-    overflow: hidden;
+    align-items: center;
+    gap: calc(${spacingFrame} * 2);
+    padding-inline-start: ${spacingFrame};
+    padding-inline-end: max(0px, ${spacingFrame});
+    padding-block: ${spacingFrame};
   }
 
   .group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: calc(${spacingFrame} / 2);
   }
 
   #shadow {
@@ -168,30 +142,28 @@ const styles = css`
   #tabs {
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalXXS};
-    overflow: hidden;
-    padding: 10px;
-    margin: -10px; /* for wings to not clip */
+    gap: calc(${spacingFrame} / 2);
+    min-width: 16px;
   }
 
   #add {
-    margin-inline-start: calc(0px - ${spacingHorizontalSNudge});
+    margin-inline-start: calc(0px - ${spacingFrame});
   }
 
-  #caption-controls {
-    position: absolute;
-    inset-inline-end: 0;
-    inset-block: 0;
+  #window-grabber {
+    flex: 1;
+    height: 100%;
+    min-height: 32px;
+    min-width: 24px;
+    cursor: grab;
+    margin-block-start: calc(0px - ${spacingFrame} * 1.5);
+    padding-block-start: calc(${spacingFrame} * 1.5);
+    margin-block-end: calc(0px - ${spacingFrame} * 0.5);
+    padding-block-end: calc(${spacingFrame} * 0.5);
   }
 
-  #caption-controls phx-button:nth-child(3):hover {
-    background-color: ${colorShellFillCaptionControlPrimaryHover};
-    color: ${colorShellForegroundCaptionControlPrimaryHover};
-  }
-
-  #caption-controls phx-button:nth-child(3):active {
-    background-color: ${colorShellFillCaptionControlPrimaryPressed};
-    color: ${colorShellForegroundCaptionControlPrimaryPressed};
+  phx-button {
+    border-radius: ${borderRadiusLarge};
   }
 
   phx-divider,
@@ -203,7 +175,7 @@ const styles = css`
 
   phx-divider {
     margin-block: ${spacingVerticalSNudge};
-    margin-inline: calc(0px - ${spacingHorizontalXXS});
+    margin-inline: calc(0px - (${spacingFrame} / 2));
   }
 
   horizontal-tab[active] + phx-divider,
@@ -223,6 +195,16 @@ const styles = css`
 export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
+  @inject(EdgeWindowService) ews!: EdgeWindowService;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('contextmenu', this.handleContextMenu);
+  }
+
+  getTabList() {
+    return this.ts.tabIds.map((tabId) => this.ts.tabsById[tabId]);
+  }
 
   activateTab(tabId: string) {
     this.ts.activateTab(tabId);
@@ -230,33 +212,28 @@ export class TabBar extends FASTElement {
 
   closeTab(tabId: string) {
     this.ts.removeTab(tabId);
-    if (this.ts.tabs.length === 0) {
+    if (this.ts.tabIds.length === 0) {
       this.closeWindow();
     }
   }
 
   addTab() {
-    this.ts.addTab();
+    const newId = this.ts.addTab();
+    this.activateTab(newId);
   }
 
   closeWindow() {
     this.ws.closeWindow(this.ws.activeWindowId);
   }
 
-  minimizeWindow() {
-    this.ws.minimizeWindow(this.ws.activeWindowId);
+  handleTitleBarMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
+    this.$emit('windowmovestart');
   }
 
-  windowIsMaximized() {
-    const window = this.ws.getActiveWindow() as Window;
-    return window.maximized;
-  }
-
-  maximizeWindow() {
-    if (this.windowIsMaximized()) {
-      this.ws.restoreWindow(this.ws.activeWindowId);
-    } else {
-      this.ws.maximizeWindow(this.ws.activeWindowId);
-    }
-  }
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }

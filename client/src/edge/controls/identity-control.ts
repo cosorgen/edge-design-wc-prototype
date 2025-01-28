@@ -8,7 +8,6 @@ import {
 import {
   borderRadiusCircular,
   colorNeutralForeground1,
-  colorNeutralStroke1,
   colorNeutralStroke1Hover,
   colorNeutralStroke1Pressed,
   colorSubtleBackgroundHover,
@@ -17,16 +16,23 @@ import {
   fontSizeBase200,
   fontWeightRegular,
   lineHeightBase200,
-  spacingHorizontalMNudge,
   spacingHorizontalXS,
-  spacingHorizontalXXS,
   strokeWidthThin,
 } from '@phoenixui/themes';
+
+const imageIds = {
+  signedIn: 'dog',
+  inPrivate: 'inPrivate',
+  guest: 'guest',
+};
 
 const template = html<IdentityControl>`
   <button>
     <slot name="image">
-      <img src="img/edge/profile_guest.png" alt="Profile picture" />
+      <img
+        src="img/edge/profile_${(x) => imageIds[x.appearance]}.png"
+        alt="Profile picture"
+      />
     </slot>
     <slot>${(x) => (x.appearance === 'guest' ? 'Guest' : '')}</slot>
   </button>
@@ -37,7 +43,6 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: ${spacingHorizontalXXS};
   }
 
   button {
@@ -49,10 +54,8 @@ const styles = css`
     background: none;
     cursor: pointer;
     border-radius: ${borderRadiusCircular};
-    padding-block: ${strokeWidthThin};
-    padding-inline-start: ${strokeWidthThin};
-    padding-inline-end: ${spacingHorizontalMNudge};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
+    padding: 0;
+    border: ${strokeWidthThin} solid transparent;
 
     /* caption1 */
     font-family: ${fontFamilyBase};
@@ -67,6 +70,7 @@ const styles = css`
     background-color: ${colorSubtleBackgroundHover};
   }
 
+  :host([pressed]) button,
   button:hover:active {
     border: ${strokeWidthThin} solid ${colorNeutralStroke1Pressed};
     background-color: ${colorSubtleBackgroundPressed};

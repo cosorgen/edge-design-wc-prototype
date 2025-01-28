@@ -29,12 +29,13 @@ import {
 import '@phoenixui/web-components/button.js';
 import '@phoenixui/web-components/spinner.js';
 import '../../windows/controls/mica-material.js';
+import { spacingFrame } from '../designSystem.js';
 
 const template = html<HorizontalTab>`
   <mica-material id="bg"></mica-material>
   <mica-material id="left-wing"></mica-material>
   <mica-material id="right-wing"></mica-material>
-  <button @click="${(x, c) => x.activate(c.event)}">
+  <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">
     <div id="favicon" part="favicon">
       ${when(
         (x) => x.loading,
@@ -59,7 +60,7 @@ const template = html<HorizontalTab>`
     @click="${(x, c) => x.close(c.event)}"
   >
     <svg>
-      <use href="img/edge/icons.svg#dismiss-16-regular"></use>
+      <use href="img/edge/icons.svg#dismiss-12-regular"></use>
     </svg>
   </phx-button>
 `;
@@ -95,7 +96,7 @@ const styles = css`
     align-items: center;
     gap: ${spacingHorizontalS};
     padding-inline-start: ${spacingHorizontalS};
-    padding-inline-end: calc(${spacingHorizontalS} + 16px);
+    padding-inline-end: calc(${spacingHorizontalS} + /*16px*/ 0px);
     padding-block: ${spacingHorizontalSNudge};
     color: ${colorNeutralForeground1};
     border-radius: ${borderRadiusLarge};
@@ -103,6 +104,10 @@ const styles = css`
 
   button:hover {
     background-color: ${colorSubtleBackgroundHover};
+  }
+
+  :host([active]) button {
+    cursor: default;
   }
 
   :host([active]) button:hover {
@@ -115,6 +120,18 @@ const styles = css`
     visibility: visible;
   }
 
+  #title {
+    flex: 1;
+    margin-block-end: ${spacingVerticalXXS};
+    mask-image: linear-gradient(
+      90deg,
+      white,
+      white 80%,
+      transparent 92%,
+      transparent
+    );
+  }
+
   #title,
   [name='title']::slotted(*) {
     /* Caption1 */
@@ -122,11 +139,9 @@ const styles = css`
     font-size: ${fontSizeBase200};
     font-weight: ${fontWeightRegular};
     line-height: ${lineHeightBase200};
+    text-align: start;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-
-    margin-block-end: ${spacingVerticalXXS};
   }
 
   #favicon,
@@ -154,13 +169,14 @@ const styles = css`
   #left-wing,
   #right-wing {
     visibility: hidden;
-    position: absolute;
     overflow: hidden;
+    inset: unset;
   }
 
   #bg {
-    inset: 0;
-    bottom: -2px;
+    inset-block-start: min(0px, calc(6px - ${spacingFrame}));
+    inset-block-end: calc(0px - ${spacingFrame});
+    inset-inline: 0;
     border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
   }
 
@@ -168,16 +184,16 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: -2px;
+    inset-block-end: calc(0px - ${spacingFrame});
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 
   #left-wing {
-    left: -10px;
+    inset-inline-start: -10px;
   }
 
   #right-wing {
-    right: -10px;
+    inset-inline-end: -10px;
     transform: rotate(90deg);
   }
 
@@ -194,9 +210,14 @@ const styles = css`
 export class HorizontalTab extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) loading = false;
-  activate(e: Event) {
+  handleClick(e: MouseEvent) {
     e.stopPropagation();
-    this.$emit('activate');
+
+    if (e.button === 0) {
+      this.$emit('activate');
+    } else if (e.button === 1) {
+      this.$emit('close');
+    }
   }
 
   close(e: Event) {

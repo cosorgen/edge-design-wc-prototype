@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import { borderRadiusSmall } from '@phoenixui/themes';
+import { borderRadiusMedium } from '@phoenixui/themes';
 
 /**
  * The icon component for the Omnibox dropdown item.
@@ -22,19 +22,20 @@ const iconIds = {
 };
 
 const template = html<OmniboxIcon>`
-  <img
-    width="20"
-    id="${(x) => x.type}"
-    src="${(x) => x['entity-image']}"
-    alt="${(x) => x.type}"
-  />
-  <svg>
-    <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}-20-regular" />
-  </svg>
+  <div id="wrapper">
+    <img
+      class="${(x) => x.type}"
+      src="${(x) => x.entityImage}"
+      alt="${(x) => x.type}"
+    />
+    <svg>
+      <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}-20-regular" />
+    </svg>
+  </div>
 `;
 
 const styles = css`
-  :host {
+  #wrapper {
     width: 48px;
     height: 32px;
     display: flex;
@@ -43,30 +44,29 @@ const styles = css`
   }
 
   svg {
+    display: none;
     width: 20px;
     height: 20px;
   }
 
   img {
     display: none;
-    width: 20px;
-    height: 20px;
-    margin-inline-start: 12px;
+    width: 16px;
+    height: 16px;
     object-fit: cover;
-    border-radius: ${borderRadiusSmall};
   }
 
-  #entity {
-    border-radius: ${borderRadiusSmall};
+  .entity {
+    border-radius: ${borderRadiusMedium};
     width: 32px;
     height: 32px;
-    margin-inline-start: 8px;
-    margin-block: -12px;
   }
 
   :host([type='entity']) img,
   :host([type='profile']) img,
-  :host([type='site']) img {
+  :host([type='site']) img,
+  :host([type='history']) svg,
+  :host([type='search']) svg {
     display: block;
   }
 `;
@@ -77,6 +77,7 @@ const styles = css`
   styles,
 })
 export class OmniboxIcon extends FASTElement {
-  @attr type: 'search' | 'entity' | 'history' | 'site' | 'profile' = 'search';
-  @attr 'entity-image' = '';
+  @attr type: 'search' | 'entity' | 'history' | 'site' | 'profile' = 'entity';
+  @attr({ attribute: 'entity-image' }) entityImage =
+    'http://www.bing.com/th?id=OSK.1773fdbec232f8dd1169e371af62d36a&w=75&h=110&c=12';
 }

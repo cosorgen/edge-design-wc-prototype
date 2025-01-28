@@ -1,0 +1,106 @@
+import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
+import {
+  borderRadiusCircular,
+  colorBrandBackground2,
+  colorBrandBackground2Hover,
+  colorBrandBackground2Pressed,
+  colorNeutralForeground1,
+  curveDecelerateMax,
+  durationSlow,
+  spacingHorizontalS,
+  spacingHorizontalXS,
+  spacingVerticalXXS,
+  typographyStyles,
+} from '@phoenixui/themes';
+
+const template = html`
+  <button>
+    <svg>
+      <use href="img/edge/icons.svg#shopping-20-regular"></use>
+    </svg>
+    <div>Coupons available</div>
+  </button>
+`;
+
+const styles = css`
+  button {
+    border-radius: ${borderRadiusCircular};
+    background: ${colorBrandBackground2};
+    border: none;
+    color: ${colorNeutralForeground1};
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: ${spacingHorizontalXS};
+
+    /* Need for collapse */
+    min-width: 24px;
+    overflow: hidden;
+
+    /* Animation on load */
+    padding: ${spacingVerticalXXS};
+    transition: all ${durationSlow} ${curveDecelerateMax};
+  }
+
+  :host([expanded]) button {
+    padding: ${spacingVerticalXXS} ${spacingHorizontalS};
+  }
+
+  button:hover {
+    background: ${colorBrandBackground2Hover};
+  }
+
+  :host([pressed='true']) button {
+    background: ${colorBrandBackground2Hover};
+  }
+
+  button:active {
+    background: ${colorBrandBackground2Pressed};
+  }
+
+  svg {
+    height: 20px;
+    width: 20px;
+  }
+
+  div {
+    flex: 1;
+    font-family: ${typographyStyles.caption1.fontFamily};
+    font-size: ${typographyStyles.caption1.fontSize};
+    font-weight: ${typographyStyles.caption1.fontWeight};
+    line-height: ${typographyStyles.caption1.lineHeight};
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0px;
+
+    /* Animation on load */
+    width: 0px;
+    transition: all ${durationSlow} ${curveDecelerateMax};
+  }
+
+  :host([expanded]) div {
+    width: var(--max-label-width);
+  }
+`;
+
+@customElement({
+  name: 'shopping-button',
+  template,
+  styles,
+})
+export class ShoppingButton extends FASTElement {
+  connectedCallback() {
+    super.connectedCallback();
+    setTimeout(() => {
+      this.setAttribute(
+        'style',
+        '--max-label-width: ' +
+          this.shadowRoot?.querySelector('div')?.scrollWidth +
+          'px',
+      );
+      this.setAttribute('expanded', '');
+    }, 1000); // delay for animation
+  }
+}
