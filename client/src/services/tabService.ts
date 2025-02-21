@@ -56,7 +56,9 @@ export class TabService {
       this.activeTabId = this.tabIds[index - 1] || this.tabIds[index + 1];
     }
 
-    delete this.tabsById[tabId]; // this might not work
+    this.tabsById = Object.fromEntries(
+      Object.entries(this.tabsById).filter(([id]) => id !== tabId),
+    );
     this.tabIds = this.tabIds.filter((id) => id !== tabId);
   }
 
@@ -85,33 +87,38 @@ export class TabService {
     tab.url = validUrl;
     tab.loading = true;
     tab.title = url; // update title to query while loading
-    this.tabsById[id] = tab;
+    this.tabsById = {
+      ...this.tabsById,
+      [tab.id]: tab,
+    };
 
-    // Get metadata for the new query
-    fetch(`/api/metadata?url=${validUrl}`)
-      .then((res) => res.json())
-      .then((res) => {
-        const tab = this.tabsById[id];
-        tab.title = res.title;
-        tab.favicon = res.favicon;
-        this.tabsById = {
-          ...this.tabsById,
-          [tab.id]: tab,
-        };
-      });
+    if (!validUrl.startsWith('edge://')) {
+      // Get metadata for the new query
+      fetch(`/api/metadata?url=${validUrl}`)
+        .then((res) => res.json())
+        .then((res) => {
+          const tab = this.tabsById[id];
+          tab.title = res.title;
+          tab.favicon = res.favicon;
+          this.tabsById = {
+            ...this.tabsById,
+            [tab.id]: tab,
+          };
+        });
 
-    // Get full page content
-    fetch(`/api/proxy?url=${validUrl}`)
-      .then((res) => res.json())
-      .then((res) => {
-        const tab = this.tabsById[id];
-        tab.page = res.page;
-        tab.url = res.url; // follow redirects
-        this.tabsById = {
-          ...this.tabsById,
-          [tab.id]: tab,
-        };
-      });
+      // Get full page content
+      fetch(`/api/proxy?url=${validUrl}`)
+        .then((res) => res.json())
+        .then((res) => {
+          const tab = this.tabsById[id];
+          tab.page = res.page;
+          tab.url = res.url; // follow redirects
+          this.tabsById = {
+            ...this.tabsById,
+            [tab.id]: tab,
+          };
+        });
+    }
   }
 
   tabDidLoad(tabId: string) {
@@ -146,7 +153,7 @@ export class TabService {
       overflow.unshift('favorite');
       top = 'shopping';
     }
-    if (url === 'https://www.madmoizelle.com/soleil-bonheur-161498') {
+    if (url === 'edge://translate') {
       overflow.unshift('favorite');
       top = 'translate';
     }

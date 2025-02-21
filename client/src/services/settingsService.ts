@@ -8,6 +8,7 @@ export default class EdgeSettingsSerivce {
   @observable frameSpacing = '4px';
   @observable savePassword = false;
   @observable reversedCTA = false;
+  @observable translatePage = false;
 
   constructor() {
     // Load settings from local storage

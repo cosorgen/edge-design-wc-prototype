@@ -37,7 +37,7 @@ const template = html<TranslateOmniboxFlyout>`
     <div class="footer">
       <div class="button-group">
         <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
-        <phx-button appearance="primary" @click="${(x) => x.closeFlyout()}">
+        <phx-button appearance="primary" @click="${(x) => x.translatePage()}">
           Translate
         </phx-button>
       </div>
@@ -105,5 +105,10 @@ export class TranslateOmniboxFlyout extends FASTElement {
 
   closeFlyout() {
     this.$emit('closemenu'); // Emit a close event
+  }
+
+  translatePage() {
+    this.ss.translatePage = true;
+    this.closeFlyout();
   }
 }

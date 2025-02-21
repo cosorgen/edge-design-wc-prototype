@@ -145,10 +145,7 @@ export class MicrosoftEdge extends FASTElement {
           this.ews.openOmniboxItem('save-password');
         }, 1000);
       } else {
-        this.ts.navigateTab(
-          tabId,
-          'https://www.madmoizelle.com/soleil-bonheur-161498',
-        );
+        this.ts.navigateTab(tabId, 'edge://translate');
         setTimeout(() => {
           this.ews.openOmniboxItem('translate');
         }, 1000);

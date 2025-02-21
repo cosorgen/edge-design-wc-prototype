@@ -18,6 +18,7 @@ import {
 } from '@phoenixui/themes';
 import './fullpage/edge-newtab.js';
 import './fullpage/edge-settings.js';
+import './fullpage/french-page.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -26,9 +27,14 @@ const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<edge-newtab
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab>`,
-  settings: html`<edge-settings
+  settings: html<string>`<edge-settings
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-settings>`,
+  translate: html<string>`<french-page
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+    @pageload="${(x, c) => c.parent.handleTabLoad(x)}"
+    @pageerror="${(x, c) => c.parent.handleTabLoadError(x)}"
+  ></french-page>`,
 };
 
 const template = html<WebContent>`
@@ -37,7 +43,7 @@ const template = html<WebContent>`
     html<string>`${when(
       (x, c) => c.parent.ts.tabsById[x].url.startsWith('edge://'),
       (x, c) => edgePages[c.parent.getHostname(c.parent.ts.tabsById[x].url)],
-      html`<web-page
+      html<string>`<web-page
         id="${(x) => x}"
         page="${(x, c) => c.parent.ts.tabsById[x].page}"
         ?active="${(x, c) => x === c.parent.ts.activeTabId}"
