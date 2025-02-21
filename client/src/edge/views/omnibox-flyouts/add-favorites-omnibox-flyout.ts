@@ -10,8 +10,6 @@ import '@phoenixui/web-components/text-input.js';
 import { TextInput } from '@phoenixui/web-components/text-input.js';
 import '@phoenixui/web-components/button.js';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   borderRadiusLayerDialog,
   colorNeutralForeground1,
   shadow28,
@@ -23,38 +21,42 @@ import {
 import { spacingVerticalXL } from '@phoenixui/themes/tokens.js';
 import { TabService } from '#services/tabService.js';
 import FavoritesService from '#services/favoritesService.js';
+import '../../../windows/controls/acrylic-material.js';
 
 const template = html<AddFavoritesOmniboxFlyout>`
-  <div class="favorite-title">Favorite added</div>
-  <div class="input-group">
-    <label for="favorite-name">Name</label>
-    <phx-text-input
-      id="favorite-name"
-      value="${(x) => x.getPageTitle()}"
-    ></phx-text-input>
-  </div>
-  <div class="input-group">
-    <label for="favorite-folder">Folder</label>
-    <phx-text-input id="favorite-folder" placeholder="Select folder" disabled>
-      <span slot="start">
-        <svg>
-          <use href="./img/edge/icons.svg#folder-20-regular" />
-        </svg>
-      </span>
-      <span slot="end">
-        <svg>
-          <use href="./img/edge/icons.svg#down-chevron-20-regular" />
-        </svg>
-      </span>
-    </phx-text-input>
-  </div>
-  <div class="footer">
-    <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
-    <div class="button-group">
-      <phx-button @click="${(x) => x.handleRemove()}"> Remove </phx-button>
-      <phx-button appearance="primary" @click="${(x) => x.handleDone()}">
-        Done
-      </phx-button>
+  <acrylic-material></acrylic-material>
+  <div id="content">
+    <div class="favorite-title">Favorite added</div>
+    <div class="input-group">
+      <label for="favorite-name">Name</label>
+      <phx-text-input
+        id="favorite-name"
+        value="${(x) => x.getPageTitle()}"
+      ></phx-text-input>
+    </div>
+    <div class="input-group">
+      <label for="favorite-folder">Folder</label>
+      <phx-text-input id="favorite-folder" placeholder="Select folder" disabled>
+        <span slot="start">
+          <svg>
+            <use href="./img/edge/icons.svg#folder-20-regular" />
+          </svg>
+        </span>
+        <span slot="end">
+          <svg>
+            <use href="./img/edge/icons.svg#down-chevron-20-regular" />
+          </svg>
+        </span>
+      </phx-text-input>
+    </div>
+    <div class="footer">
+      <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
+      <div class="button-group">
+        <phx-button @click="${(x) => x.handleRemove()}"> Remove </phx-button>
+        <phx-button appearance="primary" @click="${(x) => x.handleDone()}">
+          Done
+        </phx-button>
+      </div>
     </div>
   </div>
 `;
@@ -62,15 +64,18 @@ const template = html<AddFavoritesOmniboxFlyout>`
 const styles = css`
   :host {
     display: block;
+    position: relative;
+    box-shadow: ${shadow28};
+    color: ${colorNeutralForeground1};
+    border-radius: ${borderRadiusLayerDialog};
+    overflow: hidden;
+  }
+
+  #content {
+    position: relative;
     min-width: 256px;
     min-height: 120px;
     padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
   }
 
   .favorite-title {
