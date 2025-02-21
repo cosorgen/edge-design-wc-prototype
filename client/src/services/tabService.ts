@@ -56,7 +56,9 @@ export class TabService {
       this.activeTabId = this.tabIds[index - 1] || this.tabIds[index + 1];
     }
 
-    delete this.tabsById[tabId]; // this might not work
+    this.tabsById = Object.fromEntries(
+      Object.entries(this.tabsById).filter(([id]) => id !== tabId),
+    );
     this.tabIds = this.tabIds.filter((id) => id !== tabId);
   }
 
@@ -85,7 +87,10 @@ export class TabService {
     tab.url = validUrl;
     tab.loading = true;
     tab.title = url; // update title to query while loading
-    this.tabsById[id] = tab;
+    this.tabsById = {
+      ...this.tabsById,
+      [tab.id]: tab,
+    };
 
     // Get metadata for the new query
     fetch(`/api/metadata?url=${validUrl}`)
