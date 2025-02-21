@@ -6,6 +6,8 @@ export default class EdgeSettingsSerivce {
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'never';
   @observable pinnedToolbarItems: string[] = ['Favorites'];
   @observable frameSpacing = '4px';
+  @observable savePassword = false;
+  @observable reversedCTA = false;
 
   constructor() {
     // Load settings from local storage
@@ -22,6 +24,10 @@ export default class EdgeSettingsSerivce {
 
     this.frameSpacing =
       url.searchParams.get('frameSpacing') || this.frameSpacing;
+
+    this.savePassword = url.searchParams.get('savePassword') === 'true';
+
+    this.reversedCTA = url.searchParams.get('reversedCTA') === 'true';
   }
 
   setSettingsInURL() {

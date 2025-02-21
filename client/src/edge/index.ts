@@ -136,6 +136,24 @@ export class MicrosoftEdge extends FASTElement {
     this.setTheme();
     this.setElements();
     this.setEventListeners();
+
+    const tabId = this.ts.activeTabId;
+    if (tabId) {
+      if (this.ss.savePassword) {
+        this.ts.navigateTab(tabId, 'https://www.figma.com/login');
+        setTimeout(() => {
+          this.ews.openOmniboxItem('save-password');
+        }, 1000);
+      } else {
+        this.ts.navigateTab(
+          tabId,
+          'https://www.madmoizelle.com/soleil-bonheur-161498',
+        );
+        setTimeout(() => {
+          this.ews.openOmniboxItem('translate');
+        }, 1000);
+      }
+    }
   }
 
   disconnectedCallback() {

@@ -20,11 +20,8 @@ import {
   shadow28,
   spacingHorizontalSNudge,
   spacingHorizontalXS,
-  spacingVerticalS,
   spacingVerticalXS,
   typographyStyles,
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   colorNeutralStrokeSubtle,
 } from '@phoenixui/themes';
 import { MoreMenuEntry } from '../controls/menu-item.js';
@@ -146,6 +143,7 @@ const defaultItems: MoreMenuEntry[] = [
 ];
 
 const template = html<MoreMenu>`
+  <acrylic-material></acrylic-material>
   <div id="menu-items">
     ${repeat(
       (x) => x.items,
@@ -202,33 +200,20 @@ const template = html<MoreMenu>`
 
 const styles = css`
   :host {
-    min-width: 200px;
-    max-width: 512px;
-    display: flex;
-    flex-direction: column;
-    gap: ${spacingVerticalS};
-    padding: ${spacingVerticalXS};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
+    display: block;
+    position: relative;
     border-radius: ${borderRadiusLayerFlyout};
     box-shadow: ${shadow28};
     overflow: hidden;
   }
 
-  #content {
+  #menu-items {
     position: relative;
+    display: flex;
+    flex-direction: column;
     min-width: 200px;
     max-width: 512px;
-    display: flex;
-    flex-direction: column;
-    gap: ${spacingVerticalS};
-    padding: ${spacingVerticalS};
-  }
-
-  #menu-items {
-    display: flex;
-    flex-direction: column;
+    padding: ${spacingVerticalXS};
   }
 
   .hint {

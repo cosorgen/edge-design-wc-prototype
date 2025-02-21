@@ -146,6 +146,14 @@ export class TabService {
       overflow.unshift('favorite');
       top = 'shopping';
     }
+    if (url === 'https://www.madmoizelle.com/soleil-bonheur-161498') {
+      overflow.unshift('favorite');
+      top = 'translate';
+    }
+    if (url === 'https://www.figma.com/login') {
+      overflow.unshift('favorite');
+      top = 'save-password';
+    }
     return { top, overflow };
   }
 

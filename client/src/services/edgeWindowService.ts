@@ -9,6 +9,7 @@ export default class EdgeWindowService {
   @observable id?: string;
   @observable activeSidepaneAppId?: string;
   @observable activeToolbarItemId?: string;
+  @observable activeOmniboxItemId?: string;
   @observable viewportSize?: {
     width: number;
     height: number;
@@ -34,5 +35,15 @@ export default class EdgeWindowService {
 
   closeSidepaneApp() {
     this.activeSidepaneAppId = undefined;
+  }
+
+  openOmniboxItem(id: string) {
+    if (this.activeOmniboxItemId !== id) {
+      this.activeOmniboxItemId = id;
+    }
+  }
+
+  closeOmniboxItem() {
+    this.activeOmniboxItemId = undefined;
   }
 }

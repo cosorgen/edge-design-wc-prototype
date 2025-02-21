@@ -4,6 +4,8 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/omnibox-flyouts/add-favorites-omnibox-flyout.js';
+import './views/omnibox-flyouts/translate-omnibox-flyout.js';
+import './views/omnibox-flyouts/save-password-omnibox-flyout.js';
 import { colorBrandForeground1 } from '@phoenixui/themes';
 
 export const overflowItems = {
@@ -31,6 +33,14 @@ export const overflowItems = {
   share: {
     title: 'Share',
     iconId: 'share-20-regular',
+  },
+  translate: {
+    title: 'Translate',
+    iconId: 'translate-20-regular',
+  },
+  'save-password': {
+    title: 'Save password',
+    iconId: 'key-20-regular',
   },
 } as Record<string, { title: string; iconId: string; iconId2?: string }>;
 
@@ -76,10 +86,30 @@ export default {
     </svg>
     <div class="flyout-menu">${overflowItems.install.title}</div>
   </omnibox-action-flyout>`,
-  share: html`<omnibox-action-flyout id="install" slot="actions">
+  share: html`<omnibox-action-flyout id="share" slot="actions">
     <svg slot="trigger-content">
       <use href="img/edge/icons.svg#${overflowItems.share.iconId}" />
     </svg>
     <div class="flyout-menu">${overflowItems.share.title}</div>
+  </omnibox-action-flyout>`,
+  translate: html`<omnibox-action-flyout
+    id="translate"
+    slot="actions"
+    initially-open=${(x) => x.ews.activeOmniboxItemId === 'translate'}
+  >
+    <svg slot="trigger-content">
+      <use href="img/edge/icons.svg#${overflowItems.translate.iconId}" />
+    </svg>
+    <translate-omnibox-flyout></translate-omnibox-flyout>
+  </omnibox-action-flyout>`,
+  'save-password': html`<omnibox-action-flyout
+    id="save-password"
+    slot="actions"
+    initially-open=${(x) => x.ews.activeOmniboxItemId === 'save-password'}
+  >
+    <svg slot="trigger-content">
+      <use href="img/edge/icons.svg#${overflowItems['save-password'].iconId}" />
+    </svg>
+    <save-password-omnibox-flyout></save-password-omnibox-flyout>
   </omnibox-action-flyout>`,
 } as Record<string, ViewTemplate>;

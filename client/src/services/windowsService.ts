@@ -53,6 +53,9 @@ export default class WindowsService {
         this.transparency = e.matches ? 'reduced' : 'normal';
       });
 
+    // Set solid color default
+    this.transparency = 'reduced';
+
     // Override theme and transparency from URL
     this.getSettingsFromURL();
 
