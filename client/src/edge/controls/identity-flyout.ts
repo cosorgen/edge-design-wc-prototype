@@ -7,16 +7,16 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
   colorNeutralForeground1,
   shadow28,
 } from '@phoenixui/themes';
 import WindowsService from '#services/windowsService.js';
+import '../../windows/controls/acrylic-material.js';
 
 const template = html<IdentityMenu>`
-  <div>
+  <acrylic-material></acrylic-material>
+  <div id="content">
     <img
       src="${(x) => x.getImageSource()}"
       alt="Identity Icon"
@@ -27,16 +27,20 @@ const template = html<IdentityMenu>`
 
 const styles = css`
   :host {
-    display: flex;
-    flex-direction: column;
-    width: 318px;
-    height: 373px;
-    background: ${acrylicBackgroundLuminosity};
-    backdrop-filter: blur(${acrylicBackgroundBlur});
+    display: block;
+    position: relative;
     border-radius: ${borderRadiusLayerFlyout};
     box-shadow: ${shadow28};
     color: ${colorNeutralForeground1};
     overflow: hidden;
+  }
+
+  #content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 318px;
+    height: 373px;
   }
 
   .identity-image {
