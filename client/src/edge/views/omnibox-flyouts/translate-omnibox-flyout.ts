@@ -27,7 +27,12 @@ const template = html<TranslateOmniboxFlyout>`
   <div id="content">
     <div class="title">
       Translate page from French?
-      <phx-button size="small" appearance="subtle" icon-only>
+      <phx-button
+        size="small"
+        appearance="subtle"
+        icon-only
+        @click="${(x) => x.closeFlyout()}"
+      >
         <svg>
           <use href="./img/edge/icons.svg#dismiss-16-regular" />
         </svg>
