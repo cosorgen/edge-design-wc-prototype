@@ -25,7 +25,14 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 const template = html<TranslateOmniboxFlyout>`
   <acrylic-material></acrylic-material>
   <div id="content">
-    <div class="title">Translate page from French?</div>
+    <div class="title">
+      Translate page from French?
+      <phx-button size="small" appearance="subtle" icon-only>
+        <svg>
+          <use href="./img/edge/icons.svg#dismiss-16-regular" />
+        </svg>
+      </phx-button>
+    </div>
     <div class="input-group">
       <label for="favorite-name">Translate to</label>
       <phx-text-input id="favorite-folder" placeholder="English" disabled>
@@ -36,7 +43,12 @@ const template = html<TranslateOmniboxFlyout>`
     </div>
     <div class="footer">
       <div class="button-group">
-        <phx-button @click="${(x) => x.closeFlyout()}"> More </phx-button>
+        <phx-button @click="${(x) => x.closeFlyout()}">
+          More
+          <svg slot="end">
+            <use href="./img/edge/icons.svg#down-chevron-20-regular" />
+          </svg>
+        </phx-button>
         <phx-button appearance="primary" @click="${(x) => x.translatePage()}">
           Translate
         </phx-button>
@@ -63,6 +75,9 @@ const styles = css`
   }
 
   .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: ${spacingVerticalM};
     font-family: ${typographyStyles.subtitle2.fontFamily};
     font-size: ${typographyStyles.subtitle2.fontSize};

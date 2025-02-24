@@ -25,7 +25,14 @@ import { inject } from '@microsoft/fast-element/di.js';
 const template = html<SavePasswordOmniboxFlyout>`
   <acrylic-material></acrylic-material>
   <div id="content">
-    <div class="title">Save your password?</div>
+    <div class="title">
+      Save your password?
+      <phx-button size="small" appearance="subtle" icon-only>
+        <svg>
+          <use href="./img/edge/icons.svg#dismiss-16-regular" />
+        </svg>
+      </phx-button>
+    </div>
     <div class="input-group">
       <label for="favorite-name">Username</label>
       <phx-text-input value="test@test.com">
@@ -67,6 +74,9 @@ const styles = css`
   }
 
   .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: ${spacingVerticalM};
     font-family: ${typographyStyles.subtitle2.fontFamily};
     font-size: ${typographyStyles.subtitle2.fontSize};
