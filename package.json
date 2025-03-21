@@ -38,6 +38,7 @@
   "devDependencies": {
     "@eslint/js": "^9.15.0",
     "child_process": "^1.0.2",
+    "dotenv": "^16.4.7",
     "esbuild": "^0.24.0",
     "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
