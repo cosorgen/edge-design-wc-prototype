@@ -4,15 +4,14 @@ import { observable } from '@microsoft/fast-element';
 export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
   @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'always';
-  @observable showLegacyCopilot = false;
+  @observable showLegacyCopilot = true;
   @observable showCopilotNTP = false;
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
   @observable frameSpacing = '4px';
   @observable showLegacyNewTab = false;
-  @observable showMenusInL1 = false;
+  @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
-  @observable edgeTheme: 'kumo' | 'phoenix' | 'fluent' = 'kumo';
 
   constructor() {
     // Load settings from local storage
@@ -25,42 +24,43 @@ export default class EdgeSettingsSerivce {
       (searchParams.get('showFavoritesBar') as 'always' | 'newtab' | 'never') ||
       this.showFavoritesBar;
 
-    this.edgeTheme =
-      (searchParams.get('edgeTheme') as 'kumo' | 'phoenix' | 'fluent') ||
-      this.edgeTheme;
+    this.showLegacyCopilot =
+      searchParams.get('showLegacyCopilot') === 'true'
+        ? searchParams.get('showLegacyCopilot') === 'true'
+        : this.showLegacyCopilot;
 
-    this.showLegacyCopilot = searchParams.has('showLegacyCopilot')
-      ? searchParams.get('showLegacyCopilot') === 'true'
-      : this.showLegacyCopilot;
+    this.showLegacyNewTab =
+      searchParams.get('showLegacyNewTab') === 'true'
+        ? searchParams.get('showLegacyNewTab') === 'true'
+        : this.showLegacyNewTab;
 
-    this.showLegacyNewTab = searchParams.has('showLegacyNewTab')
-      ? searchParams.get('showLegacyNewTab') === 'true'
-      : this.showLegacyNewTab;
-
-    this.showCopilotNTP = searchParams.has('showCopilotNTP')
-      ? searchParams.get('showCopilotNTP') === 'true'
-      : this.showCopilotNTP;
+    this.showCopilotNTP =
+      searchParams.get('showCopilotNTP') === 'true'
+        ? searchParams.get('showCopilotNTP') === 'true'
+        : this.showCopilotNTP;
     if (this.showLegacyCopilot) this.pinToolbarItem('Legacy Copilot');
 
-    this.truncateURL = searchParams.has('truncateURL')
-      ? searchParams.get('truncateURL') === 'true'
-      : this.truncateURL;
+    this.truncateURL =
+      searchParams.get('truncateURL') === 'true'
+        ? searchParams.get('truncateURL') === 'true'
+        : this.truncateURL;
 
     this.frameSpacing = searchParams.get('frameSpacing') || this.frameSpacing;
 
-    this.showMenusInL1 = searchParams.has('showMenusInL1')
-      ? searchParams.get('showMenusInL1') === 'true'
-      : this.showMenusInL1;
+    this.showMenusInL1 =
+      searchParams.get('showMenusInL1') === 'true'
+        ? searchParams.get('showMenusInL1') === 'true'
+        : this.showMenusInL1;
 
-    this.fullWidthOmnibox = searchParams.has('fullWidthOmnibox')
-      ? searchParams.get('fullWidthOmnibox') === 'true'
-      : this.fullWidthOmnibox;
+    this.fullWidthOmnibox =
+      searchParams.get('fullWidthOmnibox') === 'true'
+        ? searchParams.get('fullWidthOmnibox') === 'true'
+        : this.fullWidthOmnibox;
   }
 
   setSettingsInURL() {
     const url = new URL(window.location.href);
     url.searchParams.set('showFavoritesBar', this.showFavoritesBar);
-    url.searchParams.set('edgeTheme', this.edgeTheme);
     url.searchParams.set(
       'showLegacyCopilot',
       this.showLegacyCopilot.toString(),
@@ -127,11 +127,6 @@ export default class EdgeSettingsSerivce {
 
   setFullWidthOmnibox(show: boolean): void {
     this.fullWidthOmnibox = show;
-    this.setSettingsInURL();
-  }
-
-  setEdgeTheme(theme: 'kumo' | 'phoenix' | 'fluent') {
-    this.edgeTheme = theme;
     this.setSettingsInURL();
   }
 }

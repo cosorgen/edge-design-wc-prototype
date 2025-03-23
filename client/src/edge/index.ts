@@ -220,7 +220,7 @@ export class MicrosoftEdge extends FASTElement {
         normal: { light: kumoLightTheme, dark: kumoDarkTheme },
       },
     };
-    const designSystem = themes[this.ss.edgeTheme];
+    const designSystem = themes.phoenix;
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
     const selectedTheme = designSystem[this.ws.transparency][themeKey];
     selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
