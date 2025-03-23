@@ -51,9 +51,4 @@ export default [
     width: 800,
     height: 600,
   },
-  {
-    name: 'Slides',
-    lightIcon: 'img/windows/figma-24.svg',
-    maximized: true,
-  },
 ] as InstalledApp[];

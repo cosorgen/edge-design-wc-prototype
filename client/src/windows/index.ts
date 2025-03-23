@@ -28,7 +28,6 @@ import './controls/mica-material.js';
 import './controls/app-window.js';
 import '../edge/index.js';
 import '../settings/index.js';
-import '../slides/index.js';
 
 const appTemplates: Record<string, ViewTemplate> = {
   'Microsoft Edge': html`<microsoft-edge></microsoft-edge>`,
