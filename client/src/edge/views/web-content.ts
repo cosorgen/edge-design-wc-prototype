@@ -14,7 +14,6 @@ import {
   colorLayerBackgroundApp,
   strokeWidthThin,
 } from '@edge-design/phoenix-theme';
-import './edge-newtab/index.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';

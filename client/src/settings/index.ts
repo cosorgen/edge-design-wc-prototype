@@ -188,33 +188,6 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'browser'}">
           <h2>Browser</h2>
           <div class="entry">
-            <label for="edge-theme">Edge theme</label>
-            <select
-              id="edge-theme"
-              @change="${(x) => x.updateEdgeTheme()}"
-              value="${(x) => x.ss.edgeTheme}"
-            >
-              <option
-                value="kumo"
-                ?selected="${(x) => x.ss.edgeTheme === 'kumo'}"
-              >
-                Kumo
-              </option>
-              <option
-                value="phoenix"
-                ?selected="${(x) => x.ss.edgeTheme === 'phoenix'}"
-              >
-                Phoenix
-              </option>
-              <option
-                value="fluent"
-                ?selected="${(x) => x.ss.edgeTheme === 'fluent'}"
-              >
-                Fluent
-              </option>
-            </select>
-          </div>
-          <div class="entry">
             <label for="show-menus-l0">Show menus in L1</label>
             <mai-switch
               slot="input"
@@ -663,13 +636,6 @@ export class WindowsSettings extends FASTElement {
           '#copilot-sidepane-background',
         ) as HTMLInputElement
       )?.checked || false,
-    );
-  }
-
-  updateEdgeTheme() {
-    this.ss.setEdgeTheme(
-      ((this.shadowRoot?.querySelector('#edge-theme') as HTMLSelectElement)
-        ?.value as 'kumo' | 'phoenix' | 'fluent') || 'phoenix',
     );
   }
 }

@@ -9,7 +9,7 @@ export default class EdgeSettingsSerivce {
   @observable truncateURL = false;
   @observable pinnedToolbarItems: string[] = [];
   @observable frameSpacing = '4px';
-  @observable showLegacyNewTab = false;
+  @observable showLegacyNewTab = true;
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
 

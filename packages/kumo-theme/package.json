@@ -18,10 +18,6 @@
     "dist/*.js",
     "dist/*.d.ts"
   ],
-  "dependencies": {
-    "@fluentui/tokens": "^1.0.0-alpha.19",
-    "@edge-design/utilities": "^0.0.1"
-  },
   "scripts": {
     "build": "npm run clean && npm run build:tsc && node scripts/build.js",
     "build:tsc": "tsc -p tsconfig.build.json",
