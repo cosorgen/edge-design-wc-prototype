@@ -1,9 +1,0 @@
-{
-    "extends": "../../tsconfig.json",
-    "compilerOptions": {
-        "baseUrl": ".",
-        "declarationDir": "dist/dts",
-        "outDir": "dist/esm"
-    },
-    "include": ["src/**/*.ts"]
-}
