@@ -15,7 +15,7 @@ import '../controls/favorites-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import { spacingHorizontalS, spacingFrame } from '@mai-ui/phoenix-theme';
+import { spacingHorizontalS, spacingFrame } from '@edge-design/phoenix-theme';
 import { TabService } from '#servicestabService.js';
 
 const template = html`
@@ -61,11 +61,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'favorites-bar',
-  template,
-  styles,
-})
+@customElement({ name: 'favorites-bar', template, styles })
 export class FavoritesBar extends FASTElement {
   @inject(FavoritesService) fs!: FavoritesService;
   @inject(TabService) ts!: TabService;

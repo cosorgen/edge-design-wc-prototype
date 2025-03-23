@@ -11,7 +11,7 @@ import {
   acrylicBackgroundLuminosity,
   colorNeutralForeground1,
   shadow2,
-} from '@mai-ui/copilot-theme';
+} from '@edge-design/copilot-theme';
 import '../controls/copilot-design-provider.js';
 import './copilot-chat.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -50,11 +50,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-sidepane',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-sidepane', template, styles })
 export class CopilotSidepane extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @attr({ mode: 'boolean' }) background = false;

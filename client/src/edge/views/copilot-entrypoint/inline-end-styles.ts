@@ -1,5 +1,5 @@
 import { css } from '@microsoft/fast-element';
-import { spacingFrame } from '@mai-ui/phoenix-theme';
+import { spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */
@@ -14,9 +14,8 @@ export default css`
   :host([inline-position='end'][ntp]) #composer {
     /* Start over ntp page */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${spacingFrame} / 2 - var(
-          --ntp-inset
-        )
+      100% - var(--composer-expanded-width) - ${spacingFrame} /
+        2 - var(--ntp-inset)
     );
   }
 
@@ -72,9 +71,8 @@ export default css`
   :host([inline-position='end'][active][ntp]) #hint-composer {
     /* over ntp */
     inset-inline-start: calc(
-      100% - var(--composer-retracted-width) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+      100% - var(--composer-retracted-width) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 

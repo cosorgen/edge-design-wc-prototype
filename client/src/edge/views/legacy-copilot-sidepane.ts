@@ -8,7 +8,7 @@ import {
   spacingVerticalM,
   spacingVerticalXXL,
   smtcBackgroundPageGradient,
-} from '@mai-ui/copilot-theme';
+} from '@edge-design/copilot-theme';
 import '../controls/sidepane-header.js';
 import '../controls/copilot-design-provider.js';
 import './copilot-composer.js';
@@ -91,11 +91,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'legacy-copilot-sidepane',
-  template,
-  styles,
-})
+@customElement({ name: 'legacy-copilot-sidepane', template, styles })
 export class LegacyCopilotSidepane extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
 

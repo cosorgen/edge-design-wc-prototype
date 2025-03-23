@@ -6,7 +6,7 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@mai-ui/toggle-button/define.js';
+import '@mai-ui/button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
@@ -21,7 +21,7 @@ function toCamelCase(str: string) {
 
 const template = html<ToolbarSidepaneItem>`
   <flyout-menu @toggle="${(x) => x.handleFlyoutToggle()}">
-    <mai-toggle-button
+    <mai-button
       appearance="subtle"
       icon-only
       slot="trigger"
@@ -38,7 +38,7 @@ const template = html<ToolbarSidepaneItem>`
           src="./img/edge/${(x) => toCamelCase(x.id)}AppLight.png"
         />`,
       )}
-    </mai-toggle-button>
+    </mai-button>
     <context-menu slot="context">
       <menu-item @click="${(x) => x.handlePinToggle()}">
         ${(x) => (x.pinned ? 'Hide from toolbar' : 'Always show in toolbar')}
@@ -48,7 +48,7 @@ const template = html<ToolbarSidepaneItem>`
 `;
 
 const styles = css`
-  flyout-menu > mai-toggle-button {
+  flyout-menu > mai-button {
     /* Override button corner radius */
     --smtc-corner-control-rest: 8px;
     --smtc-corner-control-hover: 8px;
@@ -57,11 +57,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'toolbar-sidepane-item',
-  template,
-  styles,
-})
+@customElement({ name: 'toolbar-sidepane-item', template, styles })
 export class ToolbarSidepaneItem extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean' }) pressed = false;
@@ -70,7 +66,7 @@ export class ToolbarSidepaneItem extends FASTElement {
   handleFlyoutToggle() {
     // Don't allow the context menu closing to affect the toggle state
     this.shadowRoot
-      ?.querySelector('mai-toggle-button')
+      ?.querySelector('mai-button')
       ?.setAttribute('pressed', this.pressed.toString());
   }
 

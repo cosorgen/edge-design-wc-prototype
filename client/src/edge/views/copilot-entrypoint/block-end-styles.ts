@@ -1,5 +1,5 @@
 import { css } from '@microsoft/fast-element';
-import { spacingFrame } from '@mai-ui/phoenix-theme';
+import { spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */
@@ -15,9 +15,8 @@ export default css`
   :host([block-position='end']:not([inline-position='center'])) #composer {
     /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+      100% - var(--composer-expanded-height) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 
@@ -31,9 +30,8 @@ export default css`
   :host([block-position='end']:not([inline-position='center'])) #composer {
     /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+      100% - var(--composer-expanded-height) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 
@@ -77,9 +75,8 @@ export default css`
   :host([block-position='end'][active][dragging]) #grabber {
     /* Center in top 25% of hint composer */
     inset-block-start: calc(
-      100% - var(--grabber-height) / 2 - ${spacingFrame} - var(
-          --composer-retracted-height
-        ) * 0.25
+      100% - var(--grabber-height) / 2 -
+        ${spacingFrame} - var(--composer-retracted-height) * 0.25
     );
   }
 
@@ -90,9 +87,8 @@ export default css`
     #grabber-no-hint {
     /* Alignt to bottom - margin */
     inset-block-start: calc(
-      100% - var(--grabber-vertical-retracted-width) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+      100% - var(--grabber-vertical-retracted-width) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 
@@ -106,9 +102,8 @@ export default css`
     /* Alignt to bottom - half expanded width - margin - ntp offset */
     inset-block-start: calc(
       100% - var(--grabber-vertical-expanded-width) -
-        (var(--grabber-vertical-expanded-width) / 2) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+        (var(--grabber-vertical-expanded-width) / 2) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 
@@ -136,9 +131,8 @@ export default css`
   :host([block-position='end'][active][ntp]) #hint-composer {
     /* bottom over ntp */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+      100% - var(--composer-retracted-height) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 
@@ -151,9 +145,8 @@ export default css`
     #hint-composer {
     /* Align to bottom - margin - ntp offset */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) - ${spacingFrame} - var(
-          --ntp-inset
-        )
+      100% - var(--composer-retracted-height) -
+        ${spacingFrame} - var(--ntp-inset)
     );
   }
 `;

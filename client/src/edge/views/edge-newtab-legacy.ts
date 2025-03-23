@@ -39,7 +39,7 @@ import {
   spacingHorizontalXXXL,
   strokeWidthThin,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const topSites = [
   {
@@ -453,11 +453,7 @@ const styles = css`
     }
 `;
 
-@customElement({
-  name: 'edge-newtab-legacy',
-  template,
-  styles,
-})
+@customElement({ name: 'edge-newtab-legacy', template, styles })
 export class EdgeNewTab extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;

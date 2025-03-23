@@ -9,8 +9,10 @@
   "license": "MIT",
   "dependencies": {
     "@edge-design/copilot-theme": "^0.0.1",
+    "@edge-design/phoenix-theme": "^0.0.1",
     "@edge-design/kumo-theme": "^0.0.1",
     "@edge-design/windows-theme": "^0.0.1",
+    "@edge-design/utilities": "^0.0.1",
     "@mai-ui/button": "^1.0.1",
     "@mai-ui/divider": "^1.0.1",
     "@mai-ui/spinner": "^1.0.1",

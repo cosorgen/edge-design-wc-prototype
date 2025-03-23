@@ -16,7 +16,7 @@ import {
   spacingHorizontalSNudge,
   spacingHorizontalXS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html<FavoritesItem>` <button
   part="favorite-button"
@@ -76,11 +76,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'favorites-item',
-  template,
-  styles,
-})
+@customElement({ name: 'favorites-item', template, styles })
 export class FavoritesItem extends FASTElement {
   @attr type: 'site' | 'folder' = 'site';
   @attr title = 'Favorite item';

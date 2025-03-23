@@ -4,7 +4,7 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/add-favorites-flyout.js';
-import { colorBrandForeground1 } from '@mai-ui/phoenix-theme';
+import { colorBrandForeground1 } from '@edge-design/phoenix-theme';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -16,22 +16,10 @@ export const overflowItems = {
     iconId: 'star-add-20-regular',
     iconId2: 'star-20-filled',
   },
-  shopping: {
-    title: 'Shopping',
-    iconId: 'shopping-20-regular',
-  },
-  'read-aloud': {
-    title: 'Read aloud',
-    iconId: 'read-aloud-20-regular',
-  },
-  install: {
-    title: 'Install app',
-    iconId: 'apps-add-in-20-regular',
-  },
-  share: {
-    title: 'Share',
-    iconId: 'share-20-regular',
-  },
+  shopping: { title: 'Shopping', iconId: 'shopping-20-regular' },
+  'read-aloud': { title: 'Read aloud', iconId: 'read-aloud-20-regular' },
+  install: { title: 'Install app', iconId: 'apps-add-in-20-regular' },
+  share: { title: 'Share', iconId: 'share-20-regular' },
 } as Record<string, { title: string; iconId: string; iconId2?: string }>;
 
 export default {

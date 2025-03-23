@@ -6,7 +6,7 @@ import {
   colorNeutralForeground1,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const template = html<SystemTray>`
   <button>
@@ -48,9 +48,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'system-tray',
-  template,
-  styles,
-})
+@customElement({ name: 'system-tray', template, styles })
 export default class SystemTray extends FASTElement {}

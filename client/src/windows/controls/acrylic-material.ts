@@ -4,7 +4,7 @@ import {
   acrylicBackgroundColor,
   acrylicBackgroundLuminosity,
   acrylicBackgroundNormal,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const template = html<AcrylicMaterial>`
   <div id="luminosity"></div>

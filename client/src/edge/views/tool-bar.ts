@@ -12,8 +12,8 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
-import '@mai-ui/toggle-button/define.js';
+} from '@edge-design/phoenix-theme';
+import '@mai-ui/button/define.js';
 import '@mai-ui/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
@@ -58,10 +58,7 @@ const template = html<Toolbar>`
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
     @blur="${(x, c) =>
-      x.handleOmniboxChange({
-        ...c.event,
-        detail: ' ',
-      } as CustomEvent)}"
+      x.handleOmniboxChange({ ...c.event, detail: ' ' } as CustomEvent)}"
   >
     ${when(
       (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.top,
@@ -135,7 +132,7 @@ const template = html<Toolbar>`
           <identity-flyout></identity-flyout>
         </flyout-menu>
         <flyout-menu>
-          <mai-toggle-button
+          <mai-button
             size="medium"
             appearance="subtle"
             icon-only
@@ -144,7 +141,7 @@ const template = html<Toolbar>`
             <svg>
               <use href="img/edge/icons.svg#more-horizontal-20-regular" />
             </svg>
-          </mai-toggle-button>
+          </mai-button>
           <more-menu
             managed
             @moreaction="${(x, c) =>
@@ -154,7 +151,7 @@ const template = html<Toolbar>`
         ${when(
           (x) => x.ess.showLegacyCopilot,
           html`
-            <mai-toggle-button
+            <mai-button
               appearance="subtle"
               icon-only
               slot="trigger"
@@ -163,7 +160,7 @@ const template = html<Toolbar>`
                 x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
             >
               <img width="20px" src="./img/edge/copilotAppLight.png" />
-            </mai-toggle-button>
+            </mai-button>
           `,
         )}
       `,
@@ -188,9 +185,9 @@ const styles = css`
     gap: ${spacingHorizontalXS};
   }
 
-  flyout-menu > mai-toggle-button,
+  flyout-menu > mai-button,
   .group > mai-button,
-  .group > mai-toggle-button {
+  .group > mai-button {
     /* Only direct buttons on toolbar need override */
     --smtc-corner-control-rest: 8px;
     --smtc-corner-control-hover: 8px;
@@ -204,11 +201,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'tool-bar',
-  template,
-  styles,
-})
+@customElement({ name: 'tool-bar', template, styles })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(WindowsService) ws!: WindowsService;

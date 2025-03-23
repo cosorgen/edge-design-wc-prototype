@@ -11,7 +11,7 @@ import {
   shadow2,
   spacingVerticalSNudge,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/horizontal-tab.js';
@@ -162,11 +162,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'tab-bar',
-  template,
-  styles,
-})
+@customElement({ name: 'tab-bar', template, styles })
 export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;

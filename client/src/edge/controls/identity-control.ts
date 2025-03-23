@@ -18,13 +18,9 @@ import {
   lineHeightBase200,
   spacingHorizontalXS,
   strokeWidthThin,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
-const imageIds = {
-  signedIn: 'dog',
-  inPrivate: 'inPrivate',
-  guest: 'guest',
-};
+const imageIds = { signedIn: 'dog', inPrivate: 'inPrivate', guest: 'guest' };
 
 const template = html<IdentityControl>`
   <button>
@@ -83,11 +79,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'identity-control',
-  template,
-  styles,
-})
+@customElement({ name: 'identity-control', template, styles })
 export class IdentityControl extends FASTElement {
   @attr appearance: 'signedIn' | 'inPrivate' | 'guest' = 'guest';
   @attr error: 'accountUnsup' | 'signIn' | 'signedOut' | 'custom' | null = null;

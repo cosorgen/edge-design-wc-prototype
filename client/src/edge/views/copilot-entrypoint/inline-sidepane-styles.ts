@@ -1,5 +1,5 @@
 import { css } from '@microsoft/fast-element';
-import { spacingHorizontalM, spacingFrame } from '@mai-ui/phoenix-theme';
+import { spacingHorizontalM, spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */

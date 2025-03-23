@@ -8,7 +8,7 @@ import {
   strokeWidthThin,
   typographyStyles,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 
 const template = html` <div id="title"><slot></slot></div>
@@ -60,9 +60,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'sidepane-header',
-  template,
-  styles,
-})
+@customElement({ name: 'sidepane-header', template, styles })
 export class SidepaneHeader extends FASTElement {}

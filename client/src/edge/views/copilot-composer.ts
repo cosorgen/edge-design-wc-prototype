@@ -19,7 +19,7 @@ import {
   smtcShadowLarge,
   durationNormal,
   curveEasyEase,
-} from '@mai-ui/copilot-theme';
+} from '@edge-design/copilot-theme';
 import '@mai-ui/button/define.js';
 import '../../windows/controls/acrylic-material.js';
 import '../controls/copilot-chat-entry.js';
@@ -166,11 +166,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-composer',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-composer', template, styles })
 export class CopilotComposer extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(TabService) ts!: TabService;

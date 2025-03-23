@@ -22,7 +22,7 @@ import {
   borderRadiusLarge,
   spacingHorizontalM,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -343,11 +343,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-entrypoint',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-entrypoint', template, styles })
 export class CopilotEntrypoint extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;

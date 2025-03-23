@@ -19,20 +19,14 @@ import {
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import {
   kumoLightTheme,
   kumoDarkTheme,
   kumoLightThemeSolid,
   kumoDarkThemeSolid,
-} from '@mai-ui/kumo-theme';
-import {
-  fluent2LightTheme,
-  fluent2DarkTheme,
-  fluent2LightThemeSolid,
-  fluent2DarkThemeSolid,
-} from '@mai-ui/fluent-theme';
-import { setThemeFor } from '@mai-ui/component-framework';
+} from '@edge-design/kumo-theme';
+import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -141,11 +135,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'microsoft-edge',
-  template,
-  styles,
-})
+@customElement({ name: 'microsoft-edge', template, styles })
 export class MicrosoftEdge extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
@@ -223,30 +213,11 @@ export class MicrosoftEdge extends FASTElement {
           light: phoenixLightThemeSolidWin11,
           dark: phoenixDarkThemeSolidWin11,
         },
-        normal: {
-          light: phoenixLightThemeWin11,
-          dark: phoenixDarkThemeWin11,
-        },
+        normal: { light: phoenixLightThemeWin11, dark: phoenixDarkThemeWin11 },
       },
       kumo: {
-        reduced: {
-          light: kumoLightThemeSolid,
-          dark: kumoDarkThemeSolid,
-        },
-        normal: {
-          light: kumoLightTheme,
-          dark: kumoDarkTheme,
-        },
-      },
-      fluent: {
-        reduced: {
-          light: fluent2LightThemeSolid,
-          dark: fluent2DarkThemeSolid,
-        },
-        normal: {
-          light: fluent2LightTheme,
-          dark: fluent2DarkTheme,
-        },
+        reduced: { light: kumoLightThemeSolid, dark: kumoDarkThemeSolid },
+        normal: { light: kumoLightTheme, dark: kumoDarkTheme },
       },
     };
     const designSystem = themes[this.ss.edgeTheme];

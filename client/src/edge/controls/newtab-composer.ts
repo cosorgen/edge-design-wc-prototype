@@ -3,7 +3,7 @@ import {
   borderRadiusCircular,
   colorNeutralForegroundHint,
   spacingHorizontalS,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import {
   colorNeutralCardBackground,
   colorNeutralForeground2,
@@ -15,7 +15,7 @@ import {
   shadow2,
   spacingVerticalMNudge,
   spacingHorizontalXXL,
-} from '@mai-ui/kumo-theme';
+} from '@edge-design/kumo-theme';
 
 const template = html`
   <input
@@ -87,11 +87,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'newtab-composer',
-  template,
-  styles,
-})
+@customElement({ name: 'newtab-composer', template, styles })
 export class NewtabComposer extends FASTElement {
   focus() {
     const input = this.shadowRoot?.querySelector('input');

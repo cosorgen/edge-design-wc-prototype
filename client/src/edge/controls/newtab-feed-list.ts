@@ -8,7 +8,7 @@ import {
   typographyStyles,
   spacingVerticalL,
   spacingVerticalM,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html` <h2>Top stories for you</h2>
   <div id="list">

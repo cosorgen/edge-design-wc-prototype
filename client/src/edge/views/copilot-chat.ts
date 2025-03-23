@@ -13,7 +13,7 @@ import {
   spacingFrame,
   spacingVerticalM,
   spacingVerticalXXL,
-} from '@mai-ui/copilot-theme';
+} from '@edge-design/copilot-theme';
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
@@ -52,11 +52,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-chat',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-chat', template, styles })
 export class CopilotChat extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @attr({ mode: 'boolean' }) inline = false;
@@ -130,10 +126,7 @@ export class CopilotChat extends FASTElement {
             // Scroll message into view if it's the last message
             if (x === messageIds.length - 1) {
               Updates.enqueue(() => {
-                entry.scrollIntoView({
-                  behavior: 'smooth',
-                  block: 'nearest',
-                });
+                entry.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
               });
             }
           }

@@ -9,7 +9,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalS,
   spacingVerticalXS,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import './menu-item.js';
 
 const template = html<ContextMenu>`
@@ -58,9 +58,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'context-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'context-menu', template, styles })
 export default class ContextMenu extends FASTElement {}

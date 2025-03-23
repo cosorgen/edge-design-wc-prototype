@@ -15,7 +15,7 @@ import {
   strokeWidthThick,
   borderRadiusMedium,
   colorNeutralForeground1Static,
-} from '@mai-ui/kumo-theme';
+} from '@edge-design/kumo-theme';
 
 const smtcCornerCardRest = `var(--smtc-corner-card-rest, ${borderRadiusLarge})`;
 const smtcCornerImageInCardRest = `var(--smtc-corner-image-in-card-rest, ${borderRadiusMedium})`;
@@ -46,7 +46,8 @@ export const styles = css`
     left: 0;
     width: var(--viewport-width);
     height: var(--viewport-height);
-    background: linear-gradient(180deg, #ffffff80 0%, white 100%),
+    background:
+      linear-gradient(180deg, #ffffff80 0%, white 100%),
       url('img/edge/newtab2/background.jpg');
     background-size: cover;
     background-position: center;
@@ -121,12 +122,8 @@ export const styles = css`
     flex-direction: column;
     justify-content: flex-end;
 
-    background: linear-gradient(
-        0deg,
-        #ff314ce5 10%,
-        #ff314c99 40%,
-        #ff314c1a 90%
-      ),
+    background:
+      linear-gradient(0deg, #ff314ce5 10%, #ff314c99 40%, #ff314c1a 90%),
       url('img/edge/newtab2/msnBackground.png');
     background-size: cover, cover;
     background-position: center, center;

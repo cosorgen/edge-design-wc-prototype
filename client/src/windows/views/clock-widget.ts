@@ -15,7 +15,7 @@ import {
   spacingHorizontalS,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const template = html<ClockWidget>`
   <button>
@@ -54,11 +54,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'clock-widget',
-  template,
-  styles,
-})
+@customElement({ name: 'clock-widget', template, styles })
 export default class ClockWidget extends FASTElement {
   @observable time = this.formatTime();
   @observable date = this.formatDate();

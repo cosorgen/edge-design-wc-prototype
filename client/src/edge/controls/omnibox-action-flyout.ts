@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import '@mai-ui/toggle-button/define.js';
+import '@mai-ui/button/define.js';
 import './flyout-menu.js';
 import {
   acrylicBackgroundBlur,
@@ -15,11 +15,11 @@ import {
   colorNeutralForegroundHint,
   shadow28,
   spacingHorizontalL,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">
-    <mai-toggle-button
+    <mai-button
       size="small"
       appearance="subtle"
       shape="circular"
@@ -28,7 +28,7 @@ const template = html<OmniboxActionFlyout>`
       @click="${(x, c) => x.handleTriggrClick(c.event)}"
     >
       <slot name="trigger-content"></slot>
-    </mai-toggle-button>
+    </mai-button>
     <slot></slot>
   </flyout-menu>
 `;
@@ -46,16 +46,12 @@ const styles = css`
     color: ${colorNeutralForeground1};
   }
 
-  flyout-menu > mai-toggle-button {
+  flyout-menu > mai-button {
     --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
   }
 `;
 
-@customElement({
-  name: 'omnibox-action-flyout',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-action-flyout', template, styles })
 export class OmniboxActionFlyout extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;

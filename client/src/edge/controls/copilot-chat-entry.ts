@@ -30,7 +30,7 @@ import {
   smtcPaddingBlockMessageBubble,
   smtcPaddingInlineMessageBubble,
   smtcBackgroundSpinnerRest,
-} from '@mai-ui/copilot-theme';
+} from '@edge-design/copilot-theme';
 import '@mai-ui/button/define.js';
 import showdown from 'showdown';
 import dompurify from 'dompurify';

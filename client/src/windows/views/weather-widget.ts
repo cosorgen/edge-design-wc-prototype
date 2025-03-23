@@ -17,7 +17,7 @@ import {
   spacingHorizontalS,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 export type IconCode =
   | '01' // clear sky
@@ -99,11 +99,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'weather-widget',
-  template,
-  styles,
-})
+@customElement({ name: 'weather-widget', template, styles })
 export default class WeatherWidget extends FASTElement {
   @observable temp: number = 0;
   @observable condition: string = '';

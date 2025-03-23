@@ -14,7 +14,7 @@ import {
   strokeWidthThin,
   colorLayerOmniboxBackground,
   colorLayerOmniboxBackgroundHover,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 export const styles = css`
   :host {

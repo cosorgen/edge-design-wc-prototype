@@ -26,7 +26,7 @@ import {
   smtcCornerComposerSendButtonHover,
   smtcCornerComposerSendButtonPressed,
   curveEasyEase,
-} from '@mai-ui/copilot-theme';
+} from '@edge-design/copilot-theme';
 import '@mai-ui/button/define.js';
 
 const template = html<CopilotInput>`
@@ -141,11 +141,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-input',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-input', template, styles })
 export class CopilotInput extends FASTElement {
   @attr placeholder = '';
   @attr({ mode: 'boolean' }) empty = true;

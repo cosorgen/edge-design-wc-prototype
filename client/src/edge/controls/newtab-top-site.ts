@@ -8,7 +8,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalS,
   strokeWidthThin,
-} from '@mai-ui/kumo-theme';
+} from '@edge-design/kumo-theme';
 
 const template = html`
   <button>
@@ -55,9 +55,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'newtab-top-site',
-  template,
-  styles,
-})
+@customElement({ name: 'newtab-top-site', template, styles })
 export class NewtabTopSite extends FASTElement {}

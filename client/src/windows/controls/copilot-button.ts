@@ -4,7 +4,7 @@ import {
   colorNeutralForeground1,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const template = html<CopilotButton>`
   <button>
@@ -35,9 +35,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-button',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-button', template, styles })
 export default class CopilotButton extends FASTElement {}

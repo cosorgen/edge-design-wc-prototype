@@ -19,8 +19,8 @@ import {
   spacingHorizontalM,
   spacingVerticalM,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
-import { spacingVerticalXL } from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
+import { spacingVerticalXL } from '@edge-design/phoenix-theme';
 import { TabService } from '#services/tabService.js';
 import FavoritesService from '#services/favoritesService.js';
 
@@ -115,11 +115,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'add-favorites-flyout',
-  template,
-  styles,
-})
+@customElement({ name: 'add-favorites-flyout', template, styles })
 export class AddFavoritesInputs extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(FavoritesService) fs!: FavoritesService;

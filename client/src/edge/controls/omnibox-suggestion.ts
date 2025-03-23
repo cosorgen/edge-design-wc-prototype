@@ -19,7 +19,7 @@ import {
   spacingHorizontalM,
   spacingVerticalS,
   strokeWidthThickest,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import './omnibox-icon.js';
 
 const template = html<OmniboxSuggestion>` <div id="start">
@@ -124,11 +124,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'omnibox-suggestion',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-suggestion', template, styles })
 export class OmniboxSuggestion extends FASTElement {
   @attr title = '';
   @attr value = '';

@@ -7,7 +7,7 @@ import {
   spacingVerticalM,
   spacingVerticalS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html`<slot name="hero"></slot>
   <div id="content"><slot name="heading"></slot><slot></slot></div>`;

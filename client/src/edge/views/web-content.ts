@@ -13,7 +13,7 @@ import '../controls/web-page.js';
 import {
   colorLayerBackgroundApp,
   strokeWidthThin,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import './edge-newtab/index.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
@@ -68,11 +68,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'web-content',
-  template,
-  styles,
-})
+@customElement({ name: 'web-content', template, styles })
 export class WebContent extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;

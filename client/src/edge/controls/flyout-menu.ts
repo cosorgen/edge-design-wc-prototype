@@ -5,7 +5,7 @@ import {
   FASTElement,
   html,
 } from '@microsoft/fast-element';
-import { curveDecelerateMax, durationFast } from '@mai-ui/phoenix-theme';
+import { curveDecelerateMax, durationFast } from '@edge-design/phoenix-theme';
 
 // Popovers need to be manually controlled so that we can use context menus with trackpads
 const template = html<FlyoutMenu>`
@@ -63,11 +63,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'flyout-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'flyout-menu', template, styles })
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   _popoverElement: HTMLElement | null = null;

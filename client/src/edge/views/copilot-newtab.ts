@@ -18,7 +18,7 @@ import {
   spacingVerticalXL,
   spacingVerticalXXXL,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -251,11 +251,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-newtab',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-newtab', template, styles })
 export class CopilotNewtab extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @inject(TabService) ts!: TabService;

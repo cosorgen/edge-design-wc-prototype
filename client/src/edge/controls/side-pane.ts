@@ -6,7 +6,10 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
-import { borderRadiusLayerBase, spacingFrame } from '@mai-ui/phoenix-theme';
+import {
+  borderRadiusLayerBase,
+  spacingFrame,
+} from '@edge-design/phoenix-theme';
 import apps from '../installedApps.js';
 
 const template = html<SidePane>`${(x) => apps[x.id].template}`;
@@ -28,11 +31,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'side-pane',
-  template,
-  styles,
-})
+@customElement({ name: 'side-pane', template, styles })
 export class SidePane extends FASTElement {
   @attr id: string = '';
 }

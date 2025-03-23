@@ -6,7 +6,7 @@ import {
   borderRadiusLayerDialog,
   colorNeutralForeground1,
   shadow28,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html` Coupons available `;
 
@@ -25,9 +25,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'shopping-flyout',
-  template,
-  styles,
-})
+@customElement({ name: 'shopping-flyout', template, styles })
 export class ShoppingFlyout extends FASTElement {}

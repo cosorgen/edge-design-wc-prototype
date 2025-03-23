@@ -9,7 +9,7 @@ import {
   colorShellFillCaptionControlPrimaryPressed,
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 import {
   borderRadiusCircular,
   spacingHorizontalS,
@@ -18,13 +18,13 @@ import {
   strokeWidthThin,
   colorLayerBackgroundPillMenu,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
-import '@mai-ui/toggle-button/define.js';
+import '@mai-ui/button/define.js';
 
 const template = html` <div
     id="window-grabber"
@@ -36,7 +36,7 @@ const template = html` <div
       ? html`
           <div class="group" id="pill-menu">
             <flyout-menu>
-              <mai-toggle-button
+              <mai-button
                 size="small"
                 appearance="subtle"
                 shape="circular"
@@ -46,7 +46,7 @@ const template = html` <div
                 <svg>
                   <use href="img/edge/icons.svg#more-horizontal-20-regular" />
                 </svg>
-              </mai-toggle-button>
+              </mai-button>
               <more-menu
                 managed
                 @moreaction="${(x, c) =>

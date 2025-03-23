@@ -10,7 +10,7 @@ import {
 import {
   colorNeutralForeground3,
   spacingHorizontalXS,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 
@@ -34,9 +34,7 @@ const iconIds: Record<string, string> = {
   file: 'file-20-regular',
 };
 
-const imgPaths: Record<string, string> = {
-  edge: 'favicon.ico',
-};
+const imgPaths: Record<string, string> = { edge: 'favicon.ico' };
 
 const template = html<OmniboxStatus>`
   <mai-button
@@ -98,11 +96,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'omnibox-status',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-status', template, styles })
 export class OmniboxStatus extends FASTElement {
   @attr value: string | null = '';
   @observable type: 'search' | 'not-secure' | 'secure' | 'file' | 'edge' =

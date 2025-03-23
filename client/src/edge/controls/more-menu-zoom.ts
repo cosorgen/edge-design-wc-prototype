@@ -4,7 +4,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXXS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html<MoreMenuZoom>`
   <div part="label">Zoom</div>
@@ -46,9 +46,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'more-menu-zoom',
-  template,
-  styles,
-})
+@customElement({ name: 'more-menu-zoom', template, styles })
 export default class MoreMenuZoom extends FASTElement {}

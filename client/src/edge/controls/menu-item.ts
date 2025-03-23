@@ -8,7 +8,7 @@ import {
   lineHeightBase300,
   spacingHorizontalL,
   spacingHorizontalS,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 export type MoreMenuEntry = {
   title?: string;
@@ -92,9 +92,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'menu-item',
-  template,
-  styles,
-})
+@customElement({ name: 'menu-item', template, styles })
 export default class MenuItem extends FASTElement {}

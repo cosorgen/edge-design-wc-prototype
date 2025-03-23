@@ -4,7 +4,7 @@ import {
   spacingHorizontalM,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const styles = css`
   button {

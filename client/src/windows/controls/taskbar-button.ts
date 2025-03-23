@@ -9,7 +9,7 @@ import {
   colorShellStrokeTaskbarItemSecondary,
   colorShellStrokeTaskbarItemQuinary,
   colorFillAccent,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const template = html`
   <button>
@@ -82,9 +82,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'taskbar-button',
-  template,
-  styles,
-})
+@customElement({ name: 'taskbar-button', template, styles })
 export default class TaskbarButton extends FASTElement {}

@@ -6,7 +6,7 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@mai-ui/toggle-button/define.js';
+import '@mai-ui/button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
@@ -17,7 +17,7 @@ import {
   colorNeutralForeground1,
   shadow28,
   spacingHorizontalL,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import apps from '../installedApps.js';
 
 const template = html<ToolbarFlyoutItem>`
@@ -25,7 +25,7 @@ const template = html<ToolbarFlyoutItem>`
     @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
     ?initially-open="${(x) => x.initOpen}"
   >
-    <mai-toggle-button appearance="subtle" icon-only slot="trigger">
+    <mai-button appearance="subtle" icon-only slot="trigger">
       ${when(
         (x) => apps[x.id].iconId,
         html`<svg>
@@ -36,7 +36,7 @@ const template = html<ToolbarFlyoutItem>`
           src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
         />`,
       )}
-    </mai-toggle-button>
+    </mai-button>
     ${(x) => apps[x.id].template}
     <context-menu slot="context">
       ${when(
@@ -57,7 +57,7 @@ const template = html<ToolbarFlyoutItem>`
 `;
 
 const styles = css`
-  flyout-menu > mai-toggle-button {
+  flyout-menu > mai-button {
     /* Override button corner radius */
     --smtc-corner-control-rest: 8px;
     --smtc-corner-control-hover: 8px;
@@ -78,11 +78,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'toolbar-flyout-item',
-  template,
-  styles,
-})
+@customElement({ name: 'toolbar-flyout-item', template, styles })
 export class ToolbarFlyoutItem extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;

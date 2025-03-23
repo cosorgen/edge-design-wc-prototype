@@ -12,7 +12,7 @@ import {
   colorSubtleBackgroundPressed,
   spacingHorizontalM,
   spacingHorizontalS,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
@@ -113,11 +113,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'extension-hub-item',
-  template,
-  styles,
-})
+@customElement({ name: 'extension-hub-item', template, styles })
 export class ExtensionHubItem extends FASTElement {
   @attr({ mode: 'boolean' }) pinned = false;
 

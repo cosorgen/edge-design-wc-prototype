@@ -4,7 +4,7 @@ import {
   strokeWidthThin,
   spacingHorizontalXS,
   colorNeutralStroke3,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 import '../controls/taskbar-button.js';
 import './clock-widget.js';
 import './system-tray.js';
@@ -73,9 +73,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'task-bar',
-  template,
-  styles,
-})
+@customElement({ name: 'task-bar', template, styles })
 export class TaskBar extends FASTElement {}

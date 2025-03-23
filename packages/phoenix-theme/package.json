@@ -1,0 +1,33 @@
+{
+  "name": "@edge-design/phoenix-theme",
+  "version": "0.0.1",
+  "author": "Microsoft",
+  "description": "MAI Phoenix theme for Edge",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/dts/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "*.md",
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "dependencies": {
+    "@fluentui/tokens": "^1.0.0-alpha.19",
+    "@edge-design/utilities": "^0.0.1"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run build:tsc && node scripts/build.js",
+    "build:tsc": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0"
+  }
+}

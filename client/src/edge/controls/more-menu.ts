@@ -26,7 +26,7 @@ import {
   spacingVerticalS,
   spacingVerticalXS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';
@@ -36,83 +36,29 @@ import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
 
 const defaultItems: MoreMenuEntry[] = [
-  {
-    title: 'New tab',
-    type: 'action',
-    shortcut: 'Ctrl+T',
-  },
-  {
-    title: 'New window',
-    type: 'action',
-    shortcut: 'Ctrl+N',
-  },
-  {
-    title: 'New InPrivate window',
-    type: 'action',
-    shortcut: 'Ctrl+Shift+N',
-  },
-  {
-    title: 'Print',
-    type: 'action',
-    shortcut: 'Ctrl+P',
-  },
-  {
-    title: 'Screenshot',
-    type: 'action',
-    shortcut: 'Ctrl+Shift+S',
-  },
-  {
-    title: 'Find on page',
-    type: 'action',
-    shortcut: 'Ctrl+F',
-  },
-  {
-    title: 'More tools',
-    type: 'sub-menu',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    type: 'zoom',
-  },
-  {
-    type: 'divider',
-  },
+  { title: 'New tab', type: 'action', shortcut: 'Ctrl+T' },
+  { title: 'New window', type: 'action', shortcut: 'Ctrl+N' },
+  { title: 'New InPrivate window', type: 'action', shortcut: 'Ctrl+Shift+N' },
+  { title: 'Print', type: 'action', shortcut: 'Ctrl+P' },
+  { title: 'Screenshot', type: 'action', shortcut: 'Ctrl+Shift+S' },
+  { title: 'Find on page', type: 'action', shortcut: 'Ctrl+F' },
+  { title: 'More tools', type: 'sub-menu' },
+  { type: 'divider' },
+  { type: 'zoom' },
+  { type: 'divider' },
   {
     title: 'Favorites',
     type: 'action',
     shortcut: 'Ctrl+Shift+O',
     keywords: ['bookmarks'],
   },
-  {
-    title: 'History',
-    type: 'action',
-    shortcut: 'Ctrl+H',
-  },
-  {
-    title: 'Shopping',
-    type: 'action',
-  },
-  {
-    title: 'Downloads',
-    type: 'action',
-  },
-  {
-    title: 'Extensions',
-    type: 'action',
-  },
-  {
-    title: 'Browser Essentials',
-    type: 'action',
-  },
-  {
-    title: 'Passwords',
-    type: 'action',
-  },
-  {
-    type: 'divider',
-  },
+  { title: 'History', type: 'action', shortcut: 'Ctrl+H' },
+  { title: 'Shopping', type: 'action' },
+  { title: 'Downloads', type: 'action' },
+  { title: 'Extensions', type: 'action' },
+  { title: 'Browser Essentials', type: 'action' },
+  { title: 'Passwords', type: 'action' },
+  { type: 'divider' },
   {
     title: 'Settings',
     type: 'action',
@@ -145,17 +91,9 @@ const defaultItems: MoreMenuEntry[] = [
       'about',
     ],
   },
-  {
-    title: 'Help and feedback',
-    type: 'sub-menu',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    title: 'Close Microsoft Edge',
-    type: 'action',
-  },
+  { title: 'Help and feedback', type: 'sub-menu' },
+  { type: 'divider' },
+  { title: 'Close Microsoft Edge', type: 'action' },
 ];
 
 const template = html<MoreMenu>`
@@ -326,11 +264,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'more-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'more-menu', template, styles })
 export default class MoreMenu extends FASTElement {
   @attr({ mode: 'boolean' }) managed = false;
   @observable items: MoreMenuEntry[] = [...defaultItems];

@@ -27,7 +27,7 @@ import {
   spacingHorizontalSNudge,
   spacingVerticalXXS,
   spacingFrame,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
@@ -212,11 +212,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'horizontal-tab',
-  template,
-  styles,
-})
+@customElement({ name: 'horizontal-tab', template, styles })
 export class HorizontalTab extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) loading = false;

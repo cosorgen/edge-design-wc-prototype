@@ -18,8 +18,8 @@ import {
   windowsDarkTheme,
   windowsDarkThemeSolid,
   windowsLightThemeSolid,
-} from '@mai-ui/windows-theme';
-import { setThemeFor } from '@mai-ui/component-framework';
+} from '@edge-design/windows-theme';
+import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/task-bar.js';

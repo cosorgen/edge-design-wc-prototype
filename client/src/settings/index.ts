@@ -38,7 +38,7 @@ import {
   colorShellFillCaptionControlPrimaryPressed,
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';

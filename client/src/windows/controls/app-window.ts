@@ -4,7 +4,7 @@ import {
   durationSlow,
   shadow28,
   shadowBaseLayer,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 import {
   FASTElement,
   attr,
@@ -182,11 +182,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'app-window',
-  template,
-  styles,
-})
+@customElement({ name: 'app-window', template, styles })
 export class AppWindow extends FASTElement {
   @attr({ converter: nullableNumberConverter }) width = 800;
   @attr({ converter: nullableNumberConverter }) height = 600;
@@ -311,13 +307,7 @@ export class AppWindow extends FASTElement {
     height = Math.min(height, window.innerHeight - 48 - 48); // 48px for taskbar
     const xPos = (window.innerWidth - width) / 2;
     const yPos = (window.innerHeight - 48 - height) / 2;
-    this.$emit('windowmove', {
-      id: this.id,
-      width,
-      height,
-      xPos,
-      yPos,
-    });
+    this.$emit('windowmove', { id: this.id, width, height, xPos, yPos });
   };
 
   handleWindowMoveStart = () => {

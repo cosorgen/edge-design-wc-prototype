@@ -16,7 +16,7 @@ import {
   tabBarBackgroundColor,
   tabBarBackgroundNormal,
   desktopBackground,
-} from '@mai-ui/windows-theme';
+} from '@edge-design/windows-theme';
 
 const template = html<MicaMaterial>`
   <div id="image"></div>

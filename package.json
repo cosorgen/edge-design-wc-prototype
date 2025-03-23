@@ -8,6 +8,7 @@
   "license": "MIT",
   "workspaces": [
     "packages/utilities",
+    "packages/phoenix-theme",
     "packages/kumo-theme",
     "packages/copilot-theme",
     "packages/windows-theme",

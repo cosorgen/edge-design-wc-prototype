@@ -17,7 +17,7 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/extension-hub-item.js';
@@ -126,11 +126,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'extensions-hub',
-  template,
-  styles,
-})
+@customElement({ name: 'extensions-hub', template, styles })
 export class ExtensionsHub extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;

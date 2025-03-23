@@ -12,7 +12,7 @@ import {
   borderRadiusLayerFlyout,
   colorNeutralForeground1,
   shadow28,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import WindowsService from '#services/windowsService.js';
 
 const template = html<DownloadsMenu>`

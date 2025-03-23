@@ -29,11 +29,11 @@ import {
   spacingHorizontalS,
   typographyStyles,
   spacingHorizontalMNudge,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 import '@phoenixui/web-components/accordion.js';
 import '@phoenixui/web-components/accordion-item.js';
 import '@mai-ui/text-input/define.js';
-import { spacingHorizontalXXS } from '@mai-ui/phoenix-theme';
+import { spacingHorizontalXXS } from '@edge-design/phoenix-theme';
 
 const template = html<FavoritesMenu>`
   <div id="header">

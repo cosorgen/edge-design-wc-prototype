@@ -11,7 +11,7 @@ import {
   fontSizeBase300,
   fontWeightRegular,
   lineHeightBase300,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html<OmniboxInput>`
   <div
@@ -63,11 +63,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'omnibox-input',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-input', template, styles })
 export class OmniboxInput extends FASTElement {
   @attr value = '';
   input?: HTMLDivElement | null;
@@ -251,10 +247,7 @@ export class OmniboxInput extends FASTElement {
       }
     });
 
-    return {
-      container,
-      offset,
-    };
+    return { container, offset };
   };
 
   saveSelection(el: HTMLElement) {
@@ -271,10 +264,7 @@ export class OmniboxInput extends FASTElement {
       range?.endContainer,
       range?.endOffset,
     );
-    return {
-      startOffset,
-      endOffset,
-    };
+    return { startOffset, endOffset };
   }
 
   restoreSelection(

@@ -1,6 +1,6 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '../controls/sidepane-header.js';
-import { colorLayerBackgroundDialog } from '@mai-ui/phoenix-theme';
+import { colorLayerBackgroundDialog } from '@edge-design/phoenix-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 
@@ -20,11 +20,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'tools-sidepane',
-  template,
-  styles,
-})
+@customElement({ name: 'tools-sidepane', template, styles })
 export class ToolsSidepane extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   handleClose(): void {

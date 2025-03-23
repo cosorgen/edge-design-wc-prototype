@@ -9,7 +9,7 @@ import {
   spacingVerticalS,
   strokeWidthThin,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html`<slot></slot>`;
 

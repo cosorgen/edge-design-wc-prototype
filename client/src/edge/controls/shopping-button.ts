@@ -11,7 +11,7 @@ import {
   spacingHorizontalXS,
   spacingVerticalXXS,
   typographyStyles,
-} from '@mai-ui/phoenix-theme';
+} from '@edge-design/phoenix-theme';
 
 const template = html`
   <button>
@@ -85,11 +85,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'shopping-button',
-  template,
-  styles,
-})
+@customElement({ name: 'shopping-button', template, styles })
 export class ShoppingButton extends FASTElement {
   connectedCallback() {
     super.connectedCallback();

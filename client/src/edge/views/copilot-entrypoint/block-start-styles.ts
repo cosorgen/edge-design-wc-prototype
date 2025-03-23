@@ -1,5 +1,5 @@
 import { css } from '@microsoft/fast-element';
-import { spacingFrame } from '@mai-ui/phoenix-theme';
+import { spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */
@@ -51,17 +51,16 @@ export default css`
   :host([block-position='start'][active]) #grabber {
     /* Center in top 10% of composer */
     inset-block-start: calc(
-      var(--viewport-top) + var(--composer-retracted-height) * 0.1 - var(
-          --grabber-height
-        ) / 2
+      var(--viewport-top) + var(--composer-retracted-height) *
+        0.1 - var(--grabber-height) / 2
     );
   }
 
   :host([block-position='start'][active][ntp]) #grabber {
     /* Center in top 10% of composer + ntp offset */
     inset-block-start: calc(
-      var(--viewport-top) + var(--ntp-inset) + var(--composer-retracted-height) *
-        0.1 - var(--grabber-height) / 2
+      var(--viewport-top) + var(--ntp-inset) +
+        var(--composer-retracted-height) * 0.1 - var(--grabber-height) / 2
     );
   }
 
