@@ -1,4 +1,4 @@
-import { themeToTokensObject } from '@mai-ui/design-tokens/utilities.js';
+import { themeToTokensObject } from '@edge-design/utilities';
 import { windowsLightTheme } from './themes.js';
 
 // Types

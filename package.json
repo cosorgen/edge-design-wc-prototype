@@ -7,6 +7,7 @@
   "author": "",
   "license": "MIT",
   "workspaces": [
+    "packages/utilities",
     "packages/kumo-theme",
     "packages/copilot-theme",
     "packages/windows-theme",

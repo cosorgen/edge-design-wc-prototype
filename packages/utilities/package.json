@@ -1,8 +1,8 @@
 {
-  "name": "@edge-design/windows-theme",
+  "name": "@edge-design/utilities",
   "version": "0.0.1",
   "author": "Microsoft",
-  "description": "MAI Windows theme",
+  "description": "Edge design system utilities",
   "license": "UNLICENSED",
   "type": "module",
   "private": true,
@@ -18,16 +18,9 @@
     "dist/*.js",
     "dist/*.d.ts"
   ],
-  "dependencies": {
-    "@fluentui/tokens": "^1.0.0-alpha.19",
-    "@edge-design/utilities": "^0.0.1"
-  },
   "scripts": {
-    "build": "npm run clean && npm run build:tsc && node scripts/build.js",
-    "build:tsc": "tsc -p tsconfig.build.json",
+    "build": "npm run clean && npm run compile",
+    "compile": "tsc -p tsconfig.build.json",
     "clean": "rimraf dist"
-  },
-  "devDependencies": {
-    "esbuild": "^0.24.0"
   }
 }
