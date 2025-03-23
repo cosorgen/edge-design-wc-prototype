@@ -1,5 +1,5 @@
 {
-  "name": "@mai-ui/copilot-theme",
+  "name": "@edge-design/copilot-theme",
   "version": "0.0.1",
   "author": "Microsoft",
   "description": "MAI Kumo theme for Edge",
@@ -19,8 +19,7 @@
     "dist/*.d.ts"
   ],
   "dependencies": {
-    "@fluentui/tokens": "^1.0.0-alpha.19",
-    "@mai-ui/design-tokens": "^0.0.1"
+    "@fluentui/tokens": "^1.0.0-alpha.19"
   },
   "scripts": {
     "build": "npm run clean && npm run build:tsc && node scripts/build.js",
