@@ -1,0 +1,207 @@
+export type Neutral = {
+  0: string; // white
+  4: string;
+  8: string;
+  100: string;
+  104: string; // hover is +4
+  108: string; // pressed is +8
+  150: string;
+  154: string;
+  158: string;
+  200: string;
+  250: string;
+  300: string;
+  304: string;
+  308: string;
+  350: string;
+  400: string;
+  404: string;
+  408: string;
+  450: string;
+  454: string;
+  458: string;
+  500: string;
+  550: string;
+  554: string;
+  558: string;
+  600: string;
+  650: string;
+  700: string;
+  704: string;
+  708: string;
+  750: string;
+  754: string;
+  758: string;
+  800: string;
+  804: string;
+  808: string;
+  1000: string; // black
+};
+
+export type Vibrant = {
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+export type AlphaBlack = {
+  5: string;
+  10: string;
+  20: string;
+  30: string;
+  40: string;
+  50: string;
+  60: string;
+  70: string;
+  80: string;
+  90: string;
+};
+
+export type AlphaWhite = {
+  5: string;
+  10: string;
+  20: string;
+  30: string;
+  40: string;
+  50: string;
+  60: string;
+  70: string;
+  80: string;
+  90: string;
+};
+
+export type AlphaVibrant100 = {
+  5: string;
+  10: string;
+  20: string;
+  30: string;
+  40: string;
+  50: string;
+  60: string;
+  70: string;
+  80: string;
+  90: string;
+};
+
+export type AlphaVibrant800 = {
+  5: string;
+  10: string;
+  20: string;
+  30: string;
+  40: string;
+  50: string;
+  60: string;
+  70: string;
+  80: string;
+  90: string;
+};
+
+export const neutral: Neutral = {
+  0: '#ffffff',
+  4: '#f3f7fb',
+  8: '#e2e6ea',
+  100: '#f6fafe',
+  104: '#e4ebf4',
+  108: '#d7dce8',
+  150: '#eff4fa',
+  154: '#e7ebf1',
+  158: '#d6dae0',
+  200: '#eaeef4',
+  250: '#d9dde3',
+  300: '#c8ccd3',
+  304: '#bfc4ca',
+  308: '#afb4ba',
+  350: '#a4a9b0',
+  400: '#8d9198',
+  404: '#9499a0',
+  408: '#a5a9b0',
+  450: '#6e7279',
+  454: '#676b72',
+  458: '#585c63',
+  500: '#5b5f66',
+  550: '#41454c',
+  554: '#484b53',
+  558: '#565a61',
+  600: '#363940',
+  650: '#2d3038',
+  700: '#292c33',
+  704: '#2f333a',
+  708: '#3d4047',
+  750: '#24282f',
+  754: '#2b2e35',
+  758: '#383b43',
+  800: '#1e2024',
+  804: '#24262a',
+  808: '#313237',
+  1000: '#000000',
+};
+
+export const vibrant: Vibrant = {
+  100: '#ecf4ff',
+  200: '#daeaff',
+  300: '#b4d5ff',
+  400: '#4599ff',
+  500: '#007ef4',
+  600: '#016dd4',
+  700: '#00458a',
+  800: '#1b3556',
+  900: '#212d3d',
+};
+
+export const alphaBlack: AlphaBlack = {
+  5: 'rgba(0, 0, 0, 0.05)',
+  10: 'rgba(0, 0, 0, 0.1)',
+  20: 'rgba(0, 0, 0, 0.2)',
+  30: 'rgba(0, 0, 0, 0.3)',
+  40: 'rgba(0, 0, 0, 0.4)',
+  50: 'rgba(0, 0, 0, 0.5)',
+  60: 'rgba(0, 0, 0, 0.6)',
+  70: 'rgba(0, 0, 0, 0.7)',
+  80: 'rgba(0, 0, 0, 0.8)',
+  90: 'rgba(0, 0, 0, 0.9)',
+};
+
+export const alphaWhite: AlphaWhite = {
+  5: 'rgba(255, 255, 255, 0.05)',
+  10: 'rgba(255, 255, 255, 0.1)',
+  20: 'rgba(255, 255, 255, 0.2)',
+  30: 'rgba(255, 255, 255, 0.3)',
+  40: 'rgba(255, 255, 255, 0.4)',
+  50: 'rgba(255, 255, 255, 0.5)',
+  60: 'rgba(255, 255, 255, 0.6)',
+  70: 'rgba(255, 255, 255, 0.7)',
+  80: 'rgba(255, 255, 255, 0.8)',
+  90: 'rgba(255, 255, 255, 0.9)',
+};
+
+export const alphaVibrant100: AlphaVibrant100 = {
+  5: 'rgba(236, 244, 255, 0.05)',
+  10: 'rgba(236, 244, 255, 0.1)',
+  20: 'rgba(236, 244, 255, 0.2)',
+  30: 'rgba(236, 244, 255, 0.3)',
+  40: 'rgba(236, 244, 255, 0.4)',
+  50: 'rgba(236, 244, 255, 0.5)',
+  60: 'rgba(236, 244, 255, 0.6)',
+  70: 'rgba(236, 244, 255, 0.7)',
+  80: 'rgba(236, 244, 255, 0.8)',
+  90: 'rgba(236, 244, 255, 0.9)',
+};
+
+export const alphaVibrant800: AlphaVibrant800 = {
+  5: 'rgba(33, 45, 61, 0.05)',
+  10: 'rgba(33, 45, 61, 0.1)',
+  20: 'rgba(33, 45, 61, 0.2)',
+  30: 'rgba(33, 45, 61, 0.3)',
+  40: 'rgba(33, 45, 61, 0.4)',
+  50: 'rgba(33, 45, 61, 0.5)',
+  60: 'rgba(33, 45, 61, 0.6)',
+  70: 'rgba(33, 45, 61, 0.7)',
+  80: 'rgba(33, 45, 61, 0.8)',
+  90: 'rgba(33, 45, 61, 0.9)',
+};
