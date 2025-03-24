@@ -14,7 +14,6 @@ esbuild
     format: 'esm',
     target: 'esnext',
     sourcemap: 'external',
-    tsconfig: 'tsconfig.build.json',
     outdir: join(__dirname, '../dist/esm'),
   })
   .catch(() => process.exit(1));

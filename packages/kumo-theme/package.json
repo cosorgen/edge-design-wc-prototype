@@ -20,7 +20,7 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build:tsc && node scripts/build.js",
-    "build:tsc": "tsc -p tsconfig.build.json",
+    "build:tsc": "tsc",
     "clean": "rimraf dist"
   },
   "devDependencies": {

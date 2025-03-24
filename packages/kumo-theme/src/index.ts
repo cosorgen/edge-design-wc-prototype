@@ -1,12 +1,11 @@
 export type {
-  Neutral,
-  Vibrant,
-  AlphaBlack,
-  AlphaWhite,
-  AlphaVibrant100,
-  AlphaVibrant800,
-  NullColors,
-} from './types/globalColors.js';
+  NeutralColors,
+  VibrantColors,
+  AlphaBlackColors,
+  AlphaWhiteColors,
+  AlphaVibrant100Colors,
+  AlphaVibrant800Colors,
+} from '../types/globalColors.js';
 
 export {
   neutral,
@@ -15,5 +14,4 @@ export {
   alphaWhite,
   alphaVibrant100,
   alphaVibrant800,
-  nullColors,
 } from './globalColors.js';
