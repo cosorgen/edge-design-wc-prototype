@@ -25,6 +25,30 @@ export {
 } from './globalColors.js';
 
 export type {
+  SizeValues,
+  CornerValues,
+  StrokeWidthValues,
+  FontFamilyValues,
+  FontSizeValues,
+  FontWeightValues,
+  LineHeightValues,
+  ShadowValues,
+  NullValues,
+} from './globalValues.js';
+
+export {
+  size,
+  corner,
+  strokeWidth,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  shadow,
+  nullValues,
+} from './globalValues.js';
+
+export type {
   ThemeBackgroundColors,
   ThemeForegroundColors,
   ThemeMaterialColors,
@@ -121,30 +145,6 @@ export {
 } from './darkCtrlColors.js';
 
 export type {
-  SizeValues,
-  CornerValues,
-  StrokeWidthValues,
-  FontFamilyValues,
-  FontSizeValues,
-  FontWeightValues,
-  LineHeightValues,
-  ShadowValues,
-  NullValues,
-} from './globalValues.js';
-
-export {
-  size,
-  corner,
-  strokeWidth,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  shadow,
-  nullValues,
-} from './globalValues.js';
-
-export type {
   TextCtrl,
   TextGlobal,
   TextRamp,
@@ -161,3 +161,7 @@ export {
   textRampSm,
   textStyle,
 } from './text.js';
+
+export type { SizeCtrl, SizeCtrlLg, SizeCtrlSm } from './size.js';
+
+export { sizeCtrl, sizeCtrlLg, sizeCtrlSm } from './size.js';
