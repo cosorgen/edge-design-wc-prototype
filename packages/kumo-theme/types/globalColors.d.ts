@@ -1,4 +1,4 @@
-export type Neutral = {
+declare type NeutralColors = {
   0: string; // white
   4: string;
   8: string;
@@ -38,7 +38,7 @@ export type Neutral = {
   1000: string; // black
 };
 
-export type Vibrant = {
+export declare type VibrantColors = {
   100: string;
   200: string;
   300: string;
@@ -50,7 +50,7 @@ export type Vibrant = {
   900: string;
 };
 
-export type AlphaBlack = {
+declare type AlphaBlackColors = {
   5: string;
   10: string;
   20: string;
@@ -63,7 +63,7 @@ export type AlphaBlack = {
   90: string;
 };
 
-export type AlphaWhite = {
+declare type AlphaWhiteColors = {
   5: string;
   10: string;
   20: string;
@@ -76,7 +76,7 @@ export type AlphaWhite = {
   90: string;
 };
 
-export type AlphaVibrant100 = {
+declare type AlphaVibrant100Colors = {
   5: string;
   10: string;
   20: string;
@@ -89,7 +89,7 @@ export type AlphaVibrant100 = {
   90: string;
 };
 
-export type AlphaVibrant800 = {
+declare type AlphaVibrant800Colors = {
   5: string;
   10: string;
   20: string;

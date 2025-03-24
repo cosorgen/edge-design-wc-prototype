@@ -1,13 +1,4 @@
-import type {
-  Neutral,
-  Vibrant,
-  AlphaBlack,
-  AlphaWhite,
-  AlphaVibrant100,
-  AlphaVibrant800,
-} from './types/globalColor.js';
-
-export const neutral: Neutral = {
+export const neutral: NeutralColors = {
   0: '#ffffff',
   4: '#f3f7fb',
   8: '#e2e6ea',
@@ -47,7 +38,7 @@ export const neutral: Neutral = {
   1000: '#000000',
 };
 
-export const vibrant: Vibrant = {
+export const vibrant: VibrantColors = {
   100: '#ecf4ff',
   200: '#daeaff',
   300: '#b4d5ff',
@@ -59,7 +50,7 @@ export const vibrant: Vibrant = {
   900: '#212d3d',
 };
 
-export const alphaBlack: AlphaBlack = {
+export const alphaBlack: AlphaBlackColors = {
   5: 'rgba(0, 0, 0, 0.05)',
   10: 'rgba(0, 0, 0, 0.1)',
   20: 'rgba(0, 0, 0, 0.2)',
@@ -72,7 +63,7 @@ export const alphaBlack: AlphaBlack = {
   90: 'rgba(0, 0, 0, 0.9)',
 };
 
-export const alphaWhite: AlphaWhite = {
+export const alphaWhite: AlphaWhiteColors = {
   5: 'rgba(255, 255, 255, 0.05)',
   10: 'rgba(255, 255, 255, 0.1)',
   20: 'rgba(255, 255, 255, 0.2)',
@@ -85,7 +76,7 @@ export const alphaWhite: AlphaWhite = {
   90: 'rgba(255, 255, 255, 0.9)',
 };
 
-export const alphaVibrant100: AlphaVibrant100 = {
+export const alphaVibrant100: AlphaVibrant100Colors = {
   5: 'rgba(236, 244, 255, 0.05)',
   10: 'rgba(236, 244, 255, 0.1)',
   20: 'rgba(236, 244, 255, 0.2)',
@@ -98,7 +89,7 @@ export const alphaVibrant100: AlphaVibrant100 = {
   90: 'rgba(236, 244, 255, 0.9)',
 };
 
-export const alphaVibrant800: AlphaVibrant800 = {
+export const alphaVibrant800: AlphaVibrant800Colors = {
   5: 'rgba(33, 45, 61, 0.05)',
   10: 'rgba(33, 45, 61, 0.1)',
   20: 'rgba(33, 45, 61, 0.2)',

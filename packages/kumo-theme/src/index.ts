@@ -5,7 +5,8 @@ export type {
   AlphaWhite,
   AlphaVibrant100,
   AlphaVibrant800,
-} from './types/globalColor.js';
+  NullColors,
+} from './types/globalColors.js';
 
 export {
   neutral,
@@ -14,4 +15,5 @@ export {
   alphaWhite,
   alphaVibrant100,
   alphaVibrant800,
-} from './globalColor.js';
+  nullColors,
+} from './globalColors.js';
