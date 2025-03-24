@@ -106,6 +106,53 @@ export type AlphaVibrant800Colors = {
   90: string;
 };
 
+export type ShadowColors = {
+  shadowKeyLowLight: string;
+  shadowKeyLowDark: string;
+  shadowKeyHighLight: string;
+  shadowKeyHighDark: string;
+  shadowAmbientLowLight: string;
+  shadowAmbientLowDark: string;
+  shadowAmbientHighLight: string;
+  shadowAmbientHighDark: string;
+};
+
+export type StatusDangerColors = {
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+export type StatusSuccessColors = {
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
+export type StatusWarningColors = {
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+};
+
 export const neutral: NeutralColors = {
   0: '#ffffff',
   4: '#f3f7fb',
@@ -212,4 +259,51 @@ export const alphaVibrant800: AlphaVibrant800Colors = {
   70: 'rgba(33, 45, 61, 0.7)',
   80: 'rgba(33, 45, 61, 0.8)',
   90: 'rgba(33, 45, 61, 0.9)',
+};
+
+export const shadow: ShadowColors = {
+  shadowKeyLowLight: 'rgba(27, 53, 86, 0.08)',
+  shadowKeyLowDark: 'rgba(0, 0, 0, 0.24)',
+  shadowKeyHighLight: 'rgba(33, 45, 61, 0.12)',
+  shadowKeyHighDark: 'rgba(0, 0, 0, 0.3)',
+  shadowAmbientLowLight: 'rgba(27, 53, 86, 0.04)',
+  shadowAmbientLowDark: 'rgba(0, 0, 0, 0.12)',
+  shadowAmbientHighLight: 'rgba(33, 45, 61, 0.06)',
+  shadowAmbientHighDark: 'rgba(0, 0, 0, 0.15)',
+};
+
+export const statusDanger: StatusDangerColors = {
+  100: '#fff0ef',
+  200: '#fee0df',
+  300: '#fcc0be',
+  400: '#ef6569',
+  500: '#df3c4a',
+  600: '#d1203a',
+  700: '#7e1e26',
+  800: '#522525',
+  900: '#3b2525',
+};
+
+export const statusSuccess: StatusSuccessColors = {
+  100: '#eaf7f0',
+  200: '#d5f0e1',
+  300: '#a9e0c4',
+  400: '#00b877',
+  500: '#009d63',
+  600: '#018050',
+  700: '#005833',
+  800: '#073f2a',
+  900: '#1c3127',
+};
+
+export const statusWarning: StatusWarningColors = {
+  100: '#fdf1e9',
+  200: '#fbe3d3',
+  300: '#f5c7a6',
+  400: '#e47700',
+  500: '#c96000',
+  600: '#c85d00',
+  700: '#743100',
+  800: '#4e2b0d',
+  900: '#39281c',
 };

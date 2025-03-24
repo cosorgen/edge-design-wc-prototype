@@ -1,4 +1,13 @@
-import { alphaBlack, alphaWhite, neutral, vibrant } from './globalColors.js';
+import {
+  alphaBlack,
+  alphaWhite,
+  neutral,
+  shadow,
+  statusDanger,
+  statusSuccess,
+  statusWarning,
+  vibrant,
+} from './globalColors.js';
 
 export type ThemeBackgroundColors = {
   backgroundCtrlBrandRest: string;
@@ -193,8 +202,8 @@ export type ThemeForegroundColors = {
 };
 
 export type ThemeShadowColors = {
-  shadowToolbarKey: string;
-  shadowToolbarAmbient: string;
+  shadowToolbarKeyColor: string;
+  shadowToolbarAmbientColor: string;
   shadowWindowActiveKeyColor: string;
   shadowWindowActiveAmbientColor: string;
   shadowWindowInactiveKeyColor: string;
@@ -285,15 +294,6 @@ export type AiColors = {
   aiBrandStop3: string;
   aiBrandStop4: string;
 };
-
-export type ThemeColors = ThemeBackgroundColors &
-  ThemeStrokeColors &
-  ThemeForegroundColors &
-  ThemeShadowColors &
-  ThemeMaterialColors &
-  ThemeStatusColors &
-  ThemeNullColors &
-  AiColors;
 
 export const lightNullColors: ThemeNullColors = {
   nullColor: alphaWhite[0],
@@ -491,9 +491,81 @@ export const lightForegroundColors: ThemeForegroundColors = {
   foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',
 };
 
-export const lightColors: ThemeColors = {
-  ...lightNullColors,
-  ...lightBackgroundColors,
-  ...lightStrokeColors,
-  ...lightForegroundColors,
+export const lightShadowColors: ThemeShadowColors = {
+  shadowToolbarKeyColor: shadow.shadowKeyLowLight,
+  shadowToolbarAmbientColor: shadow.shadowAmbientLowLight,
+  shadowWindowActiveKeyColor: shadow.shadowKeyHighLight,
+  shadowWindowActiveAmbientColor: shadow.shadowAmbientHighLight,
+  shadowWindowInactiveKeyColor: shadow.shadowKeyHighLight,
+  shadowWindowInactiveAmbientColor: shadow.shadowAmbientHighLight,
+  shadowCardRestKeyColor: '{nullColor}',
+  shadowCardRestAmbientColor: '{nullColor}',
+  shadowCardHoverKeyColor: '{nullColor}',
+  shadowCardPressedKeyColor: '{nullColor}',
+  shadowCardDisabledKeyColor: '{nullColor}',
+  shadowFlyoutKeyColor: shadow.shadowKeyLowLight,
+  shadowFlyoutAmbientColor: shadow.shadowAmbientLowLight,
+  shadowCtrlOnDragKeyColor: '{shadowFlyoutKeyColor}',
+  shadowCtrlOnDragAmbientColor: '{shadowFlyoutAmbientColor}',
+  shadowLayerKeyColor: shadow.shadowKeyHighLight,
+  shadowLayerAmbientColor: shadow.shadowAmbientHighLight,
+};
+
+export const lightMaterialColors: ThemeMaterialColors = {
+  materialAcrylicDefaultSolid: neutral[0],
+  materialAcrylicDefaultColorBlend: '{nullColor}',
+  materialAcrylicDefaultLumBlend: '{nullColor}',
+  materialAcrylicShellDefaultSolid: neutral[0],
+  materialAcrylicShellDefaultColorBlend: neutral[0],
+  materialAcrylicShellDefaultLumBlend: neutral[0],
+  materialMicaThinSolid: neutral[0],
+  materialMicaThinColorBlend: neutral[0],
+  materialMicaThinLumBlend: neutral[0],
+  materialMicaDarkerSolid: neutral[0],
+  materialMicaDarkerColorBlend: neutral[0],
+  materialMicaDarkerLumBlend: neutral[0],
+  materialMicaDefaultSolid: neutral[0],
+  materialMicaDefaultColorBlend: neutral[0],
+  materialMicaDefaultLumBlend: neutral[0],
+};
+
+export const lightStatusColors: ThemeStatusColors = {
+  statusBrandBackground: vibrant[600],
+  statusBrandForeground: neutral[0],
+  statusBrandStroke: vibrant[500],
+  statusBrandTintBackground: vibrant[100],
+  statusBrandTintForeground: vibrant[600],
+  statusBrandTintStroke: alphaWhite[0],
+  statusDangerBackground: statusDanger[600],
+  statusDangerForeground: neutral[0],
+  statusDangerStroke: statusDanger[500],
+  statusDangerTintBackground: statusDanger[100],
+  statusDangerTintForeground: statusDanger[600],
+  statusDangerTintStroke: alphaWhite[0],
+  statusSuccessBackground: statusSuccess[600],
+  statusSuccessForeground: neutral[0],
+  statusSuccessStroke: statusSuccess[500],
+  statusSuccessTintBackground: statusSuccess[100],
+  statusSuccessTintForeground: statusSuccess[600],
+  statusSuccessTintStroke: alphaWhite[0],
+  statusWarningBackground: statusWarning[600],
+  statusWarningForeground: neutral[0],
+  statusWarningStroke: statusWarning[500],
+  statusWarningTintBackground: statusWarning[100],
+  statusWarningTintForeground: statusWarning[600],
+  statusWarningTintStroke: alphaWhite[0],
+  statusInformativeBackground: vibrant[100],
+  statusInformativeForeground: neutral[500],
+  statusInformativeStroke: '{nullColor}',
+  statusInformativeTintBackground: neutral[150],
+  statusInformativeTintForeground: neutral[800],
+  statusInformativeTintStroke: alphaWhite[0],
+  statusImportantBackground: '{nullColor}',
+  statusImportantForeground: '{nullColor}',
+  statusImportantStroke: alphaWhite[0],
+  statusImportantTintBackground: alphaWhite[0],
+  statusImportantTintForeground: alphaWhite[0],
+  statusImportantTintStroke: alphaWhite[0],
+  statusAwayForeground: '#c85d00', // Kumo vibrant.orange.600
+  statusOofForeground: '#8a42ab', // Kumo vibrant.purple.600
 };
