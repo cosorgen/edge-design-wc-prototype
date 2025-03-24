@@ -51,6 +51,7 @@ export const vibrant: VibrantColors = {
 };
 
 export const alphaBlack: AlphaBlackColors = {
+  0: 'rgba(0, 0, 0, 0)',
   5: 'rgba(0, 0, 0, 0.05)',
   10: 'rgba(0, 0, 0, 0.1)',
   20: 'rgba(0, 0, 0, 0.2)',
@@ -64,6 +65,7 @@ export const alphaBlack: AlphaBlackColors = {
 };
 
 export const alphaWhite: AlphaWhiteColors = {
+  0: 'rgba(255, 255, 255, 0)',
   5: 'rgba(255, 255, 255, 0.05)',
   10: 'rgba(255, 255, 255, 0.1)',
   20: 'rgba(255, 255, 255, 0.2)',

@@ -80,16 +80,6 @@ declare type ThemeStrokeColors = {
   strokeDividerSubtle: string;
   strokeDividerBrand: string;
   strokeDividerStrong: string;
-  strokeDividerOnBrand: string;
-  strokeDividerOnBrandDisabled: string;
-  strokeDividerOnActiveBrand: string;
-  strokeDividerOnActiveBrandDisabled: string;
-  strokeDividerOnOutline: string;
-  strokeDividerOnOutlineDisabled: string;
-  strokeDividerOnNeutral: string;
-  strokeDividerOnNeutralDisabled: string;
-  strokeDividerOnSubtle: string;
-  strokeDividerOnSubtleDisabled: string;
   strokeCtrlOnActiveBrandRest: string;
   strokeCtrlOnActiveBrandHover: string;
   strokeCtrlOnActiveBrandPressed: string;
