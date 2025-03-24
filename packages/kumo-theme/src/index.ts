@@ -1,3 +1,16 @@
+export type {
+  AlphaBlackColors,
+  AlphaVibrant100Colors,
+  AlphaVibrant800Colors,
+  AlphaWhiteColors,
+  NeutralColors,
+  ShadowColors,
+  StatusDangerColors,
+  StatusSuccessColors,
+  StatusWarningColors,
+  VibrantColors,
+} from './globalColors.js';
+
 export {
   alphaBlack,
   alphaVibrant100,
@@ -8,16 +21,6 @@ export {
   statusDanger,
   statusSuccess,
   statusWarning,
-  type AlphaBlackColors,
-  type AlphaVibrant100Colors,
-  type AlphaVibrant800Colors,
-  type AlphaWhiteColors,
-  type NeutralColors,
-  type ShadowColors,
-  type StatusDangerColors,
-  type StatusSuccessColors,
-  type StatusWarningColors,
-  type VibrantColors,
   vibrant,
 } from './globalColors.js';
 
@@ -126,6 +129,7 @@ export type {
   FontWeightValues,
   LineHeightValues,
   ShadowValues,
+  NullValues,
 } from './globalValues.js';
 
 export {
@@ -137,4 +141,23 @@ export {
   fontWeight,
   lineHeight,
   shadow,
+  nullValues,
 } from './globalValues.js';
+
+export type {
+  TextCtrl,
+  TextGlobal,
+  TextRamp,
+  TextRampLg,
+  TextRampSm,
+  TextStyle,
+} from './text.js';
+
+export {
+  textCtrl,
+  textGlobal,
+  textRamp,
+  textRampLg,
+  textRampSm,
+  textStyle,
+} from './text.js';
