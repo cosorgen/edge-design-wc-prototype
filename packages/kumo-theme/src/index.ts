@@ -4,7 +4,7 @@ export {
   alphaVibrant800,
   alphaWhite,
   neutral,
-  shadow,
+  shadow as shadowColors,
   statusDanger,
   statusSuccess,
   statusWarning,
@@ -116,3 +116,25 @@ export {
   darkTabColors,
   darkTooltipColors,
 } from './darkCtrlColors.js';
+
+export type {
+  SizeValues,
+  CornerValues,
+  StrokeWidthValues,
+  FontFamilyValues,
+  FontSizeValues,
+  FontWeightValues,
+  LineHeightValues,
+  ShadowValues,
+} from './globalValues.js';
+
+export {
+  size,
+  corner,
+  strokeWidth,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  shadow,
+} from './globalValues.js';
