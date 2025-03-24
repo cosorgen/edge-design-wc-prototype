@@ -22,7 +22,7 @@ import type {
   CtrlTooltipColors,
 } from './ctrlColors.js';
 
-export const lightComposerColors: CtrlComposerColors = {
+export const darkComposerColors: CtrlComposerColors = {
   ctrlComposerContainerBackgroundDefault: alphaWhite[60],
   ctrlComposerContainerBackgroundAcrylicColorBlend: '{backgroundFlyoutSolid}',
   ctrlComposerContainerBackgroundAcrylicLumBlend: '{backgroundFlyoutSolid}',
@@ -48,14 +48,14 @@ export const lightComposerColors: CtrlComposerColors = {
   ctrlComposerInputBottomStrokeHover: '{nullColor}',
 };
 
-export const lightAvatarColors: CtrlAvatarColors = {
+export const darkAvatarColors: CtrlAvatarColors = {
   ctrlAvatarBackground: neutral[150],
   ctrlAvatarForeground: neutral[800],
   ctrlAvatarActiveRingStroke: neutral[1000],
   ctrlAvatarPresenceBadgeBackgroundBehindBadge: '{backgroundLayerPrimarySolid}',
 };
 
-export const lightChoiceColors: CtrlChoiceColors = {
+export const darkChoiceColors: CtrlChoiceColors = {
   ctrlChoiceBaseStrokeRest: neutral[450],
   ctrlChoiceBaseStrokeHover: neutral[454],
   ctrlChoiceBaseStrokePressed: neutral[458],
@@ -68,7 +68,7 @@ export const lightChoiceColors: CtrlChoiceColors = {
   ctrlChoiceSwitchThumbShadowKeyColor: '{nullColor}',
 };
 
-export const lightDialogColors: CtrlDialogColors = {
+export const darkDialogColors: CtrlDialogColors = {
   ctrlDialogBackground: neutral[0],
   ctrlDialogStroke: '{nullColor}',
   ctrlDialogLayerBackground: '{backgroundLayerPrimarySolid}',
@@ -76,18 +76,18 @@ export const lightDialogColors: CtrlDialogColors = {
   ctrlDialogBaseShadowAmbientColor: shadow.shadowAmbientHighLight,
 };
 
-export const lightDragColors: CtrlDragColors = {
+export const darkDragColors: CtrlDragColors = {
   ctrlDragBackgroundSolid: neutral[0],
   ctrlDragBackgroundColorBlend: neutral[0],
   ctrlDragBackgroundLumBlend: neutral[0],
 };
 
-export const lightIdentityFlyoutColors: CtrlIdentityFlyoutColors = {
+export const darkIdentityFlyoutColors: CtrlIdentityFlyoutColors = {
   ctrlIdentityFlyoutManagedBannerBackground: neutral[800],
   ctrlIdentityFlyoutManagedBannerForeground: neutral[0],
 };
 
-export const lightInputColors: CtrlInputColors = {
+export const darkInputColors: CtrlInputColors = {
   ctrlInputTextSelectionForeground: '{foregroundCtrlOnBrandRest}',
   ctrlInputTextSelectionBackground: '{backgroundCtrlBrandRest}',
   ctrlInputBackgroundRest: '{backgroundCtrlNeutralRest}',
@@ -110,7 +110,7 @@ export const lightInputColors: CtrlInputColors = {
   ctrlInputBottomLineStrokeError: '{nullColor}',
 };
 
-export const lightFabColors: CtrlFabColors = {
+export const darkFabColors: CtrlFabColors = {
   ctrlFabShadowRestKeyColor: shadow.shadowKeyLowLight,
   ctrlFabShadowRestAmbientColor: shadow.shadowAmbientLowLight,
   ctrlFabShadowHoverKeyColor: '{ctrlFabShadowRestKeyColor}',
@@ -122,12 +122,12 @@ export const lightFabColors: CtrlFabColors = {
   ctrlFabBackgroundDisabled: neutral[200],
 };
 
-export const lightFocusColors: CtrlFocusColors = {
+export const darkFocusColors: CtrlFocusColors = {
   ctrlFocusInnerStroke: neutral[0],
   ctrlFocusOuterStroke: '{backgroundCtrlBrandRest}',
 };
 
-export const lightLinkColors: CtrlLinkColors = {
+export const darkLinkColors: CtrlLinkColors = {
   ctrlLinkBackgroundRest: vibrant[100],
   ctrlLinkBackgroundHover: vibrant[200],
   ctrlLinkBackgroundPressed: vibrant[300],
@@ -139,7 +139,7 @@ export const lightLinkColors: CtrlLinkColors = {
   ctrlLinkForegroundBrandPressed: vibrant[600],
 };
 
-export const lightListColors: CtrlListColors = {
+export const darkListColors: CtrlListColors = {
   ctrlListChoiceBackgroundRest: '{nullColor}',
   ctrlListChoiceBackgroundDisabled: '{nullColor}',
   ctrlListChoiceBackgroundSelectedRest: '{nullColor}',
@@ -159,28 +159,28 @@ export const lightListColors: CtrlListColors = {
   ctrlListBackgroundSelectedDisabled: '{backgroundCtrlNeutralDisabled}',
 };
 
-export const lightLiteFilterColors: CtrlLiteFilterColors = {
+export const darkLiteFilterColors: CtrlLiteFilterColors = {
   ctrlLiteFilterBackgroundSelected: '{backgroundCtrlNeutralRest}',
   ctrlLiteFilterStrokeSelected: neutral[450],
   ctrlLiteFilterForegroundSelected: '{foregroundCtrlNeutralPrimaryRest}',
 };
 
-export const lightOmniboxColors: CtrlOmniboxColors = {
+export const darkOmniboxColors: CtrlOmniboxColors = {
   ctrlOmniboxBackgroundRest: neutral[150],
   ctrlOmniboxBackgroundHover: neutral[154],
 };
 
-export const lightProgressColors: CtrlProgressColors = {
+export const darkProgressColors: CtrlProgressColors = {
   ctrlProgressBackgroundFilled: '{backgroundCtrlBrandRest}',
   ctrlProgressBackgroundEmpty: neutral[250],
 };
 
-export const lightRatingColors: CtrlRatingColors = {
+export const darkRatingColors: CtrlRatingColors = {
   ctrlRatingIconForegroundEmpty: '{ctrlProgressBackgroundEmpty}',
   ctrlRatingIconForegroundFilled: '{foregroundCtrlBrandRest}',
 };
 
-export const lightSegmentedColors: CtrlSegmentedColors = {
+export const darkSegmentedColors: CtrlSegmentedColors = {
   ctrlSegmentedSegmentedStrokeRest: neutral[0],
   ctrlSegmentedSegmentedStrokeHover: neutral[0],
   ctrlSegmentedSegmentedStrokePressed: neutral[0],
@@ -191,7 +191,7 @@ export const lightSegmentedColors: CtrlSegmentedColors = {
   ctrlSegmentedSegmentedBackgroundDisabled: '{nullColor}',
 };
 
-export const lightSliderColors: CtrlSliderColors = {
+export const darkSliderColors: CtrlSliderColors = {
   ctrlSliderBarForegroundEmptyRest: '{backgroundCtrlShapeSafeNeutralRest}',
   ctrlSliderBarForegroundEmptyHover: '{backgroundCtrlShapeSafeNeutralHover}',
   ctrlSliderBarForegroundEmptyPressed:
@@ -216,12 +216,12 @@ export const lightSliderColors: CtrlSliderColors = {
   ctrlSliderThumbOuterStrokeDisabled: '{strokeDividerSubtle}',
 };
 
-export const lightTabColors: CtrlTabColors = {
+export const darkTabColors: CtrlTabColors = {
   ctrlTabBackgroundHorizontalActive: neutral[0],
   ctrlTabBackgroundVerticalActive: neutral[150],
 };
 
-export const lightTooltipColors: CtrlTooltipColors = {
+export const darkTooltipColors: CtrlTooltipColors = {
   ctrlTooltipBackground: neutral[800],
   ctrlTooltipForeground: neutral[0],
   ctrlTooltipShadowKeyColor: shadow.shadowKeyLowLight,

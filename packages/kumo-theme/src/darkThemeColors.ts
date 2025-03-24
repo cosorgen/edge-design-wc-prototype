@@ -19,11 +19,11 @@ import type {
   ThemeStrokeColors,
 } from './themeColors.js';
 
-export const lightNullColors: ThemeNullColors = {
-  nullColor: alphaWhite[0],
+export const darkNullColors: ThemeNullColors = {
+  nullColor: alphaBlack[0],
 };
 
-export const lightBackgroundColors: ThemeBackgroundColors = {
+export const darkBackgroundColors: ThemeBackgroundColors = {
   backgroundCtrlBrandRest: neutral[750],
   backgroundCtrlBrandHover: neutral[754],
   backgroundCtrlBrandPressed: neutral[758],
@@ -100,7 +100,7 @@ export const lightBackgroundColors: ThemeBackgroundColors = {
   backgroundSmoke: alphaBlack[30],
 };
 
-export const lightStrokeColors: ThemeStrokeColors = {
+export const darkStrokeColors: ThemeStrokeColors = {
   strokeDividerDefault: neutral[300],
   strokeDividerSubtle: neutral[200],
   strokeDividerBrand: '{backgroundCtrlBrandRest}',
@@ -159,7 +159,7 @@ export const lightStrokeColors: ThemeStrokeColors = {
   strokeWindowInactive: '{strokeWindowActive}',
 };
 
-export const lightForegroundColors: ThemeForegroundColors = {
+export const darkForegroundColors: ThemeForegroundColors = {
   foregroundCtrlNeutralPrimaryRest: neutral[800],
   foregroundCtrlNeutralPrimaryHover: '{foregroundCtrlNeutralPrimaryRest}',
   foregroundCtrlNeutralPrimaryPressed: '{foregroundCtrlNeutralPrimaryRest}',
@@ -215,7 +215,7 @@ export const lightForegroundColors: ThemeForegroundColors = {
   foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',
 };
 
-export const lightShadowColors: ThemeShadowColors = {
+export const darkShadowColors: ThemeShadowColors = {
   shadowToolbarKeyColor: shadow.shadowKeyLowLight,
   shadowToolbarAmbientColor: shadow.shadowAmbientLowLight,
   shadowWindowActiveKeyColor: shadow.shadowKeyHighLight,
@@ -235,7 +235,7 @@ export const lightShadowColors: ThemeShadowColors = {
   shadowLayerAmbientColor: shadow.shadowAmbientHighLight,
 };
 
-export const lightMaterialColors: ThemeMaterialColors = {
+export const darkMaterialColors: ThemeMaterialColors = {
   materialAcrylicDefaultSolid: neutral[0],
   materialAcrylicDefaultColorBlend: '{nullColor}',
   materialAcrylicDefaultLumBlend: '{nullColor}',
@@ -253,7 +253,7 @@ export const lightMaterialColors: ThemeMaterialColors = {
   materialMicaDefaultLumBlend: neutral[0],
 };
 
-export const lightStatusColors: ThemeStatusColors = {
+export const darkStatusColors: ThemeStatusColors = {
   statusBrandBackground: vibrant[600],
   statusBrandForeground: neutral[0],
   statusBrandStroke: vibrant[500],

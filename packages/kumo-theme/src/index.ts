@@ -21,6 +21,16 @@ export {
   vibrant,
 } from './globalColors.js';
 
+export type {
+  ThemeBackgroundColors,
+  ThemeForegroundColors,
+  ThemeMaterialColors,
+  ThemeNullColors,
+  ThemeShadowColors,
+  ThemeStatusColors,
+  ThemeStrokeColors,
+} from './themeColors.js';
+
 export {
   lightBackgroundColors,
   lightForegroundColors,
@@ -29,35 +39,41 @@ export {
   lightShadowColors,
   lightStatusColors,
   lightStrokeColors,
-  type ThemeBackgroundColors,
-  type ThemeForegroundColors,
-  type ThemeMaterialColors,
-  type ThemeNullColors,
-  type ThemeShadowColors,
-  type ThemeStatusColors,
-  type ThemeStrokeColors,
 } from './lightThemeColors.js';
 
 export {
-  type CtrlComposerColors,
-  type CtrlAvatarColors,
-  type CtrlChoiceColors,
-  type CtrlDialogColors,
-  type CtrlDragColors,
-  type CtrlIdentityFlyoutColors,
-  type CtrlInputColors,
-  type CtrlFabColors,
-  type CtrlFocusColors,
-  type CtrlLinkColors,
-  type CtrlListColors,
-  type CtrlLiteFilterColors,
-  type CtrlOmniboxColors,
-  type CtrlProgressColors,
-  type CtrlRatingColors,
-  type CtrlSegmentedColors,
-  type CtrlSliderColors,
-  type CtrlTabColors,
-  type CtrlTooltipColors,
+  darkBackgroundColors,
+  darkForegroundColors,
+  darkMaterialColors,
+  darkNullColors,
+  darkShadowColors,
+  darkStatusColors,
+  darkStrokeColors,
+} from './darkThemeColors.js';
+
+export type {
+  CtrlComposerColors,
+  CtrlAvatarColors,
+  CtrlChoiceColors,
+  CtrlDialogColors,
+  CtrlDragColors,
+  CtrlIdentityFlyoutColors,
+  CtrlInputColors,
+  CtrlFabColors,
+  CtrlFocusColors,
+  CtrlLinkColors,
+  CtrlListColors,
+  CtrlLiteFilterColors,
+  CtrlOmniboxColors,
+  CtrlProgressColors,
+  CtrlRatingColors,
+  CtrlSegmentedColors,
+  CtrlSliderColors,
+  CtrlTabColors,
+  CtrlTooltipColors,
+} from './ctrlColors.js';
+
+export {
   lightAvatarColors,
   lightChoiceColors,
   lightComposerColors,
@@ -78,3 +94,25 @@ export {
   lightTabColors,
   lightTooltipColors,
 } from './lightCtrlColors.js';
+
+export {
+  darkAvatarColors,
+  darkChoiceColors,
+  darkComposerColors,
+  darkDialogColors,
+  darkDragColors,
+  darkIdentityFlyoutColors,
+  darkInputColors,
+  darkFabColors,
+  darkFocusColors,
+  darkLinkColors,
+  darkListColors,
+  darkLiteFilterColors,
+  darkOmniboxColors,
+  darkProgressColors,
+  darkRatingColors,
+  darkSegmentedColors,
+  darkSliderColors,
+  darkTabColors,
+  darkTooltipColors,
+} from './darkCtrlColors.js';
