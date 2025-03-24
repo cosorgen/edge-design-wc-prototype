@@ -1,4 +1,9 @@
-import { alphaWhite, neutral, shadow, vibrant } from './globalColors.js';
+import {
+  alphaBlack,
+  neutral,
+  shadow,
+  vibrant,
+} from './globalColors.js';
 
 import type {
   CtrlAvatarColors,
@@ -23,14 +28,14 @@ import type {
 } from './ctrlColors.js';
 
 export const darkComposerColors: CtrlComposerColors = {
-  ctrlComposerContainerBackgroundDefault: alphaWhite[60],
+  ctrlComposerContainerBackgroundDefault: alphaBlack[60],
   ctrlComposerContainerBackgroundAcrylicColorBlend: '{backgroundFlyoutSolid}',
   ctrlComposerContainerBackgroundAcrylicLumBlend: '{backgroundFlyoutSolid}',
-  ctrlComposerContainerBackgroundFlyout: alphaWhite[80],
-  ctrlComposerContainerShadowAmbientColor: '{nullColor}',
+  ctrlComposerContainerBackgroundFlyout: alphaBlack[80],
+  ctrlComposerContainerShadowAmbientColor: alphaBlack[40],
   ctrlComposerContainerShadowKeyColor: '{nullColor}',
   ctrlComposerContainerStrokeDefault: '{nullColor}',
-  ctrlComposerInputShadowColor: '{nullColor}',
+  ctrlComposerInputShadowColor: alphaBlack[20],
   ctrlComposerInputStrokeRest: '{nullColor}',
   ctrlComposerInputStrokeDisabled: '{nullColor}',
   ctrlComposerInputStrokePressed: '{nullColor}',
@@ -49,16 +54,16 @@ export const darkComposerColors: CtrlComposerColors = {
 };
 
 export const darkAvatarColors: CtrlAvatarColors = {
-  ctrlAvatarBackground: neutral[150],
-  ctrlAvatarForeground: neutral[800],
-  ctrlAvatarActiveRingStroke: neutral[1000],
+  ctrlAvatarBackground: neutral[700],
+  ctrlAvatarForeground: neutral[0],
+  ctrlAvatarActiveRingStroke: neutral[0],
   ctrlAvatarPresenceBadgeBackgroundBehindBadge: '{backgroundLayerPrimarySolid}',
 };
 
 export const darkChoiceColors: CtrlChoiceColors = {
-  ctrlChoiceBaseStrokeRest: neutral[450],
-  ctrlChoiceBaseStrokeHover: neutral[454],
-  ctrlChoiceBaseStrokePressed: neutral[458],
+  ctrlChoiceBaseStrokeRest: neutral[400],
+  ctrlChoiceBaseStrokeHover: neutral[404],
+  ctrlChoiceBaseStrokePressed: neutral[408],
   ctrlChoiceBaseStrokeDisabled: '{backgroundCtrlShapeSafeNeutralDisabled}',
   ctrlChoiceBaseBackgroundRest: '{nullColor}',
   ctrlChoiceBaseBackgroundHover: '{nullColor}',
@@ -69,17 +74,17 @@ export const darkChoiceColors: CtrlChoiceColors = {
 };
 
 export const darkDialogColors: CtrlDialogColors = {
-  ctrlDialogBackground: neutral[0],
+  ctrlDialogBackground: neutral[800],
   ctrlDialogStroke: '{nullColor}',
   ctrlDialogLayerBackground: '{backgroundLayerPrimarySolid}',
-  ctrlDialogBaseShadowKeyColor: shadow.shadowKeyHighLight,
-  ctrlDialogBaseShadowAmbientColor: shadow.shadowAmbientHighLight,
+  ctrlDialogBaseShadowKeyColor: shadow.shadowKeyHighDark,
+  ctrlDialogBaseShadowAmbientColor: shadow.shadowAmbientHighDark,
 };
 
 export const darkDragColors: CtrlDragColors = {
-  ctrlDragBackgroundSolid: neutral[0],
-  ctrlDragBackgroundColorBlend: neutral[0],
-  ctrlDragBackgroundLumBlend: neutral[0],
+  ctrlDragBackgroundSolid: neutral[800],
+  ctrlDragBackgroundColorBlend: neutral[800],
+  ctrlDragBackgroundLumBlend: neutral[800],
 };
 
 export const darkIdentityFlyoutColors: CtrlIdentityFlyoutColors = {
@@ -111,32 +116,32 @@ export const darkInputColors: CtrlInputColors = {
 };
 
 export const darkFabColors: CtrlFabColors = {
-  ctrlFabShadowRestKeyColor: shadow.shadowKeyLowLight,
-  ctrlFabShadowRestAmbientColor: shadow.shadowAmbientLowLight,
+  ctrlFabShadowRestKeyColor: shadow.shadowKeyLowDark,
+  ctrlFabShadowRestAmbientColor: shadow.shadowAmbientLowDark,
   ctrlFabShadowHoverKeyColor: '{ctrlFabShadowRestKeyColor}',
   ctrlFabShadowPressedKeyColor: '{ctrlFabShadowRestKeyColor}',
   ctrlFabShadowDisabledKeyColor: '{ctrlFabShadowRestKeyColor}',
-  ctrlFabBackgroundRest: neutral[0],
-  ctrlFabBackgroundHover: neutral[4],
-  ctrlFabBackgroundPressed: neutral[8],
-  ctrlFabBackgroundDisabled: neutral[200],
+  ctrlFabBackgroundRest: neutral[800],
+  ctrlFabBackgroundHover: neutral[804],
+  ctrlFabBackgroundPressed: neutral[808],
+  ctrlFabBackgroundDisabled: neutral[650],
 };
 
 export const darkFocusColors: CtrlFocusColors = {
-  ctrlFocusInnerStroke: neutral[0],
+  ctrlFocusInnerStroke: neutral[800],
   ctrlFocusOuterStroke: '{backgroundCtrlBrandRest}',
 };
 
 export const darkLinkColors: CtrlLinkColors = {
-  ctrlLinkBackgroundRest: vibrant[100],
-  ctrlLinkBackgroundHover: vibrant[200],
-  ctrlLinkBackgroundPressed: vibrant[300],
+  ctrlLinkBackgroundRest: vibrant[900],
+  ctrlLinkBackgroundHover: vibrant[800],
+  ctrlLinkBackgroundPressed: vibrant[700],
   ctrlLinkForegroundNeutralRest: '{foregroundCtrlNeutralPrimaryRest}',
   ctrlLinkForegroundNeutralHover: '{foregroundCtrlNeutralPrimaryRest}',
   ctrlLinkForegroundNeutralPressed: '{foregroundCtrlNeutralPrimaryRest}',
-  ctrlLinkForegroundBrandRest: vibrant[600],
-  ctrlLinkForegroundBrandHover: vibrant[600],
-  ctrlLinkForegroundBrandPressed: vibrant[600],
+  ctrlLinkForegroundBrandRest: vibrant[400],
+  ctrlLinkForegroundBrandHover: vibrant[400],
+  ctrlLinkForegroundBrandPressed: vibrant[400],
 };
 
 export const darkListColors: CtrlListColors = {
@@ -153,26 +158,26 @@ export const darkListColors: CtrlListColors = {
   ctrlListChoiceForegroundSelectedDisabled:
     '{foregroundCtrlNeutralPrimaryDisabled}',
   ctrlListSplitDividerStroke: '{strokeDividerSubtle}',
-  ctrlListBackgroundSelectedRest: neutral[150],
-  ctrlListBackgroundSelectedHover: neutral[154],
-  ctrlListBackgroundSelectedPressed: neutral[158],
+  ctrlListBackgroundSelectedRest: neutral[700],
+  ctrlListBackgroundSelectedHover: neutral[704],
+  ctrlListBackgroundSelectedPressed: neutral[708],
   ctrlListBackgroundSelectedDisabled: '{backgroundCtrlNeutralDisabled}',
 };
 
 export const darkLiteFilterColors: CtrlLiteFilterColors = {
   ctrlLiteFilterBackgroundSelected: '{backgroundCtrlNeutralRest}',
-  ctrlLiteFilterStrokeSelected: neutral[450],
+  ctrlLiteFilterStrokeSelected: neutral[400],
   ctrlLiteFilterForegroundSelected: '{foregroundCtrlNeutralPrimaryRest}',
 };
 
 export const darkOmniboxColors: CtrlOmniboxColors = {
-  ctrlOmniboxBackgroundRest: neutral[150],
-  ctrlOmniboxBackgroundHover: neutral[154],
+  ctrlOmniboxBackgroundRest: neutral[800],
+  ctrlOmniboxBackgroundHover: neutral[804],
 };
 
 export const darkProgressColors: CtrlProgressColors = {
   ctrlProgressBackgroundFilled: '{backgroundCtrlBrandRest}',
-  ctrlProgressBackgroundEmpty: neutral[250],
+  ctrlProgressBackgroundEmpty: neutral[600],
 };
 
 export const darkRatingColors: CtrlRatingColors = {
@@ -217,13 +222,13 @@ export const darkSliderColors: CtrlSliderColors = {
 };
 
 export const darkTabColors: CtrlTabColors = {
-  ctrlTabBackgroundHorizontalActive: neutral[0],
-  ctrlTabBackgroundVerticalActive: neutral[150],
+  ctrlTabBackgroundHorizontalActive: neutral[650],
+  ctrlTabBackgroundVerticalActive: neutral[500],
 };
 
 export const darkTooltipColors: CtrlTooltipColors = {
-  ctrlTooltipBackground: neutral[800],
-  ctrlTooltipForeground: neutral[0],
-  ctrlTooltipShadowKeyColor: shadow.shadowKeyLowLight,
-  ctrlTooltipShadowAmbientColor: shadow.shadowAmbientLowLight,
+  ctrlTooltipBackground: neutral[0],
+  ctrlTooltipForeground: neutral[800],
+  ctrlTooltipShadowKeyColor: shadow.shadowKeyLowDark,
+  ctrlTooltipShadowAmbientColor: shadow.shadowAmbientLowDark,
 };
