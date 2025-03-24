@@ -6,6 +6,7 @@
   "license": "UNLICENSED",
   "type": "module",
   "private": true,
+  "types": "types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/dts/index.d.ts",
