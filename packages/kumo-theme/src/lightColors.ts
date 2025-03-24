@@ -1,4 +1,4 @@
-import { alphaBlack, alphaWhite, neutral } from './globalColors.js';
+import { alphaBlack, alphaWhite, neutral, vibrant } from './globalColors.js';
 
 export const lightNullColors: ThemeNullColors = {
   nullColor: 'rgba(255, 255, 255, 0)',
@@ -30,38 +30,38 @@ export const lightBackgroundColors: ThemeBackgroundColors = {
   backgroundOnImageHover: alphaBlack[50],
   backgroundOnImagePressed: alphaBlack[40],
   backgroundShapeSafeNeutralRest: neutral[400],
-  backgroundShapeSafeNeutralHover: '',
-  backgroundShapeSafeNeutralPressed: '',
-  backgroundShapeSafeNeutralDisabled: '',
-  backgroundShapeSafeActiveBrandRest: '',
-  backgroundShapeSafeActiveBrandDisabled: '',
-  backgroundCardOnPrimaryDefaultRest: '',
-  backgroundCardOnPrimaryDefaultHover: '',
-  backgroundCardOnPrimaryDefaultPressed: '',
-  backgroundCardOnPrimaryDefaultDisabled: '',
-  backgroundCardOnPrimaryDefaultSelected: '',
-  backgroundCardOnPrimaryAltRest: '',
-  backgroundCardOnPrimaryAltHover: '',
-  backgroundCardOnPrimaryAltPressed: '',
-  backgroundCardOnPrimaryAltDisabled: '',
-  backgroundCardOnSecondaryDefaultRest: '',
-  backgroundCardOnSecondaryDefaultHover: '',
-  backgroundCardOnSecondaryDefaultPressed: '',
-  backgroundCardOnSecondaryDefaultDisabled: '',
-  backgroundCardOnSecondaryAltRest: '',
-  backgroundCardOnSecondaryAltHover: '',
-  backgroundCardOnSecondaryAltPressed: '',
-  backgroundCardOnSecondaryAltDisabled: '',
-  backgroundCardOnFlyoutDefaultRest: '',
-  backgroundCardOnFlyoutDefaultHover: '',
-  backgroundCardOnFlyoutDefaultPressed: '',
-  backgroundCardOnFlyoutDefaultDisabled: '',
-  backgroundWebPagePrimary: '',
-  backgroundWebPageSecondary: '',
-  backgroundFlyoutSolid: '',
-  backgroundFlyoutLumBlend: '',
-  backgroundFlyoutColorBlend: '',
-  backgroundToolbar: '',
+  backgroundShapeSafeNeutralHover: '{backgroundShapeSafeNeutralRest}',
+  backgroundShapeSafeNeutralPressed: '{backgroundShapeSafeNeutralRest}',
+  backgroundShapeSafeNeutralDisabled: '{foregroundCtrlNeutralPrimaryDisabled}',
+  backgroundShapeSafeActiveBrandRest: '{foregroundCtrlBrandRest}',
+  backgroundShapeSafeActiveBrandDisabled: '{foregroundCtrlBrandDisabled}',
+  backgroundCardOnPrimaryDefaultRest: neutral[0],
+  backgroundCardOnPrimaryDefaultHover: neutral[4],
+  backgroundCardOnPrimaryDefaultPressed: neutral[8],
+  backgroundCardOnPrimaryDefaultDisabled: neutral[200],
+  backgroundCardOnPrimaryDefaultSelected: neutral[150],
+  backgroundCardOnPrimaryAltRest: vibrant[100],
+  backgroundCardOnPrimaryAltHover: vibrant[200],
+  backgroundCardOnPrimaryAltPressed: vibrant[300],
+  backgroundCardOnPrimaryAltDisabled: neutral[200],
+  backgroundCardOnSecondaryDefaultRest: neutral[0],
+  backgroundCardOnSecondaryDefaultHover: neutral[0],
+  backgroundCardOnSecondaryDefaultPressed: neutral[0],
+  backgroundCardOnSecondaryDefaultDisabled: neutral[0],
+  backgroundCardOnSecondaryAltRest: neutral[0],
+  backgroundCardOnSecondaryAltHover: neutral[0],
+  backgroundCardOnSecondaryAltPressed: neutral[0],
+  backgroundCardOnSecondaryAltDisabled: neutral[0],
+  backgroundCardOnFlyoutDefaultRest: neutral[0],
+  backgroundCardOnFlyoutDefaultHover: neutral[0],
+  backgroundCardOnFlyoutDefaultPressed: neutral[0],
+  backgroundCardOnFlyoutDefaultDisabled: neutral[0],
+  backgroundWebPagePrimary: neutral[0],
+  backgroundWebPageSecondary: neutral[0],
+  backgroundFlyoutSolid: neutral[0],
+  backgroundFlyoutLumBlend: neutral[0],
+  backgroundFlyoutColorBlend: neutral[0],
+  backgroundToolbar: '{backgroundCardOnPrimaryDefaultRest}',
   backgroundLayerPrimarySolid: '',
   backgroundLayerPrimaryStop1: '',
   backgroundLayerPrimaryStop2: '',
@@ -80,18 +80,6 @@ export const lightBackgroundColors: ThemeBackgroundColors = {
   backgroundWindowSecondaryColorBlend: '',
   backgroundSmoke: '',
 };
-
-// Aliasing tokens
-lightBackgroundColors.backgroundShapeSafeNeutralHover =
-  lightBackgroundColors.backgroundShapeSafeNeutralRest;
-lightBackgroundColors.backgroundShapeSafeNeutralPressed =
-  lightBackgroundColors.backgroundShapeSafeNeutralRest;
-lightBackgroundColors.backgroundShapeSafeNeutralDisabled =
-  lightForegroundColors.foregroundCtrlNeutralPrimaryDisabled;
-lightBackgroundColors.backgroundActiveBrandRest =
-  lightBackgroundColors.backgroundCtrlBrandRest;
-lightBackgroundColors.backgroundActiveBrandDisabled =
-  lightBackgroundColors.backgroundCtrlBrandDisabled;
 
 export const lightColors: ThemeColors = {
   ...lightNullColors,
