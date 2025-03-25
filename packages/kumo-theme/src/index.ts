@@ -165,3 +165,23 @@ export {
 export type { SizeCtrl, SizeCtrlLg, SizeCtrlSm } from './size.js';
 
 export { sizeCtrl, sizeCtrlLg, sizeCtrlSm } from './size.js';
+
+export type {
+  PaddingCard,
+  PaddingContent,
+  PaddingCtrl,
+  PaddingCtrlLg,
+  PaddingCtrlSm,
+  PaddingFlyout,
+  PaddingToolbar,
+} from './padding.js';
+
+export {
+  paddingCard,
+  paddingContent,
+  paddingCtrl,
+  paddingCtrlLg,
+  paddingCtrlSm,
+  paddingFlyout,
+  paddingToolbar,
+} from './padding.js';
