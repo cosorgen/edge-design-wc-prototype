@@ -102,11 +102,6 @@ export type ShadowValues = {
   shadowAmbientBlurHigh: string;
 };
 
-export type NullValues = {
-  nullString: string;
-  nullNumber: number;
-};
-
 export const size: SizeValues = {
   0: '0px',
   20: '2px',
@@ -209,9 +204,4 @@ export const shadow: ShadowValues = {
   shadowAmbientY: '0px',
   shadowAmbientBlurLow: '4px',
   shadowAmbientBlurHigh: '8px',
-};
-
-export const nullValues: NullValues = {
-  nullString: 'String value',
-  nullNumber: 0,
 };

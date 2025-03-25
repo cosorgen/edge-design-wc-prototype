@@ -80,8 +80,12 @@ import {
   textRampSm,
   textStyle,
 } from './text.js';
+import { nullValues } from './nullValues.js';
 
-export const utilityLayout = {
+import { resolveDependencies } from './resolveDependencies.js';
+
+const utilityLayoutTemplate = {
+  ...nullValues,
   ...iconTheme,
   ...material,
   ...paddingCard,
@@ -105,8 +109,11 @@ export const utilityLayout = {
   ...textStyle,
 };
 
-export const lightTheme = {
-  ...utilityLayout,
+export type Layout = typeof utilityLayoutTemplate;
+
+console.log('Ressolving light theme');
+export const lightTheme = resolveDependencies({
+  ...utilityLayoutTemplate,
   ...lightBackgroundColors,
   ...lightForegroundColors,
   ...lightMaterialColors,
@@ -133,10 +140,11 @@ export const lightTheme = {
   ...lightSliderColors,
   ...lightTabColors,
   ...lightTooltipColors,
-};
+});
 
-export const darkTheme = {
-  ...utilityLayout,
+console.log('Ressolving dark theme');
+export const darkTheme = resolveDependencies({
+  ...utilityLayoutTemplate,
   ...darkBackgroundColors,
   ...darkForegroundColors,
   ...darkMaterialColors,
@@ -163,7 +171,12 @@ export const darkTheme = {
   ...darkSliderColors,
   ...darkTabColors,
   ...darkTooltipColors,
-};
+});
+
+export const utilityLayout = Object.fromEntries(
+  Object.entries(lightTheme).filter(([k, v]) =>
+    k in utilityLayoutTemplate ? [k, v] : undefined,
+  ),
+) as Layout;
 
 export type Theme = typeof lightTheme;
-export type Layout = typeof utilityLayout;

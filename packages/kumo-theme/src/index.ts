@@ -33,7 +33,6 @@ export type {
   FontWeightValues,
   LineHeightValues,
   ShadowValues,
-  NullValues,
 } from './globalValues.js';
 
 export {
@@ -45,8 +44,11 @@ export {
   fontWeight,
   lineHeight,
   shadow as globalShadow,
-  nullValues,
 } from './globalValues.js';
+
+export type { NullValues } from './nullValues.js';
+
+export { nullValues } from './nullValues.js';
 
 export type {
   ThemeBackgroundColors,
