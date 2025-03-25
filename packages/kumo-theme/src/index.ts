@@ -205,3 +205,7 @@ export { iconTheme } from './iconTheme.js';
 export type { ShadowParts, Shadow } from './shadow.js';
 
 export { shadowParts, shadow } from './shadow.js';
+
+export type { Material } from './material.js';
+
+export { material } from './material.js';
