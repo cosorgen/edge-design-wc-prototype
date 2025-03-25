@@ -185,3 +185,7 @@ export {
   paddingFlyout,
   paddingToolbar,
 } from './padding.js';
+
+export type { GapBetween, GapInside } from './gap.js';
+
+export { gapBetween, gapInside } from './gap.js';
