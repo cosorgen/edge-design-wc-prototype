@@ -255,3 +255,7 @@ export {
   ctrlSplitLayout,
   ctrlTooltipLayout,
 } from './ctrlLayout.js';
+
+export type { Layout, Theme } from './themes.js';
+
+export { utilityLayout, lightTheme, darkTheme } from './themes.js';
