@@ -209,3 +209,26 @@ export { shadowParts, shadow } from './shadow.js';
 export type { Material } from './material.js';
 
 export { material } from './material.js';
+
+export type {
+  CtrlAvatarLayout,
+  CtrlBadgeLayout,
+  CtrlBooleanLayout,
+  CtrlChoiceLayout,
+  CtrlComposerLayout,
+  CtrlDialogLayout,
+  CtrlDividerLayout,
+  CtrlFabLayout,
+  CtrlFocusLayout,
+  CtrlInputLayout,
+  CtrlLinkLayout,
+  CtrlListLayout,
+  CtrlLiteFilterLayout,
+  CtrlProgressLayout,
+  CtrlRatingLayout,
+  CtrlSegmentedLayout,
+  CtrlSliderLayout,
+  CtrlSpinnerLayout,
+  CtrlSplitLayout,
+  CtrlTooltipLayout,
+} from './ctrlLayout.js';

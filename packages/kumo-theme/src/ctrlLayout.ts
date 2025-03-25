@@ -1,4 +1,6 @@
-export type CtrlAvatar = {
+import { corner, shadow, size, strokeWidth } from "./globalValues.js";
+
+export type CtrlAvatarLayout = {
   ctrlAvatarSize: string;
   ctrlAvatarShowCutout: string;
   ctrlAvatarActiveRingSize: string;
@@ -14,7 +16,7 @@ export type CtrlAvatar = {
   ctrlAvatarTextPaddingTopOffset: string;
 };
 
-export type CtrlBadge = {
+export type CtrlBadgeLayout = {
   ctrlBadgeCorner: string;
   ctrlBadgePadding: string;
   ctrlBadgeSize: string;
@@ -28,21 +30,23 @@ export type CtrlBadge = {
   ctrlBadgeSmSize: string;
   ctrlBadgeSmPadding: string;
   ctrlBadgeSmIconSize: string;
+  ctrlBadgeSmIconCorner: string;
   ctrlBadgeSmTextPaddingBottom: string;
   ctrlBadgeSmTextPaddingTop: string;
   ctrlBadgeLgCorner: string;
   ctrlBadgeLgSize: string;
   ctrlBadgeLgPadding: string;
   ctrlBadgeLgIconSize: string;
+  ctrlBadgeLgIconCorner: string;
   ctrlBadgeLgTextPaddingBottom: string;
   ctrlBadgeLgTextPaddingTop: string;
 };
 
-export type CtrlBoolean = {
+export type CtrlBooleanLayout = {
   selectionHint: string;
 };
 
-export type CtrlChoice = {
+export type CtrlChoiceLayout = {
   ctrlChoiceIconTheme: string;
   ctrlChoicePaddingHorizontal: string;
   ctrlChoicePaddingVertical: string;
@@ -93,7 +97,7 @@ export type CtrlChoice = {
   ctrlChoiceRadioDotSizePressed: string;
 };
 
-export type CtrlComposer = {
+export type CtrlComposerLayout = {
   ctrlComposerContainerCorner: string;
   ctrlComposerContainerShadowKeyX: string;
   ctrlComposerContainerShadowKeyY: string;
@@ -117,7 +121,7 @@ export type CtrlComposer = {
   ctrlComposerInputShadowBlur: string;
 };
 
-export type CtrlDialog = {
+export type CtrlDialogLayout = {
   ctrlDialogBaseCorner: string;
   ctrlDialogBaseShadowKeyX: string;
   ctrlDialogBaseShadowKeyY: string;
@@ -128,12 +132,12 @@ export type CtrlDialog = {
   ctrlDialogLayerPaddingBottom: string;
 };
 
-export type CtrlDivider = {
+export type CtrlDividerLayout = {
   ctrlDividerInsetWidth: string;
   ctrlDividerFixedLineLength: string;
 };
 
-export type CtrlFab = {
+export type CtrlFabLayout = {
   ctrlFabCornerRest: string;
   ctrlFabCornerHover: string;
   ctrlFabCornerPressed: string;
@@ -154,7 +158,7 @@ export type CtrlFab = {
   ctrlFabShadowDisabledKeyBlur: string;
 };
 
-export type CtrlInput = {
+export type CtrlInputLayout = {
   ctrlInputStrokeWidthRest: string;
   ctrlInputStrokeWidthHover: string;
   ctrlInputStrokeWidthPressed: string;
@@ -165,7 +169,7 @@ export type CtrlInput = {
   ctrlInputBottomLineStrokeWidthSelected: string;
 };
 
-export type CtrlLink = {
+export type CtrlLinkLayout = {
   ctrlLinkInlineShowUnderlineAtRest: string;
   ctrlLinkInlineUnderlineDashed: string;
   ctrlLinkInlineUnderlineSolid: string;
@@ -178,7 +182,7 @@ export type CtrlLink = {
   ctrlLinkOnPageStrokeWidthHover: string;
 };
 
-export type CtrlList = {
+export type CtrlListLayout = {
   ctrlListPillFullWidth: string;
   ctrlListPillLengthHint: string;
   ctrlListPillLengthHover: string;
@@ -212,17 +216,17 @@ export type CtrlList = {
   ctrlListChoiceDotSize: string;
 };
 
-export type CtrlLiteFilter = {
+export type CtrlLiteFilterLayout = {
   ctrlLiteFilterStrokeWidthSelected: string;
 };
 
-export type CtrlFocus = {
+export type CtrlFocusLayout = {
   ctrlFocusPosition: string;
   ctrlFocusOuterStrokeWidth: string;
   ctrlFocusInnerStrokeWidth: string;
 };
 
-export type CtrlProgress = {
+export type CtrlProgressLayout = {
   ctrlProgressCorner: string;
   ctrlProgressHeightEmpty: string;
   ctrlProgressHeightFilled: string;
@@ -232,13 +236,13 @@ export type CtrlProgress = {
   ctrlProgressSmHeightFilled: string;
 };
 
-export type CtrlRating = {
+export type CtrlRatingLayout = {
   ctrlRatingIconGap: string;
   ctrlRatingIconTheme: string;
   ctrlRatingIconSize: string;
 };
 
-export type CtrlSegmented = {
+export type CtrlSegmentedLayout = {
   ctrlSegmentedGap: string;
   ctrlSegmentedCornerHover: string;
   ctrlSegmentedCornerPressed: string;
@@ -269,7 +273,7 @@ export type CtrlSegmented = {
   ctrlSegmentedSmCornerRest: string;
 };
 
-export type CtrlSlider = {
+export type CtrlSliderLayout = {
   ctrlSliderBarCorner: string;
   ctrlSliderBarHeight: string;
   ctrlSliderThumbCorner: string;
@@ -290,18 +294,333 @@ export type CtrlSlider = {
   ctrlSliderSmBarHeight: string;
 };
 
-export type CtrlSplit = {
+export type CtrlSplitLayout = {
   ctrlSplitDividerStrokeWidth: string;
   ctrlSplitDividerStrokeWidthOnSubtle: string;
   ctrlSplitDividerStrokeWidthOnOutline: string;
 };
 
-export type CtrlSpinner = {
+export type CtrlSpinnerLayout = {
   ctrlSpinnerStrokeWidth: string;
   ctrlSpinnerShowEmptyTrack: string;
 };
 
-export type CtrlTooltip = {
+export type CtrlTooltipLayout = {
+  ctrlTooltipCorner: string;
+  ctrlTooltipShaodwKeyX: string;
+  ctrlTooltipShaodwKeyY: string;
+  ctrlTooltipShaodwKeyBlur: string;
+  ctrlTooltipShaodwAmbientX: string;
+  ctrlTooltipShaodwAmbientY: string;
+  ctrlTooltipShaodwAmbientBlur: string;
+};
+
+export const ctrlAvatarLayout: CtrlAvatarLayout = {
+  ctrlAvatarSize: '{sizeCtrlDefault}',
+  ctrlAvatarShowCutout: 'true',
+  ctrlAvatarActiveRingSize: size[360],
+  ctrlAvatarActiveRingStrokeWidth: strokeWidth[20],
+  ctrlAvatarCornerGroup: corner[20],
+  ctrlAvatarCornerItem: corner.circular,
+  ctrlAvatarPresenceBadgeStrokeWidth: strokeWidth[10],
+  ctrlAvatarPresenceBadgeSize: size[60],
+  ctrlAvatarPresenceBadgePadding: size[20],
+  ctrlAvatarIconSize: size[120],
+  ctrlAvatarTextFontSize: size[100],
+  ctrlAvatarTextLineHeight: size[120],
+  ctrlAvatarTextPaddingTopOffset: '11px',
+};
+
+export const ctrlBadgeLayout: CtrlBadgeLayout = {
+  ctrlBadgeCorner: corner[60],
+  ctrlBadgePadding: size[40],
+  ctrlBadgeSize: size[240],
+  ctrlBadgeGap: size[20],
+  ctrlBadgeIconSize: size[160],
+  ctrlBadgeIconTheme: 'Regular',
+  ctrlBadgeBeaconSize: size[40],
+  ctrlBadgeTextPaddingBottom: size[0],
+  ctrlBadgeTextPaddingTop: size[0],
+  ctrlBadgeSmCorner: corner[60],
+  ctrlBadgeSmSize: size[200],
+  ctrlBadgeSmPadding: size[40],
+  ctrlBadgeSmIconSize: size[120],
+  ctrlBadgeSmIconCorner: corner[40],
+  ctrlBadgeSmTextPaddingBottom: size[0],
+  ctrlBadgeSmTextPaddingTop: size[0],
+  ctrlBadgeLgPadding: size[40],
+  ctrlBadgeLgSize: size[280],
+  ctrlBadgeLgCorner: corner[60],
+  ctrlBadgeLgIconSize: size[200],
+  ctrlBadgeLgIconCorner: corner[60],
+  ctrlBadgeLgTextPaddingTop: size[0],
+  ctrlBadgeLgTextPaddingBottom: size[0],
+};
+
+export const ctrlBooleanLayout: CtrlBooleanLayout = {
+  selectionHint: 'true',
+};
+
+export const ctrlChoiceLayout: CtrlChoiceLayout = {
+  ctrlChoiceIconTheme: 'Filled',
+  ctrlChoicePaddingHorizontal: size[0],
+  ctrlChoicePaddingVertical: size[40],
+  ctrlChoiceBaseSize: size[200],
+  ctrlChoiceCheckboxCorner: corner[60],
+  ctrlChoiceCheckboxIconSize: size[100],
+  ctrlChoiceCheckboxIndeterminateCorner: corner.circular,
+  ctrlChoiceCheckboxIndeterminateWidth: size[80],
+  ctrlChoiceCheckboxIndeterminateHeight: '1.5px',
+  ctrlChoiceSwitchHeight: size[200],
+  ctrlChoiceSwitchWidth: '36px',
+  ctrlChoiceSwitchCorner: corner.circular,
+  ctrlChoiceSwitchPaddingRest: size[40],
+  ctrlChoiceSwitchPaddingHover: size[40],
+  ctrlChoiceSwitchPaddingPressed: size[40],
+  ctrlChoiceSwitchThumbShadowAmbientX: '{nullNumber}',
+  ctrlChoiceSwitchThumbShadowAmbientY: '{nullNumber}',
+  ctrlChoiceSwitchThumbShadowAmbientBlur: '{nullNumber}',
+  ctrlChoiceSwitchThumbShadowKeyX: '{nullNumber}',
+  ctrlChoiceSwitchThumbShadowKeyY: '{nullNumber}',
+  ctrlChoiceSwitchThumbShadowKeyBlur: '{nullNumber}',
+  ctrlChoiceSwitchThumbWidthPressed: size[200],
+  ctrlChoiceSwitchThumbWidthHover: '14px',
+  ctrlChoiceSwitchThumbWidthRest: '12px',
+  ctrlChoiceSmCheckboxCorner: corner[80],
+  ctrlChoiceSmCheckboxIconSize: corner[120],
+  ctrlChoiceSmBaseSize: size[160],
+  ctrlChoiceSmRadioDotSize: size[80],
+  ctrlChoiceSmSwitchWidth: size[360],
+  ctrlChoiceSmSwitchHeight: size[200],
+  ctrlChoiceSmSwitchThumbWidthHover: size[120],
+  ctrlChoiceSmSwitchThumbWidthPressed: size[160],
+  ctrlChoiceSmSwitchThumbWidthRest: size[100],
+  ctrlChoiceLgBaseSize: size[280],
+  ctrlChoiceLgSwitchWidth: size[520],
+  ctrlChoiceLgSwitchHeight: size[280],
+  ctrlChoiceLgSwitchThumbWidthPressed: size[240],
+  ctrlChoiceLgSwitchThumbWidthRest: '18px',
+  ctrlChoiceLgSwitchThumbWidthHover: size[200],
+  ctrlChoiceLgRadioDotSizeHover: size[160],
+  ctrlChoiceLgRadioDotSizeRest: '14px',
+  ctrlChoiceLgRadioDotSizePressed: size[120],
+  ctrlChoiceLgCheckboxCorner: corner[40],
+  ctrlChoiceLgCheckboxIconSize: '16px',
+  ctrlChoiceRadioCorner: corner.circular,
+  ctrlChoiceRadioDotSizeHover: size[100],
+  ctrlChoiceRadioDotSizePressed: size[100],
+  ctrlChoiceRadioDotSizeRest: size[100],
+};
+
+export const ctrlComposerLayout: CtrlComposerLayout = {
+  ctrlComposerContainerCorner: corner[240],
+  ctrlComposerContainerShadowKeyX: '{shadowFlyoutKeyX}',
+  ctrlComposerContainerShadowKeyY: '{shadowFlyoutKeyY}',
+  ctrlComposerContainerShadowKeyBlur: '{shadowFlyoutKeyBlur}',
+  ctrlComposerContainerShadowAmbientX: '{shadowFlyoutAmbientX}',
+  ctrlComposerContainerShadowAmbientY: '{shadowFlyoutAmbientY}',
+  ctrlComposerContainerShadowAmbientBlur: '{shadowFlyoutAmbientBlur}',
+  ctrlComposerInputBottomStrokeWidthRest: strokeWidth[0],
+  ctrlComposerInputBottomStrokeWidthHover: strokeWidth[0],
+  ctrlComposerInputBottomStrokeWidthPressed: strokeWidth[0],
+  ctrlComposerInputBottomStrokeWidthSelectedRest: strokeWidth[0],
+  ctrlComposerInputStrokeWidthRest: strokeWidth[0],
+  ctrlComposerInputStrokeWidthHover: strokeWidth[0],
+  ctrlComposerInputStrokeWidthPressed: strokeWidth[0],
+  ctrlComposerInputStrokeWidthSelectedRest: strokeWidth[0],
+  ctrlComposerInputCornerRest: corner[240],
+  ctrlComposerInputCornerHover: '26px',
+  ctrlComposerInputCornerPressed: '28px',
+  ctrlComposerInputShadowX: size[0],
+  ctrlComposerInputShadowY: '1px',
+  ctrlComposerInputShadowBlur: '2px',
+};
+
+export const ctrlDialogLayout: CtrlDialogLayout = {
+  ctrlDialogBaseCorner: corner[80],
+  ctrlDialogBaseShadowKeyX: shadow.shadowKeyX,
+  ctrlDialogBaseShadowKeyY: shadow.shadowKeyY64,
+  ctrlDialogBaseShadowKeyBlur: shadow.shadowKeyBlur64,
+  ctrlDialogBaseShadowAmbientX: shadow.shadowAmbientX,
+  ctrlDialogBaseShadowAmbientY: shadow.shadowAmbientY,
+  ctrlDialogBaseShadowAmbientBlur: shadow.shadowAmbientBlurHigh,
+  ctrlDialogLayerPaddingBottom: size[0],
+};
+
+export const ctrlDividerLayout: CtrlDividerLayout = {
+  ctrlDividerInsetWidth: '0px',
+  ctrlDividerFixedLineLength: size[80],
+};
+
+export const ctrlFabLayout: CtrlFabLayout = {
+  ctrlFabCornerRest: corner[120],
+  ctrlFabCornerHover: corner[120],
+  ctrlFabCornerPressed: corner[120],
+  ctrlFabShadowRestKeyX: shadow.shadowKeyX,
+  ctrlFabShadowRestKeyY: shadow.shadowKeyY8,
+  ctrlFabShadowRestKeyBlur: shadow.shadowKeyBlur8,
+  ctrlFabShadowRestAmbientX: shadow.shadowAmbientX,
+  ctrlFabShadowRestAmbientY: shadow.shadowAmbientY,
+  ctrlFabShadowRestAmbientBlur: shadow.shadowAmbientBlurLow,
+  ctrlFabShadowHoverKeyX: shadow.shadowKeyX,
+  ctrlFabShadowHoverKeyY: shadow.shadowKeyY16,
+  ctrlFabShadowHoverKeyBlur: shadow.shadowKeyBlur16,
+  ctrlFabShadowPressedKeyX: shadow.shadowKeyX,
+  ctrlFabShadowPressedKeyY: shadow.shadowKeyY2,
+  ctrlFabShadowPressedKeyBlur: shadow.shadowKeyBlur2,
+  ctrlFabShadowDisabledKeyX: shadow.shadowKeyX,
+  ctrlFabShadowDisabledKeyY: shadow.shadowKeyY2,
+  ctrlFabShadowDisabledKeyBlur: shadow.shadowKeyBlur2,
+};
+
+export const ctrlInputLayout: CtrlInputLayout = {
+  ctrlInputStrokeWidthRest: '{strokeWidthDefault}',
+  ctrlInputStrokeWidthHover: '{strokeWidthDefault}',
+  ctrlInputStrokeWidthPressed: '{strokeWidthDefault}',
+  ctrlInputStrokeWidthSelected: strokeWidth[10],
+  ctrlInputBottomLineStrokeWidthRest: '{strokeWidthDefault}',
+  ctrlInputBottomLineStrokeWidthHover: '{strokeWidthDefault}',
+  ctrlInputBottomLineStrokeWidthPressed: '{ctrlInputBottomLineStrokeWidthSelected}',
+  ctrlInputBottomLineStrokeWidthSelected: strokeWidth[20],
+};
+
+export const ctrlLinkLayout: CtrlLinkLayout = {
+  ctrlLinkInlineShowUnderlineAtRest: 'false',
+  ctrlLinkInlineUnderlineDashed: string;
+  ctrlLinkInlineUnderlineSolid: string;
+  ctrlLinkInlineStrokeWidthRest: string;
+  ctrlLinkInlineStrokeWidthHover: string;
+  ctrlLinkOnPageShowUnderlineAtRest: string;
+  ctrlLinkOnPageUnderlineDashed: string;
+  ctrlLinkOnPageUnderlineSolid: string;
+  ctrlLinkOnPageStrokeWidthRest: string;
+  ctrlLinkOnPageStrokeWidthHover: string;
+};
+
+export const ctrlListLayout: CtrlListLayout = {
+  ctrlListPillFullWidth: string;
+  ctrlListPillLengthHint: string;
+  ctrlListPillLengthHover: string;
+  ctrlListPillLengthPressed: string;
+  ctrlListPillLengthRest: string;
+  ctrlListPillwidth: string;
+  ctrlListPillStretchPaddingDefault: string;
+  ctrlListPillStretchPaddingHint: string;
+  ctrlListSplitDividerShowDivider: string;
+  ctrlListSplitDividerPaddingInset: string;
+  ctrlListCornerHover: string;
+  ctrlListCornerPressed: string;
+  ctrlListCornerRest: string;
+  ctrlListIndentLevel1: string;
+  ctrlListIndentLevel2: string;
+  ctrlListIndentLevel3: string;
+  ctrlListSmCornerRest: string;
+  ctrlListSmCornerHover: string;
+  ctrlListSmCornerPressed: string;
+  ctrlListSmIndentLevel1: string;
+  ctrlListSmIndentLevel2: string;
+  ctrlListSmIndentLevel3: string;
+  ctrlListLgCornerRest: string;
+  ctrlListLgCornerHover: string;
+  ctrlListLgCornerPressed: string;
+  ctrlListLgIndentLevel1: string;
+  ctrlListLgIndentLevel2: string;
+  ctrlListLgIndentLevel3: string;
+  ctrlListChoiceCheckboxIconSize: string;
+  ctrlListChoiceCheckboxCorner: string;
+  ctrlListChoiceDotSize: string;
+};
+
+export const ctrlLiteFilterLayout: CtrlLiteFilterLayout = {
+  ctrlLiteFilterStrokeWidthSelected: string;
+};
+
+export const ctrlFocusLayout: CtrlFocusLayout = {
+  ctrlFocusPosition: string;
+  ctrlFocusOuterStrokeWidth: string;
+  ctrlFocusInnerStrokeWidth: string;
+};
+
+export const ctrlProgressLayout: CtrlProgressLayout = {
+  ctrlProgressCorner: string;
+  ctrlProgressHeightEmpty: string;
+  ctrlProgressHeightFilled: string;
+  ctrlProgressLgHeightEmpty: string;
+  ctrlProgressLgHeightFilled: string;
+  ctrlProgressSmHeightEmpty: string;
+  ctrlProgressSmHeightFilled: string;
+};
+
+export const ctrlRatingLayout: CtrlRatingLayout = {
+  ctrlRatingIconGap: string;
+  ctrlRatingIconTheme: string;
+  ctrlRatingIconSize: string;
+};
+
+export const ctrlSegmentedLayout: CtrlSegmentedLayout = {
+  ctrlSegmentedGap: string;
+  ctrlSegmentedCornerHover: string;
+  ctrlSegmentedCornerPressed: string;
+  ctrlSegmentedCornerRest: string;
+  ctrlSegmentedItemCornerHover: string;
+  ctrlSegmentedItemCornerPressed: string;
+  ctrlSegmentedItemCornerRest: string;
+  ctrlSegmentedPaddingHover: string;
+  ctrlSegmentedPaddingPressed: string;
+  ctrlSegmentedPaddingRest: string;
+  ctrlSegmentedLgItemCornerHover: string;
+  ctrlSegmentedLgItemCornerPressed: string;
+  ctrlSegmentedLgItemCornerRest: string;
+  ctrlSegmentedLgPaddingHover: string;
+  ctrlSegmentedLgPaddingPressed: string;
+  ctrlSegmentedLgPaddingRest: string;
+  ctrlSegmentedLgCornerHover: string;
+  ctrlSegmentedLgCornerPressed: string;
+  ctrlSegmentedLgCornerRest: string;
+  ctrlSegmentedSmItemCornerHover: string;
+  ctrlSegmentedSmItemCornerPressed: string;
+  ctrlSegmentedSmItemCornerRest: string;
+  ctrlSegmentedSmPaddingHover: string;
+  ctrlSegmentedSmPaddingPressed: string;
+  ctrlSegmentedSmPaddingRest: string;
+  ctrlSegmentedSmCornerHover: string;
+  ctrlSegmentedSmCornerPressed: string;
+  ctrlSegmentedSmCornerRest: string;
+};
+
+export const ctrlSliderLayout: CtrlSliderLayout = {
+  ctrlSliderBarCorner: string;
+  ctrlSliderBarHeight: string;
+  ctrlSliderThumbCorner: string;
+  ctrlSliderThumbInnerStrokeWidthHover: string;
+  ctrlSliderThumbInnerStrokeWidthPressed: string;
+  ctrlSliderThumbInnerStrokeWidthRest: string;
+  ctrlSliderThumbSizeRest: string;
+  ctrlSliderThumbSizeHover: string;
+  ctrlSliderThumbSizePressed: string;
+  ctrlSliderThumbOuterStrokeWidth: string;
+  ctrlSliderLgThumbSizeRest: string;
+  ctrlSliderLgThumbSizeHover: string;
+  ctrlSliderLgThumbSizePressed: string;
+  ctrlSliderLgBarHeight: string;
+  ctrlSliderSmThumbSizeRest: string;
+  ctrlSliderSmThumbSizeHover: string;
+  ctrlSliderSmThumbSizePressed: string;
+  ctrlSliderSmBarHeight: string;
+};
+
+export const ctrlSplitLayout: CtrlSplitLayout = {
+  ctrlSplitDividerStrokeWidth: string;
+  ctrlSplitDividerStrokeWidthOnSubtle: string;
+  ctrlSplitDividerStrokeWidthOnOutline: string;
+};
+
+export const ctrlSpinnerLayout: CtrlSpinnerLayout = {
+  ctrlSpinnerStrokeWidth: string;
+  ctrlSpinnerShowEmptyTrack: string;
+};
+
+export const ctrlTooltipLayout: CtrlTooltipLayout = {
   ctrlTooltipCorner: string;
   ctrlTooltipShaodwKeyX: string;
   ctrlTooltipShaodwKeyY: string;
