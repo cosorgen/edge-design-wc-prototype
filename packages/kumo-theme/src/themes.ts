@@ -165,5 +165,5 @@ export const darkTheme = {
   ...darkTooltipColors,
 };
 
-export type Theme = typeof lightTheme | typeof darkTheme;
+export type Theme = typeof lightTheme;
 export type Layout = typeof utilityLayout;
