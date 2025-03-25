@@ -44,7 +44,7 @@ export {
   fontSize,
   fontWeight,
   lineHeight,
-  shadow,
+  shadow as globalShadow,
   nullValues,
 } from './globalValues.js';
 
@@ -201,3 +201,7 @@ export { strokeWidth } from './strokeWidth.js';
 export type { IconTheme } from './iconTheme.js';
 
 export { iconTheme } from './iconTheme.js';
+
+export type { ShadowParts, Shadow } from './shadow.js';
+
+export { shadowParts, shadow } from './shadow.js';
