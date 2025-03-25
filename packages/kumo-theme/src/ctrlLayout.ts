@@ -1,4 +1,4 @@
-import { corner, shadow, size, strokeWidth } from "./globalValues.js";
+import { corner, shadow, size, strokeWidth } from './globalValues.js';
 
 export type CtrlAvatarLayout = {
   ctrlAvatarSize: string;
@@ -480,152 +480,154 @@ export const ctrlInputLayout: CtrlInputLayout = {
   ctrlInputStrokeWidthSelected: strokeWidth[10],
   ctrlInputBottomLineStrokeWidthRest: '{strokeWidthDefault}',
   ctrlInputBottomLineStrokeWidthHover: '{strokeWidthDefault}',
-  ctrlInputBottomLineStrokeWidthPressed: '{ctrlInputBottomLineStrokeWidthSelected}',
+  ctrlInputBottomLineStrokeWidthPressed:
+    '{ctrlInputBottomLineStrokeWidthSelected}',
   ctrlInputBottomLineStrokeWidthSelected: strokeWidth[20],
 };
 
 export const ctrlLinkLayout: CtrlLinkLayout = {
   ctrlLinkInlineShowUnderlineAtRest: 'false',
-  ctrlLinkInlineUnderlineDashed: string;
-  ctrlLinkInlineUnderlineSolid: string;
-  ctrlLinkInlineStrokeWidthRest: string;
-  ctrlLinkInlineStrokeWidthHover: string;
-  ctrlLinkOnPageShowUnderlineAtRest: string;
-  ctrlLinkOnPageUnderlineDashed: string;
-  ctrlLinkOnPageUnderlineSolid: string;
-  ctrlLinkOnPageStrokeWidthRest: string;
-  ctrlLinkOnPageStrokeWidthHover: string;
+  ctrlLinkInlineUnderlineDashed: 'false',
+  ctrlLinkInlineUnderlineSolid: 'false',
+  ctrlLinkInlineStrokeWidthRest: strokeWidth[10],
+  ctrlLinkInlineStrokeWidthHover: strokeWidth[10],
+  ctrlLinkOnPageShowUnderlineAtRest: 'false',
+  ctrlLinkOnPageUnderlineDashed: 'false',
+  ctrlLinkOnPageUnderlineSolid: 'true',
+  ctrlLinkOnPageStrokeWidthRest: strokeWidth[10],
+  ctrlLinkOnPageStrokeWidthHover: strokeWidth[10],
 };
 
 export const ctrlListLayout: CtrlListLayout = {
-  ctrlListPillFullWidth: string;
-  ctrlListPillLengthHint: string;
-  ctrlListPillLengthHover: string;
-  ctrlListPillLengthPressed: string;
-  ctrlListPillLengthRest: string;
-  ctrlListPillwidth: string;
-  ctrlListPillStretchPaddingDefault: string;
-  ctrlListPillStretchPaddingHint: string;
-  ctrlListSplitDividerShowDivider: string;
-  ctrlListSplitDividerPaddingInset: string;
-  ctrlListCornerHover: string;
-  ctrlListCornerPressed: string;
-  ctrlListCornerRest: string;
-  ctrlListIndentLevel1: string;
-  ctrlListIndentLevel2: string;
-  ctrlListIndentLevel3: string;
-  ctrlListSmCornerRest: string;
-  ctrlListSmCornerHover: string;
-  ctrlListSmCornerPressed: string;
-  ctrlListSmIndentLevel1: string;
-  ctrlListSmIndentLevel2: string;
-  ctrlListSmIndentLevel3: string;
-  ctrlListLgCornerRest: string;
-  ctrlListLgCornerHover: string;
-  ctrlListLgCornerPressed: string;
-  ctrlListLgIndentLevel1: string;
-  ctrlListLgIndentLevel2: string;
-  ctrlListLgIndentLevel3: string;
-  ctrlListChoiceCheckboxIconSize: string;
-  ctrlListChoiceCheckboxCorner: string;
-  ctrlListChoiceDotSize: string;
+  ctrlListPillFullWidth: 'false',
+  ctrlListPillLengthHint: size[200],
+  ctrlListPillLengthHover: size[200],
+  ctrlListPillLengthPressed: size[200],
+  ctrlListPillLengthRest: size[200],
+  ctrlListPillwidth: '3px',
+  ctrlListPillStretchPaddingDefault: size[120],
+  ctrlListPillStretchPaddingHint: size[200],
+  ctrlListSplitDividerShowDivider: 'true',
+  ctrlListSplitDividerPaddingInset: size[40],
+  ctrlListCornerHover: corner[40],
+  ctrlListCornerPressed: corner[40],
+  ctrlListCornerRest: corner[40],
+  ctrlListIndentLevel1: '{paddingCtrlHorizontalDefault}',
+  ctrlListIndentLevel2: '32px',
+  ctrlListIndentLevel3: '56px',
+  ctrlListSmCornerRest: '{cornerCtrlSmRest}',
+  ctrlListSmCornerHover: '{cornerCtrlSmHover}',
+  ctrlListSmCornerPressed: '{cornerCtrlSmPressed}',
+  ctrlListSmIndentLevel1: '{paddingCtrlSmHorizontalDefault}',
+  ctrlListSmIndentLevel2: '34px',
+  ctrlListSmIndentLevel3: '58px',
+  ctrlListLgCornerRest: '{cornerCtrlLgRest}',
+  ctrlListLgCornerHover: '{cornerCtrlLgHover}',
+  ctrlListLgCornerPressed: '{cornerCtrlLgPressed}',
+  ctrlListLgIndentLevel1: '{paddingCtrlLgHorizontalDefault}',
+  ctrlListLgIndentLevel2: '42px',
+  ctrlListLgIndentLevel3: '74px',
+  ctrlListChoiceCheckboxIconSize: size[160],
+  ctrlListChoiceCheckboxCorner: '0px',
+  ctrlListChoiceDotSize: size[40],
 };
 
 export const ctrlLiteFilterLayout: CtrlLiteFilterLayout = {
-  ctrlLiteFilterStrokeWidthSelected: string;
+  ctrlLiteFilterStrokeWidthSelected: strokeWidth[10],
 };
 
 export const ctrlFocusLayout: CtrlFocusLayout = {
-  ctrlFocusPosition: string;
-  ctrlFocusOuterStrokeWidth: string;
-  ctrlFocusInnerStrokeWidth: string;
+  ctrlFocusPosition: 'Both Outside',
+  ctrlFocusOuterStrokeWidth: strokeWidth[20],
+  ctrlFocusInnerStrokeWidth: strokeWidth[10],
 };
 
 export const ctrlProgressLayout: CtrlProgressLayout = {
-  ctrlProgressCorner: string;
-  ctrlProgressHeightEmpty: string;
-  ctrlProgressHeightFilled: string;
-  ctrlProgressLgHeightEmpty: string;
-  ctrlProgressLgHeightFilled: string;
-  ctrlProgressSmHeightEmpty: string;
-  ctrlProgressSmHeightFilled: string;
+  ctrlProgressCorner: corner.circular,
+  ctrlProgressHeightEmpty: size[30],
+  ctrlProgressHeightFilled: size[30],
+  ctrlProgressLgHeightEmpty: size[40],
+  ctrlProgressLgHeightFilled: size[40],
+  ctrlProgressSmHeightEmpty: '1px',
+  ctrlProgressSmHeightFilled: '1px',
 };
 
 export const ctrlRatingLayout: CtrlRatingLayout = {
-  ctrlRatingIconGap: string;
-  ctrlRatingIconTheme: string;
-  ctrlRatingIconSize: string;
+  ctrlRatingIconGap: size[20],
+  ctrlRatingIconTheme: 'Filled',
+  ctrlRatingIconSize: size[120],
 };
 
 export const ctrlSegmentedLayout: CtrlSegmentedLayout = {
-  ctrlSegmentedGap: string;
-  ctrlSegmentedCornerHover: string;
-  ctrlSegmentedCornerPressed: string;
-  ctrlSegmentedCornerRest: string;
-  ctrlSegmentedItemCornerHover: string;
-  ctrlSegmentedItemCornerPressed: string;
-  ctrlSegmentedItemCornerRest: string;
-  ctrlSegmentedPaddingHover: string;
-  ctrlSegmentedPaddingPressed: string;
-  ctrlSegmentedPaddingRest: string;
-  ctrlSegmentedLgItemCornerHover: string;
-  ctrlSegmentedLgItemCornerPressed: string;
-  ctrlSegmentedLgItemCornerRest: string;
-  ctrlSegmentedLgPaddingHover: string;
-  ctrlSegmentedLgPaddingPressed: string;
-  ctrlSegmentedLgPaddingRest: string;
-  ctrlSegmentedLgCornerHover: string;
-  ctrlSegmentedLgCornerPressed: string;
-  ctrlSegmentedLgCornerRest: string;
-  ctrlSegmentedSmItemCornerHover: string;
-  ctrlSegmentedSmItemCornerPressed: string;
-  ctrlSegmentedSmItemCornerRest: string;
-  ctrlSegmentedSmPaddingHover: string;
-  ctrlSegmentedSmPaddingPressed: string;
-  ctrlSegmentedSmPaddingRest: string;
-  ctrlSegmentedSmCornerHover: string;
-  ctrlSegmentedSmCornerPressed: string;
-  ctrlSegmentedSmCornerRest: string;
+  ctrlSegmentedGap: size[0],
+  ctrlSegmentedCornerHover: '{cornerCtrlHover}',
+  ctrlSegmentedCornerPressed: '{cornerCtrlPressed}',
+  ctrlSegmentedCornerRest: '{cornerCtrlRest}',
+  ctrlSegmentedItemCornerHover: '{cornerCtrlSmHover}',
+  ctrlSegmentedItemCornerPressed: '{cornerCtrlSmPressed}',
+  ctrlSegmentedItemCornerRest: '{cornerCtrlSmRest}',
+  ctrlSegmentedPaddingHover: '5px',
+  ctrlSegmentedPaddingPressed: '7px',
+  ctrlSegmentedPaddingRest: size[40],
+  ctrlSegmentedLgItemCornerHover: '0px',
+  ctrlSegmentedLgItemCornerPressed: '0px',
+  ctrlSegmentedLgItemCornerRest: '0px',
+  ctrlSegmentedLgPaddingHover: '0px',
+  ctrlSegmentedLgPaddingPressed: '0px',
+  ctrlSegmentedLgPaddingRest: '0px',
+  ctrlSegmentedLgCornerHover: '0px',
+  ctrlSegmentedLgCornerPressed: '0px',
+  ctrlSegmentedLgCornerRest: '0px',
+  ctrlSegmentedSmItemCornerHover: '0px',
+  ctrlSegmentedSmItemCornerPressed: '0px',
+  ctrlSegmentedSmItemCornerRest: '0px',
+  ctrlSegmentedSmPaddingHover: '0px',
+  ctrlSegmentedSmPaddingPressed: '0px',
+  ctrlSegmentedSmPaddingRest: '0px',
+  ctrlSegmentedSmCornerHover: '0px',
+  ctrlSegmentedSmCornerPressed: '0px',
+  ctrlSegmentedSmCornerRest: '0px',
 };
 
 export const ctrlSliderLayout: CtrlSliderLayout = {
-  ctrlSliderBarCorner: string;
-  ctrlSliderBarHeight: string;
-  ctrlSliderThumbCorner: string;
-  ctrlSliderThumbInnerStrokeWidthHover: string;
-  ctrlSliderThumbInnerStrokeWidthPressed: string;
-  ctrlSliderThumbInnerStrokeWidthRest: string;
-  ctrlSliderThumbSizeRest: string;
-  ctrlSliderThumbSizeHover: string;
-  ctrlSliderThumbSizePressed: string;
-  ctrlSliderThumbOuterStrokeWidth: string;
-  ctrlSliderLgThumbSizeRest: string;
-  ctrlSliderLgThumbSizeHover: string;
-  ctrlSliderLgThumbSizePressed: string;
-  ctrlSliderLgBarHeight: string;
-  ctrlSliderSmThumbSizeRest: string;
-  ctrlSliderSmThumbSizeHover: string;
-  ctrlSliderSmThumbSizePressed: string;
-  ctrlSliderSmBarHeight: string;
+  ctrlSliderBarCorner: corner.circular,
+  ctrlSliderBarHeight: '{ctrlProgressHeightFilled}',
+  ctrlSliderThumbCorner: corner.circular,
+  ctrlSliderThumbInnerStrokeWidthHover: '{ctrlSliderThumbInnerStrokeWidthRest}',
+  ctrlSliderThumbInnerStrokeWidthPressed:
+    '{ctrlSliderThumbInnerStrokeWidthRest}',
+  ctrlSliderThumbInnerStrokeWidthRest: strokeWidth[40],
+  ctrlSliderThumbSizeRest: '{sizeCtrlIcon}',
+  ctrlSliderThumbSizeHover: '22px',
+  ctrlSliderThumbSizePressed: '18px',
+  ctrlSliderThumbOuterStrokeWidth: '1px',
+  ctrlSliderLgThumbSizeRest: '{ctrlSliderThumbSizeRest}',
+  ctrlSliderLgThumbSizeHover: '0px',
+  ctrlSliderLgThumbSizePressed: '0px',
+  ctrlSliderLgBarHeight: '0px',
+  ctrlSliderSmThumbSizeRest: '{ctrlSliderThumbSizeRest}',
+  ctrlSliderSmThumbSizeHover: '0px',
+  ctrlSliderSmThumbSizePressed: '0px',
+  ctrlSliderSmBarHeight: '0px',
 };
 
 export const ctrlSplitLayout: CtrlSplitLayout = {
-  ctrlSplitDividerStrokeWidth: string;
-  ctrlSplitDividerStrokeWidthOnSubtle: string;
-  ctrlSplitDividerStrokeWidthOnOutline: string;
+  ctrlSplitDividerStrokeWidth: strokeWidth[10],
+  ctrlSplitDividerStrokeWidthOnSubtle: strokeWidth[0],
+  ctrlSplitDividerStrokeWidthOnOutline: strokeWidth[10],
 };
 
 export const ctrlSpinnerLayout: CtrlSpinnerLayout = {
-  ctrlSpinnerStrokeWidth: string;
-  ctrlSpinnerShowEmptyTrack: string;
+  ctrlSpinnerStrokeWidth: strokeWidth[20],
+  ctrlSpinnerShowEmptyTrack: 'false',
 };
 
 export const ctrlTooltipLayout: CtrlTooltipLayout = {
-  ctrlTooltipCorner: string;
-  ctrlTooltipShaodwKeyX: string;
-  ctrlTooltipShaodwKeyY: string;
-  ctrlTooltipShaodwKeyBlur: string;
-  ctrlTooltipShaodwAmbientX: string;
-  ctrlTooltipShaodwAmbientY: string;
-  ctrlTooltipShaodwAmbientBlur: string;
+  ctrlTooltipCorner: '{cornerCtrlRest}',
+  ctrlTooltipShaodwKeyX: shadow.shadowKeyX,
+  ctrlTooltipShaodwKeyY: shadow.shadowKeyY8,
+  ctrlTooltipShaodwKeyBlur: shadow.shadowKeyBlur8,
+  ctrlTooltipShaodwAmbientX: shadow.shadowAmbientX,
+  ctrlTooltipShaodwAmbientY: shadow.shadowAmbientY,
+  ctrlTooltipShaodwAmbientBlur: shadow.shadowAmbientBlurLow,
 };
