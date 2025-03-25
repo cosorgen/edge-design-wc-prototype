@@ -39,7 +39,7 @@ export type {
 export {
   size,
   corner as globalCorner,
-  strokeWidth,
+  strokeWidth as globalStrokeWidth,
   fontFamily,
   fontSize,
   fontWeight,
@@ -193,3 +193,7 @@ export { gapBetween, gapInside } from './gap.js';
 export type { Corner } from './corner.js';
 
 export { corner } from './corner.js';
+
+export type { StrokeWidth } from './strokeWidth.js';
+
+export { strokeWidth } from './strokeWidth.js';
