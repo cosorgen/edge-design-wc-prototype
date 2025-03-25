@@ -197,3 +197,7 @@ export { corner } from './corner.js';
 export type { StrokeWidth } from './strokeWidth.js';
 
 export { strokeWidth } from './strokeWidth.js';
+
+export type { IconTheme } from './iconTheme.js';
+
+export { iconTheme } from './iconTheme.js';
