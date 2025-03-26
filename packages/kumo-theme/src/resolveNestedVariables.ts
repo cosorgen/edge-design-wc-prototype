@@ -1,33 +1,22 @@
 export function resolveNestedVariables(
   theme: Record<string, string>,
 ): Record<string, string> {
-  let exitLoop = true;
-  do {
-    exitLoop = true; // will set to false if we find variables to ressolve
-    let error = false; // Need error to never be reset in the for loop
-    for (const key of Object.keys(theme)) {
-      const matches = theme[key].matchAll(/{(.+?)}/gm);
-      for (const match of matches) {
-        exitLoop = false; // We found variables
-        const newKey = match[1];
-        const oldValue = theme[key];
-        const newValue =
-          oldValue.substring(0, match.index) +
-          theme[newKey] +
-          oldValue.substring(match.index + match[0].length);
-        if (key === 'shadowFlyout') {
-          console.log(newKey, '\n', newValue, '\n\n');
-        }
-        if (newValue) {
-          theme[key] = newValue || oldValue;
-        } else {
-          console.error('Missing key in theme:', key, '=', newKey);
-          error = true;
-        }
+  for (const key of Object.keys(theme)) {
+    let value = theme[key];
+    const regex = /\{(.+?)\}/; // {variableKey}
+    let match = value.match(regex);
+    while (match) {
+      const [wholeMatch, newKey] = match;
+      if (theme[newKey]) {
+        value = value.replace(wholeMatch, theme[newKey]);
+        match = value.match(regex);
+      } else {
+        console.error('Theme missing key:', newKey);
       }
     }
-    if (error) exitLoop = true; // We will always find variables if there was an error
-  } while (!exitLoop);
+
+    theme[key] = value;
+  }
 
   return theme;
 }
