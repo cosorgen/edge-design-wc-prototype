@@ -1,23 +1,33 @@
 import { strokeWidth as s } from './globalValues.js';
 
 export type Strokewidth = {
+  strokeWidthControlOutlineHover: string;
+  strokeWidthControlOutlinePressed: string;
+  strokeWidthControlOutlineRest: string;
+  strokeWidthControlOutlineSelectedRest: string;
+  strokewidthCtrlOutlineHover: string;
+  strokewidthCtrlOutlinePressed: string;
+  strokewidthCtrlOutlineRest: string;
+  strokewidthCtrlOutlineSelected: string;
+  strokewidthDefault: string;
   strokeWidthDefault: string;
-  strokeWidthDividerDefault: string;
-  strokeWidthDividerStrong: string;
-  strokeWidthCtrlOutlineRest: string;
-  strokeWidthCtrlOutlineHover: string;
-  strokeWidthCtrlOutlinePressed: string;
-  strokeWidthCtrlOutlineSelected: string;
+  strokewidthDividerDefault: string;
+  strokewidthDividerStrong: string;
   strokeWidthWindowDefault: string;
 };
 
 export const strokeWidth: Strokewidth = {
-  strokeWidthDefault: s[10],
-  strokeWidthDividerDefault: s[10],
-  strokeWidthDividerStrong: s[10],
-  strokeWidthCtrlOutlineRest: s[10],
-  strokeWidthCtrlOutlineHover: s[20],
-  strokeWidthCtrlOutlinePressed: s[20],
-  strokeWidthCtrlOutlineSelected: s[20],
+  strokeWidthControlOutlineHover: '{strokewidthCtrlOutlineHover}',
+  strokeWidthControlOutlinePressed: '{strokewidthCtrlOutlinePressed}',
+  strokeWidthControlOutlineRest: '{strokewidthCtrlOutlineRest}',
+  strokeWidthControlOutlineSelectedRest: '{strokewidthCtrlOutlineSelected}',
+  strokewidthCtrlOutlineHover: s[20],
+  strokewidthCtrlOutlinePressed: s[20],
+  strokewidthCtrlOutlineRest: s[10],
+  strokewidthCtrlOutlineSelected: s[20],
+  strokeWidthDefault: '{strokewidthDefault}',
+  strokewidthDefault: s[10],
+  strokewidthDividerDefault: s[10],
+  strokewidthDividerStrong: s[10],
   strokeWidthWindowDefault: '{nullNumber}',
 };
