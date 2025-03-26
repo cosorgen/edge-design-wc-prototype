@@ -134,7 +134,7 @@ function getVarsFromFallbackChain(css) {
 }
 
 let missingTokens = 0;
-for (const [key, value] of Object.entries(tokensFromKumo)) {
+for (const [key, value] of Object.entries(tokensFromKumo).sort()) {
   // Test if any tokens are missing in this package that are in @mai-ui/design-tokens
   const edgeToken = tokensFromEdge[key];
   if (!edgeToken) {

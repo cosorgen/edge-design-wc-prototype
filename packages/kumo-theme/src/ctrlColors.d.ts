@@ -50,6 +50,7 @@ export type CtrlDialogColors = {
   ctrlDialogLayerBackground: string;
   ctrlDialogBaseShadowKeyColor: string;
   ctrlDialogBaseShadowAmbientColor: string;
+  ctrlDialogPrimaryBackgroundColor: string;
 };
 
 export type CtrlDragColors = {

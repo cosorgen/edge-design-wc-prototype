@@ -70,10 +70,11 @@ export const lightChoiceColors: CtrlChoiceColors = {
 
 export const lightDialogColors: CtrlDialogColors = {
   ctrlDialogBackground: neutral[0],
-  ctrlDialogStroke: '{nullColor}',
-  ctrlDialogLayerBackground: '{backgroundLayerPrimarySolid}',
-  ctrlDialogBaseShadowKeyColor: shadow.shadowKeyHighLight,
   ctrlDialogBaseShadowAmbientColor: shadow.shadowAmbientHighLight,
+  ctrlDialogBaseShadowKeyColor: shadow.shadowKeyHighLight,
+  ctrlDialogLayerBackground: '{backgroundLayerPrimarySolid}',
+  ctrlDialogPrimaryBackgroundColor: '{backgroundLayerPrimarySolid}',
+  ctrlDialogStroke: '{nullColor}',
 };
 
 export const lightDragColors: CtrlDragColors = {

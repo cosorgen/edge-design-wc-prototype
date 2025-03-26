@@ -32,10 +32,11 @@ export type TextGlobal = {
 
 export type TextStyle = {
   textStyleDefaultRegularFontfamily: string;
+  textStyleDefaultRegularFontFamily: string;
   textStyleDefaultRegularLetterSpacing: string;
   textStyleDefaultRegularWeight: string;
   textStyleDefaultHeaderCase: string;
-  textStyleDefaultHeaderFontFamily: string;
+  textStyleDefaultHeaderFontfamily: string;
   textStyleDefaultHeaderLetterSpacing: string;
   textStyleDefaultHeaderWeight: string;
   textStyleArticleRegularFontFamily: string;
@@ -78,36 +79,52 @@ export type TextStyle = {
 export type TextCtrl = {
   textCtrlWeightDefault: string;
   textCtrlWeightSelected: string;
-  textButtonWeightDefault: string;
-  textButtonWeightSelected: string;
+  textCtrlButtonWeightDefault: string;
+  textCtrlButtonWeightSelected: string;
+  textControlDefaultBodyFontSize: string;
 };
 
 export type TextRamp = {
-  textRampItemBodyFontsize: string;
-  textRampItemBodyLineheight: string;
+  textRampItembodyFontsize: string;
+  textRampItembodyLineheight: string;
   textRampLegalFontsize: string;
   textRampLegalLineheight: string;
   textRampMetadataFontsize: string;
   textRampMetadataLineheight: string;
   textRampItemHeaderFontsize: string;
   textRampItemHeaderLineheight: string;
-  textRampReadingBodyFontsize: string;
-  textRampReadingBodyLineheight: string;
+  textRampReadingbodyFontsize: string;
+  textRampReadingbodyLineheight: string;
   textRampSubsectionHeaderFontsize: string;
   textRampSubsectionHeaderLineheight: string;
-  textRampSectionHeaderFontsize: string;
-  textRampSectionHeaderLineheight: string;
+  textRampSectionheaderFontsize: string;
+  textRampSectionheaderLineheight: string;
   textRampPageHeaderFontsize: string;
   textRampPageHeaderLineheight: string;
   textRampCaption2LineHeight: string;
   textRampCaption2FontSize: string;
   textRampBody2FontSize: string;
   textRampBody2LineHeight: string;
+  textRampTitle3LineHeight: string;
+  textRampTitle3FontSize: string;
+  textRampTitle2LineHeight: string;
+  textRampTitle2FontSize: string;
+  textRampTitle1LineHeight: string;
+  textRampTitle1FontSize: string;
+  textRampSubtitle2LineHeight: string;
+  textRampSubtitle2FontSize: string;
+  textRampSubtitle1LineHeight: string;
+  textRampSubtitle1FontSize: string;
+  textRampCaption1LineHeight: string;
+  textRampCaption1FontSize: string;
+  textRampBody1LineHeight: string;
+  textRampBody1FontSize: string;
+  textRampBody3LineHeight: string;
 };
 
 export type TextRampSm = {
-  textRampSmItemBodyFontsize: string;
-  textRampSmItemBodyLineheight: string;
+  textRampSmItembodyFontsize: string;
+  textRampSmItembodyLineheight: string;
   textRampSmLegalFontsize: string;
   textRampSmLegalLineheight: string;
   textRampSmMetadataFontsize: string;
@@ -170,10 +187,11 @@ export const textGlobal: TextGlobal = {
 
 export const textStyle: TextStyle = {
   textStyleDefaultRegularFontfamily: fontFamily.base,
+  textStyleDefaultRegularFontFamily: 'textStyleDefaultRegularFontfamily}',
   textStyleDefaultRegularLetterSpacing: '0px',
   textStyleDefaultRegularWeight: fontWeight.regular,
   textStyleDefaultHeaderCase: '{nullString}',
-  textStyleDefaultHeaderFontFamily: fontFamily.base,
+  textStyleDefaultHeaderFontfamily: fontFamily.base,
   textStyleDefaultHeaderLetterSpacing: '{textStyleDefaultRegularLetterSpacing}',
   textStyleDefaultHeaderWeight: fontWeight.semibold,
   textStyleArticleRegularFontFamily: fontFamily.serif,
@@ -217,36 +235,52 @@ export const textStyle: TextStyle = {
 export const textCtrl: TextCtrl = {
   textCtrlWeightDefault: '{textStyleDefaultRegularWeight}',
   textCtrlWeightSelected: '{textStyleDefaultHeaderWeight}',
-  textButtonWeightDefault: '{textStyleDefaultRegularWeight}',
-  textButtonWeightSelected: '{textStyleDefaultHeaderWeight}',
+  textCtrlButtonWeightDefault: '{textStyleDefaultRegularWeight}',
+  textCtrlButtonWeightSelected: '{textStyleDefaultHeaderWeight}',
+  textControlDefaultBodyFontSize: '{textGlobalBody3Fontsize}',
 };
 
 export const textRamp: TextRamp = {
-  textRampItemBodyFontsize: '{textGlobalBody3Fontsize}',
-  textRampItemBodyLineheight: '{textGlobalBody3Lineheight}',
+  textRampItembodyFontsize: '{textGlobalBody3Fontsize}',
+  textRampItembodyLineheight: '{textGlobalBody3Lineheight}',
   textRampLegalFontsize: fontSize[300],
   textRampLegalLineheight: lineHeight[300],
   textRampMetadataFontsize: '{textGlobalCaption1Fontsize}',
   textRampMetadataLineheight: '{textGlobalCaption1Lineheight}',
   textRampItemHeaderFontsize: '{textGlobalBody2Fontsize}',
   textRampItemHeaderLineheight: '{textGlobalBody2Lineheight}',
-  textRampReadingBodyFontsize: '{textGlobalBody2Fontsize}',
-  textRampReadingBodyLineheight: '{textGlobalBody2Lineheight}',
+  textRampReadingbodyFontsize: '{textGlobalBody2Fontsize}',
+  textRampReadingbodyLineheight: '{textGlobalBody2Lineheight}',
   textRampSubsectionHeaderFontsize: '{textGlobalSubtitle2Fontsize}',
   textRampSubsectionHeaderLineheight: '{textGlobalSubtitle2Lineheight}',
-  textRampSectionHeaderFontsize: '{textGlobalSubtitle1Fontsize}',
-  textRampSectionHeaderLineheight: '{textGlobalSubtitle1Lineheight}',
+  textRampSectionheaderFontsize: '{textGlobalSubtitle1Fontsize}',
+  textRampSectionheaderLineheight: '{textGlobalSubtitle1Lineheight}',
   textRampPageHeaderFontsize: '{textGlobalTitle2Fontsize}',
   textRampPageHeaderLineheight: '{textGlobalTitle2Lineheight}',
   textRampCaption2LineHeight: '{textGlobalCaption2Lineheight}',
   textRampCaption2FontSize: '{textGlobalCaption2Fontsize}',
   textRampBody2FontSize: '{textGlobalBody2Fontsize}',
   textRampBody2LineHeight: '{textGlobalBody2Lineheight}',
+  textRampTitle3LineHeight: '{textGlobalSubtitle1Lineheight}',
+  textRampTitle3FontSize: '{textGlobalSubtitle1Fontsize}',
+  textRampTitle2LineHeight: '{textGlobalTitle2Lineheight}',
+  textRampTitle2FontSize: '{textGlobalTitle2Fontsize}',
+  textRampTitle1LineHeight: '{textGlobalTitle1Lineheight}',
+  textRampTitle1FontSize: '{textGlobalTitle1Fontsize}',
+  textRampSubtitle2LineHeight: '{textGlobalSubtitle2Lineheight}',
+  textRampSubtitle2FontSize: '{textGlobalSubtitle2Fontsize}',
+  textRampSubtitle1LineHeight: '{textGlobalSubtitle1Lineheight}',
+  textRampSubtitle1FontSize: '{textGlobalSubtitle1Fontsize}',
+  textRampCaption1LineHeight: '{textGlobalCaption1Lineheight}',
+  textRampCaption1FontSize: '{textGlobalCaption1Fontsize}',
+  textRampBody1LineHeight: '{textGlobalBody1Lineheight}',
+  textRampBody1FontSize: '{textGlobalBody1Fontsize}',
+  textRampBody3LineHeight: '{textGlobalBody3Lineheight}',
 };
 
 export const textRampSm: TextRampSm = {
-  textRampSmItemBodyFontsize: '{textGlobalCaption1Fontsize}',
-  textRampSmItemBodyLineheight: '{textGlobalCaption1Lineheight}',
+  textRampSmItembodyFontsize: '{textGlobalCaption1Fontsize}',
+  textRampSmItembodyLineheight: '{textGlobalCaption1Lineheight}',
   textRampSmLegalFontsize: fontSize[200],
   textRampSmLegalLineheight: lineHeight[200],
   textRampSmMetadataFontsize: '{textGlobalCaption1Fontsize}',

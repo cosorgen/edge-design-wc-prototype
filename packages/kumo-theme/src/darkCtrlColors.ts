@@ -74,6 +74,7 @@ export const darkDialogColors: CtrlDialogColors = {
   ctrlDialogLayerBackground: '{backgroundLayerPrimarySolid}',
   ctrlDialogBaseShadowKeyColor: shadow.shadowKeyHighDark,
   ctrlDialogBaseShadowAmbientColor: shadow.shadowAmbientHighDark,
+  ctrlDialogPrimaryBackgroundColor: '{backgroundLayerPrimarySolid}',
 };
 
 export const darkDragColors: CtrlDragColors = {
