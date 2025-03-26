@@ -20,8 +20,8 @@ export type PaddingCtrlSm = {
 export type PaddingCtrlLg = {
   paddingCtrlLgHorizontalDefault: string;
   paddingCtrlLgHorizontalIconOnly: string;
-  paddingCtrlLgTextTop: string;
-  paddingCtrlLgTextBottom: string;
+  paddingCtrlLgTexttop: string;
+  paddingCtrlLgTextbottom: string;
   paddingCtrlLgToNestedControl: string;
 };
 
@@ -76,8 +76,8 @@ export const paddingCtrlSm: PaddingCtrlSm = {
 export const paddingCtrlLg: PaddingCtrlLg = {
   paddingCtrlLgHorizontalDefault: size[80],
   paddingCtrlLgHorizontalIconOnly: size[80],
-  paddingCtrlLgTextTop: size[80],
-  paddingCtrlLgTextBottom: '{paddingCtrlLgTextTop}',
+  paddingCtrlLgTexttop: size[80],
+  paddingCtrlLgTextbottom: '{paddingCtrlLgTexttop}',
   paddingCtrlLgToNestedControl: size[40],
 };
 

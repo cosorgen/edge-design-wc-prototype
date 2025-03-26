@@ -20,11 +20,13 @@
     "dist/*.d.ts"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build:tsc && node scripts/build.js",
-    "build:tsc": "tsc",
-    "clean": "rimraf dist"
+    "build": "npm run clean && npm run compile && node scripts/build.js && npm run test",
+    "compile": "tsc",
+    "clean": "rimraf dist",
+    "test": "node scripts/test.js"
   },
   "devDependencies": {
+    "@mai-ui/design-tokens": "^1.2.1",
     "esbuild": "^0.24.0"
   }
 }

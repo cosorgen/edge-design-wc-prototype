@@ -58,6 +58,29 @@ import {
   darkTabColors,
   darkTooltipColors,
 } from './darkCtrlColors.js';
+import { corner } from './corner.js';
+import {
+  ctrlAvatarLayout,
+  ctrlChoiceLayout,
+  ctrlBadgeLayout,
+  ctrlBooleanLayout,
+  ctrlComposerLayout,
+  ctrlDialogLayout,
+  ctrlDividerLayout,
+  ctrlFabLayout,
+  ctrlFocusLayout,
+  ctrlInputLayout,
+  ctrlLinkLayout,
+  ctrlListLayout,
+  ctrlLiteFilterLayout,
+  ctrlProgressLayout,
+  ctrlRatingLayout,
+  ctrlSegmentedLayout,
+  ctrlSliderLayout,
+  ctrlSpinnerLayout,
+  ctrlSplitLayout,
+  ctrlTooltipLayout,
+} from './ctrlLayout.js';
 import { iconTheme } from './iconTheme.js';
 import { material } from './material.js';
 import {
@@ -69,6 +92,7 @@ import {
   paddingFlyout,
   paddingToolbar,
 } from './padding.js';
+import { gapBetween, gapInside } from './gap.js';
 import { shadow, shadowParts } from './shadow.js';
 import { sizeCtrl, sizeCtrlLg, sizeCtrlSm } from './size.js';
 import { strokeWidth } from './strokeWidth.js';
@@ -85,14 +109,37 @@ import { nullValues } from './nullValues.js';
 import { resolveNestedVariables } from './resolveNestedVariables.js';
 
 const utilityLayoutTemplate = {
-  ...nullValues,
+  ...corner,
+  ...ctrlAvatarLayout,
+  ...ctrlChoiceLayout,
+  ...ctrlBadgeLayout,
+  ...ctrlBooleanLayout,
+  ...ctrlComposerLayout,
+  ...ctrlDialogLayout,
+  ...ctrlDividerLayout,
+  ...ctrlFabLayout,
+  ...ctrlFocusLayout,
+  ...ctrlInputLayout,
+  ...ctrlLinkLayout,
+  ...ctrlListLayout,
+  ...ctrlLiteFilterLayout,
+  ...ctrlProgressLayout,
+  ...ctrlRatingLayout,
+  ...ctrlSegmentedLayout,
+  ...ctrlSliderLayout,
+  ...ctrlSpinnerLayout,
+  ...ctrlSplitLayout,
+  ...ctrlTooltipLayout,
+  ...gapBetween,
+  ...gapInside,
   ...iconTheme,
   ...material,
+  ...nullValues,
   ...paddingCard,
-  ...paddingCtrl,
-  ...paddingCtrlSm,
-  ...paddingCtrlLg,
   ...paddingContent,
+  ...paddingCtrl,
+  ...paddingCtrlLg,
+  ...paddingCtrlSm,
   ...paddingFlyout,
   ...paddingToolbar,
   ...shadow,
