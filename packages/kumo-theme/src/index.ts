@@ -27,18 +27,18 @@ export {
 export type {
   SizeValues,
   CornerValues,
-  StrokeWidthValues,
+  StrokewidthValues,
   FontFamilyValues,
-  FontSizeValues,
+  FontsizeValues,
   FontWeightValues,
-  LineHeightValues,
+  LineheightValues,
   ShadowValues,
 } from './globalValues.js';
 
 export {
   size,
   corner as globalCorner,
-  strokeWidth as globalStrokeWidth,
+  strokeWidth as globalStrokewidth,
   fontFamily,
   fontSize,
   fontWeight,
@@ -196,7 +196,7 @@ export type { Corner } from './corner.js';
 
 export { corner } from './corner.js';
 
-export type { StrokeWidth } from './strokeWidth.js';
+export type { Strokewidth } from './strokeWidth.js';
 
 export { strokeWidth } from './strokeWidth.js';
 
@@ -257,6 +257,9 @@ export {
   ctrlSplitLayout,
   ctrlTooltipLayout,
 } from './ctrlLayout.js';
+
+export type { Duration, Curve } from './motion.js';
+export { curve, duration } from './motion.js';
 
 export type { Theme } from './themes.js';
 

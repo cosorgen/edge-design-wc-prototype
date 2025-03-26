@@ -133,26 +133,30 @@ function getVarsFromFallbackChain(css) {
   return vars;
 }
 
+let missingTokens = 0;
 for (const [key, value] of Object.entries(tokensFromKumo)) {
   // Test if any tokens are missing in this package that are in @mai-ui/design-tokens
   const edgeToken = tokensFromEdge[key];
   if (!edgeToken) {
     console.error('Missing token from Kumo:', key);
+    missingTokens++;
   } else {
     // Test if Edge css variable is in the chain for Kumo token
     const rawEdgeVariables = getVarsFromFallbackChain(edgeToken);
     const kumoRawVariables = getVarsFromFallbackChain(value);
     for (const rawEdgeVariable of rawEdgeVariables) {
       if (!kumoRawVariables.includes(rawEdgeVariable)) {
-        console.error(
-          'Missing css variable from Kumo token:\n  ',
-          key,
-          '=',
-          value,
-          'missing',
-          rawEdgeVariable,
-        );
+        // console.error(
+        //   'Missing css variable from Kumo token:\n  ',
+        //   key,
+        //   '=',
+        //   value,
+        //   'missing',
+        //   rawEdgeVariable,
+        // );
       }
     }
   }
 }
+
+console.log('Missing tokens:', missingTokens);

@@ -1,9 +1,4 @@
-import {
-  alphaBlack,
-  neutral,
-  shadow,
-  vibrant,
-} from './globalColors.js';
+import { alphaBlack, neutral, shadow, vibrant } from './globalColors.js';
 
 import type {
   CtrlAvatarColors,
@@ -56,15 +51,15 @@ export const darkComposerColors: CtrlComposerColors = {
 export const darkAvatarColors: CtrlAvatarColors = {
   ctrlAvatarBackground: neutral[700],
   ctrlAvatarForeground: neutral[0],
-  ctrlAvatarActiveRingStroke: neutral[0],
-  ctrlAvatarPresenceBadgeBackgroundBehindBadge: '{backgroundLayerPrimarySolid}',
+  ctrlAvatarActiveringStroke: neutral[0],
+  ctrlAvatarPresencebadgeBackgroundBehindbadge: '{backgroundLayerPrimarySolid}',
 };
 
 export const darkChoiceColors: CtrlChoiceColors = {
   ctrlChoiceBaseStrokeRest: neutral[400],
   ctrlChoiceBaseStrokeHover: neutral[404],
   ctrlChoiceBaseStrokePressed: neutral[408],
-  ctrlChoiceBaseStrokeDisabled: '{backgroundCtrlShapeSafeNeutralDisabled}',
+  ctrlChoiceBaseStrokeDisabled: '{backgroundCtrlShapesafeNeutralDisabled}',
   ctrlChoiceBaseBackgroundRest: '{nullColor}',
   ctrlChoiceBaseBackgroundHover: '{nullColor}',
   ctrlChoiceBaseBackgroundPressed: '{nullColor}',
@@ -93,25 +88,25 @@ export const darkIdentityFlyoutColors: CtrlIdentityFlyoutColors = {
 };
 
 export const darkInputColors: CtrlInputColors = {
-  ctrlInputTextSelectionForeground: '{foregroundCtrlOnBrandRest}',
-  ctrlInputTextSelectionBackground: '{backgroundCtrlBrandRest}',
+  ctrlInputTextselectionForeground: '{foregroundCtrlOnBrandRest}',
+  ctrlInputTextselectionBackground: '{backgroundCtrlBrandRest}',
   ctrlInputBackgroundRest: '{backgroundCtrlNeutralRest}',
   ctrlInputBackgroundHover: '{backgroundCtrlNeutralHover}',
   ctrlInputBackgroundPressed: '{backgroundCtrlNeutralPressed}',
   ctrlInputBackgroundDisabled: '{backgroundCtrlNeutralDisabled}',
   ctrlInputBackgroundSelected: '{backgroundCtrlNeutralRest}',
   ctrlInputBackgroundError: '{backgroundCtrlNeutralRest}',
-  ctrlInputStrokeRest: '{strokeCtrlOnNeutralRest}',
-  ctrlInputStrokeHover: '{strokeCtrlOnNeutralHover}',
-  ctrlInputStrokePressed: '{strokeCtrlOnNeutralPressed}',
-  ctrlInputStrokeDisabled: '{strokeCtrlOnNeutralDisabled}',
-  ctrlInputStrokeSelected: '{strokeCtrlOnNeutralRest}',
+  ctrlInputStrokeRest: '{strokeCtrlOnneutralRest}',
+  ctrlInputStrokeHover: '{strokeCtrlOnneutralHover}',
+  ctrlInputStrokePressed: '{strokeCtrlOnneutralPressed}',
+  ctrlInputStrokeDisabled: '{strokeCtrlOnneutralDisabled}',
+  ctrlInputStrokeSelected: '{strokeCtrlOnneutralRest}',
   ctrlInputStrokeError: '{statusDangerStroke}',
   ctrlInputBottomLineStrokeRest: '{nullColor}',
-  ctrlInputBottomLineStrokeHover: '{backgroundCtrlShapeSafeNeutralHover}',
-  ctrlInputBottomLineStrokePressed: '{backgroundCtrlShapeSafeNeutralPressed}',
+  ctrlInputBottomLineStrokeHover: '{backgroundCtrlShapesafeNeutralHover}',
+  ctrlInputBottomLineStrokePressed: '{backgroundCtrlShapesafeNeutralPressed}',
   ctrlInputBottomLineStrokeDisabled: '{nullColor}',
-  ctrlInputBottomLineStrokeSelected: '{backgroundCtrlActiveBrandRest}',
+  ctrlInputBottomLineStrokeSelected: '{backgroundCtrlActivebrandRest}',
   ctrlInputBottomLineStrokeError: '{nullColor}',
 };
 
@@ -197,10 +192,10 @@ export const darkSegmentedColors: CtrlSegmentedColors = {
 };
 
 export const darkSliderColors: CtrlSliderColors = {
-  ctrlSliderBarForegroundEmptyRest: '{backgroundCtrlShapeSafeNeutralRest}',
-  ctrlSliderBarForegroundEmptyHover: '{backgroundCtrlShapeSafeNeutralHover}',
+  ctrlSliderBarForegroundEmptyRest: '{backgroundCtrlShapesafeNeutralRest}',
+  ctrlSliderBarForegroundEmptyHover: '{backgroundCtrlShapesafeNeutralHover}',
   ctrlSliderBarForegroundEmptyPressed:
-    '{backgroundCtrlShapeSafeNeutralPressed}',
+    '{backgroundCtrlShapesafeNeutralPressed}',
   ctrlSliderBarForegroundEmptyDisabled: '{backgroundCtrlNeutralDisabled}',
   ctrlSliderBarForegroundFilledRest: '{backgroundCtrlBrandRest}',
   ctrlSliderBarForegroundFilledHover: '{backgroundCtrlBrandRest}',

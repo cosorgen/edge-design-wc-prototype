@@ -37,7 +37,7 @@ export type PaddingCard = {
 export type PaddingContent = {
   paddingContentNone: string;
   paddingContentXxxSmall: string;
-  paddingContentXxSmall: string;
+  paddingContentXxsmall: string;
   paddingContentXSmallNudge: string;
   paddingContentXSmall: string;
   paddingContentSmall: string;
@@ -82,7 +82,7 @@ export const paddingCtrlLg: PaddingCtrlLg = {
 };
 
 export const paddingFlyout: PaddingFlyout = {
-  paddingFlyoutDefault: '{paddingContentXxSmall}',
+  paddingFlyoutDefault: '{paddingContentXxsmall}',
 };
 
 export const paddingCard: PaddingCard = {
@@ -93,7 +93,7 @@ export const paddingCard: PaddingCard = {
 export const paddingContent: PaddingContent = {
   paddingContentNone: size[0],
   paddingContentXxxSmall: size[20],
-  paddingContentXxSmall: size[40],
+  paddingContentXxsmall: size[40],
   paddingContentXSmallNudge: size[60],
   paddingContentXSmall: size[80],
   paddingContentSmall: size[120],

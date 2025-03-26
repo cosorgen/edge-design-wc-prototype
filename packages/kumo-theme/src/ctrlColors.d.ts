@@ -27,8 +27,8 @@ export type CtrlComposerColors = {
 export type CtrlAvatarColors = {
   ctrlAvatarBackground: string;
   ctrlAvatarForeground: string;
-  ctrlAvatarActiveRingStroke: string;
-  ctrlAvatarPresenceBadgeBackgroundBehindBadge: string;
+  ctrlAvatarActiveringStroke: string;
+  ctrlAvatarPresencebadgeBackgroundBehindbadge: string;
 };
 
 export type CtrlChoiceColors = {
@@ -64,8 +64,8 @@ export type CtrlIdentityFlyoutColors = {
 };
 
 export type CtrlInputColors = {
-  ctrlInputTextSelectionForeground: string;
-  ctrlInputTextSelectionBackground: string;
+  ctrlInputTextselectionForeground: string;
+  ctrlInputTextselectionBackground: string;
   ctrlInputBackgroundRest: string;
   ctrlInputBackgroundHover: string;
   ctrlInputBackgroundPressed: string;

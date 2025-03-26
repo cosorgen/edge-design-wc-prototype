@@ -4,15 +4,15 @@ export type CtrlAvatarLayout = {
   ctrlAvatarSize: string;
   ctrlAvatarShowCutout: string;
   ctrlAvatarActiveRingSize: string;
-  ctrlAvatarActiveRingStrokeWidth: string;
+  ctrlAvatarActiveRingStrokewidth: string;
   ctrlAvatarCornerGroup: string;
   ctrlAvatarCornerItem: string;
-  ctrlAvatarPresenceBadgeStrokeWidth: string;
-  ctrlAvatarPresenceBadgeSize: string;
-  ctrlAvatarPresenceBadgePadding: string;
+  ctrlAvatarPresencebadgeStrokewidth: string;
+  ctrlAvatarPresencebadgeSize: string;
+  ctrlAvatarPresencebadgePadding: string;
   ctrlAvatarIconSize: string;
-  ctrlAvatarTextFontSize: string;
-  ctrlAvatarTextLineHeight: string;
+  ctrlAvatarTextFontsize: string;
+  ctrlAvatarTextLineheight: string;
   ctrlAvatarTextPaddingTopOffset: string;
 };
 
@@ -105,14 +105,14 @@ export type CtrlComposerLayout = {
   ctrlComposerContainerShadowAmbientX: string;
   ctrlComposerContainerShadowAmbientY: string;
   ctrlComposerContainerShadowAmbientBlur: string;
-  ctrlComposerInputBottomStrokeWidthRest: string;
-  ctrlComposerInputBottomStrokeWidthHover: string;
-  ctrlComposerInputBottomStrokeWidthPressed: string;
-  ctrlComposerInputBottomStrokeWidthSelectedRest: string;
-  ctrlComposerInputStrokeWidthRest: string;
-  ctrlComposerInputStrokeWidthHover: string;
-  ctrlComposerInputStrokeWidthPressed: string;
-  ctrlComposerInputStrokeWidthSelectedRest: string;
+  ctrlComposerInputBottomStrokewidthRest: string;
+  ctrlComposerInputBottomStrokewidthHover: string;
+  ctrlComposerInputBottomStrokewidthPressed: string;
+  ctrlComposerInputBottomStrokewidthSelectedRest: string;
+  ctrlComposerInputStrokewidthRest: string;
+  ctrlComposerInputStrokewidthHover: string;
+  ctrlComposerInputStrokewidthPressed: string;
+  ctrlComposerInputStrokewidthSelectedRest: string;
   ctrlComposerInputCornerRest: string;
   ctrlComposerInputCornerHover: string;
   ctrlComposerInputCornerPressed: string;
@@ -159,27 +159,27 @@ export type CtrlFabLayout = {
 };
 
 export type CtrlInputLayout = {
-  ctrlInputStrokeWidthRest: string;
-  ctrlInputStrokeWidthHover: string;
-  ctrlInputStrokeWidthPressed: string;
-  ctrlInputStrokeWidthSelected: string;
-  ctrlInputBottomLineStrokeWidthRest: string;
-  ctrlInputBottomLineStrokeWidthHover: string;
-  ctrlInputBottomLineStrokeWidthPressed: string;
-  ctrlInputBottomLineStrokeWidthSelected: string;
+  ctrlInputStrokewidthRest: string;
+  ctrlInputStrokewidthHover: string;
+  ctrlInputStrokewidthPressed: string;
+  ctrlInputStrokewidthSelected: string;
+  ctrlInputBottomLineStrokewidthRest: string;
+  ctrlInputBottomLineStrokewidthHover: string;
+  ctrlInputBottomLineStrokewidthPressed: string;
+  ctrlInputBottomLineStrokewidthSelected: string;
 };
 
 export type CtrlLinkLayout = {
   ctrlLinkInlineShowUnderlineAtRest: string;
   ctrlLinkInlineUnderlineDashed: string;
   ctrlLinkInlineUnderlineSolid: string;
-  ctrlLinkInlineStrokeWidthRest: string;
-  ctrlLinkInlineStrokeWidthHover: string;
+  ctrlLinkInlineStrokewidthRest: string;
+  ctrlLinkInlineStrokewidthHover: string;
   ctrlLinkOnPageShowUnderlineAtRest: string;
   ctrlLinkOnPageUnderlineDashed: string;
   ctrlLinkOnPageUnderlineSolid: string;
-  ctrlLinkOnPageStrokeWidthRest: string;
-  ctrlLinkOnPageStrokeWidthHover: string;
+  ctrlLinkOnPageStrokewidthRest: string;
+  ctrlLinkOnPageStrokewidthHover: string;
 };
 
 export type CtrlListLayout = {
@@ -188,7 +188,7 @@ export type CtrlListLayout = {
   ctrlListPillLengthHover: string;
   ctrlListPillLengthPressed: string;
   ctrlListPillLengthRest: string;
-  ctrlListPillwidth: string;
+  ctrlListPillWidth: string;
   ctrlListPillStretchPaddingDefault: string;
   ctrlListPillStretchPaddingHint: string;
   ctrlListSplitDividerShowDivider: string;
@@ -217,13 +217,13 @@ export type CtrlListLayout = {
 };
 
 export type CtrlLiteFilterLayout = {
-  ctrlLiteFilterStrokeWidthSelected: string;
+  ctrlLiteFilterStrokewidthSelected: string;
 };
 
 export type CtrlFocusLayout = {
   ctrlFocusPosition: string;
-  ctrlFocusOuterStrokeWidth: string;
-  ctrlFocusInnerStrokeWidth: string;
+  ctrlFocusOuterStrokewidth: string;
+  ctrlFocusInnerStrokewidth: string;
 };
 
 export type CtrlProgressLayout = {
@@ -277,13 +277,13 @@ export type CtrlSliderLayout = {
   ctrlSliderBarCorner: string;
   ctrlSliderBarHeight: string;
   ctrlSliderThumbCorner: string;
-  ctrlSliderThumbInnerStrokeWidthHover: string;
-  ctrlSliderThumbInnerStrokeWidthPressed: string;
-  ctrlSliderThumbInnerStrokeWidthRest: string;
+  ctrlSliderThumbInnerStrokewidthHover: string;
+  ctrlSliderThumbInnerStrokewidthPressed: string;
+  ctrlSliderThumbInnerStrokewidthRest: string;
   ctrlSliderThumbSizeRest: string;
   ctrlSliderThumbSizeHover: string;
   ctrlSliderThumbSizePressed: string;
-  ctrlSliderThumbOuterStrokeWidth: string;
+  ctrlSliderThumbOuterStrokewidth: string;
   ctrlSliderLgThumbSizeRest: string;
   ctrlSliderLgThumbSizeHover: string;
   ctrlSliderLgThumbSizePressed: string;
@@ -295,39 +295,41 @@ export type CtrlSliderLayout = {
 };
 
 export type CtrlSplitLayout = {
-  ctrlSplitDividerStrokeWidth: string;
-  ctrlSplitDividerStrokeWidthOnSubtle: string;
-  ctrlSplitDividerStrokeWidthOnOutline: string;
+  ctrlSplitDividerStrokewidth: string;
+  ctrlSplitDividerStrokewidthOnSubtle: string;
+  ctrlSplitDividerStrokewidthOnOutline: string;
 };
 
 export type CtrlSpinnerLayout = {
-  ctrlSpinnerStrokeWidth: string;
-  ctrlSpinnerShowEmptyTrack: string;
+  ctrlSpinnerStrokewidth: string;
+  ctrlSpinnerShowemptytrack: string;
 };
 
 export type CtrlTooltipLayout = {
   ctrlTooltipCorner: string;
-  ctrlTooltipShaodwKeyX: string;
-  ctrlTooltipShaodwKeyY: string;
-  ctrlTooltipShaodwKeyBlur: string;
-  ctrlTooltipShaodwAmbientX: string;
-  ctrlTooltipShaodwAmbientY: string;
-  ctrlTooltipShaodwAmbientBlur: string;
+  ctrlTooltipShadowKeyX: string;
+  ctrlTooltipShadowKeyY: string;
+  ctrlTooltipShadowKeyBlur: string;
+  ctrlTooltipShadowAmbientX: string;
+  ctrlTooltipShadowAmbientY: string;
+  ctrlTooltipShadowAmbientBlur: string;
+  ctrlTooltipShadow: string;
+  ctrlTooltipShadowCss: string;
 };
 
 export const ctrlAvatarLayout: CtrlAvatarLayout = {
   ctrlAvatarSize: '{sizeCtrlDefault}',
   ctrlAvatarShowCutout: 'true',
   ctrlAvatarActiveRingSize: size[360],
-  ctrlAvatarActiveRingStrokeWidth: strokeWidth[20],
+  ctrlAvatarActiveRingStrokewidth: strokeWidth[20],
   ctrlAvatarCornerGroup: corner[20],
   ctrlAvatarCornerItem: corner.circular,
-  ctrlAvatarPresenceBadgeStrokeWidth: strokeWidth[10],
-  ctrlAvatarPresenceBadgeSize: size[60],
-  ctrlAvatarPresenceBadgePadding: size[20],
+  ctrlAvatarPresencebadgeStrokewidth: strokeWidth[10],
+  ctrlAvatarPresencebadgeSize: size[60],
+  ctrlAvatarPresencebadgePadding: size[20],
   ctrlAvatarIconSize: size[120],
-  ctrlAvatarTextFontSize: size[100],
-  ctrlAvatarTextLineHeight: size[120],
+  ctrlAvatarTextFontsize: size[100],
+  ctrlAvatarTextLineheight: size[120],
   ctrlAvatarTextPaddingTopOffset: '11px',
 };
 
@@ -420,14 +422,14 @@ export const ctrlComposerLayout: CtrlComposerLayout = {
   ctrlComposerContainerShadowAmbientX: '{shadowFlyoutAmbientX}',
   ctrlComposerContainerShadowAmbientY: '{shadowFlyoutAmbientY}',
   ctrlComposerContainerShadowAmbientBlur: '{shadowFlyoutAmbientBlur}',
-  ctrlComposerInputBottomStrokeWidthRest: strokeWidth[0],
-  ctrlComposerInputBottomStrokeWidthHover: strokeWidth[0],
-  ctrlComposerInputBottomStrokeWidthPressed: strokeWidth[0],
-  ctrlComposerInputBottomStrokeWidthSelectedRest: strokeWidth[0],
-  ctrlComposerInputStrokeWidthRest: strokeWidth[0],
-  ctrlComposerInputStrokeWidthHover: strokeWidth[0],
-  ctrlComposerInputStrokeWidthPressed: strokeWidth[0],
-  ctrlComposerInputStrokeWidthSelectedRest: strokeWidth[0],
+  ctrlComposerInputBottomStrokewidthRest: strokeWidth[0],
+  ctrlComposerInputBottomStrokewidthHover: strokeWidth[0],
+  ctrlComposerInputBottomStrokewidthPressed: strokeWidth[0],
+  ctrlComposerInputBottomStrokewidthSelectedRest: strokeWidth[0],
+  ctrlComposerInputStrokewidthRest: strokeWidth[0],
+  ctrlComposerInputStrokewidthHover: strokeWidth[0],
+  ctrlComposerInputStrokewidthPressed: strokeWidth[0],
+  ctrlComposerInputStrokewidthSelectedRest: strokeWidth[0],
   ctrlComposerInputCornerRest: corner[240],
   ctrlComposerInputCornerHover: '26px',
   ctrlComposerInputCornerPressed: '28px',
@@ -474,28 +476,28 @@ export const ctrlFabLayout: CtrlFabLayout = {
 };
 
 export const ctrlInputLayout: CtrlInputLayout = {
-  ctrlInputStrokeWidthRest: '{strokeWidthDefault}',
-  ctrlInputStrokeWidthHover: '{strokeWidthDefault}',
-  ctrlInputStrokeWidthPressed: '{strokeWidthDefault}',
-  ctrlInputStrokeWidthSelected: strokeWidth[10],
-  ctrlInputBottomLineStrokeWidthRest: '{strokeWidthDefault}',
-  ctrlInputBottomLineStrokeWidthHover: '{strokeWidthDefault}',
-  ctrlInputBottomLineStrokeWidthPressed:
-    '{ctrlInputBottomLineStrokeWidthSelected}',
-  ctrlInputBottomLineStrokeWidthSelected: strokeWidth[20],
+  ctrlInputStrokewidthRest: '{strokeWidthDefault}',
+  ctrlInputStrokewidthHover: '{strokeWidthDefault}',
+  ctrlInputStrokewidthPressed: '{strokeWidthDefault}',
+  ctrlInputStrokewidthSelected: strokeWidth[10],
+  ctrlInputBottomLineStrokewidthRest: '{strokeWidthDefault}',
+  ctrlInputBottomLineStrokewidthHover: '{strokeWidthDefault}',
+  ctrlInputBottomLineStrokewidthPressed:
+    '{ctrlInputBottomLineStrokewidthSelected}',
+  ctrlInputBottomLineStrokewidthSelected: strokeWidth[20],
 };
 
 export const ctrlLinkLayout: CtrlLinkLayout = {
   ctrlLinkInlineShowUnderlineAtRest: 'false',
   ctrlLinkInlineUnderlineDashed: 'false',
   ctrlLinkInlineUnderlineSolid: 'false',
-  ctrlLinkInlineStrokeWidthRest: strokeWidth[10],
-  ctrlLinkInlineStrokeWidthHover: strokeWidth[10],
+  ctrlLinkInlineStrokewidthRest: strokeWidth[10],
+  ctrlLinkInlineStrokewidthHover: strokeWidth[10],
   ctrlLinkOnPageShowUnderlineAtRest: 'false',
   ctrlLinkOnPageUnderlineDashed: 'false',
   ctrlLinkOnPageUnderlineSolid: 'true',
-  ctrlLinkOnPageStrokeWidthRest: strokeWidth[10],
-  ctrlLinkOnPageStrokeWidthHover: strokeWidth[10],
+  ctrlLinkOnPageStrokewidthRest: strokeWidth[10],
+  ctrlLinkOnPageStrokewidthHover: strokeWidth[10],
 };
 
 export const ctrlListLayout: CtrlListLayout = {
@@ -504,7 +506,7 @@ export const ctrlListLayout: CtrlListLayout = {
   ctrlListPillLengthHover: size[200],
   ctrlListPillLengthPressed: size[200],
   ctrlListPillLengthRest: size[200],
-  ctrlListPillwidth: '3px',
+  ctrlListPillWidth: '3px',
   ctrlListPillStretchPaddingDefault: size[120],
   ctrlListPillStretchPaddingHint: size[200],
   ctrlListSplitDividerShowDivider: 'true',
@@ -533,13 +535,13 @@ export const ctrlListLayout: CtrlListLayout = {
 };
 
 export const ctrlLiteFilterLayout: CtrlLiteFilterLayout = {
-  ctrlLiteFilterStrokeWidthSelected: strokeWidth[10],
+  ctrlLiteFilterStrokewidthSelected: strokeWidth[10],
 };
 
 export const ctrlFocusLayout: CtrlFocusLayout = {
   ctrlFocusPosition: 'Both Outside',
-  ctrlFocusOuterStrokeWidth: strokeWidth[20],
-  ctrlFocusInnerStrokeWidth: strokeWidth[10],
+  ctrlFocusOuterStrokewidth: strokeWidth[20],
+  ctrlFocusInnerStrokewidth: strokeWidth[10],
 };
 
 export const ctrlProgressLayout: CtrlProgressLayout = {
@@ -593,14 +595,14 @@ export const ctrlSliderLayout: CtrlSliderLayout = {
   ctrlSliderBarCorner: corner.circular,
   ctrlSliderBarHeight: '{ctrlProgressHeightFilled}',
   ctrlSliderThumbCorner: corner.circular,
-  ctrlSliderThumbInnerStrokeWidthHover: '{ctrlSliderThumbInnerStrokeWidthRest}',
-  ctrlSliderThumbInnerStrokeWidthPressed:
-    '{ctrlSliderThumbInnerStrokeWidthRest}',
-  ctrlSliderThumbInnerStrokeWidthRest: strokeWidth[40],
+  ctrlSliderThumbInnerStrokewidthHover: '{ctrlSliderThumbInnerStrokewidthRest}',
+  ctrlSliderThumbInnerStrokewidthPressed:
+    '{ctrlSliderThumbInnerStrokewidthRest}',
+  ctrlSliderThumbInnerStrokewidthRest: strokeWidth[40],
   ctrlSliderThumbSizeRest: '{sizeCtrlIcon}',
   ctrlSliderThumbSizeHover: '22px',
   ctrlSliderThumbSizePressed: '18px',
-  ctrlSliderThumbOuterStrokeWidth: '1px',
+  ctrlSliderThumbOuterStrokewidth: '1px',
   ctrlSliderLgThumbSizeRest: '{ctrlSliderThumbSizeRest}',
   ctrlSliderLgThumbSizeHover: '0px',
   ctrlSliderLgThumbSizePressed: '0px',
@@ -612,22 +614,25 @@ export const ctrlSliderLayout: CtrlSliderLayout = {
 };
 
 export const ctrlSplitLayout: CtrlSplitLayout = {
-  ctrlSplitDividerStrokeWidth: strokeWidth[10],
-  ctrlSplitDividerStrokeWidthOnSubtle: strokeWidth[0],
-  ctrlSplitDividerStrokeWidthOnOutline: strokeWidth[10],
+  ctrlSplitDividerStrokewidth: strokeWidth[10],
+  ctrlSplitDividerStrokewidthOnSubtle: strokeWidth[0],
+  ctrlSplitDividerStrokewidthOnOutline: strokeWidth[10],
 };
 
 export const ctrlSpinnerLayout: CtrlSpinnerLayout = {
-  ctrlSpinnerStrokeWidth: strokeWidth[20],
-  ctrlSpinnerShowEmptyTrack: 'false',
+  ctrlSpinnerStrokewidth: strokeWidth[20],
+  ctrlSpinnerShowemptytrack: 'false',
 };
 
 export const ctrlTooltipLayout: CtrlTooltipLayout = {
   ctrlTooltipCorner: '{cornerCtrlRest}',
-  ctrlTooltipShaodwKeyX: shadow.shadowKeyX,
-  ctrlTooltipShaodwKeyY: shadow.shadowKeyY8,
-  ctrlTooltipShaodwKeyBlur: shadow.shadowKeyBlur8,
-  ctrlTooltipShaodwAmbientX: shadow.shadowAmbientX,
-  ctrlTooltipShaodwAmbientY: shadow.shadowAmbientY,
-  ctrlTooltipShaodwAmbientBlur: shadow.shadowAmbientBlurLow,
+  ctrlTooltipShadowKeyX: shadow.shadowKeyX,
+  ctrlTooltipShadowKeyY: shadow.shadowKeyY8,
+  ctrlTooltipShadowKeyBlur: shadow.shadowKeyBlur8,
+  ctrlTooltipShadowAmbientX: shadow.shadowAmbientX,
+  ctrlTooltipShadowAmbientY: shadow.shadowAmbientY,
+  ctrlTooltipShadowAmbientBlur: shadow.shadowAmbientBlurLow,
+  ctrlTooltipShadow:
+    '{ctrlTooltipShadowKeyX} {ctrlTooltipShadowKeyY} {ctrlTooltipShadowKeyBlur} 0px {ctrlTooltipShadowKeyColor}, {ctrlTooltipShadowAmbientX} {ctrlTooltipShadowAmbientY} {ctrlTooltipShadowAmbientBlur} 0px {ctrlTooltipShadowAmbientColor}',
+  ctrlTooltipShadowCss: '{ctrlTooltipShadow}',
 };

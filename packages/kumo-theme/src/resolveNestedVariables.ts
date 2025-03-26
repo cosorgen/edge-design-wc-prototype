@@ -12,6 +12,7 @@ export function resolveNestedVariables(
         match = value.match(regex);
       } else {
         console.error('Theme missing key:', newKey);
+        match = null; // break the loop
       }
     }
 

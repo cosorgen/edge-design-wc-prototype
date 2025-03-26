@@ -2,7 +2,7 @@ import { size } from './globalValues.js';
 
 export type GapInside = {
   gapInsideCtrlDefault: string;
-  gapInsideCtrlToSecondaryIcon: string;
+  gapInsideCtrlTosecondaryicon: string;
   gapInsideCtrlToLabel: string;
   gapInsideCtrlSmDefault: string;
   gapInsideCtrlSmToSecondaryIcon: string;
@@ -15,7 +15,7 @@ export type GapInside = {
 export type GapBetween = {
   gapBetweenContentNone: string;
   gapBetweenContentXxxSmall: string;
-  gapBetweenContentXxSmall: string;
+  gapBetweenContentXxsmall: string;
   gapBetweenContentXSmallNudge: string;
   gapBetweenContentXSmall: string;
   gapBetweenContentSmall: string;
@@ -38,7 +38,7 @@ export type GapBetween = {
 
 export const gapInside: GapInside = {
   gapInsideCtrlDefault: size[40],
-  gapInsideCtrlToSecondaryIcon: size[40],
+  gapInsideCtrlTosecondaryicon: size[40],
   gapInsideCtrlToLabel: size[80],
   gapInsideCtrlSmDefault: size[40],
   gapInsideCtrlSmToSecondaryIcon: size[0],
@@ -51,7 +51,7 @@ export const gapInside: GapInside = {
 export const gapBetween: GapBetween = {
   gapBetweenContentNone: size[0],
   gapBetweenContentXxxSmall: size[20],
-  gapBetweenContentXxSmall: size[40],
+  gapBetweenContentXxsmall: size[40],
   gapBetweenContentXSmallNudge: size[60],
   gapBetweenContentXSmall: size[80],
   gapBetweenContentSmall: size[120],

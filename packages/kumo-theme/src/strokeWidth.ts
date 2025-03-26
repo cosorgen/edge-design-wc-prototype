@@ -1,6 +1,6 @@
 import { strokeWidth as s } from './globalValues.js';
 
-export type StrokeWidth = {
+export type Strokewidth = {
   strokeWidthDefault: string;
   strokeWidthDividerDefault: string;
   strokeWidthDividerStrong: string;
@@ -11,7 +11,7 @@ export type StrokeWidth = {
   strokeWidthWindowDefault: string;
 };
 
-export const strokeWidth: StrokeWidth = {
+export const strokeWidth: Strokewidth = {
   strokeWidthDefault: s[10],
   strokeWidthDividerDefault: s[10],
   strokeWidthDividerStrong: s[10],

@@ -6,32 +6,32 @@ import {
 } from './globalValues.js';
 
 export type TextGlobal = {
-  textGlobalCaption2FontSize: string;
-  textGlobalCaption2LineHeight: string;
-  textGlobalCaption1FontSize: string;
-  textGlobalCaption1LineHeight: string;
-  textGlobalBody3FontSize: string;
-  textGlobalBody3LineHeight: string;
-  textGlobalBody2FontSize: string;
-  textGlobalBody2LineHeight: string;
-  textGlobalBody1FontSize: string;
-  textGlobalBody1LineHeight: string;
-  textGlobalSubtitle2FontSize: string;
-  textGlobalSubtitle2LineHeight: string;
-  textGlobalSubtitle1FontSize: string;
-  textGlobalSubtitle1LineHeight: string;
-  textGlobalTitle2FontSize: string;
-  textGlobalTitle2LineHeight: string;
-  textGlobalTitle1FontSize: string;
-  textGlobalTitle1LineHeight: string;
-  textGlobalDisplay2FontSize: string;
-  textGlobalDisplay2LineHeight: string;
-  textGlobalDisplay1FontSize: string;
-  textGlobalDisplay1LineHeight: string;
+  textGlobalCaption2Fontsize: string;
+  textGlobalCaption2Lineheight: string;
+  textGlobalCaption1Fontsize: string;
+  textGlobalCaption1Lineheight: string;
+  textGlobalBody3Fontsize: string;
+  textGlobalBody3Lineheight: string;
+  textGlobalBody2Fontsize: string;
+  textGlobalBody2Lineheight: string;
+  textGlobalBody1Fontsize: string;
+  textGlobalBody1Lineheight: string;
+  textGlobalSubtitle2Fontsize: string;
+  textGlobalSubtitle2Lineheight: string;
+  textGlobalSubtitle1Fontsize: string;
+  textGlobalSubtitle1Lineheight: string;
+  textGlobalTitle2Fontsize: string;
+  textGlobalTitle2Lineheight: string;
+  textGlobalTitle1Fontsize: string;
+  textGlobalTitle1Lineheight: string;
+  textGlobalDisplay2Fontsize: string;
+  textGlobalDisplay2Lineheight: string;
+  textGlobalDisplay1Fontsize: string;
+  textGlobalDisplay1Lineheight: string;
 };
 
 export type TextStyle = {
-  textStyleDefaultRegularFontFamily: string;
+  textStyleDefaultRegularFontfamily: string;
   textStyleDefaultRegularLetterSpacing: string;
   textStyleDefaultRegularWeight: string;
   textStyleDefaultHeaderCase: string;
@@ -83,89 +83,93 @@ export type TextCtrl = {
 };
 
 export type TextRamp = {
-  textRampItemBodyFontSize: string;
-  textRampItemBodyLineHeight: string;
-  textRampLegalFontSize: string;
-  textRampLegalLineHeight: string;
-  textRampMetadataFontSize: string;
-  textRampMetadataLineHeight: string;
-  textRampItemHeaderFontSize: string;
-  textRampItemHeaderLineHeight: string;
-  textRampReadingBodyFontSize: string;
-  textRampReadingBodyLineHeight: string;
-  textRampSubsectionHeaderFontSize: string;
-  textRampSubsectionHeaderLineHeight: string;
-  textRampSectionHeaderFontSize: string;
-  textRampSectionHeaderLineHeight: string;
-  textRampPageHeaderFontSize: string;
-  textRampPageHeaderLineHeight: string;
+  textRampItemBodyFontsize: string;
+  textRampItemBodyLineheight: string;
+  textRampLegalFontsize: string;
+  textRampLegalLineheight: string;
+  textRampMetadataFontsize: string;
+  textRampMetadataLineheight: string;
+  textRampItemHeaderFontsize: string;
+  textRampItemHeaderLineheight: string;
+  textRampReadingBodyFontsize: string;
+  textRampReadingBodyLineheight: string;
+  textRampSubsectionHeaderFontsize: string;
+  textRampSubsectionHeaderLineheight: string;
+  textRampSectionHeaderFontsize: string;
+  textRampSectionHeaderLineheight: string;
+  textRampPageHeaderFontsize: string;
+  textRampPageHeaderLineheight: string;
+  textRampCaption2LineHeight: string;
+  textRampCaption2FontSize: string;
+  textRampBody2FontSize: string;
+  textRampBody2LineHeight: string;
 };
 
 export type TextRampSm = {
-  textRampSmItemBodyFontSize: string;
-  textRampSmItemBodyLineHeight: string;
-  textRampSmLegalFontSize: string;
-  textRampSmLegalLineHeight: string;
-  textRampSmMetadataFontSize: string;
-  textRampSmMetadataLineHeight: string;
-  textRampSmItemHeaderFontSize: string;
-  textRampSmItemHeaderLineHeight: string;
-  textRampSmReadingBodyFontSize: string;
-  textRampSmReadingBodyLineHeight: string;
-  textRampSmSubsectionHeaderFontSize: string;
-  textRampSmSubsectionHeaderLineHeight: string;
-  textRampSmSectionHeaderFontSize: string;
-  textRampSmSectionHeaderLineHeight: string;
-  textRampSmPageHeaderFontSize: string;
-  textRampSmPageHeaderLineHeight: string;
+  textRampSmItemBodyFontsize: string;
+  textRampSmItemBodyLineheight: string;
+  textRampSmLegalFontsize: string;
+  textRampSmLegalLineheight: string;
+  textRampSmMetadataFontsize: string;
+  textRampSmMetadataLineheight: string;
+  textRampSmItemHeaderFontsize: string;
+  textRampSmItemHeaderLineheight: string;
+  textRampSmReadingBodyFontsize: string;
+  textRampSmReadingBodyLineheight: string;
+  textRampSmSubsectionHeaderFontsize: string;
+  textRampSmSubsectionHeaderLineheight: string;
+  textRampSmSectionHeaderFontsize: string;
+  textRampSmSectionHeaderLineheight: string;
+  textRampSmPageHeaderFontsize: string;
+  textRampSmPageHeaderLineheight: string;
 };
 
 export type TextRampLg = {
-  textRampLgItemBodyFontSize: string;
-  textRampLgItemBodyLineHeight: string;
-  textRampLgLegalFontSize: string;
-  textRampLgLegalLineHeight: string;
-  textRampLgMetadataFontSize: string;
-  textRampLgMetadataLineHeight: string;
-  textRampLgItemHeaderFontSize: string;
-  textRampLgItemHeaderLineHeight: string;
-  textRampLgReadingBodyFontSize: string;
-  textRampLgReadingBodyLineHeight: string;
-  textRampLgSubsectionHeaderFontSize: string;
-  textRampLgSubsectionHeaderLineHeight: string;
-  textRampLgSectionHeaderFontSize: string;
-  textRampLgSectionHeaderLineHeight: string;
-  textRampLgPageHeaderFontSize: string;
-  textRampLgPageHeaderLineHeight: string;
+  textRampLgItembodyFontsize: string;
+  textRampLgItembodyLineheight: string;
+  textRampLgLegalFontsize: string;
+  textRampLgLegalLineheight: string;
+  textRampLgMetadataFontsize: string;
+  textRampLgMetadataLineheight: string;
+  textRampLgItemHeaderFontsize: string;
+  textRampLgItemHeaderLineheight: string;
+  textRampLgReadingBodyFontsize: string;
+  textRampLgReadingBodyLineheight: string;
+  textRampLgSubsectionHeaderFontsize: string;
+  textRampLgSubsectionHeaderLineheight: string;
+  textRampLgSectionHeaderFontsize: string;
+  textRampLgSectionHeaderLineheight: string;
+  textRampLgPageHeaderFontsize: string;
+  textRampLgPageHeaderLineheight: string;
 };
 
 export const textGlobal: TextGlobal = {
-  textGlobalCaption2FontSize: fontSize[100],
-  textGlobalCaption2LineHeight: lineHeight[100],
-  textGlobalCaption1FontSize: fontSize[200],
-  textGlobalCaption1LineHeight: lineHeight[200],
-  textGlobalBody3FontSize: fontSize[300],
-  textGlobalBody3LineHeight: lineHeight[300],
-  textGlobalBody2FontSize: fontSize[400],
-  textGlobalBody2LineHeight: lineHeight[400],
-  textGlobalBody1FontSize: fontSize[450],
-  textGlobalBody1LineHeight: lineHeight[500],
-  textGlobalSubtitle2FontSize: fontSize[400],
-  textGlobalSubtitle2LineHeight: lineHeight[400],
-  textGlobalSubtitle1FontSize: fontSize[500],
-  textGlobalSubtitle1LineHeight: lineHeight[500],
-  textGlobalTitle2FontSize: fontSize[600],
-  textGlobalTitle2LineHeight: lineHeight[600],
-  textGlobalTitle1FontSize: fontSize[700],
-  textGlobalTitle1LineHeight: lineHeight[700],
-  textGlobalDisplay2FontSize: '56px',
-  textGlobalDisplay2LineHeight: '84px',
-  textGlobalDisplay1FontSize: '74px',
-  textGlobalDisplay1LineHeight: '112px',
+  textGlobalCaption2Fontsize: fontSize[100],
+  textGlobalCaption2Lineheight: lineHeight[100],
+  textGlobalCaption1Fontsize: fontSize[200],
+  textGlobalCaption1Lineheight: lineHeight[200],
+  textGlobalBody3Fontsize: fontSize[300],
+  textGlobalBody3Lineheight: lineHeight[300],
+  textGlobalBody2Fontsize: fontSize[400],
+  textGlobalBody2Lineheight: lineHeight[400],
+  textGlobalBody1Fontsize: fontSize[450],
+  textGlobalBody1Lineheight: lineHeight[500],
+  textGlobalSubtitle2Fontsize: fontSize[400],
+  textGlobalSubtitle2Lineheight: lineHeight[400],
+  textGlobalSubtitle1Fontsize: fontSize[500],
+  textGlobalSubtitle1Lineheight: lineHeight[500],
+  textGlobalTitle2Fontsize: fontSize[600],
+  textGlobalTitle2Lineheight: lineHeight[600],
+  textGlobalTitle1Fontsize: fontSize[700],
+  textGlobalTitle1Lineheight: lineHeight[700],
+  textGlobalDisplay2Fontsize: '56px',
+  textGlobalDisplay2Lineheight: '84px',
+  textGlobalDisplay1Fontsize: '74px',
+  textGlobalDisplay1Lineheight: '112px',
 };
 
 export const textStyle: TextStyle = {
-  textStyleDefaultRegularFontFamily: fontFamily.base,
+  textStyleDefaultRegularFontfamily: fontFamily.base,
   textStyleDefaultRegularLetterSpacing: '0px',
   textStyleDefaultRegularWeight: fontWeight.regular,
   textStyleDefaultHeaderCase: '{nullString}',
@@ -218,58 +222,62 @@ export const textCtrl: TextCtrl = {
 };
 
 export const textRamp: TextRamp = {
-  textRampItemBodyFontSize: '{textGlobalBody3FontSize}',
-  textRampItemBodyLineHeight: '{textGlobalBody3LineHeight}',
-  textRampLegalFontSize: fontSize[300],
-  textRampLegalLineHeight: lineHeight[300],
-  textRampMetadataFontSize: '{textGlobalCaption1FontSize}',
-  textRampMetadataLineHeight: '{textGlobalCaption1LineHeight}',
-  textRampItemHeaderFontSize: '{textGlobalBody2FontSize}',
-  textRampItemHeaderLineHeight: '{textGlobalBody2LineHeight}',
-  textRampReadingBodyFontSize: '{textGlobalBody2FontSize}',
-  textRampReadingBodyLineHeight: '{textGlobalBody2LineHeight}',
-  textRampSubsectionHeaderFontSize: '{textGlobalSubtitle2FontSize}',
-  textRampSubsectionHeaderLineHeight: '{textGlobalSubtitle2LineHeight}',
-  textRampSectionHeaderFontSize: '{textGlobalSubtitle1FontSize}',
-  textRampSectionHeaderLineHeight: '{textGlobalSubtitle1LineHeight}',
-  textRampPageHeaderFontSize: '{textGlobalTitle2FontSize}',
-  textRampPageHeaderLineHeight: '{textGlobalTitle2LineHeight}',
+  textRampItemBodyFontsize: '{textGlobalBody3Fontsize}',
+  textRampItemBodyLineheight: '{textGlobalBody3Lineheight}',
+  textRampLegalFontsize: fontSize[300],
+  textRampLegalLineheight: lineHeight[300],
+  textRampMetadataFontsize: '{textGlobalCaption1Fontsize}',
+  textRampMetadataLineheight: '{textGlobalCaption1Lineheight}',
+  textRampItemHeaderFontsize: '{textGlobalBody2Fontsize}',
+  textRampItemHeaderLineheight: '{textGlobalBody2Lineheight}',
+  textRampReadingBodyFontsize: '{textGlobalBody2Fontsize}',
+  textRampReadingBodyLineheight: '{textGlobalBody2Lineheight}',
+  textRampSubsectionHeaderFontsize: '{textGlobalSubtitle2Fontsize}',
+  textRampSubsectionHeaderLineheight: '{textGlobalSubtitle2Lineheight}',
+  textRampSectionHeaderFontsize: '{textGlobalSubtitle1Fontsize}',
+  textRampSectionHeaderLineheight: '{textGlobalSubtitle1Lineheight}',
+  textRampPageHeaderFontsize: '{textGlobalTitle2Fontsize}',
+  textRampPageHeaderLineheight: '{textGlobalTitle2Lineheight}',
+  textRampCaption2LineHeight: '{textGlobalCaption2Lineheight}',
+  textRampCaption2FontSize: '{textGlobalCaption2Fontsize}',
+  textRampBody2FontSize: '{textGlobalBody2Fontsize}',
+  textRampBody2LineHeight: '{textGlobalBody2Lineheight}',
 };
 
 export const textRampSm: TextRampSm = {
-  textRampSmItemBodyFontSize: '{textGlobalCaption1FontSize}',
-  textRampSmItemBodyLineHeight: '{textGlobalCaption1LineHeight}',
-  textRampSmLegalFontSize: fontSize[200],
-  textRampSmLegalLineHeight: lineHeight[200],
-  textRampSmMetadataFontSize: '{textGlobalCaption1FontSize}',
-  textRampSmMetadataLineHeight: '{textGlobalCaption1LineHeight}',
-  textRampSmItemHeaderFontSize: '{textGlobalBody3FontSize}',
-  textRampSmItemHeaderLineHeight: '{textGlobalBody3LineHeight}',
-  textRampSmReadingBodyFontSize: '{textGlobalBody3FontSize}',
-  textRampSmReadingBodyLineHeight: '{textGlobalBody3LineHeight}',
-  textRampSmSubsectionHeaderFontSize: '{textGlobalBody1FontSize}',
-  textRampSmSubsectionHeaderLineHeight: '{textGlobalBody1LineHeight}',
-  textRampSmSectionHeaderFontSize: '{textGlobalBody1FontSize}',
-  textRampSmSectionHeaderLineHeight: '{textGlobalBody1LineHeight}',
-  textRampSmPageHeaderFontSize: '{textGlobalSubtitle1FontSize}',
-  textRampSmPageHeaderLineHeight: '{textGlobalSubtitle1LineHeight}',
+  textRampSmItemBodyFontsize: '{textGlobalCaption1Fontsize}',
+  textRampSmItemBodyLineheight: '{textGlobalCaption1Lineheight}',
+  textRampSmLegalFontsize: fontSize[200],
+  textRampSmLegalLineheight: lineHeight[200],
+  textRampSmMetadataFontsize: '{textGlobalCaption1Fontsize}',
+  textRampSmMetadataLineheight: '{textGlobalCaption1Lineheight}',
+  textRampSmItemHeaderFontsize: '{textGlobalBody3Fontsize}',
+  textRampSmItemHeaderLineheight: '{textGlobalBody3Lineheight}',
+  textRampSmReadingBodyFontsize: '{textGlobalBody3Fontsize}',
+  textRampSmReadingBodyLineheight: '{textGlobalBody3Lineheight}',
+  textRampSmSubsectionHeaderFontsize: '{textGlobalBody1Fontsize}',
+  textRampSmSubsectionHeaderLineheight: '{textGlobalBody1Lineheight}',
+  textRampSmSectionHeaderFontsize: '{textGlobalBody1Fontsize}',
+  textRampSmSectionHeaderLineheight: '{textGlobalBody1Lineheight}',
+  textRampSmPageHeaderFontsize: '{textGlobalSubtitle1Fontsize}',
+  textRampSmPageHeaderLineheight: '{textGlobalSubtitle1Lineheight}',
 };
 
 export const textRampLg: TextRampLg = {
-  textRampLgItemBodyFontSize: '{textGlobalBody2FontSize}',
-  textRampLgItemBodyLineHeight: '{textGlobalBody2LineHeight}',
-  textRampLgLegalFontSize: fontSize[400],
-  textRampLgLegalLineHeight: lineHeight[400],
-  textRampLgMetadataFontSize: '{textGlobalBody3FontSize}',
-  textRampLgMetadataLineHeight: '{textGlobalBody3LineHeight}',
-  textRampLgItemHeaderFontSize: '{textGlobalBody1FontSize}',
-  textRampLgItemHeaderLineHeight: '{textGlobalBody1LineHeight}',
-  textRampLgReadingBodyFontSize: '{textGlobalBody1FontSize}',
-  textRampLgReadingBodyLineHeight: '{textGlobalBody1LineHeight}',
-  textRampLgSubsectionHeaderFontSize: '{textGlobalSubtitle1FontSize}',
-  textRampLgSubsectionHeaderLineHeight: '{textGlobalSubtitle1LineHeight}',
-  textRampLgSectionHeaderFontSize: '{textGlobalSubtitle1FontSize}',
-  textRampLgSectionHeaderLineHeight: '{textGlobalSubtitle1LineHeight}',
-  textRampLgPageHeaderFontSize: '{textGlobalTitle1FontSize}',
-  textRampLgPageHeaderLineHeight: '{textGlobalTitle1LineHeight}',
+  textRampLgItembodyFontsize: '{textGlobalBody2Fontsize}',
+  textRampLgItembodyLineheight: '{textGlobalBody2Lineheight}',
+  textRampLgLegalFontsize: fontSize[400],
+  textRampLgLegalLineheight: lineHeight[400],
+  textRampLgMetadataFontsize: '{textGlobalBody3Fontsize}',
+  textRampLgMetadataLineheight: '{textGlobalBody3Lineheight}',
+  textRampLgItemHeaderFontsize: '{textGlobalBody1Fontsize}',
+  textRampLgItemHeaderLineheight: '{textGlobalBody1Lineheight}',
+  textRampLgReadingBodyFontsize: '{textGlobalBody1Fontsize}',
+  textRampLgReadingBodyLineheight: '{textGlobalBody1Lineheight}',
+  textRampLgSubsectionHeaderFontsize: '{textGlobalSubtitle1Fontsize}',
+  textRampLgSubsectionHeaderLineheight: '{textGlobalSubtitle1Lineheight}',
+  textRampLgSectionHeaderFontsize: '{textGlobalSubtitle1Fontsize}',
+  textRampLgSectionHeaderLineheight: '{textGlobalSubtitle1Lineheight}',
+  textRampLgPageHeaderFontsize: '{textGlobalTitle1Fontsize}',
+  textRampLgPageHeaderLineheight: '{textGlobalTitle1Lineheight}',
 };

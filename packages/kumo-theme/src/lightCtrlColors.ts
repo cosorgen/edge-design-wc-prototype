@@ -51,15 +51,15 @@ export const lightComposerColors: CtrlComposerColors = {
 export const lightAvatarColors: CtrlAvatarColors = {
   ctrlAvatarBackground: neutral[150],
   ctrlAvatarForeground: neutral[800],
-  ctrlAvatarActiveRingStroke: neutral[1000],
-  ctrlAvatarPresenceBadgeBackgroundBehindBadge: '{backgroundLayerPrimarySolid}',
+  ctrlAvatarActiveringStroke: neutral[1000],
+  ctrlAvatarPresencebadgeBackgroundBehindbadge: '{backgroundLayerPrimarySolid}',
 };
 
 export const lightChoiceColors: CtrlChoiceColors = {
   ctrlChoiceBaseStrokeRest: neutral[450],
   ctrlChoiceBaseStrokeHover: neutral[454],
   ctrlChoiceBaseStrokePressed: neutral[458],
-  ctrlChoiceBaseStrokeDisabled: '{backgroundCtrlShapeSafeNeutralDisabled}',
+  ctrlChoiceBaseStrokeDisabled: '{backgroundCtrlShapesafeNeutralDisabled}',
   ctrlChoiceBaseBackgroundRest: '{nullColor}',
   ctrlChoiceBaseBackgroundHover: '{nullColor}',
   ctrlChoiceBaseBackgroundPressed: '{nullColor}',
@@ -88,25 +88,25 @@ export const lightIdentityFlyoutColors: CtrlIdentityFlyoutColors = {
 };
 
 export const lightInputColors: CtrlInputColors = {
-  ctrlInputTextSelectionForeground: '{foregroundCtrlOnBrandRest}',
-  ctrlInputTextSelectionBackground: '{backgroundCtrlBrandRest}',
+  ctrlInputTextselectionForeground: '{foregroundCtrlOnBrandRest}',
+  ctrlInputTextselectionBackground: '{backgroundCtrlBrandRest}',
   ctrlInputBackgroundRest: '{backgroundCtrlNeutralRest}',
   ctrlInputBackgroundHover: '{backgroundCtrlNeutralHover}',
   ctrlInputBackgroundPressed: '{backgroundCtrlNeutralPressed}',
   ctrlInputBackgroundDisabled: '{backgroundCtrlNeutralDisabled}',
   ctrlInputBackgroundSelected: '{backgroundCtrlNeutralRest}',
   ctrlInputBackgroundError: '{backgroundCtrlNeutralRest}',
-  ctrlInputStrokeRest: '{strokeCtrlOnNeutralRest}',
-  ctrlInputStrokeHover: '{strokeCtrlOnNeutralHover}',
-  ctrlInputStrokePressed: '{strokeCtrlOnNeutralPressed}',
-  ctrlInputStrokeDisabled: '{strokeCtrlOnNeutralDisabled}',
-  ctrlInputStrokeSelected: '{strokeCtrlOnNeutralRest}',
+  ctrlInputStrokeRest: '{strokeCtrlOnneutralRest}',
+  ctrlInputStrokeHover: '{strokeCtrlOnneutralHover}',
+  ctrlInputStrokePressed: '{strokeCtrlOnneutralPressed}',
+  ctrlInputStrokeDisabled: '{strokeCtrlOnneutralDisabled}',
+  ctrlInputStrokeSelected: '{strokeCtrlOnneutralRest}',
   ctrlInputStrokeError: '{statusDangerStroke}',
   ctrlInputBottomLineStrokeRest: '{nullColor}',
-  ctrlInputBottomLineStrokeHover: '{backgroundCtrlShapeSafeNeutralHover}',
-  ctrlInputBottomLineStrokePressed: '{backgroundCtrlShapeSafeNeutralPressed}',
+  ctrlInputBottomLineStrokeHover: '{backgroundCtrlShapesafeNeutralHover}',
+  ctrlInputBottomLineStrokePressed: '{backgroundCtrlShapesafeNeutralPressed}',
   ctrlInputBottomLineStrokeDisabled: '{nullColor}',
-  ctrlInputBottomLineStrokeSelected: '{backgroundCtrlActiveBrandRest}',
+  ctrlInputBottomLineStrokeSelected: '{backgroundCtrlActivebrandRest}',
   ctrlInputBottomLineStrokeError: '{nullColor}',
 };
 
@@ -192,10 +192,10 @@ export const lightSegmentedColors: CtrlSegmentedColors = {
 };
 
 export const lightSliderColors: CtrlSliderColors = {
-  ctrlSliderBarForegroundEmptyRest: '{backgroundCtrlShapeSafeNeutralRest}',
-  ctrlSliderBarForegroundEmptyHover: '{backgroundCtrlShapeSafeNeutralHover}',
+  ctrlSliderBarForegroundEmptyRest: '{backgroundCtrlShapesafeNeutralRest}',
+  ctrlSliderBarForegroundEmptyHover: '{backgroundCtrlShapesafeNeutralHover}',
   ctrlSliderBarForegroundEmptyPressed:
-    '{backgroundCtrlShapeSafeNeutralPressed}',
+    '{backgroundCtrlShapesafeNeutralPressed}',
   ctrlSliderBarForegroundEmptyDisabled: '{backgroundCtrlNeutralDisabled}',
   ctrlSliderBarForegroundFilledRest: '{backgroundCtrlBrandRest}',
   ctrlSliderBarForegroundFilledHover: '{backgroundCtrlBrandRest}',

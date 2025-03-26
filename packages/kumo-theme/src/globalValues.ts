@@ -33,7 +33,7 @@ export type CornerValues = {
   circular: string;
 };
 
-export type StrokeWidthValues = {
+export type StrokewidthValues = {
   0: string;
   5: string;
   10: string;
@@ -49,7 +49,7 @@ export type FontFamilyValues = {
   serif: string;
 };
 
-export type FontSizeValues = {
+export type FontsizeValues = {
   100: string;
   200: string;
   300: string;
@@ -63,7 +63,7 @@ export type FontSizeValues = {
   1000: string;
 };
 
-export type LineHeightValues = {
+export type LineheightValues = {
   100: string;
   200: string;
   300: string;
@@ -137,7 +137,7 @@ export const corner: CornerValues = {
   circular: '9999px',
 };
 
-export const strokeWidth: StrokeWidthValues = {
+export const strokeWidth: StrokewidthValues = {
   0: '0px',
   5: '0.5px',
   10: '1px',
@@ -153,7 +153,7 @@ export const fontFamily: FontFamilyValues = {
   serif: '"Lora", serif',
 };
 
-export const fontSize: FontSizeValues = {
+export const fontSize: FontsizeValues = {
   100: '10px',
   200: '12px',
   300: '14px',
@@ -167,7 +167,7 @@ export const fontSize: FontSizeValues = {
   1000: '68px',
 };
 
-export const lineHeight: LineHeightValues = {
+export const lineHeight: LineheightValues = {
   100: '14px',
   200: '16px',
   300: '20px',
