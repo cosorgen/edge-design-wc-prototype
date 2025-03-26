@@ -82,7 +82,7 @@ import {
 } from './text.js';
 import { nullValues } from './nullValues.js';
 
-import { resolveDependencies } from './resolveDependencies.js';
+import { resolveNestedVariables } from './resolveNestedVariables.js';
 
 const utilityLayoutTemplate = {
   ...nullValues,
@@ -109,10 +109,7 @@ const utilityLayoutTemplate = {
   ...textStyle,
 };
 
-export type Layout = typeof utilityLayoutTemplate;
-
-console.log('Ressolving light theme');
-export const lightTheme = resolveDependencies({
+export const lightTheme = resolveNestedVariables({
   ...utilityLayoutTemplate,
   ...lightBackgroundColors,
   ...lightForegroundColors,
@@ -142,8 +139,7 @@ export const lightTheme = resolveDependencies({
   ...lightTooltipColors,
 });
 
-console.log('Ressolving dark theme');
-export const darkTheme = resolveDependencies({
+export const darkTheme = resolveNestedVariables({
   ...utilityLayoutTemplate,
   ...darkBackgroundColors,
   ...darkForegroundColors,
@@ -172,11 +168,5 @@ export const darkTheme = resolveDependencies({
   ...darkTabColors,
   ...darkTooltipColors,
 });
-
-export const utilityLayout = Object.fromEntries(
-  Object.entries(lightTheme).filter(([k, v]) =>
-    k in utilityLayoutTemplate ? [k, v] : undefined,
-  ),
-) as Layout;
 
 export type Theme = typeof lightTheme;

@@ -129,11 +129,11 @@ export const shadow: Shadow = {
   shadowCardRest:
     '{shadowCardRestKeyX} {shadowCardRestKeyY} {shadowCardRestKeyBlur} 0px {shadowCardRestKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
   shadowCardHover:
-    '{shadowCardHoverKeyX} {shadowCardHoverKeyY} {shadowCardHoverKeyBlur} 0px {shadowCardHoverKeyColor}, {shadowCardHoverAmbientX} {shadowCardHoverAmbientY} {shadowCardHoverAmbientBlur} 0px {shadowCardHoverAmbientColor}',
+    '{shadowCardHoverKeyX} {shadowCardHoverKeyY} {shadowCardHoverKeyBlur} 0px {shadowCardHoverKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
   shadowCardPressed:
-    '{shadowCardPressedKeyX} {shadowCardPressedKeyY} {shadowCardPressedKeyBlur} 0px {shadowCardPressedKeyColor}, {shadowCardPressedAmbientX} {shadowCardPressedAmbientY} {shadowCardPressedAmbientBlur} 0px {shadowCardPressedAmbientColor}',
+    '{shadowCardPressedKeyX} {shadowCardPressedKeyY} {shadowCardPressedKeyBlur} 0px {shadowCardPressedKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
   shadowCardDisabled:
-    '{shadowCardDisabledKeyX} {shadowCardDisabledKeyY} {shadowCardDisabledKeyBlur} 0px {shadowCardDisabledKeyColor}, {shadowCardDisabledAmbientX} {shadowCardDisabledAmbientY} {shadowCardDisabledAmbientBlur} 0px {shadowCardDisabledAmbientColor}',
+    '{shadowCardDisabledKeyX} {shadowCardDisabledKeyY} {shadowCardDisabledKeyBlur} 0px {shadowCardDisabledKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
   shadowCtrlOnDrag:
     '{shadowCtrlOnDragKeyX} {shadowCtrlOnDragKeyY} {shadowCtrlOnDragKeyBlur} 0px {shadowCtrlOnDragKeyColor}, {shadowCtrlOnDragAmbientX} {shadowCtrlOnDragAmbientY} {shadowCtrlOnDragAmbientBlur} 0px {shadowCtrlOnDragAmbientColor}',
   shadowLayer:

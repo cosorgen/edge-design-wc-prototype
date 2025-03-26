@@ -258,9 +258,9 @@ export {
   ctrlTooltipLayout,
 } from './ctrlLayout.js';
 
-export type { Layout, Theme } from './themes.js';
+export type { Theme } from './themes.js';
 
-export { utilityLayout, lightTheme, darkTheme } from './themes.js';
+export { lightTheme, darkTheme } from './themes.js';
 
 export type { Tokens } from './themeToTokens.js';
 export { themeToTokens, tokens } from './themeToTokens.js';
