@@ -23,29 +23,49 @@ import type {
 } from './ctrlColors.js';
 
 export const lightComposerColors: CtrlComposerColors = {
-  ctrlComposerContainerBackgroundDefault: alphaWhite[60],
+  controlComposerContainerBackgroundDefault:
+    '{ctrlComposerContainerBackgroundDefault}',
+  controlComposerContainerShadowAmbient:
+    '{ctrlComposerContainerShadowAmbientColor}',
+  controlComposerContainerShadowKey: '{ctrlComposerContainerShadowKeyColor}',
+  controlComposerContainerStrokeDefault: '{ctrlComposerContainerStrokeDefault}',
+  controlComposerInputBackgroundDisabled:
+    '{ctrlComposerInputBackgroundDisabled}',
+  controlComposerInputBackgroundHover: '{ctrlComposerInputBackgroundHover}',
+  controlComposerInputBackgroundPressed: '{ctrlComposerInputBackgroundPressed}',
+  controlComposerInputBackgroundRest: '{ctrlComposerInputBackgroundRest}',
+  controlComposerInputBackgroundSelectedRest:
+    '{ctrlComposerInputBackgroundSelectedRest}',
+  controlComposerInputShadow: '{ctrlComposerInputShadowColor}',
+  controlComposerInputStrokeDisabled: '{ctrlComposerInputStrokeDisabled}',
+  controlComposerInputStrokeHover: '{ctrlComposerInputStrokeHover}',
+  controlComposerInputStrokePressed: '{ctrlComposerInputStrokePressed}',
+  controlComposerInputStrokeRest: '{ctrlComposerInputStrokeRest}',
+  controlComposerInputStrokeSelectedRest:
+    '{ctrlComposerInputStrokeSelectedRest}',
   ctrlComposerContainerBackgroundAcrylicColorBlend: '{backgroundFlyoutSolid}',
   ctrlComposerContainerBackgroundAcrylicLumBlend: '{backgroundFlyoutSolid}',
+  ctrlComposerContainerBackgroundDefault: alphaWhite[60],
   ctrlComposerContainerBackgroundFlyout: alphaWhite[80],
   ctrlComposerContainerShadowAmbientColor: '{nullColor}',
   ctrlComposerContainerShadowKeyColor: '{nullColor}',
   ctrlComposerContainerStrokeDefault: '{nullColor}',
-  ctrlComposerInputShadowColor: '{nullColor}',
-  ctrlComposerInputStrokeRest: '{nullColor}',
-  ctrlComposerInputStrokeDisabled: '{nullColor}',
-  ctrlComposerInputStrokePressed: '{nullColor}',
-  ctrlComposerInputStrokeSelectedRest: '{nullColor}',
-  ctrlComposerInputStrokeHover: '{nullColor}',
-  ctrlComposerInputBackgroundSelectedRest: '{nullColor}',
-  ctrlComposerInputBackgroundPressed: '{nullColor}',
-  ctrlComposerInputBackgroundHover: '{nullColor}',
-  ctrlComposerInputBackgroundRest: '{nullColor}',
   ctrlComposerInputBackgroundDisabled: '{nullColor}',
-  ctrlComposerInputBottomStrokePressed: '{nullColor}',
+  ctrlComposerInputBackgroundHover: '{nullColor}',
+  ctrlComposerInputBackgroundPressed: '{nullColor}',
+  ctrlComposerInputBackgroundRest: '{nullColor}',
+  ctrlComposerInputBackgroundSelectedRest: '{nullColor}',
   ctrlComposerInputBottomStrokeDisabled: '{nullColor}',
+  ctrlComposerInputBottomStrokeHover: '{nullColor}',
+  ctrlComposerInputBottomStrokePressed: '{nullColor}',
   ctrlComposerInputBottomStrokeRest: '{nullColor}',
   ctrlComposerInputBottomStrokeSelectedRest: '{nullColor}',
-  ctrlComposerInputBottomStrokeHover: '{nullColor}',
+  ctrlComposerInputShadowColor: '{nullColor}',
+  ctrlComposerInputStrokeDisabled: '{nullColor}',
+  ctrlComposerInputStrokeHover: '{nullColor}',
+  ctrlComposerInputStrokePressed: '{nullColor}',
+  ctrlComposerInputStrokeRest: '{nullColor}',
+  ctrlComposerInputStrokeSelectedRest: '{nullColor}',
 };
 
 export const lightAvatarColors: CtrlAvatarColors = {

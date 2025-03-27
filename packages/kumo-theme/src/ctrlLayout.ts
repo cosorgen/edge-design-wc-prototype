@@ -98,27 +98,31 @@ export type CtrlChoiceLayout = {
 };
 
 export type CtrlComposerLayout = {
+  controlComposerContainerCorner: string;
+  controlComposerInputCornerHover: string;
+  controlComposerInputCornerPressed: string;
+  controlComposerInputCornerRest: string;
   ctrlComposerContainerCorner: string;
-  ctrlComposerContainerShadowKeyX: string;
-  ctrlComposerContainerShadowKeyY: string;
-  ctrlComposerContainerShadowKeyBlur: string;
+  ctrlComposerContainerShadowAmbientBlur: string;
   ctrlComposerContainerShadowAmbientX: string;
   ctrlComposerContainerShadowAmbientY: string;
-  ctrlComposerContainerShadowAmbientBlur: string;
-  ctrlComposerInputBottomStrokewidthRest: string;
+  ctrlComposerContainerShadowKeyBlur: string;
+  ctrlComposerContainerShadowKeyX: string;
+  ctrlComposerContainerShadowKeyY: string;
   ctrlComposerInputBottomStrokewidthHover: string;
   ctrlComposerInputBottomStrokewidthPressed: string;
+  ctrlComposerInputBottomStrokewidthRest: string;
   ctrlComposerInputBottomStrokewidthSelectedRest: string;
-  ctrlComposerInputStrokewidthRest: string;
-  ctrlComposerInputStrokewidthHover: string;
-  ctrlComposerInputStrokewidthPressed: string;
-  ctrlComposerInputStrokewidthSelectedRest: string;
-  ctrlComposerInputCornerRest: string;
   ctrlComposerInputCornerHover: string;
   ctrlComposerInputCornerPressed: string;
+  ctrlComposerInputCornerRest: string;
+  ctrlComposerInputShadowBlur: string;
   ctrlComposerInputShadowX: string;
   ctrlComposerInputShadowY: string;
-  ctrlComposerInputShadowBlur: string;
+  ctrlComposerInputStrokewidthHover: string;
+  ctrlComposerInputStrokewidthPressed: string;
+  ctrlComposerInputStrokewidthRest: string;
+  ctrlComposerInputStrokewidthSelectedRest: string;
 };
 
 export type CtrlDialogLayout = {
@@ -415,27 +419,31 @@ export const ctrlChoiceLayout: CtrlChoiceLayout = {
 };
 
 export const ctrlComposerLayout: CtrlComposerLayout = {
+  controlComposerContainerCorner: '{ctrlComposerContainerCorner}',
+  controlComposerInputCornerHover: '{ctrlComposerInputCornerHover}',
+  controlComposerInputCornerPressed: '{ctrlComposerInputCornerPressed}',
+  controlComposerInputCornerRest: '{ctrlComposerInputCornerRest}',
   ctrlComposerContainerCorner: corner[240],
-  ctrlComposerContainerShadowKeyX: '{shadowFlyoutKeyX}',
-  ctrlComposerContainerShadowKeyY: '{shadowFlyoutKeyY}',
-  ctrlComposerContainerShadowKeyBlur: '{shadowFlyoutKeyBlur}',
+  ctrlComposerContainerShadowAmbientBlur: '{shadowFlyoutAmbientBlur}',
   ctrlComposerContainerShadowAmbientX: '{shadowFlyoutAmbientX}',
   ctrlComposerContainerShadowAmbientY: '{shadowFlyoutAmbientY}',
-  ctrlComposerContainerShadowAmbientBlur: '{shadowFlyoutAmbientBlur}',
-  ctrlComposerInputBottomStrokewidthRest: strokeWidth[0],
+  ctrlComposerContainerShadowKeyBlur: '{shadowFlyoutKeyBlur}',
+  ctrlComposerContainerShadowKeyX: '{shadowFlyoutKeyX}',
+  ctrlComposerContainerShadowKeyY: '{shadowFlyoutKeyY}',
   ctrlComposerInputBottomStrokewidthHover: strokeWidth[0],
   ctrlComposerInputBottomStrokewidthPressed: strokeWidth[0],
+  ctrlComposerInputBottomStrokewidthRest: strokeWidth[0],
   ctrlComposerInputBottomStrokewidthSelectedRest: strokeWidth[0],
-  ctrlComposerInputStrokewidthRest: strokeWidth[0],
-  ctrlComposerInputStrokewidthHover: strokeWidth[0],
-  ctrlComposerInputStrokewidthPressed: strokeWidth[0],
-  ctrlComposerInputStrokewidthSelectedRest: strokeWidth[0],
-  ctrlComposerInputCornerRest: corner[240],
   ctrlComposerInputCornerHover: '26px',
   ctrlComposerInputCornerPressed: '28px',
+  ctrlComposerInputCornerRest: corner[240],
+  ctrlComposerInputShadowBlur: '2px',
   ctrlComposerInputShadowX: size[0],
   ctrlComposerInputShadowY: '1px',
-  ctrlComposerInputShadowBlur: '2px',
+  ctrlComposerInputStrokewidthHover: strokeWidth[0],
+  ctrlComposerInputStrokewidthPressed: strokeWidth[0],
+  ctrlComposerInputStrokewidthRest: strokeWidth[0],
+  ctrlComposerInputStrokewidthSelectedRest: strokeWidth[0],
 };
 
 export const ctrlDialogLayout: CtrlDialogLayout = {
@@ -483,7 +491,7 @@ export const ctrlInputLayout: CtrlInputLayout = {
   ctrlInputBottomlineStrokewidthRest: '{strokeWidthDefault}',
   ctrlInputBottomlineStrokewidthHover: '{strokeWidthDefault}',
   ctrlInputBottomlineStrokewidthPressed:
-    '{ctrlInputBottomLineStrokewidthSelected}',
+    '{ctrlInputBottomlineStrokewidthSelected}',
   ctrlInputBottomlineStrokewidthSelected: strokeWidth[20],
 };
 
