@@ -4,6 +4,11 @@ export type SizeCtrl = {
   sizeCtrlDefault: string;
   sizeCtrlIcon: string;
   sizeCtrlIconSecondary: string;
+  sizeIconControlSmall: string;
+  sizeIconControlDefault: string;
+  sizeControlDefault: string;
+  sizeControlPaddingTextBottom: string;
+  sizeControlSmall: string;
 };
 
 export type SizeCtrlSm = {
@@ -20,6 +25,11 @@ export const sizeCtrl: SizeCtrl = {
   sizeCtrlDefault: size[320],
   sizeCtrlIcon: size[200],
   sizeCtrlIconSecondary: size[120],
+  sizeIconControlSmall: '{sizeCtrlSmIcon}',
+  sizeIconControlDefault: '{sizeCtrlIcon}',
+  sizeControlDefault: '{sizeCtrlDefault}',
+  sizeControlPaddingTextBottom: '{paddingCtrlTextBottom}',
+  sizeControlSmall: '{sizeCtrlSmDefault}',
 };
 
 export const sizeCtrlSm: SizeCtrlSm = {
