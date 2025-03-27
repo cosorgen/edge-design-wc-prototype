@@ -10,7 +10,7 @@ import type {
   CtrlFocusColors,
   CtrlIdentityFlyoutColors,
   CtrlInputColors,
-  CtrlLiteFilterColors,
+  CtrlLitefilterColors,
   CtrlLinkColors,
   CtrlListColors,
   CtrlOmniboxColors,
@@ -103,12 +103,12 @@ export const darkInputColors: CtrlInputColors = {
   ctrlInputStrokeDisabled: '{strokeCtrlOnneutralDisabled}',
   ctrlInputStrokeSelected: '{strokeCtrlOnneutralRest}',
   ctrlInputStrokeError: '{statusDangerStroke}',
-  ctrlInputBottomLineStrokeRest: '{nullColor}',
-  ctrlInputBottomLineStrokeHover: '{backgroundCtrlShapesafeNeutralHover}',
-  ctrlInputBottomLineStrokePressed: '{backgroundCtrlShapesafeNeutralPressed}',
-  ctrlInputBottomLineStrokeDisabled: '{nullColor}',
-  ctrlInputBottomLineStrokeSelected: '{backgroundCtrlActivebrandRest}',
-  ctrlInputBottomLineStrokeError: '{nullColor}',
+  ctrlInputBottomlineStrokeRest: '{nullColor}',
+  ctrlInputBottomlineStrokeHover: '{backgroundCtrlShapesafeNeutralHover}',
+  ctrlInputBottomlineStrokePressed: '{backgroundCtrlShapesafeNeutralPressed}',
+  ctrlInputBottomlineStrokeDisabled: '{nullColor}',
+  ctrlInputBottomlineStrokeSelected: '{backgroundCtrlActivebrandRest}',
+  ctrlInputBottomlineStrokeError: '{nullColor}',
 };
 
 export const darkFabColors: CtrlFabColors = {
@@ -160,10 +160,10 @@ export const darkListColors: CtrlListColors = {
   ctrlListBackgroundSelectedDisabled: '{backgroundCtrlNeutralDisabled}',
 };
 
-export const darkLiteFilterColors: CtrlLiteFilterColors = {
-  ctrlLiteFilterBackgroundSelected: '{backgroundCtrlNeutralRest}',
-  ctrlLiteFilterStrokeSelected: neutral[400],
-  ctrlLiteFilterForegroundSelected: '{foregroundCtrlNeutralPrimaryRest}',
+export const darkLiteFilterColors: CtrlLitefilterColors = {
+  ctrlLitefilterBackgroundSelected: '{backgroundCtrlNeutralRest}',
+  ctrlLitefilterStrokeSelected: neutral[400],
+  ctrlLitefilterForegroundSelected: '{foregroundCtrlNeutralPrimaryRest}',
 };
 
 export const darkOmniboxColors: CtrlOmniboxColors = {

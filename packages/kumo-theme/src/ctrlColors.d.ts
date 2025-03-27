@@ -79,12 +79,12 @@ export type CtrlInputColors = {
   ctrlInputStrokeDisabled: string;
   ctrlInputStrokeSelected: string;
   ctrlInputStrokeError: string;
-  ctrlInputBottomLineStrokeRest: string;
-  ctrlInputBottomLineStrokeHover: string;
-  ctrlInputBottomLineStrokePressed: string;
-  ctrlInputBottomLineStrokeDisabled: string;
-  ctrlInputBottomLineStrokeSelected: string;
-  ctrlInputBottomLineStrokeError: string;
+  ctrlInputBottomlineStrokeRest: string;
+  ctrlInputBottomlineStrokeHover: string;
+  ctrlInputBottomlineStrokePressed: string;
+  ctrlInputBottomlineStrokeDisabled: string;
+  ctrlInputBottomlineStrokeSelected: string;
+  ctrlInputBottomlineStrokeError: string;
 };
 
 export type CtrlFabColors = {
@@ -135,10 +135,10 @@ export type CtrlListColors = {
   ctrlListBackgroundSelectedDisabled: string;
 };
 
-export type CtrlLiteFilterColors = {
-  ctrlLiteFilterBackgroundSelected: string;
-  ctrlLiteFilterStrokeSelected: string;
-  ctrlLiteFilterForegroundSelected: string;
+export type CtrlLitefilterColors = {
+  ctrlLitefilterBackgroundSelected: string;
+  ctrlLitefilterStrokeSelected: string;
+  ctrlLitefilterForegroundSelected: string;
 };
 
 export type CtrlOmniboxColors = {

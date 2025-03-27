@@ -68,6 +68,11 @@ export type Shadow = {
   shadowWindowInactive: string;
 };
 
+export type CtrlShadow = {
+  ctrlDialogBaseShadow: string;
+  ctrlDialogBaseShadowCss: string;
+};
+
 export const shadowParts: ShadowParts = {
   shadowCardDisabledKeyBlur: '2px',
   shadowCardDisabledKeyX: '0px',
@@ -144,4 +149,9 @@ export const shadow: Shadow = {
     '{shadowWindowActiveKeyX} {shadowWindowActiveKeyY} {shadowWindowActiveKeyBlur} 0px {shadowWindowActiveKeyColor}, {shadowWindowActiveAmbientX} {shadowWindowActiveAmbientY} {shadowWindowActiveAmbientBlur} 0px {shadowWindowActiveAmbientColor}',
   shadowWindowInactive:
     '{shadowWindowInactiveKeyX} {shadowWindowInactiveKeyY} {shadowWindowInactiveKeyBlur} 0px {shadowWindowInactiveKeyColor}, {shadowWindowInactiveAmbientX} {shadowWindowInactiveAmbientY} {shadowWindowInactiveAmbientBlur} 0px {shadowWindowInactiveAmbientColor}',
+};
+
+export const ctrlShadow: CtrlShadow = {
+  ctrlDialogBaseShadow: '{ctrlDialogBaseShadowKeyX} {ctrlDialogBaseShadowKeyY} {ctrlDialogBaseShadowKeyBlur} 0px {ctrlDialogBaseShadowKeyColor}, {ctrlDialogBaseShadowAmbientX} {ctrlDialogBaseShadowAmbientY} {ctrlDialogBaseShadowAmbientBlur} 0px {ctrlDialogBaseShadowAmbientColor}',
+  ctrlDialogBaseShadowCss: '{ctrlDialogBaseShadow}',
 };

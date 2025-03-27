@@ -92,7 +92,7 @@ export type {
   CtrlFocusColors,
   CtrlLinkColors,
   CtrlListColors,
-  CtrlLiteFilterColors,
+  CtrlLitefilterColors,
   CtrlOmniboxColors,
   CtrlProgressColors,
   CtrlRatingColors,
@@ -204,9 +204,9 @@ export type { IconTheme } from './iconTheme.js';
 
 export { iconTheme } from './iconTheme.js';
 
-export type { ShadowParts, Shadow } from './shadow.js';
+export type { ShadowParts, Shadow, CtrlShadow } from './shadow.js';
 
-export { shadowParts, shadow } from './shadow.js';
+export { shadowParts, shadow, ctrlShadow } from './shadow.js';
 
 export type { Material } from './material.js';
 
@@ -225,7 +225,7 @@ export type {
   CtrlInputLayout,
   CtrlLinkLayout,
   CtrlListLayout,
-  CtrlLiteFilterLayout,
+  CtrlLitefilterLayout,
   CtrlProgressLayout,
   CtrlRatingLayout,
   CtrlSegmentedLayout,

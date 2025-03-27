@@ -43,7 +43,7 @@ export type CtrlBadgeLayout = {
 };
 
 export type CtrlBooleanLayout = {
-  selectionHint: string;
+  ctrlBooleanSelectionhint: string;
 };
 
 export type CtrlChoiceLayout = {
@@ -163,10 +163,10 @@ export type CtrlInputLayout = {
   ctrlInputStrokewidthHover: string;
   ctrlInputStrokewidthPressed: string;
   ctrlInputStrokewidthSelected: string;
-  ctrlInputBottomLineStrokewidthRest: string;
-  ctrlInputBottomLineStrokewidthHover: string;
-  ctrlInputBottomLineStrokewidthPressed: string;
-  ctrlInputBottomLineStrokewidthSelected: string;
+  ctrlInputBottomlineStrokewidthRest: string;
+  ctrlInputBottomlineStrokewidthHover: string;
+  ctrlInputBottomlineStrokewidthPressed: string;
+  ctrlInputBottomlineStrokewidthSelected: string;
 };
 
 export type CtrlLinkLayout = {
@@ -175,11 +175,11 @@ export type CtrlLinkLayout = {
   ctrlLinkInlineUnderlineSolid: string;
   ctrlLinkInlineStrokewidthRest: string;
   ctrlLinkInlineStrokewidthHover: string;
-  ctrlLinkOnPageShowUnderlineAtRest: string;
-  ctrlLinkOnPageUnderlineDashed: string;
-  ctrlLinkOnPageUnderlineSolid: string;
-  ctrlLinkOnPageStrokewidthRest: string;
-  ctrlLinkOnPageStrokewidthHover: string;
+  ctrlLinkOnpageShowUnderlineAtRest: string;
+  ctrlLinkOnpageUnderlineDashed: string;
+  ctrlLinkOnpageUnderlineSolid: string;
+  ctrlLinkOnpageStrokewidthRest: string;
+  ctrlLinkOnpageStrokewidthHover: string;
 };
 
 export type CtrlListLayout = {
@@ -216,8 +216,8 @@ export type CtrlListLayout = {
   ctrlListChoiceDotSize: string;
 };
 
-export type CtrlLiteFilterLayout = {
-  ctrlLiteFilterStrokewidthSelected: string;
+export type CtrlLitefilterLayout = {
+  ctrlLitefilterStrokewidthSelected: string;
 };
 
 export type CtrlFocusLayout = {
@@ -360,7 +360,7 @@ export const ctrlBadgeLayout: CtrlBadgeLayout = {
 };
 
 export const ctrlBooleanLayout: CtrlBooleanLayout = {
-  selectionHint: 'true',
+  ctrlBooleanSelectionhint: 'true',
 };
 
 export const ctrlChoiceLayout: CtrlChoiceLayout = {
@@ -480,11 +480,11 @@ export const ctrlInputLayout: CtrlInputLayout = {
   ctrlInputStrokewidthHover: '{strokeWidthDefault}',
   ctrlInputStrokewidthPressed: '{strokeWidthDefault}',
   ctrlInputStrokewidthSelected: strokeWidth[10],
-  ctrlInputBottomLineStrokewidthRest: '{strokeWidthDefault}',
-  ctrlInputBottomLineStrokewidthHover: '{strokeWidthDefault}',
-  ctrlInputBottomLineStrokewidthPressed:
+  ctrlInputBottomlineStrokewidthRest: '{strokeWidthDefault}',
+  ctrlInputBottomlineStrokewidthHover: '{strokeWidthDefault}',
+  ctrlInputBottomlineStrokewidthPressed:
     '{ctrlInputBottomLineStrokewidthSelected}',
-  ctrlInputBottomLineStrokewidthSelected: strokeWidth[20],
+  ctrlInputBottomlineStrokewidthSelected: strokeWidth[20],
 };
 
 export const ctrlLinkLayout: CtrlLinkLayout = {
@@ -493,11 +493,11 @@ export const ctrlLinkLayout: CtrlLinkLayout = {
   ctrlLinkInlineUnderlineSolid: 'false',
   ctrlLinkInlineStrokewidthRest: strokeWidth[10],
   ctrlLinkInlineStrokewidthHover: strokeWidth[10],
-  ctrlLinkOnPageShowUnderlineAtRest: 'false',
-  ctrlLinkOnPageUnderlineDashed: 'false',
-  ctrlLinkOnPageUnderlineSolid: 'true',
-  ctrlLinkOnPageStrokewidthRest: strokeWidth[10],
-  ctrlLinkOnPageStrokewidthHover: strokeWidth[10],
+  ctrlLinkOnpageShowUnderlineAtRest: 'false',
+  ctrlLinkOnpageUnderlineDashed: 'false',
+  ctrlLinkOnpageUnderlineSolid: 'true',
+  ctrlLinkOnpageStrokewidthRest: strokeWidth[10],
+  ctrlLinkOnpageStrokewidthHover: strokeWidth[10],
 };
 
 export const ctrlListLayout: CtrlListLayout = {
@@ -534,8 +534,8 @@ export const ctrlListLayout: CtrlListLayout = {
   ctrlListChoiceDotSize: size[40],
 };
 
-export const ctrlLiteFilterLayout: CtrlLiteFilterLayout = {
-  ctrlLiteFilterStrokewidthSelected: strokeWidth[10],
+export const ctrlLiteFilterLayout: CtrlLitefilterLayout = {
+  ctrlLitefilterStrokewidthSelected: strokeWidth[10],
 };
 
 export const ctrlFocusLayout: CtrlFocusLayout = {
