@@ -1,4 +1,4 @@
-/* global console */
+/* global console, process */
 
 // Have to import them individually because of the way the package is built
 import * as accordionTokens from '@mai-ui/design-tokens/accordion.js';
@@ -61,63 +61,63 @@ import * as treeItemTokens from '@mai-ui/design-tokens/tree-item.js';
 import { tokens as tokensFromEdge } from '../dist/esm/index.js';
 
 const tokensFromKumo = {
-  ...accordionTokens,
-  ...accordionItemTokens,
-  ...avatarTokens,
-  ...badgeTokens,
-  ...buttonTokens,
-  ...buyingOptionsTokens,
-  ...buyingOptionsBaseTokens,
-  ...buyingOptionsFilterTokens,
-  ...buyingOptionsFilterGroupTokens,
-  ...buyingOptionsRetailerListTokens,
-  ...cardTokens,
-  ...checkboxTokens,
-  ...composerTokens,
-  ...composerButtonTokens,
-  ...composerInputTokens,
-  ...couponTokens,
-  ...dialogTokens,
-  ...dialogBodyTokens,
-  ...dividerTokens,
-  ...drawerTokens,
-  ...drawerBodyTokens,
-  ...dropdownTokens,
-  ...fieldTokens,
-  ...filterTokens,
-  ...filterItemTokens,
-  ...infoLabelTokens,
-  ...linkTokens,
-  ...listboxTokens,
-  ...menuTokens,
-  ...menuItemTokens,
-  ...menuListTokens,
-  ...messageBarTokens,
-  ...metadataItemTokens,
-  ...notificationTokens,
-  ...optionTokens,
-  ...priceTokens,
-  ...priceActivityTokens,
-  ...priceHistoryTokens,
-  ...progressBarTokens,
-  ...radioTokens,
-  ...radioGroupTokens,
-  ...ratingBarTokens,
-  ...ratingDisplayTokens,
-  ...ratingHeaderTokens,
-  ...ratingProgressTokens,
-  ...retailerItemTokens,
-  ...reviewTokens,
-  ...sliderTokens,
-  ...spinnerTokens,
-  ...swatchesTokens,
-  ...switchTokens,
-  ...tabTokens,
-  ...tablistTokens,
-  ...textInputTokens,
-  ...textareaTokens,
-  ...tooltipTokens,
-  ...treeItemTokens,
+  accordionTokens,
+  accordionItemTokens,
+  avatarTokens,
+  badgeTokens,
+  buttonTokens,
+  buyingOptionsTokens,
+  buyingOptionsBaseTokens,
+  buyingOptionsFilterTokens,
+  buyingOptionsFilterGroupTokens,
+  buyingOptionsRetailerListTokens,
+  cardTokens,
+  checkboxTokens,
+  composerTokens,
+  composerButtonTokens,
+  composerInputTokens,
+  couponTokens,
+  dialogTokens,
+  dialogBodyTokens,
+  dividerTokens,
+  drawerTokens,
+  drawerBodyTokens,
+  dropdownTokens,
+  fieldTokens,
+  filterTokens,
+  filterItemTokens,
+  infoLabelTokens,
+  linkTokens,
+  listboxTokens,
+  menuTokens,
+  menuItemTokens,
+  menuListTokens,
+  messageBarTokens,
+  metadataItemTokens,
+  notificationTokens,
+  optionTokens,
+  priceTokens,
+  priceActivityTokens,
+  priceHistoryTokens,
+  progressBarTokens,
+  radioTokens,
+  radioGroupTokens,
+  ratingBarTokens,
+  ratingDisplayTokens,
+  ratingHeaderTokens,
+  ratingProgressTokens,
+  retailerItemTokens,
+  reviewTokens,
+  sliderTokens,
+  spinnerTokens,
+  swatchesTokens,
+  switchTokens,
+  tabTokens,
+  tablistTokens,
+  textInputTokens,
+  textareaTokens,
+  tooltipTokens,
+  treeItemTokens,
 };
 
 function getVarsFromFallbackChain(css) {
@@ -133,30 +133,40 @@ function getVarsFromFallbackChain(css) {
   return vars;
 }
 
+const edgeCssVariables = Object.values(tokensFromEdge).map(
+  (token) => getVarsFromFallbackChain(token)[0],
+);
+
 let missingTokens = 0;
-for (const [key, value] of Object.entries(tokensFromKumo).sort()) {
-  // Test if any tokens are missing in this package that are in @mai-ui/design-tokens
-  const edgeToken = tokensFromEdge[key];
-  if (!edgeToken) {
-    console.error('Missing token from Kumo:', key);
-    missingTokens++;
-  } else {
-    // Test if Edge css variable is in the chain for Kumo token
-    const rawEdgeVariables = getVarsFromFallbackChain(edgeToken);
-    const kumoRawVariables = getVarsFromFallbackChain(value);
-    for (const rawEdgeVariable of rawEdgeVariables) {
-      if (!kumoRawVariables.includes(rawEdgeVariable)) {
-        // console.error(
-        //   'Missing css variable from Kumo token:\n  ',
-        //   key,
-        //   '=',
-        //   value,
-        //   'missing',
-        //   rawEdgeVariable,
-        // );
+let missingCssVariables = 0;
+for (const [component, tokens] of Object.entries(tokensFromKumo)) {
+  for (const [token, value] of Object.entries(tokens).sort()) {
+    // Test if any tokens are missing in this package that are in @mai-ui/design-tokens
+    const edgeToken = tokensFromEdge[token];
+    if (!edgeToken) {
+      console.error('Missing token from Kumo:', token);
+      missingTokens++;
+    } else {
+      // Test if at least one of the fallbacks in Kumo is defined in edge
+      const kumoCssVariables = getVarsFromFallbackChain(value);
+      if (
+        !kumoCssVariables.some((cssVar) => edgeCssVariables.includes(cssVar))
+      ) {
+        console.error(
+          `Missing css variable from Kumo: ${token} in ${component}`,
+          kumoCssVariables,
+        );
+        missingCssVariables++;
       }
     }
   }
 }
 
-console.log('Missing tokens:', missingTokens);
+if (missingTokens) {
+  console.log('Missing tokens:', missingTokens);
+  process.exit(1);
+}
+if (missingCssVariables) {
+  console.log('Missing css variables:', missingCssVariables);
+  process.exit(1);
+}

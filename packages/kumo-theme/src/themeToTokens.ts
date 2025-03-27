@@ -1,4 +1,9 @@
 import { type Theme, lightTheme } from './themes.js';
+import {
+  legacyCommonTokens,
+  legacyDarkTokens,
+  legacyLightTokens,
+} from './legacyTokens.js';
 
 export type Tokens = {
   [key in keyof Theme]: string;
@@ -13,9 +18,19 @@ function camelCaseToKebabCase(str: string): string {
 
 export function themeToTokens(theme: Theme, prefix: string = 'smtc-'): Tokens {
   const tokens = {} as Tokens;
+  const legacyTokens = Object.keys({
+    ...legacyCommonTokens,
+    ...legacyLightTokens,
+    ...legacyDarkTokens,
+  });
 
   for (const key of Object.keys(theme)) {
-    tokens[key as keyof Theme] = `var(--${prefix}${camelCaseToKebabCase(key)})`;
+    if (legacyTokens.includes(key)) {
+      tokens[key as keyof Theme] = `var(--${key})`;
+    } else {
+      tokens[key as keyof Theme] =
+        `var(--${prefix}${camelCaseToKebabCase(key)})`;
+    }
   }
 
   return tokens;
