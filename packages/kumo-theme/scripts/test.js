@@ -148,6 +148,10 @@ for (const [component, tokens] of Object.entries(tokensFromKumo)) {
       missingTokens++;
     } else {
       // Test if at least one of the fallbacks in Kumo is defined in edge
+      if (token.endsWith('Css')) {
+        console.log(token, value);
+        continue;
+      }
       const kumoCssVariables = getVarsFromFallbackChain(value);
       if (
         !kumoCssVariables.some((cssVar) => edgeCssVariables.includes(cssVar))

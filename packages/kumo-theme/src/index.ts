@@ -258,9 +258,6 @@ export {
   ctrlTooltipLayout,
 } from './ctrlLayout.js';
 
-export type { Duration, Curve } from './motion.js';
-export { curve, duration } from './motion.js';
-
 export type { Theme } from './themes.js';
 
 export { lightTheme, darkTheme } from './themes.js';

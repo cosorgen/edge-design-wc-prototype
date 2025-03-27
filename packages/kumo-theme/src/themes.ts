@@ -105,7 +105,6 @@ import {
   textStyle,
 } from './text.js';
 import { nullValues } from './nullValues.js';
-import { curve, duration } from './motion.js';
 import {
   legacyCommonTokens,
   legacyDarkTokens,
@@ -137,8 +136,6 @@ const utilityLayoutTemplate = {
   ...ctrlSpinnerLayout,
   ...ctrlSplitLayout,
   ...ctrlTooltipLayout,
-  ...curve,
-  ...duration,
   ...gapBetween,
   ...gapInside,
   ...iconTheme,
