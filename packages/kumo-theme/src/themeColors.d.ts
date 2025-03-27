@@ -229,20 +229,20 @@ export type ThemeShadowColors = {
 
 export type ThemeMaterialColors = {
   materialAcrylicDefaultSolid: string;
-  materialAcrylicDefaultColorBlend: string;
-  materialAcrylicDefaultLumBlend: string;
+  materialAcrylicDefaultColorblend: string;
+  materialAcrylicDefaultLumblend: string;
   materialAcrylicShellDefaultSolid: string;
-  materialAcrylicShellDefaultColorBlend: string;
-  materialAcrylicShellDefaultLumBlend: string;
+  materialAcrylicShellDefaultColorblend: string;
+  materialAcrylicShellDefaultLumblend: string;
   materialMicaThinSolid: string;
-  materialMicaThinColorBlend: string;
-  materialMicaThinLumBlend: string;
+  materialMicaThinColorblend: string;
+  materialMicaThinLumblend: string;
   materialMicaDarkerSolid: string;
-  materialMicaDarkerColorBlend: string;
-  materialMicaDarkerLumBlend: string;
+  materialMicaDarkerColorblend: string;
+  materialMicaDarkerLumblend: string;
   materialMicaDefaultSolid: string;
-  materialMicaDefaultColorBlend: string;
-  materialMicaDefaultLumBlend: string;
+  materialMicaDefaultColorblend: string;
+  materialMicaDefaultLumblend: string;
 };
 
 export type ThemeStatusColors = {

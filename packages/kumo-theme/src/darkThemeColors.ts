@@ -259,21 +259,21 @@ export const darkShadowColors: ThemeShadowColors = {
 };
 
 export const darkMaterialColors: ThemeMaterialColors = {
+  materialAcrylicDefaultColorblend: '{nullColor}',
+  materialAcrylicDefaultLumblend: '{nullColor}',
   materialAcrylicDefaultSolid: neutral[800],
-  materialAcrylicDefaultColorBlend: '{nullColor}',
-  materialAcrylicDefaultLumBlend: '{nullColor}',
+  materialAcrylicShellDefaultColorblend: neutral[0],
+  materialAcrylicShellDefaultLumblend: neutral[0],
   materialAcrylicShellDefaultSolid: neutral[0],
-  materialAcrylicShellDefaultColorBlend: neutral[0],
-  materialAcrylicShellDefaultLumBlend: neutral[0],
-  materialMicaThinSolid: neutral[0],
-  materialMicaThinColorBlend: neutral[0],
-  materialMicaThinLumBlend: neutral[0],
+  materialMicaDarkerColorblend: neutral[0],
+  materialMicaDarkerLumblend: neutral[0],
   materialMicaDarkerSolid: neutral[0],
-  materialMicaDarkerColorBlend: neutral[0],
-  materialMicaDarkerLumBlend: neutral[0],
+  materialMicaDefaultColorblend: neutral[0],
+  materialMicaDefaultLumblend: neutral[0],
   materialMicaDefaultSolid: neutral[0],
-  materialMicaDefaultColorBlend: neutral[0],
-  materialMicaDefaultLumBlend: neutral[0],
+  materialMicaThinColorblend: neutral[0],
+  materialMicaThinLumblend: neutral[0],
+  materialMicaThinSolid: neutral[0],
 };
 
 export const darkStatusColors: ThemeStatusColors = {
