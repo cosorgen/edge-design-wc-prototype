@@ -297,7 +297,7 @@ export type CtrlSliderLayout = {
 export type CtrlSplitLayout = {
   ctrlSplitDividerStrokewidth: string;
   ctrlSplitDividerStrokewidthOnSubtle: string;
-  ctrlSplitDividerStrokewidthOnOutline: string;
+  ctrlSplitDividerStrokewidthOnoutline: string;
 };
 
 export type CtrlSpinnerLayout = {
@@ -616,7 +616,7 @@ export const ctrlSliderLayout: CtrlSliderLayout = {
 export const ctrlSplitLayout: CtrlSplitLayout = {
   ctrlSplitDividerStrokewidth: strokeWidth[10],
   ctrlSplitDividerStrokewidthOnSubtle: strokeWidth[0],
-  ctrlSplitDividerStrokewidthOnOutline: strokeWidth[10],
+  ctrlSplitDividerStrokewidthOnoutline: strokeWidth[10],
 };
 
 export const ctrlSpinnerLayout: CtrlSpinnerLayout = {

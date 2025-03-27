@@ -28,7 +28,7 @@ export const sizeCtrl: SizeCtrl = {
   sizeIconControlSmall: '{sizeCtrlSmIcon}',
   sizeIconControlDefault: '{sizeCtrlIcon}',
   sizeControlDefault: '{sizeCtrlDefault}',
-  sizeControlPaddingTextBottom: '{paddingCtrlTextBottom}',
+  sizeControlPaddingTextBottom: '{paddingCtrlTextbottom}',
   sizeControlSmall: '{sizeCtrlSmDefault}',
 };
 

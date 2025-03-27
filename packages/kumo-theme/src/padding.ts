@@ -65,17 +65,17 @@ export type PaddingToolbar = {
 
 export const paddingCtrl: PaddingCtrl = {
   paddingControlDefaultHorizontalIconOnly: '{paddingCtrlHorizontalIcononly}',
-  paddingControlDefaultToNestedControl: '{paddingCtrlToNestedControl}',
+  paddingControlDefaultToNestedControl: '{paddingCtrlTonestedcontrol}',
   paddingControlHorizontalDefault: '{paddingCtrlHorizontalDefault}',
   paddingControlTextTop: '{paddingCtrlTexttop}',
   paddingCtrlHorizontalDefault: size[80],
   paddingCtrlHorizontalIcononly: size[60],
-  paddingCtrlTextbottom: '{paddingCtrlTextTop}',
+  paddingCtrlTextbottom: '{paddingCtrlTexttop}',
   paddingCtrlTextside: size[20],
   paddingCtrlTexttop: size[60],
   paddingCtrlTonestedcontrol: size[40],
   paddingTextHorizontal: '{paddingCtrlHorizontalDefault}',
-  paddingToNestedControl: '{paddingCtrlToNestedControl}',
+  paddingToNestedControl: '{paddingCtrlTonestedcontrol}',
 };
 
 export const paddingCtrlSm: PaddingCtrlSm = {

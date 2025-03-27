@@ -3,7 +3,7 @@ import { size } from './globalValues.js';
 export type GapInside = {
   gapInsideCtrlDefault: string;
   gapInsideCtrlTosecondaryicon: string;
-  gapInsideCtrlToLabel: string;
+  gapInsideCtrlTolabel: string;
   gapInsideCtrlSmDefault: string;
   gapInsideCtrlSmToSecondaryIcon: string;
   gapInsideCtrlSmToLabel: string;
@@ -13,33 +13,36 @@ export type GapInside = {
 };
 
 export type GapBetween = {
-  gapBetweenContentNone: string;
-  gapBetweenContentXxxSmall: string;
-  gapBetweenContentXxsmall: string;
-  gapBetweenContentXSmallNudge: string;
-  gapBetweenContentXSmall: string;
-  gapBetweenContentSmall: string;
-  gapBetweenContentMedium: string;
-  gapBetweenContentLarge: string;
-  gapBetweenContentXLarge: string;
-  gapBetweenContentXxLarge: string;
-  gapBetweenContentXxxLarge: string;
-  gapBetweenTextSmall: string;
-  gapBetweenTextLarge: string;
-  gapBetweenListItem: string;
   gapBetweenCard: string;
+  gapBetweenContentLarge: string;
+  gapBetweenContentMedium: string;
+  gapBetweenContentNone: string;
+  gapBetweenContentSmall: string;
+  gapBetweenContentXlarge: string;
+  gapBetweenContentXS: string;
+  gapBetweenContentXsmall: string;
+  gapBetweenContentXsmallnudge: string;
+  gapBetweenContentXxlarge: string;
+  gapBetweenContentXxsmall: string;
+  gapBetweenContentXxxlarge: string;
+  gapBetweenContentXxxsmall: string;
+  gapBetweenControl: string;
   gapBetweenCtrlDefault: string;
+  gapBetweenCtrlLgDefault: string;
+  gapBetweenCtrlLgNested: string;
   gapBetweenCtrlNested: string;
   gapBetweenCtrlSmDefault: string;
   gapBetweenCtrlSmNested: string;
-  gapBetweenCtrlLgDefault: string;
-  gapBetweenCtrlLgNested: string;
+  gapBetweenListitem: string;
+  gapBetweenTextLarge: string;
+  gapBetweenTextSmall: string;
+  gapControlDefault: string;
 };
 
 export const gapInside: GapInside = {
   gapInsideCtrlDefault: size[40],
   gapInsideCtrlTosecondaryicon: size[40],
-  gapInsideCtrlToLabel: size[80],
+  gapInsideCtrlTolabel: size[80],
   gapInsideCtrlSmDefault: size[40],
   gapInsideCtrlSmToSecondaryIcon: size[0],
   gapInsideCtrlSmToLabel: size[40],
@@ -49,25 +52,28 @@ export const gapInside: GapInside = {
 };
 
 export const gapBetween: GapBetween = {
-  gapBetweenContentNone: size[0],
-  gapBetweenContentXxxSmall: size[20],
-  gapBetweenContentXxsmall: size[40],
-  gapBetweenContentXSmallNudge: size[60],
-  gapBetweenContentXSmall: size[80],
-  gapBetweenContentSmall: size[120],
-  gapBetweenContentMedium: size[160],
-  gapBetweenContentLarge: size[200],
-  gapBetweenContentXLarge: size[240],
-  gapBetweenContentXxLarge: size[360],
-  gapBetweenContentXxxLarge: size[400],
-  gapBetweenTextSmall: size[40],
-  gapBetweenTextLarge: size[60],
-  gapBetweenListItem: size[0],
   gapBetweenCard: size[240],
+  gapBetweenContentLarge: size[200],
+  gapBetweenContentMedium: size[160],
+  gapBetweenContentNone: size[0],
+  gapBetweenContentSmall: size[120],
+  gapBetweenContentXlarge: size[240],
+  gapBetweenContentXS: '{gapBetweenContentXsmall}',
+  gapBetweenContentXsmall: size[80],
+  gapBetweenContentXsmallnudge: size[60],
+  gapBetweenContentXxlarge: size[360],
+  gapBetweenContentXxsmall: size[40],
+  gapBetweenContentXxxlarge: size[400],
+  gapBetweenContentXxxsmall: size[20],
+  gapBetweenControl: '{gapBetweenCtrlDefault}',
   gapBetweenCtrlDefault: size[80],
+  gapBetweenCtrlLgDefault: size[120],
+  gapBetweenCtrlLgNested: size[40],
   gapBetweenCtrlNested: size[20],
   gapBetweenCtrlSmDefault: size[20],
   gapBetweenCtrlSmNested: size[0],
-  gapBetweenCtrlLgDefault: size[120],
-  gapBetweenCtrlLgNested: size[40],
+  gapBetweenListitem: size[0],
+  gapBetweenTextLarge: size[60],
+  gapBetweenTextSmall: size[40],
+  gapControlDefault: '{gapBetweenCtrlDefault}',
 };
