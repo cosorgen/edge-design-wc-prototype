@@ -1,8 +1,8 @@
 export const legacyCommonTokens = {
   borderRadiusSmall: '2px',
-  borderRaidusMedium: '4px',
+  borderRadiusMedium: '4px',
   borderRadiusLarge: '6px',
-  borderRaidusXLarge: '8px',
+  borderRadiusXLarge: '8px',
   fontSizeBase400: '16px',
   lineHeightBase400: '22px',
   spacingHorizontalL: '16px',
@@ -42,7 +42,7 @@ export const legacyLightTokens = {
   colorNeutralStroke2: '#e0e0e0',
   colorNeutralStroke3: '#f0f0f0',
   colorPaletteRedForeground3: '#d13438',
-  colorPaletterGreenForeground1: '#0e700e',
+  colorPaletteGreenForeground1: '#0e700e',
 };
 
 export const legacyDarkTokens = {
@@ -66,5 +66,5 @@ export const legacyDarkTokens = {
   colorNeutralStroke2: '#525252',
   colorNeutralStroke3: '#3d3d3d',
   colorPaletteRedForeground3: '#d13438',
-  colorPaletterGreenForeground1: '#54b054',
+  colorPaletteGreenForeground1: '#54b054',
 };
