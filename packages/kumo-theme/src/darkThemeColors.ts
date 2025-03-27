@@ -22,6 +22,9 @@ import type {
 export const darkNullColors: ThemeNullColors = {
   nullColor: alphaBlack[0],
   nullColorBackground: '{nullColor}',
+  nullColorBackgroundHover: '{nullColor}',
+  nullColorBackgroundPressed: '{nullColor}',
+  nullColorStroke: '{nullColor}',
 };
 
 export const darkBackgroundColors: ThemeBackgroundColors = {

@@ -289,6 +289,9 @@ export type ThemeStatusColors = {
 export type ThemeNullColors = {
   nullColor: string;
   nullColorBackground: string;
+  nullColorBackgroundHover: string;
+  nullColorBackgroundPressed: string;
+  nullColorStroke: string;
 };
 
 export type AiColors = {
