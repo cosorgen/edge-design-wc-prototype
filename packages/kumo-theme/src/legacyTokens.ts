@@ -1,6 +1,8 @@
 export const legacyCommonTokens = {
   borderRadiusSmall: '2px',
-  borderRaidusMedium: '',
+  borderRaidusMedium: '4px',
+  borderRadiusLarge: '6px',
+  borderRaidusXLarge: '8px',
   fontSizeBase400: '16px',
   lineHeightBase400: '22px',
   spacingHorizontalL: '16px',
@@ -34,6 +36,13 @@ export const legacyLightTokens = {
   colorPaletteMarigoldForeground1: '#d39300',
   shadow16: '0 0 2px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.14)',
   shadow2: '0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14)',
+  colorNeutralBackground1: '#ffffff',
+  colorNeutralBackground3Hover: '#ebebeb',
+  colorNeutralForeground2: '#525252',
+  colorNeutralStroke2: '#e0e0e0',
+  colorNeutralStroke3: '#f0f0f0',
+  colorPaletteRedForeground3: '#d13438',
+  colorPaletterGreenForeground1: '#0e700e',
 };
 
 export const legacyDarkTokens = {
@@ -51,4 +60,11 @@ export const legacyDarkTokens = {
   colorPaletteMarigoldForeground1: '#f2c661',
   shadow16: '0 0 2px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.14)',
   shadow2: '0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14)',
+  colorNeutralBackground1: '#292929',
+  colorNeutralBackground3Hover: '#292929',
+  colorNeutralForeground2: '#d6d6d6',
+  colorNeutralStroke2: '#525252',
+  colorNeutralStroke3: '#3d3d3d',
+  colorPaletteRedForeground3: '#d13438',
+  colorPaletterGreenForeground1: '#54b054',
 };
