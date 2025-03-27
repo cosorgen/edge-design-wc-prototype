@@ -146,6 +146,19 @@ export type ThemeStrokeColors = {
 };
 
 export type ThemeForegroundColors = {
+  foregroundControlBrandRest: string;
+  foregroundControlIconOnSubtleDisabled: string;
+  foregroundControlIconOnSubtleHover: string;
+  foregroundControlIconOnSubtlePressed: string;
+  foregroundControlIconOnSubtleRest: string;
+  foregroundControlNeutralPrimaryRest: string;
+  foregroundControlNeutralSecondaryDisabled: string;
+  foregroundControlNeutralSecondaryHover: string;
+  foregroundControlNeutralSecondaryPressed: string;
+  foregroundControlNeutralSecondaryRest: string;
+  foregroundControlOnActiveBrandRest: string;
+  foregroundControlShapeSafeNeutralHover: string;
+  foregroundControlShapeSafeNeutralPressed: string;
   foregroundContentBrandPrimary: string;
   foregroundContentNeutralPrimary: string;
   foregroundContentNeutralSecondary: string;

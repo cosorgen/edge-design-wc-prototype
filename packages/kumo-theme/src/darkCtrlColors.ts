@@ -89,7 +89,7 @@ export const darkIdentityFlyoutColors: CtrlIdentityFlyoutColors = {
 };
 
 export const darkInputColors: CtrlInputColors = {
-  ctrlInputTextselectionForeground: '{foregroundCtrlOnBrandRest}',
+  ctrlInputTextselectionForeground: '{foregroundCtrlOnbrandRest}',
   ctrlInputTextselectionBackground: '{backgroundCtrlBrandRest}',
   ctrlInputBackgroundRest: '{backgroundCtrlNeutralRest}',
   ctrlInputBackgroundHover: '{backgroundCtrlNeutralHover}',
@@ -207,10 +207,10 @@ export const darkSliderColors: CtrlSliderColors = {
   ctrlSliderThumbBackgroundHover: '{backgroundCtrlBrandHover}',
   ctrlSliderThumbBackgroundPressed: '{backgroundCtrlBrandPressed}',
   ctrlSliderThumbBackgroundDisabled: '{ctrlSliderBarForegroundFilledDisabled}',
-  ctrlSliderThumbInnerStrokeRest: '{foregroundCtrlOnBrandRest}',
-  ctrlSliderThumbInnerStrokeHover: '{foregroundCtrlOnBrandHover}',
-  ctrlSliderThumbInnerStrokePressed: '{foregroundCtrlOnBrandPressed}',
-  ctrlSliderThumbInnerStrokeDisabled: '{foregroundCtrlOnBrandRest}',
+  ctrlSliderThumbInnerStrokeRest: '{foregroundCtrlOnbrandRest}',
+  ctrlSliderThumbInnerStrokeHover: '{foregroundCtrlOnbrandHover}',
+  ctrlSliderThumbInnerStrokePressed: '{foregroundCtrlOnbrandPressed}',
+  ctrlSliderThumbInnerStrokeDisabled: '{foregroundCtrlOnbrandRest}',
   ctrlSliderThumbOuterStrokeRest: '{strokeDividerSubtle}',
   ctrlSliderThumbOuterStrokeHover: '{strokeDividerSubtle}',
   ctrlSliderThumbOuterStrokePressed: '{strokeDividerSubtle}',
