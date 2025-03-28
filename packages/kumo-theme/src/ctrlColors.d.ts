@@ -1,14 +1,14 @@
 export type CtrlComposerColors = {
   controlComposerContainerBackgroundDefault: string;
-  controlComposerContainerShadowAmbient: string;
-  controlComposerContainerShadowKey: string;
+  controlComposerContainerShadowAmbientColor: string;
+  controlComposerContainerShadowKeyColor: string;
   controlComposerContainerStrokeDefault: string;
   controlComposerInputBackgroundDisabled: string;
   controlComposerInputBackgroundHover: string;
   controlComposerInputBackgroundPressed: string;
   controlComposerInputBackgroundRest: string;
   controlComposerInputBackgroundSelectedRest: string;
-  controlComposerInputShadow: string;
+  controlComposerInputShadowColor: string;
   controlComposerInputStrokeDisabled: string;
   controlComposerInputStrokeHover: string;
   controlComposerInputStrokePressed: string;

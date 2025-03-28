@@ -34,6 +34,7 @@ export type TextStyle = {
   textStyleDefaultRegularFontfamily: string;
   textStyleDefaultRegularFontFamily: string;
   textStyleDefaultRegularLetterSpacing: string;
+  textStyleDefaultRegularLetterspacing: string;
   textStyleDefaultRegularWeight: string;
   textStyleDefaultHeaderCase: string;
   textStyleDefaultHeaderFontfamily: string;
@@ -189,6 +190,8 @@ export const textStyle: TextStyle = {
   textStyleDefaultRegularFontfamily: fontFamily.base,
   textStyleDefaultRegularFontFamily: 'textStyleDefaultRegularFontfamily}',
   textStyleDefaultRegularLetterSpacing: '0px',
+  textStyleDefaultRegularLetterspacing:
+    '{textStyleDefaultRegularLetterSpacing}',
   textStyleDefaultRegularWeight: fontWeight.regular,
   textStyleDefaultHeaderCase: '{nullString}',
   textStyleDefaultHeaderFontfamily: fontFamily.base,

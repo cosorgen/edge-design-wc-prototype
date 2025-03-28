@@ -99,13 +99,20 @@ export type CtrlChoiceLayout = {
 
 export type CtrlComposerLayout = {
   controlComposerContainerCorner: string;
+  controlComposerContainerShadowAmbient: string;
+  controlComposerContainerShadowKey: string;
   controlComposerInputCornerHover: string;
   controlComposerInputCornerPressed: string;
   controlComposerInputCornerRest: string;
+  controlComposerInputShadow: string;
   ctrlComposerContainerCorner: string;
+  ctrlComposerContainerShadow: string;
+  ctrlComposerContainerShadowAmbient: string;
   ctrlComposerContainerShadowAmbientBlur: string;
   ctrlComposerContainerShadowAmbientX: string;
   ctrlComposerContainerShadowAmbientY: string;
+  ctrlComposerContainerShadowCss: string;
+  ctrlComposerContainerShadowKey: string;
   ctrlComposerContainerShadowKeyBlur: string;
   ctrlComposerContainerShadowKeyX: string;
   ctrlComposerContainerShadowKeyY: string;
@@ -116,6 +123,7 @@ export type CtrlComposerLayout = {
   ctrlComposerInputCornerHover: string;
   ctrlComposerInputCornerPressed: string;
   ctrlComposerInputCornerRest: string;
+  ctrlComposerInputShadow: string;
   ctrlComposerInputShadowBlur: string;
   ctrlComposerInputShadowX: string;
   ctrlComposerInputShadowY: string;
@@ -127,12 +135,14 @@ export type CtrlComposerLayout = {
 
 export type CtrlDialogLayout = {
   ctrlDialogBaseCorner: string;
-  ctrlDialogBaseShadowKeyX: string;
-  ctrlDialogBaseShadowKeyY: string;
-  ctrlDialogBaseShadowKeyBlur: string;
+  ctrlDialogBaseShadow: string;
+  ctrlDialogBaseShadowAmbientBlur: string;
   ctrlDialogBaseShadowAmbientX: string;
   ctrlDialogBaseShadowAmbientY: string;
-  ctrlDialogBaseShadowAmbientBlur: string;
+  ctrlDialogBaseShadowCss: string;
+  ctrlDialogBaseShadowKeyBlur: string;
+  ctrlDialogBaseShadowKeyX: string;
+  ctrlDialogBaseShadowKeyY: string;
   ctrlDialogLayerPaddingBottom: string;
 };
 
@@ -420,13 +430,23 @@ export const ctrlChoiceLayout: CtrlChoiceLayout = {
 
 export const ctrlComposerLayout: CtrlComposerLayout = {
   controlComposerContainerCorner: '{ctrlComposerContainerCorner}',
+  controlComposerContainerShadowAmbient: '{ctrlComposerContainerShadowAmbient}',
+  controlComposerContainerShadowKey: '{ctrlComposerContainerShadowKey}',
   controlComposerInputCornerHover: '{ctrlComposerInputCornerHover}',
   controlComposerInputCornerPressed: '{ctrlComposerInputCornerPressed}',
   controlComposerInputCornerRest: '{ctrlComposerInputCornerRest}',
+  controlComposerInputShadow: '{ctrlComposerInputShadow}',
   ctrlComposerContainerCorner: corner[240],
+  ctrlComposerContainerShadow:
+    '{ctrlComposerContainerShadowKeyX} {ctrlComposerContainerShadowKeyY} 0px {ctrlComposerContainerShadowKeyBlur} {ctrlComposerContainerShadowKeyColor}, {ctrlComposerContainerShadowAmbientX} {ctrlComposerContainerShadowAmbientY} 0px {ctrlComposerContainerShadowAmbientBlur} {ctrlComposerContainerShadowAmbientColor}',
+  ctrlComposerContainerShadowAmbient:
+    '{ctrlComposerContainerShadowAmbientX} {ctrlComposerContainerShadowAmbientY} 0px {ctrlComposerContainerShadowAmbientBlur} {ctrlComposerContainerShadowAmbientColor}',
   ctrlComposerContainerShadowAmbientBlur: '{shadowFlyoutAmbientBlur}',
   ctrlComposerContainerShadowAmbientX: '{shadowFlyoutAmbientX}',
   ctrlComposerContainerShadowAmbientY: '{shadowFlyoutAmbientY}',
+  ctrlComposerContainerShadowCss: '{ctrlComposerContainerShadow}',
+  ctrlComposerContainerShadowKey:
+    '{ctrlComposerContainerShadowKeyX} {ctrlComposerContainerShadowKeyY} 0px {ctrlComposerContainerShadowKeyBlur} {ctrlComposerContainerShadowKeyColor}',
   ctrlComposerContainerShadowKeyBlur: '{shadowFlyoutKeyBlur}',
   ctrlComposerContainerShadowKeyX: '{shadowFlyoutKeyX}',
   ctrlComposerContainerShadowKeyY: '{shadowFlyoutKeyY}',
@@ -437,6 +457,8 @@ export const ctrlComposerLayout: CtrlComposerLayout = {
   ctrlComposerInputCornerHover: '26px',
   ctrlComposerInputCornerPressed: '28px',
   ctrlComposerInputCornerRest: corner[240],
+  ctrlComposerInputShadow:
+    '{ctrlComposerInputShadowX} {ctrlComposerInputShadowY} 0px {ctrlComposerInputShadowBlur} {ctrlComposerInputShadowColor}',
   ctrlComposerInputShadowBlur: '2px',
   ctrlComposerInputShadowX: size[0],
   ctrlComposerInputShadowY: '1px',
@@ -448,12 +470,15 @@ export const ctrlComposerLayout: CtrlComposerLayout = {
 
 export const ctrlDialogLayout: CtrlDialogLayout = {
   ctrlDialogBaseCorner: corner[80],
-  ctrlDialogBaseShadowKeyX: shadow.shadowKeyX,
-  ctrlDialogBaseShadowKeyY: shadow.shadowKeyY64,
-  ctrlDialogBaseShadowKeyBlur: shadow.shadowKeyBlur64,
+  ctrlDialogBaseShadow:
+    '{ctrlDialogBaseShadowKeyX} {ctrlDialogBaseShadowKeyY} {ctrlDialogBaseShadowKeyBlur} 0px {ctrlDialogBaseShadowKeyColor}, {ctrlDialogBaseShadowAmbientX} {ctrlDialogBaseShadowAmbientY} {ctrlDialogBaseShadowAmbientBlur} 0px {ctrlDialogBaseShadowAmbientColor}',
+  ctrlDialogBaseShadowAmbientBlur: shadow.shadowAmbientBlurHigh,
   ctrlDialogBaseShadowAmbientX: shadow.shadowAmbientX,
   ctrlDialogBaseShadowAmbientY: shadow.shadowAmbientY,
-  ctrlDialogBaseShadowAmbientBlur: shadow.shadowAmbientBlurHigh,
+  ctrlDialogBaseShadowCss: '{ctrlDialogBaseShadow}',
+  ctrlDialogBaseShadowKeyBlur: shadow.shadowKeyBlur64,
+  ctrlDialogBaseShadowKeyX: shadow.shadowKeyX,
+  ctrlDialogBaseShadowKeyY: shadow.shadowKeyY64,
   ctrlDialogLayerPaddingBottom: size[0],
 };
 

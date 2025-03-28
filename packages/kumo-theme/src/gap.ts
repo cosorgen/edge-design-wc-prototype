@@ -37,6 +37,8 @@ export type GapBetween = {
   gapBetweenTextLarge: string;
   gapBetweenTextSmall: string;
   gapControlDefault: string;
+  gapTextLarge: string;
+  gapList: string;
 };
 
 export const gapInside: GapInside = {
@@ -76,4 +78,6 @@ export const gapBetween: GapBetween = {
   gapBetweenTextLarge: size[60],
   gapBetweenTextSmall: size[40],
   gapControlDefault: '{gapBetweenCtrlDefault}',
+  gapTextLarge: '{gapBetweenTextLarge}',
+  gapList: '{gapBetweenListitem}',
 };

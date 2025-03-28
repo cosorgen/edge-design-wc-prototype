@@ -93,7 +93,7 @@ import {
   paddingToolbar,
 } from './padding.js';
 import { gapBetween, gapInside } from './gap.js';
-import { shadow, shadowParts, ctrlShadow } from './shadow.js';
+import { shadow, shadowParts } from './shadow.js';
 import { sizeCtrl, sizeCtrlLg, sizeCtrlSm } from './size.js';
 import { strokeWidth } from './strokeWidth.js';
 import {
@@ -131,7 +131,6 @@ const utilityLayoutTemplate = {
   ...ctrlProgressLayout,
   ...ctrlRatingLayout,
   ...ctrlSegmentedLayout,
-  ...ctrlShadow,
   ...ctrlSliderLayout,
   ...ctrlSpinnerLayout,
   ...ctrlSplitLayout,

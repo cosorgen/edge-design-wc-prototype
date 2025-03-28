@@ -24,15 +24,15 @@ import type {
 
 export const darkComposerColors: CtrlComposerColors = {
   controlComposerContainerBackgroundDefault: '{ctrlComposerContainerBackgroundDefault}',
-  controlComposerContainerShadowAmbient: '{ctrlComposerContainerShadowAmbientColor}',
-  controlComposerContainerShadowKey: '{ctrlComposerContainerShadowKeyColor}',
+  controlComposerContainerShadowAmbientColor: '{ctrlComposerContainerShadowAmbientColor}',
+  controlComposerContainerShadowKeyColor: '{ctrlComposerContainerShadowKeyColor}',
   controlComposerContainerStrokeDefault: '{ctrlComposerContainerStrokeDefault}',
   controlComposerInputBackgroundDisabled: '{ctrlComposerInputBackgroundDisabled}',
   controlComposerInputBackgroundHover: '{ctrlComposerInputBackgroundHover}',
   controlComposerInputBackgroundPressed: '{ctrlComposerInputBackgroundPressed}',
   controlComposerInputBackgroundRest: '{ctrlComposerInputBackgroundRest}',
   controlComposerInputBackgroundSelectedRest: '{ctrlComposerInputBackgroundSelectedRest}',
-  controlComposerInputShadow: '{ctrlComposerInputShadowColor}',
+  controlComposerInputShadowColor: '{ctrlComposerInputShadowColor}',
   controlComposerInputStrokeDisabled: '{ctrlComposerInputStrokeDisabled}',
   controlComposerInputStrokeHover: '{ctrlComposerInputStrokeHover}',
   controlComposerInputStrokePressed: '{ctrlComposerInputStrokePressed}',

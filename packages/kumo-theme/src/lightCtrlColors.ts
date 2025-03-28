@@ -25,9 +25,9 @@ import type {
 export const lightComposerColors: CtrlComposerColors = {
   controlComposerContainerBackgroundDefault:
     '{ctrlComposerContainerBackgroundDefault}',
-  controlComposerContainerShadowAmbient:
+  controlComposerContainerShadowAmbientColor:
     '{ctrlComposerContainerShadowAmbientColor}',
-  controlComposerContainerShadowKey: '{ctrlComposerContainerShadowKeyColor}',
+  controlComposerContainerShadowKeyColor: '{ctrlComposerContainerShadowKeyColor}',
   controlComposerContainerStrokeDefault: '{ctrlComposerContainerStrokeDefault}',
   controlComposerInputBackgroundDisabled:
     '{ctrlComposerInputBackgroundDisabled}',
@@ -36,7 +36,7 @@ export const lightComposerColors: CtrlComposerColors = {
   controlComposerInputBackgroundRest: '{ctrlComposerInputBackgroundRest}',
   controlComposerInputBackgroundSelectedRest:
     '{ctrlComposerInputBackgroundSelectedRest}',
-  controlComposerInputShadow: '{ctrlComposerInputShadowColor}',
+  controlComposerInputShadowColor: '{ctrlComposerInputShadowColor}',
   controlComposerInputStrokeDisabled: '{ctrlComposerInputStrokeDisabled}',
   controlComposerInputStrokeHover: '{ctrlComposerInputStrokeHover}',
   controlComposerInputStrokePressed: '{ctrlComposerInputStrokePressed}',

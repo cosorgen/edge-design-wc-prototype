@@ -5,6 +5,7 @@ export type Strokewidth = {
   strokeWidthControlOutlinePressed: string;
   strokeWidthControlOutlineRest: string;
   strokeWidthControlOutlineSelectedRest: string;
+  strokewidthCtrlOutlineSelectedRest: string;
   strokewidthCtrlOutlineHover: string;
   strokewidthCtrlOutlinePressed: string;
   strokewidthCtrlOutlineRest: string;
@@ -21,6 +22,7 @@ export const strokeWidth: Strokewidth = {
   strokeWidthControlOutlinePressed: '{strokewidthCtrlOutlinePressed}',
   strokeWidthControlOutlineRest: '{strokewidthCtrlOutlineRest}',
   strokeWidthControlOutlineSelectedRest: '{strokewidthCtrlOutlineSelected}',
+  strokewidthCtrlOutlineSelectedRest: '{strokeWidthControlOutlineSelectedRest}',
   strokewidthCtrlOutlineHover: s[20],
   strokewidthCtrlOutlinePressed: s[20],
   strokewidthCtrlOutlineRest: s[10],
