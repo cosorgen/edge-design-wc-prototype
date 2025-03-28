@@ -264,3 +264,5 @@ export { lightTheme, darkTheme } from './themes.js';
 
 export type { Tokens } from './themeToTokens.js';
 export { themeToTokens, tokens } from './themeToTokens.js';
+
+export { setTheme, setThemeFor } from './setTheme.js';

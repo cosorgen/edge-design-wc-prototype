@@ -12,6 +12,10 @@
       "types": "./dist/dts/index.d.ts",
       "default": "./dist/esm/index.js"
     },
+    "./*.js": {
+      "types": "./dist/dts/*.d.ts",
+      "default": "./dist/esm/*.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [

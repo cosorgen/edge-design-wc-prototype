@@ -20,6 +20,9 @@ import {
   phoenixDarkThemeSolidWin11,
   spacingFrame,
 } from '@edge-design/phoenix-theme';
+import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
+import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
+import { setThemeFor as setKumoThemeFor } from '@edge-design/kumo-theme';
 import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
@@ -208,10 +211,16 @@ export class MicrosoftEdge extends FASTElement {
       },
       normal: { light: phoenixLightThemeWin11, dark: phoenixDarkThemeWin11 },
     };
+    const kumoThemes = {
+      light: kumoLightTheme,
+      dark: kumoDarkTheme,
+    };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
     const selectedTheme = themes[this.ws.transparency][themeKey];
+    const selectedKumoTheme = kumoThemes[themeKey];
     selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
 
+    setKumoThemeFor(this.shadowRoot!, selectedKumoTheme);
     setThemeFor(this.shadowRoot!, selectedTheme);
   }
 

@@ -149,6 +149,7 @@ for (const [component, tokens] of Object.entries(tokensFromKumo)) {
     } else {
       // Test if at least one of the fallbacks in Kumo is defined in edge
       if (token.endsWith('Css')) {
+        // We don't match these cause we define them differently
         // console.log(token, value);
         continue;
       }
