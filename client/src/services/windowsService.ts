@@ -22,7 +22,7 @@ export type Window = {
 export default class WindowsService {
   @observable theme: OSTheme;
   @observable transparency: OSTransparency;
-  @observable activeWindowId: string | null = null;
+  @observable activeWindowId?: string;
   @observable windows: Window[] = [];
 
   constructor() {
@@ -115,12 +115,12 @@ export default class WindowsService {
     return id;
   }
 
-  closeWindow(id: string | null) {
+  closeWindow(id?: string) {
     this.windows = this.windows.filter((w) => w.id !== id);
     this.activateNextWindow(id);
   }
 
-  activateWindow(id: string | null) {
+  activateWindow(id?: string) {
     this.activeWindowId = id;
 
     // Update z-index
@@ -134,28 +134,29 @@ export default class WindowsService {
     );
   }
 
-  activateNextWindow(id: string | null) {
+  activateNextWindow(id?: string) {
     if (this.activeWindowId === id) {
-      this.activeWindowId =
-        this.windows.find((win) => win.id !== id && !win.minimized)?.id || null;
+      this.activeWindowId = this.windows.find(
+        (win) => win.id !== id && !win.minimized,
+      )?.id;
     } else if (this.windows.length > 0) {
       // activate the window with the highest z-index that is not minimized
       this.activeWindowId = this.windows
         .filter((win) => !win.minimized)
         .sort((a, b) => a.zIndex - b.zIndex)[0].id;
     } else {
-      this.activeWindowId = null;
+      this.activeWindowId = undefined;
     }
   }
 
-  minimizeWindow(id: string | null, minimized = true) {
+  minimizeWindow(id?: string, minimized = true) {
     this.windows = this.windows.map((w) =>
       w.id === id ? { ...w, minimized } : w,
     );
     this.activateNextWindow(id);
   }
 
-  maximizeWindow(id: string | null, maximized = true) {
+  maximizeWindow(id?: string, maximized = true) {
     this.windows = this.windows.map((w) =>
       w.id === id ? { ...w, maximized } : w,
     );
@@ -165,7 +166,7 @@ export default class WindowsService {
     return this.windows.find((w) => w.id === this.activeWindowId);
   }
 
-  getWindowById(id: string | null) {
+  getWindowById(id?: string) {
     return this.windows.find((w) => w.id === id);
   }
 
@@ -183,6 +184,6 @@ export default class WindowsService {
 
   closeAllWindows(appName: string) {
     this.windows = this.windows.filter((w) => w.appName !== appName);
-    this.activateNextWindow(null);
+    this.activateNextWindow();
   }
 }

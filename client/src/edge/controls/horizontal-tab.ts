@@ -6,31 +6,33 @@ import {
   html,
   when,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusLarge,
-  colorLayerBackgroundDialog,
-  colorNeutralForeground1,
-  colorNeutralShadowAmbient,
-  colorNeutralShadowKey,
-  colorSubtleBackgroundHover,
-  fontFamilyBase,
-  fontSizeBase200,
-  fontWeightRegular,
-  lineHeightBase200,
-  shadow2BaseBlur,
-  shadow2BaseY,
-  shadow2DiffuseBlur,
-  shadow2DiffuseY,
-  shadowBaseX,
-  shadowDiffuseX,
-  spacingHorizontalS,
-  spacingHorizontalSNudge,
-  spacingVerticalXXS,
-  spacingFrame,
-} from '@edge-design/phoenix-theme';
+import { spacingFrame } from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
+import {
+  shadowLayerAmbientX,
+  shadowLayerKeyBlur,
+  shadowLayerKeyColor,
+  shadowLayerKeyX,
+  shadowLayerKeyY,
+  shadowLayerAmbientY,
+  shadowLayerAmbientBlur,
+  shadowLayerAmbientColor,
+  gapInsideCtrlDefault,
+  paddingCtrlHorizontalDefault,
+  paddingContentXSmall,
+  foregroundCtrlNeutralPrimaryRest,
+  cornerCtrlRest,
+  backgroundCtrlSubtleHover,
+  foregroundCtrlNeutralPrimaryHover,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+  textGlobalCaption1Fontsize,
+  textGlobalCaption1Lineheight,
+  ctrlTabBackgroundHorizontalActive,
+  cornerCtrlSmRest,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<HorizontalTab>`
   <div class="tab-background" id="bg"></div>
@@ -73,22 +75,16 @@ const styles = css`
     width: 260px;
     min-width: 16px;
     height: 32px;
-
-    /* Override corner for close button */
-    --smtc-corner-small-control-rest: 4px;
-    --smtc-corner-small-control-hover: 4px;
-    --smtc-corner-small-control-pressed: 4px;
-    --smtc-corner-small-control-selected: 4px;
   }
 
   :host([active]) {
     filter: drop-shadow(
-        ${shadowBaseX} ${shadow2BaseY} ${shadow2BaseBlur}
-          ${colorNeutralShadowAmbient}
+        ${shadowLayerKeyX} ${shadowLayerKeyY} ${shadowLayerKeyBlur}
+          ${shadowLayerKeyColor}
       )
       drop-shadow(
-        ${shadowDiffuseX} ${shadow2DiffuseY} ${shadow2DiffuseBlur}
-          ${colorNeutralShadowKey}
+        ${shadowLayerAmbientX} ${shadowLayerAmbientY} ${shadowLayerAmbientBlur}
+          ${shadowLayerAmbientColor}
       );
   }
 
@@ -101,16 +97,17 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    padding-inline-start: ${spacingHorizontalS};
-    padding-inline-end: calc(${spacingHorizontalS} + /*16px*/ 0px);
-    padding-block: ${spacingHorizontalSNudge};
-    color: ${colorNeutralForeground1};
-    border-radius: ${borderRadiusLarge};
+    gap: ${gapInsideCtrlDefault};
+    padding-inline-start: ${paddingCtrlHorizontalDefault};
+    padding-inline-end: calc(${paddingCtrlHorizontalDefault} + /*16px*/ 0px);
+    padding-block: ${paddingContentXSmall};
+    color: ${foregroundCtrlNeutralPrimaryRest};
+    border-radius: ${cornerCtrlRest};
   }
 
   button:hover {
-    background-color: ${colorSubtleBackgroundHover};
+    background-color: ${backgroundCtrlSubtleHover};
+    color: ${foregroundCtrlNeutralPrimaryHover};
   }
 
   :host([active]) button {
@@ -129,7 +126,6 @@ const styles = css`
 
   #title {
     flex: 1;
-    margin-block-end: ${spacingVerticalXXS};
     mask-image: linear-gradient(
       90deg,
       white,
@@ -142,10 +138,10 @@ const styles = css`
   #title,
   [name='title']::slotted(*) {
     /* Caption1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase200};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalCaption1Lineheight};
     text-align: start;
     white-space: nowrap;
     overflow: hidden;
@@ -159,8 +155,8 @@ const styles = css`
 
   mai-button {
     position: absolute;
-    inset-inline-end: ${spacingHorizontalS};
-    inset-block: ${spacingHorizontalS};
+    inset-inline-end: ${paddingCtrlHorizontalDefault};
+    inset-block: ${paddingCtrlHorizontalDefault};
   }
 
   mai-button svg,
@@ -170,10 +166,11 @@ const styles = css`
     min-width: 16px;
     min-height: 16px;
     padding: 0;
+    border-radius: ${cornerCtrlSmRest};
   }
 
   .tab-background {
-    background-color: ${colorLayerBackgroundDialog};
+    background-color: ${ctrlTabBackgroundHorizontalActive};
   }
 
   #bg,
@@ -187,7 +184,7 @@ const styles = css`
   #bg {
     inset: 0;
     bottom: calc(0px - ${spacingFrame});
-    border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
+    border-radius: ${cornerCtrlRest} ${cornerCtrlRest} 0 0;
   }
 
   #left-wing,

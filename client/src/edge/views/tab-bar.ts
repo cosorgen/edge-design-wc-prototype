@@ -6,18 +6,17 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  spacingHorizontalXS,
-  shadow2,
-  spacingVerticalSNudge,
-  spacingFrame,
-} from '@edge-design/phoenix-theme';
+import { spacingFrame } from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/horizontal-tab.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import {
+  paddingContentXSmallNudge,
+  shadowLayer,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>
@@ -88,6 +87,7 @@ const styles = css`
     user-select: none;
     position: relative; /* for positioning shadow */
     width: calc(100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')});
+    padding: ${spacingFrame};
   }
 
   #content {
@@ -99,30 +99,21 @@ const styles = css`
     flex-direction: row;
     align-items: flex-end;
     gap: ${spacingFrame};
-
-    & > mai-button,
-    & > .group > mai-button {
-      /* Only direct buttons on the frame need override */
-      --smtc-corner-control-rest: 8px;
-      --smtc-corner-control-hover: 8px;
-      --smtc-corner-control-pressed: 8px;
-      --smtc-corner-control-selected: 8px;
-    }
   }
 
   .group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${spacingFrame};
   }
 
   #shadow {
     position: absolute;
-    inset-inline: 8px;
+    inset-inline: 0;
     bottom: calc(-2px - ${spacingFrame});
     height: 2px;
-    box-shadow: ${shadow2};
+    box-shadow: ${shadowLayer};
   }
 
   #tabs {
@@ -149,7 +140,7 @@ const styles = css`
   }
 
   mai-divider {
-    margin-block: ${spacingVerticalSNudge};
+    margin-block: ${paddingContentXSmallNudge};
     margin-inline: calc(0px - (${spacingFrame} / 2));
   }
 

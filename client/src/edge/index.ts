@@ -18,6 +18,15 @@ import {
 import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
 import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
 import { setThemeFor as setKumoThemeFor } from '@edge-design/kumo-theme';
+import {
+  textStyleDefaultRegularWeight,
+  ctrlTabBackgroundHorizontalActive,
+  backgroundWindowTabBandSolid,
+  foregroundContentNeutralPrimary,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultRegularFontFamily,
+} from '@edge-design/kumo-theme/tokens.js';
 import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
@@ -31,48 +40,32 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
-import {
-  backgroundWindowTabBandSolid,
-  foregroundContentNeutralPrimary,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontFamily,
-} from '@edge-design/kumo-theme/tokens.js';
-import { textStyleDefaultRegularWeight } from '@edge-design/kumo-theme/tokens.js';
-import { ctrlTabBackgroundHorizontalActive } from '@edge-design/kumo-theme/tokens.js';
-import { cornerLayerDefault } from '@edge-design/kumo-theme/tokens.js';
-import { shadowLayer } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<MicrosoftEdge>`
-  <div class="row">
-    <caption-controls></caption-controls>
-    <div class="column">
-      <tab-bar></tab-bar>
-      <div id="activeTab">
-        <div id="content">
-          <tool-bar></tool-bar>
-          ${when(
-            (x) => x.shouldFavoritesBarRender(),
-            html`<favorites-bar></favorites-bar>`,
-          )}
-          <web-content></web-content>
-        </div>
-      </div>
+  <caption-controls></caption-controls>
+  <tab-bar></tab-bar>
+  <div id="activeTab">
+    <div id="content">
+      <tool-bar></tool-bar>
       ${when(
-        (x) => !x.ss.showLegacyCopilot,
-        html`<copilot-entrypoint
-          ?ntp="${(x) =>
-            x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
-          inline-position="center"
-          block-position="end"
-        ></copilot-entrypoint>`,
+        (x) => x.shouldFavoritesBarRender(),
+        html`<favorites-bar></favorites-bar>`,
       )}
+      <web-content></web-content>
     </div>
-    ${when(
-      (x) => x.ews.activeSidepaneAppId,
-      html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
-    )}
   </div>
+  ${when(
+    (x) => !x.ss.showLegacyCopilot,
+    html`<copilot-entrypoint
+      ?ntp="${(x) => x.ts.tabsById[x.ts.activeTabId!]?.url === 'edge://newtab'}"
+      inline-position="center"
+      block-position="end"
+    ></copilot-entrypoint>`,
+  )}
+  ${when(
+    (x) => x.ews.activeSidepaneAppId,
+    html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
+  )}
 `;
 
 const styles = css`
@@ -81,11 +74,9 @@ const styles = css`
     inset: 0;
     display: flex;
     flex-direction: column;
-    gap: ${spacingFrame};
     background-color: ${backgroundWindowTabBandSolid};
     color: ${foregroundContentNeutralPrimary};
     fill: currentColor;
-    padding: ${spacingFrame};
 
     font-family: ${textStyleDefaultRegularFontFamily};
     font-size: ${textGlobalBody3Fontsize};
@@ -98,8 +89,6 @@ const styles = css`
     width: 100%;
     flex: 1;
     overflow: hidden;
-    padding: 0 2px 2px 2px; /* for shadow */
-    margin: 0 -2px -2px -2px; /* for shadow */
   }
 
   #content {
@@ -110,8 +99,6 @@ const styles = css`
     display: flex;
     flex-direction: column;
     background-color: ${ctrlTabBackgroundHorizontalActive};
-    border-radius: ${cornerLayerDefault};
-    box-shadow: ${shadowLayer};
     overflow: hidden;
   }
 

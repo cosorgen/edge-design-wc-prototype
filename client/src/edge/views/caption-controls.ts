@@ -122,6 +122,11 @@ const styles = css`
     inset-block-start: 0;
     height: var(--caption-controls-height);
     width: ${(x) => (x.ews.activeSidepaneAppId ? '384px' : '186px')};
+
+    --smtc-corner-ctrl-rest: 0px;
+    --smtc-corner-ctrl-hover: 0px;
+    --smtc-corner-ctrl-pressed: 0px;
+    --smtc-corner-ctrl-selected: 0px;
   }
 
   #close:hover {
