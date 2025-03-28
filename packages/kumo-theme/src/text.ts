@@ -188,7 +188,7 @@ export const textGlobal: TextGlobal = {
 
 export const textStyle: TextStyle = {
   textStyleDefaultRegularFontfamily: fontFamily.base,
-  textStyleDefaultRegularFontFamily: 'textStyleDefaultRegularFontfamily}',
+  textStyleDefaultRegularFontFamily: '{textStyleDefaultRegularFontfamily}',
   textStyleDefaultRegularLetterSpacing: '0px',
   textStyleDefaultRegularLetterspacing:
     '{textStyleDefaultRegularLetterSpacing}',

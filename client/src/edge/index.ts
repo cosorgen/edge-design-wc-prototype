@@ -9,11 +9,6 @@ import {
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
-  colorNeutralForeground1,
-  colorLayerBackgroundDialog,
-  borderRadiusLarge,
-  shadow2,
-  typographyStyles,
   phoenixLightThemeWin11,
   phoenixDarkThemeWin11,
   phoenixLightThemeSolidWin11,
@@ -28,7 +23,6 @@ import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#services/tabService.js';
-import '../windows/controls/mica-material.js';
 import './views/tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
@@ -37,9 +31,19 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
+import {
+  backgroundWindowTabBandSolid,
+  foregroundContentNeutralPrimary,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultRegularFontFamily,
+} from '@edge-design/kumo-theme/tokens.js';
+import { textStyleDefaultRegularWeight } from '@edge-design/kumo-theme/tokens.js';
+import { ctrlTabBackgroundHorizontalActive } from '@edge-design/kumo-theme/tokens.js';
+import { cornerLayerDefault } from '@edge-design/kumo-theme/tokens.js';
+import { shadowLayer } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<MicrosoftEdge>`
-  <mica-material></mica-material>
   <div class="row">
     <caption-controls></caption-controls>
     <div class="column">
@@ -78,14 +82,15 @@ const styles = css`
     display: flex;
     flex-direction: column;
     gap: ${spacingFrame};
-    color: ${colorNeutralForeground1};
+    background-color: ${backgroundWindowTabBandSolid};
+    color: ${foregroundContentNeutralPrimary};
     fill: currentColor;
     padding: ${spacingFrame};
 
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 
   #activeTab {
@@ -104,9 +109,9 @@ const styles = css`
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color: ${colorLayerBackgroundDialog};
-    border-radius: ${borderRadiusLarge};
-    box-shadow: ${shadow2};
+    background-color: ${ctrlTabBackgroundHorizontalActive};
+    border-radius: ${cornerLayerDefault};
+    box-shadow: ${shadowLayer};
     overflow: hidden;
   }
 
