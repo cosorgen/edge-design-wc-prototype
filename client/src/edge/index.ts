@@ -8,12 +8,6 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
-import {
-  phoenixLightThemeWin11,
-  phoenixDarkThemeWin11,
-  phoenixLightThemeSolidWin11,
-  phoenixDarkThemeSolidWin11,
-} from '@edge-design/phoenix-theme';
 import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
 import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
 import { setThemeFor as setKumoThemeFor } from '@edge-design/kumo-theme';
@@ -27,7 +21,6 @@ import {
   textStyleDefaultRegularFontFamily,
   paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
-import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -198,24 +191,14 @@ export class MicrosoftEdge extends FASTElement {
 
   setTheme() {
     // Set up edge design system
-    const themes = {
-      reduced: {
-        light: phoenixLightThemeSolidWin11,
-        dark: phoenixDarkThemeSolidWin11,
-      },
-      normal: { light: phoenixLightThemeWin11, dark: phoenixDarkThemeWin11 },
-    };
     const kumoThemes = {
       light: kumoLightTheme,
       dark: kumoDarkTheme,
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    const selectedTheme = themes[this.ws.transparency][themeKey];
     const selectedKumoTheme = kumoThemes[themeKey];
     selectedKumoTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
-
     setKumoThemeFor(this.shadowRoot!, selectedKumoTheme);
-    // setThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   clearTheme() {

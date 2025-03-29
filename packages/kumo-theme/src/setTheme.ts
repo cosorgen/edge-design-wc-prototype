@@ -12,7 +12,6 @@ export function setThemeFor<Theme>(
     const varValue = theme[token as keyof Theme];
     data += `${cssVar}: ${varValue};`;
   });
-  console.log(data);
   sheet.replaceSync(
     `:${element instanceof ShadowRoot ? 'host' : 'root'} {${data}}`,
   );
