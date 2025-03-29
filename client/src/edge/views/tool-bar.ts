@@ -11,7 +11,6 @@ import {
 import {
   spacingHorizontalS,
   spacingHorizontalXS,
-  spacingFrame,
 } from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/button/define.js';
@@ -37,6 +36,7 @@ import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
+import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -173,7 +173,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalS};
-    padding: ${spacingFrame};
+    padding: ${paddingWindowDefault};
     user-select: none;
   }
 

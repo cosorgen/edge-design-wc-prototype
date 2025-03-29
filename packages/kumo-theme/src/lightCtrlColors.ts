@@ -27,7 +27,8 @@ export const lightComposerColors: CtrlComposerColors = {
     '{ctrlComposerContainerBackgroundDefault}',
   controlComposerContainerShadowAmbientColor:
     '{ctrlComposerContainerShadowAmbientColor}',
-  controlComposerContainerShadowKeyColor: '{ctrlComposerContainerShadowKeyColor}',
+  controlComposerContainerShadowKeyColor:
+    '{ctrlComposerContainerShadowKeyColor}',
   controlComposerContainerStrokeDefault: '{ctrlComposerContainerStrokeDefault}',
   controlComposerInputBackgroundDisabled:
     '{ctrlComposerInputBackgroundDisabled}',
@@ -187,8 +188,9 @@ export const lightLiteFilterColors: CtrlLitefilterColors = {
 };
 
 export const lightOmniboxColors: CtrlOmniboxColors = {
-  ctrlOmniboxBackgroundRest: neutral[150],
   ctrlOmniboxBackgroundHover: neutral[154],
+  ctrlOmniboxBackgroundRest: neutral[150],
+  ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
 };
 
 export const lightProgressColors: CtrlProgressColors = {

@@ -91,6 +91,7 @@ import {
   paddingContent,
   paddingFlyout,
   paddingToolbar,
+  paddingWindow,
 } from './padding.js';
 import { gapBetween, gapInside } from './gap.js';
 import { shadow, shadowParts } from './shadow.js';
@@ -148,6 +149,7 @@ const utilityLayoutTemplate = {
   ...paddingCtrlSm,
   ...paddingFlyout,
   ...paddingToolbar,
+  ...paddingWindow,
   ...shadow,
   ...shadowParts,
   ...sizeCtrl,

@@ -3,7 +3,7 @@ import { observable } from '@microsoft/fast-element';
 // Global state for the Edge browser
 export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
-  @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'always';
+  @observable showFavoritesBar: 'always' | 'newtab' | 'never' = 'newtab';
   @observable showLegacyCopilot = true;
   @observable showCopilotNTP = false;
   @observable truncateURL = false;

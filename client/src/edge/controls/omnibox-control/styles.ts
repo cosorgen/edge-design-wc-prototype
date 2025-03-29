@@ -1,20 +1,19 @@
 import { css } from '@microsoft/fast-element';
 import {
-  borderRadiusCircular,
-  borderRadiusLayerDialog,
-  colorBrandStroke1,
-  colorLayerBackgroundDialog,
-  shadow28,
-  spacingHorizontalNone,
-  spacingHorizontalXS,
-  spacingHorizontalXXS,
-  spacingVerticalXS,
-  spacingVerticalXXS,
-  strokeWidthThick,
-  strokeWidthThin,
-  colorLayerOmniboxBackground,
-  colorLayerOmniboxBackgroundHover,
-} from '@edge-design/phoenix-theme';
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  ctrlOmniboxBackgroundHover,
+  ctrlOmniboxBackgroundRest,
+  ctrlOmniboxStrokeFocused,
+  gapBetweenContentNone,
+  gapBetweenContentXxsmall,
+  gapInsideCtrlDefault,
+  paddingContentNone,
+  shadowFlyout,
+  strokeWidthDefault,
+  cornerCircular,
+  paddingContentXxsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 export const styles = css`
   :host {
@@ -22,7 +21,7 @@ export const styles = css`
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     height: 32px;
-    --stroke-diff: calc(${strokeWidthThick} - ${strokeWidthThin});
+    --stroke-diff: calc(${strokeWidthDefault} - ${strokeWidthDefault});
   }
 
   :host([active]) {
@@ -37,53 +36,48 @@ export const styles = css`
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background-color: ${colorLayerOmniboxBackground};
-    border: ${strokeWidthThin} solid transparent;
-    border-radius: ${borderRadiusCircular};
-    padding: calc(${spacingVerticalXXS} + var(--stroke-diff))
-      calc(${spacingHorizontalXXS} + var(--stroke-diff));
+    background-color: ${ctrlOmniboxBackgroundRest};
+    border: ${strokeWidthDefault} solid transparent;
+    border-radius: ${cornerCircular};
+    padding: calc(${paddingContentXxsmall} + var(--stroke-diff))
+      calc(${paddingContentXxsmall} + var(--stroke-diff));
   }
 
   :host(:not([dropdown-open]))
     [part='container']:has(omnibox-input:focus-within) {
-    padding: ${spacingVerticalXXS} ${spacingHorizontalXXS};
-    border: ${strokeWidthThick} solid ${colorBrandStroke1};
+    padding: ${paddingContentXxsmall} ${paddingContentXxsmall};
+    border: ${strokeWidthDefault} solid ${ctrlOmniboxStrokeFocused};
   }
 
   :host([dropdown-open]) [part='container'] {
-    background-color: ${colorLayerBackgroundDialog};
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
+    background-color: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
   }
 
   :host(:not([dropdown-open])) [part='container']:hover {
-    background-color: ${colorLayerOmniboxBackgroundHover};
+    background-color: ${ctrlOmniboxBackgroundHover};
   }
 
   #top-row {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
-
-    #status,
-    #actions {
-      flex: 1;
-      min-width: 25%;
-    }
+    gap: ${gapInsideCtrlDefault};
   }
 
   :host([dropdown-open]) #top-row {
-    padding: ${spacingVerticalXS} ${spacingHorizontalNone};
-    gap: ${spacingHorizontalNone};
+    padding: ${paddingContentXxsmall} ${paddingContentNone};
+    gap: ${gapBetweenContentNone};
 
     #status {
       flex: 0;
       min-width: unset;
     }
-    omnibox-input {
-      flex: 1;
-    }
+  }
+
+  omnibox-input {
+    flex: 1;
   }
 
   #status,
@@ -92,7 +86,7 @@ export const styles = css`
     flex-direction: row;
     cursor: text;
     min-height: 24px;
-    gap: ${spacingHorizontalXXS};
+    gap: ${gapBetweenContentXxsmall};
   }
 
   #status {

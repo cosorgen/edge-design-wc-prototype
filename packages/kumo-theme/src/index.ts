@@ -176,6 +176,7 @@ export type {
   PaddingCtrlSm,
   PaddingFlyout,
   PaddingToolbar,
+  PaddingWindow,
 } from './padding.js';
 
 export {
@@ -186,6 +187,7 @@ export {
   paddingCtrlSm,
   paddingFlyout,
   paddingToolbar,
+  paddingWindow,
 } from './padding.js';
 
 export type { GapBetween, GapInside } from './gap.js';

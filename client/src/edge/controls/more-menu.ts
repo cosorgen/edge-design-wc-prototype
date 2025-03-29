@@ -10,8 +10,6 @@ import {
   ViewTemplate,
 } from '@microsoft/fast-element';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
   borderRadiusLayerFlyout,
   borderRadiusMedium,
   colorBrandBackground2,
@@ -34,6 +32,7 @@ import '@mai-ui/divider/define.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
+import { backgroundFlyoutSolid } from '@edge-design/kumo-theme/tokens.js';
 
 const defaultItems: MoreMenuEntry[] = [
   { title: 'New tab', type: 'action', shortcut: 'Ctrl+T' },
@@ -172,9 +171,7 @@ const styles = css`
     flex-direction: column;
     gap: ${spacingVerticalS};
     padding: ${spacingVerticalS};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
+    background: ${backgroundFlyoutSolid};
     border-radius: ${borderRadiusLayerFlyout};
     box-shadow: ${shadow28};
     overflow: hidden;

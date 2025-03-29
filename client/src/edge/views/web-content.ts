@@ -10,16 +10,17 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import {
-  colorLayerBackgroundApp,
-  strokeWidthThin,
-} from '@edge-design/phoenix-theme';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import {
+  cornerLayerDefault,
+  shadowLayer,
+  paddingWindowDefault,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<copilot-newtab
@@ -57,7 +58,9 @@ const styles = css`
   :host {
     flex: 1;
     display: flex;
-    border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
+    border-radius: ${cornerLayerDefault};
+    box-shadow: ${shadowLayer};
+    margin: ${paddingWindowDefault};
     overflow: hidden;
     z-index: 0; /* ensure content is under omnibox */
 

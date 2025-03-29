@@ -13,7 +13,6 @@ import {
   phoenixDarkThemeWin11,
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
-  spacingFrame,
 } from '@edge-design/phoenix-theme';
 import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
 import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
@@ -26,6 +25,7 @@ import {
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
   textStyleDefaultRegularFontFamily,
+  paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
 import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
@@ -44,15 +44,21 @@ import './views/caption-controls.js';
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
   <tab-bar></tab-bar>
-  <div id="activeTab">
-    <div id="content">
-      <tool-bar></tool-bar>
-      ${when(
-        (x) => x.shouldFavoritesBarRender(),
-        html`<favorites-bar></favorites-bar>`,
-      )}
-      <web-content></web-content>
+  <div class="row">
+    <div id="activeTab">
+      <div id="content">
+        <tool-bar></tool-bar>
+        ${when(
+          (x) => x.shouldFavoritesBarRender(),
+          html`<favorites-bar></favorites-bar>`,
+        )}
+        <web-content></web-content>
+      </div>
     </div>
+    ${when(
+      (x) => x.ews.activeSidepaneAppId,
+      html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
+    )}
   </div>
   ${when(
     (x) => !x.ss.showLegacyCopilot,
@@ -61,10 +67,6 @@ const template = html<MicrosoftEdge>`
       inline-position="center"
       block-position="end"
     ></copilot-entrypoint>`,
-  )}
-  ${when(
-    (x) => x.ews.activeSidepaneAppId,
-    html`<side-pane id="${(x) => x.ews.activeSidepaneAppId}"></side-pane>`,
   )}
 `;
 
@@ -105,7 +107,7 @@ const styles = css`
   .row {
     display: flex;
     flex-direction: row;
-    gap: ${spacingFrame};
+    gap: ${paddingWindowDefault};
     height: 100%;
     min-height: 0px;
   }
@@ -113,7 +115,7 @@ const styles = css`
   .column {
     display: flex;
     flex-direction: column;
-    gap: ${spacingFrame};
+    gap: ${paddingWindowDefault};
     width: 100%;
     min-width: 0px;
   }
@@ -210,10 +212,10 @@ export class MicrosoftEdge extends FASTElement {
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
     const selectedTheme = themes[this.ws.transparency][themeKey];
     const selectedKumoTheme = kumoThemes[themeKey];
-    selectedTheme.spacingFrame = this.ss.frameSpacing; // override from settings
+    selectedKumoTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
 
     setKumoThemeFor(this.shadowRoot!, selectedKumoTheme);
-    setThemeFor(this.shadowRoot!, selectedTheme);
+    // setThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   clearTheme() {

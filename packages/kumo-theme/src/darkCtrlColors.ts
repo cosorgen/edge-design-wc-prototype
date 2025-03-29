@@ -23,21 +23,27 @@ import type {
 } from './ctrlColors.js';
 
 export const darkComposerColors: CtrlComposerColors = {
-  controlComposerContainerBackgroundDefault: '{ctrlComposerContainerBackgroundDefault}',
-  controlComposerContainerShadowAmbientColor: '{ctrlComposerContainerShadowAmbientColor}',
-  controlComposerContainerShadowKeyColor: '{ctrlComposerContainerShadowKeyColor}',
+  controlComposerContainerBackgroundDefault:
+    '{ctrlComposerContainerBackgroundDefault}',
+  controlComposerContainerShadowAmbientColor:
+    '{ctrlComposerContainerShadowAmbientColor}',
+  controlComposerContainerShadowKeyColor:
+    '{ctrlComposerContainerShadowKeyColor}',
   controlComposerContainerStrokeDefault: '{ctrlComposerContainerStrokeDefault}',
-  controlComposerInputBackgroundDisabled: '{ctrlComposerInputBackgroundDisabled}',
+  controlComposerInputBackgroundDisabled:
+    '{ctrlComposerInputBackgroundDisabled}',
   controlComposerInputBackgroundHover: '{ctrlComposerInputBackgroundHover}',
   controlComposerInputBackgroundPressed: '{ctrlComposerInputBackgroundPressed}',
   controlComposerInputBackgroundRest: '{ctrlComposerInputBackgroundRest}',
-  controlComposerInputBackgroundSelectedRest: '{ctrlComposerInputBackgroundSelectedRest}',
+  controlComposerInputBackgroundSelectedRest:
+    '{ctrlComposerInputBackgroundSelectedRest}',
   controlComposerInputShadowColor: '{ctrlComposerInputShadowColor}',
   controlComposerInputStrokeDisabled: '{ctrlComposerInputStrokeDisabled}',
   controlComposerInputStrokeHover: '{ctrlComposerInputStrokeHover}',
   controlComposerInputStrokePressed: '{ctrlComposerInputStrokePressed}',
   controlComposerInputStrokeRest: '{ctrlComposerInputStrokeRest}',
-  controlComposerInputStrokeSelectedRest: '{ctrlComposerInputStrokeSelectedRest}',
+  controlComposerInputStrokeSelectedRest:
+    '{ctrlComposerInputStrokeSelectedRest}',
   ctrlComposerContainerBackgroundAcrylicColorBlend: '{backgroundFlyoutSolid}',
   ctrlComposerContainerBackgroundAcrylicLumBlend: '{backgroundFlyoutSolid}',
   ctrlComposerContainerBackgroundDefault: alphaBlack[60],
@@ -182,8 +188,9 @@ export const darkLiteFilterColors: CtrlLitefilterColors = {
 };
 
 export const darkOmniboxColors: CtrlOmniboxColors = {
-  ctrlOmniboxBackgroundRest: neutral[800],
   ctrlOmniboxBackgroundHover: neutral[804],
+  ctrlOmniboxBackgroundRest: neutral[800],
+  ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
 };
 
 export const darkProgressColors: CtrlProgressColors = {

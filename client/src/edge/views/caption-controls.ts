@@ -17,7 +17,6 @@ import {
   spacingHorizontalXXS,
   strokeWidthThin,
   colorLayerBackgroundPillMenu,
-  spacingFrame,
 } from '@edge-design/phoenix-theme';
 import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
@@ -25,6 +24,7 @@ import '../controls/more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
 import '@mai-ui/button/define.js';
+import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html` <div
     id="window-grabber"
@@ -108,7 +108,7 @@ const template = html` <div
 const styles = css`
   :host {
     --caption-controls-height: calc(
-      32px + 2 * ${spacingFrame}
+      32px + 2 * ${paddingWindowDefault}
     ); /* height of a button + gaps */
     display: flex;
     flex-direction: row;

@@ -159,6 +159,7 @@ export type CtrlLitefilterColors = {
 export type CtrlOmniboxColors = {
   ctrlOmniboxBackgroundRest: string;
   ctrlOmniboxBackgroundHover: string;
+  ctrlOmniboxStrokeFocused: string;
 };
 
 export type CtrlProgressColors = {

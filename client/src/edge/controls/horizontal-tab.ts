@@ -6,7 +6,6 @@ import {
   html,
   when,
 } from '@microsoft/fast-element';
-import { spacingFrame } from '@edge-design/phoenix-theme';
 import '@mai-ui/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
@@ -32,6 +31,7 @@ import {
   textGlobalCaption1Lineheight,
   ctrlTabBackgroundHorizontalActive,
   cornerCtrlSmRest,
+  paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<HorizontalTab>`
@@ -183,7 +183,7 @@ const styles = css`
 
   #bg {
     inset: 0;
-    bottom: calc(0px - ${spacingFrame});
+    bottom: calc(0px - ${paddingWindowDefault});
     border-radius: ${cornerCtrlRest} ${cornerCtrlRest} 0 0;
   }
 
@@ -191,7 +191,7 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: calc(0px - ${spacingFrame});
+    bottom: calc(0px - ${paddingWindowDefault});
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 

@@ -63,6 +63,10 @@ export type PaddingToolbar = {
   paddingToolbarOutside: string;
 };
 
+export type PaddingWindow = {
+  paddingWindowDefault: string;
+};
+
 export const paddingCtrl: PaddingCtrl = {
   paddingControlDefaultHorizontalIconOnly: '{paddingCtrlHorizontalIcononly}',
   paddingControlDefaultToNestedControl: '{paddingCtrlTonestedcontrol}',
@@ -124,4 +128,8 @@ export const paddingToolbar: PaddingToolbar = {
   paddingToolbar: '{paddingToolbarInside}',
   paddingToolbarInside: size[80],
   paddingToolbarOutside: size[40],
+};
+
+export const paddingWindow: PaddingWindow = {
+  paddingWindowDefault: size[40],
 };
