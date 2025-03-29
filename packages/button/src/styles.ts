@@ -5,10 +5,15 @@ export const styles = css`
   ${ButtonStyles}
 
   :host(:is([state--icon], :state(icon))) {
-    box-sizing: border-box !important;
     padding:
       var(--smtc-padding-ctrl-texttop),
       var(--smtc-padding-ctrl-horizontal-icononly); /* padding needs to be on the host for border box to work */
+  }
+
+  :host(:is([state--icon], :state(icon)):is([state--small], :state(small))) {
+    padding:
+      var(--smtc-padding-ctrl-sm-texttop),
+      var(--smtc-padding-ctrl-sm-horizontal-icononly); /* padding needs to be on the host for border box to work */
   }
 
   :host(:is([state--icon], :state(icon))) .content {
