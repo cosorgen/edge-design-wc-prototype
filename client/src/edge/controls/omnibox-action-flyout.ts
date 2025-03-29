@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import './flyout-menu.js';
 import {
   acrylicBackgroundBlur,

@@ -6,7 +6,7 @@ import {
   observable,
   repeat,
 } from '@microsoft/fast-element';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';

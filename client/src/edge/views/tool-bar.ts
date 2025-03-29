@@ -12,8 +12,8 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
 } from '@edge-design/phoenix-theme';
-import '@mai-ui/button/define.js';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
+import '@edge-design/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';

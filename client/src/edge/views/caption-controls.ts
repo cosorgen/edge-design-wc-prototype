@@ -23,7 +23,7 @@ import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html` <div

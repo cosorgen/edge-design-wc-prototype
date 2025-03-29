@@ -18,7 +18,7 @@ import {
   spacingHorizontalXS,
   typographyStyles,
 } from '@edge-design/phoenix-theme';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/extension-hub-item.js';
 import '../controls/context-menu.js';

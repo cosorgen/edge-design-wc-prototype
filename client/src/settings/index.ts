@@ -6,7 +6,7 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import '../windows/controls/mica-material.js';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@mai-ui/switch/define.js';
 import {

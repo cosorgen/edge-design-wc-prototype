@@ -20,7 +20,7 @@ import {
   durationNormal,
   curveEasyEase,
 } from '@edge-design/copilot-theme';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import '../../windows/controls/acrylic-material.js';
 import '../controls/copilot-chat-entry.js';
 import '../controls/copilot-design-provider.js';

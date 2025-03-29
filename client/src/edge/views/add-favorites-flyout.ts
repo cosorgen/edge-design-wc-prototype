@@ -8,7 +8,7 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import '@mai-ui/text-input/define.js';
 import { TextInput } from '@mai-ui/text-input';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,

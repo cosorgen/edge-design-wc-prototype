@@ -1,6 +1,6 @@
 {
   "name": "@edge-design/button",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "author": "Microsoft",
   "description": "Edge design system utilities",
   "license": "UNLICENSED",
@@ -11,12 +11,16 @@
       "types": "./dist/dts/index.d.ts",
       "default": "./dist/esm/index.js"
     },
+    "./*.js": {
+      "types": "./dist/dts/*.d.ts",
+      "default": "./dist/esm/*.js"
+    },
     "./package.json": "./package.json"
   },
   "files": [
     "*.md",
-    "dist/esm/*.js",
-    "dist/dts/*.d.ts"
+    "dist",
+    "package.json"
   ],
   "dependencies": {
     "@mai-ui/button": "^1.0.1",

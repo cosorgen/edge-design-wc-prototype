@@ -9,7 +9,7 @@ import {
   typographyStyles,
   spacingFrame,
 } from '@edge-design/phoenix-theme';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">

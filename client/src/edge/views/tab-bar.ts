@@ -6,7 +6,7 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/horizontal-tab.js';
 import { TabService } from '#services/tabService.js';

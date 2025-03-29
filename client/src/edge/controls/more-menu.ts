@@ -29,7 +29,7 @@ import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';
 import '@mai-ui/divider/define.js';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
 import { backgroundFlyoutSolid } from '@edge-design/kumo-theme/tokens.js';

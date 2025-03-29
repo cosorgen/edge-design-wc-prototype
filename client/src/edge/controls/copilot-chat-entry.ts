@@ -31,7 +31,7 @@ import {
   smtcPaddingInlineMessageBubble,
   smtcBackgroundSpinnerRest,
 } from '@edge-design/copilot-theme';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import showdown from 'showdown';
 import dompurify from 'dompurify';
 import moment from 'moment';

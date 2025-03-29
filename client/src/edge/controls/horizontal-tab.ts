@@ -6,7 +6,7 @@ import {
   html,
   when,
 } from '@microsoft/fast-element';
-import '@mai-ui/button/define.js';
+import '@edge-design/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
 import {
