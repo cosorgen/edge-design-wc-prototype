@@ -6,14 +6,13 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  shadow28,
-} from '@edge-design/phoenix-theme';
 import WindowsService from '#services/windowsService.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<IdentityMenu>`
   <div>
@@ -31,11 +30,10 @@ const styles = css`
     flex-direction: column;
     width: 318px;
     height: 373px;
-    background: ${acrylicBackgroundLuminosity};
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
     overflow: hidden;
   }
 
