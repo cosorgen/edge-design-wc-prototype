@@ -48,13 +48,13 @@ export type PaddingContent = {
   paddingContentMedium: string;
   paddingContentNone: string;
   paddingContentSmall: string;
-  paddingContentXLarge: string;
-  paddingContentXSmall: string;
-  paddingContentXSmallNudge: string;
-  paddingContentXxLarge: string;
+  paddingContentXlarge: string;
+  paddingContentXsmall: string;
+  paddingContentXsmallnudge: string;
+  paddingContentXxlarge: string;
   paddingContentXxsmall: string;
-  paddingContentXxxLarge: string;
-  paddingContentXxxSmall: string;
+  paddingContentXxxlarge: string;
+  paddingContentXxxsmall: string;
 };
 
 export type PaddingToolbar = {
@@ -115,13 +115,13 @@ export const paddingContent: PaddingContent = {
   paddingContentMedium: size[160],
   paddingContentNone: size[0],
   paddingContentSmall: size[120],
-  paddingContentXLarge: size[240],
-  paddingContentXSmall: size[80],
-  paddingContentXSmallNudge: size[60],
-  paddingContentXxLarge: size[320],
+  paddingContentXlarge: size[240],
+  paddingContentXsmall: size[80],
+  paddingContentXsmallnudge: size[60],
+  paddingContentXxlarge: size[320],
   paddingContentXxsmall: size[40],
-  paddingContentXxxLarge: size[400],
-  paddingContentXxxSmall: size[20],
+  paddingContentXxxlarge: size[400],
+  paddingContentXxxsmall: size[20],
 };
 
 export const paddingToolbar: PaddingToolbar = {

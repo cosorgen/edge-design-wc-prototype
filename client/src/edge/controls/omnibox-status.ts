@@ -7,12 +7,15 @@ import {
   observable,
   when,
 } from '@microsoft/fast-element';
-import {
-  colorNeutralForeground3,
-  spacingHorizontalXS,
-} from '@edge-design/phoenix-theme';
 import '@edge-design/button/define.js';
 import '@mai-ui/divider/define.js';
+import {
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtleRest,
+  cornerCircular,
+  foregroundCtrlNeutralSecondaryRest,
+  paddingCtrlSmHorizontalIcononly,
+} from '@edge-design/kumo-theme/tokens.js';
 
 /**
  * omnibox-status is a presentational component that renders
@@ -37,12 +40,7 @@ const iconIds: Record<string, string> = {
 const imgPaths: Record<string, string> = { edge: 'favicon.ico' };
 
 const template = html<OmniboxStatus>`
-  <mai-button
-    appearance="subtle"
-    size="small"
-    shape="circular"
-    ?icon-only="${(x) => !labels[x.type]}"
-  >
+  <button>
     ${when(
       (x) => imgPaths[x.type],
       html`<img
@@ -53,9 +51,15 @@ const template = html<OmniboxStatus>`
         <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}" />
       </svg>`,
     )}
-    <div part="label">${(x) => labels[x.type]}</div>
-  </mai-button>
-  <mai-divider orientation="vertical"></mai-divider>
+    ${when(
+      (x) => labels[x.type],
+      html` <div part="label">${(x) => labels[x.type]}</div> `,
+    )}
+  </button>
+  ${when(
+    (x) => labels[x.type],
+    html` <mai-divider orientation="vertical"></mai-divider> `,
+  )}
 `;
 
 const styles = css`
@@ -63,17 +67,30 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 100%;
   }
 
-  mai-button {
-    color: ${colorNeutralForeground3};
-    gap: ${spacingHorizontalXS};
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: ${backgroundCtrlSubtleRest};
+    border: none;
+    padding: ${paddingCtrlSmHorizontalIcononly};
+    margin: 0;
+    color: ${foregroundCtrlNeutralSecondaryRest};
+    border-radius: ${cornerCircular};
+  }
+
+  button:hover {
+    background: ${backgroundCtrlSubtleHover};
+    cursor: pointer;
   }
 
   svg,
   img {
     width: 20px;
+    height: 20px;
   }
 
   mai-divider {
@@ -85,10 +102,6 @@ const styles = css`
   mai-divider::after {
     height: 100%;
     min-height: 8px;
-  }
-
-  [icon-only] ~ mai-divider {
-    display: none;
   }
 
   :host(:hover) mai-divider {

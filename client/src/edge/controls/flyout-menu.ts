@@ -20,8 +20,8 @@ const template = html<FlyoutMenu>`
 
 const styles = css`
   :host {
-    /* Need for collapse */
-    min-width: 16px;
+    display: block;
+    min-width: 16px; /* Need for collapse */
 
     /* Don't clip focus outline */
     margin: -2px;

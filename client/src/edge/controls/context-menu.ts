@@ -1,16 +1,15 @@
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  colorNeutralForegroundHint,
-  shadow28,
-  spacingHorizontalXS,
-  spacingVerticalS,
-  spacingVerticalXS,
-} from '@edge-design/phoenix-theme';
 import './menu-item.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundContentNeutralPrimary,
+  foregroundContentNeutralSecondary,
+  gapBetweenContentXsmall,
+  shadowFlyout,
+  paddingContentXsmall,
+  paddingContentXxsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ContextMenu>`
   <div id="menu-items">
@@ -24,15 +23,13 @@ const styles = css`
     max-width: 512px;
     display: flex;
     flex-direction: column;
-    gap: ${spacingVerticalS};
-    padding: ${spacingVerticalS};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
+    gap: ${gapBetweenContentXsmall};
+    padding: ${paddingContentXsmall};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
     overflow: hidden;
-    color: ${colorNeutralForeground1};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   #menu-items {
@@ -41,7 +38,7 @@ const styles = css`
   }
 
   .hint {
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundContentNeutralSecondary};
   }
 
   svg {
@@ -50,11 +47,11 @@ const styles = css`
   }
 
   svg[slot='end'] {
-    margin-inline-end: calc(0px - ${spacingHorizontalXS});
+    margin-inline-end: calc(0px - ${paddingContentXxsmall});
   }
 
   mai-divider {
-    margin-block: ${spacingVerticalXS};
+    margin-block: ${paddingContentXxsmall};
   }
 `;
 

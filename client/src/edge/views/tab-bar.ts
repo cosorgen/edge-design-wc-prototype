@@ -14,7 +14,7 @@ import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   ctrlTabBackgroundHorizontalActive,
-  paddingContentXSmallNudge,
+  paddingContentXsmallnudge,
   shadowLayer,
   paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
@@ -145,7 +145,7 @@ const styles = css`
   }
 
   mai-divider {
-    margin-block: ${paddingContentXSmallNudge};
+    margin-block: ${paddingContentXsmallnudge};
     margin-inline: calc(0px - (${paddingWindowDefault} / 2));
   }
 

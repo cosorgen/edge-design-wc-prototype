@@ -5,15 +5,17 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusMedium,
-  colorNeutralForeground1,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  spacingHorizontalM,
-  spacingHorizontalS,
-} from '@edge-design/phoenix-theme';
 import '@edge-design/button/define.js';
+import {
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  cornerCtrlRest,
+  foregroundContentNeutralPrimary,
+  gapBetweenCtrlDefault,
+  paddingContentSmall,
+  paddingContentXsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
     <div id="start">
@@ -53,31 +55,31 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
 const styles = css`
   :host {
     position: relative;
-    color: ${colorNeutralForeground1};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
+    gap: ${gapBetweenCtrlDefault};
     padding: 0;
-    padding-inline: ${spacingHorizontalS} 72px;
+    padding-inline: ${paddingContentXsmall} 72px;
     height: 32px;
     cursor: pointer;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
     border: none;
-    background-color: transparent;
+    background-color: ${backgroundCtrlSubtleRest};
     width: 100%;
     color: inherit;
   }
 
   button:hover {
-    background-color: ${colorSubtleBackgroundHover};
+    background-color: ${backgroundCtrlSubtleHover};
   }
 
   button:active {
-    background-color: ${colorSubtleBackgroundPressed};
+    background-color: ${backgroundCtrlSubtlePressed};
   }
 
   #start ::slotted(*) {
@@ -98,7 +100,7 @@ const styles = css`
     position: absolute;
     right: 0;
     top: 0;
-    margin-inline-start: ${spacingHorizontalM};
+    margin-inline-start: ${paddingContentSmall};
   }
 
   #main {

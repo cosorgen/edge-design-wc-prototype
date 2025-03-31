@@ -20,7 +20,7 @@ import {
   shadowLayerAmbientColor,
   gapInsideCtrlDefault,
   paddingCtrlHorizontalDefault,
-  paddingContentXSmall,
+  paddingContentXsmall,
   foregroundCtrlNeutralPrimaryRest,
   cornerCtrlRest,
   backgroundCtrlSubtleHover,
@@ -100,7 +100,7 @@ const styles = css`
     gap: ${gapInsideCtrlDefault};
     padding-inline-start: ${paddingCtrlHorizontalDefault};
     padding-inline-end: calc(${paddingCtrlHorizontalDefault} + /*16px*/ 0px);
-    padding-block: ${paddingContentXSmall};
+    padding-block: ${paddingContentXsmall};
     color: ${foregroundCtrlNeutralPrimaryRest};
     border-radius: ${cornerCtrlRest};
   }

@@ -7,6 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import '@edge-design/button/define.js';
 import './flyout-menu.js';
+import './omnibox-action-button.js';
 import {
   acrylicBackgroundBlur,
   acrylicBackgroundLuminosity,
@@ -19,16 +20,12 @@ import {
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">
-    <mai-button
-      size="small"
-      appearance="subtle"
-      shape="circular"
-      icon-only
+    <omnibox-action-button
       slot="trigger"
       @click="${(x, c) => x.handleTriggrClick(c.event)}"
     >
       <slot name="trigger-content"></slot>
-    </mai-button>
+    </omnibox-action-button>
     <slot></slot>
   </flyout-menu>
 `;

@@ -57,7 +57,7 @@ export const styles = css`
     box-shadow: ${shadowFlyout};
   }
 
-  :host(:not([dropdown-open])) [part='container']:hover {
+  :host(:not([dropdown-open])) [part='container']:has(omnibox-input:hover) {
     background-color: ${ctrlOmniboxBackgroundHover};
     border-color: ${ctrlOmniboxStrokeHover};
   }
