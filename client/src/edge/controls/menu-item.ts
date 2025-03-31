@@ -1,14 +1,16 @@
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 import {
-  borderRadiusMedium,
-  colorNeutralForeground1,
-  colorSubtleBackgroundHover,
-  fontFamilyBase,
-  fontSizeBase300,
-  lineHeightBase300,
-  spacingHorizontalL,
-  spacingHorizontalS,
-} from '@edge-design/phoenix-theme';
+  cornerCtrlRest,
+  gapBetweenCtrlDefault,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundCtrlSubtleRest,
+  backgroundCtrlSubtleHover,
+  paddingContentMedium,
+} from '@edge-design/kumo-theme/tokens.js';
 
 export type MoreMenuEntry = {
   title?: string;
@@ -39,21 +41,21 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
+    gap: ${gapBetweenCtrlDefault};
     border: none;
-    background: transparent;
+    background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
 
-    /* Body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    line-height: ${lineHeightBase300};
-    color: ${colorNeutralForeground1};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-weight: ${textStyleDefaultRegularWeight};
+    font-size: ${textGlobalBody3Fontsize};
+    line-height: ${textGlobalBody3Lineheight};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   button:hover {
-    background: ${colorSubtleBackgroundHover};
+    background: ${backgroundCtrlSubtleHover};
   }
 
   #start,
@@ -72,7 +74,7 @@ const styles = css`
   }
 
   #end {
-    margin-inline-start: ${spacingHorizontalL};
+    margin-inline-start: ${paddingContentMedium};
   }
 
   :host([start-slot]) #start,
