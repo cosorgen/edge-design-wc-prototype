@@ -111,10 +111,7 @@ const template = html<MoreMenu>`
     html<MoreMenuEntry[]>`
       <div class="menu-group">
         ${repeat(
-          (x) => {
-            console.log(x);
-            return x;
-          },
+          (x) => x,
           html<MoreMenuEntry>`
             ${when(
               (x) => x.type === 'divider',
@@ -123,7 +120,8 @@ const template = html<MoreMenu>`
             ${when(
               (x) => x.type === 'action',
               html` <menu-item
-                @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
+                @click="${(x, c) =>
+                  c.parentContext.parent.handleMenuItemClick(x.title)}"
                 end-slot
               >
                 ${(x) => x.title}
