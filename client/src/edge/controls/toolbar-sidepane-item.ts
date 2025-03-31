@@ -2,7 +2,6 @@ import {
   customElement,
   FASTElement,
   html,
-  css,
   attr,
   when,
 } from '@microsoft/fast-element';
@@ -47,17 +46,7 @@ const template = html<ToolbarSidepaneItem>`
   </flyout-menu>
 `;
 
-const styles = css`
-  flyout-menu > mai-button {
-    /* Override button corner radius */
-    --smtc-corner-control-rest: 8px;
-    --smtc-corner-control-hover: 8px;
-    --smtc-corner-control-pressed: 8px;
-    --smtc-corner-control-selected: 8px;
-  }
-`;
-
-@customElement({ name: 'toolbar-sidepane-item', template, styles })
+@customElement({ name: 'toolbar-sidepane-item', template })
 export class ToolbarSidepaneItem extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean' }) pressed = false;

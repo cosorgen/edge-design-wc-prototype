@@ -8,9 +8,9 @@ import {
   foregroundCtrlNeutralSecondaryHover,
   foregroundCtrlNeutralSecondaryRest,
   paddingCtrlSmHorizontalIcononly,
+  backgroundCtrlSubtlePressed,
+  foregroundCtrlNeutralSecondaryPressed,
 } from '@edge-design/kumo-theme/tokens.js';
-import { backgroundCtrlSubtlePressed } from '@edge-design/kumo-theme/tokens.js';
-import { foregroundCtrlNeutralSecondaryPressed } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<OmniboxActionButton>`
   <button>

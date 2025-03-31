@@ -10,15 +10,14 @@ import '@edge-design/button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerDialog,
-  colorNeutralForeground1,
-  shadow28,
-  spacingHorizontalL,
-} from '@edge-design/phoenix-theme';
 import apps from '../installedApps.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  paddingContentMedium,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ToolbarFlyoutItem>`
   <flyout-menu
@@ -57,24 +56,14 @@ const template = html<ToolbarFlyoutItem>`
 `;
 
 const styles = css`
-  flyout-menu > mai-button {
-    /* Override button corner radius */
-    --smtc-corner-control-rest: 8px;
-    --smtc-corner-control-hover: 8px;
-    --smtc-corner-control-pressed: 8px;
-    --smtc-corner-control-selected: 8px;
-  }
-
   .flyout-menu {
     width: 256px;
     height: 300px;
-    padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
+    padding: ${paddingContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;
 

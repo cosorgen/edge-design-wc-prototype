@@ -6,12 +6,12 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  colorNeutralForegroundHint,
-  fontFamilyBase,
-  fontSizeBase300,
-  fontWeightRegular,
-  lineHeightBase300,
-} from '@edge-design/phoenix-theme';
+  foregroundCtrlNeutralSecondaryRest,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<OmniboxInput>`
   <div
@@ -41,16 +41,16 @@ const styles = css`
     overflow: hidden;
     text-overflow: ellipsis;
     /* body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    line-height: ${lineHeightBase300};
-    font-weight: ${fontWeightRegular};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    line-height: ${textGlobalBody3Lineheight};
+    font-weight: ${textStyleDefaultRegularWeight};
     cursor: text;
     outline: none;
 
     &:empty::before {
       content: attr(placeholder);
-      color: ${colorNeutralForegroundHint};
+      color: ${foregroundCtrlNeutralSecondaryRest};
     }
   }
 
@@ -59,7 +59,7 @@ const styles = css`
   }
 
   .metadata {
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundCtrlNeutralSecondaryRest};
   }
 `;
 

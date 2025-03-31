@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import { borderRadiusMedium } from '@edge-design/phoenix-theme';
+import { cornerCtrlRest } from '@edge-design/kumo-theme/tokens.js';
 
 /**
  * The icon component for the Omnibox dropdown item.
@@ -57,7 +57,7 @@ const styles = css`
   }
 
   .entity {
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
     width: 32px;
     height: 32px;
   }

@@ -9,14 +9,12 @@ import '@edge-design/button/define.js';
 import './flyout-menu.js';
 import './omnibox-action-button.js';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerDialog,
-  colorNeutralForeground1,
-  colorNeutralForegroundHint,
-  shadow28,
-  spacingHorizontalL,
-} from '@edge-design/phoenix-theme';
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  paddingFlyoutDefault,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">
@@ -34,17 +32,11 @@ const styles = css`
   ::slotted(.flyout-menu) {
     width: 256px;
     height: 300px;
-    padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
-  }
-
-  flyout-menu > mai-button {
-    --smtc-foreground-control-neutral-primary-rest: ${colorNeutralForegroundHint};
+    padding: ${paddingFlyoutDefault};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;
 

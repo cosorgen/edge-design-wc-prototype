@@ -43,6 +43,7 @@ export const styles = css`
     border-radius: ${cornerCircular};
     padding: calc(${paddingContentXxsmall} + var(--stroke-diff))
       calc(${paddingContentXxsmall} + var(--stroke-diff));
+    overflow: hidden;
   }
 
   :host(:not([dropdown-open]))
@@ -55,6 +56,8 @@ export const styles = css`
     background-color: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
     box-shadow: ${shadowFlyout};
+    padding: 0px;
+    border: none;
   }
 
   :host(:not([dropdown-open])) [part='container']:has(omnibox-input:hover) {

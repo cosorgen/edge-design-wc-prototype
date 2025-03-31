@@ -1,7 +1,6 @@
 import {
   foregroundCtrlNeutralPrimaryRest,
   gapBetweenContentXxxsmall,
-  paddingContentXxsmall,
   paddingCtrlHorizontalDefault,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,

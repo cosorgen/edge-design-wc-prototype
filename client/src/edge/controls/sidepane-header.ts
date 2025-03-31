@@ -1,15 +1,17 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerBase,
-  colorNeutralStroke2,
-  spacingHorizontalS,
-  strokeWidthThin,
-  typographyStyles,
-  spacingFrame,
-} from '@edge-design/phoenix-theme';
 import '@edge-design/button/define.js';
+import {
+  backgroundToolbar,
+  cornerLayerDefault,
+  gapBetweenCtrlDefault,
+  paddingWindowDefault,
+  strokeCtrlOnoutlineRest,
+  strokeWidthDefault,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">
@@ -40,23 +42,22 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    background: ${acrylicBackgroundLuminosity};
+    gap: ${gapBetweenCtrlDefault};
+    background: ${backgroundToolbar};
     background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    padding: calc(4px + ${spacingFrame});
-    padding-inline-start: calc(8px + ${spacingFrame});
-    border-bottom: ${strokeWidthThin} solid ${colorNeutralStroke2};
-    border-radius: ${borderRadiusLayerBase} ${borderRadiusLayerBase} 0 0;
+    padding: calc(4px + ${paddingWindowDefault});
+    padding-inline-start: calc(8px + ${paddingWindowDefault});
+    border-bottom: ${strokeWidthDefault} solid ${strokeCtrlOnoutlineRest};
+    border-radius: ${cornerLayerDefault} ${cornerLayerDefault} 0 0;
   }
 
   #title {
     flex: 1;
 
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    line-height: ${typographyStyles.body1Strong.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultHeaderWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 `;
 
