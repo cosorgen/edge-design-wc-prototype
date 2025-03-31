@@ -1,10 +1,13 @@
-import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 import {
-  colorNeutralForeground1,
-  spacingHorizontalS,
-  spacingHorizontalXXS,
-  typographyStyles,
-} from '@edge-design/phoenix-theme';
+  foregroundCtrlNeutralPrimaryRest,
+  gapBetweenContentXxxsmall,
+  paddingContentXxsmall,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
+import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 
 const template = html<MoreMenuZoom>`
   <div part="label">Zoom</div>
@@ -31,14 +34,14 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXXS};
-    padding-inline-start: ${spacingHorizontalS};
+    gap: ${gapBetweenContentXxxsmall};
+    padding-inline-start: ${paddingContentXxsmall};
 
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    line-height: ${typographyStyles.body1.lineHeight};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    color: ${colorNeutralForeground1};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    line-height: ${textGlobalBody3Lineheight};
+    font-weight: ${textStyleDefaultRegularWeight};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   [part='label'] {
