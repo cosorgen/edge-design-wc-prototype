@@ -6,19 +6,20 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  borderRadiusCircular,
-  colorNeutralForeground1,
-  colorNeutralStroke1Hover,
-  colorNeutralStroke1Pressed,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  fontFamilyBase,
-  fontSizeBase200,
-  fontWeightRegular,
-  lineHeightBase200,
-  spacingHorizontalXS,
-  strokeWidthThin,
-} from '@edge-design/phoenix-theme';
+  cornerCircular,
+  gapBetweenContentXxsmall,
+  strokeWidthDefault,
+  textStyleDefaultRegularFontFamily,
+  textGlobalCaption1Fontsize,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundCtrlSubtleHover,
+  strokeCtrlOnoutlinePressed,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  textGlobalCaption1Lineheight,
+  strokeCtrlOnoutlineHover,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const imageIds = { signedIn: 'dog', inPrivate: 'inPrivate', guest: 'guest' };
 
@@ -46,36 +47,37 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
-    background: none;
+    gap: ${gapBetweenContentXxsmall};
+    background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
-    border-radius: ${borderRadiusCircular};
+    border-radius: ${cornerCircular};
     padding: 0;
-    border: ${strokeWidthThin} solid transparent;
+    border: ${strokeWidthDefault} solid transparent;
 
     /* caption1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    line-height: ${lineHeightBase200};
-    font-weight: ${fontWeightRegular};
-    color: ${colorNeutralForeground1};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1Fontsize};
+    line-height: ${textGlobalCaption1Lineheight};
+    font-weight: ${textStyleDefaultRegularWeight};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   button:hover {
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1Hover};
-    background-color: ${colorSubtleBackgroundHover};
+    border-color: ${strokeCtrlOnoutlineHover};
+    background-color: ${backgroundCtrlSubtleHover};
   }
 
-  button:hover:active {
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1Pressed};
-    background-color: ${colorSubtleBackgroundPressed};
+  button:hover:active,
+  :host([pressed='true']) button {
+    border-color: ${strokeCtrlOnoutlinePressed};
+    background-color: ${backgroundCtrlSubtlePressed};
   }
 
   slot[name='image'] img,
   slot[name='image']::slotted(*) {
     width: 24px;
     height: 24px;
-    border-radius: ${borderRadiusCircular};
+    border-radius: ${cornerCircular};
   }
 `;
 
