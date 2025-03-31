@@ -3,28 +3,10 @@ import {
   customElement,
   css,
   html,
-  observable,
   repeat,
   attr,
   when,
-  ViewTemplate,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusLayerFlyout,
-  borderRadiusMedium,
-  colorBrandBackground2,
-  colorNeutralForeground1,
-  colorNeutralForeground2,
-  colorNeutralForegroundHint,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  shadow28,
-  spacingHorizontalSNudge,
-  spacingHorizontalXS,
-  spacingVerticalS,
-  spacingVerticalXS,
-  typographyStyles,
-} from '@edge-design/phoenix-theme';
 import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';
@@ -32,158 +14,173 @@ import '@mai-ui/divider/define.js';
 import '@edge-design/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
-import { backgroundFlyoutSolid } from '@edge-design/kumo-theme/tokens.js';
+import {
+  backgroundCtrlNeutralRest,
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  backgroundFlyoutSolid,
+  cornerCtrlRest,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  foregroundCtrlNeutralSecondaryRest,
+  paddingContentXsmallnudge,
+  paddingContentXxsmall,
+  paddingFlyoutDefault,
+  shadowFlyout,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textGlobalCaption1Fontsize,
+  textGlobalCaption1Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
 
-const defaultItems: MoreMenuEntry[] = [
-  { title: 'New tab', type: 'action', shortcut: 'Ctrl+T' },
-  { title: 'New window', type: 'action', shortcut: 'Ctrl+N' },
-  { title: 'New InPrivate window', type: 'action', shortcut: 'Ctrl+Shift+N' },
-  { title: 'Print', type: 'action', shortcut: 'Ctrl+P' },
-  { title: 'Screenshot', type: 'action', shortcut: 'Ctrl+Shift+S' },
-  { title: 'Find on page', type: 'action', shortcut: 'Ctrl+F' },
-  { title: 'More tools', type: 'sub-menu' },
-  { type: 'divider' },
-  { type: 'zoom' },
-  { type: 'divider' },
-  {
-    title: 'Favorites',
-    type: 'action',
-    shortcut: 'Ctrl+Shift+O',
-    keywords: ['bookmarks'],
-  },
-  { title: 'History', type: 'action', shortcut: 'Ctrl+H' },
-  { title: 'Shopping', type: 'action' },
-  { title: 'Downloads', type: 'action' },
-  { title: 'Extensions', type: 'action' },
-  { title: 'Browser Essentials', type: 'action' },
-  { title: 'Passwords', type: 'action' },
-  { type: 'divider' },
-  {
-    title: 'Settings',
-    type: 'action',
-    keywords: [
-      'appearance',
-      'profiles',
-      'privacy',
-      'security',
-      'search',
-      'services',
-      'copilot',
-      'sidebar',
-      'start',
-      'home',
-      'tabs',
-      'downloads',
-      'cookies',
-      'permissions',
-      'share',
-      'copy',
-      'paste',
-      'safety',
-      'family',
-      'printers',
-      'system',
-      'update',
-      'reset',
-      'phone',
-      'accessibility',
-      'about',
-    ],
-  },
-  { title: 'Help and feedback', type: 'sub-menu' },
-  { type: 'divider' },
-  { title: 'Close Microsoft Edge', type: 'action' },
+const defaultItems: MoreMenuEntry[][] = [
+  [
+    { title: 'New tab', type: 'action', shortcut: 'Ctrl+T' },
+    { title: 'New window', type: 'action', shortcut: 'Ctrl+N' },
+    { title: 'New InPrivate window', type: 'action', shortcut: 'Ctrl+Shift+N' },
+  ],
+  [{ type: 'zoom' }],
+  [
+    {
+      title: 'Favorites',
+      type: 'action',
+      shortcut: 'Ctrl+Shift+O',
+      keywords: ['bookmarks'],
+    },
+    { title: 'History', type: 'action', shortcut: 'Ctrl+H' },
+    { title: 'Downloads', type: 'action' },
+    { title: 'Extensions', type: 'action' },
+    { title: 'Passwords', type: 'action' },
+  ],
+  [
+    {
+      title: 'Delete browsing data',
+      type: 'action',
+      shortcut: 'Ctrl+Shift+Delete',
+    },
+    { title: 'Print', type: 'action', shortcut: 'Ctrl+P' },
+    { title: 'Screenshot', type: 'action', shortcut: 'Ctrl+Shift+S' },
+    { title: 'Find on page', type: 'action', shortcut: 'Ctrl+F' },
+    { title: 'More tools', type: 'sub-menu' },
+  ],
+  [
+    {
+      title: 'Settings',
+      type: 'action',
+      keywords: [
+        'appearance',
+        'profiles',
+        'privacy',
+        'security',
+        'search',
+        'services',
+        'copilot',
+        'sidebar',
+        'start',
+        'home',
+        'tabs',
+        'downloads',
+        'cookies',
+        'permissions',
+        'share',
+        'copy',
+        'paste',
+        'safety',
+        'family',
+        'printers',
+        'system',
+        'update',
+        'reset',
+        'phone',
+        'accessibility',
+        'about',
+      ],
+    },
+    { title: 'Help and feedback', type: 'sub-menu' },
+  ],
+  [{ title: 'Close Microsoft Edge', type: 'action' }, { type: 'managed' }],
 ];
 
 const template = html<MoreMenu>`
-  <mai-text-input
-    appearance="filled-darker"
-    placeholder="Search"
-    @keyup="${(x, c) => x.handleInputKeyUp(c.event as KeyboardEvent)}"
-  >
-    <svg slot="start">
-      <use href="img/edge/icons.svg#search-20-regular" />
-    </svg>
-    ${when(
-      (x) => x.searchValue !== '',
-      html` <button slot="end" @click="${(x) => x.clearSearch()}">
-        <svg>
-          <use href="img/edge/icons.svg#dismiss-16-regular" />
-        </svg>
-      </button>`,
-    )}
-  </mai-text-input>
-  <div id="menu-items">
-    ${repeat(
-      (x) => x.items,
-      html<MoreMenuEntry>` ${when(
-        (x) => x.type === 'divider',
-        html`<mai-divider></mai-divider>`,
-      )}
-      ${when(
-        (x) => x.type === 'action',
-        html` <menu-item
-          @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
-          end-slot
-        >
-          ${(x, c) => c.parent.formatTitle(x.title)}
-          <span class="hint" slot="end">${(x) => x.shortcut}</span>
-        </menu-item>`,
-      )}
-      ${when(
-        (x) => x.type === 'sub-menu',
-        html` <menu-item end-slot>
-          ${(x, c) => c.parent.formatTitle(x.title)}
-          <svg slot="end">
-            <use href="img/edge/icons.svg#chevron-right-20-regular" />
-          </svg>
-        </menu-item>`,
-      )}
-      ${when(
-        (x) => x.type === 'zoom',
-        html` <more-menu-zoom></more-menu-zoom>`,
-      )}
-      ${when(
-        (x) => x.type === 'label',
-        html` <div class="label">${(x) => x.title}</div>`,
-      )}`,
-    )}
-    ${when(
-      (x) => x.additionalSettings(),
-      html`<mai-divider></mai-divider>
-        <div class="label" id="additional">
-          Also ${(x) => x.additionalSettings()} results found in
-          <phx-link inline>Settings</phx-link>
-        </div> `,
-    )}
-    ${when(
-      (x) => x.searchValue === '',
-      html`<div class="label" id="managed">Managed by your organization</div>`,
-    )}
-  </div>
+  ${repeat(
+    () => defaultItems,
+    html<MoreMenuEntry[]>`
+      <div class="menu-group">
+        ${repeat(
+          (x) => {
+            console.log(x);
+            return x;
+          },
+          html<MoreMenuEntry>`
+            ${when(
+              (x) => x.type === 'divider',
+              html`<mai-divider appearance="subtle"></mai-divider>`,
+            )}
+            ${when(
+              (x) => x.type === 'action',
+              html` <menu-item
+                @click="${(x, c) => c.parent.handleMenuItemClick(x.title)}"
+                end-slot
+              >
+                ${(x) => x.title}
+                <span class="hint" slot="end">${(x) => x.shortcut}</span>
+              </menu-item>`,
+            )}
+            ${when(
+              (x) => x.type === 'sub-menu',
+              html` <menu-item end-slot>
+                ${(x) => x.title}
+                <svg slot="end">
+                  <use href="img/edge/icons.svg#chevron-right-20-regular" />
+                </svg>
+              </menu-item>`,
+            )}
+            ${when(
+              (x) => x.type === 'zoom',
+              html` <more-menu-zoom></more-menu-zoom>`,
+            )}
+            ${when(
+              (x) => x.type === 'label',
+              html` <div class="label">${(x) => x.title}</div>`,
+            )}
+            ${when(
+              (x) => x.type === 'managed',
+              html` <div class="label" id="managed">
+                Managed by your organization
+              </div>`,
+            )}
+          `,
+        )}
+      </div>
+      <mai-divider appearance="subtle"></mai-divider>
+    `,
+  )}
 `;
 
 const styles = css`
   :host {
-    min-width: 200px;
+    min-width: 320px;
     max-width: 512px;
     display: flex;
     flex-direction: column;
-    gap: ${spacingVerticalS};
-    padding: ${spacingVerticalS};
     background: ${backgroundFlyoutSolid};
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
     overflow: hidden;
   }
 
-  #menu-items {
+  .menu-group {
     display: flex;
     flex-direction: column;
+    padding: ${paddingFlyoutDefault};
   }
 
   .hint {
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundCtrlNeutralSecondaryRest};
   }
 
   svg {
@@ -192,27 +189,27 @@ const styles = css`
   }
 
   svg[slot='end'] {
-    margin-inline-end: calc(0px - ${spacingHorizontalXS});
+    margin-inline-end: calc(0px - ${paddingContentXxsmall});
   }
 
   mai-divider {
-    margin-block: ${spacingVerticalXS};
+    margin-block: 0;
   }
 
   .label {
-    padding: ${spacingHorizontalSNudge};
-    border-radius: ${borderRadiusMedium};
+    padding: ${paddingContentXsmallnudge};
+    border-radius: ${cornerCtrlRest};
 
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
-    color: ${colorNeutralForeground1};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalBody3Lineheight};
+    color: ${foregroundCtrlNeutralPrimaryRest};
     user-select: none;
   }
 
   #managed {
-    background-color: ${colorBrandBackground2};
+    background-color: ${backgroundCtrlNeutralRest};
     user-select: none;
 
     display: none;
@@ -223,130 +220,49 @@ const styles = css`
   }
 
   #additional {
-    font-family: ${typographyStyles.caption1.fontFamily};
-    font-size: ${typographyStyles.caption1.fontSize};
-    font-weight: ${typographyStyles.caption1.fontWeight};
-    line-height: ${typographyStyles.caption1.lineHeight};
-    color: ${colorNeutralForeground2};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalCaption1Lineheight};
+    color: ${foregroundCtrlNeutralSecondaryRest};
   }
 
   button {
     border: none;
-    background: transparent;
+    background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
     padding: 0;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
   }
 
   button:hover {
-    background: ${colorSubtleBackgroundHover};
+    background: ${backgroundCtrlSubtleHover};
   }
 
   button:active {
-    background: ${colorSubtleBackgroundPressed};
+    background: ${backgroundCtrlSubtlePressed};
   }
 
   .bold {
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    line-height: ${typographyStyles.body1Strong.lineHeight};
-    font-size: ${typographyStyles.body1Strong.fontSize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultHeaderWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 
   .regular {
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
-    font-size: ${typographyStyles.body1.fontSize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 `;
 
 @customElement({ name: 'more-menu', template, styles })
 export default class MoreMenu extends FASTElement {
   @attr({ mode: 'boolean' }) managed = false;
-  @observable items: MoreMenuEntry[] = [...defaultItems];
-  @observable searchValue = '';
-  _inputElement: HTMLInputElement | null = null;
-
-  connectedCallback() {
-    super.connectedCallback();
-    this.setElements();
-  }
-
-  disconnectedCallback(): void {
-    super.disconnectedCallback();
-    this.unsetElements();
-  }
-
-  setElements() {
-    this._inputElement = this.shadowRoot?.querySelector(
-      'mai-text-input',
-    ) as HTMLInputElement;
-  }
-
-  unsetElements() {
-    this._inputElement = null;
-  }
 
   handleMenuItemClick(title: string) {
     this.$emit('moreaction', title);
-  }
-
-  handleInputKeyUp(e: KeyboardEvent) {
-    if (!this._inputElement) return;
-
-    this.searchValue = this._inputElement.value || '';
-    this._inputElement.value = this._inputElement.value || '';
-
-    if (e.key === 'Escape') {
-      this.clearSearch();
-      this.$emit('closemenu');
-    }
-
-    this.filterItems();
-  }
-
-  clearSearch() {
-    this.searchValue = '';
-    this._inputElement!.value = '';
-    this.items = [...defaultItems];
-  }
-
-  filterItems() {
-    this.items = defaultItems.filter(
-      (item) =>
-        (item.title &&
-          item.title.toLowerCase().includes(this.searchValue.toLowerCase())) ||
-        (item.keywords &&
-          item.title !== 'Settings' &&
-          item.keywords.some((k) =>
-            k.includes(this.searchValue.toLowerCase()),
-          )),
-    );
-
-    if (this.searchValue === '') this.items = [...defaultItems];
-    if (this.items.length === 0)
-      this.items = [{ title: 'No results', type: 'label' }];
-  }
-
-  additionalSettings() {
-    if (this.searchValue === '') return 0;
-    return defaultItems
-      .find((i) => i.title === 'Settings')
-      ?.keywords?.filter((k) => k.includes(this.searchValue.toLowerCase()))
-      .length;
-  }
-
-  formatTitle(title?: string) {
-    if (this.searchValue === '' || !title) return html`${title || ''}`;
-
-    const formattedTitle = title.replaceAll(
-      new RegExp(this.searchValue, 'gi'),
-      (match) => `<span class="regular">${match}</span>`,
-    );
-
-    return html`<span class="bold">
-      ${new ViewTemplate(formattedTitle)}
-    </span>`;
   }
 }

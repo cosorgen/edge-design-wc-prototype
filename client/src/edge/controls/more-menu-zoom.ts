@@ -2,6 +2,7 @@ import {
   foregroundCtrlNeutralPrimaryRest,
   gapBetweenContentXxxsmall,
   paddingContentXxsmall,
+  paddingCtrlHorizontalDefault,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
   textStyleDefaultRegularFontFamily,
@@ -35,7 +36,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${gapBetweenContentXxxsmall};
-    padding-inline-start: ${paddingContentXxsmall};
+    padding-inline-start: ${paddingCtrlHorizontalDefault};
 
     font-family: ${textStyleDefaultRegularFontFamily};
     font-size: ${textGlobalBody3Fontsize};

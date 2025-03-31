@@ -10,11 +10,12 @@ import {
   backgroundCtrlSubtleRest,
   backgroundCtrlSubtleHover,
   paddingContentMedium,
+  paddingCtrlHorizontalDefault,
 } from '@edge-design/kumo-theme/tokens.js';
 
 export type MoreMenuEntry = {
   title?: string;
-  type: 'action' | 'sub-menu' | 'divider' | 'zoom' | 'label';
+  type: 'action' | 'sub-menu' | 'divider' | 'zoom' | 'label' | 'managed';
   shortcut?: string;
   keywords?: string[];
 };
@@ -42,6 +43,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${gapBetweenCtrlDefault};
+    padding-inline: ${paddingCtrlHorizontalDefault};
     border: none;
     background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
