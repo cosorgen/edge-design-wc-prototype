@@ -188,9 +188,11 @@ export const darkLiteFilterColors: CtrlLitefilterColors = {
 };
 
 export const darkOmniboxColors: CtrlOmniboxColors = {
-  ctrlOmniboxBackgroundHover: neutral[804],
-  ctrlOmniboxBackgroundRest: neutral[800],
+  ctrlOmniboxBackgroundHover: neutral[704],
+  ctrlOmniboxBackgroundRest: neutral[650],
   ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
+  ctrlOmniboxStrokeRest: '{strokeCtrlOnoutlineRest}',
+  ctrlOmniboxStrokeHover: '{strokeCtrlOnoutlineHover}',
 };
 
 export const darkProgressColors: CtrlProgressColors = {

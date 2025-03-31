@@ -13,6 +13,8 @@ import {
   strokeWidthDefault,
   cornerCircular,
   paddingContentXxsmall,
+  ctrlOmniboxStrokeRest,
+  ctrlOmniboxStrokeHover,
 } from '@edge-design/kumo-theme/tokens.js';
 
 export const styles = css`
@@ -37,7 +39,7 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     background-color: ${ctrlOmniboxBackgroundRest};
-    border: ${strokeWidthDefault} solid transparent;
+    border: ${strokeWidthDefault} solid ${ctrlOmniboxStrokeRest};
     border-radius: ${cornerCircular};
     padding: calc(${paddingContentXxsmall} + var(--stroke-diff))
       calc(${paddingContentXxsmall} + var(--stroke-diff));
@@ -57,6 +59,11 @@ export const styles = css`
 
   :host(:not([dropdown-open])) [part='container']:hover {
     background-color: ${ctrlOmniboxBackgroundHover};
+    border-color: ${ctrlOmniboxStrokeHover};
+  }
+
+  :host([dropdown-open]) [part='container'] {
+    border-color: transparent;
   }
 
   #top-row {
