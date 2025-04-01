@@ -19,21 +19,25 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 import '../controls/favorites-item.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  shadow28,
-  borderRadiusMedium,
-  spacingHorizontalS,
-  typographyStyles,
-  spacingHorizontalMNudge,
-} from '@edge-design/phoenix-theme';
 import '@phoenixui/web-components/accordion.js';
 import '@phoenixui/web-components/accordion-item.js';
 import '@mai-ui/text-input/define.js';
-import { spacingHorizontalXXS } from '@edge-design/phoenix-theme';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundContentNeutralPrimary,
+  paddingContentXsmall,
+  shadowFlyout,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+} from '@edge-design/kumo-theme/tokens.js';
+import { cornerCtrlRest } from '@edge-design/kumo-theme/tokens.js';
+import { textStyleDefaultRegularWeight } from '@edge-design/kumo-theme/tokens.js';
+import { gapBetweenContentMedium } from '@edge-design/kumo-theme/tokens.js';
+import { gapBetweenContentXxsmall } from '@edge-design/kumo-theme/tokens.js';
+import { paddingContentMedium } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<FavoritesMenu>`
   <div id="header">
@@ -142,31 +146,36 @@ const styles = css`
     flex-direction: column;
     min-width: 256px;
     max-width: 358px;
-    background: ${acrylicBackgroundLuminosity};
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
+    padding: ${paddingContentMedium};
+    gap: ${gapBetweenContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   #header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: ${spacingHorizontalS};
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultHeaderWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 
   #icons {
-    gap: ${spacingHorizontalXXS};
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${gapBetweenContentXxsmall};
   }
 
   #content {
     display: flex;
     flex-direction: column;
-    padding: 0 ${spacingHorizontalS} ${spacingHorizontalS};
+    padding: 0 ${paddingContentXsmall} ${paddingContentXsmall};
   }
 
   button {
@@ -174,7 +183,7 @@ const styles = css`
     background: transparent;
     cursor: pointer;
     padding: 0;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
   }
 
   favorites-item,
@@ -193,12 +202,12 @@ const styles = css`
 
   favorites-item::part(favorite-button) {
     height: 32px !important;
-    gap: ${spacingHorizontalMNudge};
+    gap: ${gapBetweenContentMedium};
     padding-left: 42px;
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 
   mai-text-input {
@@ -217,7 +226,7 @@ const styles = css`
   }
 
   .folder-heading svg {
-    margin-right: ${spacingHorizontalS};
+    margin-right: ${paddingContentXsmall};
   }
 
   .vertical-container {
