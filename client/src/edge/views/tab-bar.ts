@@ -106,7 +106,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${paddingWindowDefault};
+    gap: calc(${paddingWindowDefault} * 2);
   }
 
   #shadow {

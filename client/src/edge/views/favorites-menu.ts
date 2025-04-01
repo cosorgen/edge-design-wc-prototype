@@ -19,8 +19,8 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 import '../controls/favorites-item.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import '@phoenixui/web-components/accordion.js';
-import '@phoenixui/web-components/accordion-item.js';
+import '@mai-ui/tree/define.js';
+import '@mai-ui/tree-item/define.js';
 import '@mai-ui/text-input/define.js';
 import {
   backgroundFlyoutSolid,
@@ -32,57 +32,61 @@ import {
   textGlobalBody3Lineheight,
   textStyleDefaultHeaderWeight,
   textStyleDefaultRegularFontFamily,
+  cornerCtrlRest,
+  textStyleDefaultRegularWeight,
+  gapBetweenContentMedium,
+  gapBetweenContentXxsmall,
+  paddingContentMedium,
+  gapBetweenContentSmall,
 } from '@edge-design/kumo-theme/tokens.js';
-import { cornerCtrlRest } from '@edge-design/kumo-theme/tokens.js';
-import { textStyleDefaultRegularWeight } from '@edge-design/kumo-theme/tokens.js';
-import { gapBetweenContentMedium } from '@edge-design/kumo-theme/tokens.js';
-import { gapBetweenContentXxsmall } from '@edge-design/kumo-theme/tokens.js';
-import { paddingContentMedium } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<FavoritesMenu>`
   <div id="header">
-    <span>Favorites</span>
-    <div id="icons">
-      <mai-button
-        size="small"
-        appearance="subtle"
-        icon-only
-        @click="${(x) => x.handleAddFavorite()}"
-      >
-        <svg><use href="./img/edge/icons.svg#open-20-regular" /></svg>
-      </mai-button>
-      <flyout-menu>
-        <mai-button size="small" appearance="subtle" icon-only slot="trigger">
-          <svg>
-            <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
-          </svg>
+    <div id="header-title">
+      <span>Favorites</span>
+      <div id="icons">
+        <flyout-menu>
+          <mai-button size="small" appearance="subtle" icon-only slot="trigger">
+            <svg>
+              <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
+            </svg>
+          </mai-button>
+          <context-menu>
+            <menu-item @click="${(x) => x.handleAddFavorite()}">
+              Add this page to favorites
+            </menu-item>
+            <menu-item> Add new folder </menu-item>
+            ${when(
+              (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
+              html` <menu-item
+                @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
+              >
+                Hide favorites button in toolbar
+              </menu-item>`,
+              html` <menu-item
+                @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
+              >
+                Show favorites button in toolbar
+              </menu-item>`,
+            )}
+          </context-menu>
+        </flyout-menu>
+        <mai-button
+          size="small"
+          appearance="subtle"
+          icon-only
+          @click="${(x) => x.handleAddFavorite()}"
+        >
+          <svg><use href="./img/edge/icons.svg#pin-20-regular" /></svg>
         </mai-button>
-        <context-menu>
-          <menu-item @click="${(x) => x.handleAddFavorite()}">
-            Add this page to favorites
-          </menu-item>
-          <menu-item> Add new folder </menu-item>
-          ${when(
-            (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
-            html` <menu-item
-              @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
-            >
-              Hide favorites button in toolbar
-            </menu-item>`,
-            html` <menu-item
-              @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
-            >
-              Show favorites button in toolbar
-            </menu-item>`,
-          )}
-        </context-menu>
-      </flyout-menu>
+        <mai-button size="small" appearance="subtle" icon-only>
+          <svg><use href="./img/edge/icons.svg#dismiss-16-regular" /></svg>
+        </mai-button>
+      </div>
     </div>
-  </div>
-  <div id="content">
     <mai-text-input
       appearance="filled-darker"
-      placeholder="Search"
+      placeholder="Search your favorites"
       @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
       value="${(x) => x.searchValue}"
     >
@@ -96,48 +100,61 @@ const template = html<FavoritesMenu>`
         </button>`,
       )}
     </mai-text-input>
-    <phx-accordion>
-      <phx-accordion-item expanded>
-        <span slot="heading" class="folder-heading">
-          <svg><use href="./img/edge/icons.svg#star-20-regular" /></svg>
-          Favorites bar
-        </span>
-        <div class="vertical-container">
-          ${repeat(
-            (x) => x.filteredFavorites,
-            html`${when(
-              (x) => x.type === 'folder',
-              html`<phx-accordion-item>
-                <span slot="heading" class="folder-heading">
-                  <svg>
-                    <use href="./img/edge/icons.svg#folder-20-regular" />
-                  </svg>
-                  ${(x) => x.title}
-                </span>
-                <div class="vertical-container">
-                  ${repeat(
-                    [1, 2, 3],
-                    html`<favorites-item
-                      type="site"
-                      title="${(item) => `Favorite ${item}`}"
-                      favicon="https://www.microsoft.com/favicon.ico?v2"
-                      @click="${(item, c) => c.parent.handleItemClick(item)}"
-                    ></favorites-item>`,
-                  )}
-                </div>
-              </phx-accordion-item>`,
-              html`<favorites-item
-                type="${(x) => x.type}"
-                title="${(x) => x.title}"
-                favicon="${(x) => x.favicon}"
-                @click="${(x, c) => c.parent.handleItemClick(x)}"
-              ></favorites-item>`,
-            )}`,
-          )}
-        </div>
-      </phx-accordion-item>
-    </phx-accordion>
   </div>
+  <mai-tree>
+    <mai-tree-item expanded>
+      <svg slot="start">
+        <use href="./img/edge/icons.svg#star-20-regular" />
+      </svg>
+      Favorites bar
+      ${repeat(
+        (x) => x.filteredFavorites,
+        html`${when(
+          (x) => x.type === 'folder',
+          html`<mai-tree-item>
+            <svg slot="start">
+              <use href="./img/edge/icons.svg#folder-20-regular" />
+            </svg>
+            ${(x) => x.title}
+            ${repeat(
+              [1, 2, 3],
+              html` <mai-tree-item
+                @click="${(item, c) => c.parent.handleItemClick(item)}"
+              >
+                <svg slot="start">
+                  <use href="./img/edge/icons.svg#document-20-regular" />
+                </svg>
+                ${(item) => `Favorite ${item}`}
+              </mai-tree-item>`,
+            )}
+          </mai-tree-item>`,
+          html`<mai-tree-item
+            @click="${(item, c) => c.parent.handleItemClick(item)}"
+          >
+            <img src="${(x) => x.favicon}" slot="start" />
+            ${(x) => x.title}
+          </mai-tree-item>`,
+        )}`,
+      )}
+    </mai-tree-item>
+    <mai-tree-item>
+      <svg slot="start">
+        <use href="./img/edge/icons.svg#folder-20-regular" />
+      </svg>
+      Other favorites
+      ${repeat(
+        [1, 2, 3],
+        html` <mai-tree-item
+          @click="${(item, c) => c.parent.handleItemClick(item)}"
+        >
+          <svg slot="start">
+            <use href="./img/edge/icons.svg#document-20-regular" />
+          </svg>
+          ${(item) => `Favorite ${item}`}
+        </mai-tree-item>`,
+      )}
+    </mai-tree-item>
+  </mai-tree>
 `;
 
 const styles = css`
@@ -156,9 +173,15 @@ const styles = css`
 
   #header {
     display: flex;
+    flex-direction: column;
+    gap: ${gapBetweenContentSmall};
+  }
+
+  #header-title {
+    display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     font-family: ${textStyleDefaultRegularFontFamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultHeaderWeight};
@@ -170,12 +193,6 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${gapBetweenContentXxsmall};
-  }
-
-  #content {
-    display: flex;
-    flex-direction: column;
-    padding: 0 ${paddingContentXsmall} ${paddingContentXsmall};
   }
 
   button {

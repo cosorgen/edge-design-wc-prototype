@@ -18,7 +18,6 @@ import '../controls/menu-item.js';
 import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
 import {
-  gapBetweenCtrlDefault,
   paddingContentXsmall,
   paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
@@ -45,9 +44,24 @@ const template = html`
           >
           </favorites-item>
           <context-menu>
-            <menu-item type="action">Item 1</menu-item>
-            <menu-item type="action">Item 2</menu-item>
-            <menu-item type="action">Item 3</menu-item>
+            <menu-item type="action" start-slot>
+              <svg slot="start">
+                <use href="./img/edge/icons.svg#document-20-regular" />
+              </svg>
+              Item 1
+            </menu-item>
+            <menu-item type="action" start-slot>
+              <svg slot="start">
+                <use href="./img/edge/icons.svg#document-20-regular" />
+              </svg>
+              Item 2
+            </menu-item>
+            <menu-item type="action" start-slot>
+              <svg slot="start">
+                <use href="./img/edge/icons.svg#document-20-regular" />
+              </svg>
+              Item 3
+            </menu-item>
           </context-menu>
         </flyout-menu>`,
       )}`,
@@ -59,9 +73,24 @@ const template = html`
       <favorites-item type="folder" title="Other favorites" slot="trigger">
       </favorites-item>
       <context-menu>
-        <menu-item type="action">Item 1</menu-item>
-        <menu-item type="action">Item 2</menu-item>
-        <menu-item type="action">Item 3</menu-item>
+        <menu-item type="action" start-slot>
+          <svg slot="start">
+            <use href="./img/edge/icons.svg#document-20-regular" />
+          </svg>
+          Item 1
+        </menu-item>
+        <menu-item type="action" start-slot>
+          <svg slot="start">
+            <use href="./img/edge/icons.svg#document-20-regular" />
+          </svg>
+          Item 2
+        </menu-item>
+        <menu-item type="action" start-slot>
+          <svg slot="start">
+            <use href="./img/edge/icons.svg#document-20-regular" />
+          </svg>
+          Item 3
+        </menu-item>
       </context-menu>
     </flyout-menu>
   </div>
@@ -72,7 +101,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: space-between;
-    gap: ${gapBetweenCtrlDefault};
+    gap: calc(${paddingWindowDefault} * 2);
     padding: ${paddingWindowDefault};
     padding-block-end: 0px;
   }
@@ -82,7 +111,7 @@ const styles = css`
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    gap: ${gapBetweenCtrlDefault};
+    gap: calc(${paddingWindowDefault} * 2);
   }
 
   #system {

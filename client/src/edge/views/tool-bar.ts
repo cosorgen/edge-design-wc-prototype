@@ -8,10 +8,6 @@ import {
   volatile,
   when,
 } from '@microsoft/fast-element';
-import {
-  spacingHorizontalS,
-  spacingHorizontalXS,
-} from '@edge-design/phoenix-theme';
 import '@edge-design/button/define.js';
 import '@edge-design/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
@@ -172,7 +168,7 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: row;
-    gap: ${spacingHorizontalS};
+    gap: calc(${paddingWindowDefault} * 2);
     padding: ${paddingWindowDefault};
     user-select: none;
   }
@@ -182,7 +178,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${paddingWindowDefault};
   }
 
   flyout-menu > mai-button,
