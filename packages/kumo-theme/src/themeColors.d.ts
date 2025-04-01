@@ -316,7 +316,7 @@ export type ThemeNullColors = {
   nullColorStroke: string;
 };
 
-export type AiColors = {
+export type ThemeAiColors = {
   aiShimmerStop1: string;
   aiShimmerStop2: string;
   aiShimmerStop3: string;

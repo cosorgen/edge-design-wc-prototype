@@ -10,6 +10,7 @@ import {
 } from './globalColors.js';
 
 import type {
+  ThemeAiColors,
   ThemeBackgroundColors,
   ThemeForegroundColors,
   ThemeMaterialColors,
@@ -342,4 +343,15 @@ export const darkStatusColors: ThemeStatusColors = {
   statusImportantTintStroke: alphaBlack[0],
   statusAwayForeground: '#e47700', // Kumo vibrant.orange.400
   statusOofForeground: '#be74e1', // Kumo vibrant.purple.400
+};
+
+export const darkAiColors: ThemeAiColors = {
+  aiShimmerStop1: '{nullColor}',
+  aiShimmerStop2: '{nullColor}',
+  aiShimmerStop3: '{nullColor}',
+  aiShimmerStop4: '{nullColor}',
+  aiBrandStop1: '{nullColor}',
+  aiBrandStop2: '{nullColor}',
+  aiBrandStop3: '{nullColor}',
+  aiBrandStop4: '{nullColor}',
 };

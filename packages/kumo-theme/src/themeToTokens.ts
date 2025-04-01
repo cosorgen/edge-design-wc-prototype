@@ -36,4 +36,4 @@ export function themeToTokens(theme: Theme, prefix: string = 'smtc-'): Tokens {
   return tokens;
 }
 
-export const tokens = themeToTokens(lightTheme);
+export const tokens = themeToTokens(lightTheme());

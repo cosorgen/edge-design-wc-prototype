@@ -6,6 +6,7 @@ import {
   lightShadowColors,
   lightStatusColors,
   lightStrokeColors,
+  lightAiColors,
 } from './lightThemeColors.js';
 import {
   lightAvatarColors,
@@ -13,10 +14,10 @@ import {
   lightComposerColors,
   lightDialogColors,
   lightDragColors,
-  lightIdentityFlyoutColors,
-  lightInputColors,
   lightFabColors,
   lightFocusColors,
+  lightIdentityFlyoutColors,
+  lightInputColors,
   lightLinkColors,
   lightListColors,
   lightLiteFilterColors,
@@ -36,6 +37,7 @@ import {
   darkShadowColors,
   darkStatusColors,
   darkStrokeColors,
+  darkAiColors,
 } from './darkThemeColors.js';
 import {
   darkAvatarColors,
@@ -58,7 +60,7 @@ import {
   darkTabColors,
   darkTooltipColors,
 } from './darkCtrlColors.js';
-import { corner } from './corner.js';
+import { Corner, corner } from './corner.js';
 import {
   ctrlAvatarLayout,
   ctrlChoiceLayout,
@@ -80,9 +82,29 @@ import {
   ctrlSpinnerLayout,
   ctrlSplitLayout,
   ctrlTooltipLayout,
+  CtrlBadgeLayout,
+  CtrlBooleanLayout,
+  CtrlChoiceLayout,
+  CtrlComposerLayout,
+  CtrlDialogLayout,
+  CtrlDividerLayout,
+  CtrlFabLayout,
+  CtrlFocusLayout,
+  CtrlInputLayout,
+  CtrlListLayout,
+  CtrlAvatarLayout,
+  CtrlLinkLayout,
+  CtrlLitefilterLayout,
+  CtrlProgressLayout,
+  CtrlRatingLayout,
+  CtrlSegmentedLayout,
+  CtrlSliderLayout,
+  CtrlSpinnerLayout,
+  CtrlSplitLayout,
+  CtrlTooltipLayout,
 } from './ctrlLayout.js';
-import { iconTheme } from './iconTheme.js';
-import { material } from './material.js';
+import { IconTheme, iconTheme } from './iconTheme.js';
+import { Material, material } from './material.js';
 import {
   paddingCard,
   paddingCtrl,
@@ -92,27 +114,164 @@ import {
   paddingFlyout,
   paddingToolbar,
   paddingWindow,
+  PaddingCtrl,
+  PaddingCtrlLg,
+  PaddingCtrlSm,
+  PaddingFlyout,
+  PaddingCard,
+  PaddingWindow,
+  PaddingToolbar,
+  PaddingContent,
 } from './padding.js';
-import { gapBetween, gapInside } from './gap.js';
-import { shadow, shadowParts } from './shadow.js';
-import { sizeCtrl, sizeCtrlLg, sizeCtrlSm } from './size.js';
-import { strokeWidth } from './strokeWidth.js';
+import { GapBetween, gapBetween, GapInside, gapInside } from './gap.js';
+import { Shadow, shadow, ShadowParts, shadowParts } from './shadow.js';
 import {
+  SizeCtrl,
+  sizeCtrl,
+  SizeCtrlLg,
+  sizeCtrlLg,
+  SizeCtrlSm,
+  sizeCtrlSm,
+} from './size.js';
+import { Strokewidth, strokeWidth } from './strokeWidth.js';
+import {
+  TextCtrl,
   textCtrl,
+  TextGlobal,
   textGlobal,
+  TextRamp,
   textRamp,
+  TextRampLg,
   textRampLg,
+  TextRampSm,
   textRampSm,
+  TextStyle,
   textStyle,
 } from './text.js';
-import { nullValues } from './nullValues.js';
+import { NullValues, nullValues } from './nullValues.js';
 import {
   legacyCommonTokens,
   legacyDarkTokens,
   legacyLightTokens,
 } from './legacyTokens.js';
-
 import { resolveNestedVariables } from './resolveNestedVariables.js';
+import {
+  ThemeAiColors,
+  ThemeBackgroundColors,
+  ThemeForegroundColors,
+  ThemeMaterialColors,
+  ThemeNullColors,
+  ThemeShadowColors,
+  ThemeStatusColors,
+  ThemeStrokeColors,
+} from './themeColors.js';
+import {
+  CtrlAvatarColors,
+  CtrlChoiceColors,
+  CtrlComposerColors,
+  CtrlDialogColors,
+  CtrlDragColors,
+  CtrlFabColors,
+  CtrlFocusColors,
+  CtrlIdentityFlyoutColors,
+  CtrlInputColors,
+  CtrlLinkColors,
+  CtrlListColors,
+  CtrlLitefilterColors,
+  CtrlOmniboxColors,
+  CtrlProgressColors,
+  CtrlRatingColors,
+  CtrlSegmentedColors,
+  CtrlSliderColors,
+  CtrlTabColors,
+  CtrlTooltipColors,
+} from './ctrlColors.js';
+import {
+  neutral as defaultNeutral,
+  alphaWhite as defaultAlphaWhite,
+  shadow as defaultShadow,
+  vibrant as defaultVibrant,
+} from './globalColors.js';
+import {
+  GenerateNeutralPalette,
+  GenerateVibrantPalette,
+} from './paletteGen.js';
+
+export type ThemeLayout = Corner &
+  CtrlAvatarLayout &
+  CtrlBadgeLayout &
+  CtrlBooleanLayout &
+  CtrlChoiceLayout &
+  CtrlComposerLayout &
+  CtrlDialogLayout &
+  CtrlDividerLayout &
+  CtrlFabLayout &
+  CtrlFocusLayout &
+  CtrlInputLayout &
+  CtrlLinkLayout &
+  CtrlListLayout &
+  CtrlLitefilterLayout &
+  CtrlProgressLayout &
+  CtrlRatingLayout &
+  CtrlSegmentedLayout &
+  CtrlSliderLayout &
+  CtrlSpinnerLayout &
+  CtrlSplitLayout &
+  CtrlTooltipLayout &
+  GapBetween &
+  GapInside &
+  IconTheme &
+  Material &
+  NullValues &
+  PaddingCard &
+  PaddingContent &
+  PaddingCtrl &
+  PaddingCtrlLg &
+  PaddingCtrlSm &
+  PaddingFlyout &
+  PaddingToolbar &
+  PaddingWindow &
+  Shadow &
+  ShadowParts &
+  SizeCtrl &
+  SizeCtrlLg &
+  SizeCtrlSm &
+  Strokewidth &
+  TextCtrl &
+  TextGlobal &
+  TextRamp &
+  TextRampLg &
+  TextRampSm &
+  TextStyle;
+
+export type Theme = ThemeLayout &
+  CtrlAvatarColors &
+  CtrlChoiceColors &
+  CtrlComposerColors &
+  CtrlDialogColors &
+  CtrlDragColors &
+  CtrlFabColors &
+  CtrlFocusColors &
+  CtrlIdentityFlyoutColors &
+  CtrlInputColors &
+  CtrlLinkColors &
+  CtrlListColors &
+  CtrlLitefilterColors &
+  CtrlOmniboxColors &
+  CtrlProgressColors &
+  CtrlRatingColors &
+  CtrlSegmentedColors &
+  CtrlSliderColors &
+  CtrlTabColors &
+  CtrlTooltipColors &
+  ThemeAiColors &
+  ThemeBackgroundColors &
+  ThemeForegroundColors &
+  ThemeMaterialColors &
+  ThemeNullColors &
+  ThemeShadowColors &
+  ThemeStatusColors &
+  ThemeStrokeColors;
 
 const utilityLayoutTemplate = {
   ...corner,
@@ -162,68 +321,81 @@ const utilityLayoutTemplate = {
   ...textRampLg,
   ...textRampSm,
   ...textStyle,
-};
+} as ThemeLayout;
 
-export const lightTheme = resolveNestedVariables({
-  ...legacyLightTokens,
-  ...lightAvatarColors,
-  ...lightBackgroundColors,
-  ...lightChoiceColors,
-  ...lightComposerColors,
-  ...lightDialogColors,
-  ...lightDragColors,
-  ...lightFabColors,
-  ...lightFocusColors,
-  ...lightForegroundColors,
-  ...lightIdentityFlyoutColors,
-  ...lightInputColors,
-  ...lightLinkColors,
-  ...lightListColors,
-  ...lightLiteFilterColors,
-  ...lightMaterialColors,
-  ...lightNullColors,
-  ...lightOmniboxColors,
-  ...lightProgressColors,
-  ...lightRatingColors,
-  ...lightSegmentedColors,
-  ...lightShadowColors,
-  ...lightSliderColors,
-  ...lightStatusColors,
-  ...lightStrokeColors,
-  ...lightTabColors,
-  ...lightTooltipColors,
-  ...utilityLayoutTemplate,
-});
+export function lightTheme(themeColor?: string): Theme {
+  let neutral = defaultNeutral;
+  const shadow = defaultShadow;
+  let vibrant = defaultVibrant;
 
-export const darkTheme = resolveNestedVariables({
-  ...darkAvatarColors,
-  ...darkBackgroundColors,
-  ...darkChoiceColors,
-  ...darkComposerColors,
-  ...darkDialogColors,
-  ...darkDragColors,
-  ...darkFabColors,
-  ...darkFocusColors,
-  ...darkForegroundColors,
-  ...darkIdentityFlyoutColors,
-  ...darkInputColors,
-  ...darkLinkColors,
-  ...darkListColors,
-  ...darkLiteFilterColors,
-  ...darkMaterialColors,
-  ...darkNullColors,
-  ...darkOmniboxColors,
-  ...darkProgressColors,
-  ...darkRatingColors,
-  ...darkSegmentedColors,
-  ...darkShadowColors,
-  ...darkSliderColors,
-  ...darkStatusColors,
-  ...darkStrokeColors,
-  ...darkTabColors,
-  ...darkTooltipColors,
-  ...legacyDarkTokens,
-  ...utilityLayoutTemplate,
-});
+  if (themeColor) {
+    neutral = GenerateNeutralPalette(themeColor);
+    vibrant = GenerateVibrantPalette(themeColor);
+  }
 
-export type Theme = typeof lightTheme;
+  return resolveNestedVariables({
+    ...legacyLightTokens,
+    ...lightAiColors,
+    ...lightAvatarColors(neutral),
+    ...lightBackgroundColors(neutral, vibrant),
+    ...lightChoiceColors(neutral),
+    ...lightComposerColors,
+    ...lightDialogColors(neutral, shadow),
+    ...lightDragColors(neutral),
+    ...lightFabColors(neutral, shadow),
+    ...lightFocusColors(neutral),
+    ...lightForegroundColors(neutral),
+    ...lightIdentityFlyoutColors(neutral),
+    ...lightInputColors,
+    ...lightLinkColors(vibrant),
+    ...lightListColors(neutral),
+    ...lightLiteFilterColors(neutral),
+    ...lightMaterialColors(neutral),
+    ...lightNullColors,
+    ...lightOmniboxColors(neutral),
+    ...lightProgressColors(neutral),
+    ...lightRatingColors,
+    ...lightSegmentedColors(neutral),
+    ...lightShadowColors(shadow),
+    ...lightSliderColors,
+    ...lightStatusColors(neutral, vibrant),
+    ...lightStrokeColors(neutral),
+    ...lightTabColors(neutral),
+    ...lightTooltipColors(neutral, shadow),
+    ...utilityLayoutTemplate,
+  } as Theme);
+}
+
+export async function darkTheme(themeColor?: string) {
+  return resolveNestedVariables({
+    ...darkAiColors,
+    ...darkAvatarColors,
+    ...darkBackgroundColors,
+    ...darkChoiceColors,
+    ...darkComposerColors,
+    ...darkDialogColors,
+    ...darkDragColors,
+    ...darkFabColors,
+    ...darkFocusColors,
+    ...darkForegroundColors,
+    ...darkIdentityFlyoutColors,
+    ...darkInputColors,
+    ...darkLinkColors,
+    ...darkListColors,
+    ...darkLiteFilterColors,
+    ...darkMaterialColors,
+    ...darkNullColors,
+    ...darkOmniboxColors,
+    ...darkProgressColors,
+    ...darkRatingColors,
+    ...darkSegmentedColors,
+    ...darkShadowColors,
+    ...darkSliderColors,
+    ...darkStatusColors,
+    ...darkStrokeColors,
+    ...darkTabColors,
+    ...darkTooltipColors,
+    ...legacyDarkTokens,
+    ...utilityLayoutTemplate,
+  } as Theme);
+}

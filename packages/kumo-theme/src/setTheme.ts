@@ -8,7 +8,9 @@ export function setThemeFor<Theme>(
   const tokens = Object.keys(theme as Record<string, unknown>);
   let data = '';
   tokens.forEach((token) => {
-    const cssVar = kumoTokens[token].replace(/var\(/, '').replace(/\)/, '');
+    const cssVar = kumoTokens[token as keyof typeof kumoTokens]
+      .replace(/var\(/, '')
+      .replace(/\)/, '');
     const varValue = theme[token as keyof Theme];
     data += `${cssVar}: ${varValue};`;
   });

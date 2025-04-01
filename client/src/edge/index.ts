@@ -8,8 +8,10 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
-import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
-import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
+import {
+  lightTheme as kumoLightTheme,
+  darkTheme as kumoDarkTheme,
+} from '@edge-design/kumo-theme';
 import { setThemeFor as setKumoThemeFor } from '@edge-design/kumo-theme';
 import {
   textStyleDefaultRegularWeight,
@@ -182,7 +184,8 @@ export class MicrosoftEdge extends FASTElement {
       propertyName === 'theme' ||
       propertyName === 'transparency' ||
       propertyName === 'frameSpacing' ||
-      propertyName === 'edgeTheme'
+      propertyName === 'edgeTheme' ||
+      propertyName === 'themeColor'
     ) {
       this.clearTheme();
       this.setTheme();
@@ -196,7 +199,7 @@ export class MicrosoftEdge extends FASTElement {
       dark: kumoDarkTheme,
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    const selectedKumoTheme = kumoThemes[themeKey];
+    const selectedKumoTheme = kumoThemes[themeKey](this.ss.themeColor);
     selectedKumoTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
     setKumoThemeFor(this.shadowRoot!, selectedKumoTheme);
   }
