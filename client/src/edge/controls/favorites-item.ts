@@ -38,6 +38,7 @@ const styles = css`
   :host {
     display: block;
     height: fit-content;
+    overflow: hidden;
   }
 
   button {
@@ -56,6 +57,7 @@ const styles = css`
   }
 
   #title {
+    flex: 1;
     font-family: ${textStyleDefaultRegularFontFamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};

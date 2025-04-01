@@ -19,6 +19,7 @@ import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
 import {
   gapBetweenCtrlDefault,
+  paddingContentXsmall,
   paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
 
@@ -73,10 +74,12 @@ const styles = css`
     align-items: space-between;
     gap: ${gapBetweenCtrlDefault};
     padding: ${paddingWindowDefault};
+    padding-block-end: 0px;
   }
 
   #user {
     flex: 1;
+    overflow: hidden;
     display: flex;
     flex-direction: row;
     gap: ${gapBetweenCtrlDefault};
@@ -89,10 +92,13 @@ const styles = css`
 
   mai-divider::before,
   mai-divider::after {
-    min-height: 4px;
+    min-height: 0px;
   }
+
   mai-divider {
-    min-height: 4px;
+    box-sizing: border-box;
+    min-height: 0px;
+    padding-block: ${paddingContentXsmall};
   }
 `;
 

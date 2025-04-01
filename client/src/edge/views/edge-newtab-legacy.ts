@@ -264,9 +264,8 @@ const styles = css`
     gap: ${gapBetweenContentXsmall};
     padding: ${paddingContentXxlarge};
 
-    mai-button {
-      color: white;
-    }
+    --smtc-foreground-ctrl-onsubtle-rest: white;
+    --smtc-foreground-ctrl-icon-onsubtle-rest: white;
   }
 
   #image-actions {
@@ -279,9 +278,8 @@ const styles = css`
     gap: ${gapBetweenContentXsmall};
     padding: ${paddingContentXxlarge};
 
-    mai-button {
-      color: white;
-    }
+    --smtc-foreground-ctrl-onsubtle-rest: white;
+    --smtc-foreground-ctrl-icon-onsubtle-rest: white;
   }
 
   #searchbox {
