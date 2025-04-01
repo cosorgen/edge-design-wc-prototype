@@ -9,20 +9,14 @@ import '../windows/controls/mica-material.js';
 import '@edge-design/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@mai-ui/switch/define.js';
+import '@mai-ui/dropdown/define.js';
+import '@mai-ui/listbox/define.js';
+import '@mai-ui/option/define.js';
 import {
-  borderRadiusMedium,
-  colorBrandStroke,
   colorLayerBackgroundDialog,
-  colorNeutralBackground1,
   colorNeutralForeground1,
-  colorNeutralStroke2,
-  colorNeutralStrokeAccessible,
   spacingHorizontalL,
   spacingHorizontalXL,
-  spacingHorizontalS,
-  spacingVerticalXS,
-  strokeWidthThick,
-  strokeWidthThin,
   typographyStyles,
   borderRadiusCircular,
   fontFamilyBase,
@@ -140,37 +134,44 @@ const template = html<WindowsSettings>`
           <h2>Overall appearance</h2>
           <div class="entry">
             <label for="theme">Theme</label>
-            <select id="theme" @change="${(x) => x.updateTheme()}">
-              <option
-                value="light"
-                ?selected="${(x) => x.ws.theme === 'light'}"
-              >
-                Light
-              </option>
-              <option value="dark" ?selected="${(x) => x.ws.theme === 'dark'}">
-                Dark
-              </option>
-            </select>
+            <mai-dropdown id="theme" @change="${(x) => x.updateTheme()}">
+              <mai-listbox>
+                <mai-option
+                  value="light"
+                  ?selected="${(x) => x.ws.theme === 'light'}"
+                >
+                  Light
+                </mai-option>
+                <mai-option
+                  value="dark"
+                  ?selected="${(x) => x.ws.theme === 'dark'}"
+                >
+                  Dark
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="transparency">Transparency</label>
-            <select
+            <mai-dropdown
               id="transparency"
               @change="${(x) => x.updateTransparency()}"
             >
-              <option
-                value="normal"
-                ?selected="${(x) => x.ws.transparency === 'normal'}"
-              >
-                Normal
-              </option>
-              <option
-                value="reduced"
-                ?selected="${(x) => x.ws.transparency === 'reduced'}"
-              >
-                Reduced
-              </option>
-            </select>
+              <mai-listbox>
+                <mai-option
+                  value="normal"
+                  ?selected="${(x) => x.ws.transparency === 'normal'}"
+                >
+                  Normal
+                </mai-option>
+                <mai-option
+                  value="reduced"
+                  ?selected="${(x) => x.ws.transparency === 'reduced'}"
+                >
+                  Reduced
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="frame-spacing">Frame spacing</label>
@@ -181,6 +182,15 @@ const template = html<WindowsSettings>`
               @change="${(x) => x.updateFrameSpacing()}"
             >
             </mai-text-input>
+          </div>
+          <div class="entry">
+            <label for="theme-color">Theme color</label>
+            <input
+              type="color"
+              id="theme-color"
+              value="${(x) => x.ss.themeColor}"
+              @change="${(x) => x.updateThemeColor()}"
+            />
           </div>
         </div>
 
@@ -198,30 +208,32 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
-            <select
+            <mai-dropdown
               id="favorites-bar"
               @change="${(x) => x.updateShowFavoritesBar()}"
               value="${(x) => x.ss.showFavoritesBar}"
             >
-              <option
-                value="always"
-                ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
-              >
-                Always
-              </option>
-              <option
-                value="never"
-                ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
-              >
-                Never
-              </option>
-              <option
-                value="newtab"
-                ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
-              >
-                On new tab
-              </option>
-            </select>
+              <mai-listbox>
+                <mai-option
+                  value="always"
+                  ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
+                >
+                  Always
+                </mai-option>
+                <mai-option
+                  value="never"
+                  ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
+                >
+                  Never
+                </mai-option>
+                <mai-option
+                  value="newtab"
+                  ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
+                >
+                  On new tab
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="truncate-url">Truncate URL</label>
@@ -331,6 +343,10 @@ const template = html<WindowsSettings>`
 `;
 
 const styles = css`
+  :host {
+    --smtc-background-layer-primarysolid: ${colorLayerBackgroundDialog};
+  }
+
   #container {
     display: flex;
     height: 100vh;
@@ -351,6 +367,9 @@ const styles = css`
     display: flex;
     align-items: center;
     padding-inline-start: ${spacingHorizontalL};
+    --smtc-corner-ctrl-rest: 0px;
+    --smtc-corner-ctrl-hover: 0px;
+    --smtc-corner-ctrl-pressed: 0px;
   }
 
   h1 {
@@ -454,31 +473,6 @@ const styles = css`
     #main {
       grid-template-columns: 1fr; /* Switch to single column on small screens */
     }
-  }
-
-  select {
-    padding: ${spacingVerticalXS} ${spacingHorizontalS};
-    border-radius: ${borderRadiusMedium};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke2};
-    border-bottom: ${strokeWidthThin} solid ${colorNeutralStrokeAccessible};
-    background-color: ${colorNeutralBackground1};
-
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
-    color: ${colorNeutralForeground1};
-  }
-
-  select:focus,
-  select:focus-visible {
-    border-bottom: ${strokeWidthThick} solid ${colorBrandStroke};
-    outline: none;
-  }
-
-  select option {
-    background-color: ${colorLayerBackgroundDialog};
-    color: ${colorNeutralForeground1};
   }
 `;
 
@@ -637,5 +631,14 @@ export class WindowsSettings extends FASTElement {
         ) as HTMLInputElement
       )?.checked || false,
     );
+  }
+
+  updateThemeColor() {
+    const newColor = (
+      this.shadowRoot?.querySelector('#theme-color') as HTMLInputElement
+    ).value;
+    if (newColor && newColor !== '') {
+      this.ss.setThemeColor(newColor);
+    }
   }
 }

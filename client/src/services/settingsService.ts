@@ -12,6 +12,7 @@ export default class EdgeSettingsSerivce {
   @observable showLegacyNewTab = true;
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
+  @observable themeColor = '#EFF4FA'; // Kumo blue
 
   constructor() {
     // Load settings from local storage
@@ -56,6 +57,8 @@ export default class EdgeSettingsSerivce {
       searchParams.get('fullWidthOmnibox') === 'true'
         ? searchParams.get('fullWidthOmnibox') === 'true'
         : this.fullWidthOmnibox;
+
+    this.themeColor = searchParams.get('themeColor') || this.themeColor;
   }
 
   setSettingsInURL() {
@@ -71,6 +74,7 @@ export default class EdgeSettingsSerivce {
     url.searchParams.set('frameSpacing', this.frameSpacing);
     url.searchParams.set('showMenusInL1', this.showMenusInL1.toString());
     url.searchParams.set('fullWidthOmnibox', this.fullWidthOmnibox.toString());
+    url.searchParams.set('themeColor', this.themeColor);
 
     window.history.pushState({}, '', url.toString());
   }
@@ -127,6 +131,11 @@ export default class EdgeSettingsSerivce {
 
   setFullWidthOmnibox(show: boolean): void {
     this.fullWidthOmnibox = show;
+    this.setSettingsInURL();
+  }
+
+  setThemeColor(color: string): void {
+    this.themeColor = color;
     this.setSettingsInURL();
   }
 }
