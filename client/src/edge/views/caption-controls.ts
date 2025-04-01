@@ -10,21 +10,21 @@ import {
   colorShellForegroundCaptionControlPrimaryHover,
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '@edge-design/windows-theme';
-import {
-  borderRadiusCircular,
-  spacingHorizontalS,
-  spacingHorizontalXS,
-  spacingHorizontalXXS,
-  strokeWidthThin,
-  colorLayerBackgroundPillMenu,
-} from '@edge-design/phoenix-theme';
 import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
 import '@edge-design/button/define.js';
-import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
+import {
+  backgroundCtrlNeutralRest,
+  cornerCircular,
+  gapBetweenContentXxsmall,
+  paddingContentXsmall,
+  paddingContentXxxsmall,
+  paddingWindowDefault,
+  strokeWidthDefault,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html` <div
     id="window-grabber"
@@ -143,12 +143,12 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: ${spacingHorizontalS};
-    padding: calc(${spacingHorizontalXXS} - ${strokeWidthThin})
-      ${spacingHorizontalXXS};
-    gap: ${spacingHorizontalXS};
-    border-radius: ${borderRadiusCircular};
-    background-color: ${colorLayerBackgroundPillMenu};
+    margin-right: ${paddingContentXsmall};
+    padding: calc(${paddingContentXxxsmall} - ${strokeWidthDefault})
+      ${paddingContentXxxsmall};
+    gap: ${gapBetweenContentXxsmall};
+    border-radius: ${cornerCircular};
+    background-color: ${backgroundCtrlNeutralRest};
   }
 
   #window-grabber {

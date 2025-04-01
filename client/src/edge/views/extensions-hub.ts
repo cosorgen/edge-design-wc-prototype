@@ -7,17 +7,6 @@ import {
   repeat,
   when,
 } from '@microsoft/fast-element';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  shadow28,
-  spacingHorizontalMNudge,
-  spacingHorizontalS,
-  spacingHorizontalXS,
-  typographyStyles,
-} from '@edge-design/phoenix-theme';
 import '@edge-design/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/extension-hub-item.js';
@@ -28,33 +17,51 @@ import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import apps, { ToolbarApp } from '../installedApps.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundContentNeutralPrimary,
+  paddingContentMedium,
+  shadowFlyout,
+  textGlobalBody2Fontsize,
+  textGlobalBody2Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+  gapBetweenContentXxsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>
-    <flyout-menu>
-      <mai-button size="small" appearance="subtle" icon-only slot="trigger">
+    <div id="actions">
+      <flyout-menu>
+        <mai-button size="small" appearance="subtle" icon-only slot="trigger">
+          <svg>
+            <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
+          </svg>
+        </mai-button>
+        <context-menu>
+          ${when(
+            (x) => x.ess.pinnedToolbarItems.includes('Extensions'),
+            html` <menu-item
+              @click="${(x) => x.ess.unpinToolbarItem('Extensions')}"
+            >
+              Hide extensions menu in toolbar
+            </menu-item>`,
+            html` <menu-item
+              @click="${(x) => x.ess.pinToolbarItem('Extensions')}"
+            >
+              Show extensions menu in toolbar
+            </menu-item>`,
+          )}
+        </context-menu>
+      </flyout-menu>
+      <mai-button size="small" appearance="subtle" icon-only>
         <svg>
-          <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
+          <use href="./img/edge/icons.svg#dismiss-16-regular" />
         </svg>
       </mai-button>
-      <context-menu>
-        ${when(
-          (x) => x.ess.pinnedToolbarItems.includes('Extensions'),
-          html` <menu-item
-            @click="${(x) => x.ess.unpinToolbarItem('Extensions')}"
-          >
-            Hide extensions menu in toolbar
-          </menu-item>`,
-          html` <menu-item
-            @click="${(x) => x.ess.pinToolbarItem('Extensions')}"
-          >
-            Show extensions menu in toolbar
-          </menu-item>`,
-        )}
-      </context-menu>
-    </flyout-menu>
+    </div>
   </div>
-  <mai-divider appearance="strong"></mai-divider>
   <div id="content">
     ${repeat(
       (x) => x.extensions,
@@ -71,7 +78,9 @@ const template = html<ExtensionsHub>` <div id="header">
         ${(x) => x}
       </extension-hub-item>`,
     )}
-    <mai-divider></mai-divider>
+  </div>
+  <mai-divider appearance="subtle"></mai-divider>
+  <div id="footer">
     <menu-item start-slot>
       <svg slot="start">
         <use href="./img/edge/icons.svg#puzzle-piece-20-regular" />
@@ -93,36 +102,42 @@ const styles = css`
     width: fit-content;
     min-width: 128px;
     min-height: 16px;
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
     overflow: hidden;
-    color: ${colorNeutralForeground1};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   #header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: ${spacingHorizontalS};
-    padding-inline-start: ${spacingHorizontalMNudge};
+    padding: ${paddingContentMedium};
+    padding-block-end: 0;
 
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    line-height: ${typographyStyles.body1Strong.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody2Fontsize};
+    font-weight: ${textStyleDefaultHeaderWeight};
+    line-height: ${textGlobalBody2Lineheight};
+  }
+
+  #actions {
+    display: flex;
+    flex-direction: row;
+    gap: ${gapBetweenContentXxsmall};
   }
 
   #content {
     display: flex;
     flex-direction: column;
-    padding: ${spacingHorizontalXS};
+    padding: ${paddingContentMedium};
+  }
 
-    mai-divider {
-      margin: ${spacingHorizontalXS} 0;
-    }
+  #footer {
+    display: flex;
+    flex-direction: column;
+    padding: ${paddingContentMedium};
   }
 `;
 

@@ -15,49 +15,84 @@ import '../controls/favorites-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
-import { spacingHorizontalS, spacingFrame } from '@edge-design/phoenix-theme';
+import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
+import {
+  gapBetweenCtrlDefault,
+  paddingWindowDefault,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html`
-  ${repeat(
-    (x) => x.fs.favorites,
-    html`${when(
-      (x) => x.type === 'site',
-      html` <favorites-item
-        type=${(x) => x.type}
-        title=${(x) => x.title}
-        favicon=${(x) => x.favicon}
-        @click=${(x, c) => c.parent.handleItemClick(x)}
-        slot="trigger"
-      >
-      </favorites-item>`,
-      html`<flyout-menu>
-        <favorites-item
+  <div id="user">
+    ${repeat(
+      (x) => x.fs.favorites,
+      html`${when(
+        (x) => x.type === 'site',
+        html` <favorites-item
           type=${(x) => x.type}
           title=${(x) => x.title}
           favicon=${(x) => x.favicon}
           @click=${(x, c) => c.parent.handleItemClick(x)}
           slot="trigger"
         >
-        </favorites-item>
-        <context-menu>
-          <menu-item type="action">Item 1</menu-item>
-          <menu-item type="action">Item 2</menu-item>
-          <menu-item type="action">Item 3</menu-item>
-        </context-menu>
-      </flyout-menu>`,
-    )}`,
-  )}
+        </favorites-item>`,
+        html`<flyout-menu>
+          <favorites-item
+            type=${(x) => x.type}
+            title=${(x) => x.title}
+            slot="trigger"
+          >
+          </favorites-item>
+          <context-menu>
+            <menu-item type="action">Item 1</menu-item>
+            <menu-item type="action">Item 2</menu-item>
+            <menu-item type="action">Item 3</menu-item>
+          </context-menu>
+        </flyout-menu>`,
+      )}`,
+    )}
+  </div>
+  <mai-divider orientation="vertical"></mai-divider>
+  <div id="system">
+    <flyout-menu>
+      <favorites-item type="folder" title="Other favorites" slot="trigger">
+      </favorites-item>
+      <context-menu>
+        <menu-item type="action">Item 1</menu-item>
+        <menu-item type="action">Item 2</menu-item>
+        <menu-item type="action">Item 3</menu-item>
+      </context-menu>
+    </flyout-menu>
+  </div>
 `;
 
 const styles = css`
   :host {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: ${spacingHorizontalS};
-    padding-block-end: ${spacingFrame};
+    align-items: space-between;
+    gap: ${gapBetweenCtrlDefault};
+    padding: ${paddingWindowDefault};
+  }
+
+  #user {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: ${gapBetweenCtrlDefault};
+  }
+
+  #system {
+    display: flex;
+    flex-direction: row;
+  }
+
+  mai-divider::before,
+  mai-divider::after {
+    min-height: 4px;
+  }
+  mai-divider {
+    min-height: 4px;
   }
 `;
 

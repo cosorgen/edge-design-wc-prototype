@@ -57,10 +57,6 @@ export default class FavoritesService {
       title: 'Nike jacket',
       favicon: 'https://www.nike.com/favicon.ico?v=1',
     },
-    {
-      type: 'folder',
-      title: 'Other favorites',
-    },
   ];
 
   addFavorite(favorite: Favorite) {

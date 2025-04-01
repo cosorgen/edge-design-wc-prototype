@@ -28,13 +28,18 @@ const template = html<FavoritesItem>` <button
     (x) => x.type === 'site',
     html`<img src="${(x) => x.favicon}" alt="${(x) => x.title}" />`,
     html`<svg>
-      <use href="./img/edge/icons.svg#folder-20-regular" />
+      <use href="./img/edge/icons.svg#folder-16-regular" />
     </svg>`,
   )}
   <div id="title">${(x) => x.title}</div>
 </button>`;
 
 const styles = css`
+  :host {
+    display: block;
+    height: fit-content;
+  }
+
   button {
     display: flex;
     flex-direction: row;
@@ -77,8 +82,8 @@ const styles = css`
   }
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
   }
 `;
 
