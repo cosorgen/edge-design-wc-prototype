@@ -47,6 +47,7 @@ const styles = css`
     cursor: pointer;
     width: 100%;
     max-width: 256px;
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   #title {
@@ -54,7 +55,6 @@ const styles = css`
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};
-    color: ${foregroundCtrlNeutralPrimaryRest};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

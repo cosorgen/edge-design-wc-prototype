@@ -9,23 +9,32 @@ import { inject } from '@microsoft/fast-element/di.js';
 import '@mai-ui/text-input/define.js';
 import { TextInput } from '@mai-ui/text-input';
 import '@edge-design/button/define.js';
-import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerDialog,
-  colorNeutralForeground1,
-  shadow28,
-  spacingHorizontalL,
-  spacingHorizontalM,
-  spacingVerticalM,
-  typographyStyles,
-} from '@edge-design/phoenix-theme';
-import { spacingVerticalXL } from '@edge-design/phoenix-theme';
 import { TabService } from '#services/tabService.js';
 import FavoritesService from '#services/favoritesService.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  gapBetweenContentSmall,
+  paddingContentMedium,
+  paddingContentSmall,
+  shadowFlyout,
+  textGlobalBody2Fontsize,
+  textGlobalBody2Lineheight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+  paddingContentXsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<AddFavoritesInputs>`
-  <div class="favorite-title">Favorite added</div>
+  <div class="favorite-title">
+    Favorite added
+    <mai-button appearance="subtle" size="small" icon-only>
+      <svg>
+        <use href="./img/edge/icons.svg#dismiss-16-regular" />
+      </svg>
+    </mai-button>
+  </div>
   <div class="input-group">
     <label for="favorite-name">Name</label>
     <mai-text-input
@@ -51,10 +60,10 @@ const template = html<AddFavoritesInputs>`
   <div class="footer">
     <mai-button @click="${(x) => x.closeFlyout()}"> More </mai-button>
     <div class="button-group">
-      <mai-button @click="${(x) => x.handleRemove()}"> Remove </mai-button>
       <mai-button appearance="primary" @click="${(x) => x.handleDone()}">
         Done
       </mai-button>
+      <mai-button @click="${(x) => x.handleRemove()}"> Remove </mai-button>
     </div>
   </div>
 `;
@@ -64,20 +73,22 @@ const styles = css`
     display: block;
     min-width: 256px;
     min-height: 120px;
-    padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
+    padding: ${paddingContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   .favorite-title {
-    margin-bottom: ${spacingVerticalM};
-    font-family: ${typographyStyles.subtitle2.fontFamily};
-    font-size: ${typographyStyles.subtitle2.fontSize};
-    font-weight: ${typographyStyles.subtitle2.fontWeight};
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: ${paddingContentXsmall};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody2Fontsize};
+    line-height: ${textGlobalBody2Lineheight};
+    font-weight: ${textStyleDefaultRegularWeight};
   }
 
   svg {
@@ -88,12 +99,12 @@ const styles = css`
   .input-group {
     display: flex;
     align-items: center;
-    margin-bottom: ${spacingVerticalM};
+    margin-bottom: ${paddingContentXsmall};
     justify-content: space-between;
   }
 
   .input-group label {
-    margin-right: ${spacingHorizontalM};
+    margin-right: ${paddingContentSmall};
     flex: 0 0 auto;
   }
 
@@ -106,12 +117,12 @@ const styles = css`
   .footer {
     display: flex;
     justify-content: space-between;
-    margin-top: ${spacingVerticalXL};
+    margin-top: ${paddingContentMedium};
   }
 
   .button-group {
     display: flex;
-    gap: ${spacingHorizontalM};
+    gap: ${gapBetweenContentSmall};
   }
 `;
 
