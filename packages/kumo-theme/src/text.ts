@@ -44,7 +44,7 @@ export type TextStyle = {
   textStyleArticleRegularLetterSpacing: string;
   textStyleArticleRegularWeight: string;
   textStyleArticleHeaderCase: string;
-  textStyleArticleHeaderFontFamily: string;
+  textStyleArticleHeaderFontfamily: string;
   textStyleArticleHeaderLetterSpacing: string;
   textStyleArticleHeaderWeight: string;
   textStyleAiRegularFontFamily: string;
@@ -201,7 +201,7 @@ export const textStyle: TextStyle = {
   textStyleArticleRegularLetterSpacing: '{textStyleDefaultHeaderLetterSpacing}',
   textStyleArticleRegularWeight: fontWeight.regular,
   textStyleArticleHeaderCase: '{nullString}',
-  textStyleArticleHeaderFontFamily: fontFamily.serif,
+  textStyleArticleHeaderFontfamily: fontFamily.serif,
   textStyleArticleHeaderLetterSpacing: '{textStyleDefaultHeaderLetterSpacing}',
   textStyleArticleHeaderWeight: fontWeight.medium,
   textStyleAiRegularFontFamily: fontFamily.base,

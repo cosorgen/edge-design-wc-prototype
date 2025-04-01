@@ -23,7 +23,7 @@ export type Corner = {
   cornerFlyoutPressed: string;
   cornerFlyoutRest: string;
   cornerImageInCard: string;
-  cornerImageOnPage: string;
+  cornerImageOnpage: string;
   cornerLayerDefault: string;
   cornerLayerIntersection: string;
   cornerToolbarDefault: string;
@@ -54,7 +54,7 @@ export const corner: Corner = {
   cornerFlyoutPressed: c[80],
   cornerFlyoutRest: c[80],
   cornerImageInCard: c[120],
-  cornerImageOnPage: c[120],
+  cornerImageOnpage: c[120],
   cornerLayerDefault: c[80],
   cornerLayerIntersection: c[0],
   cornerToolbarDefault: c[80],

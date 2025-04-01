@@ -56,9 +56,13 @@ export type ShadowParts = {
 
 export type Shadow = {
   shadowCardDisabled: string;
+  shadowCardDisabledCss: string;
   shadowCardHover: string;
+  shadowCardHoverCss: string;
   shadowCardPressed: string;
+  shadowCardPressedCss: string;
   shadowCardRest: string;
+  shadowCardRestCss: string;
   shadowCtrlOnDrag: string;
   shadowFlyout: string;
   shadowFlyoutCss: string;
@@ -125,12 +129,16 @@ export const shadowParts: ShadowParts = {
 export const shadow: Shadow = {
   shadowCardDisabled:
     '{shadowCardDisabledKeyX} {shadowCardDisabledKeyY} {shadowCardDisabledKeyBlur} 0px {shadowCardDisabledKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
+  shadowCardDisabledCss: '{shadowCardDisabled}',
   shadowCardHover:
     '{shadowCardHoverKeyX} {shadowCardHoverKeyY} {shadowCardHoverKeyBlur} 0px {shadowCardHoverKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
+  shadowCardHoverCss: '{shadowCardHover}',
   shadowCardPressed:
     '{shadowCardPressedKeyX} {shadowCardPressedKeyY} {shadowCardPressedKeyBlur} 0px {shadowCardPressedKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
+  shadowCardPressedCss: '{shadowCardPressed}',
   shadowCardRest:
     '{shadowCardRestKeyX} {shadowCardRestKeyY} {shadowCardRestKeyBlur} 0px {shadowCardRestKeyColor}, {shadowCardRestAmbientX} {shadowCardRestAmbientY} {shadowCardRestAmbientBlur} 0px {shadowCardRestAmbientColor}',
+  shadowCardRestCss: '{shadowCardRest}',
   shadowCtrlOnDrag:
     '{shadowCtrlOnDragKeyX} {shadowCtrlOnDragKeyY} {shadowCtrlOnDragKeyBlur} 0px {shadowCtrlOnDragKeyColor}, {shadowCtrlOnDragAmbientX} {shadowCtrlOnDragAmbientY} {shadowCtrlOnDragAmbientBlur} 0px {shadowCtrlOnDragAmbientColor}',
   shadowFlyout:
