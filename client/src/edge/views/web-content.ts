@@ -13,6 +13,7 @@ import '../controls/web-page.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';
+import './palette-playground.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -35,6 +36,9 @@ const edgePages: Record<string, ViewTemplate> = {
   settings: html`<settings-page
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></settings-page>`,
+  palette: html`<palette-playground
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></palette-playground>`,
 };
 
 const template = html<WebContent>`
