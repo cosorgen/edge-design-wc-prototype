@@ -344,7 +344,7 @@ export function lightTheme(themeColor?: string): Theme {
     ...lightDragColors(neutral),
     ...lightFabColors(neutral, shadow),
     ...lightFocusColors(neutral),
-    ...lightForegroundColors(neutral),
+    ...lightForegroundColors(themed, neutral, vibrant),
     ...lightIdentityFlyoutColors(neutral),
     ...lightInputColors,
     ...lightLinkColors(vibrant),

@@ -68,10 +68,10 @@ export function lightBackgroundColors(
     backgroundCtrlActivebrandHover: '{backgroundCtrlBrandHover}',
     backgroundCtrlActivebrandPressed: '{backgroundCtrlBrandPressed}',
     backgroundCtrlActivebrandRest: '{backgroundCtrlBrandRest}',
-    backgroundCtrlBrandDisabled: neutral[200],
-    backgroundCtrlBrandHover: neutral[754],
-    backgroundCtrlBrandPressed: neutral[758],
-    backgroundCtrlBrandRest: neutral[750],
+    backgroundCtrlBrandDisabled: theme ? vibrant[200] : neutral[200],
+    backgroundCtrlBrandHover: theme ? vibrant[604] : neutral[754],
+    backgroundCtrlBrandPressed: theme ? vibrant[608] : neutral[758],
+    backgroundCtrlBrandRest: theme ? vibrant[600] : neutral[750],
     backgroundCtrlNeutralDisabled: neutral[200],
     backgroundCtrlNeutralHover: neutral[154],
     backgroundCtrlNeutralPressed: neutral[158],
@@ -116,9 +116,9 @@ export function lightBackgroundColors(
     backgroundWindowSecondaryLumBlend: '{nullColor}',
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
-    backgroundWindowTabBandInactive: theme ? vibrant[50] : neutral[200],
+    backgroundWindowTabBandInactive: theme ? vibrant[100] : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
-    backgroundWindowTabBandSolid: theme ? vibrant[100] : neutral[250],
+    backgroundWindowTabBandSolid: theme ? vibrant[200] : neutral[250],
   };
 }
 
@@ -195,7 +195,9 @@ export function lightStrokeColors(neutral: NeutralColors): ThemeStrokeColors {
 }
 
 export function lightForegroundColors(
+  theme: boolean,
   neutral: NeutralColors,
+  vibrant: VibrantColors,
 ): ThemeForegroundColors {
   return {
     foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',
@@ -232,10 +234,10 @@ export function lightForegroundColors(
     foregroundCtrlActivebrandHover: '{foregroundCtrlBrandHover}',
     foregroundCtrlActivebrandPressed: '{foregroundCtrlBrandPressed}',
     foregroundCtrlActivebrandRest: '{foregroundCtrlBrandRest}',
-    foregroundCtrlBrandDisabled: neutral[350],
-    foregroundCtrlBrandHover: neutral[750],
-    foregroundCtrlBrandPressed: neutral[750],
-    foregroundCtrlBrandRest: neutral[750],
+    foregroundCtrlBrandDisabled: theme ? vibrant[200] : neutral[350],
+    foregroundCtrlBrandHover: '{foregroundCtrlBrandRest}',
+    foregroundCtrlBrandPressed: '{foregroundCtrlBrandRest}',
+    foregroundCtrlBrandRest: theme ? vibrant[600] : neutral[750],
     foregroundCtrlHintDefault: neutral[300],
     foregroundCtrlIconOnneutralDisabled:
       '{foregroundCtrlNeutralPrimaryDisabled}',

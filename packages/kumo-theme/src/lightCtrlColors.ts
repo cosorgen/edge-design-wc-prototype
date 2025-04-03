@@ -293,7 +293,7 @@ export function lightTabColors(
   vibrant: VibrantColors,
 ): CtrlTabColors {
   return {
-    ctrlTabBackgroundHorizontalActive: theme ? vibrant[10] : neutral[0],
+    ctrlTabBackgroundHorizontalActive: neutral[0],
     ctrlTabBackgroundVerticalActive: neutral[150],
   };
 }

@@ -150,15 +150,15 @@ export const darkFocusColors: CtrlFocusColors = {
 };
 
 export const darkLinkColors: CtrlLinkColors = {
-  ctrlLinkBackgroundRest: vibrant[900],
-  ctrlLinkBackgroundHover: vibrant[800],
-  ctrlLinkBackgroundPressed: vibrant[700],
+  ctrlLinkBackgroundRest: vibrant[600],
+  ctrlLinkBackgroundHover: vibrant[604],
+  ctrlLinkBackgroundPressed: vibrant[608],
   ctrlLinkForegroundNeutralRest: '{foregroundCtrlNeutralPrimaryRest}',
   ctrlLinkForegroundNeutralHover: '{foregroundCtrlNeutralPrimaryRest}',
   ctrlLinkForegroundNeutralPressed: '{foregroundCtrlNeutralPrimaryRest}',
-  ctrlLinkForegroundBrandRest: vibrant[400],
-  ctrlLinkForegroundBrandHover: vibrant[400],
-  ctrlLinkForegroundBrandPressed: vibrant[400],
+  ctrlLinkForegroundBrandRest: vibrant[300],
+  ctrlLinkForegroundBrandHover: vibrant[300], // need fixing
+  ctrlLinkForegroundBrandPressed: vibrant[300], // need fixing
 };
 
 export const darkListColors: CtrlListColors = {
