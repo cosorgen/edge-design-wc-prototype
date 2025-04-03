@@ -278,10 +278,16 @@ export function GenerateVibrantPalette(seedColor: string): VibrantColors {
   const palette = GeneratePalette(seedColor, 'vibrant').primary;
   return {
     100: hexFromArgb(palette.tone(96)),
+    104: hexFromArgb(palette.tone(93)),
+    108: hexFromArgb(palette.tone(87)),
     200: hexFromArgb(palette.tone(92)),
     300: hexFromArgb(palette.tone(84)),
+    304: hexFromArgb(palette.tone(64)),
+    308: hexFromArgb(palette.tone(70)),
     400: hexFromArgb(palette.tone(63)),
     500: hexFromArgb(palette.tone(53)),
+    504: hexFromArgb(palette.tone(43)),
+    508: hexFromArgb(palette.tone(37)),
     600: hexFromArgb(palette.tone(47)),
     604: hexFromArgb(palette.tone(21)),
     608: hexFromArgb(palette.tone(27)),
