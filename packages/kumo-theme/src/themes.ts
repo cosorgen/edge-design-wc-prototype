@@ -188,7 +188,6 @@ import {
 } from './ctrlColors.js';
 import {
   neutral as defaultNeutral,
-  alphaWhite as defaultAlphaWhite,
   shadow as defaultShadow,
   vibrant as defaultVibrant,
 } from './globalColors.js';
@@ -324,11 +323,12 @@ const utilityLayoutTemplate = {
 } as ThemeLayout;
 
 export function lightTheme(themeColor?: string): Theme {
+  const themed = themeColor !== undefined;
   let neutral = defaultNeutral;
   const shadow = defaultShadow;
   let vibrant = defaultVibrant;
 
-  if (themeColor) {
+  if (themed) {
     neutral = GenerateNeutralPalette(themeColor);
     vibrant = GenerateVibrantPalette(themeColor);
   }
@@ -337,7 +337,7 @@ export function lightTheme(themeColor?: string): Theme {
     ...legacyLightTokens,
     ...lightAiColors,
     ...lightAvatarColors(neutral),
-    ...lightBackgroundColors(neutral, vibrant),
+    ...lightBackgroundColors(themed, neutral, vibrant),
     ...lightChoiceColors(neutral),
     ...lightComposerColors,
     ...lightDialogColors(neutral, shadow),
@@ -360,7 +360,7 @@ export function lightTheme(themeColor?: string): Theme {
     ...lightSliderColors,
     ...lightStatusColors(neutral, vibrant),
     ...lightStrokeColors(neutral),
-    ...lightTabColors(neutral),
+    ...lightTabColors(themed, neutral, vibrant),
     ...lightTooltipColors(neutral, shadow),
     ...utilityLayoutTemplate,
   } as Theme);

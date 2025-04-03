@@ -29,6 +29,7 @@ export const lightNullColors: ThemeNullColors = {
 };
 
 export function lightBackgroundColors(
+  theme: boolean,
   neutral: NeutralColors,
   vibrant: VibrantColors,
 ): ThemeBackgroundColors {
@@ -110,14 +111,14 @@ export function lightBackgroundColors(
     backgroundWebPageSecondary: neutral[0],
     backgroundWindowPrimaryColorBlend: neutral[0],
     backgroundWindowPrimaryLumBlend: neutral[0],
-    backgroundWindowPrimarySolid: neutral[0],
-    backgroundWindowSecondaryColorBlend: neutral[0],
-    backgroundWindowSecondaryLumBlend: neutral[0],
-    backgroundWindowSecondarySolid: neutral[0],
+    backgroundWindowPrimarySolid: '{backgroundLayerPrimarySolid}',
+    backgroundWindowSecondaryColorBlend: '{nullColor}',
+    backgroundWindowSecondaryLumBlend: '{nullColor}',
+    backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
-    backgroundWindowTabBandInactive: neutral[200],
+    backgroundWindowTabBandInactive: theme ? vibrant[50] : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
-    backgroundWindowTabBandSolid: neutral[250],
+    backgroundWindowTabBandSolid: theme ? vibrant[100] : neutral[250],
   };
 }
 

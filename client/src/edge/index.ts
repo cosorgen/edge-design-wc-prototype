@@ -6,6 +6,7 @@ import {
   when,
   observable,
   Observable,
+  attr,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
@@ -22,6 +23,7 @@ import {
   textGlobalBody3Lineheight,
   textStyleDefaultRegularFontFamily,
   paddingWindowDefault,
+  backgroundWindowTabBandInactive,
 } from '@edge-design/kumo-theme/tokens.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
@@ -71,7 +73,10 @@ const styles = css`
     inset: 0;
     display: flex;
     flex-direction: column;
-    background-color: ${backgroundWindowTabBandSolid};
+    background-color: ${(x) =>
+      x.ws.activeWindowId === x.id
+        ? backgroundWindowTabBandSolid
+        : backgroundWindowTabBandInactive};
     color: ${foregroundContentNeutralPrimary};
     fill: currentColor;
 
@@ -123,6 +128,7 @@ const styles = css`
 
 @customElement({ name: 'microsoft-edge', template, styles })
 export class MicrosoftEdge extends FASTElement {
+  @attr id!: string;
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
   @observable ts!: TabService;

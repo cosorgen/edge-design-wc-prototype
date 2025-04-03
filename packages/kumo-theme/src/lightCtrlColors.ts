@@ -287,9 +287,13 @@ export const lightSliderColors: CtrlSliderColors = {
   ctrlSliderThumbOuterStrokeDisabled: '{strokeDividerSubtle}',
 };
 
-export function lightTabColors(neutral: NeutralColors): CtrlTabColors {
+export function lightTabColors(
+  theme: boolean,
+  neutral: NeutralColors,
+  vibrant: VibrantColors,
+): CtrlTabColors {
   return {
-    ctrlTabBackgroundHorizontalActive: neutral[0],
+    ctrlTabBackgroundHorizontalActive: theme ? vibrant[10] : neutral[0],
     ctrlTabBackgroundVerticalActive: neutral[150],
   };
 }

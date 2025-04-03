@@ -4,7 +4,7 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/add-favorites-flyout.js';
-import { colorBrandForeground1 } from '@edge-design/phoenix-theme';
+import { foregroundContentBrandPrimary } from '@edge-design/kumo-theme/tokens.js';
 
 export const overflowItems = {
   'limit-cookies': {
@@ -31,7 +31,7 @@ export default {
             ? overflowItems.favorite.iconId2
             : overflowItems.favorite.iconId}"
         style="${(x) =>
-          x.pageIsFavorite() ? `color: ${colorBrandForeground1};` : ''}"
+          x.pageIsFavorite() ? `color: ${foregroundContentBrandPrimary};` : ''}"
       />
     </svg>
     <add-favorites-flyout></add-favorites-flyout>

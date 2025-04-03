@@ -39,6 +39,8 @@ export type NeutralColors = {
 };
 
 export type VibrantColors = {
+  10: string;
+  50: string;
   100: string;
   200: string;
   300: string;
@@ -194,6 +196,8 @@ export const neutral: NeutralColors = {
 };
 
 export const vibrant: VibrantColors = {
+  10: '#ecf4ff',
+  50: '#ecf4ff',
   100: '#ecf4ff',
   200: '#daeaff',
   300: '#b4d5ff',
