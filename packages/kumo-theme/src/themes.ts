@@ -322,7 +322,7 @@ const utilityLayoutTemplate = {
 export function lightTheme(themeColor?: string): Theme {
   let palettes: ChromePalette | undefined;
   let neutral = defaultNeutral;
-  const shadow = defaultShadow;
+  let shadow = defaultShadow;
   let vibrant = defaultVibrant;
 
   if (themeColor) {
@@ -382,6 +382,13 @@ export function lightTheme(themeColor?: string): Theme {
       600: palettes.tonal.primary[47],
       604: palettes.tonal.primary[21],
       608: palettes.tonal.primary[27],
+    };
+    shadow = {
+      ...defaultShadow,
+      shadowKeyLowLight: `${palettes.vibrant.primary[12]}1F`, // 12% opacity
+      shadowKeyHighLight: `${palettes.vibrant.primary[12]}29`, // 16% opacity
+      shadowAmbientLowLight: `${palettes.vibrant.primary[12]}0F`, // 6% opacity
+      shadowAmbientHighLight: `${palettes.vibrant.primary[12]}14`, // 8% opacity
     };
   }
 
