@@ -98,8 +98,8 @@ export function lightBackgroundColors(
     backgroundCtrlSubtleHoverSplit: '{nullColor}',
     backgroundCtrlSubtlePressed: neutral[8],
     backgroundCtrlSubtleRest: alphaWhite[0],
-    backgroundFlyoutColorblend: neutral[0],
-    backgroundFlyoutLumblend: neutral[0],
+    backgroundFlyoutColorblend: '{backgroundFlyoutSolid}',
+    backgroundFlyoutLumblend: '{backgroundFlyoutSolid}',
     backgroundFlyoutSolid: neutral[0],
     backgroundLayerPrimarySolid: neutral[0],
     backgroundLayerPrimaryStop1: neutral[0],
@@ -109,8 +109,8 @@ export function lightBackgroundColors(
     backgroundLayerTertiary: neutral[100],
     backgroundSmoke: alphaBlack[30],
     backgroundToolbar: '{backgroundCardOnprimaryDefaultRest}',
-    backgroundWebPagePrimary: neutral[0],
-    backgroundWebPageSecondary: neutral[0],
+    backgroundWebPagePrimary: '{backgroundLayerPrimarySolid}',
+    backgroundWebPageSecondary: '{backgroundLayerSecondary}',
     backgroundWindowPrimaryColorBlend: neutral[0],
     backgroundWindowPrimaryLumBlend: neutral[0],
     backgroundWindowPrimarySolid: '{backgroundLayerPrimarySolid}',
@@ -119,11 +119,11 @@ export function lightBackgroundColors(
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
     backgroundWindowTabBandInactive: palette
-      ? palette.vibrant.primary[92]
+      ? palette.neutral.primary[90]
       : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
     backgroundWindowTabBandSolid: palette
-      ? palette.vibrant.primary[88]
+      ? palette.neutral.tertiary[90]
       : neutral[250],
   };
 }

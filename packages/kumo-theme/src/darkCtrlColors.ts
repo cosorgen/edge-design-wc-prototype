@@ -303,7 +303,7 @@ export function darkTabColors(
 ): CtrlTabColors {
   return {
     ctrlTabBackgroundHorizontalActive: palette
-      ? palette.vibrant.neutralVariant[28]
+      ? palette.tonal.secondary[22]
       : neutral[650],
     ctrlTabBackgroundVerticalActive: neutral[500],
   };

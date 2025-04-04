@@ -24,6 +24,8 @@ import {
   textStyleDefaultRegularFontFamily,
   paddingWindowDefault,
   backgroundWindowTabBandInactive,
+  backgroundCtrlBrandRest,
+  foregroundCtrlOnbrandRest,
 } from '@edge-design/kumo-theme/tokens.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
@@ -84,6 +86,11 @@ const styles = css`
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalBody3Lineheight};
+  }
+
+  ::selection {
+    background-color: ${backgroundCtrlBrandRest};
+    color: ${foregroundCtrlOnbrandRest};
   }
 
   #activeTab {
