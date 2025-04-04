@@ -237,6 +237,7 @@ const template = html<PalettePlayground>`
 
 const styles = css`
   :host {
+    box-sizing: border-box;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -244,6 +245,7 @@ const styles = css`
     padding: 24px;
     width: 100%;
     height: fit-content;
+    min-height: 100%;
     background-color: ${backgroundWebPagePrimary};
     color: ${foregroundContentNeutralPrimary};
   }

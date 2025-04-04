@@ -20,4 +20,8 @@ export const styles = css`
     box-sizing: border-box;
     padding: 0;
   }
+
+  :host(:is([state--subtle], :state(subtle))[pressed='true']) {
+    background-color: var(--smtc-background-ctrl-subtle-pressed);
+  }
 `;
