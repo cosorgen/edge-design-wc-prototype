@@ -21,6 +21,8 @@ import {
   cornerLayerDefault,
   shadowLayer,
   paddingWindowDefault,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundLayerPrimarySolid,
 } from '@edge-design/kumo-theme/tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
@@ -65,7 +67,10 @@ const styles = css`
     border-radius: ${cornerLayerDefault};
     box-shadow: ${shadowLayer};
     margin: ${paddingWindowDefault};
-    overflow: hidden;
+    overflow: auto;
+    scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
+      ${backgroundLayerPrimarySolid};
+    scrollbar-width: thin;
     z-index: 0; /* ensure content is under omnibox */
 
     :not([active]) {

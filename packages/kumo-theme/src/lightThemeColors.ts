@@ -71,9 +71,9 @@ export function lightBackgroundColors(
     backgroundCtrlActivebrandPressed: '{backgroundCtrlBrandPressed}',
     backgroundCtrlActivebrandRest: '{backgroundCtrlBrandRest}',
     backgroundCtrlBrandDisabled: palette ? vibrant[200] : neutral[200],
-    backgroundCtrlBrandHover: palette ? vibrant[604] : neutral[754],
-    backgroundCtrlBrandPressed: palette ? vibrant[608] : neutral[758],
-    backgroundCtrlBrandRest: palette ? vibrant[600] : neutral[750],
+    backgroundCtrlBrandHover: palette ? vibrant[504] : neutral[754],
+    backgroundCtrlBrandPressed: palette ? vibrant[508] : neutral[758],
+    backgroundCtrlBrandRest: palette ? vibrant[500] : neutral[750],
     backgroundCtrlNeutralDisabled: neutral[200],
     backgroundCtrlNeutralHover: neutral[154],
     backgroundCtrlNeutralPressed: neutral[158],
@@ -119,7 +119,7 @@ export function lightBackgroundColors(
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
     backgroundWindowTabBandInactive: palette
-      ? palette.neutral.primary[90]
+      ? palette.neutral.primary[92]
       : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
     backgroundWindowTabBandSolid: palette

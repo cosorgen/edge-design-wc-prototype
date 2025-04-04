@@ -315,9 +315,10 @@ export function lightTabColors(
 export function lightTooltipColors(
   neutral: NeutralColors,
   shadow: ShadowColors,
+  palette?: ChromePalette,
 ): CtrlTooltipColors {
   return {
-    ctrlTooltipBackground: neutral[800],
+    ctrlTooltipBackground: palette ? palette.tonal.primary[20] : neutral[800],
     ctrlTooltipForeground: neutral[0],
     ctrlTooltipShadowKeyColor: shadow.shadowKeyLowLight,
     ctrlTooltipShadowAmbientColor: shadow.shadowAmbientLowLight,
