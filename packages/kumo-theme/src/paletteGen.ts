@@ -5,7 +5,6 @@ import {
   sanitizeDegreesDouble,
   TonalPalette,
 } from '@material/material-color-utilities';
-import { NeutralColors, VibrantColors } from './globalColors.js';
 
 export type SchemeVariant = 'tonal' | 'vibrant' | 'expressive' | 'neutral';
 
@@ -31,6 +30,22 @@ export type Palette = {
   error: TonalPalette;
   neutral: TonalPalette;
   neutralVariant: TonalPalette;
+};
+
+export type PaletteTones = {
+  primary: { [tone in number]: string };
+  secondary: { [tone in number]: string };
+  tertiary: { [tone in number]: string };
+  error: { [tone in number]: string };
+  neutral: { [tone in number]: string };
+  neutralVariant: { [tone in number]: string };
+};
+
+export type ChromePalette = {
+  tonal: PaletteTones;
+  vibrant: PaletteTones;
+  expressive: PaletteTones;
+  neutral: PaletteTones;
 };
 
 function Transform(
@@ -231,65 +246,45 @@ export function GeneratePalette(
   return FromConfig(seedColor, config);
 }
 
-export function GenerateNeutralPalette(seedColor: string): NeutralColors {
-  const palette = GeneratePalette(seedColor, 'vibrant').neutralVariant;
-  return {
-    0: hexFromArgb(palette.tone(100)),
-    4: hexFromArgb(palette.tone(97)),
-    8: hexFromArgb(palette.tone(91)),
-    100: hexFromArgb(palette.tone(98)),
-    104: hexFromArgb(palette.tone(93)),
-    108: hexFromArgb(palette.tone(88)),
-    150: hexFromArgb(palette.tone(96)),
-    154: hexFromArgb(palette.tone(93)),
-    158: hexFromArgb(palette.tone(88)),
-    200: hexFromArgb(palette.tone(94)),
-    250: hexFromArgb(palette.tone(88)),
-    300: hexFromArgb(palette.tone(82)),
-    304: hexFromArgb(palette.tone(79)),
-    308: hexFromArgb(palette.tone(73)),
-    350: hexFromArgb(palette.tone(69)),
-    400: hexFromArgb(palette.tone(60)),
-    404: hexFromArgb(palette.tone(63)),
-    408: hexFromArgb(palette.tone(69)),
-    450: hexFromArgb(palette.tone(48)),
-    454: hexFromArgb(palette.tone(45)),
-    458: hexFromArgb(palette.tone(39)),
-    500: hexFromArgb(palette.tone(40)),
-    550: hexFromArgb(palette.tone(29)),
-    554: hexFromArgb(palette.tone(32)),
-    558: hexFromArgb(palette.tone(38)),
-    600: hexFromArgb(palette.tone(24)),
-    650: hexFromArgb(palette.tone(20)),
-    700: hexFromArgb(palette.tone(18)),
-    704: hexFromArgb(palette.tone(21)),
-    708: hexFromArgb(palette.tone(27)),
-    750: hexFromArgb(palette.tone(16)),
-    754: hexFromArgb(palette.tone(19)),
-    758: hexFromArgb(palette.tone(25)),
-    800: hexFromArgb(palette.tone(12)),
-    804: hexFromArgb(palette.tone(15)),
-    808: hexFromArgb(palette.tone(21)),
-    1000: hexFromArgb(palette.tone(0)),
-  };
+function GeneratePaletteTones(palette: Palette): PaletteTones {
+  const primary = {} as { [tone in number]: string };
+  for (let i = 0; i <= 100; i++) {
+    primary[i as keyof typeof primary] = hexFromArgb(palette.primary.tone(i));
+  }
+  const secondary = {} as { [tone in number]: string };
+  for (let i = 0; i <= 100; i++) {
+    secondary[i as keyof typeof secondary] = hexFromArgb(
+      palette.secondary.tone(i),
+    );
+  }
+  const tertiary = {} as { [tone in number]: string };
+  for (let i = 0; i <= 100; i++) {
+    tertiary[i as keyof typeof tertiary] = hexFromArgb(
+      palette.tertiary.tone(i),
+    );
+  }
+  const error = {} as { [tone in number]: string };
+  for (let i = 0; i <= 100; i++) {
+    error[i as keyof typeof error] = hexFromArgb(palette.error.tone(i));
+  }
+  const neutral = {} as { [tone in number]: string };
+  for (let i = 0; i <= 100; i++) {
+    neutral[i as keyof typeof neutral] = hexFromArgb(palette.neutral.tone(i));
+  }
+  const neutralVariant = {} as { [tone in number]: string };
+  for (let i = 0; i <= 100; i++) {
+    neutralVariant[i as keyof typeof neutralVariant] = hexFromArgb(
+      palette.neutralVariant.tone(i),
+    );
+  }
+  return { primary, secondary, tertiary, error, neutral, neutralVariant };
 }
 
-export function GenerateVibrantPalette(seedColor: string): VibrantColors {
-  const palette = GeneratePalette(seedColor, 'vibrant').primary;
+export function GenerateAllPalettes(seedColor: string): ChromePalette {
   return {
-    100: hexFromArgb(palette.tone(96)),
-    104: hexFromArgb(palette.tone(93)),
-    108: hexFromArgb(palette.tone(87)),
-    200: hexFromArgb(palette.tone(92)),
-    300: hexFromArgb(palette.tone(84)),
-    304: hexFromArgb(palette.tone(64)),
-    308: hexFromArgb(palette.tone(70)),
-    400: hexFromArgb(palette.tone(63)),
-    500: hexFromArgb(palette.tone(53)),
-    504: hexFromArgb(palette.tone(43)),
-    508: hexFromArgb(palette.tone(37)),
-    600: hexFromArgb(palette.tone(47)),
-    604: hexFromArgb(palette.tone(21)),
-    608: hexFromArgb(palette.tone(27)),
+    tonal: GeneratePaletteTones(GeneratePalette(seedColor, 'tonal')),
+    vibrant: GeneratePaletteTones(GeneratePalette(seedColor, 'vibrant')),
+    expressive: GeneratePaletteTones(GeneratePalette(seedColor, 'expressive')),
+    neutral: GeneratePaletteTones(GeneratePalette(seedColor, 'neutral')),
   };
 }

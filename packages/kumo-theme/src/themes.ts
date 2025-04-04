@@ -191,10 +191,7 @@ import {
   shadow as defaultShadow,
   vibrant as defaultVibrant,
 } from './globalColors.js';
-import {
-  GenerateNeutralPalette,
-  GenerateVibrantPalette,
-} from './paletteGen.js';
+import { GenerateAllPalettes, type ChromePalette } from './paletteGen.js';
 
 export type ThemeLayout = Corner &
   CtrlAvatarLayout &
@@ -323,28 +320,83 @@ const utilityLayoutTemplate = {
 } as ThemeLayout;
 
 export function lightTheme(themeColor?: string): Theme {
-  const themed = themeColor !== undefined;
+  let palettes: ChromePalette | undefined;
   let neutral = defaultNeutral;
   const shadow = defaultShadow;
   let vibrant = defaultVibrant;
 
-  if (themed) {
-    neutral = GenerateNeutralPalette(themeColor);
-    vibrant = GenerateVibrantPalette(themeColor);
+  if (themeColor) {
+    palettes = GenerateAllPalettes(themeColor);
+    const lightOffset = -4;
+    neutral = {
+      0: palettes.vibrant.neutralVariant[100],
+      4: palettes.vibrant.neutralVariant[97 + lightOffset],
+      8: palettes.vibrant.neutralVariant[91 + lightOffset],
+      100: palettes.vibrant.neutralVariant[98 + lightOffset],
+      104: palettes.vibrant.neutralVariant[93 + lightOffset],
+      108: palettes.vibrant.neutralVariant[88 + lightOffset],
+      150: palettes.vibrant.neutralVariant[96 + lightOffset],
+      154: palettes.vibrant.neutralVariant[93 + lightOffset],
+      158: palettes.vibrant.neutralVariant[88 + lightOffset],
+      200: palettes.vibrant.neutralVariant[94 + lightOffset],
+      250: palettes.vibrant.neutralVariant[88 + lightOffset],
+      300: palettes.vibrant.neutralVariant[82 + lightOffset],
+      304: palettes.vibrant.neutralVariant[79 + lightOffset],
+      308: palettes.vibrant.neutralVariant[73 + lightOffset],
+      350: palettes.vibrant.neutralVariant[69 + lightOffset],
+      400: palettes.vibrant.neutralVariant[60 + lightOffset],
+      404: palettes.vibrant.neutralVariant[63 + lightOffset],
+      408: palettes.vibrant.neutralVariant[69 + lightOffset],
+      450: palettes.vibrant.neutralVariant[48 + lightOffset],
+      454: palettes.vibrant.neutralVariant[45 + lightOffset],
+      458: palettes.vibrant.neutralVariant[39 + lightOffset],
+      500: palettes.vibrant.neutralVariant[40 + lightOffset],
+      550: palettes.vibrant.neutralVariant[29 + lightOffset],
+      554: palettes.vibrant.neutralVariant[32 + lightOffset],
+      558: palettes.vibrant.neutralVariant[38 + lightOffset],
+      600: palettes.vibrant.neutralVariant[24 + lightOffset],
+      650: palettes.vibrant.neutralVariant[20 + lightOffset],
+      700: palettes.vibrant.neutralVariant[18 + lightOffset],
+      704: palettes.vibrant.neutralVariant[21 + lightOffset],
+      708: palettes.vibrant.neutralVariant[27 + lightOffset],
+      750: palettes.vibrant.neutralVariant[16 + lightOffset],
+      754: palettes.vibrant.neutralVariant[19 + lightOffset],
+      758: palettes.vibrant.neutralVariant[25 + lightOffset],
+      800: palettes.vibrant.neutralVariant[12 + lightOffset],
+      804: palettes.vibrant.neutralVariant[15 + lightOffset],
+      808: palettes.vibrant.neutralVariant[21 + lightOffset],
+      1000: palettes.vibrant.neutralVariant[0],
+    };
+    vibrant = {
+      100: palettes.vibrant.primary[96],
+      104: palettes.vibrant.primary[93],
+      108: palettes.vibrant.primary[87],
+      200: palettes.vibrant.primary[92],
+      300: palettes.vibrant.primary[84],
+      304: palettes.vibrant.primary[64],
+      308: palettes.vibrant.primary[70],
+      400: palettes.vibrant.primary[63],
+      500: palettes.vibrant.primary[53],
+      504: palettes.vibrant.primary[43],
+      508: palettes.vibrant.primary[37],
+      600: palettes.vibrant.primary[47],
+      604: palettes.vibrant.primary[21],
+      608: palettes.vibrant.primary[27],
+    };
   }
 
   return resolveNestedVariables({
     ...legacyLightTokens,
     ...lightAiColors,
     ...lightAvatarColors(neutral),
-    ...lightBackgroundColors(themed, neutral, vibrant),
+    ...lightBackgroundColors(neutral, vibrant, palettes),
     ...lightChoiceColors(neutral),
     ...lightComposerColors,
     ...lightDialogColors(neutral, shadow),
     ...lightDragColors(neutral),
     ...lightFabColors(neutral, shadow),
     ...lightFocusColors(neutral),
-    ...lightForegroundColors(themed, neutral, vibrant),
+    ...lightForegroundColors(neutral, vibrant, palettes),
     ...lightIdentityFlyoutColors(neutral),
     ...lightInputColors,
     ...lightLinkColors(vibrant),
@@ -352,7 +404,7 @@ export function lightTheme(themeColor?: string): Theme {
     ...lightLiteFilterColors(neutral),
     ...lightMaterialColors(neutral),
     ...lightNullColors,
-    ...lightOmniboxColors(neutral),
+    ...lightOmniboxColors(neutral, palettes),
     ...lightProgressColors(neutral),
     ...lightRatingColors,
     ...lightSegmentedColors(neutral),
@@ -360,41 +412,106 @@ export function lightTheme(themeColor?: string): Theme {
     ...lightSliderColors,
     ...lightStatusColors(neutral, vibrant),
     ...lightStrokeColors(neutral),
-    ...lightTabColors(themed, neutral, vibrant),
+    ...lightTabColors(neutral, palettes),
     ...lightTooltipColors(neutral, shadow),
     ...utilityLayoutTemplate,
   } as Theme);
 }
 
-export async function darkTheme(themeColor?: string) {
+export function darkTheme(themeColor?: string): Theme {
+  let palettes: ChromePalette | undefined;
+  let neutral = defaultNeutral;
+  const shadow = defaultShadow;
+  let vibrant = defaultVibrant;
+
+  if (themeColor) {
+    palettes = GenerateAllPalettes(themeColor);
+    const lightOffset = -8;
+    neutral = {
+      0: palettes.vibrant.neutralVariant[100 + lightOffset],
+      4: palettes.vibrant.neutralVariant[97 + lightOffset],
+      8: palettes.vibrant.neutralVariant[91 + lightOffset],
+      100: palettes.vibrant.neutralVariant[98 + lightOffset],
+      104: palettes.vibrant.neutralVariant[93 + lightOffset],
+      108: palettes.vibrant.neutralVariant[88 + lightOffset],
+      150: palettes.vibrant.neutralVariant[96 + lightOffset],
+      154: palettes.vibrant.neutralVariant[93 + lightOffset],
+      158: palettes.vibrant.neutralVariant[88 + lightOffset],
+      200: palettes.vibrant.neutralVariant[94 + lightOffset],
+      250: palettes.vibrant.neutralVariant[88 + lightOffset],
+      300: palettes.vibrant.neutralVariant[82],
+      304: palettes.vibrant.neutralVariant[79],
+      308: palettes.vibrant.neutralVariant[73],
+      350: palettes.vibrant.neutralVariant[69],
+      400: palettes.vibrant.neutralVariant[60],
+      404: palettes.vibrant.neutralVariant[63],
+      408: palettes.vibrant.neutralVariant[69],
+      450: palettes.vibrant.neutralVariant[48],
+      454: palettes.vibrant.neutralVariant[45],
+      458: palettes.vibrant.neutralVariant[39],
+      500: palettes.vibrant.neutralVariant[40],
+      550: palettes.vibrant.neutralVariant[29],
+      554: palettes.vibrant.neutralVariant[32],
+      558: palettes.vibrant.neutralVariant[38],
+      600: palettes.vibrant.neutralVariant[24],
+      650: palettes.vibrant.neutralVariant[20],
+      700: palettes.vibrant.neutralVariant[18],
+      704: palettes.vibrant.neutralVariant[21],
+      708: palettes.vibrant.neutralVariant[27],
+      750: palettes.vibrant.neutralVariant[16],
+      754: palettes.vibrant.neutralVariant[19],
+      758: palettes.vibrant.neutralVariant[25],
+      800: palettes.vibrant.neutralVariant[12],
+      804: palettes.vibrant.neutralVariant[15],
+      808: palettes.vibrant.neutralVariant[21],
+      1000: palettes.vibrant.neutralVariant[0],
+    };
+    vibrant = {
+      100: palettes.vibrant.primary[96],
+      104: palettes.vibrant.primary[93],
+      108: palettes.vibrant.primary[87],
+      200: palettes.vibrant.primary[92],
+      300: palettes.vibrant.primary[84],
+      304: palettes.vibrant.primary[64],
+      308: palettes.vibrant.primary[70],
+      400: palettes.vibrant.primary[63],
+      500: palettes.vibrant.primary[53],
+      504: palettes.vibrant.primary[43],
+      508: palettes.vibrant.primary[37],
+      600: palettes.vibrant.primary[47],
+      604: palettes.vibrant.primary[21],
+      608: palettes.vibrant.primary[27],
+    };
+  }
+
   return resolveNestedVariables({
     ...darkAiColors,
-    ...darkAvatarColors,
-    ...darkBackgroundColors,
-    ...darkChoiceColors,
+    ...darkAvatarColors(neutral),
+    ...darkBackgroundColors(neutral, vibrant, palettes),
+    ...darkChoiceColors(neutral),
     ...darkComposerColors,
-    ...darkDialogColors,
-    ...darkDragColors,
-    ...darkFabColors,
-    ...darkFocusColors,
-    ...darkForegroundColors,
-    ...darkIdentityFlyoutColors,
+    ...darkDialogColors(neutral, shadow),
+    ...darkDragColors(neutral),
+    ...darkFabColors(neutral, shadow),
+    ...darkFocusColors(neutral),
+    ...darkForegroundColors(neutral),
+    ...darkIdentityFlyoutColors(neutral),
     ...darkInputColors,
-    ...darkLinkColors,
-    ...darkListColors,
-    ...darkLiteFilterColors,
+    ...darkLinkColors(vibrant),
+    ...darkListColors(neutral),
+    ...darkLiteFilterColors(neutral),
     ...darkMaterialColors,
     ...darkNullColors,
-    ...darkOmniboxColors,
-    ...darkProgressColors,
+    ...darkOmniboxColors(neutral, palettes),
+    ...darkProgressColors(neutral),
     ...darkRatingColors,
-    ...darkSegmentedColors,
+    ...darkSegmentedColors(neutral),
     ...darkShadowColors,
     ...darkSliderColors,
     ...darkStatusColors,
     ...darkStrokeColors,
-    ...darkTabColors,
-    ...darkTooltipColors,
+    ...darkTabColors(neutral, palettes),
+    ...darkTooltipColors(neutral, shadow),
     ...legacyDarkTokens,
     ...utilityLayoutTemplate,
   } as Theme);

@@ -27,6 +27,8 @@ import type {
   CtrlTooltipColors,
 } from './ctrlColors.js';
 
+import type { ChromePalette } from './paletteGen.js';
+
 export const lightComposerColors: CtrlComposerColors = {
   controlComposerContainerBackgroundDefault:
     '{ctrlComposerContainerBackgroundDefault}',
@@ -223,13 +225,24 @@ export function lightLiteFilterColors(
   };
 }
 
-export function lightOmniboxColors(neutral: NeutralColors): CtrlOmniboxColors {
+export function lightOmniboxColors(
+  neutral: NeutralColors,
+  palette?: ChromePalette,
+): CtrlOmniboxColors {
   return {
-    ctrlOmniboxBackgroundHover: neutral[4],
-    ctrlOmniboxBackgroundRest: neutral[0],
+    ctrlOmniboxBackgroundHover: palette
+      ? palette.tonal.neutral[88]
+      : neutral[4],
+    ctrlOmniboxBackgroundRest: palette
+      ? palette.tonal.neutral[92]
+      : neutral[0],
     ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
-    ctrlOmniboxStrokeRest: '{strokeCtrlOnoutlineRest}',
-    ctrlOmniboxStrokeHover: '{strokeCtrlOnoutlineHover}',
+    ctrlOmniboxStrokeRest: palette
+      ? '{nullColor}'
+      : '{strokeCtrlOnoutlineRest}',
+    ctrlOmniboxStrokeHover: palette
+      ? '{nullColor}'
+      : '{strokeCtrlOnoutlineHover}',
   };
 }
 
@@ -288,12 +301,13 @@ export const lightSliderColors: CtrlSliderColors = {
 };
 
 export function lightTabColors(
-  theme: boolean,
   neutral: NeutralColors,
-  vibrant: VibrantColors,
+  palette?: ChromePalette,
 ): CtrlTabColors {
   return {
-    ctrlTabBackgroundHorizontalActive: neutral[0],
+    ctrlTabBackgroundHorizontalActive: palette
+      ? palette.vibrant.neutralVariant[98]
+      : neutral[0],
     ctrlTabBackgroundVerticalActive: neutral[150],
   };
 }

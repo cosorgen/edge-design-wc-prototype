@@ -20,6 +20,8 @@ import type {
   ThemeStrokeColors,
 } from './themeColors.js';
 
+import type { ChromePalette } from './paletteGen.js';
+
 export const lightNullColors: ThemeNullColors = {
   nullColor: alphaWhite[0],
   nullColorBackground: '{nullColor}',
@@ -29,9 +31,9 @@ export const lightNullColors: ThemeNullColors = {
 };
 
 export function lightBackgroundColors(
-  theme: boolean,
   neutral: NeutralColors,
   vibrant: VibrantColors,
+  palette?: ChromePalette,
 ): ThemeBackgroundColors {
   return {
     backgroundCardOnflyoutDefaultDisabled: neutral[0],
@@ -68,10 +70,10 @@ export function lightBackgroundColors(
     backgroundCtrlActivebrandHover: '{backgroundCtrlBrandHover}',
     backgroundCtrlActivebrandPressed: '{backgroundCtrlBrandPressed}',
     backgroundCtrlActivebrandRest: '{backgroundCtrlBrandRest}',
-    backgroundCtrlBrandDisabled: theme ? vibrant[200] : neutral[200],
-    backgroundCtrlBrandHover: theme ? vibrant[604] : neutral[754],
-    backgroundCtrlBrandPressed: theme ? vibrant[608] : neutral[758],
-    backgroundCtrlBrandRest: theme ? vibrant[600] : neutral[750],
+    backgroundCtrlBrandDisabled: palette ? vibrant[200] : neutral[200],
+    backgroundCtrlBrandHover: palette ? vibrant[604] : neutral[754],
+    backgroundCtrlBrandPressed: palette ? vibrant[608] : neutral[758],
+    backgroundCtrlBrandRest: palette ? vibrant[600] : neutral[750],
     backgroundCtrlNeutralDisabled: neutral[200],
     backgroundCtrlNeutralHover: neutral[154],
     backgroundCtrlNeutralPressed: neutral[158],
@@ -116,9 +118,13 @@ export function lightBackgroundColors(
     backgroundWindowSecondaryLumBlend: '{nullColor}',
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
-    backgroundWindowTabBandInactive: theme ? vibrant[100] : neutral[200],
+    backgroundWindowTabBandInactive: palette
+      ? palette.vibrant.primary[92]
+      : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
-    backgroundWindowTabBandSolid: theme ? vibrant[200] : neutral[250],
+    backgroundWindowTabBandSolid: palette
+      ? palette.vibrant.primary[88]
+      : neutral[250],
   };
 }
 
@@ -195,9 +201,9 @@ export function lightStrokeColors(neutral: NeutralColors): ThemeStrokeColors {
 }
 
 export function lightForegroundColors(
-  theme: boolean,
   neutral: NeutralColors,
   vibrant: VibrantColors,
+  palette?: ChromePalette,
 ): ThemeForegroundColors {
   return {
     foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',
@@ -234,10 +240,10 @@ export function lightForegroundColors(
     foregroundCtrlActivebrandHover: '{foregroundCtrlBrandHover}',
     foregroundCtrlActivebrandPressed: '{foregroundCtrlBrandPressed}',
     foregroundCtrlActivebrandRest: '{foregroundCtrlBrandRest}',
-    foregroundCtrlBrandDisabled: theme ? vibrant[200] : neutral[350],
+    foregroundCtrlBrandDisabled: palette ? vibrant[200] : neutral[350],
     foregroundCtrlBrandHover: '{foregroundCtrlBrandRest}',
     foregroundCtrlBrandPressed: '{foregroundCtrlBrandRest}',
-    foregroundCtrlBrandRest: theme ? vibrant[600] : neutral[750],
+    foregroundCtrlBrandRest: palette ? vibrant[600] : neutral[750],
     foregroundCtrlHintDefault: neutral[300],
     foregroundCtrlIconOnneutralDisabled:
       '{foregroundCtrlNeutralPrimaryDisabled}',
