@@ -3,10 +3,16 @@ import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
+  foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentMedium,
   gapBetweenContentSmall,
+  gapBetweenContentXsmall,
   paddingContentMedium,
   shadowFlyout,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textGlobalCaption2Fontsize,
+  textGlobalCaption2Lineheight,
 } from '@edge-design/kumo-theme/tokens.js';
 import { gapBetweenContentXxsmall } from '@edge-design/kumo-theme/tokens.js';
 import { statusSuccessTintForeground } from '@edge-design/kumo-theme/tokens.js';
@@ -16,6 +22,9 @@ import { textGlobalBody2Lineheight } from '@edge-design/kumo-theme/tokens.js';
 import { textGlobalCaption1Fontsize } from '@edge-design/kumo-theme/tokens.js';
 import { textStyleDefaultRegularWeight } from '@edge-design/kumo-theme/tokens.js';
 import { textGlobalCaption1Lineheight } from '@edge-design/kumo-theme/tokens.js';
+import '@mai-ui/link/define.js';
+import '@mai-ui/menu-list/define.js';
+import '@mai-ui/menu-item/define.js';
 
 const template = html<IdentityMenu>` <div id="top-row">
     <img id="avatar" src="./img/edge/profile_dog.png" alt="User Avatar" />
@@ -56,6 +65,58 @@ const template = html<IdentityMenu>` <div id="top-row">
         </mai-button>
       </div>
     </div>
+    <div class="wallet-row">
+      <div id="start">
+        <svg>
+          <use href="./img/edge/icons.svg#reward-20-regular"></use>
+        </svg>
+      </div>
+      <div id="end">
+        <div id="title">Microsoft Rewards</div>
+        <div id="content">
+          <div>3,290 pts</div>
+          <mai-link href="#" size="small">Redeem</mai-link>
+        </div>
+      </div>
+    </div>
+    <div class="wallet-row">
+      <div id="start">
+        <svg>
+          <use href="./img/edge/icons.svg#tag-20-regular"></use>
+        </svg>
+      </div>
+      <div id="end">
+        <div id="title">Microsoft Cashback</div>
+        <div id="content">
+          <div>$30.56</div>
+          <mai-link href="#" size="small">Get paid</mai-link>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <mai-menu-list>
+      <mai-menu-item>
+        <img
+          width="20"
+          height="20"
+          src="./img/edge/profile_guest.png"
+          alt="User Avatar"
+          slot="start"
+        />
+        Work
+        <span slot="end">johnsmith@contoso.com</span>
+      </mai-menu-item>
+      <mai-menu-item>
+        <svg slot="start" width="20" height="20">
+          <use href="./img/edge/icons.svg#person-switch-20-regular"></use>
+        </svg>
+        Other profiles
+        <mai-menu-list slot="submenu">
+          <mai-menu-item> Test profile </mai-menu-item>
+        </mai-menu-list>
+      </mai-menu-item>
+    </mai-menu-list>
   </div>`;
 
 const styles = css`
@@ -128,9 +189,70 @@ const styles = css`
   #wallet {
     display: flex;
     flex-direction: column;
+    gap: ${gapBetweenContentXxsmall};
+
+    & > span {
+      font-size: ${textGlobalBody3Fontsize};
+      line-height: ${textGlobalBody3Lineheight};
+      font-weight: ${textStyleDefaultHeaderWeight};
+      color: ${foregroundCtrlNeutralPrimaryRest};
+    }
 
     #header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
+  }
+
+  .wallet-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: ${gapBetweenContentXsmall};
+
+    #start {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    #end {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      #title {
+        font-size: ${textGlobalCaption2Fontsize};
+        line-height: ${textGlobalCaption2Lineheight};
+        color: ${foregroundCtrlNeutralSecondaryRest};
+      }
+
+      #content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: ${gapBetweenContentXxsmall};
+        font-size: ${textGlobalBody3Fontsize};
+        line-height: ${textGlobalBody3Lineheight};
+        font-weight: ${textStyleDefaultHeaderWeight};
+        color: ${foregroundCtrlNeutralPrimaryRest};
+      }
+    }
+  }
+
+  #footer > mai-menu-list {
+    padding: 0;
+    box-shadow: none;
   }
 `;
 

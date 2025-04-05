@@ -110,6 +110,17 @@ const template = html<PalettePlayground>`
         </mai-listbox>
       </mai-dropdown>
       <mai-link href="#">Link</mai-link>
+      <mai-radio checked>Radio</mai-radio>
+      <mai-slider min="0" max="100" value="50" step="10"></mai-slider>
+      <mai-tooltip anchor="tooltip"> This is a tooltip </mai-tooltip>
+      <mai-button id="tooltip">Tooltip</mai-button>
+      <mai-tree>
+        <mai-tree-item expanded>
+          Item 1
+          <mai-tree-item>Item 2</mai-tree-item>
+          <mai-tree-item>Item 3</mai-tree-item>
+        </mai-tree-item>
+      </mai-tree>
       <mai-progress-bar appearance="indeterminate"></mai-progress-bar>
       <mai-message-bar intent="info"
         ><span slot="icon">
@@ -148,17 +159,6 @@ const template = html<PalettePlayground>`
             ></path>
           </svg> </mai-button
       ></mai-message-bar>
-      <mai-radio checked>Radio</mai-radio>
-      <mai-slider min="0" max="100" value="50" step="10"></mai-slider>
-      <mai-tooltip anchor="tooltip"> This is a tooltip </mai-tooltip>
-      <mai-button id="tooltip">Tooltip</mai-button>
-      <mai-tree>
-        <mai-tree-item expanded>
-          Item 1
-          <mai-tree-item>Item 2</mai-tree-item>
-          <mai-tree-item>Item 3</mai-tree-item>
-        </mai-tree-item>
-      </mai-tree>
     </div>
   </div>
   <div class="group">
