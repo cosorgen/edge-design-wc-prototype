@@ -97,15 +97,15 @@ const template = html<IdentityMenu>` <div id="top-row">
   <div id="footer">
     <mai-menu-list>
       <mai-menu-item>
-        <img
-          width="20"
-          height="20"
-          src="./img/edge/profile_guest.png"
-          alt="User Avatar"
-          slot="start"
-        />
+        <span slot="start">
+          <img src="./img/edge/profile_guest.png" width="20" />
+        </span>
         Work
         <span slot="end">johnsmith@contoso.com</span>
+
+        <mai-menu-list slot="submenu">
+          <mai-menu-item> Work profile </mai-menu-item>
+        </mai-menu-list>
       </mai-menu-item>
       <mai-menu-item>
         <svg slot="start" width="20" height="20">
