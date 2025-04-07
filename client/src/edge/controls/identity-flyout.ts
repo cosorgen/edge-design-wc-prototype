@@ -150,6 +150,7 @@ const styles = css`
     }
 
     & > div {
+      flex: 1;
       display: flex;
       flex-direction: column;
       gap: ${gapBetweenContentXxsmall};

@@ -268,3 +268,5 @@ export type { Tokens } from './themeToTokens.js';
 export { themeToTokens, tokens } from './themeToTokens.js';
 
 export { setTheme, setThemeFor } from './setTheme.js';
+
+export { GenerateAllPalettes } from './paletteGen.js';

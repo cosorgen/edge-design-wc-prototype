@@ -433,7 +433,7 @@ export function darkTheme(themeColor?: string): Theme {
 
   if (themeColor) {
     palettes = GenerateAllPalettes(themeColor);
-    const highlightOffset = -8;
+    const highlightOffset = -4;
     const offset = 12;
     neutral = {
       0: palettes.expressive.neutralVariant[100 + highlightOffset],
