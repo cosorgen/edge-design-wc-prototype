@@ -10,14 +10,6 @@ import '@edge-design/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
 import {
-  shadowLayerAmbientX,
-  shadowLayerKeyBlur,
-  shadowLayerKeyColor,
-  shadowLayerKeyX,
-  shadowLayerKeyY,
-  shadowLayerAmbientY,
-  shadowLayerAmbientBlur,
-  shadowLayerAmbientColor,
   gapInsideCtrlDefault,
   paddingCtrlHorizontalDefault,
   paddingContentXsmall,
@@ -28,16 +20,12 @@ import {
   textStyleDefaultRegularWeight,
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
-  ctrlTabBackgroundHorizontalActive,
   cornerCtrlSmRest,
-  paddingWindowDefault,
-  ctrlTabBackgroundHorizontalHover,
+  ctrlTabBackgroundVerticalHover,
+  ctrlTabBackgroundVerticalActive,
 } from '@edge-design/kumo-theme/tokens.js';
 
-const template = html<HorizontalTab>`
-  <div class="tab-background" id="bg"></div>
-  <div class="tab-background" id="left-wing"></div>
-  <div class="tab-background" id="right-wing"></div>
+const template = html<VerticalTab>`
   <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">
     <div id="favicon" part="favicon">
       ${when(
@@ -77,17 +65,6 @@ const styles = css`
     height: 32px;
   }
 
-  :host([active]) {
-    filter: drop-shadow(
-        ${shadowLayerKeyX} ${shadowLayerKeyY} ${shadowLayerKeyBlur}
-          ${shadowLayerKeyColor}
-      )
-      drop-shadow(
-        ${shadowLayerAmbientX} ${shadowLayerAmbientY} ${shadowLayerAmbientBlur}
-          ${shadowLayerAmbientColor}
-      );
-  }
-
   button {
     position: absolute;
     inset: 0;
@@ -106,22 +83,17 @@ const styles = css`
   }
 
   button:hover {
-    background-color: ${ctrlTabBackgroundHorizontalHover};
+    background-color: ${ctrlTabBackgroundVerticalHover};
     color: ${foregroundCtrlNeutralPrimaryHover};
   }
 
   :host([active]) button {
     cursor: default;
+    background-color: ${ctrlTabBackgroundVerticalActive};
   }
 
   :host([active]) button:hover {
-    background-color: transparent;
-  }
-
-  :host([active]) #bg,
-  :host([active]) #left-wing,
-  :host([active]) #right-wing {
-    visibility: visible;
+    background-color: ${ctrlTabBackgroundVerticalActive};
   }
 
   #title {
@@ -169,48 +141,13 @@ const styles = css`
     border-radius: ${cornerCtrlSmRest};
   }
 
-  .tab-background {
-    background-color: ${ctrlTabBackgroundHorizontalActive};
-  }
-
-  #bg,
-  #left-wing,
-  #right-wing {
-    visibility: hidden;
-    position: absolute;
-    overflow: hidden;
-  }
-
-  #bg {
-    inset: 0;
-    bottom: calc(0px - ${paddingWindowDefault});
-    border-radius: ${cornerCtrlRest} ${cornerCtrlRest} 0 0;
-  }
-
-  #left-wing,
-  #right-wing {
-    width: 10px;
-    height: 10px;
-    bottom: calc(0px - ${paddingWindowDefault});
-    clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
-  }
-
-  #left-wing {
-    left: -10px;
-  }
-
-  #right-wing {
-    right: -10px;
-    transform: rotate(90deg);
-  }
-
   mai-spinner {
     --size: 16px;
   }
 `;
 
-@customElement({ name: 'horizontal-tab', template, styles })
-export class HorizontalTab extends FASTElement {
+@customElement({ name: 'vertical-tab', template, styles })
+export class VerticalTab extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) loading = false;
   handleClick(e: MouseEvent) {

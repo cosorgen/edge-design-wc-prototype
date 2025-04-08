@@ -32,6 +32,7 @@ import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
+import './views/vertical-tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
 import './views/copilot-entrypoint/index.js';
@@ -42,7 +43,7 @@ import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
-  <tab-bar></tab-bar>
+  ${when((x) => x.ss.verticalTabs, html``, html`<tab-bar></tab-bar>`)}
   <div class="row">
     <div id="activeTab">
       <div id="content">
@@ -51,7 +52,13 @@ const template = html<MicrosoftEdge>`
           (x) => x.shouldFavoritesBarRender(),
           html`<favorites-bar></favorites-bar>`,
         )}
-        <web-content></web-content>
+        <div id="web-vertical-tabs">
+          ${when(
+            (x) => x.ss.verticalTabs,
+            html`<vertical-tab-bar></vertical-tab-bar>`,
+          )}
+          <web-content></web-content>
+        </div>
       </div>
     </div>
     ${when(
@@ -108,6 +115,13 @@ const styles = css`
     display: flex;
     flex-direction: column;
     background-color: ${ctrlTabBackgroundHorizontalActive};
+    overflow: hidden;
+  }
+
+  #web-vertical-tabs {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
     overflow: hidden;
   }
 

@@ -18,12 +18,17 @@ import {
   shadowLayer,
   paddingWindowDefault,
 } from '@edge-design/kumo-theme/tokens.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>
   <div id="content">
     <div class="group">
-      <mai-button appearance="subtle" icon-only>
+      <mai-button
+        appearance="subtle"
+        icon-only
+        @click="${(x) => x.showVerticalTabs()}"
+      >
         <svg>
           <use href="img/edge/icons.svg#panel-left-text-20-regular" />
         </svg>
@@ -163,6 +168,7 @@ export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -203,4 +209,8 @@ export class TabBar extends FASTElement {
     e.preventDefault();
     return false;
   };
+
+  showVerticalTabs() {
+    this.ss.verticalTabs = true;
+  } 
 }

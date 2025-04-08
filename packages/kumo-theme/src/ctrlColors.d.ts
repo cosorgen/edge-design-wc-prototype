@@ -210,7 +210,9 @@ export type CtrlSliderColors = {
 
 export type CtrlTabColors = {
   ctrlTabBackgroundHorizontalActive: string;
+  ctrlTabBackgroundHorizontalHover: string;
   ctrlTabBackgroundVerticalActive: string;
+  ctrlTabBackgroundVerticalHover: string;
 };
 
 export type CtrlTooltipColors = {

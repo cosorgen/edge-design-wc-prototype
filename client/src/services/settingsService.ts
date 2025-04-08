@@ -13,6 +13,7 @@ export default class EdgeSettingsSerivce {
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
   @observable themeColor?: string;
+  @observable verticalTabs = false;
 
   constructor() {
     // Load settings from local storage

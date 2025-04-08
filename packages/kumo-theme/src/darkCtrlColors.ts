@@ -305,7 +305,13 @@ export function darkTabColors(
     ctrlTabBackgroundHorizontalActive: palette
       ? palette.tonal.secondary[22]
       : neutral[650],
-    ctrlTabBackgroundVerticalActive: neutral[500],
+    ctrlTabBackgroundHorizontalHover: palette
+      ? palette.tonal.primary[32]
+      : '{backgroundCtrlSubtleHover}',
+    ctrlTabBackgroundVerticalActive: palette
+      ? palette.tonal.primary[32]
+      : neutral[500],
+    ctrlTabBackgroundVerticalHover: '{backgroundCtrlSubtleHover}',
   };
 }
 

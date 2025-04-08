@@ -308,7 +308,13 @@ export function lightTabColors(
     ctrlTabBackgroundHorizontalActive: palette
       ? palette.neutral.secondary[98]
       : neutral[0],
-    ctrlTabBackgroundVerticalActive: neutral[150],
+    ctrlTabBackgroundHorizontalHover: palette
+      ? palette.tonal.primary[78]
+      : '{backgroundCtrlSubtleHover}',
+    ctrlTabBackgroundVerticalActive: palette
+      ? palette.tonal.primary[92]
+      : neutral[150],
+    ctrlTabBackgroundVerticalHover: '{backgroundCtrlSubtleHover}',
   };
 }
 
