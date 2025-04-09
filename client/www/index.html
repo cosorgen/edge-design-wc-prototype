@@ -1,38 +1,39 @@
 <!doctype html>
 <html lang="en-us">
+  <head>
+    <title>Kumo theming Prototype</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=1.0" />
+    <script src="bundle.js" type="module"></script>
+    <style>
+      @font-face {
+        font-family: 'Ginto';
+        src:
+          url('fonts/Ginto-Copilot-Upright-Variable.woff2')
+            format('woff2 supports variations'),
+          url('fonts/Ginto-Copilot-Upright-Variable.woff2')
+            format('woff2-variations');
+        font-weight: 100 900;
+      }
 
-<head>
-  <title>Kumo theming Prototype</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="icon" type="image/x-icon" href="favicon.ico?v=1.0" />
-  <script src="bundle.js" type="module"></script>
-  <style>
-    @font-face {
-      font-family: "Ginto";
-      src: url('fonts/Ginto-Copilot-Upright-Variable.woff2') format('woff2 supports variations'),
-        url('fonts/Ginto-Copilot-Upright-Variable.woff2') format('woff2-variations');
-      font-weight: 100 900;
-    }
+      * {
+        box-sizing: border-box;
+      }
 
-    * {
-      box-sizing: border-box;
-    }
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      }
 
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
+      *:not(:defined) {
+        display: none;
+      }
+    </style>
+  </head>
 
-    *:not(:defined) {
-      display: none;
-    }
-  </style>
-</head>
-
-<body>
-  <app-root></app-root>
-</body>
-
+  <body>
+    <app-root></app-root>
+  </body>
 </html>

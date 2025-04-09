@@ -8,6 +8,9 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import '@edge-design/button/define.js';
 import '../controls/vertical-tab.js';
+import '../controls/menu-item.js';
+import '../controls/flyout-menu.js';
+import '../controls/context-menu.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -21,13 +24,56 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<VerticalTabBar>`
   <div class="group">
-    <mai-button
-      appearance="subtle"
-      icon-only
-      @click="${(x) => x.hideVerticalTabs()}"
-    >
+    <flyout-menu>
+      <mai-button appearance="subtle" icon-only slot="trigger">
+        <svg>
+          <use href="img/edge/icons.svg#panel-left-text-20-regular" />
+        </svg>
+      </mai-button>
+      <context-menu>
+        <menu-item @click="${(x) => x.hideVerticalTabs()}" start-slot>
+          <svg slot="start">
+            <use
+              href="img/edge/icons.svg#tab-position-switch-to-horizontal-20-regular"
+            />
+          </svg>
+          Turn off vertical tabs
+        </menu-item>
+        <menu-item start-slot>
+          <svg slot="start">
+            <use href="img/edge/icons.svg#search-20-regular" />
+          </svg>
+          Search tabs
+        </menu-item>
+        <menu-item start-slot>
+          <svg slot="start">
+            <use href="img/edge/icons.svg#tabs-20-regular" />
+          </svg>
+          Organize tabs
+        </menu-item>
+        <menu-item start-slot>
+          <svg slot="start">
+            <use href="img/edge/icons.svg#tab-desktop-clock-20-regular" />
+          </svg>
+          Recently closed tabs
+        </menu-item>
+        <menu-item start-slot>
+          <svg slot="start">
+            <use href="img/edge/icons.svg#phone-desktop-20-regular" />
+          </svg>
+          Tabs from other devices
+        </menu-item>
+        <menu-item start-slot>
+          <svg slot="start">
+            <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
+          </svg>
+          Create new workspace
+        </menu-item>
+      </context-menu>
+    </flyout-menu>
+    <mai-button appearance="subtle" icon-only>
       <svg>
-        <use href="img/edge/icons.svg#panel-left-text-20-regular" />
+        <use href="img/edge/icons.svg#chevron-left-20-regular" />
       </svg>
     </mai-button>
   </div>
@@ -87,6 +133,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     gap: calc(${paddingWindowDefault} * 2);
   }
 

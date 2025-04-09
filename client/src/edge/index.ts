@@ -32,6 +32,7 @@ import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
+import './views/title-bar.js';
 import './views/vertical-tab-bar.js';
 import './views/tool-bar.js';
 import './views/web-content.js';
@@ -43,7 +44,11 @@ import './views/caption-controls.js';
 
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
-  ${when((x) => x.ss.verticalTabs, html``, html`<tab-bar></tab-bar>`)}
+  ${when(
+    (x) => x.ss.verticalTabs,
+    html`<title-bar></title-bar>`,
+    html`<tab-bar></tab-bar>`,
+  )}
   <div class="row">
     <div id="activeTab">
       <div id="content">
