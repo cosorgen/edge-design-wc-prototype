@@ -12,8 +12,12 @@ import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
   lightTheme as kumoLightTheme,
   darkTheme as kumoDarkTheme,
+  setThemeFor,
 } from '@edge-design/kumo-theme';
-import { setThemeFor as setKumoThemeFor } from '@edge-design/kumo-theme';
+import {
+  lightTheme as phoenixLightTheme,
+  darkTheme as phoenixDarkTheme,
+} from '@edge-design/phoenix-theme';
 import {
   textStyleDefaultRegularWeight,
   ctrlTabBackgroundHorizontalActive,
@@ -217,7 +221,8 @@ export class MicrosoftEdge extends FASTElement {
       propertyName === 'transparency' ||
       propertyName === 'frameSpacing' ||
       propertyName === 'edgeTheme' ||
-      propertyName === 'themeColor'
+      propertyName === 'themeColor' ||
+      propertyName === 'designSystem'
     ) {
       this.clearTheme();
       this.setTheme();
@@ -226,14 +231,22 @@ export class MicrosoftEdge extends FASTElement {
 
   setTheme() {
     // Set up edge design system
-    const kumoThemes = {
-      light: kumoLightTheme,
-      dark: kumoDarkTheme,
+    const themes = {
+      kumo: {
+        light: kumoLightTheme,
+        dark: kumoDarkTheme,
+      },
+      phoenix: {
+        light: phoenixLightTheme,
+        dark: phoenixDarkTheme,
+      },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    const selectedKumoTheme = kumoThemes[themeKey](this.ss.themeColor);
-    selectedKumoTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
-    setKumoThemeFor(this.shadowRoot!, selectedKumoTheme);
+    const selectedTheme = themes[this.ss.designSystem][themeKey](
+      this.ss.themeColor,
+    );
+    selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
+    setThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   clearTheme() {

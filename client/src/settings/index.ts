@@ -133,6 +133,25 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'appearance'}">
           <h2>Overall appearance</h2>
           <div class="entry">
+            <label for="theme">Design system</label>
+            <mai-dropdown id="theme" @change="${(x) => x.updateDesignSystem()}">
+              <mai-listbox>
+                <mai-option
+                  value="kumo"
+                  ?selected="${(x) => x.ss.designSystem === 'kumo'}"
+                >
+                  Kumo
+                </mai-option>
+                <mai-option
+                  value="phoenix"
+                  ?selected="${(x) => x.ss.designSystem === 'phoenix'}"
+                >
+                  Phoenix
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
+          </div>
+          <div class="entry">
             <label for="theme">Theme</label>
             <mai-dropdown id="theme" @change="${(x) => x.updateTheme()}">
               <mai-listbox>
@@ -639,6 +658,15 @@ export class WindowsSettings extends FASTElement {
     ).value;
     if (newColor && newColor !== '') {
       this.ss.setThemeColor(newColor);
+    }
+  }
+
+  updateDesignSystem() {
+    const newDesignSystem = (
+      this.shadowRoot?.querySelector('#theme') as HTMLSelectElement
+    ).value as 'kumo' | 'phoenix';
+    if (newDesignSystem) {
+      this.ss.setDesignSystem(newDesignSystem);
     }
   }
 }

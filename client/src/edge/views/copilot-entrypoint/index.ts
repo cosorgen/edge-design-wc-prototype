@@ -22,7 +22,7 @@ import {
   borderRadiusLarge,
   spacingHorizontalM,
   spacingFrame,
-} from '@edge-design/phoenix-theme';
+} from '@edge-design/copilot-theme';
 import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';

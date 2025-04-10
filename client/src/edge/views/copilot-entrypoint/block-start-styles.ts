@@ -1,12 +1,12 @@
+import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 import { css } from '@microsoft/fast-element';
-import { spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */
 
   :host([block-position='start']) #composer {
     /* Center in margin */
-    inset-block-start: calc(var(--viewport-top) - ${spacingFrame} / 2);
+    inset-block-start: calc(var(--viewport-top) - ${paddingWindowDefault} / 2);
   }
 
   :host([block-position='start'][ntp]) #composer {
@@ -45,7 +45,9 @@ export default css`
   :host([block-position='start']) #grabber,
   :host([block-position='start']) #grabber-no-hint {
     /* Center in margin */
-    inset-block-start: calc(${spacingFrame} / 2 - var(--grabber-height) / 2);
+    inset-block-start: calc(
+      ${paddingWindowDefault} / 2 - var(--grabber-height) / 2
+    );
   }
 
   :host([block-position='start'][active]) #grabber {
@@ -68,7 +70,7 @@ export default css`
   :host([block-position='start'][active][dragging]) #grabber {
     /* Center in top 25% of hint composer */
     inset-block-start: calc(
-      var(--grabber-height) / 2 + ${spacingFrame} +
+      var(--grabber-height) / 2 + ${paddingWindowDefault} +
         var(--composer-retracted-height) * 0.25
     );
   }
@@ -106,7 +108,7 @@ export default css`
 
   :host([block-position='start'][active]) #hint-composer {
     /* top in margin */
-    inset-block-start: calc(var(--viewport-top) - ${spacingFrame} / 2);
+    inset-block-start: calc(var(--viewport-top) - ${paddingWindowDefault} / 2);
   }
 
   :host([block-position='start'][hint]) #hint-composer,

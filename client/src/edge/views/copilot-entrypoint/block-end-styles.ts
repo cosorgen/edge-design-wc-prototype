@@ -1,5 +1,5 @@
+import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 import { css } from '@microsoft/fast-element';
-import { spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */
@@ -7,7 +7,7 @@ export default css`
   :host([block-position='end']) #composer {
     /* Align to bottom - 1/2 margin */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) - ${spacingFrame} / 2
+      100% - var(--composer-expanded-height) - ${paddingWindowDefault} / 2
     );
   }
 
@@ -16,7 +16,7 @@ export default css`
     /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
       100% - var(--composer-expanded-height) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 
@@ -31,7 +31,7 @@ export default css`
     /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
       100% - var(--composer-expanded-height) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 
@@ -55,7 +55,7 @@ export default css`
   :host([block-position='end']) #grabber-no-hint {
     /* Center in margin */
     inset-block-start: calc(
-      100% - var(--grabber-height) / 2 - ${spacingFrame} / 2
+      100% - var(--grabber-height) / 2 - ${paddingWindowDefault} / 2
     );
   }
 
@@ -76,7 +76,7 @@ export default css`
     /* Center in top 25% of hint composer */
     inset-block-start: calc(
       100% - var(--grabber-height) / 2 -
-        ${spacingFrame} - var(--composer-retracted-height) * 0.25
+        ${paddingWindowDefault} - var(--composer-retracted-height) * 0.25
     );
   }
 
@@ -88,7 +88,7 @@ export default css`
     /* Alignt to bottom - margin */
     inset-block-start: calc(
       100% - var(--grabber-vertical-retracted-width) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 
@@ -103,7 +103,7 @@ export default css`
     inset-block-start: calc(
       100% - var(--grabber-vertical-expanded-width) -
         (var(--grabber-vertical-expanded-width) / 2) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 
@@ -117,7 +117,7 @@ export default css`
   :host([block-position='end'][active]) #hint-composer {
     /* bottom in margin */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) - ${spacingFrame} / 2
+      100% - var(--composer-retracted-height) - ${paddingWindowDefault} / 2
     );
   }
 
@@ -132,7 +132,7 @@ export default css`
     /* bottom over ntp */
     inset-block-start: calc(
       100% - var(--composer-retracted-height) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 
@@ -146,7 +146,7 @@ export default css`
     /* Align to bottom - margin - ntp offset */
     inset-block-start: calc(
       100% - var(--composer-retracted-height) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 `;

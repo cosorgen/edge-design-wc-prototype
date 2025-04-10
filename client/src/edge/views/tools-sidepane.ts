@@ -1,8 +1,8 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '../controls/sidepane-header.js';
-import { colorLayerBackgroundDialog } from '@edge-design/phoenix-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import { backgroundLayerSecondary } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ToolsSidepane>`<sidepane-header
   @close="${(x) => x.handleClose()}"
@@ -16,7 +16,7 @@ const styles = css`
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    background-color: ${colorLayerBackgroundDialog};
+    background-color: ${backgroundLayerSecondary};
   }
 `;
 

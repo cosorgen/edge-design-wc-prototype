@@ -1,12 +1,11 @@
-import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import {
-  spacingHorizontalL,
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerDialog,
-  colorNeutralForeground1,
-  shadow28,
-} from '@edge-design/phoenix-theme';
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  paddingContentMedium,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
+import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
 const template = html` Coupons available `;
 
@@ -15,13 +14,11 @@ const styles = css`
     display: block;
     width: 256px;
     height: 300px;
-    padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
+    padding: ${paddingContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;
 

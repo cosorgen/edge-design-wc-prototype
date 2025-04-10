@@ -1,3 +1,4 @@
+import { curveDecelerateMax, durationFast } from '@edge-design/kumo-theme/tokens.js';
 import {
   attr,
   css,
@@ -5,7 +6,6 @@ import {
   FASTElement,
   html,
 } from '@microsoft/fast-element';
-import { curveDecelerateMax, durationFast } from '@edge-design/phoenix-theme';
 
 // Popovers need to be manually controlled so that we can use context menus with trackpads
 const template = html<FlyoutMenu>`

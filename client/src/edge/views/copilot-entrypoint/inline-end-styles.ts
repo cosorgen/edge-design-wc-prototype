@@ -1,5 +1,5 @@
+import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 import { css } from '@microsoft/fast-element';
-import { spacingFrame } from '@edge-design/phoenix-theme';
 
 export default css`
   /* Composer */
@@ -7,14 +7,14 @@ export default css`
   :host([inline-position='end']) #composer {
     /* Start half in the margin */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${spacingFrame} / 2
+      100% - var(--composer-expanded-width) - ${paddingWindowDefault} / 2
     );
   }
 
   :host([inline-position='end'][ntp]) #composer {
     /* Start over ntp page */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${spacingFrame} /
+      100% - var(--composer-expanded-width) - ${paddingWindowDefault} /
         2 - var(--ntp-inset)
     );
   }
@@ -37,14 +37,14 @@ export default css`
   :host([inline-position='end']) #grabber-no-hint {
     /* Start centered in margin */
     inset-inline-start: calc(
-      100% - var(--grabber-height) / 2 - ${spacingFrame} / 2
+      100% - var(--grabber-height) / 2 - ${paddingWindowDefault} / 2
     );
   }
 
   :host([inline-position='end'][active]) #grabber {
     /* Offset composer expanded width + margin */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${spacingFrame}
+      100% - var(--composer-expanded-width) - ${paddingWindowDefault}
     );
   }
 
@@ -64,7 +64,7 @@ export default css`
   :host([inline-position='end'][active]) #hint-composer {
     /* half in margin */
     inset-inline-start: calc(
-      100% - var(--composer-retracted-width) - ${spacingFrame} / 2
+      100% - var(--composer-retracted-width) - ${paddingWindowDefault} / 2
     );
   }
 
@@ -72,7 +72,7 @@ export default css`
     /* over ntp */
     inset-inline-start: calc(
       100% - var(--composer-retracted-width) -
-        ${spacingFrame} - var(--ntp-inset)
+        ${paddingWindowDefault} - var(--ntp-inset)
     );
   }
 
