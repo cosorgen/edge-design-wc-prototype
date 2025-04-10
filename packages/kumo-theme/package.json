@@ -27,8 +27,7 @@
     "build": "npm run clean && npm run compile && node scripts/build.js && npm run test",
     "compile": "tsc",
     "clean": "rimraf dist",
-    "test": "node scripts/test.js",
-    "generate": "node scripts/generateMappings.js"
+    "test": "node scripts/test.js"
   },
   "devDependencies": {
     "@mai-ui/design-tokens": "^1.2.1",
