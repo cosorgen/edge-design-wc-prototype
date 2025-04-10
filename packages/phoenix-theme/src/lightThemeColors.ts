@@ -7,6 +7,7 @@ import {
   alphaBlack,
   alphaWhite,
   ShadowColors,
+  solid,
 } from './globalColors.js';
 
 import type {
@@ -101,30 +102,30 @@ export function lightBackgroundColors(
     backgroundFlyoutColorblend: '{backgroundFlyoutSolid}',
     backgroundFlyoutLumblend: '{backgroundFlyoutSolid}',
     backgroundFlyoutSolid: neutral[0],
-    backgroundLayerPrimarySolid: neutral[0],
-    backgroundLayerPrimaryStop1: neutral[0],
-    backgroundLayerPrimaryStop2: neutral[0],
-    backgroundLayerPrimaryStop3: neutral[0],
-    backgroundLayerSecondary: neutral[100],
-    backgroundLayerTertiary: neutral[100],
+    backgroundLayerPrimarySolid: palette ? neutral[0] : solid[100],
+    backgroundLayerPrimaryStop1: '{backgroundLayerPrimarySolid}',
+    backgroundLayerPrimaryStop2: '{backgroundLayerPrimarySolid}',
+    backgroundLayerPrimaryStop3: '{backgroundLayerPrimarySolid}',
+    backgroundLayerSecondary: palette ? neutral[100] : solid[96],
+    backgroundLayerTertiary: '{backgroundLayerSecondary}',
     backgroundSmoke: alphaBlack[30],
     backgroundToolbar: '{backgroundCardOnprimaryDefaultRest}',
     backgroundWebPagePrimary: '{backgroundLayerPrimarySolid}',
     backgroundWebPageSecondary: '{backgroundLayerSecondary}',
-    backgroundWindowPrimaryColorBlend: neutral[0],
-    backgroundWindowPrimaryLumBlend: neutral[0],
+    backgroundWindowPrimaryColorBlend: '{backgroundWindowPrimarySolid}',
+    backgroundWindowPrimaryLumBlend: '{backgroundWindowPrimarySolid}',
     backgroundWindowPrimarySolid: '{backgroundLayerPrimarySolid}',
     backgroundWindowSecondaryColorBlend: '{nullColor}',
     backgroundWindowSecondaryLumBlend: '{nullColor}',
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
-    backgroundWindowTabBandColorBlend: neutral[0],
+    backgroundWindowTabBandColorBlend: '{backgroundWindowTabBandSolid}',
     backgroundWindowTabBandInactive: palette
       ? palette.neutral.primary[92]
-      : neutral[200],
-    backgroundWindowTabBandLumBlend: neutral[0],
+      : solid[94],
+    backgroundWindowTabBandLumBlend: '{backgroundWindowTabBandSolid}',
     backgroundWindowTabBandSolid: palette
       ? palette.neutral.tertiary[90]
-      : neutral[250],
+      : solid[88],
   };
 }
 
