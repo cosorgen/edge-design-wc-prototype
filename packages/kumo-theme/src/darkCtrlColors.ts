@@ -230,10 +230,10 @@ export function darkOmniboxColors(
 ): CtrlOmniboxColors {
   return {
     ctrlOmniboxBackgroundHover: palette
-      ? palette.vibrant.neutral[26]
+      ? palette.tonal.neutralVariant[26]
       : neutral[704],
     ctrlOmniboxBackgroundRest: palette
-      ? palette.vibrant.neutral[14]
+      ? palette.tonal.neutralVariant[14]
       : neutral[650],
     ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
     ctrlOmniboxStrokeRest: palette

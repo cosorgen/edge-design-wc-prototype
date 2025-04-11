@@ -231,10 +231,10 @@ export function lightOmniboxColors(
 ): CtrlOmniboxColors {
   return {
     ctrlOmniboxBackgroundHover: palette
-      ? palette.neutral.secondary[90]
+      ? palette.tonal.neutralVariant[90]
       : neutral[4],
     ctrlOmniboxBackgroundRest: palette
-      ? palette.neutral.secondary[94]
+      ? palette.tonal.neutralVariant[94]
       : neutral[0],
     ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
     ctrlOmniboxStrokeRest: palette
@@ -306,13 +306,13 @@ export function lightTabColors(
 ): CtrlTabColors {
   return {
     ctrlTabBackgroundHorizontalActive: palette
-      ? palette.neutral.secondary[98]
+      ? palette.tonal.neutralVariant[98]
       : neutral[0],
     ctrlTabBackgroundHorizontalHover: palette
       ? palette.tonal.primary[78]
       : '{backgroundCtrlSubtleHover}',
     ctrlTabBackgroundVerticalActive: palette
-      ? palette.tonal.primary[92]
+      ? palette.tonal.primary[90]
       : neutral[150],
     ctrlTabBackgroundVerticalHover: '{backgroundCtrlSubtleHover}',
   };

@@ -119,11 +119,11 @@ export function lightBackgroundColors(
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
     backgroundWindowTabBandInactive: palette
-      ? palette.neutral.primary[92]
+      ? palette.tonal.neutral[92]
       : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
     backgroundWindowTabBandSolid: palette
-      ? palette.neutral.tertiary[90]
+      ? palette.tonal.secondary[90]
       : neutral[250],
   };
 }

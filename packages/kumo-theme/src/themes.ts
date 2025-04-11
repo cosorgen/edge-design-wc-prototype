@@ -385,10 +385,10 @@ export function lightTheme(themeColor?: string): Theme {
     };
     shadow = {
       ...defaultShadow,
-      shadowKeyLowLight: `${palettes.vibrant.primary[12]}1F`, // 12% opacity
-      shadowKeyHighLight: `${palettes.vibrant.primary[12]}29`, // 16% opacity
-      shadowAmbientLowLight: `${palettes.vibrant.primary[12]}0F`, // 6% opacity
-      shadowAmbientHighLight: `${palettes.vibrant.primary[12]}14`, // 8% opacity
+      shadowKeyLowLight: `${palettes.tonal.primary[12]}1F`, // 12% opacity
+      shadowKeyHighLight: `${palettes.tonal.primary[12]}29`, // 16% opacity
+      shadowAmbientLowLight: `${palettes.tonal.primary[12]}0F`, // 6% opacity
+      shadowAmbientHighLight: `${palettes.tonal.primary[12]}14`, // 8% opacity
     };
   }
 
@@ -436,43 +436,43 @@ export function darkTheme(themeColor?: string): Theme {
     const highlightOffset = -4;
     const offset = 12;
     neutral = {
-      0: palettes.expressive.neutralVariant[100 + highlightOffset],
-      4: palettes.expressive.neutralVariant[97 + highlightOffset],
-      8: palettes.expressive.neutralVariant[91 + highlightOffset],
-      100: palettes.expressive.neutralVariant[98 + highlightOffset],
-      104: palettes.expressive.neutralVariant[93 + highlightOffset],
-      108: palettes.expressive.neutralVariant[88 + highlightOffset],
-      150: palettes.expressive.neutralVariant[96 + highlightOffset],
-      154: palettes.expressive.neutralVariant[93 + highlightOffset],
-      158: palettes.expressive.neutralVariant[88 + highlightOffset],
-      200: palettes.expressive.neutralVariant[94 + highlightOffset],
-      250: palettes.expressive.neutralVariant[88 + highlightOffset],
-      300: palettes.expressive.neutralVariant[82 + highlightOffset],
-      304: palettes.expressive.neutralVariant[79 + highlightOffset],
-      308: palettes.expressive.neutralVariant[73 + highlightOffset],
-      350: palettes.expressive.neutralVariant[69 + highlightOffset],
-      400: palettes.expressive.neutralVariant[60 + offset],
-      404: palettes.expressive.neutralVariant[63 + offset],
-      408: palettes.expressive.neutralVariant[69 + offset],
-      450: palettes.expressive.neutralVariant[48 + offset],
-      454: palettes.expressive.neutralVariant[45 + offset],
-      458: palettes.expressive.neutralVariant[39 + offset],
-      500: palettes.expressive.neutralVariant[40 + offset],
-      550: palettes.expressive.neutralVariant[29 + offset],
-      554: palettes.expressive.neutralVariant[32 + offset],
-      558: palettes.expressive.neutralVariant[38 + offset],
-      600: palettes.expressive.neutralVariant[24 + offset],
-      650: palettes.expressive.neutralVariant[20 + offset],
-      700: palettes.expressive.neutralVariant[18 + offset],
-      704: palettes.expressive.neutralVariant[21 + offset],
-      708: palettes.expressive.neutralVariant[27 + offset],
-      750: palettes.expressive.neutralVariant[16 + offset],
-      754: palettes.expressive.neutralVariant[19 + offset],
-      758: palettes.expressive.neutralVariant[25 + offset],
-      800: palettes.expressive.neutralVariant[12 + offset],
-      804: palettes.expressive.neutralVariant[15 + offset],
-      808: palettes.expressive.neutralVariant[21 + offset],
-      1000: palettes.expressive.neutralVariant[0],
+      0: palettes.tonal.neutralVariant[100 + highlightOffset],
+      4: palettes.tonal.neutralVariant[97 + highlightOffset],
+      8: palettes.tonal.neutralVariant[91 + highlightOffset],
+      100: palettes.tonal.neutralVariant[98 + highlightOffset],
+      104: palettes.tonal.neutralVariant[93 + highlightOffset],
+      108: palettes.tonal.neutralVariant[88 + highlightOffset],
+      150: palettes.tonal.neutralVariant[96 + highlightOffset],
+      154: palettes.tonal.neutralVariant[93 + highlightOffset],
+      158: palettes.tonal.neutralVariant[88 + highlightOffset],
+      200: palettes.tonal.neutralVariant[94 + highlightOffset],
+      250: palettes.tonal.neutralVariant[88 + highlightOffset],
+      300: palettes.tonal.neutralVariant[82 + highlightOffset],
+      304: palettes.tonal.neutralVariant[79 + highlightOffset],
+      308: palettes.tonal.neutralVariant[73 + highlightOffset],
+      350: palettes.tonal.neutralVariant[69 + highlightOffset],
+      400: palettes.tonal.neutralVariant[60 + offset],
+      404: palettes.tonal.neutralVariant[63 + offset],
+      408: palettes.tonal.neutralVariant[69 + offset],
+      450: palettes.tonal.neutralVariant[48 + offset],
+      454: palettes.tonal.neutralVariant[45 + offset],
+      458: palettes.tonal.neutralVariant[39 + offset],
+      500: palettes.tonal.neutralVariant[40 + offset],
+      550: palettes.tonal.neutralVariant[29 + offset],
+      554: palettes.tonal.neutralVariant[32 + offset],
+      558: palettes.tonal.neutralVariant[38 + offset],
+      600: palettes.tonal.neutralVariant[24 + offset],
+      650: palettes.tonal.neutralVariant[20 + offset],
+      700: palettes.tonal.neutralVariant[18 + offset],
+      704: palettes.tonal.neutralVariant[21 + offset],
+      708: palettes.tonal.neutralVariant[27 + offset],
+      750: palettes.tonal.neutralVariant[16 + offset],
+      754: palettes.tonal.neutralVariant[19 + offset],
+      758: palettes.tonal.neutralVariant[25 + offset],
+      800: palettes.tonal.neutralVariant[12 + offset],
+      804: palettes.tonal.neutralVariant[15 + offset],
+      808: palettes.tonal.neutralVariant[21 + offset],
+      1000: palettes.tonal.neutralVariant[0],
     };
     vibrant = {
       100: palettes.tonal.primary[96],

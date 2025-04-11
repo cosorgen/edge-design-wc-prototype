@@ -40,31 +40,28 @@ for (const themeKey of Object.keys(lightThemeColored)) {
   }
 
   const valueSolid = value.substring(0, 7);
-  const shadowTone = Object.entries(palettes.vibrant.primary).find(
+  const shadowTone = Object.entries(palettes.tonal.primary).find(
     ([k, v]) => v === valueSolid,
   );
   if (shadowTone && !(themeKey in lightMapping)) {
     let opacity = (parseInt(value.substring(7, 9), 16) / 255).toFixed(2);
-    lightMapping[themeKey] = `vibrant.primary.tone(12).opacity(${opacity})`;
+    lightMapping[themeKey] = `tonal.primary.tone(12).opacity(${opacity})`;
   }
 
   // Check for custom color overrides
-  // Check for custom color overrides
-  for (const palette of Object.keys(palettes)) {
-    for (const variant of Object.keys(palettes[palette])) {
-      const tone = Object.entries(palettes[palette][variant]).find(
-        ([k, v]) => v === value,
-      );
-      if (tone && !(themeKey in lightMapping)) {
-        console.log(`Check light ${themeKey}`);
-        lightMapping[themeKey] = `{custom}`;
-      }
+  for (const variant of Object.keys(palettes.tonal)) {
+    const tone = Object.entries(palettes.tonal[variant]).find(
+      ([k, v]) => v === value,
+    );
+    if (tone && !(themeKey in lightMapping)) {
+      console.log(`Check light ${themeKey}`);
+      lightMapping[themeKey] = `tonal.${variant}.tone(${tone[0]})`;
     }
   }
 }
 
 fs.writeFileSync(
-  join(__dirname, './dist/lightThemeMapping.json'),
+  join(__dirname, './data/lightThemeMapping.json'),
   JSON.stringify(lightMapping, null, 2),
 );
 
@@ -74,11 +71,11 @@ const darkMapping = {};
 for (const themeKey of Object.keys(darkThemeColored)) {
   const value = darkThemeColored[themeKey];
 
-  const neutralTone = Object.entries(palettes.expressive.neutralVariant).find(
+  const neutralTone = Object.entries(palettes.tonal.neutralVariant).find(
     ([k, v]) => v === value,
   );
   if (neutralTone && !(themeKey in darkMapping)) {
-    darkMapping[themeKey] = `expressive.neutralVariant.tone(${neutralTone[0]})`;
+    darkMapping[themeKey] = `tonal.neutralVariant.tone(${neutralTone[0]})`;
   }
 
   const vibrantTone = Object.entries(palettes.tonal.primary).find(
@@ -89,20 +86,19 @@ for (const themeKey of Object.keys(darkThemeColored)) {
   }
 
   // Check for custom color overrides
-  for (const palette of Object.keys(palettes)) {
-    for (const variant of Object.keys(palettes[palette])) {
-      const tone = Object.entries(palettes[palette][variant]).find(
-        ([k, v]) => v === value,
-      );
-      if (tone && !(themeKey in darkMapping)) {
-        console.log(`Check dark ${themeKey}`);
-        darkMapping[themeKey] = `{custom}`;
-      }
+  for (const variant of Object.keys(palettes.tonal)) {
+    const tone = Object.entries(palettes.tonal[variant]).find(
+      ([k, v]) => v === value,
+    );
+    if (tone && !(themeKey in darkMapping)) {
+      console.log(`Check dark ${themeKey}`);
+      darkMapping[themeKey] = `tonal.${variant}.tone(${tone[0]})`;
     }
   }
 }
 
 fs.writeFileSync(
-  join(__dirname, './dist/darkThemeMapping.json'),
+  join(__dirname, './data/darkThemeMapping.json'),
   JSON.stringify(darkMapping, null, 2),
+  { overwrite: true },
 );

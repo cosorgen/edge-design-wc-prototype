@@ -122,7 +122,7 @@ export function darkBackgroundColors(
     backgroundWindowSecondarySolid: neutral[0],
     backgroundWindowTabBandColorBlend: '{nullColor}',
     backgroundWindowTabBandInactive: palette
-      ? palette.tonal.secondary[16]
+      ? palette.tonal.neutralVariant[18]
       : neutral[800],
     backgroundWindowTabBandLumBlend: '{nullColor}',
     backgroundWindowTabBandSolid: palette
