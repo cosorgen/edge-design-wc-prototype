@@ -15,10 +15,14 @@ function JsToCppConst(string) {
   const variant = parts[1].charAt(0).toUpperCase() + parts[1].slice(1);
   const tone = parts[2].replace('tone(', '').replace(')', '');
   out = `k${palette}${variant}${tone}`;
+  // Adjust opacity
   if (parts[3]) {
-    const opacity =
-      parts[3].replace('opacity(', '') + '.' + parts[4].replace(')', '');
-    out = `applyOpacity(${out}, ${opacity})`;
+    const opacity = parseInt(
+      parseFloat(
+        parts[3].replace('opacity(', '') + '.' + parts[4].replace(')', ''),
+      ) * 255,
+    );
+    out = `SetAlpha(${out}, 0x${opacity.toString(16)})`;
   }
   return out;
 }
@@ -61,9 +65,12 @@ function paletteToChroma(string) {
 
   // Adjust opacity
   if (parts[3]) {
-    const opacity =
-      parts[3].replace('opacity(', '') + '.' + parts[4].replace(')', '');
-    out = `applyOpacity(${out}, ${opacity})`;
+    const opacity = parseInt(
+      parseFloat(
+        parts[3].replace('opacity(', '') + '.' + parts[4].replace(')', ''),
+      ) * 255,
+    );
+    out = `SetAlpha(${out}, 0x${opacity.toString(16)})`;
   }
   return out;
 }
@@ -76,6 +83,13 @@ const { default: lightMapping } = await import(
 );
 const { default: darkMapping } = await import('./data/darkThemeMapping.json', {
   with: { type: 'json' },
+});
+const { legacyCommonTokens, legacyDarkTokens, legacyLightTokens } =
+  await import('../dist/esm/index.js');
+const legacyKeys = Object.keys({
+  ...legacyCommonTokens,
+  ...legacyDarkTokens,
+  ...legacyLightTokens,
 });
 
 // Generate cpp for multi palette
@@ -101,6 +115,21 @@ for (const [key, value] of Object.entries(lightMapping)) {
       `mixer[${key}] = {dark_mode ? ${darkConstant} : ${lightConstant}};`;
   }
 }
+
+// Sort by legacy keys
+let legacyContent = {};
+for (const key of legacyKeys) {
+  if (key in content) {
+    const value = content[key];
+    delete content[key];
+    legacyContent[key] = value;
+  }
+}
+content = {
+  ...content,
+  ['spacer']: '\n//Phoenix tokens',
+  ...legacyContent,
+};
 
 // write to file
 let string = '';
@@ -136,6 +165,21 @@ for (const [key, value] of Object.entries(lightMapping)) {
       `mixer[${key}] = {dark_mode ? ${darkConstant} : ${lightConstant}};`;
   }
 }
+
+// Sort by legacy keys
+legacyContent = {};
+for (const key of legacyKeys) {
+  if (key in content) {
+    const value = content[key];
+    delete content[key];
+    legacyContent[key] = value;
+  }
+}
+content = {
+  ...content,
+  ['spacer']: '\n//Phoenix tokens',
+  ...legacyContent,
+};
 
 // write to file
 string = '';

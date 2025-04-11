@@ -260,6 +260,12 @@ export {
   ctrlTooltipLayout,
 } from './ctrlLayout.js';
 
+export {
+  legacyCommonTokens,
+  legacyDarkTokens,
+  legacyLightTokens,
+} from './legacyTokens.js';
+
 export type { Theme } from './themes.js';
 
 export { lightTheme, darkTheme } from './themes.js';
