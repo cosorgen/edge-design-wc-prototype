@@ -418,7 +418,7 @@ export function lightTheme(themeColor?: string): Theme {
     ...lightShadowColors(shadow),
     ...lightSliderColors,
     ...lightStatusColors(neutral, vibrant),
-    ...lightStrokeColors(neutral),
+    ...lightStrokeColors(neutral, palettes),
     ...lightTabColors(neutral, palettes),
     ...lightTooltipColors(neutral, shadow, palettes),
     ...utilityLayoutTemplate,

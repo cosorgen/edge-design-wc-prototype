@@ -13,7 +13,7 @@ export default class EdgeSettingsSerivce {
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
   @observable themeColor?: string;
-  @observable designSystem: 'phoenix' | 'kumo' = 'kumo';
+  @observable designSystem: 'phoenix' | 'kumo' = 'phoenix';
   @observable verticalTabs = false;
 
   constructor() {
