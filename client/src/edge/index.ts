@@ -15,9 +15,14 @@ import {
   setThemeFor,
 } from '@edge-design/kumo-theme';
 import {
-  lightTheme as phoenixLightTheme,
-  darkTheme as phoenixDarkTheme,
+  lightTheme as phoenixKumoLightTheme,
+  darkTheme as phoenixKumoDarkTheme,
 } from '@edge-design/phoenix-theme';
+import {
+  phoenixLightThemeSolidWin11,
+  phoenixDarkThemeSolidWin11,
+} from '@phoenixui/themes';
+import { setThemeFor as phxSetThemeFor } from '@phoenixui/web-components';
 import {
   textStyleDefaultRegularWeight,
   ctrlTabBackgroundHorizontalActive,
@@ -237,8 +242,8 @@ export class MicrosoftEdge extends FASTElement {
         dark: kumoDarkTheme,
       },
       phoenix: {
-        light: phoenixLightTheme,
-        dark: phoenixDarkTheme,
+        light: phoenixKumoLightTheme,
+        dark: phoenixKumoDarkTheme,
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
@@ -247,10 +252,21 @@ export class MicrosoftEdge extends FASTElement {
     );
     selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
     setThemeFor(this.shadowRoot!, selectedTheme);
+    if (this.ss.designSystem === 'phoenix') {
+      phxSetThemeFor(
+        this.shadowRoot!,
+        themeKey === 'dark'
+          ? phoenixDarkThemeSolidWin11
+          : phoenixLightThemeSolidWin11,
+      );
+    }
   }
 
   clearTheme() {
     this.shadowRoot!.adoptedStyleSheets.pop();
+    if (this.ss.designSystem === 'phoenix') {
+      this.shadowRoot!.adoptedStyleSheets.pop();
+    }
   }
 
   shouldFavoritesBarRender() {

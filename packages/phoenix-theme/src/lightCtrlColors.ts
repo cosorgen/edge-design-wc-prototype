@@ -4,7 +4,6 @@ import {
   ShadowColors,
   VibrantColors,
 } from './globalColors.js';
-
 import type {
   CtrlAvatarColors,
   CtrlChoiceColors,
@@ -26,9 +25,11 @@ import type {
   CtrlTabColors,
   CtrlTooltipColors,
 } from './ctrlColors.js';
-
 import type { ChromePalette } from './paletteGen.js';
-import { phoenixLightThemeSolidWin11 } from '@phoenixui/themes';
+import {
+  colorNeutralBackgroundTabActive,
+  tabActiveBackgroundNormal,
+} from '@phoenixui/themes/tokens.js';
 
 export const lightComposerColors: CtrlComposerColors = {
   controlComposerContainerBackgroundDefault:
@@ -308,13 +309,13 @@ export function lightTabColors(
   return {
     ctrlTabBackgroundHorizontalActive: palette
       ? palette.neutral.secondary[98]
-      : phoenixLightThemeSolidWin11.tabActiveBackgroundNormal,
+      : tabActiveBackgroundNormal,
     ctrlTabBackgroundHorizontalHover: palette
       ? palette.tonal.primary[78]
       : '{backgroundCtrlSubtleHover}',
     ctrlTabBackgroundVerticalActive: palette
       ? palette.tonal.primary[92]
-      : phoenixLightThemeSolidWin11.colorNeutralBackgroundTabActive,
+      : colorNeutralBackgroundTabActive,
     ctrlTabBackgroundVerticalHover: '{backgroundCtrlSubtleHover}',
   };
 }

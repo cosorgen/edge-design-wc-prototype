@@ -8,7 +8,6 @@ import {
   alphaWhite,
   ShadowColors,
 } from './globalColors.js';
-
 import type {
   ThemeAiColors,
   ThemeBackgroundColors,
@@ -19,9 +18,36 @@ import type {
   ThemeStatusColors,
   ThemeStrokeColors,
 } from './themeColors.js';
-
 import type { ChromePalette } from './paletteGen.js';
-import { phoenixLightThemeSolidWin11 } from '@phoenixui/themes';
+import {
+  colorBackgroundOverlay,
+  colorBrandBackground,
+  colorBrandBackgroundHover,
+  colorBrandBackgroundPressed,
+  colorBrandForeground1,
+  colorLayerBackgroundDialog,
+  colorNeutralBackground1,
+  colorNeutralBackground1Hover,
+  colorNeutralBackground1Pressed,
+  colorNeutralBackground2,
+  colorNeutralBackgroundDisabled,
+  colorNeutralForeground1,
+  colorNeutralForegroundDisabled,
+  colorNeutralForegroundHint,
+  colorNeutralForegroundOnBrand,
+  colorNeutralStroke1,
+  colorNeutralStroke1Hover,
+  colorNeutralStroke1Pressed,
+  colorNeutralStroke2,
+  colorNeutralStroke3,
+  colorNeutralStrokeDisabled,
+  colorSubtleBackground,
+  colorSubtleBackgroundHover,
+  colorSubtleBackgroundPressed,
+  colorTransparentBackground,
+  tabBarBackgroundNormal,
+  tabBarInactiveBackgroundNormal,
+} from '@phoenixui/themes/tokens.js';
 
 export const lightNullColors: ThemeNullColors = {
   nullColor: alphaWhite[0],
@@ -73,28 +99,24 @@ export function lightBackgroundColors(
     backgroundCtrlActivebrandRest: '{backgroundCtrlBrandRest}',
     backgroundCtrlBrandDisabled: palette
       ? vibrant[200]
-      : phoenixLightThemeSolidWin11.colorNeutralBackgroundDisabled,
+      : colorNeutralBackgroundDisabled,
     backgroundCtrlBrandHover: palette
       ? vibrant[504]
-      : phoenixLightThemeSolidWin11.colorBrandBackgroundHover,
+      : colorBrandBackgroundHover,
     backgroundCtrlBrandPressed: palette
       ? vibrant[508]
-      : phoenixLightThemeSolidWin11.colorBrandBackgroundPressed,
-    backgroundCtrlBrandRest: palette
-      ? vibrant[500]
-      : phoenixLightThemeSolidWin11.colorBrandBackground,
+      : colorBrandBackgroundPressed,
+    backgroundCtrlBrandRest: palette ? vibrant[500] : colorBrandBackground,
     backgroundCtrlNeutralDisabled: palette
       ? neutral[200]
-      : phoenixLightThemeSolidWin11.colorNeutralBackgroundDisabled,
+      : colorNeutralBackgroundDisabled,
     backgroundCtrlNeutralHover: palette
       ? neutral[154]
-      : phoenixLightThemeSolidWin11.colorNeutralBackground1Hover,
+      : colorNeutralBackground1Hover,
     backgroundCtrlNeutralPressed: palette
       ? neutral[158]
-      : phoenixLightThemeSolidWin11.colorNeutralBackground1Pressed,
-    backgroundCtrlNeutralRest: palette
-      ? neutral[150]
-      : phoenixLightThemeSolidWin11.colorNeutralBackground1,
+      : colorNeutralBackground1Pressed,
+    backgroundCtrlNeutralRest: palette ? neutral[150] : colorNeutralBackground1,
     backgroundCtrlOnimageHover: alphaBlack[50],
     backgroundCtrlOnimagePressed: alphaBlack[40],
     backgroundCtrlOnimageRest: alphaBlack[60],
@@ -111,40 +133,32 @@ export function lightBackgroundColors(
       '{backgroundCtrlShapesafeNeutralRest}',
     backgroundCtrlShapesafeNeutralRest: palette
       ? neutral[400]
-      : phoenixLightThemeSolidWin11.colorNeutralBackground1,
+      : colorNeutralBackground1,
     backgroundCtrlSubtleDisabled: palette
       ? alphaWhite[0]
-      : phoenixLightThemeSolidWin11.colorTransparentBackground,
+      : colorTransparentBackground,
     backgroundCtrlSubtleHover: palette
       ? neutral[4]
-      : phoenixLightThemeSolidWin11.colorSubtleBackgroundHover,
+      : colorSubtleBackgroundHover,
     backgroundCtrlSubtleHoverSplit: '{nullColor}',
     backgroundCtrlSubtlePressed: palette
       ? neutral[8]
-      : phoenixLightThemeSolidWin11.colorSubtleBackgroundPressed,
-    backgroundCtrlSubtleRest: palette
-      ? alphaWhite[0]
-      : phoenixLightThemeSolidWin11.colorSubtleBackground,
+      : colorSubtleBackgroundPressed,
+    backgroundCtrlSubtleRest: palette ? alphaWhite[0] : colorSubtleBackground,
     backgroundFlyoutColorblend: '{backgroundFlyoutSolid}',
     backgroundFlyoutLumblend: '{backgroundFlyoutSolid}',
-    backgroundFlyoutSolid: palette
-      ? neutral[0]
-      : phoenixLightThemeSolidWin11.colorLayerBackgroundDialog,
-    backgroundLayerPrimarySolid: palette
-      ? neutral[0]
-      : phoenixLightThemeSolidWin11.colorNeutralBackground1,
+    backgroundFlyoutSolid: palette ? neutral[0] : colorLayerBackgroundDialog,
+    backgroundLayerPrimarySolid: palette ? neutral[0] : colorNeutralBackground1,
     backgroundLayerPrimaryStop1: '{backgroundLayerPrimarySolid}',
     backgroundLayerPrimaryStop2: '{backgroundLayerPrimarySolid}',
     backgroundLayerPrimaryStop3: '{backgroundLayerPrimarySolid}',
-    backgroundLayerSecondary: palette
-      ? neutral[100]
-      : phoenixLightThemeSolidWin11.colorNeutralBackground2,
+    backgroundLayerSecondary: palette ? neutral[100] : colorNeutralBackground2,
     backgroundLayerTertiary: '{backgroundLayerSecondary}',
-    backgroundSmoke: phoenixLightThemeSolidWin11.colorBackgroundOverlay,
+    backgroundSmoke: colorBackgroundOverlay,
     backgroundToolbar: '{backgroundCardOnprimaryDefaultRest}',
     backgroundWebPagePrimary: palette
       ? '{backgroundLayerPrimarySolid}'
-      : phoenixLightThemeSolidWin11.colorLayerBackgroundDialog,
+      : colorLayerBackgroundDialog,
     backgroundWebPageSecondary: palette
       ? '{backgroundLayerSecondary}'
       : '{backgroundWebPagePrimary}',
@@ -152,20 +166,20 @@ export function lightBackgroundColors(
     backgroundWindowPrimaryLumBlend: '{backgroundWindowPrimarySolid}',
     backgroundWindowPrimarySolid: palette
       ? '{backgroundLayerPrimarySolid}'
-      : phoenixLightThemeSolidWin11.colorLayerBackgroundDialog,
+      : colorLayerBackgroundDialog,
     backgroundWindowSecondaryColorBlend: '{backgroundWindowSecondarySolid}',
     backgroundWindowSecondaryLumBlend: '{backgroundWindowSecondarySolid}',
     backgroundWindowSecondarySolid: palette
       ? '{backgroundLayerSecondary}'
-      : phoenixLightThemeSolidWin11.colorLayerBackgroundDialog,
+      : colorLayerBackgroundDialog,
     backgroundWindowTabBandColorBlend: '{backgroundWindowTabBandSolid}',
     backgroundWindowTabBandInactive: palette
       ? palette.neutral.primary[92]
-      : phoenixLightThemeSolidWin11.tabBarInactiveBackgroundNormal,
+      : tabBarInactiveBackgroundNormal,
     backgroundWindowTabBandLumBlend: '{backgroundWindowTabBandSolid}',
     backgroundWindowTabBandSolid: palette
       ? palette.neutral.tertiary[90]
-      : phoenixLightThemeSolidWin11.tabBarBackgroundNormal,
+      : tabBarBackgroundNormal,
   };
 }
 
@@ -212,35 +226,29 @@ export function lightStrokeColors(
     strokeCtrlOnBrandRestStop2: '{strokeCtrlOnBrandRest}',
     strokeCtrlOnneutralDisabled: palette
       ? '{nullColor}'
-      : phoenixLightThemeSolidWin11.colorNeutralStrokeDisabled,
+      : colorNeutralStrokeDisabled,
     strokeCtrlOnneutralDisabledStop2: '{strokeCtrlOnneutralDisabled}',
     strokeCtrlOnneutralHover: palette
       ? '{nullColor}'
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1Hover,
+      : colorNeutralStroke1Hover,
     strokeCtrlOnneutralHoverStop2: '{strokeCtrlOnneutralHover}',
     strokeCtrlOnneutralPressed: palette
       ? '{nullColor}'
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1Pressed,
+      : colorNeutralStroke1Pressed,
     strokeCtrlOnneutralPressedStop2: '{strokeCtrlOnneutralPressed}',
-    strokeCtrlOnneutralRest: palette
-      ? '{nullColor}'
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1,
+    strokeCtrlOnneutralRest: palette ? '{nullColor}' : colorNeutralStroke1,
     strokeCtrlOnneutralRestStop2: '{strokeCtrlOnneutralRest}',
     strokeCtrlOnoutlineDisabled: palette
       ? neutral[200]
-      : phoenixLightThemeSolidWin11.colorNeutralStrokeDisabled,
+      : colorNeutralStrokeDisabled,
     strokeCtrlOnoutlineDisabledStop2: '{strokeCtrlOnoutlineDisabled}',
-    strokeCtrlOnoutlineHover: palette
-      ? neutral[304]
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1Hover,
+    strokeCtrlOnoutlineHover: palette ? neutral[304] : colorNeutralStroke1Hover,
     strokeCtrlOnoutlineHoverStop2: '{strokeCtrlOnoutlineHover}',
     strokeCtrlOnoutlinePressed: palette
       ? neutral[308]
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1Pressed,
+      : colorNeutralStroke1Pressed,
     strokeCtrlOnoutlinePressedStop2: '{strokeCtrlOnoutlinePressed}',
-    strokeCtrlOnoutlineRest: palette
-      ? neutral[300]
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1,
+    strokeCtrlOnoutlineRest: palette ? neutral[300] : colorNeutralStroke1,
     strokeCtrlOnoutlineRestStop2: '{strokeCtrlOnoutlineRest}',
     strokeCtrlOnsubtleDisabled: '{nullColor}',
     strokeCtrlOnsubtleHover: '{nullColor}',
@@ -248,15 +256,11 @@ export function lightStrokeColors(
     strokeCtrlOnsubtlePressed: '{nullColor}',
     strokeCtrlOnsubtleRest: '{nullColor}',
     strokeDividerBrand: '{backgroundCtrlBrandRest}',
-    strokeDividerDefault: palette
-      ? neutral[300]
-      : phoenixLightThemeSolidWin11.colorNeutralStroke2,
+    strokeDividerDefault: palette ? neutral[300] : colorNeutralStroke2,
     strokeDividerStrong: palette
       ? '{strokeDividerDefault}'
-      : phoenixLightThemeSolidWin11.colorNeutralStroke1,
-    strokeDividerSubtle: palette
-      ? neutral[200]
-      : phoenixLightThemeSolidWin11.colorNeutralStroke3,
+      : colorNeutralStroke1,
+    strokeDividerSubtle: palette ? neutral[200] : colorNeutralStroke3,
     strokeFlyout: '{nullColor}',
     strokeImage: '{nullColor}',
     strokeLayer: '{nullColor}',
@@ -308,12 +312,10 @@ export function lightForegroundColors(
     foregroundCtrlActivebrandRest: '{foregroundCtrlBrandRest}',
     foregroundCtrlBrandDisabled: palette
       ? vibrant[200]
-      : phoenixLightThemeSolidWin11.colorNeutralForegroundDisabled,
+      : colorNeutralForegroundDisabled,
     foregroundCtrlBrandHover: '{foregroundCtrlBrandRest}',
     foregroundCtrlBrandPressed: '{foregroundCtrlBrandRest}',
-    foregroundCtrlBrandRest: palette
-      ? vibrant[600]
-      : phoenixLightThemeSolidWin11.colorBrandForeground1,
+    foregroundCtrlBrandRest: palette ? vibrant[600] : colorBrandForeground1,
     foregroundCtrlHintDefault: neutral[300],
     foregroundCtrlIconOnneutralDisabled:
       '{foregroundCtrlNeutralPrimaryDisabled}',
@@ -335,31 +337,31 @@ export function lightForegroundColors(
     foregroundCtrlNeutralPrimaryPressed: '{foregroundCtrlNeutralPrimaryRest}',
     foregroundCtrlNeutralPrimaryRest: palette
       ? neutral[800]
-      : phoenixLightThemeSolidWin11.colorNeutralForeground1,
+      : colorNeutralForeground1,
     foregroundCtrlNeutralSecondaryDisabled: palette
       ? neutral[350]
-      : phoenixLightThemeSolidWin11.colorNeutralForegroundDisabled,
+      : colorNeutralForegroundDisabled,
     foregroundCtrlNeutralSecondaryHover: '{foregroundCtrlNeutralSecondaryRest}',
     foregroundCtrlNeutralSecondaryPressed:
       '{foregroundCtrlNeutralSecondaryRest}',
     foregroundCtrlNeutralSecondaryRest: palette
       ? neutral[450]
-      : phoenixLightThemeSolidWin11.colorNeutralForegroundHint,
+      : colorNeutralForegroundHint,
     foregroundCtrlOnactivebrandDisabled: '{foregroundCtrlOnbrandDisabled}',
     foregroundCtrlOnactivebrandHover: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnactivebrandPressed: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnactivebrandRest: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnbrandDisabled: palette
       ? neutral[350]
-      : phoenixLightThemeSolidWin11.colorNeutralForegroundDisabled,
+      : colorNeutralForegroundDisabled,
     foregroundCtrlOnbrandHover: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnbrandPressed: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnbrandRest: palette
       ? neutral[0]
-      : phoenixLightThemeSolidWin11.colorNeutralForegroundOnBrand,
+      : colorNeutralForegroundOnBrand,
     foregroundCtrlOnimageRest: palette
       ? neutral[0]
-      : phoenixLightThemeSolidWin11.colorNeutralForegroundOnBrand,
+      : colorNeutralForegroundOnBrand,
     foregroundCtrlOnoutlineDisabled: '{foregroundCtrlNeutralPrimaryDisabled}',
     foregroundCtrlOnoutlineHover: '{foregroundCtrlNeutralPrimaryRest}',
     foregroundCtrlOnoutlinePressed: '{foregroundCtrlNeutralPrimaryRest}',
