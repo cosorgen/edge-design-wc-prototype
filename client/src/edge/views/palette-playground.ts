@@ -525,7 +525,7 @@ const styles = css`
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px;
+    gap: 32px;
     width: 100%;
   }
 
