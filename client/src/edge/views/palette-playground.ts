@@ -118,6 +118,10 @@ const template = html<PalettePlayground>`
       <mai-text-input type="text" placeholder="Text input"></mai-text-input>
       <mai-switch checked></mai-switch>
       <mai-badge>Badge</mai-badge>
+      <mai-badge appearance="brand">Badge</mai-badge>
+      <mai-badge appearance="success">Badge</mai-badge>
+      <mai-badge appearance="danger">Badge</mai-badge>
+      <mai-badge appearance="onimage">Badge</mai-badge>
       <mai-checkbox checked>Checkbox</mai-checkbox>
       <mai-divider orientation="vertical">Default</mai-divider>
       <mai-divider orientation="vertical" appearance="subtle"
@@ -378,6 +382,9 @@ const template = html<PalettePlayground>`
           </svg>
         </mai-button>
       </mai-message-bar>
+      <mai-message-bar intent="error">Error</mai-message-bar>
+      <mai-message-bar intent="success">Success</mai-message-bar>
+      <mai-message-bar intent="warning">Warning</mai-message-bar>
       <mai-accordion expand-mode="multi">
         <mai-accordion-item>
           <span slot="heading">Accordion Header 1</span>
