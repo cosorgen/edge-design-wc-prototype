@@ -1,13 +1,4 @@
-import {
-  NeutralColors,
-  statusDanger,
-  statusSuccess,
-  statusWarning,
-  VibrantColors,
-  alphaBlack,
-  alphaWhite,
-  ShadowColors,
-} from './globalColors.js';
+import { NeutralColors, VibrantColors, ShadowColors } from './globalColors.js';
 import type {
   ThemeAiColors,
   ThemeBackgroundColors,
@@ -20,21 +11,35 @@ import type {
 } from './themeColors.js';
 import type { ChromePalette } from './paletteGen.js';
 import {
+  acrylicBackgroundColor,
+  acrylicBackgroundLuminosity,
+  acrylicBackgroundNormal,
   colorBackgroundOverlay,
   colorBrandBackground,
+  colorBrandBackground2,
+  colorBrandBackground2Hover,
+  colorBrandBackground2Pressed,
   colorBrandBackgroundHover,
   colorBrandBackgroundPressed,
   colorBrandForeground1,
+  colorBrandStroke,
   colorLayerBackgroundDialog,
   colorNeutralBackground1,
   colorNeutralBackground1Hover,
   colorNeutralBackground1Pressed,
   colorNeutralBackground2,
   colorNeutralBackgroundDisabled,
+  colorNeutralCardBackground,
+  colorNeutralCardBackgroundDisabled,
+  colorNeutralCardBackgroundHover,
+  colorNeutralCardBackgroundPressed,
+  colorNeutralCardBackgroundSelected,
   colorNeutralForeground1,
   colorNeutralForegroundDisabled,
   colorNeutralForegroundHint,
   colorNeutralForegroundOnBrand,
+  colorNeutralShadowAmbient,
+  colorNeutralShadowKey,
   colorNeutralStroke1,
   colorNeutralStroke1Hover,
   colorNeutralStroke1Pressed,
@@ -45,12 +50,39 @@ import {
   colorSubtleBackgroundHover,
   colorSubtleBackgroundPressed,
   colorTransparentBackground,
+  tabActiveBackgroundColor,
+  tabActiveBackgroundLuminosity,
+  tabActiveBackgroundNormal,
+  tabBarBackgroundColor,
+  tabBarBackgroundLuminosity,
   tabBarBackgroundNormal,
   tabBarInactiveBackgroundNormal,
+  colorLayerBackgroundTooltipStaticInverted,
+  colorStatusDangerBackground3,
+  colorStatusDangerForeground3,
+  colorStatusDangerBorder1,
+  colorStatusDangerBorderActive,
+  colorStatusDangerBackground1,
+  colorStatusDangerForeground1,
+  colorStatusSuccessBackground3,
+  colorStatusSuccessForeground3,
+  colorStatusSuccessBorderActive,
+  colorStatusSuccessBackground1,
+  colorStatusSuccessForeground1,
+  colorStatusSuccessBorder1,
+  colorStatusWarningBackground3,
+  colorStatusWarningForeground3,
+  colorStatusWarningBorderActive,
+  colorStatusWarningBackground1,
+  colorStatusWarningForeground1,
+  colorStatusWarningBorder1,
+  colorNeutralBackground3,
+  colorPalettePurpleForeground2,
+  colorPalettePumpkinForeground2,
 } from '@phoenixui/themes/tokens.js';
 
 export const lightNullColors: ThemeNullColors = {
-  nullColor: alphaWhite[0],
+  nullColor: colorTransparentBackground,
   nullColorBackground: '{nullColor}',
   nullColorBackgroundHover: '{nullColor}',
   nullColorBackgroundPressed: '{nullColor}',
@@ -58,32 +90,63 @@ export const lightNullColors: ThemeNullColors = {
 };
 
 export function lightBackgroundColors(
-  neutral: NeutralColors,
-  vibrant: VibrantColors,
+  neutral?: NeutralColors,
+  vibrant?: VibrantColors,
   palette?: ChromePalette,
 ): ThemeBackgroundColors {
   return {
-    backgroundCardOnflyoutDefaultDisabled: neutral[0],
-    backgroundCardOnflyoutDefaultHover: neutral[0],
-    backgroundCardOnflyoutDefaultPressed: neutral[0],
-    backgroundCardOnflyoutDefaultRest: neutral[0],
-    backgroundCardOnprimaryAltDisabled: neutral[200],
-    backgroundCardOnprimaryAltHover: vibrant[200],
-    backgroundCardOnprimaryAltPressed: vibrant[300],
-    backgroundCardOnprimaryAltRest: vibrant[100],
-    backgroundCardOnprimaryDefaultDisabled: neutral[200],
-    backgroundCardOnprimaryDefaultHover: neutral[4],
-    backgroundCardOnprimaryDefaultPressed: neutral[8],
-    backgroundCardOnprimaryDefaultRest: neutral[0],
-    backgroundCardOnprimaryDefaultSelected: neutral[150],
-    backgroundCardOnsecondaryAltDisabled: neutral[0],
-    backgroundCardOnsecondaryAltHover: neutral[0],
-    backgroundCardOnsecondaryAltPressed: neutral[0],
-    backgroundCardOnsecondaryAltRest: neutral[0],
-    backgroundCardOnsecondaryDefaultDisabled: neutral[0],
-    backgroundCardOnsecondaryDefaultHover: neutral[0],
-    backgroundCardOnsecondaryDefaultPressed: neutral[0],
-    backgroundCardOnsecondaryDefaultRest: neutral[0],
+    backgroundCardOnflyoutDefaultDisabled: neutral
+      ? neutral[0]
+      : colorNeutralCardBackgroundDisabled,
+    backgroundCardOnflyoutDefaultHover: neutral
+      ? neutral[0]
+      : colorNeutralCardBackgroundHover,
+    backgroundCardOnflyoutDefaultPressed: neutral
+      ? neutral[0]
+      : colorNeutralCardBackgroundPressed,
+    backgroundCardOnflyoutDefaultRest: neutral
+      ? neutral[0]
+      : colorNeutralCardBackground,
+    backgroundCardOnprimaryAltDisabled: neutral
+      ? neutral[200]
+      : colorNeutralCardBackgroundDisabled,
+    backgroundCardOnprimaryAltHover: vibrant
+      ? vibrant[200]
+      : colorBrandBackground2Hover,
+    backgroundCardOnprimaryAltPressed: vibrant
+      ? vibrant[300]
+      : colorBrandBackground2Pressed,
+    backgroundCardOnprimaryAltRest: vibrant
+      ? vibrant[100]
+      : colorBrandBackground2,
+    backgroundCardOnprimaryDefaultDisabled: neutral
+      ? neutral[200]
+      : colorNeutralCardBackgroundDisabled,
+    backgroundCardOnprimaryDefaultHover: neutral
+      ? neutral[4]
+      : colorNeutralCardBackgroundHover,
+    backgroundCardOnprimaryDefaultPressed: neutral
+      ? neutral[8]
+      : colorNeutralCardBackgroundPressed,
+    backgroundCardOnprimaryDefaultRest: neutral
+      ? neutral[0]
+      : colorNeutralCardBackground,
+    backgroundCardOnprimaryDefaultSelected: neutral
+      ? neutral[150]
+      : colorNeutralCardBackgroundSelected,
+    backgroundCardOnsecondaryAltDisabled:
+      '{backgroundCardOnprimaryAltDisabled}',
+    backgroundCardOnsecondaryAltHover: '{backgroundCardOnprimaryAltHover}',
+    backgroundCardOnsecondaryAltPressed: '{backgroundCardOnprimaryAltPressed}',
+    backgroundCardOnsecondaryAltRest: '{backgroundCardOnprimaryAltRest}',
+    backgroundCardOnsecondaryDefaultDisabled:
+      '{backgroundCardOnprimaryDefaultDisabled}',
+    backgroundCardOnsecondaryDefaultHover:
+      '{backgroundCardOnprimaryDefaultHover}',
+    backgroundCardOnsecondaryDefaultPressed:
+      '{backgroundCardOnprimaryDefaultPressed}',
+    backgroundCardOnsecondaryDefaultRest:
+      '{backgroundCardOnprimaryDefaultRest}',
     backgroundControlBrandRest: '{backgroundCtrlBrandRest}',
     backgroundControlInputRest: '{ctrlInputBackgroundRest}',
     backgroundControlNeutralHover: '{backgroundCtrlNeutralHover}',
@@ -97,29 +160,29 @@ export function lightBackgroundColors(
     backgroundCtrlActivebrandHover: '{backgroundCtrlBrandHover}',
     backgroundCtrlActivebrandPressed: '{backgroundCtrlBrandPressed}',
     backgroundCtrlActivebrandRest: '{backgroundCtrlBrandRest}',
-    backgroundCtrlBrandDisabled: palette
+    backgroundCtrlBrandDisabled: vibrant
       ? vibrant[200]
       : colorNeutralBackgroundDisabled,
-    backgroundCtrlBrandHover: palette
+    backgroundCtrlBrandHover: vibrant
       ? vibrant[504]
       : colorBrandBackgroundHover,
-    backgroundCtrlBrandPressed: palette
+    backgroundCtrlBrandPressed: vibrant
       ? vibrant[508]
       : colorBrandBackgroundPressed,
-    backgroundCtrlBrandRest: palette ? vibrant[500] : colorBrandBackground,
-    backgroundCtrlNeutralDisabled: palette
+    backgroundCtrlBrandRest: vibrant ? vibrant[500] : colorBrandBackground,
+    backgroundCtrlNeutralDisabled: neutral
       ? neutral[200]
       : colorNeutralBackgroundDisabled,
-    backgroundCtrlNeutralHover: palette
+    backgroundCtrlNeutralHover: neutral
       ? neutral[154]
       : colorNeutralBackground1Hover,
-    backgroundCtrlNeutralPressed: palette
+    backgroundCtrlNeutralPressed: neutral
       ? neutral[158]
       : colorNeutralBackground1Pressed,
-    backgroundCtrlNeutralRest: palette ? neutral[150] : colorNeutralBackground1,
-    backgroundCtrlOnimageHover: alphaBlack[50],
-    backgroundCtrlOnimagePressed: alphaBlack[40],
-    backgroundCtrlOnimageRest: alphaBlack[60],
+    backgroundCtrlNeutralRest: neutral ? neutral[150] : colorNeutralBackground1,
+    backgroundCtrlOnimageHover: '{backgroundCtrlOnimageRest}',
+    backgroundCtrlOnimagePressed: '{backgroundCtrlOnimageRest}',
+    backgroundCtrlOnimageRest: colorLayerBackgroundTooltipStaticInverted,
     backgroundCtrlOutlineDisabled: '{nullColor}',
     backgroundCtrlOutlineHover: '{nullColor}',
     backgroundCtrlOutlinePressed: '{nullColor}',
@@ -131,28 +194,28 @@ export function lightBackgroundColors(
     backgroundCtrlShapesafeNeutralHover: '{backgroundCtrlShapesafeNeutralRest}',
     backgroundCtrlShapesafeNeutralPressed:
       '{backgroundCtrlShapesafeNeutralRest}',
-    backgroundCtrlShapesafeNeutralRest: palette
+    backgroundCtrlShapesafeNeutralRest: neutral
       ? neutral[400]
       : colorNeutralBackground1,
     backgroundCtrlSubtleDisabled: palette
-      ? alphaWhite[0]
+      ? '{nullColor}'
       : colorTransparentBackground,
-    backgroundCtrlSubtleHover: palette
+    backgroundCtrlSubtleHover: neutral
       ? neutral[4]
       : colorSubtleBackgroundHover,
     backgroundCtrlSubtleHoverSplit: '{nullColor}',
-    backgroundCtrlSubtlePressed: palette
+    backgroundCtrlSubtlePressed: neutral
       ? neutral[8]
       : colorSubtleBackgroundPressed,
-    backgroundCtrlSubtleRest: palette ? alphaWhite[0] : colorSubtleBackground,
+    backgroundCtrlSubtleRest: colorSubtleBackground,
     backgroundFlyoutColorblend: '{backgroundFlyoutSolid}',
     backgroundFlyoutLumblend: '{backgroundFlyoutSolid}',
-    backgroundFlyoutSolid: palette ? neutral[0] : colorLayerBackgroundDialog,
-    backgroundLayerPrimarySolid: palette ? neutral[0] : colorNeutralBackground1,
+    backgroundFlyoutSolid: neutral ? neutral[0] : colorLayerBackgroundDialog,
+    backgroundLayerPrimarySolid: neutral ? neutral[0] : colorNeutralBackground1,
     backgroundLayerPrimaryStop1: '{backgroundLayerPrimarySolid}',
     backgroundLayerPrimaryStop2: '{backgroundLayerPrimarySolid}',
     backgroundLayerPrimaryStop3: '{backgroundLayerPrimarySolid}',
-    backgroundLayerSecondary: palette ? neutral[100] : colorNeutralBackground2,
+    backgroundLayerSecondary: neutral ? neutral[100] : colorNeutralBackground2,
     backgroundLayerTertiary: '{backgroundLayerSecondary}',
     backgroundSmoke: colorBackgroundOverlay,
     backgroundToolbar: '{backgroundCardOnprimaryDefaultRest}',
@@ -183,10 +246,7 @@ export function lightBackgroundColors(
   };
 }
 
-export function lightStrokeColors(
-  neutral: NeutralColors,
-  palette?: ChromePalette,
-): ThemeStrokeColors {
+export function lightStrokeColors(neutral?: NeutralColors): ThemeStrokeColors {
   return {
     strokeCardOnprimaryDisabled: '{nullColor}',
     strokeCardOnprimaryHover: '{nullColor}',
@@ -200,11 +260,11 @@ export function lightStrokeColors(
     strokeCtrlDividerOnActivebrand: '{strokeCtrlDividerOnBrand}',
     strokeCtrlDividerOnActivebrandDisabled:
       '{strokeCtrlDividerOnBrandDisabled}',
-    strokeCtrlDividerOnBrand: alphaWhite[0],
+    strokeCtrlDividerOnBrand: '{nullColor}',
     strokeCtrlDividerOnBrandDisabled: '{nullColor}',
-    strokeCtrlDividerOnneutral: alphaWhite[0],
+    strokeCtrlDividerOnneutral: '{nullColor}',
     strokeCtrlDividerOnneutralDisabled: '{nullColor}',
-    strokeCtrlDividerOnoutline: alphaWhite[0],
+    strokeCtrlDividerOnoutline: '{nullColor}',
     strokeCtrlDividerOnoutlineDisabled: '{nullColor}',
     strokeCtrlDividerOnSubtle: '{nullColor}',
     strokeCtrlDividerOnSubtleDisabled: '{nullColor}',
@@ -224,31 +284,31 @@ export function lightStrokeColors(
     strokeCtrlOnBrandPressedStop2: '{strokeCtrlOnBrandPressed}',
     strokeCtrlOnBrandRest: '{nullColor}',
     strokeCtrlOnBrandRestStop2: '{strokeCtrlOnBrandRest}',
-    strokeCtrlOnneutralDisabled: palette
+    strokeCtrlOnneutralDisabled: neutral
       ? '{nullColor}'
       : colorNeutralStrokeDisabled,
     strokeCtrlOnneutralDisabledStop2: '{strokeCtrlOnneutralDisabled}',
-    strokeCtrlOnneutralHover: palette
+    strokeCtrlOnneutralHover: neutral
       ? '{nullColor}'
       : colorNeutralStroke1Hover,
     strokeCtrlOnneutralHoverStop2: '{strokeCtrlOnneutralHover}',
-    strokeCtrlOnneutralPressed: palette
+    strokeCtrlOnneutralPressed: neutral
       ? '{nullColor}'
       : colorNeutralStroke1Pressed,
     strokeCtrlOnneutralPressedStop2: '{strokeCtrlOnneutralPressed}',
-    strokeCtrlOnneutralRest: palette ? '{nullColor}' : colorNeutralStroke1,
+    strokeCtrlOnneutralRest: neutral ? '{nullColor}' : colorNeutralStroke1,
     strokeCtrlOnneutralRestStop2: '{strokeCtrlOnneutralRest}',
-    strokeCtrlOnoutlineDisabled: palette
+    strokeCtrlOnoutlineDisabled: neutral
       ? neutral[200]
       : colorNeutralStrokeDisabled,
     strokeCtrlOnoutlineDisabledStop2: '{strokeCtrlOnoutlineDisabled}',
-    strokeCtrlOnoutlineHover: palette ? neutral[304] : colorNeutralStroke1Hover,
+    strokeCtrlOnoutlineHover: neutral ? neutral[304] : colorNeutralStroke1Hover,
     strokeCtrlOnoutlineHoverStop2: '{strokeCtrlOnoutlineHover}',
-    strokeCtrlOnoutlinePressed: palette
+    strokeCtrlOnoutlinePressed: neutral
       ? neutral[308]
       : colorNeutralStroke1Pressed,
     strokeCtrlOnoutlinePressedStop2: '{strokeCtrlOnoutlinePressed}',
-    strokeCtrlOnoutlineRest: palette ? neutral[300] : colorNeutralStroke1,
+    strokeCtrlOnoutlineRest: neutral ? neutral[300] : colorNeutralStroke1,
     strokeCtrlOnoutlineRestStop2: '{strokeCtrlOnoutlineRest}',
     strokeCtrlOnsubtleDisabled: '{nullColor}',
     strokeCtrlOnsubtleHover: '{nullColor}',
@@ -256,24 +316,23 @@ export function lightStrokeColors(
     strokeCtrlOnsubtlePressed: '{nullColor}',
     strokeCtrlOnsubtleRest: '{nullColor}',
     strokeDividerBrand: '{backgroundCtrlBrandRest}',
-    strokeDividerDefault: palette ? neutral[300] : colorNeutralStroke2,
-    strokeDividerStrong: palette
+    strokeDividerDefault: neutral ? neutral[300] : colorNeutralStroke2,
+    strokeDividerStrong: neutral
       ? '{strokeDividerDefault}'
       : colorNeutralStroke1,
-    strokeDividerSubtle: palette ? neutral[200] : colorNeutralStroke3,
+    strokeDividerSubtle: neutral ? neutral[200] : colorNeutralStroke3,
     strokeFlyout: '{nullColor}',
     strokeImage: '{nullColor}',
     strokeLayer: '{nullColor}',
     strokeToolbar: '{nullColor}',
-    strokeWindowActive: alphaWhite[0],
+    strokeWindowActive: '{nullColor}',
     strokeWindowInactive: '{strokeWindowActive}',
   };
 }
 
 export function lightForegroundColors(
-  neutral: NeutralColors,
-  vibrant: VibrantColors,
-  palette?: ChromePalette,
+  neutral?: NeutralColors,
+  vibrant?: VibrantColors,
 ): ThemeForegroundColors {
   return {
     foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',
@@ -310,13 +369,15 @@ export function lightForegroundColors(
     foregroundCtrlActivebrandHover: '{foregroundCtrlBrandHover}',
     foregroundCtrlActivebrandPressed: '{foregroundCtrlBrandPressed}',
     foregroundCtrlActivebrandRest: '{foregroundCtrlBrandRest}',
-    foregroundCtrlBrandDisabled: palette
+    foregroundCtrlBrandDisabled: vibrant
       ? vibrant[200]
       : colorNeutralForegroundDisabled,
     foregroundCtrlBrandHover: '{foregroundCtrlBrandRest}',
     foregroundCtrlBrandPressed: '{foregroundCtrlBrandRest}',
-    foregroundCtrlBrandRest: palette ? vibrant[600] : colorBrandForeground1,
-    foregroundCtrlHintDefault: neutral[300],
+    foregroundCtrlBrandRest: vibrant ? vibrant[600] : colorBrandForeground1,
+    foregroundCtrlHintDefault: neutral
+      ? neutral[300]
+      : colorNeutralForegroundHint,
     foregroundCtrlIconOnneutralDisabled:
       '{foregroundCtrlNeutralPrimaryDisabled}',
     foregroundCtrlIconOnneutralHover: '{foregroundCtrlNeutralPrimaryRest}',
@@ -332,34 +393,36 @@ export function lightForegroundColors(
     foregroundCtrlIconOnsubtleHover: '{foregroundCtrlNeutralPrimaryRest}',
     foregroundCtrlIconOnsubtlePressed: '{foregroundCtrlNeutralPrimaryRest}',
     foregroundCtrlIconOnsubtleRest: '{foregroundCtrlNeutralPrimaryRest}',
-    foregroundCtrlNeutralPrimaryDisabled: neutral[350],
+    foregroundCtrlNeutralPrimaryDisabled: neutral
+      ? neutral[350]
+      : colorNeutralForegroundDisabled,
     foregroundCtrlNeutralPrimaryHover: '{foregroundCtrlNeutralPrimaryRest}',
     foregroundCtrlNeutralPrimaryPressed: '{foregroundCtrlNeutralPrimaryRest}',
-    foregroundCtrlNeutralPrimaryRest: palette
+    foregroundCtrlNeutralPrimaryRest: neutral
       ? neutral[800]
       : colorNeutralForeground1,
-    foregroundCtrlNeutralSecondaryDisabled: palette
+    foregroundCtrlNeutralSecondaryDisabled: neutral
       ? neutral[350]
       : colorNeutralForegroundDisabled,
     foregroundCtrlNeutralSecondaryHover: '{foregroundCtrlNeutralSecondaryRest}',
     foregroundCtrlNeutralSecondaryPressed:
       '{foregroundCtrlNeutralSecondaryRest}',
-    foregroundCtrlNeutralSecondaryRest: palette
+    foregroundCtrlNeutralSecondaryRest: neutral
       ? neutral[450]
       : colorNeutralForegroundHint,
     foregroundCtrlOnactivebrandDisabled: '{foregroundCtrlOnbrandDisabled}',
     foregroundCtrlOnactivebrandHover: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnactivebrandPressed: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnactivebrandRest: '{foregroundCtrlOnbrandRest}',
-    foregroundCtrlOnbrandDisabled: palette
+    foregroundCtrlOnbrandDisabled: neutral
       ? neutral[350]
       : colorNeutralForegroundDisabled,
     foregroundCtrlOnbrandHover: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnbrandPressed: '{foregroundCtrlOnbrandRest}',
-    foregroundCtrlOnbrandRest: palette
+    foregroundCtrlOnbrandRest: neutral
       ? neutral[0]
       : colorNeutralForegroundOnBrand,
-    foregroundCtrlOnimageRest: palette
+    foregroundCtrlOnimageRest: neutral
       ? neutral[0]
       : colorNeutralForegroundOnBrand,
     foregroundCtrlOnoutlineDisabled: '{foregroundCtrlNeutralPrimaryDisabled}',
@@ -380,93 +443,125 @@ export function lightForegroundColors(
   };
 }
 
-export function lightShadowColors(shadow: ShadowColors): ThemeShadowColors {
+export function lightShadowColors(shadow?: ShadowColors): ThemeShadowColors {
   return {
-    shadowToolbarKeyColor: shadow.shadowKeyLowLight,
-    shadowToolbarAmbientColor: shadow.shadowAmbientLowLight,
-    shadowWindowActiveKeyColor: shadow.shadowKeyHighLight,
-    shadowWindowActiveAmbientColor: shadow.shadowAmbientHighLight,
-    shadowWindowInactiveKeyColor: shadow.shadowKeyHighLight,
-    shadowWindowInactiveAmbientColor: shadow.shadowAmbientHighLight,
+    shadowToolbarKeyColor: shadow
+      ? shadow.shadowKeyLowLight
+      : colorNeutralShadowKey,
+    shadowToolbarAmbientColor: shadow
+      ? shadow.shadowAmbientLowLight
+      : colorNeutralShadowAmbient,
+    shadowWindowActiveKeyColor: shadow
+      ? shadow.shadowKeyHighLight
+      : colorNeutralShadowKey,
+    shadowWindowActiveAmbientColor: shadow
+      ? shadow.shadowAmbientHighLight
+      : colorNeutralShadowAmbient,
+    shadowWindowInactiveKeyColor: shadow
+      ? shadow.shadowKeyHighLight
+      : colorNeutralShadowKey,
+    shadowWindowInactiveAmbientColor: shadow
+      ? shadow.shadowAmbientHighLight
+      : colorNeutralShadowAmbient,
     shadowCardRestKeyColor: '{nullColor}',
     shadowCardRestAmbientColor: '{nullColor}',
     shadowCardHoverKeyColor: '{nullColor}',
     shadowCardPressedKeyColor: '{nullColor}',
     shadowCardDisabledKeyColor: '{nullColor}',
-    shadowFlyoutKeyColor: shadow.shadowKeyLowLight,
-    shadowFlyoutAmbientColor: shadow.shadowAmbientLowLight,
+    shadowFlyoutKeyColor: shadow
+      ? shadow.shadowKeyLowLight
+      : colorNeutralShadowKey,
+    shadowFlyoutAmbientColor: shadow
+      ? shadow.shadowAmbientLowLight
+      : colorNeutralShadowAmbient,
     shadowCtrlOnDragKeyColor: '{shadowFlyoutKeyColor}',
     shadowCtrlOnDragAmbientColor: '{shadowFlyoutAmbientColor}',
-    shadowLayerKeyColor: shadow.shadowKeyHighLight,
-    shadowLayerAmbientColor: shadow.shadowAmbientHighLight,
+    shadowLayerKeyColor: shadow
+      ? shadow.shadowKeyHighLight
+      : colorNeutralShadowKey,
+    shadowLayerAmbientColor: shadow
+      ? shadow.shadowAmbientHighLight
+      : colorNeutralShadowAmbient,
   };
 }
 
 export function lightMaterialColors(
-  neutral: NeutralColors,
+  neutral?: NeutralColors,
 ): ThemeMaterialColors {
   return {
     materialAcrylicDefaultColorblend: '{nullColor}',
     materialAcrylicDefaultLumblend: '{nullColor}',
-    materialAcrylicDefaultSolid: neutral[0],
-    materialAcrylicShellDefaultColorblend: neutral[0],
-    materialAcrylicShellDefaultLumblend: neutral[0],
-    materialAcrylicShellDefaultSolid: neutral[0],
-    materialMicaDarkerColorblend: neutral[0],
-    materialMicaDarkerLumblend: neutral[0],
-    materialMicaDarkerSolid: neutral[0],
-    materialMicaDefaultColorblend: neutral[0],
-    materialMicaDefaultLumblend: neutral[0],
-    materialMicaDefaultSolid: neutral[0],
-    materialMicaThinColorblend: neutral[0],
-    materialMicaThinLumblend: neutral[0],
-    materialMicaThinSolid: neutral[0],
+    materialAcrylicDefaultSolid: neutral ? neutral[0] : acrylicBackgroundNormal,
+    materialAcrylicShellDefaultColorblend: neutral
+      ? '{materialAcrylicDefaultSolid}'
+      : acrylicBackgroundColor,
+    materialAcrylicShellDefaultLumblend: neutral
+      ? '{materialAcrylicDefaultSolid}'
+      : acrylicBackgroundLuminosity,
+    materialAcrylicShellDefaultSolid: '{materialAcrylicDefaultSolid}',
+    materialMicaDarkerColorblend: neutral
+      ? '{materialMicaDarkerSolid}'
+      : tabBarBackgroundColor,
+    materialMicaDarkerLumblend: neutral
+      ? '{materialMicaDarkerSolid}'
+      : tabBarBackgroundLuminosity,
+    materialMicaDarkerSolid: neutral ? neutral[0] : tabBarBackgroundNormal,
+    materialMicaDefaultColorblend: neutral
+      ? '{materialMicaDefaultSolid}'
+      : tabActiveBackgroundColor,
+    materialMicaDefaultLumblend: neutral
+      ? '{materialMicaDefaultSolid}'
+      : tabActiveBackgroundLuminosity,
+    materialMicaDefaultSolid: neutral ? neutral[0] : tabActiveBackgroundNormal,
+    materialMicaThinColorblend: '{nullColor}',
+    materialMicaThinLumblend: '{nullColor}',
+    materialMicaThinSolid: '{nullColor}',
   };
 }
 
 export function lightStatusColors(
-  neutral: NeutralColors,
-  vibrant: VibrantColors,
+  neutral?: NeutralColors,
+  vibrant?: VibrantColors,
 ): ThemeStatusColors {
   return {
-    statusBrandBackground: vibrant[600],
-    statusBrandForeground: neutral[0],
-    statusBrandStroke: vibrant[500],
-    statusBrandTintBackground: vibrant[100],
-    statusBrandTintForeground: vibrant[600],
-    statusBrandTintStroke: alphaWhite[0],
-    statusDangerBackground: statusDanger[600],
-    statusDangerForeground: neutral[0],
-    statusDangerStroke: statusDanger[500],
-    statusDangerTintBackground: statusDanger[100],
-    statusDangerTintForeground: statusDanger[600],
-    statusDangerTintStroke: alphaWhite[0],
-    statusSuccessBackground: statusSuccess[600],
-    statusSuccessForeground: neutral[0],
-    statusSuccessStroke: statusSuccess[500],
-    statusSuccessTintBackground: statusSuccess[100],
-    statusSuccessTintForeground: statusSuccess[600],
-    statusSuccessTintStroke: alphaWhite[0],
-    statusWarningBackground: statusWarning[600],
-    statusWarningForeground: neutral[0],
-    statusWarningStroke: statusWarning[500],
-    statusWarningTintBackground: statusWarning[100],
-    statusWarningTintForeground: statusWarning[600],
-    statusWarningTintStroke: alphaWhite[0],
-    statusInformativeBackground: vibrant[100],
-    statusInformativeForeground: neutral[500],
+    statusBrandBackground: vibrant ? vibrant[600] : colorBrandBackground,
+    statusBrandForeground: neutral ? neutral[0] : colorNeutralForegroundOnBrand,
+    statusBrandStroke: vibrant ? vibrant[500] : colorBrandStroke,
+    statusBrandTintBackground: vibrant ? vibrant[100] : colorBrandBackground2,
+    statusBrandTintForeground: vibrant ? vibrant[600] : colorBrandForeground1,
+    statusBrandTintStroke: '{nullColor}',
+    statusDangerBackground: colorStatusDangerBackground3,
+    statusDangerForeground: colorStatusDangerForeground3,
+    statusDangerStroke: colorStatusDangerBorderActive,
+    statusDangerTintBackground: colorStatusDangerBackground1,
+    statusDangerTintForeground: colorStatusDangerForeground1,
+    statusDangerTintStroke: colorStatusDangerBorder1,
+    statusSuccessBackground: colorStatusSuccessBackground3,
+    statusSuccessForeground: colorStatusSuccessForeground3,
+    statusSuccessStroke: colorStatusSuccessBorderActive,
+    statusSuccessTintBackground: colorStatusSuccessBackground1,
+    statusSuccessTintForeground: colorStatusSuccessForeground1,
+    statusSuccessTintStroke: colorStatusSuccessBorder1,
+    statusWarningBackground: colorStatusWarningBackground3,
+    statusWarningForeground: colorStatusWarningForeground3,
+    statusWarningStroke: colorStatusWarningBorderActive,
+    statusWarningTintBackground: colorStatusWarningBackground1,
+    statusWarningTintForeground: colorStatusWarningForeground1,
+    statusWarningTintStroke: colorStatusWarningBorder1,
+    statusInformativeBackground: colorBrandBackground2,
+    statusInformativeForeground: colorBrandForeground1,
     statusInformativeStroke: '{nullColor}',
-    statusInformativeTintBackground: neutral[150],
-    statusInformativeTintForeground: neutral[800],
-    statusInformativeTintStroke: alphaWhite[0],
+    statusInformativeTintBackground: colorNeutralBackground3,
+    statusInformativeTintForeground: colorNeutralForeground1,
+    statusInformativeTintStroke: '{nullColor}',
     statusImportantBackground: '{nullColor}',
     statusImportantForeground: '{nullColor}',
-    statusImportantStroke: alphaWhite[0],
-    statusImportantTintBackground: alphaWhite[0],
-    statusImportantTintForeground: alphaWhite[0],
-    statusImportantTintStroke: alphaWhite[0],
-    statusAwayForeground: '#c85d00', // Kumo vibrant.orange.600
-    statusOofForeground: '#8a42ab', // Kumo vibrant.purple.600
+    statusImportantStroke: '{nullColor}',
+    statusImportantTintBackground: '{nullColor}',
+    statusImportantTintForeground: '{nullColor}',
+    statusImportantTintStroke: '{nullColor}',
+    statusAwayForeground: colorPalettePumpkinForeground2, // Kumo vibrant.orange.600
+    statusOofForeground: colorPalettePurpleForeground2, // Kumo vibrant.purple.600
   };
 }
 
