@@ -11,28 +11,49 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import '@mai-ui/button/define.js';
-import '@mai-ui/spinner/define.js';
-import '@mai-ui/text-input/define.js';
-import '@mai-ui/switch/define.js';
+import '@mai-ui/accordion-item/define.js';
+import '@mai-ui/accordion/define.js';
+import '@mai-ui/avatar/define.js';
 import '@mai-ui/badge/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/checkbox/define.js';
-import '@mai-ui/dropdown/define.js';
-import '@mai-ui/option/define.js';
-import '@mai-ui/listbox/define.js';
+import '@mai-ui/dialog-body/define.js';
+import '@mai-ui/dialog/define.js';
 import '@mai-ui/divider/define.js';
+import '@mai-ui/drawer-body/define.js';
+import '@mai-ui/drawer/define.js';
+import '@mai-ui/dropdown/define.js';
+import '@mai-ui/field/define.js';
+import '@mai-ui/filter-item/define.js';
+import '@mai-ui/filter/define.js';
 import '@mai-ui/link/define.js';
+import '@mai-ui/listbox/define.js';
+import '@mai-ui/menu-button/define.js';
+import '@mai-ui/menu-item/define.js';
+import '@mai-ui/menu-list/define.js';
+import '@mai-ui/menu/define.js';
 import '@mai-ui/message-bar/define.js';
+import '@mai-ui/option/define.js';
 import '@mai-ui/progress-bar/define.js';
+import '@mai-ui/radio-group/define.js';
 import '@mai-ui/radio/define.js';
+import '@mai-ui/rating-display/define.js';
 import '@mai-ui/slider/define.js';
+import '@mai-ui/spinner/define.js';
+import '@mai-ui/switch/define.js';
+import '@mai-ui/tablist/define.js';
+import '@mai-ui/tab/define.js';
+import '@mai-ui/textarea/define.js';
+import '@mai-ui/text-input/define.js';
 import '@mai-ui/tooltip/define.js';
-import '@mai-ui/tree/define.js';
 import '@mai-ui/tree-item/define.js';
+import '@mai-ui/tree/define.js';
 import {
   backgroundWebPagePrimary,
   foregroundContentNeutralPrimary,
 } from '@edge-design/kumo-theme/tokens.js';
+import { Dialog } from '@phoenixui/web-components';
+import { Drawer } from '@fluentui/web-components';
 
 function FormatTitle(title: string): string {
   return title
@@ -121,9 +142,206 @@ const template = html<PalettePlayground>`
           <mai-tree-item>Item 3</mai-tree-item>
         </mai-tree-item>
       </mai-tree>
+      <mai-avatar></mai-avatar>
+      <mai-button
+        @click="${(x) =>
+          (x.shadowRoot!.querySelector('#dialog-default')! as Dialog).show()}"
+        >Open Dialog</mai-button
+      >
+      <mai-dialog id="dialog-default" type="modal">
+        <mai-dialog-body>
+          <mai-button
+            slot="action"
+            appearance="primary"
+            @click="${(x) =>
+              (
+                x.shadowRoot!.querySelector('#dialog-default')! as Dialog
+              ).hide()}"
+          >
+            Close Dialog
+          </mai-button>
+
+          <div
+            style="background: var(--smtc-status-informative-tint-background, var(--colorNeutralBackground5));display: flex;flex-direction: column;padding-inline: 10px;"
+          >
+            <p>
+              The dialog component is a window overlaid on either the primary
+              window or another dialog window. Windows under a modal dialog are
+              inert.
+            </p>
+            <p>
+              That is, users cannot interact with content outside an active
+              dialog window.
+            </p>
+          </div>
+
+          <div slot="title">Default Dialog</div>
+        </mai-dialog-body>
+      </mai-dialog>
+      <mai-button
+        @click="${(x) =>
+          (x.shadowRoot!.querySelector('#drawer-default')! as Drawer).show()}"
+        >Toggle Drawer</mai-button
+      >
+      <mai-drawer id="drawer-default" position="start" type="modal" style>
+        <mai-drawer-body>
+          <span slot="title">Drawer Header</span>
+          <mai-button
+            slot="close"
+            appearance="transparent"
+            icon-only
+            aria-label="close"
+            @click="${(x) =>
+              (
+                x.shadowRoot!.querySelector('#drawer-default')! as Drawer
+              ).hide()}"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="fluent--dismiss-20-regular"
+              viewBox="0 0 20 20"
+              aria-hidden="true"
+              width="20"
+              height="20"
+            >
+              <path
+                fill="currentColor"
+                d="m4.089 4.216l.057-.07a.5.5 0 0 1 .638-.057l.07.057L10 9.293l5.146-5.147a.5.5 0 0 1 .638-.057l.07.057a.5.5 0 0 1 .057.638l-.057.07L10.707 10l5.147 5.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.638.057l-.07-.057L10 10.707l-5.146 5.147a.5.5 0 0 1-.638.057l-.07-.057a.5.5 0 0 1-.057-.638l.057-.07L9.293 10L4.146 4.854a.5.5 0 0 1-.057-.638l.057-.07z"
+              ></path>
+            </svg>
+          </mai-button>
+          <div>
+            The drawer gives users a quick entry point to configuration and
+            information. It should be used when retaining context is beneficial
+            to users. An overlay is optional depending on whether or not
+            interacting with the background content is beneficial to the user's
+            context/scenario. An overlay makes the drawer blocking and signifies
+            that the users full attention is required when making
+            configurations.
+
+            <div>
+              <mai-field>
+                <label slot="label" for="demo-options">
+                  Please select an option
+                </label>
+                <mai-radio-group
+                  id="demo-options"
+                  slot="input"
+                  orientation="vertical"
+                >
+                  <mai-field label-position="after">
+                    <label for="option-one" slot="label">Option 1</label>
+                    <mai-radio
+                      id="option-one"
+                      slot="input"
+                      name="demo-options"
+                      value="1"
+                    ></mai-radio>
+                  </mai-field>
+                  <mai-field label-position="after">
+                    <label for="option-two" slot="label">Option 2</label>
+                    <mai-radio
+                      id="option-two"
+                      slot="input"
+                      name="demo-options"
+                      value="2"
+                    ></mai-radio>
+                  </mai-field>
+                  <mai-field label-position="after">
+                    <label for="option-three" slot="label">Option 3</label>
+                    <mai-radio
+                      id="option-three"
+                      slot="input"
+                      name="demo-options"
+                      value="3"
+                    ></mai-radio>
+                  </mai-field>
+                </mai-radio-group>
+              </mai-field>
+            </div>
+          </div>
+          <div slot="footer">
+            <mai-button
+              appearance="primary"
+              @click="${(x) =>
+                (
+                  x.shadowRoot!.querySelector('#drawer-default')! as Drawer
+                ).hide()}"
+              >Close</mai-button
+            >
+            <mai-button appearance="secondary">Do Something</mai-button>
+          </div>
+        </mai-drawer-body>
+      </mai-drawer>
+      <mai-field label-position="above">
+        <label slot="label">Example</label>
+        <mai-text-input slot="input"></mai-text-input>
+
+        <fluent-text slot="message" size="200">
+          <span
+            style="
+                        display: inline-block;
+                        vertical-align: middle;
+                        color: var(--smtc-status-success-tint-foreground, var(--colorStatusSuccessBackground3))
+                    "
+          >
+            <span
+              style="display: inline-block; vertical-align: middle; color: var(--smtc-status-success-tint-foreground, var(--colorStatusSuccessBackground3))"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="fluent--checkmark-circle-12-filled"
+                viewBox="0 0 12 12"
+                aria-hidden="true"
+                width="12"
+                height="12"
+              >
+                <path
+                  fill="currentColor"
+                  d="M1 6a5 5 0 1 1 10 0A5 5 0 0 1 1 6m7.354-.896a.5.5 0 1 0-.708-.708L5.5 6.543L4.354 5.396a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0z"
+                ></path>
+              </svg>
+            </span>
+          </span>
+          This is a success message
+        </fluent-text>
+      </mai-field>
+      <mai-filter>
+        <mai-filter-item checked>Text</mai-filter-item>
+        <mai-filter-item>Text</mai-filter-item>
+        <mai-filter-item>Text</mai-filter-item>
+        <mai-filter-item>Text</mai-filter-item>
+        <mai-filter-item>Text</mai-filter-item>
+      </mai-filter>
+      <mai-menu>
+        <mai-menu-button
+          aria-label="Toggle Menu"
+          appearance="neutral"
+          slot="trigger"
+        >
+          Toggle Menu
+        </mai-menu-button>
+
+        <mai-menu-list>
+          <mai-menu-item>Menu item 1</mai-menu-item>
+          <mai-menu-item>Menu item 2</mai-menu-item>
+          <mai-menu-item>Menu item 3</mai-menu-item>
+          <mai-menu-item>Menu item 4</mai-menu-item>
+        </mai-menu-list>
+      </mai-menu>
+      <mai-rating-display value="3.5"></mai-rating-display>
+      <mai-tablist>
+        <mai-tab id="first-tab">First Tab</mai-tab>
+        <mai-tab id="second-tab">Second Tab</mai-tab>
+        <mai-tab id="third-tab">Third Tab</mai-tab>
+        <mai-tab id="fourth-tab">Fourth Tab</mai-tab>
+      </mai-tablist>
+      <mai-textarea resize="none">
+        <span slot="label">Sample textarea</span>
+      </mai-textarea>
       <mai-progress-bar appearance="indeterminate"></mai-progress-bar>
-      <mai-message-bar intent="info"
-        ><span slot="icon">
+      <mai-message-bar intent="info">
+        <span slot="icon">
           <svg
             width="20"
             height="20"
@@ -157,8 +375,30 @@ const template = html<PalettePlayground>`
               fill="currentColor"
               d="m4.089 4.216l.057-.07a.5.5 0 0 1 .638-.057l.07.057L10 9.293l5.146-5.147a.5.5 0 0 1 .638-.057l.07.057a.5.5 0 0 1 .057.638l-.057.07L10.707 10l5.147 5.146a.5.5 0 0 1 .057.638l-.057.07a.5.5 0 0 1-.638.057l-.07-.057L10 10.707l-5.146 5.147a.5.5 0 0 1-.638.057l-.07-.057a.5.5 0 0 1-.057-.638l.057-.07L9.293 10L4.146 4.854a.5.5 0 0 1-.057-.638l.057-.07z"
             ></path>
-          </svg> </mai-button
-      ></mai-message-bar>
+          </svg>
+        </mai-button>
+      </mai-message-bar>
+      <mai-accordion expand-mode="multi">
+        <mai-accordion-item>
+          <span slot="heading">Accordion Header 1</span>
+
+          Accordion Panel 1
+        </mai-accordion-item>
+        <mai-divider></mai-divider>
+
+        <mai-accordion-item>
+          <span slot="heading">Accordion Header 2</span>
+
+          Accordion Panel 2
+        </mai-accordion-item>
+        <mai-divider></mai-divider>
+
+        <mai-accordion-item>
+          <span slot="heading">Accordion Header 3</span>
+
+          Accordion Panel 3
+        </mai-accordion-item>
+      </mai-accordion>
     </div>
   </div>
   <div class="group">
@@ -280,7 +520,6 @@ const styles = css`
     align-items: center;
     gap: 16px;
     width: 100%;
-    overflow: hidden;
   }
 
   #palettes {

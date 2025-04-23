@@ -1,5 +1,4 @@
-import {
-  alphaWhite,
+import type {
   NeutralColors,
   ShadowColors,
   VibrantColors,
@@ -27,6 +26,7 @@ import type {
 } from './ctrlColors.js';
 import type { ChromePalette } from './paletteGen.js';
 import {
+  colorNeutralBackground1,
   colorNeutralBackgroundTabActive,
   tabActiveBackgroundNormal,
 } from '@phoenixui/themes/tokens.js';
@@ -55,8 +55,8 @@ export const lightComposerColors: CtrlComposerColors = {
     '{ctrlComposerInputStrokeSelectedRest}',
   ctrlComposerContainerBackgroundAcrylicColorBlend: '{backgroundFlyoutSolid}',
   ctrlComposerContainerBackgroundAcrylicLumBlend: '{backgroundFlyoutSolid}',
-  ctrlComposerContainerBackgroundDefault: alphaWhite[60],
-  ctrlComposerContainerBackgroundFlyout: alphaWhite[80],
+  ctrlComposerContainerBackgroundDefault: colorNeutralBackground1,
+  ctrlComposerContainerBackgroundFlyout: colorNeutralBackground1,
   ctrlComposerContainerShadowAmbientColor: '{nullColor}',
   ctrlComposerContainerShadowKeyColor: '{nullColor}',
   ctrlComposerContainerStrokeDefault: '{nullColor}',
