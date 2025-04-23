@@ -320,10 +320,10 @@ const utilityLayoutTemplate = {
 } as ThemeLayout;
 
 export function lightTheme(themeColor?: string): Theme {
-  let palettes: ChromePalette | undefined;
-  let neutral = defaultNeutral;
-  let shadow = defaultShadow;
-  let vibrant = defaultVibrant;
+  let palettes;
+  let neutral;
+  let shadow;
+  let vibrant;
 
   if (themeColor) {
     palettes = GenerateAllPalettes(themeColor);
@@ -396,30 +396,38 @@ export function lightTheme(themeColor?: string): Theme {
     ...legacyLightTokens,
     ...lightAiColors,
     ...lightAvatarColors(neutral),
-    ...lightBackgroundColors(neutral, vibrant, palettes),
+    ...lightBackgroundColors(
+      neutral || defaultNeutral,
+      vibrant || defaultVibrant,
+      palettes,
+    ),
     ...lightChoiceColors(neutral),
     ...lightComposerColors,
     ...lightDialogColors(neutral, shadow),
     ...lightDragColors(neutral),
     ...lightFabColors(neutral, shadow),
     ...lightFocusColors(neutral),
-    ...lightForegroundColors(neutral, vibrant, palettes),
+    ...lightForegroundColors(
+      neutral || defaultNeutral,
+      vibrant || defaultVibrant,
+      palettes,
+    ),
     ...lightIdentityFlyoutColors(neutral),
     ...lightInputColors,
     ...lightLinkColors(vibrant),
     ...lightListColors(neutral),
     ...lightLiteFilterColors(neutral),
-    ...lightMaterialColors(neutral),
+    ...lightMaterialColors(neutral || defaultNeutral),
     ...lightNullColors,
-    ...lightOmniboxColors(neutral, palettes),
+    ...lightOmniboxColors(palettes),
     ...lightProgressColors(neutral),
     ...lightRatingColors,
     ...lightSegmentedColors(neutral),
-    ...lightShadowColors(shadow),
+    ...lightShadowColors(shadow || defaultShadow),
     ...lightSliderColors,
-    ...lightStatusColors(neutral, vibrant),
-    ...lightStrokeColors(neutral, palettes),
-    ...lightTabColors(neutral, palettes),
+    ...lightStatusColors(neutral || defaultNeutral, vibrant || defaultVibrant),
+    ...lightStrokeColors(neutral || defaultNeutral, palettes),
+    ...lightTabColors(palettes),
     ...lightTooltipColors(neutral, shadow, palettes),
     ...utilityLayoutTemplate,
   } as Theme);
