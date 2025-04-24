@@ -28,15 +28,15 @@ export {
   lightStrokeColors,
 } from './lightThemeColors.js';
 
-export {
-  darkBackgroundColors,
-  darkForegroundColors,
-  darkMaterialColors,
-  darkNullColors,
-  darkShadowColors,
-  darkStatusColors,
-  darkStrokeColors,
-} from './darkThemeColors.js';
+// export {
+//   darkBackgroundColors,
+//   darkForegroundColors,
+//   darkMaterialColors,
+//   darkNullColors,
+//   darkShadowColors,
+//   darkStatusColors,
+//   darkStrokeColors,
+// } from './darkThemeColors.js';
 
 export type {
   CtrlComposerColors,
@@ -82,27 +82,27 @@ export {
   lightTooltipColors,
 } from './lightCtrlColors.js';
 
-export {
-  darkAvatarColors,
-  darkChoiceColors,
-  darkComposerColors,
-  darkDialogColors,
-  darkDragColors,
-  darkIdentityFlyoutColors,
-  darkInputColors,
-  darkFabColors,
-  darkFocusColors,
-  darkLinkColors,
-  darkListColors,
-  darkLiteFilterColors,
-  darkOmniboxColors,
-  darkProgressColors,
-  darkRatingColors,
-  darkSegmentedColors,
-  darkSliderColors,
-  darkTabColors,
-  darkTooltipColors,
-} from './darkCtrlColors.js';
+// export {
+//   darkAvatarColors,
+//   darkChoiceColors,
+//   darkComposerColors,
+//   darkDialogColors,
+//   darkDragColors,
+//   darkIdentityFlyoutColors,
+//   darkInputColors,
+//   darkFabColors,
+//   darkFocusColors,
+//   darkLinkColors,
+//   darkListColors,
+//   darkLiteFilterColors,
+//   darkOmniboxColors,
+//   darkProgressColors,
+//   darkRatingColors,
+//   darkSegmentedColors,
+//   darkSliderColors,
+//   darkTabColors,
+//   darkTooltipColors,
+// } from './darkCtrlColors.js';
 
 export type {
   TextCtrl,
