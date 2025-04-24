@@ -1,3 +1,8 @@
+import {
+  acrylicBackgroundBlur,
+  tabActiveBackgroundBlur,
+} from '@phoenixui/themes/tokens.js';
+
 export type Material = {
   materialAcrylicBlur: string;
   materialBlurAcrylic: string;
@@ -6,8 +11,8 @@ export type Material = {
 };
 
 export const material: Material = {
-  materialAcrylicBlur: '60px',
+  materialAcrylicBlur: acrylicBackgroundBlur,
   materialBlurAcrylic: '{materialAcrylicBlur}',
-  materialMicaBlur: '240px',
-  materialOnImageBlur: '12px',
+  materialMicaBlur: tabActiveBackgroundBlur,
+  materialOnImageBlur: '{nullNumber}',
 };
