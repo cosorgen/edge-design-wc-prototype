@@ -63,44 +63,46 @@ import {
 import { Corner, corner } from './corner.js';
 import {
   ctrlAvatarLayout,
-  ctrlChoiceLayout,
-  ctrlBadgeLayout,
-  ctrlBooleanLayout,
-  ctrlComposerLayout,
-  ctrlDialogLayout,
-  ctrlDividerLayout,
-  ctrlFabLayout,
-  ctrlFocusLayout,
-  ctrlInputLayout,
-  ctrlLinkLayout,
-  ctrlListLayout,
-  ctrlLiteFilterLayout,
-  ctrlProgressLayout,
-  ctrlRatingLayout,
-  ctrlSegmentedLayout,
-  ctrlSliderLayout,
-  ctrlSpinnerLayout,
-  ctrlSplitLayout,
-  ctrlTooltipLayout,
-  CtrlBadgeLayout,
-  CtrlBooleanLayout,
-  CtrlChoiceLayout,
-  CtrlComposerLayout,
-  CtrlDialogLayout,
-  CtrlDividerLayout,
-  CtrlFabLayout,
-  CtrlFocusLayout,
-  CtrlInputLayout,
-  CtrlListLayout,
   CtrlAvatarLayout,
+  ctrlBadgeLayout,
+  CtrlBadgeLayout,
+  ctrlBooleanLayout,
+  CtrlBooleanLayout,
+  ctrlChoiceLayout,
+  CtrlChoiceLayout,
+  ctrlComposerLayout,
+  CtrlComposerLayout,
+  ctrlDialogLayout,
+  CtrlDialogLayout,
+  ctrlDividerLayout,
+  CtrlDividerLayout,
+  ctrlFabLayout,
+  CtrlFabLayout,
+  ctrlFocusLayout,
+  CtrlFocusLayout,
+  ctrlInputLayout,
+  CtrlInputLayout,
+  ctrlLinkLayout,
   CtrlLinkLayout,
+  ctrlListLayout,
+  CtrlListLayout,
+  ctrlLiteFilterLayout,
   CtrlLitefilterLayout,
+  ctrlProgressLayout,
   CtrlProgressLayout,
+  ctrlRatingLayout,
   CtrlRatingLayout,
+  ctrlSegmentedLayout,
   CtrlSegmentedLayout,
+  ctrlSliderLayout,
   CtrlSliderLayout,
+  ctrlSpinnerLayout,
   CtrlSpinnerLayout,
+  ctrlSplitLayout,
   CtrlSplitLayout,
+  CtrlTabLayout,
+  ctrlTabLayout,
+  ctrlTooltipLayout,
   CtrlTooltipLayout,
 } from './ctrlLayout.js';
 import { IconTheme, iconTheme } from './iconTheme.js';
@@ -149,11 +151,6 @@ import {
   textStyle,
 } from './text.js';
 import { NullValues, nullValues } from './nullValues.js';
-import {
-  legacyCommonTokens,
-  legacyDarkTokens,
-  legacyLightTokens,
-} from './legacyTokens.js';
 import { resolveNestedVariables } from './resolveNestedVariables.js';
 import {
   ThemeAiColors,
@@ -213,6 +210,7 @@ export type ThemeLayout = Corner &
   CtrlSliderLayout &
   CtrlSpinnerLayout &
   CtrlSplitLayout &
+  CtrlTabLayout &
   CtrlTooltipLayout &
   GapBetween &
   GapInside &
@@ -290,11 +288,11 @@ const utilityLayoutTemplate = {
   ...ctrlSliderLayout,
   ...ctrlSpinnerLayout,
   ...ctrlSplitLayout,
+  ...ctrlTabLayout,
   ...ctrlTooltipLayout,
   ...gapBetween,
   ...gapInside,
   ...iconTheme,
-  ...legacyCommonTokens,
   ...material,
   ...nullValues,
   ...paddingCard,
@@ -393,7 +391,6 @@ export function lightTheme(themeColor?: string): Theme {
   }
 
   return resolveNestedVariables({
-    ...legacyLightTokens,
     ...lightAiColors,
     ...lightAvatarColors(neutral),
     ...lightBackgroundColors(neutral, vibrant, palettes),
@@ -520,7 +517,6 @@ export function darkTheme(themeColor?: string): Theme {
     ...darkStrokeColors(neutral),
     ...darkTabColors(neutral, palettes),
     ...darkTooltipColors(neutral, shadow),
-    ...legacyDarkTokens,
     ...utilityLayoutTemplate,
   } as Theme);
 }

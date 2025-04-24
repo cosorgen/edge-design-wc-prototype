@@ -22,7 +22,6 @@ import {
   paddingCtrlHorizontalDefault,
   paddingContentXsmall,
   foregroundCtrlNeutralPrimaryRest,
-  cornerCtrlRest,
   foregroundCtrlNeutralPrimaryHover,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
@@ -32,6 +31,7 @@ import {
   cornerCtrlSmRest,
   paddingWindowDefault,
   ctrlTabBackgroundHorizontalHover,
+  ctrlTabCorner,
 } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<HorizontalTab>`
@@ -102,7 +102,7 @@ const styles = css`
     padding-inline-end: calc(${paddingCtrlHorizontalDefault} + /*16px*/ 0px);
     padding-block: ${paddingContentXsmall};
     color: ${foregroundCtrlNeutralPrimaryRest};
-    border-radius: ${cornerCtrlRest};
+    border-radius: ${ctrlTabCorner};
   }
 
   button:hover {
@@ -184,7 +184,7 @@ const styles = css`
   #bg {
     inset: 0;
     bottom: calc(0px - ${paddingWindowDefault});
-    border-radius: ${cornerCtrlRest} ${cornerCtrlRest} 0 0;
+    border-radius: ${ctrlTabCorner} ${ctrlTabCorner} 0 0;
   }
 
   #left-wing,

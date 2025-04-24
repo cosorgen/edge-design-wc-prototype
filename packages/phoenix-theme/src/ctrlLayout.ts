@@ -1,3 +1,4 @@
+import { borderRadiusLarge } from '@phoenixui/themes/tokens.js';
 import { corner, shadow, size, strokeWidth } from './globalValues.js';
 
 export type CtrlAvatarLayout = {
@@ -317,6 +318,11 @@ export type CtrlSplitLayout = {
 export type CtrlSpinnerLayout = {
   ctrlSpinnerStrokewidth: string;
   ctrlSpinnerShowemptytrack: string;
+};
+
+export type CtrlTabLayout = {
+  ctrlTabCorner: string;
+  ctrlTabShadowVerticalActive: string;
 };
 
 export type CtrlTooltipLayout = {
@@ -655,6 +661,11 @@ export const ctrlSplitLayout: CtrlSplitLayout = {
 export const ctrlSpinnerLayout: CtrlSpinnerLayout = {
   ctrlSpinnerStrokewidth: strokeWidth[20],
   ctrlSpinnerShowemptytrack: 'false',
+};
+
+export const ctrlTabLayout: CtrlTabLayout = {
+  ctrlTabCorner: borderRadiusLarge,
+  ctrlTabShadowVerticalActive: '{shadowLayer}',
 };
 
 export const ctrlTooltipLayout: CtrlTooltipLayout = {

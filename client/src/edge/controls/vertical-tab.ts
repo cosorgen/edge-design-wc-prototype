@@ -14,7 +14,6 @@ import {
   paddingCtrlHorizontalDefault,
   paddingContentXsmall,
   foregroundCtrlNeutralPrimaryRest,
-  cornerCtrlRest,
   foregroundCtrlNeutralPrimaryHover,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
@@ -23,6 +22,8 @@ import {
   cornerCtrlSmRest,
   ctrlTabBackgroundVerticalHover,
   ctrlTabBackgroundVerticalActive,
+  ctrlTabCorner,
+  ctrlTabShadowVerticalActive,
 } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<VerticalTab>`
@@ -79,7 +80,7 @@ const styles = css`
     padding-inline-end: calc(${paddingCtrlHorizontalDefault} + /*16px*/ 0px);
     padding-block: ${paddingContentXsmall};
     color: ${foregroundCtrlNeutralPrimaryRest};
-    border-radius: ${cornerCtrlRest};
+    border-radius: ${ctrlTabCorner};
   }
 
   button:hover {
@@ -90,6 +91,7 @@ const styles = css`
   :host([active]) button {
     cursor: default;
     background-color: ${ctrlTabBackgroundVerticalActive};
+    box-shadow: ${ctrlTabShadowVerticalActive};
   }
 
   :host([active]) button:hover {

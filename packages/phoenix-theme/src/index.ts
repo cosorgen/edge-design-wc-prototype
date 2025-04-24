@@ -234,6 +234,7 @@ export type {
   CtrlSliderLayout,
   CtrlSpinnerLayout,
   CtrlSplitLayout,
+  CtrlTabLayout,
   CtrlTooltipLayout,
 } from './ctrlLayout.js';
 
@@ -257,6 +258,7 @@ export {
   ctrlSliderLayout,
   ctrlSpinnerLayout,
   ctrlSplitLayout,
+  ctrlTabLayout,
   ctrlTooltipLayout,
 } from './ctrlLayout.js';
 

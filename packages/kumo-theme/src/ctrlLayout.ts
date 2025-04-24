@@ -319,6 +319,11 @@ export type CtrlSpinnerLayout = {
   ctrlSpinnerShowemptytrack: string;
 };
 
+export type CtrlTabLayout = {
+  ctrlTabCorner: string;
+  ctrlTabShadowVerticalActive: string;
+};
+
 export type CtrlTooltipLayout = {
   ctrlTooltipCorner: string;
   ctrlTooltipShadowKeyX: string;
@@ -655,6 +660,11 @@ export const ctrlSplitLayout: CtrlSplitLayout = {
 export const ctrlSpinnerLayout: CtrlSpinnerLayout = {
   ctrlSpinnerStrokewidth: strokeWidth[20],
   ctrlSpinnerShowemptytrack: 'false',
+};
+
+export const ctrlTabLayout: CtrlTabLayout = {
+  ctrlTabCorner: corner[80],
+  ctrlTabShadowVerticalActive: 'none',
 };
 
 export const ctrlTooltipLayout: CtrlTooltipLayout = {

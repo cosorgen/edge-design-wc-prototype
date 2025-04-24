@@ -102,6 +102,8 @@ import {
   CtrlSpinnerLayout,
   CtrlSplitLayout,
   CtrlTooltipLayout,
+  ctrlTabLayout,
+  CtrlTabLayout,
 } from './ctrlLayout.js';
 import { IconTheme, iconTheme } from './iconTheme.js';
 import { Material, material } from './material.js';
@@ -213,6 +215,7 @@ export type ThemeLayout = Corner &
   CtrlSliderLayout &
   CtrlSpinnerLayout &
   CtrlSplitLayout &
+  CtrlTabLayout &
   CtrlTooltipLayout &
   GapBetween &
   GapInside &
@@ -290,6 +293,7 @@ const utilityLayoutTemplate = {
   ...ctrlSliderLayout,
   ...ctrlSpinnerLayout,
   ...ctrlSplitLayout,
+  ...ctrlTabLayout,
   ...ctrlTooltipLayout,
   ...gapBetween,
   ...gapInside,
