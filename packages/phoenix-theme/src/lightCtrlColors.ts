@@ -1,6 +1,6 @@
 import type {
   NeutralColors,
-  ShadowColors,
+  LightShadowColors,
   VibrantColors,
 } from './globalColors.js';
 import type {
@@ -137,7 +137,7 @@ export function lightChoiceColors(neutral?: NeutralColors): CtrlChoiceColors {
 
 export function lightDialogColors(
   neutral?: NeutralColors,
-  shadow?: ShadowColors,
+  shadow?: LightShadowColors,
 ): CtrlDialogColors {
   return {
     ctrlDialogBackground: neutral ? neutral[0] : colorLayerBackgroundDialog,
@@ -203,7 +203,7 @@ export const lightInputColors: CtrlInputColors = {
 
 export function lightFabColors(
   neutral?: NeutralColors,
-  shadow?: ShadowColors,
+  shadow?: LightShadowColors,
 ): CtrlFabColors {
   return {
     ctrlFabShadowRestKeyColor: shadow
@@ -402,7 +402,7 @@ export function lightTabColors(palette?: ChromePalette): CtrlTabColors {
 
 export function lightTooltipColors(
   neutral?: NeutralColors,
-  shadow?: ShadowColors,
+  shadow?: LightShadowColors,
   palette?: ChromePalette,
 ): CtrlTooltipColors {
   return {

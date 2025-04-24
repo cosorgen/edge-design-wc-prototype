@@ -12,14 +12,14 @@ export type IconTheme = {
 };
 
 export const iconTheme: IconTheme = {
-  iconThemeCtrlChevronDefault: 'Regular',
-  iconThemeCtrlChevronSelected: 'Filled',
-  iconThemeCtrlDefaultRest: 'Regular',
-  iconThemeCtrlDefaultHover: 'Filled',
-  iconThemeCtrlDefaultPressed: 'Filled',
-  iconThemeCtrlDefaultSelected: 'Filled',
-  iconThemeCtrlSubtleRest: 'Regular',
-  iconThemeCtrlSubtleHover: 'Filled',
-  iconThemeCtrlSubtlePressed: 'Filled',
-  iconThemeCtrlSubtleSelected: 'Filled',
+  iconThemeCtrlChevronDefault: 'Regular', // unmappable
+  iconThemeCtrlChevronSelected: 'Filled', // unmappable
+  iconThemeCtrlDefaultRest: 'Regular', // unmappable
+  iconThemeCtrlDefaultHover: 'Filled', // unmappable
+  iconThemeCtrlDefaultPressed: 'Filled', // unmappable
+  iconThemeCtrlDefaultSelected: 'Filled', // unmappable
+  iconThemeCtrlSubtleRest: 'Regular', // unmappable
+  iconThemeCtrlSubtleHover: 'Filled', // unmappable
+  iconThemeCtrlSubtlePressed: 'Filled', // unmappable
+  iconThemeCtrlSubtleSelected: 'Filled', // unmappable
 };

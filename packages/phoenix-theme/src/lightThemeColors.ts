@@ -1,4 +1,4 @@
-import { NeutralColors, VibrantColors, ShadowColors } from './globalColors.js';
+import { NeutralColors, VibrantColors, LightShadowColors } from './globalColors.js';
 import type {
   ThemeAiColors,
   ThemeBackgroundColors,
@@ -443,7 +443,7 @@ export function lightForegroundColors(
   };
 }
 
-export function lightShadowColors(shadow?: ShadowColors): ThemeShadowColors {
+export function lightShadowColors(shadow?: LightShadowColors): ThemeShadowColors {
   return {
     shadowToolbarKeyColor: shadow
       ? shadow.shadowKeyLowLight

@@ -1,4 +1,4 @@
-import { size } from './globalValues.js';
+import { spacingHorizontalM, spacingHorizontalXL, spacingHorizontalXXL, spacingHorizontalXXXL } from "@phoenixui/themes/tokens.js";
 
 export type SizeCtrl = {
   sizeCtrlDefault: string;
@@ -22,9 +22,9 @@ export type SizeCtrlLg = {
 };
 
 export const sizeCtrl: SizeCtrl = {
-  sizeCtrlDefault: size[320],
-  sizeCtrlIcon: size[200],
-  sizeCtrlIconSecondary: size[120],
+  sizeCtrlDefault: spacingHorizontalXXXL,
+  sizeCtrlIcon: spacingHorizontalXL,
+  sizeCtrlIconSecondary: spacingHorizontalM,
   sizeIconControlSmall: '{sizeCtrlSmIcon}',
   sizeIconControlDefault: '{sizeCtrlIcon}',
   sizeControlDefault: '{sizeCtrlDefault}',
@@ -33,11 +33,11 @@ export const sizeCtrl: SizeCtrl = {
 };
 
 export const sizeCtrlSm: SizeCtrlSm = {
-  sizeCtrlSmDefault: size[240],
-  sizeCtrlSmIcon: size[200],
+  sizeCtrlSmDefault: spacingHorizontalXXL,
+  sizeCtrlSmIcon: spacingHorizontalXL,
 };
 
 export const sizeCtrlLg: SizeCtrlLg = {
-  sizeCtrlLgDefault: size[400],
-  sizeCtrlLgIcon: size[240],
+  sizeCtrlLgDefault: '40px', // unmappable
+  sizeCtrlLgIcon: spacingHorizontalXXL,
 };

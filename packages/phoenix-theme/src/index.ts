@@ -1,50 +1,8 @@
 export type {
-  AlphaBlackColors,
-  AlphaVibrant100Colors,
-  AlphaVibrant800Colors,
-  AlphaWhiteColors,
   NeutralColors,
-  ShadowColors,
-  StatusDangerColors,
-  StatusSuccessColors,
-  StatusWarningColors,
+  LightShadowColors,
   VibrantColors,
 } from './globalColors.js';
-
-export {
-  alphaBlack,
-  alphaVibrant100,
-  alphaVibrant800,
-  alphaWhite,
-  neutral,
-  shadow as shadowColors,
-  statusDanger,
-  statusSuccess,
-  statusWarning,
-  vibrant,
-} from './globalColors.js';
-
-export type {
-  SizeValues,
-  CornerValues,
-  StrokewidthValues,
-  FontFamilyValues,
-  FontsizeValues,
-  FontWeightValues,
-  LineheightValues,
-  ShadowValues,
-} from './globalValues.js';
-
-export {
-  size,
-  corner as globalCorner,
-  strokeWidth as globalStrokewidth,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  shadow as globalShadow,
-} from './globalValues.js';
 
 export type { NullValues } from './nullValues.js';
 

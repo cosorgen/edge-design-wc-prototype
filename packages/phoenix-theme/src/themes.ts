@@ -183,12 +183,7 @@ import {
   CtrlTabColors,
   CtrlTooltipColors,
 } from './ctrlColors.js';
-import {
-  neutral as defaultNeutral,
-  shadow as defaultShadow,
-  vibrant as defaultVibrant,
-} from './globalColors.js';
-import { GenerateAllPalettes, type ChromePalette } from './paletteGen.js';
+import { GenerateAllPalettes } from './paletteGen.js';
 
 export type ThemeLayout = Corner &
   CtrlAvatarLayout &
@@ -382,7 +377,6 @@ export function lightTheme(themeColor?: string): Theme {
       608: palettes.tonal.primary[27],
     };
     shadow = {
-      ...defaultShadow,
       shadowKeyLowLight: `${palettes.vibrant.primary[12]}1F`, // 12% opacity
       shadowKeyHighLight: `${palettes.vibrant.primary[12]}29`, // 16% opacity
       shadowAmbientLowLight: `${palettes.vibrant.primary[12]}0F`, // 6% opacity
@@ -422,101 +416,102 @@ export function lightTheme(themeColor?: string): Theme {
   } as Theme);
 }
 
-export function darkTheme(themeColor?: string): Theme {
-  let palettes: ChromePalette | undefined;
-  let neutral = defaultNeutral;
-  const shadow = defaultShadow;
-  let vibrant = defaultVibrant;
+export const darkTheme = lightTheme;
 
-  if (themeColor) {
-    palettes = GenerateAllPalettes(themeColor);
-    const highlightOffset = -4;
-    const offset = 12;
-    neutral = {
-      0: palettes.expressive.neutralVariant[100 + highlightOffset],
-      4: palettes.expressive.neutralVariant[97 + highlightOffset],
-      8: palettes.expressive.neutralVariant[91 + highlightOffset],
-      100: palettes.expressive.neutralVariant[98 + highlightOffset],
-      104: palettes.expressive.neutralVariant[93 + highlightOffset],
-      108: palettes.expressive.neutralVariant[88 + highlightOffset],
-      150: palettes.expressive.neutralVariant[96 + highlightOffset],
-      154: palettes.expressive.neutralVariant[93 + highlightOffset],
-      158: palettes.expressive.neutralVariant[88 + highlightOffset],
-      200: palettes.expressive.neutralVariant[94 + highlightOffset],
-      250: palettes.expressive.neutralVariant[88 + highlightOffset],
-      300: palettes.expressive.neutralVariant[82 + highlightOffset],
-      304: palettes.expressive.neutralVariant[79 + highlightOffset],
-      308: palettes.expressive.neutralVariant[73 + highlightOffset],
-      350: palettes.expressive.neutralVariant[69 + highlightOffset],
-      400: palettes.expressive.neutralVariant[60 + offset],
-      404: palettes.expressive.neutralVariant[63 + offset],
-      408: palettes.expressive.neutralVariant[69 + offset],
-      450: palettes.expressive.neutralVariant[48 + offset],
-      454: palettes.expressive.neutralVariant[45 + offset],
-      458: palettes.expressive.neutralVariant[39 + offset],
-      500: palettes.expressive.neutralVariant[40 + offset],
-      550: palettes.expressive.neutralVariant[29 + offset],
-      554: palettes.expressive.neutralVariant[32 + offset],
-      558: palettes.expressive.neutralVariant[38 + offset],
-      600: palettes.expressive.neutralVariant[24 + offset],
-      650: palettes.expressive.neutralVariant[20 + offset],
-      700: palettes.expressive.neutralVariant[18 + offset],
-      704: palettes.expressive.neutralVariant[21 + offset],
-      708: palettes.expressive.neutralVariant[27 + offset],
-      750: palettes.expressive.neutralVariant[16 + offset],
-      754: palettes.expressive.neutralVariant[19 + offset],
-      758: palettes.expressive.neutralVariant[25 + offset],
-      800: palettes.expressive.neutralVariant[12 + offset],
-      804: palettes.expressive.neutralVariant[15 + offset],
-      808: palettes.expressive.neutralVariant[21 + offset],
-      1000: palettes.expressive.neutralVariant[0],
-    };
-    vibrant = {
-      100: palettes.tonal.primary[96],
-      104: palettes.tonal.primary[93],
-      108: palettes.tonal.primary[87],
-      200: palettes.tonal.primary[92],
-      300: palettes.tonal.primary[84],
-      304: palettes.tonal.primary[64],
-      308: palettes.tonal.primary[70],
-      400: palettes.tonal.primary[63],
-      500: palettes.tonal.primary[53],
-      504: palettes.tonal.primary[43],
-      508: palettes.tonal.primary[37],
-      600: palettes.tonal.primary[47],
-      604: palettes.tonal.primary[21],
-      608: palettes.tonal.primary[27],
-    };
-  }
+// export function darkTheme(themeColor?: string): Theme {
+//   let palettes;
+//   let neutral;
+//   let vibrant;
 
-  return resolveNestedVariables({
-    ...darkAiColors,
-    ...darkAvatarColors(neutral),
-    ...darkBackgroundColors(neutral, vibrant, palettes),
-    ...darkChoiceColors(neutral),
-    ...darkComposerColors,
-    ...darkDialogColors(neutral, shadow),
-    ...darkDragColors(neutral),
-    ...darkFabColors(neutral, shadow),
-    ...darkFocusColors(neutral),
-    ...darkForegroundColors(neutral, vibrant, palettes),
-    ...darkIdentityFlyoutColors(neutral),
-    ...darkInputColors,
-    ...darkLinkColors(vibrant),
-    ...darkListColors(neutral),
-    ...darkLiteFilterColors(neutral),
-    ...darkMaterialColors(neutral),
-    ...darkNullColors,
-    ...darkOmniboxColors(neutral, palettes),
-    ...darkProgressColors(neutral),
-    ...darkRatingColors,
-    ...darkSegmentedColors(neutral),
-    ...darkShadowColors(shadow),
-    ...darkSliderColors,
-    ...darkStatusColors(neutral, vibrant),
-    ...darkStrokeColors(neutral),
-    ...darkTabColors(neutral, palettes),
-    ...darkTooltipColors(neutral, shadow),
-    ...utilityLayoutTemplate,
-  } as Theme);
-}
+//   if (themeColor) {
+//     palettes = GenerateAllPalettes(themeColor);
+//     const highlightOffset = -4;
+//     const offset = 12;
+//     neutral = {
+//       0: palettes.expressive.neutralVariant[100 + highlightOffset],
+//       4: palettes.expressive.neutralVariant[97 + highlightOffset],
+//       8: palettes.expressive.neutralVariant[91 + highlightOffset],
+//       100: palettes.expressive.neutralVariant[98 + highlightOffset],
+//       104: palettes.expressive.neutralVariant[93 + highlightOffset],
+//       108: palettes.expressive.neutralVariant[88 + highlightOffset],
+//       150: palettes.expressive.neutralVariant[96 + highlightOffset],
+//       154: palettes.expressive.neutralVariant[93 + highlightOffset],
+//       158: palettes.expressive.neutralVariant[88 + highlightOffset],
+//       200: palettes.expressive.neutralVariant[94 + highlightOffset],
+//       250: palettes.expressive.neutralVariant[88 + highlightOffset],
+//       300: palettes.expressive.neutralVariant[82 + highlightOffset],
+//       304: palettes.expressive.neutralVariant[79 + highlightOffset],
+//       308: palettes.expressive.neutralVariant[73 + highlightOffset],
+//       350: palettes.expressive.neutralVariant[69 + highlightOffset],
+//       400: palettes.expressive.neutralVariant[60 + offset],
+//       404: palettes.expressive.neutralVariant[63 + offset],
+//       408: palettes.expressive.neutralVariant[69 + offset],
+//       450: palettes.expressive.neutralVariant[48 + offset],
+//       454: palettes.expressive.neutralVariant[45 + offset],
+//       458: palettes.expressive.neutralVariant[39 + offset],
+//       500: palettes.expressive.neutralVariant[40 + offset],
+//       550: palettes.expressive.neutralVariant[29 + offset],
+//       554: palettes.expressive.neutralVariant[32 + offset],
+//       558: palettes.expressive.neutralVariant[38 + offset],
+//       600: palettes.expressive.neutralVariant[24 + offset],
+//       650: palettes.expressive.neutralVariant[20 + offset],
+//       700: palettes.expressive.neutralVariant[18 + offset],
+//       704: palettes.expressive.neutralVariant[21 + offset],
+//       708: palettes.expressive.neutralVariant[27 + offset],
+//       750: palettes.expressive.neutralVariant[16 + offset],
+//       754: palettes.expressive.neutralVariant[19 + offset],
+//       758: palettes.expressive.neutralVariant[25 + offset],
+//       800: palettes.expressive.neutralVariant[12 + offset],
+//       804: palettes.expressive.neutralVariant[15 + offset],
+//       808: palettes.expressive.neutralVariant[21 + offset],
+//       1000: palettes.expressive.neutralVariant[0],
+//     };
+//     vibrant = {
+//       100: palettes.tonal.primary[96],
+//       104: palettes.tonal.primary[93],
+//       108: palettes.tonal.primary[87],
+//       200: palettes.tonal.primary[92],
+//       300: palettes.tonal.primary[84],
+//       304: palettes.tonal.primary[64],
+//       308: palettes.tonal.primary[70],
+//       400: palettes.tonal.primary[63],
+//       500: palettes.tonal.primary[53],
+//       504: palettes.tonal.primary[43],
+//       508: palettes.tonal.primary[37],
+//       600: palettes.tonal.primary[47],
+//       604: palettes.tonal.primary[21],
+//       608: palettes.tonal.primary[27],
+//     };
+//   }
+
+//   return resolveNestedVariables({
+//     ...darkAiColors,
+//     ...darkAvatarColors(neutral),
+//     ...darkBackgroundColors(neutral, vibrant, palettes),
+//     ...darkChoiceColors(neutral),
+//     ...darkComposerColors,
+//     ...darkDialogColors(neutral, shadow),
+//     ...darkDragColors(neutral),
+//     ...darkFabColors(neutral, shadow),
+//     ...darkFocusColors(neutral),
+//     ...darkForegroundColors(neutral, vibrant, palettes),
+//     ...darkIdentityFlyoutColors(neutral),
+//     ...darkInputColors,
+//     ...darkLinkColors(vibrant),
+//     ...darkListColors(neutral),
+//     ...darkLiteFilterColors(neutral),
+//     ...darkMaterialColors(neutral),
+//     ...darkNullColors,
+//     ...darkOmniboxColors(neutral, palettes),
+//     ...darkProgressColors(neutral),
+//     ...darkRatingColors,
+//     ...darkSegmentedColors(neutral),
+//     ...darkShadowColors(shadow),
+//     ...darkSliderColors,
+//     ...darkStatusColors(neutral, vibrant),
+//     ...darkStrokeColors(neutral),
+//     ...darkTabColors(neutral, palettes),
+//     ...darkTooltipColors(neutral, shadow),
+//     ...utilityLayoutTemplate,
+//   } as Theme);
+// }

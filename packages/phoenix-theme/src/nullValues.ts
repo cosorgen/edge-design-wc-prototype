@@ -6,6 +6,6 @@ export type NullValues = {
 };
 
 export const nullValues: NullValues = {
-  nullString: 'String value',
+  nullString: 'String value', // unmappable
   nullNumber: spacingHorizontalNone,
 };

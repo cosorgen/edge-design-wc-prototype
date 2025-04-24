@@ -1,4 +1,4 @@
-import { strokeWidth as s } from './globalValues.js';
+import { strokeWidthThick, strokeWidthThin } from '@phoenixui/themes/tokens.js';
 
 export type Strokewidth = {
   strokeWidthControlOutlineHover: string;
@@ -23,13 +23,13 @@ export const strokeWidth: Strokewidth = {
   strokeWidthControlOutlineRest: '{strokewidthCtrlOutlineRest}',
   strokeWidthControlOutlineSelectedRest: '{strokewidthCtrlOutlineSelected}',
   strokewidthCtrlOutlineSelectedRest: '{strokeWidthControlOutlineSelectedRest}',
-  strokewidthCtrlOutlineHover: s[20],
-  strokewidthCtrlOutlinePressed: s[20],
-  strokewidthCtrlOutlineRest: s[10],
-  strokewidthCtrlOutlineSelected: s[20],
+  strokewidthCtrlOutlineHover: strokeWidthThick,
+  strokewidthCtrlOutlinePressed: strokeWidthThick,
+  strokewidthCtrlOutlineRest: strokeWidthThin,
+  strokewidthCtrlOutlineSelected: strokeWidthThick,
   strokeWidthDefault: '{strokewidthDefault}',
-  strokewidthDefault: s[10],
-  strokewidthDividerDefault: s[10],
-  strokewidthDividerStrong: s[10],
+  strokewidthDefault: strokeWidthThin,
+  strokewidthDividerDefault: strokeWidthThin,
+  strokewidthDividerStrong: strokeWidthThin,
   strokeWidthWindowDefault: '{nullNumber}',
 };

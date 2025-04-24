@@ -1,4 +1,16 @@
-import { size } from './globalValues.js';
+import {
+  spacingHorizontalL,
+  spacingHorizontalM,
+  spacingHorizontalMNudge,
+  spacingHorizontalNone,
+  spacingHorizontalS,
+  spacingHorizontalSNudge,
+  spacingHorizontalXL,
+  spacingHorizontalXS,
+  spacingHorizontalXXL,
+  spacingHorizontalXXS,
+  spacingHorizontalXXXL,
+} from '@phoenixui/themes/tokens.js';
 
 export type PaddingCtrl = {
   paddingControlDefaultHorizontalIconOnly: string;
@@ -72,30 +84,30 @@ export const paddingCtrl: PaddingCtrl = {
   paddingControlDefaultToNestedControl: '{paddingCtrlTonestedcontrol}',
   paddingControlHorizontalDefault: '{paddingCtrlHorizontalDefault}',
   paddingControlTextTop: '{paddingCtrlTexttop}',
-  paddingCtrlHorizontalDefault: size[80],
-  paddingCtrlHorizontalIcononly: size[60],
+  paddingCtrlHorizontalDefault: spacingHorizontalS,
+  paddingCtrlHorizontalIcononly: spacingHorizontalSNudge,
   paddingCtrlTextbottom: '{paddingCtrlTexttop}',
-  paddingCtrlTextside: size[20],
-  paddingCtrlTexttop: size[60],
-  paddingCtrlTonestedcontrol: size[40],
+  paddingCtrlTextside: spacingHorizontalXXS,
+  paddingCtrlTexttop: spacingHorizontalSNudge,
+  paddingCtrlTonestedcontrol: spacingHorizontalXS,
   paddingTextHorizontal: '{paddingCtrlHorizontalDefault}',
   paddingToNestedControl: '{paddingCtrlTonestedcontrol}',
 };
 
 export const paddingCtrlSm: PaddingCtrlSm = {
-  paddingCtrlSmHorizontalDefault: size[80],
-  paddingCtrlSmHorizontalIcononly: size[20],
+  paddingCtrlSmHorizontalDefault: spacingHorizontalS,
+  paddingCtrlSmHorizontalIcononly: spacingHorizontalXXS,
   paddingCtrlSmTextBottom: '{paddingCtrlSmTextTop}',
-  paddingCtrlSmTextTop: size[40],
-  paddingCtrlSmToNestedControl: size[0],
+  paddingCtrlSmTextTop: spacingHorizontalXS,
+  paddingCtrlSmToNestedControl: spacingHorizontalNone,
 };
 
 export const paddingCtrlLg: PaddingCtrlLg = {
-  paddingCtrlLgHorizontalDefault: size[80],
-  paddingCtrlLgHorizontalIcononly: size[80],
+  paddingCtrlLgHorizontalDefault: spacingHorizontalS,
+  paddingCtrlLgHorizontalIcononly: spacingHorizontalS,
   paddingCtrlLgTextbottom: '{paddingCtrlLgTexttop}',
-  paddingCtrlLgTexttop: size[80],
-  paddingCtrlLgToNestedControl: size[40],
+  paddingCtrlLgTexttop: spacingHorizontalS,
+  paddingCtrlLgToNestedControl: spacingHorizontalXS,
 };
 
 export const paddingFlyout: PaddingFlyout = {
@@ -103,33 +115,33 @@ export const paddingFlyout: PaddingFlyout = {
 };
 
 export const paddingCard: PaddingCard = {
-  paddingCard: size[200],
+  paddingCard: spacingHorizontalXL,
   paddingCardNestedimage: '{paddingCard}',
 };
 
 export const paddingContent: PaddingContent = {
-  paddingContentAlignDefault: size[200],
-  paddingContentAlignOutdentIcononsubtle: size[120],
-  paddingContentAlignOutdentTextonsubtle: size[100],
-  paddingContentLarge: size[200],
-  paddingContentMedium: size[160],
-  paddingContentNone: size[0],
-  paddingContentSmall: size[120],
-  paddingContentXlarge: size[240],
-  paddingContentXsmall: size[80],
-  paddingContentXsmallnudge: size[60],
-  paddingContentXxlarge: size[320],
-  paddingContentXxsmall: size[40],
-  paddingContentXxxlarge: size[400],
-  paddingContentXxxsmall: size[20],
+  paddingContentAlignDefault: spacingHorizontalXL,
+  paddingContentAlignOutdentIcononsubtle: spacingHorizontalM,
+  paddingContentAlignOutdentTextonsubtle: spacingHorizontalMNudge,
+  paddingContentLarge: spacingHorizontalXL,
+  paddingContentMedium: spacingHorizontalL,
+  paddingContentNone: spacingHorizontalNone,
+  paddingContentSmall: spacingHorizontalM,
+  paddingContentXlarge: spacingHorizontalXXL,
+  paddingContentXsmall: spacingHorizontalS,
+  paddingContentXsmallnudge: spacingHorizontalSNudge,
+  paddingContentXxlarge: spacingHorizontalXXXL,
+  paddingContentXxsmall: spacingHorizontalXS,
+  paddingContentXxxlarge: '40px', // unmappable
+  paddingContentXxxsmall: spacingHorizontalXXS,
 };
 
 export const paddingToolbar: PaddingToolbar = {
   paddingToolbar: '{paddingToolbarInside}',
-  paddingToolbarInside: size[80],
-  paddingToolbarOutside: size[40],
+  paddingToolbarInside: spacingHorizontalS,
+  paddingToolbarOutside: spacingHorizontalXS,
 };
 
 export const paddingWindow: PaddingWindow = {
-  paddingWindowDefault: size[40],
+  paddingWindowDefault: spacingHorizontalXS,
 };
