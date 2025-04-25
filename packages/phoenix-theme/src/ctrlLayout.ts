@@ -33,6 +33,7 @@ import {
   strokeWidthThickest,
   strokeWidthThin,
   lineHeightBase100,
+  spacingHorizontalXXXL,
 } from '@phoenixui/themes/tokens.js';
 
 export type CtrlAvatarLayout = {
@@ -588,7 +589,7 @@ export const ctrlListLayout: CtrlListLayout = {
   ctrlListCornerPressed: '{ctrlListCornerRest}',
   ctrlListCornerRest: borderRadiusMedium,
   ctrlListIndentLevel1: '{paddingCtrlHorizontalDefault}',
-  ctrlListIndentLevel2: '32px',
+  ctrlListIndentLevel2: spacingHorizontalXXXL,
   ctrlListIndentLevel3: '56px',
   ctrlListSmCornerRest: '{cornerCtrlSmRest}',
   ctrlListSmCornerHover: '{cornerCtrlSmHover}',
