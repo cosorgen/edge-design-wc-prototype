@@ -379,10 +379,10 @@ export const lightSliderColors: CtrlSliderColors = {
   ctrlSliderThumbInnerStrokeHover: '{foregroundCtrlOnbrandHover}',
   ctrlSliderThumbInnerStrokePressed: '{foregroundCtrlOnbrandPressed}',
   ctrlSliderThumbInnerStrokeDisabled: '{foregroundCtrlOnbrandRest}',
-  ctrlSliderThumbOuterStrokeRest: '{strokeDividerSubtle}',
-  ctrlSliderThumbOuterStrokeHover: '{strokeDividerSubtle}',
-  ctrlSliderThumbOuterStrokePressed: '{strokeDividerSubtle}',
-  ctrlSliderThumbOuterStrokeDisabled: '{strokeDividerSubtle}',
+  ctrlSliderThumbOuterStrokeRest: '{foregroundCtrlOnbrandRest}',
+  ctrlSliderThumbOuterStrokeHover: '{foregroundCtrlOnbrandRest}',
+  ctrlSliderThumbOuterStrokePressed: '{foregroundCtrlOnbrandRest}',
+  ctrlSliderThumbOuterStrokeDisabled: '{foregroundCtrlOnbrandRest}',
 };
 
 export function lightTabColors(palette?: ChromePalette): CtrlTabColors {

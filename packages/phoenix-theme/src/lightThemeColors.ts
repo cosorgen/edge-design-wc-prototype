@@ -1,4 +1,8 @@
-import { NeutralColors, VibrantColors, LightShadowColors } from './globalColors.js';
+import {
+  NeutralColors,
+  VibrantColors,
+  LightShadowColors,
+} from './globalColors.js';
 import type {
   ThemeAiColors,
   ThemeBackgroundColors,
@@ -79,6 +83,7 @@ import {
   colorNeutralBackground3,
   colorPalettePurpleForeground2,
   colorPalettePumpkinForeground2,
+  colorNeutralForeground3,
 } from '@phoenixui/themes/tokens.js';
 
 export const lightNullColors: ThemeNullColors = {
@@ -196,7 +201,7 @@ export function lightBackgroundColors(
       '{backgroundCtrlShapesafeNeutralRest}',
     backgroundCtrlShapesafeNeutralRest: neutral
       ? neutral[400]
-      : colorNeutralBackground1,
+      : colorNeutralForeground3,
     backgroundCtrlSubtleDisabled: palette
       ? '{nullColor}'
       : colorTransparentBackground,
@@ -443,7 +448,9 @@ export function lightForegroundColors(
   };
 }
 
-export function lightShadowColors(shadow?: LightShadowColors): ThemeShadowColors {
+export function lightShadowColors(
+  shadow?: LightShadowColors,
+): ThemeShadowColors {
   return {
     shadowToolbarKeyColor: shadow
       ? shadow.shadowKeyLowLight

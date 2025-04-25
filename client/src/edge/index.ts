@@ -10,14 +10,18 @@ import {
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
-  lightTheme as kumoLightTheme,
-  darkTheme as kumoDarkTheme,
+  lightTheme as kumoLightThemeThemable,
+  darkTheme as kumoDarkThemeThemable,
   setThemeFor,
 } from '@edge-design/kumo-theme';
+import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
+import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
 import {
-  lightTheme as phoenixKumoLightTheme,
-  darkTheme as phoenixKumoDarkTheme,
+  lightTheme as phoenixKumoLightThemeThemable,
+  darkTheme as phoenixKumoDarkThemeThemable,
 } from '@edge-design/phoenix-theme';
+import { lightTheme as phoenixKumoLightTheme } from '@edge-design/phoenix-theme/lightTheme.js';
+import { darkTheme as phoenixKumoDarkTheme } from '@edge-design/phoenix-theme/darkTheme.js';
 import {
   phoenixLightThemeSolidWin11,
   phoenixDarkThemeSolidWin11,
@@ -238,21 +242,37 @@ export class MicrosoftEdge extends FASTElement {
     // Set up edge design system
     const themes = {
       kumo: {
-        light: kumoLightTheme,
-        dark: kumoDarkTheme,
+        default: {
+          light: kumoLightTheme,
+          dark: kumoDarkTheme,
+        },
+        themable: {
+          light: kumoLightThemeThemable,
+          dark: kumoDarkThemeThemable,
+        },
       },
       phoenix: {
-        light: phoenixKumoLightTheme,
-        dark: phoenixKumoDarkTheme,
+        default: {
+          light: phoenixKumoLightTheme,
+          dark: phoenixKumoDarkTheme,
+        },
+        themable: {
+          light: phoenixKumoLightThemeThemable,
+          dark: phoenixKumoDarkThemeThemable,
+        },
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    const selectedTheme = themes[this.ss.designSystem][themeKey](
-      this.ss.themeColor,
-    );
+    let selectedTheme =
+      themes[this.ss.designSystem][this.ss.themeColor ? 'themable' : 'default'][
+        themeKey
+      ];
+    if (this.ss.themeColor) {
+      selectedTheme = selectedTheme(this.ss.themeColor);
+    }
     selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
     setThemeFor(this.shadowRoot!, selectedTheme);
-    if (this.ss.designSystem === 'phoenix') {
+    if (this.ss.designSystem === 'phoenix' && this.ss.themeColor) {
       phxSetThemeFor(
         this.shadowRoot!,
         themeKey === 'dark'
@@ -264,7 +284,7 @@ export class MicrosoftEdge extends FASTElement {
 
   clearTheme() {
     this.shadowRoot!.adoptedStyleSheets.pop();
-    if (this.ss.designSystem === 'phoenix') {
+    if (this.ss.designSystem === 'kumo' && this.ss.themeColor) {
       this.shadowRoot!.adoptedStyleSheets.pop();
     }
   }
