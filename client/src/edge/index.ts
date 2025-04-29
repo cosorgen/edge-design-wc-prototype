@@ -284,7 +284,7 @@ export class MicrosoftEdge extends FASTElement {
 
   clearTheme() {
     this.shadowRoot!.adoptedStyleSheets.pop();
-    if (this.ss.designSystem === 'kumo' && this.ss.themeColor) {
+    if (this.ss.designSystem === 'kumo' && !this.ss.themeColor) {
       this.shadowRoot!.adoptedStyleSheets.pop();
     }
   }
