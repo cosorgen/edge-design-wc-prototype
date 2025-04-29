@@ -18,6 +18,7 @@ export type MoreMenuEntry = {
   type: 'action' | 'sub-menu' | 'divider' | 'zoom' | 'label' | 'managed';
   shortcut?: string;
   keywords?: string[];
+  icon?: string;
 };
 
 const template = html<MenuItem>` <button

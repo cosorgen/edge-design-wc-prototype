@@ -195,25 +195,6 @@ const template = html<WindowsSettings>`
               </mai-listbox>
             </mai-dropdown>
           </div>
-          <div class="entry">
-            <label for="frame-spacing">Frame spacing</label>
-            <mai-text-input
-              id="frame-spacing"
-              type="number"
-              value="${(x) => parseInt(x.ss.frameSpacing)}"
-              @change="${(x) => x.updateFrameSpacing()}"
-            >
-            </mai-text-input>
-          </div>
-          <div class="entry">
-            <label for="theme-color">Theme color</label>
-            <input
-              type="color"
-              id="theme-color"
-              value="${(x) => x.ss.themeColor}"
-              @change="${(x) => x.updateThemeColor()}"
-            />
-          </div>
         </div>
 
         <!-- Browser Section -->
@@ -653,15 +634,6 @@ export class WindowsSettings extends FASTElement {
         ) as HTMLInputElement
       )?.checked || false,
     );
-  }
-
-  updateThemeColor() {
-    const newColor = (
-      this.shadowRoot?.querySelector('#theme-color') as HTMLInputElement
-    ).value;
-    if (newColor && newColor !== '') {
-      this.ss.setThemeColor(newColor);
-    }
   }
 
   updateDesignSystem() {
