@@ -49,9 +49,9 @@ import '@mai-ui/tooltip/define.js';
 import '@mai-ui/tree-item/define.js';
 import '@mai-ui/tree/define.js';
 import {
-  backgroundWebPagePrimary,
+  backgroundWebpagePrimary,
   foregroundContentNeutralPrimary,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 import { Dialog } from '@phoenixui/web-components';
 import { Drawer } from '@fluentui/web-components';
 
@@ -493,7 +493,7 @@ const styles = css`
     width: 100%;
     height: fit-content;
     min-height: 100%;
-    background-color: ${backgroundWebPagePrimary};
+    background-color: ${backgroundWebpagePrimary};
     color: ${foregroundContentNeutralPrimary};
   }
 

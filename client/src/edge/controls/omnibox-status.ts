@@ -7,7 +7,7 @@ import {
   observable,
   when,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
   backgroundCtrlSubtleHover,
@@ -15,7 +15,7 @@ import {
   cornerCircular,
   foregroundCtrlNeutralSecondaryRest,
   paddingCtrlSmHorizontalIcononly,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 /**
  * omnibox-status is a presentational component that renders

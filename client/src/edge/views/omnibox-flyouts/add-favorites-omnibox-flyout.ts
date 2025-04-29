@@ -8,7 +8,7 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import '@mai-ui/text-input/define.js';
 import { TextInput } from '@mai-ui/text-input';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import { TabService } from '#services/tabService.js';
 import FavoritesService from '#services/favoritesService.js';
 import {
@@ -21,10 +21,10 @@ import {
   shadowFlyout,
   textGlobalBody2Fontsize,
   textGlobalBody2Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
   paddingContentXsmall,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<AddFavoritesInputs>`
   <div class="favorite-title">
@@ -85,7 +85,7 @@ const styles = css`
     justify-content: space-between;
     align-items: center;
     margin-bottom: ${paddingContentXsmall};
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody2Fontsize};
     line-height: ${textGlobalBody2Lineheight};
     font-weight: ${textStyleDefaultRegularWeight};

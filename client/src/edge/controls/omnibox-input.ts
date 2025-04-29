@@ -9,9 +9,9 @@ import {
   foregroundCtrlNeutralSecondaryRest,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<OmniboxInput>`
   <div
@@ -41,7 +41,7 @@ const styles = css`
     overflow: hidden;
     text-overflow: ellipsis;
     /* body1 */
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     line-height: ${textGlobalBody3Lineheight};
     font-weight: ${textStyleDefaultRegularWeight};

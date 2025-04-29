@@ -19,8 +19,8 @@ import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
 import {
   paddingContentXsmall,
-  paddingWindowDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+  paddingContentXxsmall,
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html`
   <div id="user">
@@ -101,8 +101,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: space-between;
-    gap: calc(${paddingWindowDefault} * 2);
-    padding: ${paddingWindowDefault};
+    gap: calc(${paddingContentXxsmall} * 2);
+    padding: ${paddingContentXxsmall};
     padding-block-end: 0px;
   }
 
@@ -111,7 +111,7 @@ const styles = css`
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    gap: calc(${paddingWindowDefault} * 2);
+    gap: calc(${paddingContentXxsmall} * 2);
   }
 
   #system {

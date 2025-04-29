@@ -4,7 +4,7 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/omnibox-flyouts/add-favorites-omnibox-flyout.js';
-import { foregroundContentBrandPrimary } from '@edge-design/kumo-theme/tokens.js';
+import { foregroundContentBrandPrimary } from '@phoenixui/themes/kumo-tokens.js';
 
 export const overflowItems = {
   'limit-cookies': {

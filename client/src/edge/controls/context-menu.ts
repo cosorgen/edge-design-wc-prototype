@@ -9,7 +9,7 @@ import {
   shadowFlyout,
   paddingContentXsmall,
   paddingContentXxsmall,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<ContextMenu>`
   <div id="menu-items">

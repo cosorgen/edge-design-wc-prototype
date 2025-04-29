@@ -9,37 +9,24 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
-import {
-  lightTheme as kumoLightThemeThemable,
-  darkTheme as kumoDarkThemeThemable,
-  setThemeFor,
-} from '@edge-design/kumo-theme';
-import { lightTheme as kumoLightTheme } from '@edge-design/kumo-theme/lightTheme.js';
-import { darkTheme as kumoDarkTheme } from '@edge-design/kumo-theme/darkTheme.js';
-import {
-  lightTheme as phoenixKumoLightThemeThemable,
-  darkTheme as phoenixKumoDarkThemeThemable,
-} from '@edge-design/phoenix-theme';
-import { lightTheme as phoenixKumoLightTheme } from '@edge-design/phoenix-theme/lightTheme.js';
-import { darkTheme as phoenixKumoDarkTheme } from '@edge-design/phoenix-theme/darkTheme.js';
-import {
-  phoenixLightThemeSolidWin11,
-  phoenixDarkThemeSolidWin11,
-} from '@phoenixui/themes';
-import { setThemeFor as phxSetThemeFor } from '@phoenixui/web-components';
+import { default as kumoLightTheme } from '@phoenixui/themes/kumo-light-theme.js';
+import { default as kumoDarkTheme } from '@phoenixui/themes/kumo-dark-theme.js';
+import { default as phoenixSmtcLightTheme } from '@phoenixui/themes/phoenix-smtc-light-theme.js';
+import { default as phoenixSmtcDarkTheme } from '@phoenixui/themes/phoenix-smtc-dark-theme.js';
+import { setSmtcThemeFor } from '@phoenixui/web-components';
 import {
   textStyleDefaultRegularWeight,
   ctrlTabBackgroundHorizontalActive,
-  backgroundWindowTabBandSolid,
+  backgroundWindowTabbandSolid,
   foregroundContentNeutralPrimary,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontFamily,
-  paddingWindowDefault,
-  backgroundWindowTabBandInactive,
+  textStyleDefaultRegularFontfamily,
+  backgroundWindowTabbandInactive,
   backgroundCtrlBrandRest,
   foregroundCtrlOnbrandRest,
-} from '@edge-design/kumo-theme/tokens.js';
+  paddingContentXxsmall,
+} from '@phoenixui/themes/kumo-tokens.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -97,12 +84,12 @@ const styles = css`
     flex-direction: column;
     background-color: ${(x) =>
       x.ws.activeWindowId === x.id
-        ? backgroundWindowTabBandSolid
-        : backgroundWindowTabBandInactive};
+        ? backgroundWindowTabbandSolid
+        : backgroundWindowTabbandInactive};
     color: ${foregroundContentNeutralPrimary};
     fill: currentColor;
 
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalBody3Lineheight};
@@ -141,7 +128,7 @@ const styles = css`
   .row {
     display: flex;
     flex-direction: row;
-    gap: ${paddingWindowDefault};
+    gap: ${paddingContentXxsmall};
     height: 100%;
     min-height: 0px;
   }
@@ -149,7 +136,7 @@ const styles = css`
   .column {
     display: flex;
     flex-direction: column;
-    gap: ${paddingWindowDefault};
+    gap: ${paddingContentXxsmall};
     width: 100%;
     min-width: 0px;
   }
@@ -237,51 +224,21 @@ export class MicrosoftEdge extends FASTElement {
     // Set up edge design system
     const themes = {
       kumo: {
-        default: {
-          light: kumoLightTheme,
-          dark: kumoDarkTheme,
-        },
-        themable: {
-          light: kumoLightThemeThemable,
-          dark: kumoDarkThemeThemable,
-        },
+        light: kumoLightTheme,
+        dark: kumoDarkTheme,
       },
       phoenix: {
-        default: {
-          light: phoenixKumoLightTheme,
-          dark: phoenixKumoDarkTheme,
-        },
-        themable: {
-          light: phoenixKumoLightThemeThemable,
-          dark: phoenixKumoDarkThemeThemable,
-        },
+        light: phoenixSmtcLightTheme,
+        dark: phoenixSmtcDarkTheme,
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    let selectedTheme =
-      themes[this.ss.designSystem][this.ss.themeColor ? 'themable' : 'default'][
-        themeKey
-      ];
-    if (this.ss.themeColor) {
-      selectedTheme = selectedTheme(this.ss.themeColor);
-    }
-    selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
-    setThemeFor(this.shadowRoot!, selectedTheme);
-    if (this.ss.designSystem === 'phoenix' && this.ss.themeColor) {
-      phxSetThemeFor(
-        this.shadowRoot!,
-        themeKey === 'dark'
-          ? phoenixDarkThemeSolidWin11
-          : phoenixLightThemeSolidWin11,
-      );
-    }
+    const selectedTheme = themes[this.ss.designSystem][themeKey];
+    setSmtcThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   clearTheme() {
     this.shadowRoot!.adoptedStyleSheets.pop();
-    if (this.ss.designSystem === 'kumo' && this.ss.themeColor) {
-      this.shadowRoot!.adoptedStyleSheets.pop();
-    }
   }
 
   shouldFavoritesBarRender() {

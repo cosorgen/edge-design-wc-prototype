@@ -6,7 +6,7 @@ import {
   html,
   when,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
 import {
@@ -15,7 +15,7 @@ import {
   paddingContentXsmall,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralPrimaryHover,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
@@ -24,7 +24,7 @@ import {
   ctrlTabBackgroundVerticalActive,
   ctrlTabCorner,
   ctrlTabShadowVerticalActive,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<VerticalTab>`
   <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">
@@ -112,7 +112,7 @@ const styles = css`
   #title,
   [name='title']::slotted(*) {
     /* Caption1 */
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};

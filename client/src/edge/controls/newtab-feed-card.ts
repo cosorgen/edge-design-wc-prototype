@@ -8,8 +8,8 @@ import {
   spacingHorizontalXS,
   spacingVerticalM,
   spacingVerticalS,
-  typographyStyles,
-} from '@edge-design/phoenix-theme';
+} from '@phoenixui/themes/phoenix-tokens.js';
+import { typographyStyles } from '@phoenixui/themes';
 
 const template = html`<slot name="hero"></slot>
   <div id="by-line">

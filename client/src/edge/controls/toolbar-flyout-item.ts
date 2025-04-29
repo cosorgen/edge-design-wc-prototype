@@ -6,7 +6,7 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
@@ -17,7 +17,7 @@ import {
   foregroundCtrlNeutralPrimaryRest,
   paddingContentMedium,
   shadowFlyout,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<ToolbarFlyoutItem>`
   <flyout-menu

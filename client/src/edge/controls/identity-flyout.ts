@@ -13,15 +13,15 @@ import {
   textGlobalBody3Lineheight,
   textGlobalCaption2Fontsize,
   textGlobalCaption2Lineheight,
-} from '@edge-design/kumo-theme/tokens.js';
-import { gapBetweenContentXxsmall } from '@edge-design/kumo-theme/tokens.js';
-import { statusSuccessTintForeground } from '@edge-design/kumo-theme/tokens.js';
-import { textGlobalBody2Fontsize } from '@edge-design/kumo-theme/tokens.js';
-import { textStyleDefaultHeaderWeight } from '@edge-design/kumo-theme/tokens.js';
-import { textGlobalBody2Lineheight } from '@edge-design/kumo-theme/tokens.js';
-import { textGlobalCaption1Fontsize } from '@edge-design/kumo-theme/tokens.js';
-import { textStyleDefaultRegularWeight } from '@edge-design/kumo-theme/tokens.js';
-import { textGlobalCaption1Lineheight } from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
+import { gapBetweenContentXxsmall } from '@phoenixui/themes/kumo-tokens.js';
+import { statusSuccessTintForeground } from '@phoenixui/themes/kumo-tokens.js';
+import { textGlobalBody2Fontsize } from '@phoenixui/themes/kumo-tokens.js';
+import { textStyleDefaultHeaderWeight } from '@phoenixui/themes/kumo-tokens.js';
+import { textGlobalBody2Lineheight } from '@phoenixui/themes/kumo-tokens.js';
+import { textGlobalCaption1Fontsize } from '@phoenixui/themes/kumo-tokens.js';
+import { textStyleDefaultRegularWeight } from '@phoenixui/themes/kumo-tokens.js';
+import { textGlobalCaption1Lineheight } from '@phoenixui/themes/kumo-tokens.js';
 import '@mai-ui/link/define.js';
 import '@mai-ui/menu-list/define.js';
 import '@mai-ui/menu-item/define.js';

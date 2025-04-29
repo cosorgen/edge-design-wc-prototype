@@ -3,18 +3,19 @@ import {
   backgroundCtrlBrandPressed,
   backgroundCtrlBrandRest,
   cornerCircular,
-  curveDecelerateMax,
-  durationSlow,
   gapBetweenContentXxsmall,
   paddingContentXxsmall,
   paddingContentXxxsmall,
   statusBrandTintForeground,
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
+
+const curveDecelerateMax = 'cubic-bezier(0,0,0,1)';
+const durationSlow = '300ms';
 
 const template = html`
   <button>
@@ -70,7 +71,7 @@ const styles = css`
 
   div {
     flex: 1;
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};

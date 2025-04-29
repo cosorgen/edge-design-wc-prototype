@@ -1,5 +1,5 @@
 import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
   backgroundCtrlSubtleHover,
@@ -10,7 +10,7 @@ import {
   paddingCtrlSmHorizontalIcononly,
   backgroundCtrlSubtlePressed,
   foregroundCtrlNeutralSecondaryPressed,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<OmniboxActionButton>`
   <button>

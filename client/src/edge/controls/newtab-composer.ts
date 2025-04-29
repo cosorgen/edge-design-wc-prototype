@@ -3,19 +3,19 @@ import {
   borderRadiusCircular,
   colorNeutralForegroundHint,
   spacingHorizontalS,
-} from '@edge-design/phoenix-theme';
+} from '@phoenixui/themes/phoenix-tokens.js';
 import {
   colorNeutralCardBackground,
   colorNeutralForeground2,
   colorNeutralStroke1,
   shadow16,
   strokeWidthThin,
-  typographyStyles,
   colorNeutralBackground1,
   shadow2,
   spacingVerticalMNudge,
   spacingHorizontalXXL,
-} from '@edge-design/kumo-theme';
+} from '@phoenixui/themes/phoenix-tokens.js';
+import { typographyStyles } from '@phoenixui/themes';
 
 const template = html`
   <input

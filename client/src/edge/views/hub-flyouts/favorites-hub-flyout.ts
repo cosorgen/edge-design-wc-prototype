@@ -31,14 +31,14 @@ import {
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   cornerCtrlRest,
   textStyleDefaultRegularWeight,
   gapBetweenContentMedium,
   gapBetweenContentXxsmall,
   paddingContentMedium,
   gapBetweenContentSmall,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<FavoritesHubFlyout>`
   <div id="header">
@@ -182,7 +182,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultHeaderWeight};
     line-height: ${textGlobalBody3Lineheight};
@@ -221,7 +221,7 @@ const styles = css`
     height: 32px !important;
     gap: ${gapBetweenContentMedium};
     padding-left: 42px;
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalBody3Lineheight};

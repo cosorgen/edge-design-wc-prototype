@@ -6,8 +6,8 @@ import {
   spacingHorizontalL,
   spacingVerticalM,
   spacingVerticalS,
-  typographyStyles,
-} from '@edge-design/phoenix-theme';
+} from '@phoenixui/themes/phoenix-tokens.js';
+import { typographyStyles } from '@phoenixui/themes';
 
 const template = html`<slot name="hero"></slot>
   <div id="content"><slot name="heading"></slot><slot></slot></div>`;

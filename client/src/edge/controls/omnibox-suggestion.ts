@@ -16,7 +16,7 @@ import {
   gapBetweenContentSmall,
   textGlobalBody3Fontsize,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<OmniboxSuggestion>` <div id="start">
     <div id="indicator"></div>

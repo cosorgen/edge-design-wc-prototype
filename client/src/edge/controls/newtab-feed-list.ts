@@ -5,10 +5,10 @@ import {
   colorNeutralForegroundHint,
   spacingHorizontalXS,
   spacingVerticalS,
-  typographyStyles,
   spacingVerticalL,
   spacingVerticalM,
-} from '@edge-design/phoenix-theme';
+} from '@phoenixui/themes/phoenix-tokens.js';
+import { typographyStyles } from '@phoenixui/themes';
 
 const template = html` <h2>Top stories for you</h2>
   <div id="list">

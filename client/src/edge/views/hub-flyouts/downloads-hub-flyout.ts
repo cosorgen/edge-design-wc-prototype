@@ -4,7 +4,7 @@ import {
   foregroundCtrlNeutralPrimaryRest,
   paddingContentMedium,
   shadowFlyout,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
 const template = html` Downloads `;

@@ -11,7 +11,7 @@ import { MoreMenuEntry } from './menu-item.js';
 import './menu-item.js';
 import './more-menu-zoom.js';
 import '@mai-ui/divider/define.js';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@phoenixui/web-components/link.js';
 import {
@@ -33,9 +33,9 @@ import {
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const defaultItems: MoreMenuEntry[][] = [
   [
@@ -198,7 +198,7 @@ const styles = css`
     padding: ${paddingContentXsmallnudge};
     border-radius: ${cornerCtrlRest};
 
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalBody3Lineheight};
@@ -218,7 +218,7 @@ const styles = css`
   }
 
   #additional {
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};
@@ -242,14 +242,14 @@ const styles = css`
   }
 
   .bold {
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultHeaderWeight};
     line-height: ${textGlobalBody3Lineheight};
   }
 
   .regular {
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalBody3Lineheight};

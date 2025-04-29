@@ -18,10 +18,10 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   cornerLayerDefault,
   shadowLayer,
-  paddingWindowDefault,
+  paddingContentXxsmall,
   foregroundCtrlNeutralPrimaryRest,
   backgroundLayerPrimarySolid,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<edge-newtab
@@ -58,7 +58,7 @@ const styles = css`
     display: flex;
     border-radius: ${cornerLayerDefault};
     box-shadow: ${shadowLayer};
-    margin: ${paddingWindowDefault};
+    margin: ${paddingContentXxsmall};
     overflow: auto;
     scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
       ${backgroundLayerPrimarySolid};

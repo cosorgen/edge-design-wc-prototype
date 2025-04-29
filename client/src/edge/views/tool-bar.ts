@@ -8,8 +8,8 @@ import {
   volatile,
   when,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
@@ -32,7 +32,7 @@ import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
-import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
+import { paddingContentXxsmall } from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -168,8 +168,8 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: row;
-    gap: calc(${paddingWindowDefault} * 2);
-    padding: ${paddingWindowDefault};
+    gap: calc(${paddingContentXxsmall} * 2);
+    padding: ${paddingContentXxsmall};
     user-select: none;
   }
 
@@ -178,7 +178,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${paddingWindowDefault};
+    gap: ${paddingContentXxsmall};
   }
 
   flyout-menu > mai-button,

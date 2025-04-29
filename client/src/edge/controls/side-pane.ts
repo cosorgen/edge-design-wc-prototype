@@ -9,15 +9,15 @@ import '../views//sidepanes/copilot-sidepane.js';
 import apps from '../installedApps.js';
 import {
   cornerLayerDefault,
-  paddingWindowDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+  paddingContentXxsmall,
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<SidePane>`${(x) => apps[x.id].template}`;
 
 const styles = css`
   :host {
     --tab-bar-height:  /* height of a button + gap */ calc(
-      32px + ${paddingWindowDefault}
+      32px + ${paddingContentXxsmall}
     );
     position: relative;
     display: flex;

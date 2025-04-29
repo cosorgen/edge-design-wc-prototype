@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import {
   backgroundCtrlSubtleHover,
   backgroundCtrlSubtlePressed,
@@ -15,7 +15,7 @@ import {
   gapBetweenCtrlDefault,
   paddingContentSmall,
   paddingContentXsmall,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/kumo-tokens.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
     <div id="start">
