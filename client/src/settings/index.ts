@@ -38,16 +38,14 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import { CopilotService } from '#servicescopilotService.js';
-import '@phoenixui/web-components/button.js';
-import '../windows/controls/mica-material.js';
-import './views/appearance-settings.js';
-import './views/browser-settings.js';
-import './controls/left-nav.js';
 
 const template = html<WindowsSettings>`
-  <mica-material></mica-material>
+  <mica-material
+    top="${(x) => x.ws.getWindowById(x.id)?.yPos}"
+    left="${(x) => x.ws.getWindowById(x.id)?.xPos}"
+  ></mica-material>
   <div id="content">
-    <div id="title-bar">
+    <div id="nav">
       <h1>Settings</h1>
       <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
@@ -102,20 +100,33 @@ const template = html<WindowsSettings>`
     </div>
 
     <div id="container">
-      <left-nav>
-        <left-nav-item
+      <div id="sidebar">
+        <button
+          class="${(x) =>
+            x.selectedButton === 'appearance' ? 'selected' : ''}"
           @click="${(x) => x.handleSidebarButtonClick('appearance')}"
-          ?selected="${(x) => x.selectedPage === 'appearance'}"
         >
           Overall appearance
-        </left-nav-item>
-        <left-nav-item
+        </button>
+        <button
+          class="${(x) => (x.selectedButton === 'browser' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('browser')}"
-          ?selected="${(x) => x.selectedPage === 'browser'}"
         >
           Browser
-        </left-nav-item>
-      </left-nav>
+        </button>
+        <button
+          class="${(x) => (x.selectedButton === 'newtab' ? 'selected' : '')}"
+          @click="${(x) => x.handleSidebarButtonClick('newtab')}"
+        >
+          New tab pages
+        </button>
+        <button
+          class="${(x) => (x.selectedButton === 'copilot' ? 'selected' : '')}"
+          @click="${(x) => x.handleSidebarButtonClick('copilot')}"
+        >
+          Copilot
+        </button>
+      </div>
 
       <div id="main">
         <!-- Overall Appearance Section -->
@@ -374,7 +385,7 @@ const styles = css`
     overflow: hidden;
   }
 
-  #title-bar {
+  #nav {
     display: flex;
     align-items: center;
     padding-inline-start: ${spacingHorizontalL};
@@ -487,19 +498,18 @@ const styles = css`
   }
 `;
 
-type Section = 'appearance' | 'browser';
-
-@customElement({
-  name: 'windows-settings',
-  template,
-  styles,
-})
+@customElement({ name: 'windows-settings', template, styles })
 export class WindowsSettings extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @inject(CopilotService) cs!: CopilotService;
-  @observable selectedPage: Section = 'appearance';
+
+  @observable selectedButton = 'appearance';
+
+  handleSidebarButtonClick(button: string) {
+    this.selectedButton = button;
+  }
 
   handleTitleBarMouseDown() {
     this.$emit('windowmovestart');

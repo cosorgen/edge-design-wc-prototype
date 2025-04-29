@@ -1,40 +1,26 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
-  shadowLayer,
   paddingContentMedium,
+  shadowFlyout,
 } from '@edge-design/kumo-theme/tokens.js';
+import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
-const template = html<DownloadsMenu>` Downloads TBD `;
+const template = html` Downloads `;
 
 const styles = css`
   :host {
-    display: flex;
-    flex-direction: column;
-    width: 368px;
-    height: 298px;
+    display: block;
+    width: 256px;
+    height: 300px;
+    padding: ${paddingContentMedium};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowLayer};
+    box-shadow: ${shadowFlyout};
     color: ${foregroundCtrlNeutralPrimaryRest};
-    padding: ${paddingContentMedium};
-    overflow: hidden;
-  }
-
-  div {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 360px;
-    height: 207px;
-  }
-
-  img {
-    width: 100%;
   }
 `;
 
-@customElement({ name: 'downloads-menu', template, styles })
-export class DownloadsMenu extends FASTElement {}
+@customElement({ name: 'downloads-hub-flyout', template, styles })
+export class DownloadsHubFlyout extends FASTElement {}

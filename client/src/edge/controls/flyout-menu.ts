@@ -1,4 +1,7 @@
-import { curveDecelerateMax, durationFast } from '@edge-design/kumo-theme/tokens.js';
+import {
+  curveDecelerateMax,
+  durationFast,
+} from '@edge-design/kumo-theme/tokens.js';
 import {
   attr,
   css,
@@ -251,12 +254,11 @@ export class FlyoutMenu extends FASTElement {
 
     this._open = e.newState === 'open';
 
-    this._open || this._contextOpen
-      ? this._triggerElement?.setAttribute('pressed', '')
-      : this._triggerElement?.removeAttribute('pressed');
-    this._open
-      ? this._popoverSlottedElement?.setAttribute('open', '')
-      : this._popoverSlottedElement?.removeAttribute('open');
+    this._triggerElement?.setAttribute(
+      'pressed',
+      (this._open || this._contextOpen).toString(),
+    );
+    this._popoverSlottedElement?.setAttribute('open', this._open.toString());
 
     if (this._open || this._contextOpen) {
       // Listen for close events
@@ -292,12 +294,14 @@ export class FlyoutMenu extends FASTElement {
 
     this._contextOpen = e.newState === 'open';
 
-    this._open || this._contextOpen
-      ? this._triggerElement?.setAttribute('pressed', '')
-      : this._triggerElement?.removeAttribute('pressed');
-    this._contextOpen
-      ? this._contextPopoverSlottedElement?.setAttribute('open', '')
-      : this._contextPopoverSlottedElement?.removeAttribute('open');
+    this._triggerElement?.setAttribute(
+      'pressed',
+      (this._open || this._contextOpen).toString(),
+    );
+    this._contextPopoverSlottedElement?.setAttribute(
+      'open',
+      this._open.toString(),
+    );
 
     if (this._contextOpen || this._open) {
       // Listen for close events

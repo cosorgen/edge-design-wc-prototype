@@ -20,7 +20,6 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
-import './more-menu.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -49,6 +48,8 @@ const template = html<Toolbar>`
     </mai-button>
   </div>
   <omnibox-control
+    ?full-width="${(x) => x.ess.fullWidthOmnibox}"
+    ?truncate-url="${(x) => x.ess.truncateURL}"
     initialValue="${(x) => x.ts.tabsById[x.ts.activeTabId!].url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
@@ -290,6 +291,7 @@ export class Toolbar extends FASTElement {
 
   toggleSidepane(id: string) {
     const isActive = this.ews.activeSidepaneAppId === id;
+    this.$emit('togglesidepane', !isActive);
     if (isActive) {
       this.ews.closeSidepaneApp();
     } else {
@@ -306,6 +308,40 @@ export class Toolbar extends FASTElement {
   handleOmniboxActionClick(id: string, e: Event) {
     e.stopPropagation();
     return false;
+  }
+
+  handleMoreAction(e: CustomEvent) {
+    const action = e.detail;
+    switch (action) {
+      case 'New tab':
+        this.ts.addTab();
+        break;
+      case 'New window':
+        this.ws.openWindow('Microsoft Edge');
+        break;
+      case 'Print':
+        window.print(); // maybe see if we can print the current tab iframe?
+        break;
+      case 'Settings': {
+        const settingsTabId = this.ts.addTab({
+          id: `tab-${window.crypto.randomUUID()}`,
+          title: 'Settings',
+          url: 'edge://settings',
+        });
+        this.ts.activateTab(settingsTabId);
+        break;
+      }
+      case 'Find on page':
+      case 'Screenshot':
+      case 'New InPrivate window':
+        break;
+      case 'Close Microsoft Edge':
+        this.ws.closeAllWindows('Microsoft Edge');
+        break;
+      default:
+        this.ews.openToolbarItem(action);
+        break;
+    }
   }
 
   pageIsFavorite() {

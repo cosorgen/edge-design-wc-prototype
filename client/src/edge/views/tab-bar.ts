@@ -24,18 +24,8 @@ import {
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<TabBar>`
-  <mica-material tab-bar></mica-material>
   <div id="shadow"></div>
   <div id="content">
-    <div class="group" style="padding: 3px">
-      <flyout-menu>
-        <identity-control
-          appearance="signedIn"
-          slot="trigger"
-        ></identity-control>
-        <identity-flyout></identity-flyout>
-      </flyout-menu>
-    </div>
     <div class="group">
       <flyout-menu>
         <mai-button appearance="subtle" icon-only slot="trigger">
@@ -135,7 +125,6 @@ const template = html<TabBar>`
       @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
       @mouseup="${(x, c) => x.handleContextMenu(c.event)}"
     ></div>
-    <caption-controls></caption-controls>
   </div>
 `;
 
@@ -152,6 +141,7 @@ const styles = css`
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     align-items: flex-end;

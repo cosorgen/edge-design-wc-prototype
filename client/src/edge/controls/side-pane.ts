@@ -5,7 +5,7 @@ import {
   customElement,
   attr,
 } from '@microsoft/fast-element';
-import '../views/copilot-sidepane.js';
+import '../views//sidepanes/copilot-sidepane.js';
 import apps from '../installedApps.js';
 import {
   cornerLayerDefault,
@@ -22,12 +22,12 @@ const styles = css`
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 100%;
+    height: calc(100% - var(--tab-bar-height));
     min-width: 376px;
     max-width: 376px;
     border-radius: ${cornerLayerDefault};
     overflow: hidden;
-    box-shadow: ${shadow2};
+    margin-block-start: var(--tab-bar-height);
   }
 `;
 

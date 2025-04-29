@@ -1,6 +1,7 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
+import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import {
@@ -11,7 +12,7 @@ import {
 } from '@edge-design/windows-theme';
 import '../controls/context-menu.js';
 import '../controls/flyout-menu.js';
-import '../controls/more-menu.js';
+import './more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
 import '@edge-design/button/define.js';
@@ -159,7 +160,20 @@ const styles = css`
 @customElement({ name: 'caption-controls', template, styles })
 export class CaptionControls extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
+  @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsService) ss!: EdgeSettingsService;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.addEventListener('contextmenu', this.handleContextMenu);
+  }
+
+  handleTitleBarMouseDown(e: Event) {
+    if (!(e instanceof MouseEvent)) return;
+    if (e.button !== 0) return;
+    this.$emit('windowmovestart');
+  }
 
   closeWindow() {
     this.ws.closeWindow(this.ews.id);
@@ -176,4 +190,44 @@ export class CaptionControls extends FASTElement {
   maximizeWindow() {
     this.ws.maximizeWindow(this.ews.id, !this.windowIsMaximized());
   }
+
+  handleMoreAction(e: CustomEvent) {
+    const action = e.detail;
+    switch (action) {
+      case 'New tab':
+        this.ts.activateTab(this.ts.addTab());
+        break;
+      case 'New window':
+        this.ws.openWindow('Microsoft Edge');
+        break;
+      case 'Print':
+        window.print(); // maybe see if we can print the current tab iframe?
+        break;
+      case 'Settings': {
+        const settingsTabId = this.ts.addTab({
+          id: `tab-${window.crypto.randomUUID()}`,
+          title: 'Settings',
+          url: 'edge://settings',
+          favicon: 'img/edge/icons.svg#settings-16-regular',
+        });
+        this.ts.activateTab(settingsTabId);
+        break;
+      }
+      case 'Find on page':
+      case 'Screenshot':
+      case 'New InPrivate window':
+        break;
+      case 'Close Microsoft Edge':
+        this.ws.closeAllWindows('Microsoft Edge');
+        break;
+      default:
+        this.ews.openToolbarItem(action);
+        break;
+    }
+  }
+
+  handleContextMenu = (e: Event) => {
+    e.preventDefault();
+    return false;
+  };
 }

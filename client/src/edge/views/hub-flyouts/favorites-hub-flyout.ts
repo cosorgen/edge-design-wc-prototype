@@ -19,213 +19,180 @@ import EdgeSettingsSerivce from '#servicessettingsService.js';
 import '../../controls/favorites-item.js';
 import '../../controls/context-menu.js';
 import '../../controls/menu-item.js';
+import '@mai-ui/tree/define.js';
+import '@mai-ui/tree-item/define.js';
+import '@mai-ui/text-input/define.js';
 import {
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  shadow28,
-  borderRadiusMedium,
-  spacingHorizontalS,
-  typographyStyles,
-  spacingHorizontalMNudge,
-  spacingHorizontalXXS,
-  spacingHorizontalXS,
-  spacingVerticalXXS,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/accordion.js';
-import '@phoenixui/web-components/accordion-item.js';
-import '@phoenixui/web-components/text-input.js';
-import '../../../windows/controls/acrylic-material.js';
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundContentNeutralPrimary,
+  paddingContentXsmall,
+  shadowFlyout,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+  cornerCtrlRest,
+  textStyleDefaultRegularWeight,
+  gapBetweenContentMedium,
+  gapBetweenContentXxsmall,
+  paddingContentMedium,
+  gapBetweenContentSmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<FavoritesHubFlyout>`
-  <acrylic-material></acrylic-material>
-  <div id="content">
-    <div id="header">
-      ${when(
-        (x) => x.isSearchInputVisible,
-        html`
-          <phx-button
-              size="medium"
-              appearance="subtle"
-              icon-only
-              @click="${(x) => x.toggleSearchInput()}"
-            >
-              <svg><use href="./img/edge/icons.svg#chevron-left-20-regular" /></svg>
-            </phx-button>
-          <phx-text-input
-            appearance="filled-darker"
-            placeholder="Search"
-            @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
-            value="${(x) => x.searchValue}"
-          >
-            <svg slot="start">
-              <use href="img/edge/icons.svg#search-20-regular" />
+  <div id="header">
+    <div id="header-title">
+      <span>Favorites</span>
+      <div id="icons">
+        <flyout-menu>
+          <mai-button size="small" appearance="subtle" icon-only slot="trigger">
+            <svg>
+              <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
             </svg>
+          </mai-button>
+          <context-menu>
+            <menu-item @click="${(x) => x.handleAddFavorite()}">
+              Add this page to favorites
+            </menu-item>
+            <menu-item> Add new folder </menu-item>
             ${when(
-              (x) => x.searchValue !== '',
-              html`
-                <button slot="end" @click="${(x) => x.clearSearch()}">
-                  <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
-                </button>
-              `
+              (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
+              html` <menu-item
+                @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
+              >
+                Hide favorites button in toolbar
+              </menu-item>`,
+              html` <menu-item
+                @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
+              >
+                Show favorites button in toolbar
+              </menu-item>`,
             )}
-          </phx-text-input>
-        `,
-        html`
-          <span>Favorites</span>
-          <div id="icons">
-            <phx-button
-              size="small"
-              appearance="subtle"
-              icon-only
-              @click="${(x) => x.handleAddFavorite()}"
-            >
-              <svg><use href="./img/edge/icons.svg#star-add-20-regular" /></svg>
-            </phx-button>
-            <phx-button
-              size="small"
-              appearance="subtle"
-              icon-only
-            >
-              <svg><use href="./img/edge/icons.svg#folder-add-20-regular" /></svg>
-            </phx-button>
-            <phx-button
-              size="small"
-              appearance="subtle"
-              icon-only
-              @click="${(x) => x.toggleSearchInput()}"
-            >
-              <svg><use href="./img/edge/icons.svg#search-20-regular" /></svg>
-            </phx-button>
-            <flyout-menu>
-              <phx-button size="small" appearance="subtle" icon-only slot="trigger">
-                <svg>
-                  <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
-                </svg>
-              </phx-button>
-              <context-menu>
-                <menu-item>
-                  <span slot="start"><svg><use href="./img/edge/icons.svg#open-20-regular" /></svg></span>
-                  Open Favorites Page
-                </menu-item>
-                <phx-divider></phx-divider>
-                <menu-item @click="${(x) => x.handleAddFavorite()}">
-                  <span slot="start"><svg><use href="./img/edge/icons.svg#star-add-20-regular" /></svg></span>
-                  Add This Page to Favorites...
-                </menu-item>
-                <menu-item> Add Open Pages to Favorites... </menu-item>
-                <phx-divider></phx-divider>
-                <menu-item> Import Favorites </menu-item>
-                <menu-item> Export Favorites </menu-item>
-                <menu-item> Remove Duplicate Favorites </menu-item>
-                <phx-divider></phx-divider>
-                <menu-item> 
-                  <span slot="end"><svg><use href="./img/edge/icons.svg#chevron-right-20-regular" /></svg></span>
-                  Show Favorites Bar 
-                </menu-item>
-                ${when(
-                  (x) => x.ess.pinnedToolbarItems.includes('Favorites'),
-                  html` <menu-item
-                    @click="${(x) => x.ess.unpinToolbarItem('Favorites')}"
-                  >
-                    Hide favorites button in toolbar
-                  </menu-item>`,
-                  html` <menu-item
-                    @click="${(x) => x.ess.pinToolbarItem('Favorites')}"
-                  >
-                    Show favorites button in toolbar
-                  </menu-item>`,
-                )}
-              </context-menu>
-            </flyout-menu>
-          </div>
-        `
+          </context-menu>
+        </flyout-menu>
+        <mai-button
+          size="small"
+          appearance="subtle"
+          icon-only
+          @click="${(x) => x.handleAddFavorite()}"
+        >
+          <svg><use href="./img/edge/icons.svg#pin-20-regular" /></svg>
+        </mai-button>
+        <mai-button size="small" appearance="subtle" icon-only>
+          <svg><use href="./img/edge/icons.svg#dismiss-16-regular" /></svg>
+        </mai-button>
+      </div>
+    </div>
+    <mai-text-input
+      appearance="filled-darker"
+      placeholder="Search your favorites"
+      @input="${(x, c) => x.handleInput(c.event as InputEvent)}"
+      value="${(x) => x.searchValue}"
+    >
+      <svg slot="start">
+        <use href="img/edge/icons.svg#search-20-regular" />
+      </svg>
+      ${when(
+        (x) => x.searchValue !== '',
+        html`<button slot="end" @click="${(x) => x.clearSearch()}">
+          <svg><use href="img/edge/icons.svg#dismiss-16-regular" /></svg>
+        </button>`,
       )}
-    </div>
-    <phx-divider appearance="strong"></phx-divider>
-    <div id="body">
-      <phx-accordion>
-        <phx-accordion-item expanded>
-          <span slot="heading" class="folder-heading">
-            <svg><use href="./img/edge/icons.svg#star-20-regular" /></svg>
-            Favorites bar
-          </span>
-          <div class="vertical-container">
-            ${repeat(
-              (x) => x.filteredFavorites,
-              html`${when(
-                (x) => x.type === 'folder',
-                html`<phx-accordion-item>
-                  <span slot="heading" class="folder-heading">
-                    <svg>
-                      <use href="./img/edge/icons.svg#folder-20-regular" />
-                    </svg>
-                    ${(x) => x.title}
-                  </span>
-                  <div class="vertical-container">
-                    ${repeat(
-                      [1, 2, 3],
-                      html`<favorites-item
-                        type="site"
-                        title="${(item) => `Favorite ${item}`}"
-                        favicon="https://www.microsoft.com/favicon.ico?v2"
-                        @click="${(item, c) => c.parent.handleItemClick(item)}"
-                      ></favorites-item>`,
-                    )}
-                  </div>
-                </phx-accordion-item>`,
-                html`<favorites-item
-                  type="${(x) => x.type}"
-                  title="${(x) => x.title}"
-                  favicon="${(x) => x.favicon}"
-                  @click="${(x, c) => c.parent.handleItemClick(x)}"
-                ></favorites-item>`,
-              )}`,
-            )}
-          </div>
-        </phx-accordion-item>
-      </phx-accordion>
-    </div>
+    </mai-text-input>
   </div>
+  <mai-tree>
+    <mai-tree-item expanded>
+      <svg slot="start">
+        <use href="./img/edge/icons.svg#star-20-regular" />
+      </svg>
+      Favorites bar
+      ${repeat(
+        (x) => x.filteredFavorites,
+        html`${when(
+          (x) => x.type === 'folder',
+          html`<mai-tree-item>
+            <svg slot="start">
+              <use href="./img/edge/icons.svg#folder-20-regular" />
+            </svg>
+            ${(x) => x.title}
+            ${repeat(
+              [1, 2, 3],
+              html` <mai-tree-item
+                @click="${(item, c) => c.parent.handleItemClick(item)}"
+              >
+                <svg slot="start">
+                  <use href="./img/edge/icons.svg#document-20-regular" />
+                </svg>
+                ${(item) => `Favorite ${item}`}
+              </mai-tree-item>`,
+            )}
+          </mai-tree-item>`,
+          html`<mai-tree-item
+            @click="${(item, c) => c.parent.handleItemClick(item)}"
+          >
+            <img src="${(x) => x.favicon}" slot="start" />
+            ${(x) => x.title}
+          </mai-tree-item>`,
+        )}`,
+      )}
+    </mai-tree-item>
+    <mai-tree-item>
+      <svg slot="start">
+        <use href="./img/edge/icons.svg#folder-20-regular" />
+      </svg>
+      Other favorites
+      ${repeat(
+        [1, 2, 3],
+        html` <mai-tree-item
+          @click="${(item, c) => c.parent.handleItemClick(item)}"
+        >
+          <svg slot="start">
+            <use href="./img/edge/icons.svg#document-20-regular" />
+          </svg>
+          ${(item) => `Favorite ${item}`}
+        </mai-tree-item>`,
+      )}
+    </mai-tree-item>
+  </mai-tree>
 `;
 
 const styles = css`
   :host {
-    position: relative;
-    display: block;
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
-    overflow: hidden;
-  }
-
-  #content {
-    position: relative;
     display: flex;
     flex-direction: column;
     min-width: 256px;
     max-width: 358px;
+    padding: ${paddingContentMedium};
+    gap: ${gapBetweenContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   #header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: ${gapBetweenContentSmall};
+  }
+
+  #header-title {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    padding: ${spacingHorizontalS};
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    gap: ${spacingHorizontalXS};
-    height: 24px;
+    justify-content: space-between;
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultHeaderWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 
   #icons {
-    gap: ${spacingHorizontalXXS};
-  }
-
-  #body {
     display: flex;
-    flex-direction: column;
-    padding-bottom: ${spacingHorizontalS};
+    flex-direction: row;
+    align-items: center;
+    gap: ${gapBetweenContentXxsmall};
   }
 
   button {
@@ -233,7 +200,7 @@ const styles = css`
     background: transparent;
     cursor: pointer;
     padding: 0;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
   }
 
   favorites-item,
@@ -245,24 +212,24 @@ const styles = css`
     max-width: none !important;
   }
 
-  phx-divider {
-    padding: ${spacingVerticalXXS} 0;
+  phx-accordion-item::part(heading),
+  phx-accordion-item::part(button) {
+    height: 32px;
   }
 
   favorites-item::part(favorite-button) {
     height: 32px !important;
-    gap: ${spacingHorizontalMNudge};
+    gap: ${gapBetweenContentMedium};
     padding-left: 42px;
-    font-family: ${typographyStyles.body1.fontFamily};
-    font-size: ${typographyStyles.body1.fontSize};
-    font-weight: ${typographyStyles.body1.fontWeight};
-    line-height: ${typographyStyles.body1.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 
-  phx-text-input {
+  mai-text-input {
     display: flex;
     align-items: center;
-    width: 100%;
   }
 
   svg {
@@ -276,7 +243,7 @@ const styles = css`
   }
 
   .folder-heading svg {
-    margin-right: ${spacingHorizontalS};
+    margin-right: ${paddingContentXsmall};
   }
 
   .vertical-container {
@@ -291,18 +258,13 @@ export class FavoritesHubFlyout extends FASTElement {
   @inject(FavoritesService) fs!: FavoritesService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
-
   @observable searchValue = '';
   @observable menuVisible = true;
-  @observable isSearchInputVisible = false;
   _inputElement: HTMLInputElement | null = null;
 
   connectedCallback() {
     super.connectedCallback();
     this.setElements();
-    requestAnimationFrame(() => {
-      this.overrideHeadingStyles(); // Call here to set the initial height
-    });
   }
 
   disconnectedCallback(): void {
@@ -312,7 +274,7 @@ export class FavoritesHubFlyout extends FASTElement {
 
   setElements() {
     this._inputElement = this.shadowRoot?.querySelector(
-      'phx-text-input',
+      'mai-text-input',
     ) as HTMLInputElement;
   }
 
@@ -322,29 +284,11 @@ export class FavoritesHubFlyout extends FASTElement {
 
   handleInput(event: InputEvent) {
     this.searchValue = (event.target as HTMLInputElement).value;
-    this.overrideHeadingStyles();
   }
 
-  clearSearch() { 
+  clearSearch() {
     this.searchValue = '';
     this._inputElement!.value = '';
-    this.overrideHeadingStyles();
-  }
-
-  overrideHeadingStyles() {
-    const accordionItems =
-      this.shadowRoot?.querySelectorAll('phx-accordion-item');
-
-    accordionItems?.forEach((item) => {
-      const heading = item.shadowRoot?.querySelector('.heading') as HTMLElement;
-      const button = item.shadowRoot?.querySelector('button') as HTMLElement;
-      if (heading) {
-        heading.style.height = '32px';
-      }
-      if (button) {
-        button.style.height = '32px';
-      }
-    });
   }
 
   @volatile
@@ -404,9 +348,5 @@ export class FavoritesHubFlyout extends FASTElement {
     const activeTab = this.ts.tabsById[activeTabId!];
     if (!activeTab) return false;
     return this.fs.favorites.some((f) => f.title === activeTab.title);
-  }
-
-  toggleSearchInput() {
-    this.isSearchInputVisible = !this.isSearchInputVisible; // Toggle visibility
   }
 }

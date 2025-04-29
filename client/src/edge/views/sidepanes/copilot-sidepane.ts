@@ -9,9 +9,9 @@ import {
   spacingVerticalXXL,
   smtcBackgroundPageGradient,
 } from '@edge-design/copilot-theme';
-import '../controls/sidepane-header.js';
-import '../controls/copilot-design-provider.js';
-import './copilot-composer.js';
+import '../../controls/sidepane-header.js';
+import '../../controls/copilot-design-provider.js';
+import '../copilot-composer.js';
 
 const template = html`
   <copilot-design-provider>

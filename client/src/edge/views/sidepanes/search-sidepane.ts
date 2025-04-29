@@ -1,5 +1,5 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import '../controls/sidepane-header.js';
+import '../../controls/sidepane-header.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { backgroundWebPagePrimary } from '@edge-design/kumo-theme/tokens.js';

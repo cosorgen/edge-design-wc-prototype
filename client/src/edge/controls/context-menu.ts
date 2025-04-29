@@ -12,7 +12,6 @@ import {
 } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ContextMenu>`
-  <acrylic-material></acrylic-material>
   <div id="menu-items">
     <slot></slot>
   </div>
@@ -34,12 +33,8 @@ const styles = css`
   }
 
   #menu-items {
-    position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 96px;
-    max-width: 512px;
-    padding: ${spacingVerticalS};
   }
 
   .hint {

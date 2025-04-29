@@ -71,15 +71,6 @@ const template = html<AddFavoritesInputs>`
 const styles = css`
   :host {
     display: block;
-    position: relative;
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
-    border-radius: ${borderRadiusLayerDialog};
-    overflow: hidden;
-  }
-
-  #content {
-    position: relative;
     min-width: 256px;
     min-height: 120px;
     padding: ${paddingContentMedium};

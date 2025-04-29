@@ -35,9 +35,9 @@ import {
 } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<HorizontalTab>`
-  <mica-material id="bg"></mica-material>
-  <mica-material id="left-wing"></mica-material>
-  <mica-material id="right-wing"></mica-material>
+  <div class="tab-background" id="bg"></div>
+  <div class="tab-background" id="left-wing"></div>
+  <div class="tab-background" id="right-wing"></div>
   <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">
     <div id="favicon" part="favicon">
       ${when(
@@ -177,8 +177,8 @@ const styles = css`
   #left-wing,
   #right-wing {
     visibility: hidden;
+    position: absolute;
     overflow: hidden;
-    inset: unset;
   }
 
   #bg {
@@ -196,11 +196,11 @@ const styles = css`
   }
 
   #left-wing {
-    inset-inline-start: -10px;
+    left: -10px;
   }
 
   #right-wing {
-    inset-inline-end: -10px;
+    right: -10px;
     transform: rotate(90deg);
   }
 

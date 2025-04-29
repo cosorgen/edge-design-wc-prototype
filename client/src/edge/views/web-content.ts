@@ -10,9 +10,7 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import './edge-newtab-legacy.js';
-import './copilot-newtab.js';
-import './settings.js';
+import './fullpage/edge-settings.js';
 import './palette-playground.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
@@ -29,9 +27,6 @@ const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<edge-newtab
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab>`,
-  settings: html`<edge-settings
-    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></edge-newtab-legacy>`,
   settings: html`<settings-page
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></settings-page>`,

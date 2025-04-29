@@ -19,7 +19,7 @@ import {
 
 export const styles = css`
   :host {
-    width: 100%;
+    width: 1024px;
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     height: 32px;
@@ -28,6 +28,10 @@ export const styles = css`
 
   :host([active]) {
     display: block;
+  }
+
+  :host([full-width]) {
+    width: 100%;
   }
 
   [part='container'] {
@@ -130,6 +134,19 @@ export const styles = css`
   }
 
   :host([dropdown-open]) omnibox-status {
+    display: none;
+  }
+
+  #rest-input {
+    display: none;
+    cursor: text;
+  }
+
+  :host([truncate-url]:not([dropdown-open])) #rest-input {
+    display: block;
+  }
+
+  :host([truncate-url]:not([dropdown-open])) omnibox-input:not([value='']) {
     display: none;
   }
 `;

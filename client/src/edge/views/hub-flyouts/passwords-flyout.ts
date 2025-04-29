@@ -1,39 +1,24 @@
-import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
 import {
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  shadow28,
-  spacingHorizontalS,
-} from '@phoenixui/themes';
-import '../../../windows/controls/acrylic-material.js';
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  paddingContentMedium,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
+import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
-const template = html<PasswordsFlyout>`
-  <acrylic-material></acrylic-material>
-  <div>Passwords</div>
-`;
+const template = html` Passwords `;
 
 const styles = css`
   :host {
-    position: relative;
     display: block;
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
-    overflow: hidden;
-  }
-
-  div {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 256px;
-    max-width: 358px;
-    min-height: 256px;
-    padding: ${spacingHorizontalS};
-  }
-
-  img {
-    width: 100%;
+    width: 256px;
+    height: 300px;
+    padding: ${paddingContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;
 

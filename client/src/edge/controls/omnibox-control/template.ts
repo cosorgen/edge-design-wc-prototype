@@ -24,6 +24,9 @@ export const template = html<OmniboxControl>`
         ></omnibox-icon>
         <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
       </div>
+      <div id="rest-input" @click="${(x) => x.handleInputClick()}">
+        ${(x) => x.truncatedInputValue()}
+      </div>
       <omnibox-input
         value="${(x) => x.inputValue}"
         @click="${(x) => x.handleInputClick()}"
