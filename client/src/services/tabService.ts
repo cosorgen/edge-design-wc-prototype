@@ -32,8 +32,9 @@ export class TabService {
     if (!tab) {
       tab = {
         id: `tab-${window.crypto.randomUUID()}`,
-        url: 'edge://newtab',
-        title: 'New tab',
+        url: 'edge://palette',
+        title: 'Palette playground',
+        favicon: './img/edge/icons.svg#document-16-regular',
       };
     }
 
@@ -98,7 +99,7 @@ export class TabService {
       .then((res) => {
         const tab = this.tabsById[id];
         tab.title = res.title;
-        tab.favicon = res.favicon;
+        tab.favicon = res.favicon || 'img/edge/icons.svg#document-16-regular';
         this.tabsById = {
           ...this.tabsById,
           [tab.id]: tab,

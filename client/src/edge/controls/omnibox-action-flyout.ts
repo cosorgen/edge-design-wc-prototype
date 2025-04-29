@@ -5,57 +5,42 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
+import '@edge-design/button/define.js';
 import './flyout-menu.js';
+import './omnibox-action-button.js';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerDialog,
-  colorNeutralForeground1,
-  colorNeutralForegroundHint,
-  shadow28,
-  spacingHorizontalL,
-} from '@phoenixui/themes';
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  paddingFlyoutDefault,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">
-    <phx-toggle-button
-      size="small"
-      appearance="subtle"
-      shape="circular"
-      icon-only
+    <omnibox-action-button
       slot="trigger"
       @click="${(x, c) => x.handleTriggrClick(c.event)}"
     >
       <slot name="trigger-content"></slot>
-    </phx-toggle-button>
+    </omnibox-action-button>
     <slot></slot>
   </flyout-menu>
 `;
 
 const styles = css`
-  phx-toggle-button {
-    color: ${colorNeutralForegroundHint};
-  }
-
   ::slotted(.flyout-menu) {
     width: 256px;
     height: 300px;
-    padding: ${spacingHorizontalL};
-    background: ${acrylicBackgroundLuminosity};
-    background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    border-radius: ${borderRadiusLayerDialog};
-    box-shadow: ${shadow28};
-    color: ${colorNeutralForeground1};
+    padding: ${paddingFlyoutDefault};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;
 
-@customElement({
-  name: 'omnibox-action-flyout',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-action-flyout', template, styles })
 export class OmniboxActionFlyout extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;

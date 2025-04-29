@@ -38,6 +38,7 @@ Then run the following
 
 ```bash
 npm install
+npm run build:packages
 npm run dev
 ```
 

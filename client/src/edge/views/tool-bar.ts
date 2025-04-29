@@ -8,7 +8,8 @@ import {
   volatile,
   when,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/button.js';
+import '@edge-design/button/define.js';
+import '@edge-design/button/define.js';
 import { OmniboxControl } from '../controls/omnibox-control/index.js';
 import '../controls/omnibox-control/index.js';
 import '../controls/omnibox-suggestion.js';
@@ -30,32 +31,29 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
-import omniboxActions, { overflowItems } from '../omniboxActions.js';
-import { spacingFrame } from '../designSystem.js';
 import apps from '../installedApps.js';
+import omniboxActions, { overflowItems } from '../omniboxActions.js';
+import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<Toolbar>`
   <div class="group">
-    <phx-button appearance="subtle" icon-only disabled>
+    <mai-button appearance="subtle" icon-only disabled>
       <svg>
         <use href="img/edge/icons.svg#back-20-regular" />
       </svg>
-    </phx-button>
-    <phx-button appearance="subtle" icon-only>
+    </mai-button>
+    <mai-button appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#arrow-clockwise-20-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
   </div>
   <omnibox-control
     initialValue="${(x) => x.ts.tabsById[x.ts.activeTabId!].url}"
     @submit="${(x, c) => x.handleOmniboxSubmit(c.event as CustomEvent)}"
     @change="${(x, c) => x.handleOmniboxChange(c.event as CustomEvent)}"
     @blur="${(x, c) =>
-      x.handleOmniboxChange({
-        ...c.event,
-        detail: ' ',
-      } as CustomEvent)}"
+      x.handleOmniboxChange({ ...c.event, detail: ' ' } as CustomEvent)}"
   >
     ${when(
       (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.top,
@@ -118,28 +116,50 @@ const template = html<Toolbar>`
       )}`,
       { positioning: true },
     )}
-    <flyout-menu>
-      <phx-toggle-button
-        size="medium"
-        appearance="subtle"
-        icon-only
-        slot="trigger"
-      >
-        <svg>
-          <use href="img/edge/icons.svg#more-horizontal-20-regular" />
-        </svg>
-      </phx-toggle-button>
-      <more-menu managed></more-menu>
-    </flyout-menu>
-    <phx-toggle-button
-      appearance="subtle"
-      icon-only
-      slot="trigger"
-      @click="${(x) => x.toggleSidepane('Copilot')}"
-      ?pressed="${(x) => x.ews.activeSidepaneAppId === 'Copilot'}"
-    >
-      <img width="20px" src="./img/edge/copilotAppLight.png" />
-    </phx-toggle-button>
+    ${when(
+      (x) => x.ess.showMenusInL1,
+      html`
+        <flyout-menu>
+          <identity-control
+            appearance="signedIn"
+            slot="trigger"
+          ></identity-control>
+          <identity-flyout></identity-flyout>
+        </flyout-menu>
+        <flyout-menu>
+          <mai-button
+            size="medium"
+            appearance="subtle"
+            icon-only
+            slot="trigger"
+          >
+            <svg>
+              <use href="img/edge/icons.svg#more-horizontal-20-regular" />
+            </svg>
+          </mai-button>
+          <more-menu
+            managed
+            @moreaction="${(x, c) =>
+              x.handleMoreAction(c.event as CustomEvent)}"
+          ></more-menu>
+        </flyout-menu>
+        ${when(
+          (x) => x.ess.showLegacyCopilot,
+          html`
+            <mai-button
+              appearance="subtle"
+              icon-only
+              slot="trigger"
+              @click="${(x) => x.toggleSidepane('Legacy Copilot')}"
+              ?pressed="${(x) =>
+                x.ews.activeSidepaneAppId === 'Legacy Copilot'}"
+            >
+              <img width="20px" src="./img/edge/copilotAppLight.png" />
+            </mai-button>
+          `,
+        )}
+      `,
+    )}
   </div>
 `;
 
@@ -147,28 +167,36 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: row;
-    gap: calc(${spacingFrame} * 2);
+    gap: calc(${paddingWindowDefault} * 2);
+    padding: ${paddingWindowDefault};
     user-select: none;
   }
 
   .group {
-    flex: 1;
+    flex: ${(x) => (x.ess.fullWidthOmnibox ? 'none' : '1')};
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingFrame};
+    gap: ${paddingWindowDefault};
+  }
+
+  flyout-menu > mai-button,
+  .group > mai-button,
+  .group > mai-button {
+    /* Only direct buttons on toolbar need override */
+    --smtc-corner-control-rest: 8px;
+    --smtc-corner-control-hover: 8px;
+    --smtc-corner-control-pressed: 8px;
+    --smtc-corner-control-selected: 8px;
   }
 
   .right {
     justify-content: flex-end;
+    min-width: 68px; /* Make equal with left side buttons */
   }
 `;
 
-@customElement({
-  name: 'tool-bar',
-  template,
-  styles,
-})
+@customElement({ name: 'tool-bar', template, styles })
 export class Toolbar extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(WindowsService) ws!: WindowsService;
@@ -222,7 +250,14 @@ export class Toolbar extends FASTElement {
       );
     });
 
-    // Make sure Copilot doesn't show up twice in toolbar
+    // Remove legacy copilot if it's not enabled or
+    // if menus are in L1 (needed for correct order)
+    if (!this.ess.showLegacyCopilot || this.ess.showMenusInL1)
+      this._derivedToolbarItems = this._derivedToolbarItems.filter(
+        (id) => id !== 'Legacy Copilot',
+      );
+
+    // Remove new copilot always
     this._derivedToolbarItems = this._derivedToolbarItems.filter(
       (id) => id !== 'Copilot',
     );
@@ -249,7 +284,8 @@ export class Toolbar extends FASTElement {
 
   toggleFlyout(id: string, event: Event) {
     if (!(event instanceof CustomEvent)) return;
-    event.detail ? this.ews.openToolbarItem(id) : this.ews.closeToolbarItem();
+    if (event.detail) this.ews.openToolbarItem(id);
+    else this.ews.closeToolbarItem();
   }
 
   toggleSidepane(id: string) {
@@ -263,7 +299,8 @@ export class Toolbar extends FASTElement {
 
   togglePinToolbarItem(id: string, event: Event) {
     if (!(event instanceof CustomEvent)) return;
-    event.detail ? this.ess.pinToolbarItem(id) : this.ess.unpinToolbarItem(id);
+    if (event.detail) this.ess.pinToolbarItem(id);
+    else this.ess.unpinToolbarItem(id);
   }
 
   handleOmniboxActionClick(id: string, e: Event) {

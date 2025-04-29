@@ -6,40 +6,39 @@ import {
   observable,
   repeat,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/button.js';
+import '@edge-design/button/define.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#servicestabService.js';
 import {
-  borderRadiusCircular,
-  borderRadiusLarge,
-  colorBackgroundOverlay,
-  colorBrandForeground1,
-  colorBrandForeground1Hover,
-  colorLayerBackgroundDialog,
-  colorNeutralCardBackground,
-  colorNeutralCardBackgroundHover,
-  colorNeutralForeground1,
-  colorNeutralForeground2,
-  colorNeutralForegroundStaticInverted,
-  colorNeutralStroke1,
-  colorSubtleBackgroundHover,
-  shadow8,
-  spacingHorizontalL,
-  spacingHorizontalM,
-  spacingHorizontalS,
-  spacingHorizontalXL,
-  spacingHorizontalXS,
-  spacingVerticalL,
-  spacingVerticalM,
-  spacingVerticalMNudge,
-  spacingVerticalS,
-  spacingVerticalXXXL,
-  spacingHorizontalXXXL,
-  strokeWidthThin,
-  typographyStyles,
-} from '@phoenixui/themes';
+  backgroundCardOnprimaryDefaultHover,
+  backgroundCardOnprimaryDefaultRest,
+  backgroundCtrlSubtleHover,
+  cornerCircular,
+  cornerCtrlRest,
+  ctrlOmniboxBackgroundRest,
+  foregroundControlLinkBrandRest,
+  foregroundCtrlNeutralPrimaryRest,
+  foregroundCtrlNeutralSecondaryRest,
+  gapBetweenContentMedium,
+  gapBetweenContentSmall,
+  gapBetweenContentXsmall,
+  paddingContentLarge,
+  paddingContentMedium,
+  paddingContentSmall,
+  paddingContentXsmall,
+  paddingContentXxlarge,
+  paddingContentXxsmall,
+  shadowFlyout,
+  strokeCtrlOnoutlineRest,
+  strokeWidthDefault,
+  textGlobalBody2Fontsize,
+  textGlobalBody2Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const topSites = [
   {
@@ -96,28 +95,28 @@ const template = html<EdgeNewTab>`<img
         Microsoft Start
       </div>
       <div id="actions">
-        <phx-button icon-only appearance="subtle" size="large">
+        <mai-button icon-only appearance="subtle" size="large">
           <svg>
             <use href="img/edge/icons.svg#settings-24-regular"></use>
           </svg>
-        </phx-button>
-        <phx-button icon-only appearance="subtle" size="large">
+        </mai-button>
+        <mai-button icon-only appearance="subtle" size="large">
           <svg>
             <use href="img/edge/icons.svg#grid-dots-24-regular"></use>
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
       <div id="image-actions">
-        <phx-button icon-only appearance="subtle">
+        <mai-button icon-only appearance="subtle">
           <svg>
             <use href="img/edge/icons.svg#image-20-regular"></use>
           </svg>
-        </phx-button>
-        <phx-button icon-only appearance="subtle">
+        </mai-button>
+        <mai-button icon-only appearance="subtle">
           <svg>
             <use href="img/edge/icons.svg#arrow-maximize-20-regular"></use>
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
       <div id="searchbox">
         <div id="start">
@@ -145,7 +144,9 @@ const template = html<EdgeNewTab>`<img
           `,
         )}
         <div class="top-site" role="button">
-          <img src="img/edge/newtab/add.png" alt="add" />
+          <svg>
+            <use href="img/edge/icons.svg#add-24-regular"></use>
+          </svg>
           <div>Add</div>
         </div>
       </div>
@@ -172,18 +173,18 @@ const template = html<EdgeNewTab>`<img
         <a href="">Real Estate</a>
       </div>
       <div id="feed-actions">
-        <phx-button shape="circular">
+        <mai-button shape="circular">
           <svg slot="start" width="20px" height="20px">
             <use href="img/edge/icons.svg#star-edit-20-regular"></use>
           </svg>
           Personalize
-        </phx-button>
-        <phx-button shape="circular">
+        </mai-button>
+        <mai-button shape="circular">
           <svg slot="start" width="20px" height="20px">
             <use href="img/edge/icons.svg#options-20-regular"></use>
           </svg>
           Feed layout
-        </phx-button>
+        </mai-button>
       </div>
     </div>
   </div>`;
@@ -219,7 +220,7 @@ const styles = css`
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(transparent, ${colorBackgroundOverlay});
+    background: radial-gradient(transparent, rgba(0, 0, 0, 0.5));
 
     display: flex;
     flex-direction: column;
@@ -232,10 +233,10 @@ const styles = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: ${spacingVerticalL};
+    gap: ${gapBetweenContentMedium};
     width: 100%;
     max-width: 1024px;
-    padding: ${spacingHorizontalXXXL};
+    padding: ${paddingContentXxlarge};
     box-sizing: border-box; 
   }
 
@@ -246,13 +247,13 @@ const styles = css`
     min-height: 40px;
     display: flex;
     align-items: center;
-    gap: ${spacingHorizontalM};
-    padding: ${spacingVerticalXXXL};
-    font-size: ${typographyStyles.subtitle2.fontSize};
-    font-weight: ${typographyStyles.subtitle2.fontWeight};
-    line-height: ${typographyStyles.subtitle2.lineHeight};
-    font-family: ${typographyStyles.subtitle2.fontFamily};
-    color: ${colorNeutralForegroundStaticInverted};
+    gap: ${gapBetweenContentSmall};
+    padding: ${paddingContentXxlarge};
+    font-size: ${textGlobalBody2Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalBody2Lineheight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    color: white;
 
     img {
       width: 20px;
@@ -267,12 +268,11 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    padding: ${spacingVerticalXXXL};
+    gap: ${gapBetweenContentXsmall};
+    padding: ${paddingContentXxlarge};
 
-    phx-button {
-      color: ${colorNeutralForegroundStaticInverted};
-    }
+    --smtc-foreground-ctrl-onsubtle-rest: white;
+    --smtc-foreground-ctrl-icon-onsubtle-rest: white;
   }
 
   #image-actions {
@@ -282,28 +282,27 @@ const styles = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    padding: ${spacingVerticalXXXL};
+    gap: ${gapBetweenContentXsmall};
+    padding: ${paddingContentXxlarge};
 
-    phx-button {
-      color: ${colorNeutralForegroundStaticInverted};
-    }
+    --smtc-foreground-ctrl-onsubtle-rest: white;
+    --smtc-foreground-ctrl-icon-onsubtle-rest: white;
   }
 
   #searchbox {
     width: 100%;
     display: flex;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    border-radius: ${borderRadiusCircular};
-    background-color: ${colorLayerBackgroundDialog};
-    box-shadow: ${shadow8};
+    gap: ${gapBetweenContentXsmall};
+    border-radius: ${cornerCircular};
+    background-color: ${ctrlOmniboxBackgroundRest};
+    box-shadow: ${shadowFlyout};
 
     #start {
-      padding: ${spacingVerticalM} ${spacingHorizontalL};
+      padding: ${paddingContentSmall} ${paddingContentMedium};
       display: flex;
       align-items: center;
-      gap: ${spacingHorizontalM};
+      gap: ${gapBetweenContentSmall};
       flex: 1;
       min-width: 512px;
     }
@@ -318,11 +317,11 @@ const styles = css`
       background: transparent;
       flex: 1;
 
-      font-size: ${typographyStyles.body2.fontSize};
-      font-weight: ${typographyStyles.body2.fontWeight};
-      line-height: ${typographyStyles.body2.lineHeight};
-      font-family: ${typographyStyles.body2.fontFamily};
-      color: ${colorNeutralForeground1};
+      font-size: ${textGlobalBody2Fontsize};
+      font-weight: ${textStyleDefaultRegularWeight};
+      line-height: ${textGlobalBody2Lineheight};
+      font-family: ${textStyleDefaultRegularFontFamily};
+      color: ${foregroundCtrlNeutralPrimaryRest};
 
       &:focus,
       &:focus-visible {
@@ -336,7 +335,7 @@ const styles = css`
       cursor: pointer;
       height: 100%;
       width: 48px;
-      border-radius: 0 ${borderRadiusCircular} ${borderRadiusCircular} 0;
+      border-radius: 0 ${cornerCircular} ${cornerCircular} 0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -348,7 +347,7 @@ const styles = css`
     }
 
     button:hover {
-      background-color: ${colorSubtleBackgroundHover};
+      background-color: ${backgroundCtrlSubtleHover};
     }
   }
 
@@ -372,23 +371,33 @@ const styles = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: ${spacingVerticalS};
-    padding: ${spacingVerticalS} ${spacingHorizontalXS};
-    color: ${colorNeutralForegroundStaticInverted};
+    gap: ${gapBetweenContentXsmall};
+    padding: ${paddingContentXsmall} ${paddingContentXxsmall};
+    color: white;
     cursor: pointer;
 
     &:hover {
       img {
-        background-color: ${colorNeutralCardBackgroundHover};
+        background-color: ${backgroundCardOnprimaryDefaultHover};
       }
     }
 
     img {
       width: 24px;
       height: 24px;
-      padding: ${spacingVerticalS};
-      background-color: ${colorNeutralCardBackground};
-      border-radius: ${borderRadiusLarge};
+      padding: ${paddingContentXsmall};
+      background-color: ${backgroundCardOnprimaryDefaultRest};
+      border-radius: ${cornerCtrlRest};
+      color: ${foregroundCtrlNeutralSecondaryRest};
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+      padding: 10px;
+      background-color: ${backgroundCardOnprimaryDefaultRest};
+      border-radius: ${cornerCtrlRest};
+      color: ${foregroundCtrlNeutralSecondaryRest};
     }
 
     div {
@@ -409,25 +418,25 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: ${spacingVerticalL};
-    background-color: ${colorNeutralCardBackground};
-    padding: ${spacingVerticalMNudge} ${spacingHorizontalXL};
-    border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
-    color: ${colorNeutralForeground2};
+    gap: ${gapBetweenContentMedium};
+    background-color: ${backgroundCardOnprimaryDefaultRest};
+    padding: ${paddingContentMedium} ${paddingContentLarge};
+    border-radius: ${cornerCtrlRest} ${cornerCtrlRest} 0 0;
+    color: ${foregroundCtrlNeutralSecondaryRest};
   }
 
   #feed-switch {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalM};
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1};
-    border-radius: ${borderRadiusLarge};
-    padding: ${spacingVerticalS} ${spacingHorizontalL};
+    gap: ${gapBetweenContentSmall};
+    border: ${strokeWidthDefault} solid ${strokeCtrlOnoutlineRest};
+    border-radius: ${cornerCtrlRest};
+    padding: ${paddingContentXsmall} ${paddingContentMedium};
 
     [active] {
-      color: ${colorBrandForeground1};
-      font-weight: ${typographyStyles.body1Strong.fontWeight};
+      color: ${foregroundControlLinkBrandRest};
+      font-weight: ${textStyleDefaultHeaderWeight};
     }
   }
 
@@ -436,16 +445,16 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalL};
+    gap: ${gapBetweenContentMedium};
     overflow-x: auto;
 
     a {
       text-decoration: none;
-      color: ${colorNeutralForeground2};
+      color: ${foregroundCtrlNeutralSecondaryRest};
     }
 
     a:hover {
-      color: ${colorBrandForeground1Hover};
+      color: ${foregroundControlLinkBrandRest};
     }
   }
 
@@ -453,18 +462,14 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalM};
+    gap: ${gapBetweenContentMedium};
 
-    phx-button {
-      color: ${colorNeutralForeground2};
+    mai-button {
+      color: ${foregroundCtrlNeutralSecondaryRest};
     }
 `;
 
-@customElement({
-  name: 'edge-newtab',
-  template,
-  styles,
-})
+@customElement({ name: 'edge-newtab-legacy', template, styles })
 export class EdgeNewTab extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;

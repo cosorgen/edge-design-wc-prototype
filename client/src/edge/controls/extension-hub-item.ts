@@ -5,15 +5,17 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
+import '@edge-design/button/define.js';
 import {
-  borderRadiusMedium,
-  colorNeutralForeground1,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  spacingHorizontalM,
-  spacingHorizontalS,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  cornerCtrlRest,
+  foregroundContentNeutralPrimary,
+  gapBetweenCtrlDefault,
+  paddingContentSmall,
+  paddingContentXsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
     <div id="start">
@@ -24,7 +26,7 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
     </div>
   </button>
   <div id="end">
-    <phx-button
+    <mai-button
       appearance="subtle"
       icon-only
       @click="${(x, c) => x.handlePinClick(c.event)}"
@@ -35,8 +37,8 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
             x.pinned ? 'pin-off' : 'pin'}-20-regular"
         />
       </svg>
-    </phx-button>
-    <phx-button
+    </mai-button>
+    <mai-button
       appearance="subtle"
       icon-only
       @click="${(x, c) => {
@@ -47,37 +49,37 @@ const template = html<ExtensionHubItem>` <button tabindex="0">
       <svg>
         <use href="./img/edge/icons.svg#more-horizontal-20-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
   </div>`;
 
 const styles = css`
   :host {
     position: relative;
-    color: ${colorNeutralForeground1};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
+    gap: ${gapBetweenCtrlDefault};
     padding: 0;
-    padding-inline: ${spacingHorizontalS} 72px;
+    padding-inline: ${paddingContentXsmall} 72px;
     height: 32px;
     cursor: pointer;
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
     border: none;
-    background-color: transparent;
+    background-color: ${backgroundCtrlSubtleRest};
     width: 100%;
     color: inherit;
   }
 
   button:hover {
-    background-color: ${colorSubtleBackgroundHover};
+    background-color: ${backgroundCtrlSubtleHover};
   }
 
   button:active {
-    background-color: ${colorSubtleBackgroundPressed};
+    background-color: ${backgroundCtrlSubtlePressed};
   }
 
   #start ::slotted(*) {
@@ -98,7 +100,7 @@ const styles = css`
     position: absolute;
     right: 0;
     top: 0;
-    margin-inline-start: ${spacingHorizontalM};
+    margin-inline-start: ${paddingContentSmall};
   }
 
   #main {
@@ -113,11 +115,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'extension-hub-item',
-  template,
-  styles,
-})
+@customElement({ name: 'extension-hub-item', template, styles })
 export class ExtensionHubItem extends FASTElement {
   @attr({ mode: 'boolean' }) pinned = false;
 

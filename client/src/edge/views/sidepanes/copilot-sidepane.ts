@@ -7,11 +7,11 @@ import {
   spacingHorizontalM,
   spacingVerticalM,
   spacingVerticalXXL,
-} from '@phoenixui/themes';
-import '../../controls/sidepane-header.js';
-import '../../controls/copilot-design-provider.js';
-import '../copilot-composer.js';
-import { backgroundGradient } from '../../copilotDesignSystem.js';
+  smtcBackgroundPageGradient,
+} from '@edge-design/copilot-theme';
+import '../controls/sidepane-header.js';
+import '../controls/copilot-design-provider.js';
+import './copilot-composer.js';
 
 const template = html`
   <copilot-design-provider>
@@ -54,7 +54,7 @@ const styles = css`
   copilot-design-provider {
     position: absolute;
     inset: 0;
-    background: linear-gradient(${backgroundGradient});
+    background: linear-gradient(${smtcBackgroundPageGradient});
     padding-block-start: 50px; /* Account for the sidepane header */
     padding-block-end: 120px; /* Account for the composer */
   }
@@ -91,12 +91,8 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-sidepane',
-  template,
-  styles,
-})
-export class CopilotSidepane extends FASTElement {
+@customElement({ name: 'legacy-copilot-sidepane', template, styles })
+export class LegacyCopilotSidepane extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
 
   handleClose = () => {

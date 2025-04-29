@@ -7,13 +7,21 @@
   "author": "",
   "license": "MIT",
   "workspaces": [
+    "packages/utilities",
+    "packages/button",
+    "packages/phoenix-theme",
+    "packages/kumo-theme",
+    "packages/copilot-theme",
+    "packages/windows-theme",
     "client",
     "server"
   ],
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
+    "build:pkg": "npm run build -ws --if-present",
     "clean": "node scripts/clean.mjs",
+    "clean:pkg": "npm run clean -ws --if-present",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "prettier": "prettier --check .",
@@ -21,15 +29,19 @@
     "preinstall": "npx ado-npm-auth"
   },
   "devDependencies": {
-    "@eslint/js": "^9.2.0",
+    "@eslint/js": "^9.15.0",
     "child_process": "^1.0.2",
     "dotenv": "^16.4.7",
-    "esbuild": "^0.21.4",
-    "eslint": "^8.57.0",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.15.0",
     "eslint-config-prettier": "^9.1.0",
     "open": "^10.1.0",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^7.8.0"
+    "prettier": "^3.3.3",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.15.0"
+  },
+  "dependencies": {
+    "@mai-ui/listbox": "^1.0.1"
   }
 }

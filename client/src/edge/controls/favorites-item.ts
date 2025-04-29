@@ -1,4 +1,17 @@
 import {
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  cornerCtrlRest,
+  foregroundCtrlNeutralPrimaryRest,
+  gapBetweenContentXxsmall,
+  paddingContentXsmallnudge,
+  textGlobalCaption1Fontsize,
+  textGlobalCaption1Lineheight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
+import {
   customElement,
   html,
   css,
@@ -6,19 +19,6 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
-import '@phoenixui/web-components/button.js';
-import {
-  borderRadiusMedium,
-  colorNeutralForeground1,
-  colorSubtleBackground,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  colorSubtleBackgroundSelected,
-  spacingHorizontalSNudge,
-  spacingHorizontalXS,
-  typographyStyles,
-} from '@phoenixui/themes';
 
 const template = html<FavoritesItem>` <button
   part="favorite-button"
@@ -27,62 +27,69 @@ const template = html<FavoritesItem>` <button
   ${when(
     (x) => x.type === 'site',
     html`<img src="${(x) => x.favicon}" alt="${(x) => x.title}" />`,
-    html`<img
-      src="./img/edge/folder-16-filled-yellow.svg"
-      alt="${(x) => x.title}"
-    />`,
+    html`<svg>
+      <use href="./img/edge/icons.svg#folder-16-regular" />
+    </svg>`,
   )}
   <div id="title">${(x) => x.title}</div>
 </button>`;
 
 const styles = css`
+  :host {
+    display: block;
+    height: fit-content;
+    overflow: hidden;
+  }
+
   button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
-    padding: ${spacingHorizontalSNudge};
+    gap: ${gapBetweenContentXxsmall};
+    padding: ${paddingContentXsmallnudge};
     border: none;
-    border-radius: ${borderRadiusMedium};
-    background: ${colorSubtleBackground};
+    border-radius: ${cornerCtrlRest};
+    background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
     width: 100%;
     max-width: 256px;
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   #title {
-    font-family: ${typographyStyles.caption1.fontFamily};
-    font-size: ${typographyStyles.caption1.fontSize};
-    font-weight: ${typographyStyles.caption1.fontWeight};
-    line-height: ${typographyStyles.caption1.lineHeight};
-    color: ${colorNeutralForeground1};
+    flex: 1;
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalCaption1Lineheight};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   button:hover {
-    background: ${colorSubtleBackgroundHover};
+    background: ${backgroundCtrlSubtleHover};
   }
 
   button:active {
-    background: ${colorSubtleBackgroundPressed};
+    background: ${backgroundCtrlSubtlePressed};
   }
 
   :host([pressed='true']) button {
-    background: ${colorSubtleBackgroundSelected};
+    background: ${backgroundCtrlSubtlePressed};
   }
 
   img {
     width: 16px;
   }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
 `;
 
-@customElement({
-  name: 'favorites-item',
-  template,
-  styles,
-})
+@customElement({ name: 'favorites-item', template, styles })
 export class FavoritesItem extends FASTElement {
   @attr type: 'site' | 'folder' = 'site';
   @attr title = 'Favorite item';

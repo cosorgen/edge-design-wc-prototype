@@ -6,19 +6,25 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import '@phoenixui/web-components/toggle-button.js';
+import '@edge-design/button/define.js';
 import './flyout-menu.js';
 import './context-menu.js';
 import './menu-item.js';
-import { colorNeutralForeground1 } from '@phoenixui/themes';
 import apps from '../installedApps.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundCtrlNeutralPrimaryRest,
+  paddingContentMedium,
+  shadowFlyout,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ToolbarFlyoutItem>`
   <flyout-menu
     @toggle="${(x, c) => x.handleFlyoutToggle(c.event)}"
     ?initially-open="${(x) => x.initOpen}"
   >
-    <phx-toggle-button appearance="subtle" icon-only slot="trigger">
+    <mai-button appearance="subtle" icon-only slot="trigger">
       ${when(
         (x) => apps[x.id].iconId,
         html`<svg>
@@ -29,7 +35,7 @@ const template = html<ToolbarFlyoutItem>`
           src="./img/edge/${(x) => x.id.toLowerCase()}AppLight.png"
         />`,
       )}
-    </phx-toggle-button>
+    </mai-button>
     ${(x) => apps[x.id].template}
     <context-menu slot="context">
       ${when(
@@ -50,16 +56,18 @@ const template = html<ToolbarFlyoutItem>`
 `;
 
 const styles = css`
-  phx-toggle-button {
-    color: ${colorNeutralForeground1};
+  .flyout-menu {
+    width: 256px;
+    height: 300px;
+    padding: ${paddingContentMedium};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;
 
-@customElement({
-  name: 'toolbar-flyout-item',
-  template,
-  styles,
-})
+@customElement({ name: 'toolbar-flyout-item', template, styles })
 export class ToolbarFlyoutItem extends FASTElement {
   @attr id: string = '';
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;

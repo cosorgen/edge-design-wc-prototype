@@ -1,15 +1,15 @@
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
-import {
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  colorNeutralForegroundHint,
-  shadow28,
-  spacingHorizontalXS,
-  spacingVerticalS,
-  spacingVerticalXS,
-} from '@phoenixui/themes';
 import './menu-item.js';
-import '../../windows/controls/acrylic-material.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundContentNeutralPrimary,
+  foregroundContentNeutralSecondary,
+  gapBetweenContentXsmall,
+  shadowFlyout,
+  paddingContentXsmall,
+  paddingContentXxsmall,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<ContextMenu>`
   <acrylic-material></acrylic-material>
@@ -20,12 +20,17 @@ const template = html<ContextMenu>`
 
 const styles = css`
   :host {
-    position: relative;
-    display: block;
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
+    min-width: 96px;
+    max-width: 512px;
+    display: flex;
+    flex-direction: column;
+    gap: ${gapBetweenContentXsmall};
+    padding: ${paddingContentXsmall};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyout};
     overflow: hidden;
-    color: ${colorNeutralForeground1};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   #menu-items {
@@ -38,7 +43,7 @@ const styles = css`
   }
 
   .hint {
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundContentNeutralSecondary};
   }
 
   svg {
@@ -47,17 +52,13 @@ const styles = css`
   }
 
   svg[slot='end'] {
-    margin-inline-end: calc(0px - ${spacingHorizontalXS});
+    margin-inline-end: calc(0px - ${paddingContentXxsmall});
   }
 
-  phx-divider {
-    margin-block: ${spacingVerticalXS};
+  mai-divider {
+    margin-block: ${paddingContentXxsmall};
   }
 `;
 
-@customElement({
-  name: 'context-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'context-menu', template, styles })
 export default class ContextMenu extends FASTElement {}

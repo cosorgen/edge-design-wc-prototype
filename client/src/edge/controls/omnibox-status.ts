@@ -7,12 +7,15 @@ import {
   observable,
   when,
 } from '@microsoft/fast-element';
+import '@edge-design/button/define.js';
+import '@mai-ui/divider/define.js';
 import {
-  colorNeutralForeground3,
-  spacingHorizontalXS,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/divider.js';
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtleRest,
+  cornerCircular,
+  foregroundCtrlNeutralSecondaryRest,
+  paddingCtrlSmHorizontalIcononly,
+} from '@edge-design/kumo-theme/tokens.js';
 
 /**
  * omnibox-status is a presentational component that renders
@@ -34,17 +37,10 @@ const iconIds: Record<string, string> = {
   file: 'file-20-regular',
 };
 
-const imgPaths: Record<string, string> = {
-  edge: 'favicon.ico',
-};
+const imgPaths: Record<string, string> = { edge: 'favicon.ico' };
 
 const template = html<OmniboxStatus>`
-  <phx-button
-    appearance="subtle"
-    size="small"
-    shape="circular"
-    ?icon-only="${(x) => !labels[x.type]}"
-  >
+  <button>
     ${when(
       (x) => imgPaths[x.type],
       html`<img
@@ -55,9 +51,15 @@ const template = html<OmniboxStatus>`
         <use href="img/edge/icons.svg#${(x) => iconIds[x.type]}" />
       </svg>`,
     )}
-    <div part="label">${(x) => labels[x.type]}</div>
-  </phx-button>
-  <phx-divider orientation="vertical"></phx-divider>
+    ${when(
+      (x) => labels[x.type],
+      html` <div part="label">${(x) => labels[x.type]}</div> `,
+    )}
+  </button>
+  ${when(
+    (x) => labels[x.type],
+    html` <mai-divider orientation="vertical"></mai-divider> `,
+  )}
 `;
 
 const styles = css`
@@ -65,44 +67,49 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 100%;
   }
 
-  phx-button {
-    color: ${colorNeutralForeground3};
-    gap: ${spacingHorizontalXS};
+  button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: ${backgroundCtrlSubtleRest};
+    border: none;
+    padding: ${paddingCtrlSmHorizontalIcononly};
+    margin: 0;
+    color: ${foregroundCtrlNeutralSecondaryRest};
+    border-radius: ${cornerCircular};
+  }
+
+  button:hover {
+    background: ${backgroundCtrlSubtleHover};
+    cursor: pointer;
   }
 
   svg,
   img {
     width: 20px;
+    height: 20px;
   }
 
-  phx-divider {
+  mai-divider {
     min-height: 16px;
     height: 100%;
   }
 
-  phx-divider::before,
-  phx-divider::after {
+  mai-divider::before,
+  mai-divider::after {
     height: 100%;
     min-height: 8px;
   }
 
-  [icon-only] ~ phx-divider {
-    display: none;
-  }
-
-  :host(:hover) phx-divider {
+  :host(:hover) mai-divider {
     display: none;
   }
 `;
 
-@customElement({
-  name: 'omnibox-status',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-status', template, styles })
 export class OmniboxStatus extends FASTElement {
   @attr value: string | null = '';
   @observable type: 'search' | 'not-secure' | 'secure' | 'file' | 'edge' =

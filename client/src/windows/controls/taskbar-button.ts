@@ -1,6 +1,7 @@
 import { css, customElement, FASTElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, strokeWidthThin } from '@phoenixui/themes';
 import {
+  borderRadiusSmall,
+  strokeWidthThin,
   colorShellFillTaskbarItemIndicator,
   colorShellFillTaksbarItemPrimary,
   colorShellFillTaksbarItemSecondary,
@@ -8,7 +9,7 @@ import {
   colorShellStrokeTaskbarItemSecondary,
   colorShellStrokeTaskbarItemQuinary,
   colorFillAccent,
-} from '../designSystem.js';
+} from '@edge-design/windows-theme';
 
 const template = html`
   <button>
@@ -81,9 +82,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'taskbar-button',
-  template,
-  styles,
-})
+@customElement({ name: 'taskbar-button', template, styles })
 export default class TaskbarButton extends FASTElement {}

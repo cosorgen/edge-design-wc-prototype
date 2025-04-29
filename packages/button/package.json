@@ -1,0 +1,34 @@
+{
+  "name": "@edge-design/button",
+  "version": "1.0.1",
+  "author": "Microsoft",
+  "description": "Edge design system utilities",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/dts/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "./*.js": {
+      "types": "./dist/dts/*.d.ts",
+      "default": "./dist/esm/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "*.md",
+    "dist",
+    "package.json"
+  ],
+  "dependencies": {
+    "@mai-ui/button": "^1.0.1",
+    "@microsoft/fast-element": "^2.2.0"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "compile": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist"
+  }
+}

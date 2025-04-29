@@ -10,17 +10,20 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import {
-  borderRadiusLayerBase,
-  colorLayerBackgroundApp,
-  shadow2,
-  strokeWidthThin,
-} from '@phoenixui/themes';
-import './fullpage/edge-newtab.js';
-import './fullpage/edge-settings.js';
+import './edge-newtab-legacy.js';
+import './copilot-newtab.js';
+import './settings.js';
+import './palette-playground.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import {
+  cornerLayerDefault,
+  shadowLayer,
+  paddingWindowDefault,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundLayerPrimarySolid,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<edge-newtab
@@ -28,7 +31,13 @@ const edgePages: Record<string, ViewTemplate> = {
   ></edge-newtab>`,
   settings: html`<edge-settings
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></edge-settings>`,
+  ></edge-newtab-legacy>`,
+  settings: html`<settings-page
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></settings-page>`,
+  palette: html`<palette-playground
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></palette-playground>`,
 };
 
 const template = html<WebContent>`
@@ -52,27 +61,22 @@ const styles = css`
   :host {
     flex: 1;
     display: flex;
-    border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
-    border-radius: ${borderRadiusLayerBase};
-    box-shadow: ${shadow2};
-    overflow: hidden;
+    border-radius: ${cornerLayerDefault};
+    box-shadow: ${shadowLayer};
+    margin: ${paddingWindowDefault};
+    overflow: auto;
+    scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
+      ${backgroundLayerPrimarySolid};
+    scrollbar-width: thin;
     z-index: 0; /* ensure content is under omnibox */
 
-    * {
+    :not([active]) {
       display: none;
-    }
-
-    [active] {
-      display: unset;
     }
   }
 `;
 
-@customElement({
-  name: 'web-content',
-  template,
-  styles,
-})
+@customElement({ name: 'web-content', template, styles })
 export class WebContent extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;

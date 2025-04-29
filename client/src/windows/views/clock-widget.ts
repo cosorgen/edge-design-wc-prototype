@@ -13,11 +13,9 @@ import {
   fontWeightRegular,
   lineHeightBase200,
   spacingHorizontalS,
-} from '@phoenixui/themes';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@edge-design/windows-theme';
 
 const template = html<ClockWidget>`
   <button>
@@ -56,11 +54,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'clock-widget',
-  template,
-  styles,
-})
+@customElement({ name: 'clock-widget', template, styles })
 export default class ClockWidget extends FASTElement {
   @observable time = this.formatTime();
   @observable date = this.formatDate();

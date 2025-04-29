@@ -6,30 +6,33 @@ import {
   html,
   when,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusLarge,
-  colorNeutralForeground1,
-  colorNeutralShadowAmbient,
-  colorNeutralShadowKey,
-  colorSubtleBackgroundHover,
-  fontFamilyBase,
-  fontSizeBase200,
-  fontWeightRegular,
-  lineHeightBase200,
-  shadow2BaseBlur,
-  shadow2BaseY,
-  shadow2DiffuseBlur,
-  shadow2DiffuseY,
-  shadowBaseX,
-  shadowDiffuseX,
-  spacingHorizontalS,
-  spacingHorizontalSNudge,
-  spacingVerticalXXS,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/spinner.js';
+import '@edge-design/button/define.js';
+import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
-import { spacingFrame } from '../designSystem.js';
+import {
+  shadowLayerAmbientX,
+  shadowLayerKeyBlur,
+  shadowLayerKeyColor,
+  shadowLayerKeyX,
+  shadowLayerKeyY,
+  shadowLayerAmbientY,
+  shadowLayerAmbientBlur,
+  shadowLayerAmbientColor,
+  gapInsideCtrlDefault,
+  paddingCtrlHorizontalDefault,
+  paddingContentXsmall,
+  foregroundCtrlNeutralPrimaryRest,
+  foregroundCtrlNeutralPrimaryHover,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+  textGlobalCaption1Fontsize,
+  textGlobalCaption1Lineheight,
+  ctrlTabBackgroundHorizontalActive,
+  cornerCtrlSmRest,
+  paddingWindowDefault,
+  ctrlTabBackgroundHorizontalHover,
+  ctrlTabCorner,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<HorizontalTab>`
   <mica-material id="bg"></mica-material>
@@ -39,7 +42,7 @@ const template = html<HorizontalTab>`
     <div id="favicon" part="favicon">
       ${when(
         (x) => x.loading,
-        html`<phx-spinner size="tiny"></phx-spinner>`,
+        html`<mai-spinner size="tiny"></mai-spinner>`,
         html`<slot name="favicon">
           <svg width="16" height="16">
             <use
@@ -53,7 +56,7 @@ const template = html<HorizontalTab>`
       <slot name="title">New tab</slot>
     </div>
   </button>
-  <phx-button
+  <mai-button
     size="small"
     appearance="subtle"
     icon-only
@@ -62,7 +65,7 @@ const template = html<HorizontalTab>`
     <svg>
       <use href="img/edge/icons.svg#dismiss-12-regular"></use>
     </svg>
-  </phx-button>
+  </mai-button>
 `;
 
 const styles = css`
@@ -76,12 +79,12 @@ const styles = css`
 
   :host([active]) {
     filter: drop-shadow(
-        ${shadowBaseX} ${shadow2BaseY} ${shadow2BaseBlur}
-          ${colorNeutralShadowAmbient}
+        ${shadowLayerKeyX} ${shadowLayerKeyY} ${shadowLayerKeyBlur}
+          ${shadowLayerKeyColor}
       )
       drop-shadow(
-        ${shadowDiffuseX} ${shadow2DiffuseY} ${shadow2DiffuseBlur}
-          ${colorNeutralShadowKey}
+        ${shadowLayerAmbientX} ${shadowLayerAmbientY} ${shadowLayerAmbientBlur}
+          ${shadowLayerAmbientColor}
       );
   }
 
@@ -94,16 +97,17 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    padding-inline-start: ${spacingHorizontalS};
-    padding-inline-end: calc(${spacingHorizontalS} + /*16px*/ 0px);
-    padding-block: ${spacingHorizontalSNudge};
-    color: ${colorNeutralForeground1};
-    border-radius: ${borderRadiusLarge};
+    gap: ${gapInsideCtrlDefault};
+    padding-inline-start: ${paddingCtrlHorizontalDefault};
+    padding-inline-end: calc(${paddingCtrlHorizontalDefault} + /*16px*/ 0px);
+    padding-block: ${paddingContentXsmall};
+    color: ${foregroundCtrlNeutralPrimaryRest};
+    border-radius: ${ctrlTabCorner};
   }
 
   button:hover {
-    background-color: ${colorSubtleBackgroundHover};
+    background-color: ${ctrlTabBackgroundHorizontalHover};
+    color: ${foregroundCtrlNeutralPrimaryHover};
   }
 
   :host([active]) button {
@@ -122,7 +126,6 @@ const styles = css`
 
   #title {
     flex: 1;
-    margin-block-end: ${spacingVerticalXXS};
     mask-image: linear-gradient(
       90deg,
       white,
@@ -135,10 +138,10 @@ const styles = css`
   #title,
   [name='title']::slotted(*) {
     /* Caption1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    font-weight: ${fontWeightRegular};
-    line-height: ${lineHeightBase200};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalCaption1Lineheight};
     text-align: start;
     white-space: nowrap;
     overflow: hidden;
@@ -150,19 +153,24 @@ const styles = css`
     height: 16px;
   }
 
-  phx-button {
+  mai-button {
     position: absolute;
-    inset-inline-end: ${spacingHorizontalS};
-    inset-block: ${spacingHorizontalS};
+    inset-inline-end: ${paddingCtrlHorizontalDefault};
+    inset-block: ${paddingCtrlHorizontalDefault};
   }
 
-  phx-button svg,
-  phx-button {
+  mai-button svg,
+  mai-button {
     width: 16px;
     height: 16px;
     min-width: 16px;
     min-height: 16px;
     padding: 0;
+    border-radius: ${cornerCtrlSmRest};
+  }
+
+  .tab-background {
+    background-color: ${ctrlTabBackgroundHorizontalActive};
   }
 
   #bg,
@@ -174,17 +182,16 @@ const styles = css`
   }
 
   #bg {
-    inset-block-start: min(0px, calc(6px - ${spacingFrame}));
-    inset-block-end: calc(0px - ${spacingFrame});
-    inset-inline: 0;
-    border-radius: ${borderRadiusLarge} ${borderRadiusLarge} 0 0;
+    inset: 0;
+    bottom: calc(0px - ${paddingWindowDefault});
+    border-radius: ${ctrlTabCorner} ${ctrlTabCorner} 0 0;
   }
 
   #left-wing,
   #right-wing {
     width: 10px;
     height: 10px;
-    inset-block-end: calc(0px - ${spacingFrame});
+    bottom: calc(0px - ${paddingWindowDefault});
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 
@@ -197,16 +204,12 @@ const styles = css`
     transform: rotate(90deg);
   }
 
-  phx-spinner {
+  mai-spinner {
     --size: 16px;
   }
 `;
 
-@customElement({
-  name: 'horizontal-tab',
-  template,
-  styles,
-})
+@customElement({ name: 'horizontal-tab', template, styles })
 export class HorizontalTab extends FASTElement {
   @attr({ mode: 'boolean' }) active = false;
   @attr({ mode: 'boolean' }) loading = false;

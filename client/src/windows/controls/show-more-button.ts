@@ -3,11 +3,9 @@ import {
   borderRadiusSmall,
   colorNeutralForeground1,
   spacingHorizontalXS,
-} from '@phoenixui/themes';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@edge-design/windows-theme';
 
 const template = html<ShowMoreButton>`
   <button>
@@ -41,9 +39,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'show-more-button',
-  template,
-  styles,
-})
+@customElement({ name: 'show-more-button', template, styles })
 export default class ShowMoreButton extends FASTElement {}

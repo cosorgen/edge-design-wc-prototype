@@ -1,29 +1,31 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
+import '@edge-design/button/define.js';
 import {
-  acrylicBackgroundBlur,
-  acrylicBackgroundLuminosity,
-  borderRadiusLayerBase,
-  colorNeutralStroke2,
-  spacingHorizontalS,
-  strokeWidthThin,
-  typographyStyles,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import { spacingFrame } from '../designSystem.js';
+  backgroundToolbar,
+  cornerLayerDefault,
+  gapBetweenCtrlDefault,
+  paddingWindowDefault,
+  strokeCtrlOnoutlineRest,
+  strokeWidthDefault,
+  textGlobalBody3Fontsize,
+  textGlobalBody3Lineheight,
+  textStyleDefaultHeaderWeight,
+  textStyleDefaultRegularFontFamily,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">
-    <phx-button size="small" appearance="subtle" icon-only>
+    <mai-button size="small" appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#more-vertical-16-regular" />
       </svg>
-    </phx-button>
-    <phx-button size="small" appearance="subtle" icon-only>
+    </mai-button>
+    <mai-button size="small" appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#arrow-clockwise-16-regular" />
       </svg>
-    </phx-button>
-    <phx-button
+    </mai-button>
+    <mai-button
       size="small"
       appearance="subtle"
       @click="${(x) => x.$emit('close')}"
@@ -32,7 +34,7 @@ const template = html` <div id="title"><slot></slot></div>
       <svg>
         <use href="img/edge/icons.svg#dismiss-16-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
   </div>`;
 
 const styles = css`
@@ -40,29 +42,24 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalS};
-    background: ${acrylicBackgroundLuminosity};
+    gap: ${gapBetweenCtrlDefault};
+    background: ${backgroundToolbar};
     background-blend-mode: luminosity;
-    backdrop-filter: blur(${acrylicBackgroundBlur});
-    padding: calc(4px + ${spacingFrame});
-    padding-inline-start: calc(8px + ${spacingFrame});
-    border-bottom: ${strokeWidthThin} solid ${colorNeutralStroke2};
-    border-radius: ${borderRadiusLayerBase} ${borderRadiusLayerBase} 0 0;
+    padding: calc(4px + ${paddingWindowDefault});
+    padding-inline-start: calc(8px + ${paddingWindowDefault});
+    border-bottom: ${strokeWidthDefault} solid ${strokeCtrlOnoutlineRest};
+    border-radius: ${cornerLayerDefault} ${cornerLayerDefault} 0 0;
   }
 
   #title {
     flex: 1;
 
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    line-height: ${typographyStyles.body1Strong.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultHeaderWeight};
+    line-height: ${textGlobalBody3Lineheight};
   }
 `;
 
-@customElement({
-  name: 'sidepane-header',
-  template,
-  styles,
-})
+@customElement({ name: 'sidepane-header', template, styles })
 export class SidepaneHeader extends FASTElement {}

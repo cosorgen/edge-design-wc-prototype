@@ -3,7 +3,6 @@ import '../omnibox-status.js';
 import '../omnibox-input.js';
 import '../omnibox-icon.js';
 import '../omnibox-dropdown.js';
-import '@phoenixui/web-components/button.js';
 import { OmniboxControl } from './index.js';
 
 export const template = html<OmniboxControl>`

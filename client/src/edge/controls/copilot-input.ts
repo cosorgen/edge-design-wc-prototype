@@ -6,15 +6,28 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  colorLayerBackgroundDialog,
-  colorNeutralForeground1,
-  colorNeutralForegroundHint,
-  curveEasyEaseMax,
   durationNormal,
   spacingHorizontalXL,
-  spacingVerticalM,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
+  smtcTextComposerInputFontSize,
+  smtcTextComposerInputLineHeight,
+  smtcTextComposerInputFontWeight,
+  smtcTextComposerInputFontVariationSettings,
+  smtcForegroundComposerInputHint,
+  smtcForegroundComposerInputRest,
+  smtcCornerComposerInputRest,
+  smtcBackgroundSendButtonRest,
+  smtcBackgroundSendButtonHover,
+  smtcBackgroundSendButtonPressed,
+  smtcForegroundSendButtonRest,
+  smtcBackgroundComposerInputRest,
+  smtcForegroundSendButtonHover,
+  smtcForegroundSendButtonPressed,
+  smtcCornerComposerSendButtonRest,
+  smtcCornerComposerSendButtonHover,
+  smtcCornerComposerSendButtonPressed,
+  curveEasyEase,
+} from '@edge-design/copilot-theme';
+import '@edge-design/button/define.js';
 
 const template = html<CopilotInput>`
   <div
@@ -23,7 +36,7 @@ const template = html<CopilotInput>`
     @keydown="${(x, c) => x.handleKeydown(c.event)}"
     @keyup="${(x, c) => x.handleKeyUp(c.event)}"
   ></div>
-  <phx-button
+  <mai-button
     appearance="primary"
     size="large"
     @click="${(x) => x.handleSubmit()}"
@@ -33,7 +46,7 @@ const template = html<CopilotInput>`
     <svg>
       <use href="img/edge/icons.svg#arrow-up-24-regular" />
     </svg>
-  </phx-button>
+  </mai-button>
 `;
 
 const styles = css`
@@ -43,27 +56,43 @@ const styles = css`
     flex: 1;
     flex-direction: row;
     align-items: center;
+    border-radius: ${smtcCornerComposerInputRest};
+    overflow: hidden;
   }
 
   #send {
     position: absolute;
     right: 6px;
     bottom: 6px;
-    border-radius: 14px;
-    color: ${colorNeutralForeground1};
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    min-height: 36px;
+
+    /* Overrides for button tokens */
+    --smtc-background-control-brand-rest: ${smtcBackgroundSendButtonRest};
+    --smtc-background-control-brand-hover: ${smtcBackgroundSendButtonHover};
+    --smtc-background-control-brand-pressed: ${smtcBackgroundSendButtonPressed};
+    --smtc-foreground-control-on-brand-rest: ${smtcForegroundSendButtonRest};
+    --smtc-foreground-control-on-brand-hover: ${smtcForegroundSendButtonHover};
+    --smtc-foreground-control-on-brand-pressed: ${smtcForegroundSendButtonPressed};
+    --smtc-corner-control-rest: ${smtcCornerComposerSendButtonRest};
+    --smtc-corner-control-hover: ${smtcCornerComposerSendButtonHover};
+    --smtc-corner-control-pressed: ${smtcCornerComposerSendButtonPressed};
+    box-shadow: 0px 0.5px 1px 0.5px #0000000a;
 
     display: none;
-    transform: translateY(8px);
+    transform: translateX(calc(-1 * var(--end-actions-width, -80px) + 40px));
     opacity: 0;
     transition:
-      transform ${durationNormal} ${curveEasyEaseMax},
-      opacity ${durationNormal} ${curveEasyEaseMax},
-      display ${durationNormal} ${curveEasyEaseMax} allow-discrete;
+      transform ${durationNormal} ${curveEasyEase},
+      opacity ${durationNormal} ${curveEasyEase},
+      display ${durationNormal} ${curveEasyEase} allow-discrete;
   }
 
-  [contenteditable]:not(:empty) + #send {
+  :host(:not([empty])) #send {
     display: inline-flex; /* reset display */
-    transform: translateY(0);
+    transform: translateX(0);
     opacity: 1;
   }
 
@@ -72,23 +101,23 @@ const styles = css`
     box-sizing: border-box;
     min-width: 206px;
     border: none;
-    background: ${colorLayerBackgroundDialog};
-    border-radius: 20px;
-    padding-block: ${spacingVerticalM};
+    background: ${smtcBackgroundComposerInputRest};
+    border-radius: ${smtcCornerComposerInputRest};
+    padding-block: 11px; /* Not in system to make height 48px */
     padding-inline-start: ${spacingHorizontalXL};
     padding-inline-end: 64px;
-    box-shadow: 0px 1px 30px rgba(0, 0, 0, 0.03);
-    height: 50px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    box-shadow: 0px 1px 30px 0px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
 
-    font-size: 18px;
-    line-height: 26px;
-    color: ${colorNeutralForeground1};
+    font-size: ${smtcTextComposerInputFontSize};
+    line-height: ${smtcTextComposerInputLineHeight};
+    font-weight: ${smtcTextComposerInputFontWeight};
+    font-variation-settings: ${smtcTextComposerInputFontVariationSettings};
+    color: ${smtcForegroundComposerInputRest};
 
     &:empty::before {
       content: attr(placeholder);
-      color: ${colorNeutralForegroundHint};
+      color: ${smtcForegroundComposerInputHint};
       cursor: text;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -96,7 +125,7 @@ const styles = css`
     }
   }
 
-  [contenteditable]:empty {
+  :host([empty]) [contenteditable] {
     padding-inline-end: ${spacingHorizontalXL};
   }
 
@@ -105,20 +134,17 @@ const styles = css`
   }
 
   @starting-style {
-    [contenteditable]:not(:empty) + #send {
-      transform: translateY(8px);
+    :host(:not([empty])) #send {
+      transform: translateX(calc(-1 * var(--end-actions-width, -80px) + 40px));
       opacity: 0;
     }
   }
 `;
 
-@customElement({
-  name: 'copilot-input',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-input', template, styles })
 export class CopilotInput extends FASTElement {
   @attr placeholder = '';
+  @attr({ mode: 'boolean' }) empty = true;
   _inputElement: HTMLInputElement | null = null;
 
   connectedCallback(): void {
@@ -149,7 +175,7 @@ export class CopilotInput extends FASTElement {
       return;
     }
     if (e.key === 'Escape') {
-      this.handleClose();
+      this._inputElement?.blur();
       return;
     }
 
@@ -165,6 +191,12 @@ export class CopilotInput extends FASTElement {
       this._inputElement!.innerHTML = ''; // need to clear innerHTML to show the placeholder
     }
 
+    if (this._inputElement?.innerText) {
+      this.empty = false;
+    } else {
+      this.empty = true;
+    }
+
     return true;
   }
 
@@ -177,7 +209,7 @@ export class CopilotInput extends FASTElement {
     const message = this._inputElement.innerText;
     if (!message) return;
     this.$emit('submit', message);
-    this._inputElement.innerHTML = '';
+    this.clearInput();
   }
 
   handleClose() {
@@ -188,5 +220,6 @@ export class CopilotInput extends FASTElement {
   clearInput() {
     if (!this._inputElement) return;
     this._inputElement.innerHTML = '';
+    this.empty = true;
   }
 }

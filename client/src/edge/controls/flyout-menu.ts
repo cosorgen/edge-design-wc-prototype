@@ -1,3 +1,4 @@
+import { curveDecelerateMax, durationFast } from '@edge-design/kumo-theme/tokens.js';
 import {
   attr,
   css,
@@ -5,7 +6,6 @@ import {
   FASTElement,
   html,
 } from '@microsoft/fast-element';
-import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
 // Popovers need to be manually controlled so that we can use context menus with trackpads
 const template = html<FlyoutMenu>`
@@ -20,8 +20,8 @@ const template = html<FlyoutMenu>`
 
 const styles = css`
   :host {
-    /* Need for collapse */
-    overflow: hidden;
+    display: block;
+    min-width: 16px; /* Need for collapse */
 
     /* Don't clip focus outline */
     margin: -2px;
@@ -63,11 +63,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'flyout-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'flyout-menu', template, styles })
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   _popoverElement: HTMLElement | null = null;
@@ -235,6 +231,7 @@ export class FlyoutMenu extends FASTElement {
   }
 
   closeMenuListener = (e: Event) => {
+    console.log('closemenu');
     e.stopPropagation();
     this._popoverElement?.hidePopover();
     this._contextPopoverElement?.hidePopover();

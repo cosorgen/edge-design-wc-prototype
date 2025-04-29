@@ -6,21 +6,17 @@ import {
   attr,
   when,
 } from '@microsoft/fast-element';
-import {
-  borderRadiusCircular,
-  borderRadiusMedium,
-  colorBrandStroke,
-  colorNeutralForegroundHint,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  colorSubtleBackgroundSelected,
-  fontSizeBase300,
-  fontWeightRegular,
-  spacingHorizontalM,
-  spacingVerticalS,
-  strokeWidthThickest,
-} from '@phoenixui/themes';
 import './omnibox-icon.js';
+import {
+  backgroundCtrlBrandRest,
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  cornerCtrlRest,
+  foregroundCtrlNeutralSecondaryRest,
+  gapBetweenContentSmall,
+  textGlobalBody3Fontsize,
+  textStyleDefaultRegularWeight,
+} from '@edge-design/kumo-theme/tokens.js';
 
 const template = html<OmniboxSuggestion>` <div id="start">
     <div id="indicator"></div>
@@ -42,23 +38,22 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalM};
+    gap: ${gapBetweenContentSmall};
     height: 40px;
-    border-radius: ${borderRadiusMedium};
     overflow: hidden;
   }
 
   :host(:hover) {
-    background-color: ${colorSubtleBackgroundHover};
+    background-color: ${backgroundCtrlSubtleHover};
     cursor: pointer;
   }
 
   :host(:active) {
-    background-color: ${colorSubtleBackgroundPressed};
+    background-color: ${backgroundCtrlSubtlePressed};
   }
 
   :host([selected]) {
-    background-color: ${colorSubtleBackgroundSelected};
+    background-color: ${backgroundCtrlSubtlePressed};
 
     #indicator {
       display: block;
@@ -77,11 +72,10 @@ const styles = css`
   #indicator {
     display: none;
     position: absolute;
-    width: ${strokeWidthThickest};
-    inset-block: ${spacingVerticalS};
+    width: 3px;
+    inset-block: 0;
     inset-inline-start: 0;
-    background-color: ${colorBrandStroke};
-    border-radius: ${borderRadiusCircular};
+    background-color: ${backgroundCtrlBrandRest};
   }
 
   #icon {
@@ -100,14 +94,14 @@ const styles = css`
       width: 32px;
       height: 32px;
       object-fit: cover;
-      border-radius: ${borderRadiusMedium};
+      border-radius: ${cornerCtrlRest};
     }
   }
 
   #title {
     /* Body1 */
-    font-size: ${fontSizeBase300};
-    font-weight: ${fontWeightRegular};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -115,20 +109,16 @@ const styles = css`
 
   #subtitle2 {
     /* Body1 */
-    font-size: ${fontSizeBase300};
-    font-weight: ${fontWeightRegular};
+    font-size: ${textGlobalBody3Fontsize};
+    font-weight: ${textStyleDefaultRegularWeight};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundCtrlNeutralSecondaryRest};
   }
 `;
 
-@customElement({
-  name: 'omnibox-suggestion',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-suggestion', template, styles })
 export class OmniboxSuggestion extends FASTElement {
   @attr title = '';
   @attr value = '';
