@@ -283,8 +283,8 @@ export class MicrosoftEdge extends FASTElement {
   }
 
   clearTheme() {
-    this.shadowRoot!.adoptedStyleSheets.pop();
-    if (this.ss.designSystem === 'kumo' && !this.ss.themeColor) {
+    while (this.shadowRoot!.adoptedStyleSheets.length > 1) {
+      // Remove all but the first stylesheet
       this.shadowRoot!.adoptedStyleSheets.pop();
     }
   }
