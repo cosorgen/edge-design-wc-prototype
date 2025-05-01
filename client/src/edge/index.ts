@@ -231,7 +231,8 @@ export class MicrosoftEdge extends FASTElement {
       propertyName === 'frameSpacing' ||
       propertyName === 'edgeTheme' ||
       propertyName === 'themeColor' ||
-      propertyName === 'designSystem'
+      propertyName === 'designSystem' ||
+      propertyName === 'themePalette'
     ) {
       this.clearTheme();
       this.setTheme();
@@ -268,7 +269,7 @@ export class MicrosoftEdge extends FASTElement {
         themeKey
       ];
     if (this.ss.themeColor) {
-      selectedTheme = selectedTheme(this.ss.themeColor);
+      selectedTheme = selectedTheme(this.ss.themeColor, this.ss.themePalette);
     }
     selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
     setThemeFor(this.shadowRoot!, selectedTheme);

@@ -20,7 +20,7 @@ import type {
   ThemeStrokeColors,
 } from './themeColors.js';
 
-import type { ChromePalette } from './paletteGen.js';
+import type { PaletteTones } from './paletteGen.js';
 
 export const lightNullColors: ThemeNullColors = {
   nullColor: alphaWhite[0],
@@ -33,7 +33,7 @@ export const lightNullColors: ThemeNullColors = {
 export function lightBackgroundColors(
   neutral: NeutralColors,
   vibrant: VibrantColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): ThemeBackgroundColors {
   return {
     backgroundCardOnflyoutDefaultDisabled: neutral[0],
@@ -119,11 +119,11 @@ export function lightBackgroundColors(
     backgroundWindowSecondarySolid: '{backgroundLayerSecondary}',
     backgroundWindowTabBandColorBlend: neutral[0],
     backgroundWindowTabBandInactive: palette
-      ? palette.tonal.neutral[92]
+      ? palette.neutral[92]
       : neutral[200],
     backgroundWindowTabBandLumBlend: neutral[0],
     backgroundWindowTabBandSolid: palette
-      ? palette.tonal.secondary[90]
+      ? palette.secondary[90]
       : neutral[250],
   };
 }
@@ -203,7 +203,7 @@ export function lightStrokeColors(neutral: NeutralColors): ThemeStrokeColors {
 export function lightForegroundColors(
   neutral: NeutralColors,
   vibrant: VibrantColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): ThemeForegroundColors {
   return {
     foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',

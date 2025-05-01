@@ -27,7 +27,7 @@ import type {
   CtrlTooltipColors,
 } from './ctrlColors.js';
 
-import type { ChromePalette } from './paletteGen.js';
+import type { PaletteTones } from './paletteGen.js';
 
 export const lightComposerColors: CtrlComposerColors = {
   controlComposerContainerBackgroundDefault:
@@ -227,14 +227,14 @@ export function lightLiteFilterColors(
 
 export function lightOmniboxColors(
   neutral: NeutralColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): CtrlOmniboxColors {
   return {
     ctrlOmniboxBackgroundHover: palette
-      ? palette.tonal.neutralVariant[90]
+      ? palette.neutralVariant[90]
       : neutral[4],
     ctrlOmniboxBackgroundRest: palette
-      ? palette.tonal.neutralVariant[94]
+      ? palette.neutralVariant[94]
       : neutral[0],
     ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
     ctrlOmniboxStrokeRest: palette
@@ -302,17 +302,17 @@ export const lightSliderColors: CtrlSliderColors = {
 
 export function lightTabColors(
   neutral: NeutralColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): CtrlTabColors {
   return {
     ctrlTabBackgroundHorizontalActive: palette
-      ? palette.tonal.neutralVariant[98]
+      ? palette.neutralVariant[98]
       : neutral[0],
     ctrlTabBackgroundHorizontalHover: palette
-      ? palette.tonal.primary[78]
+      ? palette.primary[78]
       : '{backgroundCtrlSubtleHover}',
     ctrlTabBackgroundVerticalActive: palette
-      ? palette.tonal.primary[90]
+      ? palette.primary[90]
       : neutral[150],
     ctrlTabBackgroundVerticalHover: '{backgroundCtrlSubtleHover}',
   };
@@ -321,10 +321,10 @@ export function lightTabColors(
 export function lightTooltipColors(
   neutral: NeutralColors,
   shadow: ShadowColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): CtrlTooltipColors {
   return {
-    ctrlTooltipBackground: palette ? palette.tonal.primary[20] : neutral[800],
+    ctrlTooltipBackground: palette ? palette.primary[20] : neutral[800],
     ctrlTooltipForeground: neutral[0],
     ctrlTooltipShadowKeyColor: shadow.shadowKeyLowLight,
     ctrlTooltipShadowAmbientColor: shadow.shadowAmbientLowLight,

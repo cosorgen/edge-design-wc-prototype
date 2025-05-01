@@ -26,7 +26,7 @@ import type {
   CtrlTabColors,
   CtrlTooltipColors,
 } from './ctrlColors.js';
-import { ChromePalette } from './paletteGen.js';
+import { PaletteTones } from './paletteGen.js';
 
 export const darkComposerColors: CtrlComposerColors = {
   controlComposerContainerBackgroundDefault:
@@ -226,14 +226,14 @@ export function darkLiteFilterColors(
 
 export function darkOmniboxColors(
   neutral: NeutralColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): CtrlOmniboxColors {
   return {
     ctrlOmniboxBackgroundHover: palette
-      ? palette.tonal.neutralVariant[26]
+      ? palette.neutralVariant[26]
       : neutral[704],
     ctrlOmniboxBackgroundRest: palette
-      ? palette.tonal.neutralVariant[14]
+      ? palette.neutralVariant[14]
       : neutral[650],
     ctrlOmniboxStrokeFocused: '{backgroundCtrlBrandRest}',
     ctrlOmniboxStrokeRest: palette
@@ -299,17 +299,17 @@ export const darkSliderColors: CtrlSliderColors = {
 
 export function darkTabColors(
   neutral: NeutralColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): CtrlTabColors {
   return {
     ctrlTabBackgroundHorizontalActive: palette
-      ? palette.tonal.secondary[22]
+      ? palette.secondary[22]
       : neutral[650],
     ctrlTabBackgroundHorizontalHover: palette
-      ? palette.tonal.primary[32]
+      ? palette.primary[32]
       : '{backgroundCtrlSubtleHover}',
     ctrlTabBackgroundVerticalActive: palette
-      ? palette.tonal.primary[32]
+      ? palette.primary[32]
       : neutral[500],
     ctrlTabBackgroundVerticalHover: '{backgroundCtrlSubtleHover}',
   };

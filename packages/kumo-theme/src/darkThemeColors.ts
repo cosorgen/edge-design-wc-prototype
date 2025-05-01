@@ -8,7 +8,7 @@ import {
   statusWarning,
   VibrantColors,
 } from './globalColors.js';
-import { ChromePalette } from './paletteGen.js';
+import { PaletteTones } from './paletteGen.js';
 
 import type {
   ThemeAiColors,
@@ -32,7 +32,7 @@ export const darkNullColors: ThemeNullColors = {
 export function darkBackgroundColors(
   neutral: NeutralColors,
   vibrant: VibrantColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): ThemeBackgroundColors {
   return {
     backgroundCardOnflyoutDefaultDisabled: neutral[0],
@@ -99,16 +99,12 @@ export function darkBackgroundColors(
     backgroundCtrlSubtleRest: alphaBlack[0],
     backgroundFlyoutColorblend: '{backgroundFlyoutSolid}',
     backgroundFlyoutLumblend: '{backgroundFlyoutSolid}',
-    backgroundFlyoutSolid: palette ? palette.tonal.secondary[12] : neutral[800],
-    backgroundLayerPrimarySolid: palette
-      ? palette.tonal.secondary[22]
-      : neutral[800],
+    backgroundFlyoutSolid: palette ? palette.secondary[12] : neutral[800],
+    backgroundLayerPrimarySolid: palette ? palette.secondary[22] : neutral[800],
     backgroundLayerPrimaryStop1: neutral[800],
     backgroundLayerPrimaryStop2: neutral[800],
     backgroundLayerPrimaryStop3: neutral[800],
-    backgroundLayerSecondary: palette
-      ? palette.tonal.secondary[32]
-      : neutral[750],
+    backgroundLayerSecondary: palette ? palette.secondary[32] : neutral[750],
     backgroundLayerTertiary: neutral[750],
     backgroundSmoke: alphaBlack[40],
     backgroundToolbar: '{backgroundCardOnprimaryDefaultRest}',
@@ -122,11 +118,11 @@ export function darkBackgroundColors(
     backgroundWindowSecondarySolid: neutral[0],
     backgroundWindowTabBandColorBlend: '{nullColor}',
     backgroundWindowTabBandInactive: palette
-      ? palette.tonal.neutralVariant[18]
+      ? palette.neutralVariant[18]
       : neutral[800],
     backgroundWindowTabBandLumBlend: '{nullColor}',
     backgroundWindowTabBandSolid: palette
-      ? palette.tonal.secondary[14]
+      ? palette.secondary[14]
       : neutral[1000],
   };
 }
@@ -206,7 +202,7 @@ export function darkStrokeColors(neutral: NeutralColors): ThemeStrokeColors {
 export function darkForegroundColors(
   neutral: NeutralColors,
   vibrant: VibrantColors,
-  palette?: ChromePalette,
+  palette?: PaletteTones,
 ): ThemeForegroundColors {
   return {
     foregroundContentBrandPrimary: '{foregroundCtrlBrandRest}',
@@ -277,13 +273,11 @@ export function darkForegroundColors(
     foregroundCtrlOnactivebrandPressed: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnactivebrandRest: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnbrandDisabled: palette
-      ? palette.tonal.primary[40] // TODO: Need to test this!
+      ? palette.primary[40] // TODO: Need to test this!
       : neutral[500],
     foregroundCtrlOnbrandHover: '{foregroundCtrlOnbrandRest}',
     foregroundCtrlOnbrandPressed: '{foregroundCtrlOnbrandRest}',
-    foregroundCtrlOnbrandRest: palette
-      ? palette.tonal.primary[14]
-      : neutral[800],
+    foregroundCtrlOnbrandRest: palette ? palette.primary[14] : neutral[800],
     foregroundCtrlOnimageRest: neutral[0],
     foregroundCtrlOnoutlineDisabled: '{foregroundCtrlNeutralPrimaryDisabled}',
     foregroundCtrlOnoutlineHover: '{foregroundCtrlNeutralPrimaryRest}',

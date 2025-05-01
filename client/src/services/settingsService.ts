@@ -13,6 +13,8 @@ export default class EdgeSettingsSerivce {
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
   @observable themeColor?: string;
+  @observable themePalette: 'tonal' | 'neutral' | 'expressive' | 'vibrant' =
+    'tonal';
   @observable designSystem: 'phoenix' | 'kumo' = 'kumo';
   @observable verticalTabs = false;
 
@@ -65,6 +67,13 @@ export default class EdgeSettingsSerivce {
     this.designSystem =
       (searchParams.get('designSystem') as 'phoenix' | 'kumo') ||
       this.designSystem;
+
+    this.themePalette =
+      (searchParams.get('themePalette') as
+        | 'tonal'
+        | 'neutral'
+        | 'expressive'
+        | 'vibrant') || this.themePalette;
   }
 
   setSettingsInURL() {
@@ -84,6 +93,7 @@ export default class EdgeSettingsSerivce {
       url.searchParams.set('themeColor', this.themeColor);
     }
     url.searchParams.set('designSystem', this.designSystem);
+    url.searchParams.set('themePalette', this.themePalette);
 
     window.history.pushState({}, '', url.toString());
   }
@@ -150,6 +160,13 @@ export default class EdgeSettingsSerivce {
 
   setDesignSystem(system: 'phoenix' | 'kumo'): void {
     this.designSystem = system;
+    this.setSettingsInURL();
+  }
+
+  setThemePalette(
+    palette: 'tonal' | 'neutral' | 'expressive' | 'vibrant',
+  ): void {
+    this.themePalette = palette;
     this.setSettingsInURL();
   }
 }

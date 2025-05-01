@@ -214,6 +214,40 @@ const template = html<WindowsSettings>`
               @change="${(x) => x.updateThemeColor()}"
             />
           </div>
+          <div class="entry">
+            <label for="theme-palette">Theme palette</label>
+            <mai-dropdown
+              id="theme-palette"
+              @change="${(x) => x.updateThemePalette()}"
+            >
+              <mai-listbox>
+                <mai-option
+                  value="tonal"
+                  ?selected="${(x) => x.ss.themePalette === 'tonal'}"
+                >
+                  Tonal (default)
+                </mai-option>
+                <mai-option
+                  value="neutral"
+                  ?selected="${(x) => x.ss.themePalette === 'neutral'}"
+                >
+                  Neutral
+                </mai-option>
+                <mai-option
+                  value="vibrant"
+                  ?selected="${(x) => x.ss.themePalette === 'vibrant'}"
+                >
+                  Vibrant
+                </mai-option>
+                <mai-option
+                  value="expressive"
+                  ?selected="${(x) => x.ss.themePalette === 'expressive'}"
+                >
+                  Expressive
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
+          </div>
         </div>
 
         <!-- Browser Section -->
@@ -670,6 +704,15 @@ export class WindowsSettings extends FASTElement {
     ).value as 'kumo' | 'phoenix';
     if (newDesignSystem) {
       this.ss.setDesignSystem(newDesignSystem);
+    }
+  }
+
+  updateThemePalette() {
+    const newThemePalette = (
+      this.shadowRoot?.querySelector('#theme-palette') as HTMLSelectElement
+    ).value as 'tonal' | 'neutral' | 'expressive' | 'vibrant';
+    if (newThemePalette) {
+      this.ss.setThemePalette(newThemePalette);
     }
   }
 }
