@@ -8,10 +8,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@edge-design/button": "^1.0.1",
     "@edge-design/copilot-theme": "^0.0.1",
-    "@edge-design/kumo-theme": "^0.0.1",
-    "@edge-design/phoenix-theme": "^0.0.1",
     "@edge-design/utilities": "^0.0.1",
     "@edge-design/windows-theme": "^0.0.1",
     "@mai-ui/accordion": "^1.1.0",
@@ -51,10 +48,10 @@
     "@mai-ui/tree": "^1.1.0",
     "@mai-ui/tree-item": "^1.1.0",
     "@microsoft/fast-element": "^2.0.0",
-    "@phoenixui/themes": "^1.1.1",
-    "@phoenixui/web-components": "^0.3.47",
     "dompurify": "^3.1.7",
     "moment": "^2.30.1",
+    "@phoenixui/themes": "file:../../phoenixui/packages/themes",
+    "@phoenixui/web-components": "file:../../phoenixui/packages/web-components",
     "showdown": "^2.1.0"
   },
   "imports": {
