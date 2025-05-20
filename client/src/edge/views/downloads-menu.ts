@@ -5,7 +5,7 @@ import {
   foregroundCtrlNeutralPrimaryRest,
   shadowLayer,
   paddingContentMedium,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<DownloadsMenu>` Downloads TBD `;
 

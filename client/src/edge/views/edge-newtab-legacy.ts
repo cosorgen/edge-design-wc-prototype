@@ -6,7 +6,7 @@ import {
   observable,
   repeat,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -18,7 +18,7 @@ import {
   cornerCircular,
   cornerCtrlRest,
   ctrlOmniboxBackgroundRest,
-  foregroundControlLinkBrandRest,
+  ctrlLinkForegroundBrandRest,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentMedium,
@@ -32,13 +32,14 @@ import {
   paddingContentXxsmall,
   shadowFlyout,
   strokeCtrlOnoutlineRest,
-  strokeWidthDefault,
+  strokewidthDefault,
   textGlobalBody2Fontsize,
   textGlobalBody2Lineheight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+  ctrlLinkForegroundBrandHover,
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const topSites = [
   {
@@ -245,7 +246,7 @@ const styles = css`
     font-size: ${textGlobalBody2Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalBody2Lineheight};
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     color: white;
 
     img {
@@ -313,7 +314,7 @@ const styles = css`
       font-size: ${textGlobalBody2Fontsize};
       font-weight: ${textStyleDefaultRegularWeight};
       line-height: ${textGlobalBody2Lineheight};
-      font-family: ${textStyleDefaultRegularFontFamily};
+      font-family: ${textStyleDefaultRegularFontfamily};
       color: ${foregroundCtrlNeutralPrimaryRest};
 
       &:focus,
@@ -423,12 +424,12 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${gapBetweenContentSmall};
-    border: ${strokeWidthDefault} solid ${strokeCtrlOnoutlineRest};
+    border: ${strokewidthDefault} solid ${strokeCtrlOnoutlineRest};
     border-radius: ${cornerCtrlRest};
     padding: ${paddingContentXsmall} ${paddingContentMedium};
 
     [active] {
-      color: ${foregroundControlLinkBrandRest};
+      color: ${ctrlLinkForegroundBrandRest};
       font-weight: ${textStyleDefaultHeaderWeight};
     }
   }
@@ -447,7 +448,7 @@ const styles = css`
     }
 
     a:hover {
-      color: ${foregroundControlLinkBrandRest};
+      color: ${ctrlLinkForegroundBrandHover};
     }
   }
 

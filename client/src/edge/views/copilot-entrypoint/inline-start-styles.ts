@@ -1,4 +1,4 @@
-import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
+import { paddingWindowDefault } from '@phoenixui/themes/smtc-tokens.js';
 import { css } from '@microsoft/fast-element';
 
 export default css`
@@ -6,12 +6,14 @@ export default css`
 
   :host([inline-position='start']) #composer {
     /* Start halfway in margin */
-    inset-inline-start: calc(${paddingWindowDefault} / 2);
+    inset-inline-start: calc(var(--smtc-padding-window-default) / 2);
   }
 
   :host([inline-position='start'][ntp]) #composer {
     /* Start over ntp page */
-    inset-inline-start: calc(${paddingWindowDefault} / 2 + var(--ntp-inset));
+    inset-inline-start: calc(
+      var(--smtc-padding-window-default) / 2 + var(--ntp-inset)
+    );
   }
 
   :host([inline-position='start']:not([active])) #composer {
@@ -32,14 +34,14 @@ export default css`
   :host([inline-position='start']) #grabber-no-hint {
     /* Start centered in the margin */
     inset-inline-start: calc(
-      ${paddingWindowDefault} / 2 - var(--grabber-height) / 2
+      var(--smtc-padding-window-default) / 2 - var(--grabber-height) / 2
     );
   }
 
   :host([inline-position='start'][active]) #grabber {
     /* Offset composer expanded width + margin */
     inset-inline-start: calc(
-      var(--composer-expanded-width) + ${paddingWindowDefault}
+      var(--composer-expanded-width) + var(--smtc-padding-window-default)
     );
   }
 
@@ -58,12 +60,14 @@ export default css`
 
   :host([inline-position='start'][active]) #hint-composer {
     /* Start half in margin */
-    inset-inline-start: calc(${paddingWindowDefault} / 2);
+    inset-inline-start: calc(var(--smtc-padding-window-default) / 2);
   }
 
   :host([inline-position='start'][active][ntp]) #hint-composer {
     /* Start over ntp */
-    inset-inline-start: calc(${paddingWindowDefault} + var(--ntp-inset));
+    inset-inline-start: calc(
+      var(--smtc-padding-window-default) + var(--ntp-inset)
+    );
   }
 
   :host([inline-position='start'][hint]) #hint-composer,

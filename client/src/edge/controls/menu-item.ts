@@ -2,7 +2,7 @@ import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 import {
   cornerCtrlRest,
   gapBetweenCtrlDefault,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
@@ -11,7 +11,7 @@ import {
   backgroundCtrlSubtleHover,
   paddingContentMedium,
   paddingCtrlHorizontalDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 export type MoreMenuEntry = {
   title?: string;
@@ -49,7 +49,7 @@ const styles = css`
     cursor: pointer;
     border-radius: ${cornerCtrlRest};
 
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-weight: ${textStyleDefaultRegularWeight};
     font-size: ${textGlobalBody3Fontsize};
     line-height: ${textGlobalBody3Lineheight};

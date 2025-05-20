@@ -6,7 +6,7 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/horizontal-tab.js';
 import '../controls/flyout-menu.js';
@@ -19,8 +19,7 @@ import {
   ctrlTabBackgroundHorizontalActive,
   paddingContentXsmallnudge,
   shadowLayer,
-  paddingWindowDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<TabBar>`
@@ -134,7 +133,7 @@ const styles = css`
     user-select: none;
     position: relative; /* for positioning shadow */
     width: calc(100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')});
-    padding: ${paddingWindowDefault};
+    padding: var(--smtc-padding-window-default);
   }
 
   #content {
@@ -145,14 +144,14 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: ${paddingWindowDefault};
+    gap: var(--smtc-padding-window-default);
   }
 
   .group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: calc(${paddingWindowDefault} * 2);
+    gap: calc(var(--smtc-padding-window-default) * 2);
   }
 
   #shadow {
@@ -167,19 +166,19 @@ const styles = css`
   #tabs {
     display: flex;
     flex-direction: row;
-    gap: ${paddingWindowDefault};
+    gap: var(--smtc-padding-window-default);
     overflow: hidden;
-    padding: max(10px, ${paddingWindowDefault});
+    padding: max(10px, var(--smtc-padding-window-default));
     margin: min(
       -10px,
-      calc(0px - ${paddingWindowDefault})
+      calc(0px - var(--smtc-padding-window-default))
     ); /* for wings to not clip */
   }
 
   #window-grabber {
     flex: 1;
-    height: calc(100% + (2 * ${paddingWindowDefault}));
-    margin-block-end: calc(0px - ${paddingWindowDefault});
+    height: calc(100% + (2 * var(--smtc-padding-window-default)));
+    margin-block-end: calc(0px - var(--smtc-padding-window-default));
     min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
@@ -192,7 +191,7 @@ const styles = css`
 
   mai-divider {
     margin-block: ${paddingContentXsmallnudge};
-    margin-inline: calc(0px - (${paddingWindowDefault} / 2));
+    margin-inline: calc(0px - (var(--smtc-padding-window-default) / 2));
   }
 
   horizontal-tab[active] + mai-divider,

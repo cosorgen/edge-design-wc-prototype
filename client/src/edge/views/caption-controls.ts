@@ -15,16 +15,15 @@ import '../controls/flyout-menu.js';
 import '../controls/more-menu.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import {
   backgroundCtrlNeutralRest,
   cornerCircular,
   gapBetweenContentXxsmall,
   paddingContentXsmall,
   paddingContentXxxsmall,
-  paddingWindowDefault,
-  strokeWidthDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+  strokewidthDefault,
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html` <div
     id="window-grabber"
@@ -108,7 +107,7 @@ const template = html` <div
 const styles = css`
   :host {
     --caption-controls-height: calc(
-      32px + 2 * ${paddingWindowDefault}
+      32px + 2 * var(--smtc-padding-window-default)
     ); /* height of a button + gaps */
     display: flex;
     flex-direction: row;
@@ -144,7 +143,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     margin-right: ${paddingContentXsmall};
-    padding: calc(${paddingContentXxxsmall} - ${strokeWidthDefault})
+    padding: calc(${paddingContentXxxsmall} - ${strokewidthDefault})
       ${paddingContentXxxsmall};
     gap: ${gapBetweenContentXxsmall};
     border-radius: ${cornerCircular};

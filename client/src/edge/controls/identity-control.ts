@@ -8,8 +8,8 @@ import {
 import {
   cornerCircular,
   gapBetweenContentXxsmall,
-  strokeWidthDefault,
-  textStyleDefaultRegularFontFamily,
+  strokewidthDefault,
+  textStyleDefaultRegularFontfamily,
   textGlobalCaption1Fontsize,
   foregroundCtrlNeutralPrimaryRest,
   backgroundCtrlSubtleHover,
@@ -19,7 +19,7 @@ import {
   textGlobalCaption1Lineheight,
   strokeCtrlOnoutlineHover,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const imageIds = { signedIn: 'dog', inPrivate: 'inPrivate', guest: 'guest' };
 
@@ -52,10 +52,10 @@ const styles = css`
     cursor: pointer;
     border-radius: ${cornerCircular};
     padding: 0;
-    border: ${strokeWidthDefault} solid transparent;
+    border: ${strokewidthDefault} solid transparent;
 
     /* caption1 */
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     line-height: ${textGlobalCaption1Lineheight};
     font-weight: ${textStyleDefaultRegularWeight};

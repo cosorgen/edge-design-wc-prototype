@@ -27,7 +27,7 @@ import {
   smtcCornerComposerSendButtonPressed,
   curveEasyEase,
 } from '@edge-design/copilot-theme';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 
 const template = html<CopilotInput>`
   <div

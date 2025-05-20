@@ -23,7 +23,7 @@ import {
   paddingWindowDefault,
   foregroundCtrlNeutralPrimaryRest,
   backgroundLayerPrimarySolid,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<copilot-newtab
@@ -66,7 +66,7 @@ const styles = css`
     display: flex;
     border-radius: ${cornerLayerDefault};
     box-shadow: ${shadowLayer};
-    margin: ${paddingWindowDefault};
+    margin: var(--smtc-padding-window-default);
     overflow: auto;
     scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
       ${backgroundLayerPrimarySolid};

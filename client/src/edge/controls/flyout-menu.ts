@@ -1,4 +1,7 @@
-import { curveDecelerateMax, durationFast } from '@edge-design/kumo-theme/tokens.js';
+import {
+  curveDecelerateMax,
+  durationFast,
+} from '@phoenixui/themes/fluent2-tokens.js';
 import {
   attr,
   css,

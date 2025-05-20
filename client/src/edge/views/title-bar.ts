@@ -11,12 +11,11 @@ import {
   ctrlTabBackgroundHorizontalActive,
   foregroundContentNeutralPrimary,
   gapBetweenContentXxsmall,
-  paddingWindowDefault,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<TitleBar>`
   ${when(
@@ -47,9 +46,9 @@ const styles = css`
     user-select: none;
     width: 100%;
     min-height: 40px;
-    padding: ${paddingWindowDefault};
+    padding: var(--smtc-padding-window-default);
     background-color: ${ctrlTabBackgroundHorizontalActive};
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     line-height: ${textGlobalBody3Lineheight};
     font-weight: ${textStyleDefaultRegularWeight};

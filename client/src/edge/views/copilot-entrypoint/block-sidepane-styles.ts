@@ -1,7 +1,4 @@
-import {
-  paddingContentSmall,
-  paddingWindowDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+import { paddingContentSmall } from '@phoenixui/themes/smtc-tokens.js';
 import { css } from '@microsoft/fast-element';
 
 export default css`
@@ -10,7 +7,9 @@ export default css`
   :host([block-position='sidepane']) #composer {
     /* Align to bottom - 1/2 margin */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) - ${paddingWindowDefault} -
+      100% - var(--composer-retracted-height) - var(
+          --smtc-padding-window-default
+        ) -
         ${paddingContentSmall}
     );
   }

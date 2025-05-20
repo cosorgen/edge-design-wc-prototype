@@ -10,12 +10,12 @@ import {
   gapInsideCtrlDefault,
   paddingContentNone,
   shadowFlyout,
-  strokeWidthDefault,
+  strokewidthDefault,
   cornerCircular,
   paddingContentXxsmall,
   ctrlOmniboxStrokeRest,
   ctrlOmniboxStrokeHover,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 export const styles = css`
   :host {
@@ -23,7 +23,7 @@ export const styles = css`
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     height: 32px;
-    --stroke-diff: calc(${strokeWidthDefault} - ${strokeWidthDefault});
+    --stroke-diff: calc(${strokewidthDefault} - ${strokewidthDefault});
   }
 
   :host([active]) {
@@ -39,7 +39,7 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     background-color: ${ctrlOmniboxBackgroundRest};
-    border: ${strokeWidthDefault} solid ${ctrlOmniboxStrokeRest};
+    border: ${strokewidthDefault} solid ${ctrlOmniboxStrokeRest};
     border-radius: ${cornerCircular};
     padding: calc(${paddingContentXxsmall} + var(--stroke-diff))
       calc(${paddingContentXxsmall} + var(--stroke-diff));
@@ -49,7 +49,7 @@ export const styles = css`
   :host(:not([dropdown-open]))
     [part='container']:has(omnibox-input:focus-within) {
     padding: ${paddingContentXxsmall} ${paddingContentXxsmall};
-    border: ${strokeWidthDefault} solid ${ctrlOmniboxStrokeFocused};
+    border: ${strokewidthDefault} solid ${ctrlOmniboxStrokeFocused};
   }
 
   :host([dropdown-open]) [part='container'] {

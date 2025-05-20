@@ -8,9 +8,9 @@ import {
   paddingContentXsmallnudge,
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 import {
   customElement,
   html,
@@ -58,7 +58,7 @@ const styles = css`
 
   #title {
     flex: 1;
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};

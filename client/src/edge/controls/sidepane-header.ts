@@ -1,17 +1,16 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import {
   backgroundToolbar,
   cornerLayerDefault,
   gapBetweenCtrlDefault,
-  paddingWindowDefault,
   strokeCtrlOnoutlineRest,
-  strokeWidthDefault,
+  strokewidthDefault,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontFamily,
-} from '@edge-design/kumo-theme/tokens.js';
+  textStyleDefaultRegularFontfamily,
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">
@@ -45,16 +44,16 @@ const styles = css`
     gap: ${gapBetweenCtrlDefault};
     background: ${backgroundToolbar};
     background-blend-mode: luminosity;
-    padding: calc(4px + ${paddingWindowDefault});
-    padding-inline-start: calc(8px + ${paddingWindowDefault});
-    border-bottom: ${strokeWidthDefault} solid ${strokeCtrlOnoutlineRest};
+    padding: calc(4px + var(--smtc-padding-window-default));
+    padding-inline-start: calc(8px + var(--smtc-padding-window-default));
+    border-bottom: ${strokewidthDefault} solid ${strokeCtrlOnoutlineRest};
     border-radius: ${cornerLayerDefault} ${cornerLayerDefault} 0 0;
   }
 
   #title {
     flex: 1;
 
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     font-weight: ${textStyleDefaultHeaderWeight};
     line-height: ${textGlobalBody3Lineheight};

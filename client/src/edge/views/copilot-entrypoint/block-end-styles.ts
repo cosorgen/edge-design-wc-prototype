@@ -1,4 +1,3 @@
-import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 import { css } from '@microsoft/fast-element';
 
 export default css`
@@ -7,7 +6,10 @@ export default css`
   :host([block-position='end']) #composer {
     /* Align to bottom - 1/2 margin */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) - ${paddingWindowDefault} / 2
+      100% - var(--composer-expanded-height) - var(
+          --smtc-padding-window-default
+        ) /
+        2
     );
   }
 
@@ -15,8 +17,9 @@ export default css`
   :host([block-position='end']:not([inline-position='center'])) #composer {
     /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+      100% - var(--composer-expanded-height) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 
@@ -30,8 +33,9 @@ export default css`
   :host([block-position='end']:not([inline-position='center'])) #composer {
     /* Align to bottom - margin - ntp inset */
     inset-block-start: calc(
-      100% - var(--composer-expanded-height) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+      100% - var(--composer-expanded-height) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 
@@ -55,7 +59,7 @@ export default css`
   :host([block-position='end']) #grabber-no-hint {
     /* Center in margin */
     inset-block-start: calc(
-      100% - var(--grabber-height) / 2 - ${paddingWindowDefault} / 2
+      100% - var(--grabber-height) / 2 - var(--smtc-padding-window-default) / 2
     );
   }
 
@@ -75,8 +79,11 @@ export default css`
   :host([block-position='end'][active][dragging]) #grabber {
     /* Center in top 25% of hint composer */
     inset-block-start: calc(
-      100% - var(--grabber-height) / 2 -
-        ${paddingWindowDefault} - var(--composer-retracted-height) * 0.25
+      100% - var(--grabber-height) /
+        2 - var(--smtc-padding-window-default) - var(
+          --composer-retracted-height
+        ) *
+        0.25
     );
   }
 
@@ -87,8 +94,9 @@ export default css`
     #grabber-no-hint {
     /* Alignt to bottom - margin */
     inset-block-start: calc(
-      100% - var(--grabber-vertical-retracted-width) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+      100% - var(--grabber-vertical-retracted-width) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 
@@ -102,8 +110,9 @@ export default css`
     /* Alignt to bottom - half expanded width - margin - ntp offset */
     inset-block-start: calc(
       100% - var(--grabber-vertical-expanded-width) -
-        (var(--grabber-vertical-expanded-width) / 2) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+        (var(--grabber-vertical-expanded-width) / 2) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 
@@ -117,7 +126,10 @@ export default css`
   :host([block-position='end'][active]) #hint-composer {
     /* bottom in margin */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) - ${paddingWindowDefault} / 2
+      100% - var(--composer-retracted-height) - var(
+          --smtc-padding-window-default
+        ) /
+        2
     );
   }
 
@@ -131,8 +143,9 @@ export default css`
   :host([block-position='end'][active][ntp]) #hint-composer {
     /* bottom over ntp */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+      100% - var(--composer-retracted-height) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 
@@ -145,8 +158,9 @@ export default css`
     #hint-composer {
     /* Align to bottom - margin - ntp offset */
     inset-block-start: calc(
-      100% - var(--composer-retracted-height) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+      100% - var(--composer-retracted-height) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 `;

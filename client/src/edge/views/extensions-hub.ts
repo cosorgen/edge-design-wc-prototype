@@ -7,7 +7,7 @@ import {
   repeat,
   when,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import '../controls/extension-hub-item.js';
 import '../controls/context-menu.js';
@@ -26,9 +26,9 @@ import {
   textGlobalBody2Fontsize,
   textGlobalBody2Lineheight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   gapBetweenContentXxsmall,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>
@@ -116,7 +116,7 @@ const styles = css`
     padding: ${paddingContentMedium};
     padding-block-end: 0;
 
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody2Fontsize};
     font-weight: ${textStyleDefaultHeaderWeight};
     line-height: ${textGlobalBody2Lineheight};

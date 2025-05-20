@@ -7,17 +7,14 @@ import {
 } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
 import apps from '../installedApps.js';
-import {
-  cornerLayerDefault,
-  paddingWindowDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+import { cornerLayerDefault } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<SidePane>`${(x) => apps[x.id].template}`;
 
 const styles = css`
   :host {
     --tab-bar-height:  /* height of a button + gap */ calc(
-      32px + ${paddingWindowDefault}
+      32px + var(--smtc-padding-window-default)
     );
     position: relative;
     display: flex;

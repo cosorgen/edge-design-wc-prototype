@@ -6,7 +6,7 @@ import {
   html,
   when,
 } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
 import {
@@ -23,16 +23,15 @@ import {
   paddingContentXsmall,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralPrimaryHover,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
   ctrlTabBackgroundHorizontalActive,
   cornerCtrlSmRest,
-  paddingWindowDefault,
   ctrlTabBackgroundHorizontalHover,
   ctrlTabCorner,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<HorizontalTab>`
   <div class="tab-background" id="bg"></div>
@@ -138,7 +137,7 @@ const styles = css`
   #title,
   [name='title']::slotted(*) {
     /* Caption1 */
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};
@@ -183,7 +182,7 @@ const styles = css`
 
   #bg {
     inset: 0;
-    bottom: calc(0px - ${paddingWindowDefault});
+    bottom: calc(0px - var(--smtc-padding-window-default));
     border-radius: ${ctrlTabCorner} ${ctrlTabCorner} 0 0;
   }
 
@@ -191,7 +190,7 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: calc(0px - ${paddingWindowDefault});
+    bottom: calc(0px - var(--smtc-padding-window-default));
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 

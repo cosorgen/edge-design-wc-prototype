@@ -1,5 +1,5 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import {
   borderRadiusCircular,
   colorLayerBackgroundDialog,

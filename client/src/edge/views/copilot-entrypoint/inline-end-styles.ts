@@ -1,4 +1,3 @@
-import { paddingWindowDefault } from '@edge-design/kumo-theme/tokens.js';
 import { css } from '@microsoft/fast-element';
 
 export default css`
@@ -7,14 +6,19 @@ export default css`
   :host([inline-position='end']) #composer {
     /* Start half in the margin */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${paddingWindowDefault} / 2
+      100% - var(--composer-expanded-width) - var(
+          --smtc-padding-window-default
+        ) /
+        2
     );
   }
 
   :host([inline-position='end'][ntp]) #composer {
     /* Start over ntp page */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${paddingWindowDefault} /
+      100% - var(--composer-expanded-width) - var(
+          --smtc-padding-window-default
+        ) /
         2 - var(--ntp-inset)
     );
   }
@@ -37,14 +41,14 @@ export default css`
   :host([inline-position='end']) #grabber-no-hint {
     /* Start centered in margin */
     inset-inline-start: calc(
-      100% - var(--grabber-height) / 2 - ${paddingWindowDefault} / 2
+      100% - var(--grabber-height) / 2 - var(--smtc-padding-window-default) / 2
     );
   }
 
   :host([inline-position='end'][active]) #grabber {
     /* Offset composer expanded width + margin */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - ${paddingWindowDefault}
+      100% - var(--composer-expanded-width) - var(--smtc-padding-window-default)
     );
   }
 
@@ -64,15 +68,19 @@ export default css`
   :host([inline-position='end'][active]) #hint-composer {
     /* half in margin */
     inset-inline-start: calc(
-      100% - var(--composer-retracted-width) - ${paddingWindowDefault} / 2
+      100% - var(--composer-retracted-width) - var(
+          --smtc-padding-window-default
+        ) /
+        2
     );
   }
 
   :host([inline-position='end'][active][ntp]) #hint-composer {
     /* over ntp */
     inset-inline-start: calc(
-      100% - var(--composer-retracted-width) -
-        ${paddingWindowDefault} - var(--ntp-inset)
+      100% - var(--composer-retracted-width) - var(
+          --smtc-padding-window-default
+        ) - var(--ntp-inset)
     );
   }
 

@@ -6,7 +6,7 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import '@edge-design/button/define.js';
+import '@mai-ui/button/define.js';
 import '../controls/vertical-tab.js';
 import '../controls/menu-item.js';
 import '../controls/flyout-menu.js';
@@ -17,9 +17,8 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   ctrlTabBackgroundHorizontalActive,
   foregroundCtrlNeutralSecondaryRest,
-  paddingWindowDefault,
   textGlobalCaption1Fontsize,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<VerticalTabBar>`
@@ -122,9 +121,9 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: column;
-    gap: calc(${paddingWindowDefault} * 2);
+    gap: calc(var(--smtc-padding-window-default) * 2);
     user-select: none;
-    padding: ${paddingWindowDefault};
+    padding: var(--smtc-padding-window-default);
     padding-inline-end: 0;
     background: ${ctrlTabBackgroundHorizontalActive};
   }
@@ -134,13 +133,13 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: calc(${paddingWindowDefault} * 2);
+    gap: calc(var(--smtc-padding-window-default) * 2);
   }
 
   #tabs {
     display: flex;
     flex-direction: column;
-    gap: ${paddingWindowDefault};
+    gap: var(--smtc-padding-window-default);
     min-height: 16px;
   }
 

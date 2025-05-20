@@ -3,17 +3,19 @@ import {
   backgroundCtrlBrandPressed,
   backgroundCtrlBrandRest,
   cornerCircular,
-  curveDecelerateMax,
-  durationSlow,
   gapBetweenContentXxsmall,
   paddingContentXxsmall,
   paddingContentXxxsmall,
   statusBrandTintForeground,
   textGlobalCaption1Fontsize,
   textGlobalCaption1Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
+import {
+  curveDecelerateMax,
+  durationSlow,
+} from '@phoenixui/themes/fluent2-tokens.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
 const template = html`
@@ -70,7 +72,7 @@ const styles = css`
 
   div {
     flex: 1;
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalCaption1Fontsize};
     font-weight: ${textStyleDefaultRegularWeight};
     line-height: ${textGlobalCaption1Lineheight};

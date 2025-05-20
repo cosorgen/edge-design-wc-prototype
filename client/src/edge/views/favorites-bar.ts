@@ -20,7 +20,7 @@ import { TabService } from '#servicestabService.js';
 import {
   paddingContentXsmall,
   paddingWindowDefault,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html`
   <div id="user">
@@ -101,8 +101,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: space-between;
-    gap: calc(${paddingWindowDefault} * 2);
-    padding: ${paddingWindowDefault};
+    gap: calc(var(--smtc-padding-window-default) * 2);
+    padding: var(--smtc-padding-window-default);
     padding-block-end: 0px;
   }
 
@@ -111,7 +111,7 @@ const styles = css`
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    gap: calc(${paddingWindowDefault} * 2);
+    gap: calc(var(--smtc-padding-window-default) * 2);
   }
 
   #system {

@@ -238,7 +238,7 @@ export class MicrosoftEdge extends FASTElement {
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    let selectedTheme = themes[this.ss.designSystem][themeKey];
+    const selectedTheme = themes[this.ss.designSystem][themeKey];
     if (this.ss.themeColor) {
       console.log('Implement theming', this.ss.themeColor);
     }

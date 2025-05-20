@@ -4,9 +4,9 @@ import {
   paddingCtrlHorizontalDefault,
   textGlobalBody3Fontsize,
   textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularFontfamily,
   textStyleDefaultRegularWeight,
-} from '@edge-design/kumo-theme/tokens.js';
+} from '@phoenixui/themes/smtc-tokens.js';
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 
 const template = html<MoreMenuZoom>`
@@ -37,7 +37,7 @@ const styles = css`
     gap: ${gapBetweenContentXxxsmall};
     padding-inline-start: ${paddingCtrlHorizontalDefault};
 
-    font-family: ${textStyleDefaultRegularFontFamily};
+    font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};
     line-height: ${textGlobalBody3Lineheight};
     font-weight: ${textStyleDefaultRegularWeight};
