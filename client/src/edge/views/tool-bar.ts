@@ -166,8 +166,8 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: row;
-    gap: calc(var(--smtc-padding-window-default) * 2);
-    padding: var(--smtc-padding-window-default);
+    gap: calc(var(--paddingWindowDefault) * 2);
+    padding: var(--paddingWindowDefault);
     user-select: none;
   }
 
@@ -176,7 +176,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: var(--smtc-padding-window-default);
+    gap: var(--paddingWindowDefault);
   }
 
   flyout-menu > mai-button,

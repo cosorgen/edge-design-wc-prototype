@@ -44,8 +44,8 @@ const styles = css`
     gap: ${gapBetweenCtrlDefault};
     background: ${backgroundToolbar};
     background-blend-mode: luminosity;
-    padding: calc(4px + var(--smtc-padding-window-default));
-    padding-inline-start: calc(8px + var(--smtc-padding-window-default));
+    padding: calc(4px + var(--paddingWindowDefault));
+    padding-inline-start: calc(8px + var(--paddingWindowDefault));
     border-bottom: ${strokewidthDefault} solid ${strokeCtrlOnoutlineRest};
     border-radius: ${cornerLayerDefault} ${cornerLayerDefault} 0 0;
   }

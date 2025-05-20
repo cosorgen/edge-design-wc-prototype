@@ -17,10 +17,7 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
-import {
-  paddingContentXsmall,
-  paddingWindowDefault,
-} from '@phoenixui/themes/smtc-tokens.js';
+import { paddingContentXsmall } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html`
   <div id="user">
@@ -101,8 +98,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: space-between;
-    gap: calc(var(--smtc-padding-window-default) * 2);
-    padding: var(--smtc-padding-window-default);
+    gap: calc(var(--paddingWindowDefault) * 2);
+    padding: var(--paddingWindowDefault);
     padding-block-end: 0px;
   }
 
@@ -111,7 +108,7 @@ const styles = css`
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    gap: calc(var(--smtc-padding-window-default) * 2);
+    gap: calc(var(--paddingWindowDefault) * 2);
   }
 
   #system {

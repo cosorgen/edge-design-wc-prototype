@@ -107,7 +107,7 @@ const template = html` <div
 const styles = css`
   :host {
     --caption-controls-height: calc(
-      32px + 2 * var(--smtc-padding-window-default)
+      32px + 2 * var(--paddingWindowDefault)
     ); /* height of a button + gaps */
     display: flex;
     flex-direction: row;

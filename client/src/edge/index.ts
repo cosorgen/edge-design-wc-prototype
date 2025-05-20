@@ -132,7 +132,7 @@ const styles = css`
   .row {
     display: flex;
     flex-direction: row;
-    gap: var(--smtc-padding-window-default);
+    gap: var(--paddingWindowDefault);
     height: 100%;
     min-height: 0px;
   }
@@ -140,7 +140,7 @@ const styles = css`
   .column {
     display: flex;
     flex-direction: column;
-    gap: var(--smtc-padding-window-default);
+    gap: var(--paddingWindowDefault);
     width: 100%;
     min-width: 0px;
   }

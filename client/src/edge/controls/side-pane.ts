@@ -14,7 +14,7 @@ const template = html<SidePane>`${(x) => apps[x.id].template}`;
 const styles = css`
   :host {
     --tab-bar-height:  /* height of a button + gap */ calc(
-      32px + var(--smtc-padding-window-default)
+      32px + var(--paddingWindowDefault)
     );
     position: relative;
     display: flex;

@@ -121,9 +121,9 @@ const styles = css`
   :host {
     display: flex;
     flex-direction: column;
-    gap: calc(var(--smtc-padding-window-default) * 2);
+    gap: calc(var(--paddingWindowDefault) * 2);
     user-select: none;
-    padding: var(--smtc-padding-window-default);
+    padding: var(--paddingWindowDefault);
     padding-inline-end: 0;
     background: ${ctrlTabBackgroundHorizontalActive};
   }
@@ -133,13 +133,13 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: calc(var(--smtc-padding-window-default) * 2);
+    gap: calc(var(--paddingWindowDefault) * 2);
   }
 
   #tabs {
     display: flex;
     flex-direction: column;
-    gap: var(--smtc-padding-window-default);
+    gap: var(--paddingWindowDefault);
     min-height: 16px;
   }
 

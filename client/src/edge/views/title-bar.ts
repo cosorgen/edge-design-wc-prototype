@@ -46,7 +46,7 @@ const styles = css`
     user-select: none;
     width: 100%;
     min-height: 40px;
-    padding: var(--smtc-padding-window-default);
+    padding: var(--paddingWindowDefault);
     background-color: ${ctrlTabBackgroundHorizontalActive};
     font-family: ${textStyleDefaultRegularFontfamily};
     font-size: ${textGlobalBody3Fontsize};

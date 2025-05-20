@@ -133,7 +133,7 @@ const styles = css`
     user-select: none;
     position: relative; /* for positioning shadow */
     width: calc(100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')});
-    padding: var(--smtc-padding-window-default);
+    padding: var(--paddingWindowDefault);
   }
 
   #content {
@@ -144,14 +144,14 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: flex-end;
-    gap: var(--smtc-padding-window-default);
+    gap: var(--paddingWindowDefault);
   }
 
   .group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: calc(var(--smtc-padding-window-default) * 2);
+    gap: calc(var(--paddingWindowDefault) * 2);
   }
 
   #shadow {
@@ -166,19 +166,19 @@ const styles = css`
   #tabs {
     display: flex;
     flex-direction: row;
-    gap: var(--smtc-padding-window-default);
+    gap: var(--paddingWindowDefault);
     overflow: hidden;
-    padding: max(10px, var(--smtc-padding-window-default));
+    padding: max(10px, var(--paddingWindowDefault));
     margin: min(
       -10px,
-      calc(0px - var(--smtc-padding-window-default))
+      calc(0px - var(--paddingWindowDefault))
     ); /* for wings to not clip */
   }
 
   #window-grabber {
     flex: 1;
-    height: calc(100% + (2 * var(--smtc-padding-window-default)));
-    margin-block-end: calc(0px - var(--smtc-padding-window-default));
+    height: calc(100% + (2 * var(--paddingWindowDefault)));
+    margin-block-end: calc(0px - var(--paddingWindowDefault));
     min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
@@ -191,7 +191,7 @@ const styles = css`
 
   mai-divider {
     margin-block: ${paddingContentXsmallnudge};
-    margin-inline: calc(0px - (var(--smtc-padding-window-default) / 2));
+    margin-inline: calc(0px - (var(--paddingWindowDefault) / 2));
   }
 
   horizontal-tab[active] + mai-divider,

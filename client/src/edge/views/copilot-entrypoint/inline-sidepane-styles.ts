@@ -1,6 +1,5 @@
 import { css } from '@microsoft/fast-element';
 import { spacingHorizontalM } from '@edge-design/copilot-theme';
-import { paddingWindowDefault } from '@phoenixui/themes/smtc-tokens.js';
 
 export default css`
   /* Composer */
@@ -8,7 +7,7 @@ export default css`
   :host([inline-position='sidepane']) #composer {
     /* Start halfway in margin */
     inset-inline-start: calc(
-      100% - var(--sidepane-width) - var(--smtc-padding-window-default) +
+      100% - var(--sidepane-width) - var(--paddingWindowDefault) +
         ${spacingHorizontalM}
     );
   }
@@ -25,7 +24,7 @@ export default css`
   :host([inline-position='sidepane']) #grabber,
   :host([inline-position='sidepane']) #grabber-no-hint {
     inset-inline-start: calc(
-      100% - var(--grabber-height) / 2 - var(--smtc-padding-window-default) / 2
+      100% - var(--grabber-height) / 2 - var(--paddingWindowDefault) / 2
     );
     opacity: 0;
   }

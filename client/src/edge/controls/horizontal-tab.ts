@@ -182,7 +182,7 @@ const styles = css`
 
   #bg {
     inset: 0;
-    bottom: calc(0px - var(--smtc-padding-window-default));
+    bottom: calc(0px - var(--paddingWindowDefault));
     border-radius: ${ctrlTabCorner} ${ctrlTabCorner} 0 0;
   }
 
@@ -190,7 +190,7 @@ const styles = css`
   #right-wing {
     width: 10px;
     height: 10px;
-    bottom: calc(0px - var(--smtc-padding-window-default));
+    bottom: calc(0px - var(--paddingWindowDefault));
     clip-path: path('M0 10h10V0A10 10 0 0 1 0 10Z');
   }
 

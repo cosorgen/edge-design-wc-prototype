@@ -41,14 +41,14 @@ export default css`
   :host([inline-position='end']) #grabber-no-hint {
     /* Start centered in margin */
     inset-inline-start: calc(
-      100% - var(--grabber-height) / 2 - var(--smtc-padding-window-default) / 2
+      100% - var(--grabber-height) / 2 - var(--paddingWindowDefault) / 2
     );
   }
 
   :host([inline-position='end'][active]) #grabber {
     /* Offset composer expanded width + margin */
     inset-inline-start: calc(
-      100% - var(--composer-expanded-width) - var(--smtc-padding-window-default)
+      100% - var(--composer-expanded-width) - var(--paddingWindowDefault)
     );
   }
 

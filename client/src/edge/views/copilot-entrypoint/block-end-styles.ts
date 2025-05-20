@@ -59,7 +59,7 @@ export default css`
   :host([block-position='end']) #grabber-no-hint {
     /* Center in margin */
     inset-block-start: calc(
-      100% - var(--grabber-height) / 2 - var(--smtc-padding-window-default) / 2
+      100% - var(--grabber-height) / 2 - var(--paddingWindowDefault) / 2
     );
   }
 
@@ -80,9 +80,7 @@ export default css`
     /* Center in top 25% of hint composer */
     inset-block-start: calc(
       100% - var(--grabber-height) /
-        2 - var(--smtc-padding-window-default) - var(
-          --composer-retracted-height
-        ) *
+        2 - var(--paddingWindowDefault) - var(--composer-retracted-height) *
         0.25
     );
   }

@@ -20,7 +20,6 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   cornerLayerDefault,
   shadowLayer,
-  paddingWindowDefault,
   foregroundCtrlNeutralPrimaryRest,
   backgroundLayerPrimarySolid,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -66,7 +65,7 @@ const styles = css`
     display: flex;
     border-radius: ${cornerLayerDefault};
     box-shadow: ${shadowLayer};
-    margin: var(--smtc-padding-window-default);
+    margin: var(--paddingWindowDefault);
     overflow: auto;
     scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
       ${backgroundLayerPrimarySolid};
