@@ -9,10 +9,14 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
-import { default as kumoLightTheme } from '@phoenixui/themes/kumo-light-theme.js';
-import { default as kumoDarkTheme } from '@phoenixui/themes/kumo-dark-theme.js';
-import { default as phoenixSmtcLightTheme } from '@phoenixui/themes/phoenix-smtc-light-theme.js';
-import { default as phoenixSmtcDarkTheme } from '@phoenixui/themes/phoenix-smtc-dark-theme.js';
+import {
+  kumoLightTheme,
+  kumoDarkTheme,
+  phoenixSmtcLightTheme,
+  phoenixSmtcDarkTheme,
+  lightChromiumMapping,
+  darkChromiumMapping,
+} from '@phoenixui/themes';
 import { setSmtcThemeFor } from '@phoenixui/web-components';
 import {
   textStyleDefaultRegularWeight,
@@ -40,6 +44,7 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
+import { applyChromiumTheme } from './applyChromiumTheme.js';
 
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
@@ -238,9 +243,14 @@ export class MicrosoftEdge extends FASTElement {
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    const selectedTheme = themes[this.ss.designSystem][themeKey];
+    let selectedTheme = themes[this.ss.designSystem][themeKey];
     if (this.ss.themeColor) {
-      console.log('Implement theming', this.ss.themeColor);
+      selectedTheme = applyChromiumTheme(
+        selectedTheme,
+        themeKey === 'dark' ? darkChromiumMapping : lightChromiumMapping,
+        this.ss.themeColor,
+        this.ss.themePalette,
+      );
     }
     selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
     setSmtcThemeFor(this.shadowRoot!, selectedTheme);
