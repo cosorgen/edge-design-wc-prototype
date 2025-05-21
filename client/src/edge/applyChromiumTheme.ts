@@ -286,8 +286,9 @@ export function applyChromiumTheme(
     const value = mapping[key];
     if (typeof value === 'string') return;
     const { variant, tone, alpha } = value;
+    const resolvedAlpha = alpha === undefined ? 1 : alpha;
     const color = paletteColors[variant][tone];
-    const alphaValue = Math.round((alpha || 1) * 255);
+    const alphaValue = Math.round(resolvedAlpha * 255);
     const newColor = `${color}${alphaValue.toString(16)}`;
     themeColors[key] = newColor;
   });
