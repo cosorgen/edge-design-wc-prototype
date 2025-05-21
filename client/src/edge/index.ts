@@ -17,7 +17,7 @@ import {
   lightChromiumMapping,
   darkChromiumMapping,
 } from '@phoenixui/themes';
-import { setSmtcThemeFor } from '@phoenixui/web-components';
+import { setThemeFor } from '@phoenixui/web-components';
 import {
   textStyleDefaultRegularWeight,
   ctrlTabBackgroundHorizontalActive,
@@ -253,7 +253,7 @@ export class MicrosoftEdge extends FASTElement {
       );
     }
     selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
-    setSmtcThemeFor(this.shadowRoot!, selectedTheme);
+    setThemeFor(this.shadowRoot!, selectedTheme);
   }
 
   clearTheme() {
