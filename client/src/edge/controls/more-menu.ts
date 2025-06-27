@@ -24,16 +24,16 @@ import {
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralSecondaryRest,
-  paddingContentXsmallnudge,
-  paddingContentXxsmall,
+  paddingContentXSmallnudge,
+  paddingContentXxSmall,
   paddingFlyoutDefault,
   shadowFlyout,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textGlobalCaption1Fontsize,
-  textGlobalCaption1Lineheight,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textGlobalCaption1FontSize,
+  textGlobalCaption1LineHeight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontfamily,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 
@@ -187,7 +187,7 @@ const styles = css`
   }
 
   svg[slot='end'] {
-    margin-inline-end: calc(0px - ${paddingContentXxsmall});
+    margin-inline-end: calc(0px - ${paddingContentXxSmall});
   }
 
   mai-divider {
@@ -195,13 +195,13 @@ const styles = css`
   }
 
   .label {
-    padding: ${paddingContentXsmallnudge};
+    padding: ${paddingContentXSmallnudge};
     border-radius: ${cornerCtrlRest};
 
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
     color: ${foregroundCtrlNeutralPrimaryRest};
     user-select: none;
   }
@@ -218,10 +218,10 @@ const styles = css`
   }
 
   #additional {
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalCaption1Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalCaption1Lineheight};
+    line-height: ${textGlobalCaption1LineHeight};
     color: ${foregroundCtrlNeutralSecondaryRest};
   }
 
@@ -242,17 +242,17 @@ const styles = css`
   }
 
   .bold {
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultHeaderWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
   }
 
   .regular {
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
   }
 `;
 

@@ -12,8 +12,8 @@ import WindowsService from '#serviceswindowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import { TabService } from '#servicestabService.js';
 import {
-  backgroundCardOnprimaryDefaultHover,
-  backgroundCardOnprimaryDefaultRest,
+  backgroundCardOnPrimaryDefaultHover,
+  backgroundCardOnPrimaryDefaultRest,
   backgroundCtrlSubtleHover,
   cornerCircular,
   cornerCtrlRest,
@@ -23,20 +23,20 @@ import {
   foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentMedium,
   gapBetweenContentSmall,
-  gapBetweenContentXsmall,
+  gapBetweenContentXSmall,
   paddingContentLarge,
   paddingContentMedium,
   paddingContentSmall,
-  paddingContentXsmall,
-  paddingContentXxlarge,
-  paddingContentXxsmall,
+  paddingContentXSmall,
+  paddingContentXxLarge,
+  paddingContentXxSmall,
   shadowFlyout,
-  strokeCtrlOnoutlineRest,
-  strokewidthDefault,
-  textGlobalBody2Fontsize,
-  textGlobalBody2Lineheight,
+  strokeCtrlOnOutlineRest,
+  strokeWidthDefault,
+  textGlobalBody2FontSize,
+  textGlobalBody2LineHeight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontfamily,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
   ctrlLinkForegroundBrandHover,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -230,7 +230,7 @@ const styles = css`
     gap: ${gapBetweenContentMedium};
     width: 100%;
     max-width: 1024px;
-    padding: ${paddingContentXxlarge};
+    padding: ${paddingContentXxLarge};
     box-sizing: border-box; 
   }
 
@@ -242,11 +242,11 @@ const styles = css`
     display: flex;
     align-items: center;
     gap: ${gapBetweenContentSmall};
-    padding: ${paddingContentXxlarge};
-    font-size: ${textGlobalBody2Fontsize};
+    padding: ${paddingContentXxLarge};
+    font-size: ${textGlobalBody2FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalBody2Lineheight};
-    font-family: ${textStyleDefaultRegularFontfamily};
+    line-height: ${textGlobalBody2LineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
     color: white;
 
     img {
@@ -262,8 +262,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXsmall};
-    padding: ${paddingContentXxlarge};
+    gap: ${gapBetweenContentXSmall};
+    padding: ${paddingContentXxLarge};
 
     --smtc-foreground-ctrl-onsubtle-rest: white;
     --smtc-foreground-ctrl-icon-onsubtle-rest: white;
@@ -276,8 +276,8 @@ const styles = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: ${gapBetweenContentXsmall};
-    padding: ${paddingContentXxlarge};
+    gap: ${gapBetweenContentXSmall};
+    padding: ${paddingContentXxLarge};
 
     --smtc-foreground-ctrl-onsubtle-rest: white;
     --smtc-foreground-ctrl-icon-onsubtle-rest: white;
@@ -287,7 +287,7 @@ const styles = css`
     width: 100%;
     display: flex;
     align-items: center;
-    gap: ${gapBetweenContentXsmall};
+    gap: ${gapBetweenContentXSmall};
     border-radius: ${cornerCircular};
     background-color: ${ctrlOmniboxBackgroundRest};
     box-shadow: ${shadowFlyout};
@@ -311,10 +311,10 @@ const styles = css`
       background: transparent;
       flex: 1;
 
-      font-size: ${textGlobalBody2Fontsize};
+      font-size: ${textGlobalBody2FontSize};
       font-weight: ${textStyleDefaultRegularWeight};
-      line-height: ${textGlobalBody2Lineheight};
-      font-family: ${textStyleDefaultRegularFontfamily};
+      line-height: ${textGlobalBody2LineHeight};
+      font-family: ${textStyleDefaultRegularFontFamily};
       color: ${foregroundCtrlNeutralPrimaryRest};
 
       &:focus,
@@ -365,22 +365,22 @@ const styles = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: ${gapBetweenContentXsmall};
-    padding: ${paddingContentXsmall} ${paddingContentXxsmall};
+    gap: ${gapBetweenContentXSmall};
+    padding: ${paddingContentXSmall} ${paddingContentXxSmall};
     color: white;
     cursor: pointer;
 
     &:hover {
       img {
-        background-color: ${backgroundCardOnprimaryDefaultHover};
+        background-color: ${backgroundCardOnPrimaryDefaultHover};
       }
     }
 
     img {
       width: 24px;
       height: 24px;
-      padding: ${paddingContentXsmall};
-      background-color: ${backgroundCardOnprimaryDefaultRest};
+      padding: ${paddingContentXSmall};
+      background-color: ${backgroundCardOnPrimaryDefaultRest};
       border-radius: ${cornerCtrlRest};
       color: ${foregroundCtrlNeutralSecondaryRest};
     }
@@ -389,7 +389,7 @@ const styles = css`
       width: 20px;
       height: 20px;
       padding: 10px;
-      background-color: ${backgroundCardOnprimaryDefaultRest};
+      background-color: ${backgroundCardOnPrimaryDefaultRest};
       border-radius: ${cornerCtrlRest};
       color: ${foregroundCtrlNeutralSecondaryRest};
     }
@@ -413,7 +413,7 @@ const styles = css`
     align-items: center;
     justify-content: space-between;
     gap: ${gapBetweenContentMedium};
-    background-color: ${backgroundCardOnprimaryDefaultRest};
+    background-color: ${backgroundCardOnPrimaryDefaultRest};
     padding: ${paddingContentMedium} ${paddingContentLarge};
     border-radius: ${cornerCtrlRest} ${cornerCtrlRest} 0 0;
     color: ${foregroundCtrlNeutralSecondaryRest};
@@ -424,9 +424,9 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${gapBetweenContentSmall};
-    border: ${strokewidthDefault} solid ${strokeCtrlOnoutlineRest};
+    border: ${strokeWidthDefault} solid ${strokeCtrlOnOutlineRest};
     border-radius: ${cornerCtrlRest};
-    padding: ${paddingContentXsmall} ${paddingContentMedium};
+    padding: ${paddingContentXSmall} ${paddingContentMedium};
 
     [active] {
       color: ${ctrlLinkForegroundBrandRest};

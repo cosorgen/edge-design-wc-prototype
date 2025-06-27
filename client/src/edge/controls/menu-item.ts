@@ -2,10 +2,10 @@ import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 import {
   cornerCtrlRest,
   gapBetweenCtrlDefault,
-  textStyleDefaultRegularFontfamily,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
   foregroundCtrlNeutralPrimaryRest,
   backgroundCtrlSubtleRest,
   backgroundCtrlSubtleHover,
@@ -49,10 +49,10 @@ const styles = css`
     cursor: pointer;
     border-radius: ${cornerCtrlRest};
 
-    font-family: ${textStyleDefaultRegularFontfamily};
+    font-family: ${textStyleDefaultRegularFontFamily};
     font-weight: ${textStyleDefaultRegularWeight};
-    font-size: ${textGlobalBody3Fontsize};
-    line-height: ${textGlobalBody3Lineheight};
+    font-size: ${textGlobalBody3FontSize};
+    line-height: ${textGlobalBody3LineHeight};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 

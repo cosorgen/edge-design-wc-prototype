@@ -12,13 +12,13 @@ import '../../windows/controls/mica-material.js';
 import {
   gapInsideCtrlDefault,
   paddingCtrlHorizontalDefault,
-  paddingContentXsmall,
+  paddingContentXSmall,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralPrimaryHover,
-  textStyleDefaultRegularFontfamily,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-  textGlobalCaption1Fontsize,
-  textGlobalCaption1Lineheight,
+  textGlobalCaption1FontSize,
+  textGlobalCaption1LineHeight,
   cornerCtrlSmRest,
   ctrlTabBackgroundVerticalHover,
   ctrlTabBackgroundVerticalActive,
@@ -78,7 +78,7 @@ const styles = css`
     gap: ${gapInsideCtrlDefault};
     padding-inline-start: ${paddingCtrlHorizontalDefault};
     padding-inline-end: calc(${paddingCtrlHorizontalDefault} + /*16px*/ 0px);
-    padding-block: ${paddingContentXsmall};
+    padding-block: ${paddingContentXSmall};
     color: ${foregroundCtrlNeutralPrimaryRest};
     border-radius: ${ctrlTabCorner};
   }
@@ -112,10 +112,10 @@ const styles = css`
   #title,
   [name='title']::slotted(*) {
     /* Caption1 */
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalCaption1Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalCaption1Lineheight};
+    line-height: ${textGlobalCaption1LineHeight};
     text-align: start;
     white-space: nowrap;
     overflow: hidden;

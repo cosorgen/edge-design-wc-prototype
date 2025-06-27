@@ -7,7 +7,7 @@ import {
   cornerCircular,
   foregroundCtrlNeutralSecondaryHover,
   foregroundCtrlNeutralSecondaryRest,
-  paddingCtrlSmHorizontalIcononly,
+  paddingCtrlSmHorizontalIconOnly,
   backgroundCtrlSubtlePressed,
   foregroundCtrlNeutralSecondaryPressed,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -32,7 +32,7 @@ const styles = css`
     justify-content: center;
     background: ${backgroundCtrlSubtleRest};
     border: none;
-    padding: ${paddingCtrlSmHorizontalIcononly};
+    padding: ${paddingCtrlSmHorizontalIconOnly};
     margin: 0;
     color: ${foregroundCtrlNeutralSecondaryRest};
     border-radius: ${cornerCircular};

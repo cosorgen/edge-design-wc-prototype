@@ -17,7 +17,7 @@ import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   ctrlTabBackgroundHorizontalActive,
-  paddingContentXsmallnudge,
+  paddingContentXSmallnudge,
   shadowLayer,
 } from '@phoenixui/themes/smtc-tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
@@ -190,7 +190,7 @@ const styles = css`
   }
 
   mai-divider {
-    margin-block: ${paddingContentXsmallnudge};
+    margin-block: ${paddingContentXSmallnudge};
     margin-inline: calc(0px - (var(--paddingWindowDefault) / 2));
   }
 

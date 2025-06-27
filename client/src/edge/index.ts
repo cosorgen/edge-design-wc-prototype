@@ -21,14 +21,14 @@ import { setThemeFor } from '@phoenixui/web-components';
 import {
   textStyleDefaultRegularWeight,
   ctrlTabBackgroundHorizontalActive,
-  backgroundWindowTabbandSolid,
+  backgroundWindowTabBandSolid,
   foregroundContentNeutralPrimary,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontfamily,
-  backgroundWindowTabbandInactive,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textStyleDefaultRegularFontFamily,
+  backgroundWindowTabBandInactive,
   backgroundCtrlBrandRest,
-  foregroundCtrlOnbrandRest,
+  foregroundCtrlOnBrandRest,
 } from '@phoenixui/themes/smtc-tokens.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
@@ -93,20 +93,20 @@ const styles = css`
     flex-direction: column;
     background-color: ${(x) =>
       x.ws.activeWindowId === x.id
-        ? backgroundWindowTabbandSolid
-        : backgroundWindowTabbandInactive};
+        ? backgroundWindowTabBandSolid
+        : backgroundWindowTabBandInactive};
     color: ${foregroundContentNeutralPrimary};
     fill: currentColor;
 
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
   }
 
   ::selection {
     background-color: ${backgroundCtrlBrandRest};
-    color: ${foregroundCtrlOnbrandRest};
+    color: ${foregroundCtrlOnBrandRest};
   }
 
   #activeTab {

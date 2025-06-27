@@ -23,11 +23,11 @@ import {
   foregroundContentNeutralPrimary,
   paddingContentMedium,
   shadowFlyout,
-  textGlobalBody2Fontsize,
-  textGlobalBody2Lineheight,
+  textGlobalBody2FontSize,
+  textGlobalBody2LineHeight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontfamily,
-  gapBetweenContentXxsmall,
+  textStyleDefaultRegularFontFamily,
+  gapBetweenContentXxSmall,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<ExtensionsHub>` <div id="header">
@@ -116,16 +116,16 @@ const styles = css`
     padding: ${paddingContentMedium};
     padding-block-end: 0;
 
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody2Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody2FontSize};
     font-weight: ${textStyleDefaultHeaderWeight};
-    line-height: ${textGlobalBody2Lineheight};
+    line-height: ${textGlobalBody2LineHeight};
   }
 
   #actions {
     display: flex;
     flex-direction: row;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
   }
 
   #content {

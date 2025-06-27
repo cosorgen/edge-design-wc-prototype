@@ -1,10 +1,10 @@
 import {
   foregroundCtrlNeutralPrimaryRest,
-  gapBetweenContentXxxsmall,
+  gapBetweenContentXxxSmall,
   paddingCtrlHorizontalDefault,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontfamily,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
@@ -34,12 +34,12 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXxxsmall};
+    gap: ${gapBetweenContentXxxSmall};
     padding-inline-start: ${paddingCtrlHorizontalDefault};
 
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
-    line-height: ${textGlobalBody3Lineheight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
+    line-height: ${textGlobalBody3LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }

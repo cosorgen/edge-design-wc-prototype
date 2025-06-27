@@ -6,13 +6,13 @@ import {
   ctrlOmniboxBackgroundRest,
   ctrlOmniboxStrokeFocused,
   gapBetweenContentNone,
-  gapBetweenContentXxsmall,
+  gapBetweenContentXxSmall,
   gapInsideCtrlDefault,
   paddingContentNone,
   shadowFlyout,
-  strokewidthDefault,
+  strokeWidthDefault,
   cornerCircular,
-  paddingContentXxsmall,
+  paddingContentXxSmall,
   ctrlOmniboxStrokeRest,
   ctrlOmniboxStrokeHover,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -23,7 +23,7 @@ export const styles = css`
     min-width: 32px; /* Prevents the control from overflowing or collapsing */
     position: relative;
     height: 32px;
-    --stroke-diff: calc(${strokewidthDefault} - ${strokewidthDefault});
+    --stroke-diff: calc(${strokeWidthDefault} - ${strokeWidthDefault});
   }
 
   :host([active]) {
@@ -39,17 +39,17 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     background-color: ${ctrlOmniboxBackgroundRest};
-    border: ${strokewidthDefault} solid ${ctrlOmniboxStrokeRest};
+    border: ${strokeWidthDefault} solid ${ctrlOmniboxStrokeRest};
     border-radius: ${cornerCircular};
-    padding: calc(${paddingContentXxsmall} + var(--stroke-diff))
-      calc(${paddingContentXxsmall} + var(--stroke-diff));
+    padding: calc(${paddingContentXxSmall} + var(--stroke-diff))
+      calc(${paddingContentXxSmall} + var(--stroke-diff));
     overflow: hidden;
   }
 
   :host(:not([dropdown-open]))
     [part='container']:has(omnibox-input:focus-within) {
-    padding: ${paddingContentXxsmall} ${paddingContentXxsmall};
-    border: ${strokewidthDefault} solid ${ctrlOmniboxStrokeFocused};
+    padding: ${paddingContentXxSmall} ${paddingContentXxSmall};
+    border: ${strokeWidthDefault} solid ${ctrlOmniboxStrokeFocused};
   }
 
   :host([dropdown-open]) [part='container'] {
@@ -77,7 +77,7 @@ export const styles = css`
   }
 
   :host([dropdown-open]) #top-row {
-    padding: ${paddingContentXxsmall} ${paddingContentNone};
+    padding: ${paddingContentXxSmall} ${paddingContentNone};
     gap: ${gapBetweenContentNone};
 
     #status {
@@ -96,7 +96,7 @@ export const styles = css`
     flex-direction: row;
     cursor: text;
     min-height: 24px;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
   }
 
   #status {

@@ -4,12 +4,12 @@ import {
   backgroundToolbar,
   cornerLayerDefault,
   gapBetweenCtrlDefault,
-  strokeCtrlOnoutlineRest,
-  strokewidthDefault,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
+  strokeCtrlOnOutlineRest,
+  strokeWidthDefault,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontfamily,
+  textStyleDefaultRegularFontFamily,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html` <div id="title"><slot></slot></div>
@@ -46,17 +46,17 @@ const styles = css`
     background-blend-mode: luminosity;
     padding: calc(4px + var(--paddingWindowDefault));
     padding-inline-start: calc(8px + var(--paddingWindowDefault));
-    border-bottom: ${strokewidthDefault} solid ${strokeCtrlOnoutlineRest};
+    border-bottom: ${strokeWidthDefault} solid ${strokeCtrlOnOutlineRest};
     border-radius: ${cornerLayerDefault} ${cornerLayerDefault} 0 0;
   }
 
   #title {
     flex: 1;
 
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultHeaderWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
   }
 `;
 

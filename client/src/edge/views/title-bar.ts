@@ -10,10 +10,10 @@ import { TabService } from '#services/tabService.js';
 import {
   ctrlTabBackgroundHorizontalActive,
   foregroundContentNeutralPrimary,
-  gapBetweenContentXxsmall,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontfamily,
+  gapBetweenContentXxSmall,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 
@@ -42,15 +42,15 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
     user-select: none;
     width: 100%;
     min-height: 40px;
     padding: var(--paddingWindowDefault);
     background-color: ${ctrlTabBackgroundHorizontalActive};
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
-    line-height: ${textGlobalBody3Lineheight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
+    line-height: ${textGlobalBody3LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
     color: ${foregroundContentNeutralPrimary};
   }

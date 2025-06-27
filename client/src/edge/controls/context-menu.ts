@@ -5,10 +5,10 @@ import {
   cornerFlyoutRest,
   foregroundContentNeutralPrimary,
   foregroundContentNeutralSecondary,
-  gapBetweenContentXsmall,
+  gapBetweenContentXSmall,
   shadowFlyout,
-  paddingContentXsmall,
-  paddingContentXxsmall,
+  paddingContentXSmall,
+  paddingContentXxSmall,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<ContextMenu>`
@@ -23,8 +23,8 @@ const styles = css`
     max-width: 512px;
     display: flex;
     flex-direction: column;
-    gap: ${gapBetweenContentXsmall};
-    padding: ${paddingContentXsmall};
+    gap: ${gapBetweenContentXSmall};
+    padding: ${paddingContentXSmall};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
     box-shadow: ${shadowFlyout};
@@ -47,11 +47,11 @@ const styles = css`
   }
 
   svg[slot='end'] {
-    margin-inline-end: calc(0px - ${paddingContentXxsmall});
+    margin-inline-end: calc(0px - ${paddingContentXxSmall});
   }
 
   mai-divider {
-    margin-block: ${paddingContentXxsmall};
+    margin-block: ${paddingContentXxSmall};
   }
 `;
 

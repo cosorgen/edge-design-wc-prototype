@@ -14,7 +14,7 @@ import {
   foregroundContentNeutralPrimary,
   gapBetweenCtrlDefault,
   paddingContentSmall,
-  paddingContentXsmall,
+  paddingContentXSmall,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
@@ -64,7 +64,7 @@ const styles = css`
     align-items: center;
     gap: ${gapBetweenCtrlDefault};
     padding: 0;
-    padding-inline: ${paddingContentXsmall} 72px;
+    padding-inline: ${paddingContentXSmall} 72px;
     height: 32px;
     cursor: pointer;
     border-radius: ${cornerCtrlRest};

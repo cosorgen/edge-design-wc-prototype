@@ -17,7 +17,7 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
-import { paddingContentXsmall } from '@phoenixui/themes/smtc-tokens.js';
+import { paddingContentXSmall } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html`
   <div id="user">
@@ -124,7 +124,7 @@ const styles = css`
   mai-divider {
     box-sizing: border-box;
     min-height: 0px;
-    padding-block: ${paddingContentXsmall};
+    padding-block: ${paddingContentXSmall};
   }
 `;
 

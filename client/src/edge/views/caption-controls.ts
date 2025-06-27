@@ -19,10 +19,10 @@ import '@mai-ui/button/define.js';
 import {
   backgroundCtrlNeutralRest,
   cornerCircular,
-  gapBetweenContentXxsmall,
-  paddingContentXsmall,
-  paddingContentXxxsmall,
-  strokewidthDefault,
+  gapBetweenContentXxSmall,
+  paddingContentXSmall,
+  paddingContentXxxSmall,
+  strokeWidthDefault,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html` <div
@@ -142,10 +142,10 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-right: ${paddingContentXsmall};
-    padding: calc(${paddingContentXxxsmall} - ${strokewidthDefault})
-      ${paddingContentXxxsmall};
-    gap: ${gapBetweenContentXxsmall};
+    margin-right: ${paddingContentXSmall};
+    padding: calc(${paddingContentXxxSmall} - ${strokeWidthDefault})
+      ${paddingContentXxxSmall};
+    gap: ${gapBetweenContentXxSmall};
     border-radius: ${cornerCircular};
     background-color: ${backgroundCtrlNeutralRest};
   }

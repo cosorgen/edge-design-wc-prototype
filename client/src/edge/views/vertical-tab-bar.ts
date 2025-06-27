@@ -17,7 +17,7 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   ctrlTabBackgroundHorizontalActive,
   foregroundCtrlNeutralSecondaryRest,
-  textGlobalCaption1Fontsize,
+  textGlobalCaption1FontSize,
 } from '@phoenixui/themes/smtc-tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
@@ -147,7 +147,7 @@ const styles = css`
     overflow: hidden;
 
     div[slot='end'] {
-      font-size: ${textGlobalCaption1Fontsize};
+      font-size: ${textGlobalCaption1FontSize};
       color: ${foregroundCtrlNeutralSecondaryRest};
       width: fit-content;
     }

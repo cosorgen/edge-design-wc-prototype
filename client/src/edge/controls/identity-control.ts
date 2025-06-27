@@ -7,17 +7,17 @@ import {
 } from '@microsoft/fast-element';
 import {
   cornerCircular,
-  gapBetweenContentXxsmall,
-  strokewidthDefault,
-  textStyleDefaultRegularFontfamily,
-  textGlobalCaption1Fontsize,
+  gapBetweenContentXxSmall,
+  strokeWidthDefault,
+  textStyleDefaultRegularFontFamily,
+  textGlobalCaption1FontSize,
   foregroundCtrlNeutralPrimaryRest,
   backgroundCtrlSubtleHover,
-  strokeCtrlOnoutlinePressed,
+  strokeCtrlOnOutlinePressed,
   backgroundCtrlSubtlePressed,
   backgroundCtrlSubtleRest,
-  textGlobalCaption1Lineheight,
-  strokeCtrlOnoutlineHover,
+  textGlobalCaption1LineHeight,
+  strokeCtrlOnOutlineHover,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 
@@ -47,29 +47,29 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
     background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
     border-radius: ${cornerCircular};
     padding: 0;
-    border: ${strokewidthDefault} solid transparent;
+    border: ${strokeWidthDefault} solid transparent;
 
     /* caption1 */
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalCaption1Fontsize};
-    line-height: ${textGlobalCaption1Lineheight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
+    line-height: ${textGlobalCaption1LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   button:hover {
-    border-color: ${strokeCtrlOnoutlineHover};
+    border-color: ${strokeCtrlOnOutlineHover};
     background-color: ${backgroundCtrlSubtleHover};
   }
 
   button:hover:active,
   :host([pressed='true']) button {
-    border-color: ${strokeCtrlOnoutlinePressed};
+    border-color: ${strokeCtrlOnOutlinePressed};
     background-color: ${backgroundCtrlSubtlePressed};
   }
 

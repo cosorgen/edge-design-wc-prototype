@@ -49,7 +49,7 @@ import '@mai-ui/tooltip/define.js';
 import '@mai-ui/tree-item/define.js';
 import '@mai-ui/tree/define.js';
 import {
-  backgroundWebpagePrimary,
+  backgroundWebPagePrimary,
   foregroundContentNeutralPrimary,
 } from '@phoenixui/themes/smtc-tokens.js';
 import { Dialog } from '@phoenixui/web-components';
@@ -493,7 +493,7 @@ const styles = css`
     width: 100%;
     height: fit-content;
     min-height: 100%;
-    background-color: ${backgroundWebpagePrimary};
+    background-color: ${backgroundWebPagePrimary};
     color: ${foregroundContentNeutralPrimary};
   }
 

@@ -3,13 +3,13 @@ import {
   backgroundCtrlBrandPressed,
   backgroundCtrlBrandRest,
   cornerCircular,
-  gapBetweenContentXxsmall,
-  paddingContentXxsmall,
-  paddingContentXxxsmall,
+  gapBetweenContentXxSmall,
+  paddingContentXxSmall,
+  paddingContentXxxSmall,
   statusBrandTintForeground,
-  textGlobalCaption1Fontsize,
-  textGlobalCaption1Lineheight,
-  textStyleDefaultRegularFontfamily,
+  textGlobalCaption1FontSize,
+  textGlobalCaption1LineHeight,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 import {
@@ -38,19 +38,19 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
 
     /* Need for collapse */
     min-width: 24px;
     overflow: hidden;
 
     /* Animation on load */
-    padding: ${paddingContentXxxsmall};
+    padding: ${paddingContentXxxSmall};
     transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
   :host([expanded]) button {
-    padding: ${paddingContentXxxsmall} ${paddingContentXxsmall};
+    padding: ${paddingContentXxxSmall} ${paddingContentXxSmall};
   }
 
   button:hover {
@@ -72,10 +72,10 @@ const styles = css`
 
   div {
     flex: 1;
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalCaption1Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalCaption1Lineheight};
+    line-height: ${textGlobalCaption1LineHeight};
     white-space: nowrap;
     overflow: hidden;
     min-width: 0px;

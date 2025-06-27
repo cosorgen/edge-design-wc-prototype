@@ -4,11 +4,11 @@ import {
   backgroundCtrlSubtleRest,
   cornerCtrlRest,
   foregroundCtrlNeutralPrimaryRest,
-  gapBetweenContentXxsmall,
-  paddingContentXsmallnudge,
-  textGlobalCaption1Fontsize,
-  textGlobalCaption1Lineheight,
-  textStyleDefaultRegularFontfamily,
+  gapBetweenContentXxSmall,
+  paddingContentXSmallnudge,
+  textGlobalCaption1FontSize,
+  textGlobalCaption1LineHeight,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 import {
@@ -45,8 +45,8 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXxsmall};
-    padding: ${paddingContentXsmallnudge};
+    gap: ${gapBetweenContentXxSmall};
+    padding: ${paddingContentXSmallnudge};
     border: none;
     border-radius: ${cornerCtrlRest};
     background: ${backgroundCtrlSubtleRest};
@@ -58,10 +58,10 @@ const styles = css`
 
   #title {
     flex: 1;
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalCaption1Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalCaption1Lineheight};
+    line-height: ${textGlobalCaption1LineHeight};
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

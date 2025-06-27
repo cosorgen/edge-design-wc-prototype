@@ -19,11 +19,11 @@ import {
   paddingContentMedium,
   paddingContentSmall,
   shadowFlyout,
-  textGlobalBody2Fontsize,
-  textGlobalBody2Lineheight,
-  textStyleDefaultRegularFontfamily,
+  textGlobalBody2FontSize,
+  textGlobalBody2LineHeight,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-  paddingContentXsmall,
+  paddingContentXSmall,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<AddFavoritesInputs>`
@@ -84,10 +84,10 @@ const styles = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: ${paddingContentXsmall};
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody2Fontsize};
-    line-height: ${textGlobalBody2Lineheight};
+    margin-bottom: ${paddingContentXSmall};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody2FontSize};
+    line-height: ${textGlobalBody2LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
   }
 
@@ -99,7 +99,7 @@ const styles = css`
   .input-group {
     display: flex;
     align-items: center;
-    margin-bottom: ${paddingContentXsmall};
+    margin-bottom: ${paddingContentXSmall};
     justify-content: space-between;
   }
 

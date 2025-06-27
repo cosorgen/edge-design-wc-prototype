@@ -26,16 +26,16 @@ import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,
   foregroundContentNeutralPrimary,
-  paddingContentXsmall,
+  paddingContentXSmall,
   shadowFlyout,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
   textStyleDefaultHeaderWeight,
-  textStyleDefaultRegularFontfamily,
+  textStyleDefaultRegularFontFamily,
   cornerCtrlRest,
   textStyleDefaultRegularWeight,
   gapBetweenContentMedium,
-  gapBetweenContentXxsmall,
+  gapBetweenContentXxSmall,
   paddingContentMedium,
   gapBetweenContentSmall,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -182,17 +182,17 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultHeaderWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
   }
 
   #icons {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
   }
 
   button {
@@ -221,10 +221,10 @@ const styles = css`
     height: 32px !important;
     gap: ${gapBetweenContentMedium};
     padding-left: 42px;
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
-    line-height: ${textGlobalBody3Lineheight};
+    line-height: ${textGlobalBody3LineHeight};
   }
 
   mai-text-input {
@@ -243,7 +243,7 @@ const styles = css`
   }
 
   .folder-heading svg {
-    margin-right: ${paddingContentXsmall};
+    margin-right: ${paddingContentXSmall};
   }
 
   .vertical-container {

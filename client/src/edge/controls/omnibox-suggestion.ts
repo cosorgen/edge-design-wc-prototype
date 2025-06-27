@@ -14,7 +14,7 @@ import {
   cornerCtrlRest,
   foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentSmall,
-  textGlobalBody3Fontsize,
+  textGlobalBody3FontSize,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 
@@ -100,7 +100,7 @@ const styles = css`
 
   #title {
     /* Body1 */
-    font-size: ${textGlobalBody3Fontsize};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
     white-space: nowrap;
     overflow: hidden;
@@ -109,7 +109,7 @@ const styles = css`
 
   #subtitle2 {
     /* Body1 */
-    font-size: ${textGlobalBody3Fontsize};
+    font-size: ${textGlobalBody3FontSize};
     font-weight: ${textStyleDefaultRegularWeight};
     white-space: nowrap;
     overflow: hidden;

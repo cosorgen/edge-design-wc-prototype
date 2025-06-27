@@ -6,22 +6,22 @@ import {
   foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentMedium,
   gapBetweenContentSmall,
-  gapBetweenContentXsmall,
+  gapBetweenContentXSmall,
   paddingContentMedium,
   shadowFlyout,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textGlobalCaption2Fontsize,
-  textGlobalCaption2Lineheight,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textGlobalCaption2FontSize,
+  textGlobalCaption2LineHeight,
+  gapBetweenContentXxSmall,
+  statusSuccessTintForeground,
+  textGlobalBody2FontSize,
+  textGlobalBody2LineHeight,
+  textStyleDefaultHeaderWeight,
+  textGlobalCaption1FontSize,
+  textStyleDefaultRegularWeight,
+  textGlobalCaption1LineHeight,
 } from '@phoenixui/themes/smtc-tokens.js';
-import { gapBetweenContentXxsmall } from '@phoenixui/themes/smtc-tokens.js';
-import { statusSuccessTintForeground } from '@phoenixui/themes/smtc-tokens.js';
-import { textGlobalBody2Fontsize } from '@phoenixui/themes/smtc-tokens.js';
-import { textStyleDefaultHeaderWeight } from '@phoenixui/themes/smtc-tokens.js';
-import { textGlobalBody2Lineheight } from '@phoenixui/themes/smtc-tokens.js';
-import { textGlobalCaption1Fontsize } from '@phoenixui/themes/smtc-tokens.js';
-import { textStyleDefaultRegularWeight } from '@phoenixui/themes/smtc-tokens.js';
-import { textGlobalCaption1Lineheight } from '@phoenixui/themes/smtc-tokens.js';
 import '@mai-ui/link/define.js';
 import '@mai-ui/menu-list/define.js';
 import '@mai-ui/menu-item/define.js';
@@ -153,20 +153,20 @@ const styles = css`
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: ${gapBetweenContentXxsmall};
+      gap: ${gapBetweenContentXxSmall};
     }
   }
 
   #profile-name {
-    font-size: ${textGlobalBody2Fontsize};
-    line-height: ${textGlobalBody2Lineheight};
+    font-size: ${textGlobalBody2FontSize};
+    line-height: ${textGlobalBody2LineHeight};
     font-weight: ${textStyleDefaultHeaderWeight};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   #profile-email {
-    font-size: ${textGlobalCaption1Fontsize};
-    line-height: ${textGlobalCaption1Lineheight};
+    font-size: ${textGlobalCaption1FontSize};
+    line-height: ${textGlobalCaption1LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
@@ -174,10 +174,10 @@ const styles = css`
   #profile-status {
     display: flex;
     flex-direction: row;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
     color: ${statusSuccessTintForeground};
-    font-size: ${textGlobalCaption1Fontsize};
-    line-height: ${textGlobalCaption1Lineheight};
+    font-size: ${textGlobalCaption1FontSize};
+    line-height: ${textGlobalCaption1LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
 
     svg {
@@ -190,11 +190,11 @@ const styles = css`
   #wallet {
     display: flex;
     flex-direction: column;
-    gap: ${gapBetweenContentXxsmall};
+    gap: ${gapBetweenContentXxSmall};
 
     & > span {
-      font-size: ${textGlobalBody3Fontsize};
-      line-height: ${textGlobalBody3Lineheight};
+      font-size: ${textGlobalBody3FontSize};
+      line-height: ${textGlobalBody3LineHeight};
       font-weight: ${textStyleDefaultHeaderWeight};
       color: ${foregroundCtrlNeutralPrimaryRest};
     }
@@ -211,7 +211,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXsmall};
+    gap: ${gapBetweenContentXSmall};
 
     #start {
       width: 32px;
@@ -232,8 +232,8 @@ const styles = css`
       width: 100%;
 
       #title {
-        font-size: ${textGlobalCaption2Fontsize};
-        line-height: ${textGlobalCaption2Lineheight};
+        font-size: ${textGlobalCaption2FontSize};
+        line-height: ${textGlobalCaption2LineHeight};
         color: ${foregroundCtrlNeutralSecondaryRest};
       }
 
@@ -242,9 +242,9 @@ const styles = css`
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        gap: ${gapBetweenContentXxsmall};
-        font-size: ${textGlobalBody3Fontsize};
-        line-height: ${textGlobalBody3Lineheight};
+        gap: ${gapBetweenContentXxSmall};
+        font-size: ${textGlobalBody3FontSize};
+        line-height: ${textGlobalBody3LineHeight};
         font-weight: ${textStyleDefaultHeaderWeight};
         color: ${foregroundCtrlNeutralPrimaryRest};
       }

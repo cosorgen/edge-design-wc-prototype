@@ -7,9 +7,9 @@ import {
 } from '@microsoft/fast-element';
 import {
   foregroundCtrlNeutralSecondaryRest,
-  textGlobalBody3Fontsize,
-  textGlobalBody3Lineheight,
-  textStyleDefaultRegularFontfamily,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
 } from '@phoenixui/themes/smtc-tokens.js';
 
@@ -41,9 +41,9 @@ const styles = css`
     overflow: hidden;
     text-overflow: ellipsis;
     /* body1 */
-    font-family: ${textStyleDefaultRegularFontfamily};
-    font-size: ${textGlobalBody3Fontsize};
-    line-height: ${textGlobalBody3Lineheight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
+    line-height: ${textGlobalBody3LineHeight};
     font-weight: ${textStyleDefaultRegularWeight};
     cursor: text;
     outline: none;
