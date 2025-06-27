@@ -6,26 +6,19 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import '../windows/controls/mica-material.js';
-import '@mai-ui/button/define.js';
-import '@mai-ui/text-input/define.js';
-import '@mai-ui/switch/define.js';
-import '@mai-ui/dropdown/define.js';
-import '@mai-ui/listbox/define.js';
-import '@mai-ui/option/define.js';
+import '@phoenixui/web-components/button.js';
+import '@phoenixui/web-components/text-input.js';
+import '@phoenixui/web-components/switch.js';
+import '@fluentui/web-components/dropdown.js';
+import '@fluentui/web-components/listbox.js';
+import '@fluentui/web-components/option.js';
+import '@fluentui/web-components/tablist.js';
+import '@fluentui/web-components/tab.js';
 import {
   colorLayerBackgroundDialog,
-  colorNeutralForeground1,
   spacingHorizontalL,
   spacingHorizontalXL,
   typographyStyles,
-  borderRadiusCircular,
-  fontFamilyBase,
-  fontSizeBase300,
-  lineHeightBase300,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundSelected,
-  colorBrandForeground1,
-  borderRadiusSmall,
   spacingHorizontalM,
   spacingVerticalS,
   colorShellFillCaptionControlPrimaryHover,
@@ -49,7 +42,7 @@ const template = html<WindowsSettings>`
       <h1>Settings</h1>
       <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
-        <mai-button
+        <phx-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -63,8 +56,8 @@ const template = html<WindowsSettings>`
               href="./img/edge/icons.svg#chrome-minimize-20-regular"
             />
           </svg>
-        </mai-button>
-        <mai-button
+        </phx-button>
+        <phx-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -79,8 +72,8 @@ const template = html<WindowsSettings>`
                 x.windowIsMaximized() ? 'restore' : 'maximize'}-20-regular"
             />
           </svg>
-        </mai-button>
-        <mai-button
+        </phx-button>
+        <phx-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -95,115 +88,114 @@ const template = html<WindowsSettings>`
               href="./img/edge/icons.svg#chrome-close-20-regular"
             />
           </svg>
-        </mai-button>
+        </phx-button>
       </div>
     </div>
 
     <div id="container">
-      <div id="sidebar">
-        <button
+      <fluent-tablist orientation="vertical">
+        <fluent-tab
           class="${(x) =>
             x.selectedButton === 'appearance' ? 'selected' : ''}"
           @click="${(x) => x.handleSidebarButtonClick('appearance')}"
         >
           Overall appearance
-        </button>
-        <button
+        </fluent-tab>
+        <fluent-tab
           class="${(x) => (x.selectedButton === 'browser' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('browser')}"
         >
           Browser
-        </button>
-        <button
+        </fluent-tab>
+        <fluent-tab
           class="${(x) => (x.selectedButton === 'newtab' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('newtab')}"
         >
           New tab pages
-        </button>
-        <button
+        </fluent-tab>
+        <fluent-tab
           class="${(x) => (x.selectedButton === 'copilot' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('copilot')}"
         >
           Copilot
-        </button>
-      </div>
+        </fluent-tab>
+      </fluent-tablist>
 
       <div id="main">
         <!-- Overall Appearance Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'appearance'}">
-          <h2>Overall appearance</h2>
           <div class="entry">
             <label for="design-system">Design system</label>
-            <mai-dropdown
+            <fluent-dropdown
               id="design-system"
               @change="${(x) => x.updateDesignSystem()}"
             >
-              <mai-listbox>
-                <mai-option
+              <fluent-listbox>
+                <fluent-option
                   value="kumo"
                   ?selected="${(x) => x.ss.designSystem === 'kumo'}"
                 >
                   Kumo
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="phoenix"
                   ?selected="${(x) => x.ss.designSystem === 'phoenix'}"
                 >
                   Phoenix
-                </mai-option>
-              </mai-listbox>
-            </mai-dropdown>
+                </fluent-option>
+              </fluent-listbox>
+            </fluent-dropdown>
           </div>
           <div class="entry">
             <label for="theme">Theme</label>
-            <mai-dropdown id="theme" @change="${(x) => x.updateTheme()}">
-              <mai-listbox>
-                <mai-option
+            <fluent-dropdown id="theme" @change="${(x) => x.updateTheme()}">
+              <fluent-listbox>
+                <fluent-option
                   value="light"
                   ?selected="${(x) => x.ws.theme === 'light'}"
                 >
                   Light
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="dark"
                   ?selected="${(x) => x.ws.theme === 'dark'}"
                 >
                   Dark
-                </mai-option>
-              </mai-listbox>
-            </mai-dropdown>
+                </fluent-option>
+              </fluent-listbox>
+            </fluent-dropdown>
           </div>
           <div class="entry">
             <label for="transparency">Transparency</label>
-            <mai-dropdown
+            <fluent-dropdown
               id="transparency"
               @change="${(x) => x.updateTransparency()}"
             >
-              <mai-listbox>
-                <mai-option
+              <fluent-listbox>
+                <fluent-option
                   value="normal"
                   ?selected="${(x) => x.ws.transparency === 'normal'}"
                 >
                   Normal
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="reduced"
                   ?selected="${(x) => x.ws.transparency === 'reduced'}"
                 >
                   Reduced
-                </mai-option>
-              </mai-listbox>
-            </mai-dropdown>
+                </fluent-option>
+              </fluent-listbox>
+            </fluent-dropdown>
           </div>
           <div class="entry">
             <label for="frame-spacing">Frame spacing</label>
-            <mai-text-input
+            <phx-text-input
               id="frame-spacing"
               type="number"
               value="${(x) => parseInt(x.ss.frameSpacing)}"
               @change="${(x) => x.updateFrameSpacing()}"
             >
-            </mai-text-input>
+            </phx-text-input>
           </div>
           <div class="entry">
             <label for="theme-color">Theme color</label>
@@ -216,181 +208,178 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="theme-palette">Theme palette</label>
-            <mai-dropdown
+            <fluent-dropdown
               id="theme-palette"
               @change="${(x) => x.updateThemePalette()}"
             >
-              <mai-listbox>
-                <mai-option
+              <fluent-listbox>
+                <fluent-option
                   value="tonal"
                   ?selected="${(x) => x.ss.themePalette === 'tonal'}"
                 >
                   Tonal (default)
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="neutral"
                   ?selected="${(x) => x.ss.themePalette === 'neutral'}"
                 >
                   Neutral
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="vibrant"
                   ?selected="${(x) => x.ss.themePalette === 'vibrant'}"
                 >
                   Vibrant
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="expressive"
                   ?selected="${(x) => x.ss.themePalette === 'expressive'}"
                 >
                   Expressive
-                </mai-option>
-              </mai-listbox>
-            </mai-dropdown>
+                </fluent-option>
+              </fluent-listbox>
+            </fluent-dropdown>
           </div>
         </div>
 
         <!-- Browser Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'browser'}">
-          <h2>Browser</h2>
           <div class="entry">
             <label for="show-menus-l0">Show menus in L1</label>
-            <mai-switch
+            <phx-switch
               slot="input"
               id="show-menus-l0"
               ?checked="${(x) => x.ss.showMenusInL1}"
               @change="${(x) => x.toggleshowMenusInL1()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
-            <mai-dropdown
+            <fluent-dropdown
               id="favorites-bar"
               @change="${(x) => x.updateShowFavoritesBar()}"
               value="${(x) => x.ss.showFavoritesBar}"
             >
-              <mai-listbox>
-                <mai-option
+              <fluent-listbox>
+                <fluent-option
                   value="always"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
                 >
                   Always
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="never"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
                 >
                   Never
-                </mai-option>
-                <mai-option
+                </fluent-option>
+                <fluent-option
                   value="newtab"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
                 >
                   On new tab
-                </mai-option>
-              </mai-listbox>
-            </mai-dropdown>
+                </fluent-option>
+              </fluent-listbox>
+            </fluent-dropdown>
           </div>
           <div class="entry">
             <label for="truncate-url">Truncate URL</label>
-            <mai-switch
+            <phx-switch
               id="truncate-url"
               ?checked="${(x) => x.ss.truncateURL}"
               @change="${(x) => x.toggleTruncateUrl()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="full-width-omnibox">Full width omnibox</label>
-            <mai-switch
+            <phx-switch
               slot="input"
               id="full-width-omnibox"
               ?checked="${(x) => x.ss.fullWidthOmnibox}"
               @change="${(x) => x.toggleFullWidthOmnibox()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="shopping-trigger">Shopping trigger URL</label>
-            <mai-text-input
+            <phx-text-input
               id="shopping-trigger"
               type="text"
               value="${(x) => x.ts.shoppingTriggerURL}"
               @blur="${(x) => x.updateShoppingTrigger()}"
             >
-            </mai-text-input>
+            </phx-text-input>
           </div>
         </div>
 
         <!-- New Tab Pages Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'newtab'}">
-          <h2>New tab pages</h2>
           <div class="entry">
             <label for="legacy-newtab"> Show legacy new tab page </label>
-            <mai-switch
+            <phx-switch
               id="legacy-newtab"
               ?checked="${(x) => x.ss.showLegacyNewTab}"
               @change="${(x) => x.toggleShowLegacyNewTab()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="show-copilot-ntp"> Show copilot new tab page </label>
-            <mai-switch
+            <phx-switch
               slot="input"
               id="show-copilot-ntp"
               ?checked="${(x) => x.ss.showCopilotNTP}"
               @change="${(x) => x.toggleShowCopilotNTP()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
         </div>
 
         <!-- Copilot Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'copilot'}">
-          <h2>Copilot</h2>
           <div class="entry">
             <label for="legacy-copilot"> Show legacy copilot </label>
-            <mai-switch
+            <phx-switch
               id="legacy-copilot"
               ?checked="${(x) => x.ss.showLegacyCopilot}"
               @change="${(x) => x.toggleShowLegacyCopilot()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="composer-hint"> Show composer hint </label>
-            <mai-switch
+            <phx-switch
               id="composer-hint"
               ?checked="${(x) => x.cs.showHint}"
               @change="${(x) => x.toggleShowComposerHint()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="legacy-newtab"> Auto open composer on hover </label>
-            <mai-switch
+            <phx-switch
               id="composer-auto-open"
               ?checked="${(x) => x.cs.autoOpen}"
               @change="${(x) => x.toggleAutoOpenComposer()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
           <div class="entry">
             <label for="composer-auto-open-delay"
               >Composer auto open delay (ms)</label
             >
-            <mai-text-input
+            <phx-text-input
               id="composer-auto-open-delay"
               type="number"
               value="${(x) => x.cs.autoOpenDelay}"
               @change="${(x) => x.updateComposerAutoOpenDelay()}"
               ?disabled="${(x) => !x.cs.autoOpen}"
             >
-            </mai-text-input>
+            </phx-text-input>
           </div>
           <div class="entry">
             <label for="copilot-sidepane-background">
               Copilot sidepane background
             </label>
-            <mai-switch
+            <phx-switch
               id="copilot-sidepane-background"
               ?checked="${(x) => x.cs.sidepaneBackground}"
               @change="${(x) => x.toggleShowSidepaneBackground()}"
-            ></mai-switch>
+            ></phx-switch>
           </div>
         </div>
       </div>
@@ -436,60 +425,6 @@ const styles = css`
     padding-top: ${spacingVerticalS};
     margin: 0;
     user-select: none;
-  }
-
-  h2 {
-    font-family: ${typographyStyles.body1Strong.fontFamily};
-    font-size: ${typographyStyles.body1Strong.fontSize};
-    font-weight: ${typographyStyles.body1Strong.fontWeight};
-    line-height: 32px;
-    margin: 0;
-    user-select: none;
-  }
-
-  button {
-    position: relative;
-    width: 100%;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    padding-left: ${spacingHorizontalM};
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    border-radius: ${borderRadiusSmall};
-
-    /* Body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    line-height: ${lineHeightBase300};
-    color: ${colorNeutralForeground1};
-  }
-
-  button:hover {
-    background: ${colorSubtleBackgroundHover};
-  }
-
-  button.selected {
-    background: ${colorSubtleBackgroundSelected};
-  }
-
-  button.selected::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3px;
-    height: 16px;
-    background-color: ${colorBrandForeground1};
-    border-radius: ${borderRadiusCircular};
-  }
-
-  #sidebar {
-    width: 200px;
-    display: flex;
-    flex-direction: column;
   }
 
   #close:hover {

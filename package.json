@@ -39,6 +39,7 @@
     "typescript-eslint": "^8.15.0"
   },
   "dependencies": {
+    "@fluentui/tokens": "^1.0.0-alpha.21",
     "@mai-ui/listbox": "^1.0.1"
   }
 }

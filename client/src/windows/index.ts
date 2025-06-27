@@ -62,7 +62,7 @@ const template = html<WindowsShell>`
   <mica-material
     id="desktop"
     image-only
-    @click="${(x) => x.ws.activateWindow(null)}"
+    @click="${(x) => x.ws.activateWindow()}"
   ></mica-material>
   ${repeat(
     (x) => x.ws.windows,
