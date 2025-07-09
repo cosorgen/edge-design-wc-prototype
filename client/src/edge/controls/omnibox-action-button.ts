@@ -2,14 +2,14 @@ import { customElement, FASTElement, html, css } from '@microsoft/fast-element';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
-  backgroundCtrlSubtleHover,
-  backgroundCtrlSubtleRest,
   cornerCircular,
   foregroundCtrlNeutralSecondaryHover,
   foregroundCtrlNeutralSecondaryRest,
   paddingCtrlSmHorizontalIconOnly,
-  backgroundCtrlSubtlePressed,
   foregroundCtrlNeutralSecondaryPressed,
+  ctrlOmniboxActionButtonBackgroundPressed,
+  ctrlOmniboxActionButtonBackgroundRest,
+  ctrlOmniboxActionButtonBackgroundHover,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<OmniboxActionButton>`
@@ -30,7 +30,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: ${backgroundCtrlSubtleRest};
+    background: ${ctrlOmniboxActionButtonBackgroundRest};
     border: none;
     padding: ${paddingCtrlSmHorizontalIconOnly};
     margin: 0;
@@ -39,14 +39,14 @@ const styles = css`
   }
 
   button:hover {
-    background: ${backgroundCtrlSubtleHover};
+    background: ${ctrlOmniboxActionButtonBackgroundHover};
     color: ${foregroundCtrlNeutralSecondaryHover};
     cursor: pointer;
   }
 
   button:hover:active,
   :host([pressed='true']) button {
-    background: ${backgroundCtrlSubtlePressed};
+    background: ${ctrlOmniboxActionButtonBackgroundPressed};
     color: ${foregroundCtrlNeutralSecondaryPressed};
   }
 
