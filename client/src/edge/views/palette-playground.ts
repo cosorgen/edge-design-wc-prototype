@@ -48,12 +48,16 @@ import '@mai-ui/text-input/define.js';
 import '@mai-ui/tooltip/define.js';
 import '@mai-ui/tree-item/define.js';
 import '@mai-ui/tree/define.js';
+import { Dialog } from '@phoenixui/web-components';
+import { Drawer } from '@fluentui/web-components';
 import {
   backgroundWebPagePrimary,
   foregroundContentNeutralPrimary,
-} from '@phoenixui/themes/smtc-tokens.js';
-import { Dialog } from '@phoenixui/web-components';
-import { Drawer } from '@fluentui/web-components';
+  backgroundCtrlSubtleHover,
+  foregroundCtrlHintDefault,
+  foregroundCtrlNeutralPrimaryRest,
+  foregroundCtrlNeutralSecondaryRest,
+} from '@phoenixui/themes/tokens.js';
 
 function FormatTitle(title: string): string {
   return title
@@ -110,6 +114,17 @@ const template = html<PalettePlayground>`
   <div class="group">
     <h2>Controls</h2>
     <div id="controls">
+      <div style="padding: 8px; background: ${backgroundCtrlSubtleHover};">
+        <span style="color: ${foregroundCtrlHintDefault};">
+          This is hint text with hover BG.
+        </span>
+        <span style="color: ${foregroundCtrlNeutralSecondaryRest};">
+          This is secondary text with hover BG.
+        </span>
+        <span style="color: ${foregroundCtrlNeutralPrimaryRest};">
+          This is primary text with hover BG.
+        </span>
+      </div>
       <mai-button>Neutral</mai-button>
       <mai-button appearance="primary">Primary</mai-button>
       <mai-button appearance="outline">Outline</mai-button>
