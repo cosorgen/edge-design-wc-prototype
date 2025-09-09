@@ -114,6 +114,17 @@ const template = html<PalettePlayground>`
   <div class="group">
     <h2>Controls</h2>
     <div id="controls">
+      <div style="padding: 8px;">
+        <span style="color: ${foregroundCtrlHintDefault};">
+          This is hint text with hover BG.
+        </span>
+        <span style="color: ${foregroundCtrlNeutralSecondaryRest};">
+          This is secondary text with hover BG.
+        </span>
+        <span style="color: ${foregroundCtrlNeutralPrimaryRest};">
+          This is primary text with hover BG.
+        </span>
+      </div>
       <div style="padding: 8px; background: ${backgroundCtrlSubtleHover};">
         <span style="color: ${foregroundCtrlHintDefault};">
           This is hint text with hover BG.
