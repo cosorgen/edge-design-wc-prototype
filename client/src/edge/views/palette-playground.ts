@@ -48,6 +48,7 @@ import '@mai-ui/text-input/define.js';
 import '@mai-ui/tooltip/define.js';
 import '@mai-ui/tree-item/define.js';
 import '@mai-ui/tree/define.js';
+import '@mai-ui/content-card/define.js';
 import { Dialog } from '@phoenixui/web-components';
 import { Drawer } from '@fluentui/web-components';
 import {
@@ -432,6 +433,26 @@ const template = html<PalettePlayground>`
           Accordion Panel 3
         </mai-accordion-item>
       </mai-accordion>
+      <mai-content-card
+        href="https://microsoft.com"
+        style="height: 320px; width: 300px;"
+      >
+        <img alt src="https://picsum.photos/id/168/800/400" slot="preview" />
+
+        <mai-badge slot="attribution">
+          <img
+            alt
+            slot="start"
+            style="border-radius: 1rem"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAK0lEQVR4AeyTsQkAAAzCxP+f86KW3uDQJYKrQzBOMk2tMgxIMIDBafT/gwUAAP//o8kMuAAAAAZJREFUAwBD9zdBHpQo2gAAAABJRU5ErkJggg=="
+          />
+          Wikipedia
+        </mai-badge>
+
+        <span slot="meta">· 1d</span>
+
+        <h2>The Woman Who Sold the World’s Most Expensive Dinosaur</h2>
+      </mai-content-card>
     </div>
   </div>
   <div class="group">
