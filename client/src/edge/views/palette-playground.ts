@@ -58,6 +58,8 @@ import {
   foregroundCtrlHintDefault,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralSecondaryRest,
+  backgroundCtrlNeutralDisabled,
+  foregroundCtrlNeutralPrimaryDisabled,
 } from '@phoenixui/themes/tokens.js';
 
 function FormatTitle(title: string): string {
@@ -117,13 +119,18 @@ const template = html<PalettePlayground>`
     <div id="controls">
       <div style="padding: 8px;">
         <span style="color: ${foregroundCtrlHintDefault};">
-          This is hint text with hover BG.
+          This is hint text with primary BG.
         </span>
         <span style="color: ${foregroundCtrlNeutralSecondaryRest};">
-          This is secondary text with hover BG.
+          This is secondary text with primary BG.
         </span>
         <span style="color: ${foregroundCtrlNeutralPrimaryRest};">
-          This is primary text with hover BG.
+          This is primary text with primary BG.
+        </span>
+      </div>
+      <div style="padding: 8px; background: ${backgroundCtrlNeutralDisabled};">
+        <span style="color: ${foregroundCtrlNeutralPrimaryDisabled};">
+          This is disabled text with button BG.
         </span>
       </div>
       <div style="padding: 8px; background: ${backgroundCtrlSubtleHover};">
