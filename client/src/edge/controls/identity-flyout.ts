@@ -50,17 +50,17 @@ const template = html<IdentityMenu>` <div id="top-row">
       <div id="actions">
         <mai-button appearance="subtle" size="small" icon-only>
           <svg>
-            <use href="./img/edge/icons.svg#payment-20-regular"></use>
+            <use href="./img/edge/icons.svg#payment-20-regular" x="-2" y="-2"></use>
           </svg>
         </mai-button>
         <mai-button appearance="subtle" size="small" icon-only>
           <svg>
-            <use href="./img/edge/icons.svg#key-20-regular"></use>
+            <use href="./img/edge/icons.svg#key-20-regular" x="-2" y="-2"></use>
           </svg>
         </mai-button>
         <mai-button appearance="subtle" size="small" icon-only>
           <svg>
-            <use href="./img/edge/icons.svg#person-note-20-regular"></use>
+            <use href="./img/edge/icons.svg#person-note-20-regular" x="-2" y="-2"></use>
           </svg>
         </mai-button>
       </div>

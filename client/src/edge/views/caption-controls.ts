@@ -65,18 +65,16 @@ const template = html` <div
   <mai-button
     size="large"
     appearance="subtle"
-    shape="square"
     icon-only
     @click="${(x) => x.minimizeWindow()}"
   >
     <svg>
-      <use href="img/edge/icons.svg#chrome-minimize-20-regular" x="2" y="2" />
+      <use href="img/edge/icons.svg#chrome-minimize-20-regular" />
     </svg>
   </mai-button>
   <mai-button
     size="large"
     appearance="subtle"
-    shape="square"
     icon-only
     @click="${(x) => x.maximizeWindow()}"
   >
@@ -86,21 +84,18 @@ const template = html` <div
           x.windowIsMaximized()
             ? 'img/edge/icons.svg#chrome-restore-20-regular'
             : 'img/edge/icons.svg#chrome-maximize-20-regular'}"
-        x="2"
-        y="2"
       />
     </svg>
   </mai-button>
   <mai-button
     size="large"
     appearance="subtle"
-    shape="square"
     icon-only
     @click="${(x) => x.closeWindow()}"
     id="close"
   >
     <svg>
-      <use href="img/edge/icons.svg#chrome-close-20-regular" x="2" y="2" />
+      <use href="img/edge/icons.svg#chrome-close-20-regular" />
     </svg>
   </mai-button>`;
 
@@ -122,10 +117,10 @@ const styles = css`
     height: var(--caption-controls-height);
     width: ${(x) => (x.ews.activeSidepaneAppId ? '384px' : '186px')};
 
-    --smtc-corner-ctrl-rest: 0px;
-    --smtc-corner-ctrl-hover: 0px;
-    --smtc-corner-ctrl-pressed: 0px;
-    --smtc-corner-ctrl-selected: 0px;
+    --smtc-corner-ctrl-lg-rest: 0px;
+    --smtc-corner-ctrl-lg-hover: 0px;
+    --smtc-corner-ctrl-lg-pressed: 0px;
+    --smtc-corner-ctrl-lg-selected: 0px;
   }
 
   #close:hover {
