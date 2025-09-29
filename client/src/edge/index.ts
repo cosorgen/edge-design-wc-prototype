@@ -16,6 +16,7 @@ import {
   phoenixSmtcDarkTheme,
   lightChromiumMapping,
   darkChromiumMapping,
+  backgroundWindowTabBandVerticalTabs,
 } from '@phoenixui/themes';
 import { setThemeFor } from '@phoenixui/web-components';
 import {
@@ -104,6 +105,10 @@ const styles = css`
     line-height: ${textGlobalBody3LineHeight};
   }
 
+  :host([vertical-tabs-active]) {
+    background-color: ${backgroundWindowTabBandVerticalTabs};
+  }
+
   ::selection {
     background-color: ${backgroundCtrlBrandRest};
     color: ${foregroundCtrlOnBrandRest};
@@ -125,6 +130,10 @@ const styles = css`
     flex-direction: column;
     background-color: ${ctrlTabBackgroundHorizontalActive};
     overflow: hidden;
+  }
+
+  :host([vertical-tabs-active]) #content {
+    background-color: transparent;
   }
 
   #web-vertical-tabs {
@@ -159,6 +168,8 @@ const styles = css`
 @customElement({ name: 'microsoft-edge', template, styles })
 export class MicrosoftEdge extends FASTElement {
   @attr id!: string;
+  @attr({ mode: 'boolean', attribute: 'vertical-tabs-active' })
+  verticalTabsActive = false;
   @inject(WindowsService) ws!: WindowsService;
   @inject(EdgeSettingsService) ss!: EdgeSettingsService;
   @observable ts!: TabService;
@@ -227,6 +238,9 @@ export class MicrosoftEdge extends FASTElement {
     ) {
       this.clearTheme();
       this.setTheme();
+    }
+    if (propertyName === 'verticalTabs') {
+      this.verticalTabsActive = this.ss.verticalTabs;
     }
   }
 

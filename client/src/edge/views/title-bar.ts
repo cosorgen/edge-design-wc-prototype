@@ -8,7 +8,6 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#services/tabService.js';
 import {
-  ctrlTabBackgroundHorizontalActive,
   foregroundContentNeutralPrimary,
   gapBetweenContentXxSmall,
   textGlobalBody3FontSize,
@@ -47,7 +46,6 @@ const styles = css`
     width: 100%;
     min-height: 40px;
     padding: var(--paddingWindowDefault);
-    background-color: ${ctrlTabBackgroundHorizontalActive};
     font-family: ${textStyleDefaultRegularFontFamily};
     font-size: ${textGlobalBody3FontSize};
     line-height: ${textGlobalBody3LineHeight};

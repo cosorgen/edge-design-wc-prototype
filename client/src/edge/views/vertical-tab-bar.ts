@@ -15,7 +15,6 @@ import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
-  ctrlTabBackgroundHorizontalActive,
   foregroundCtrlNeutralSecondaryRest,
   textGlobalCaption1FontSize,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -125,7 +124,6 @@ const styles = css`
     user-select: none;
     padding: var(--paddingWindowDefault);
     padding-inline-end: 0;
-    background: ${ctrlTabBackgroundHorizontalActive};
   }
 
   .group {

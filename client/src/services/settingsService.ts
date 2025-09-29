@@ -15,7 +15,7 @@ export default class EdgeSettingsSerivce {
   @observable themeColor?: string;
   @observable themePalette: 'tonal' | 'neutral' | 'expressive' | 'vibrant' =
     'tonal';
-  @observable designSystem: 'phoenix' | 'kumo' = 'kumo';
+  @observable designSystem: 'phoenix' | 'kumo' = 'phoenix';
   @observable verticalTabs = false;
 
   constructor() {
