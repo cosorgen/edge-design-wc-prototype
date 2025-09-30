@@ -67,8 +67,20 @@ export default class WindowsService {
 
   setSettingsInURL() {
     const url = new URL(window.location.href);
-    url.searchParams.set('theme', this.theme);
-    url.searchParams.set('transparency', this.transparency);
+    const osTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+    if (this.theme !== osTheme) {
+      url.searchParams.set('theme', this.theme);
+    }
+    const osTransparency = window.matchMedia(
+      '(prefers-reduced-transparency: reduce)',
+    ).matches
+      ? 'reduced'
+      : 'normal';
+    if (this.transparency !== osTransparency) {
+      url.searchParams.set('transparency', this.transparency);
+    }
 
     window.history.pushState({}, '', url.toString());
   }

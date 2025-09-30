@@ -12,10 +12,10 @@ export default class EdgeSettingsSerivce {
   @observable showLegacyNewTab = true;
   @observable showMenusInL1 = true;
   @observable fullWidthOmnibox = true;
-  @observable themeColor?: string;
+  @observable themeColor: string | null = null;
   @observable themePalette: 'tonal' | 'neutral' | 'expressive' | 'vibrant' =
     'tonal';
-  @observable designSystem: 'phoenix' | 'kumo' = 'phoenix';
+  @observable designSystem: 'phoenix' | 'compact' | 'baseline' = 'phoenix';
   @observable verticalTabs = false;
 
   constructor() {
@@ -65,8 +65,10 @@ export default class EdgeSettingsSerivce {
     this.themeColor = searchParams.get('themeColor') || this.themeColor;
 
     this.designSystem =
-      (searchParams.get('designSystem') as 'phoenix' | 'kumo') ||
-      this.designSystem;
+      (searchParams.get('designSystem') as
+        | 'phoenix'
+        | 'compact'
+        | 'baseline') || this.designSystem;
 
     this.themePalette =
       (searchParams.get('themePalette') as
@@ -91,6 +93,8 @@ export default class EdgeSettingsSerivce {
     url.searchParams.set('fullWidthOmnibox', this.fullWidthOmnibox.toString());
     if (this.themeColor) {
       url.searchParams.set('themeColor', this.themeColor);
+    } else {
+      url.searchParams.delete('themeColor');
     }
     url.searchParams.set('designSystem', this.designSystem);
     url.searchParams.set('themePalette', this.themePalette);
@@ -153,12 +157,12 @@ export default class EdgeSettingsSerivce {
     this.setSettingsInURL();
   }
 
-  setThemeColor(color: string): void {
+  setThemeColor(color: string | null): void {
     this.themeColor = color;
     this.setSettingsInURL();
   }
 
-  setDesignSystem(system: 'phoenix' | 'kumo'): void {
+  setDesignSystem(system: 'phoenix' | 'compact' | 'baseline'): void {
     this.designSystem = system;
     this.setSettingsInURL();
   }

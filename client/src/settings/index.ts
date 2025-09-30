@@ -132,16 +132,22 @@ const template = html<WindowsSettings>`
             >
               <fluent-listbox>
                 <fluent-option
-                  value="kumo"
-                  ?selected="${(x) => x.ss.designSystem === 'kumo'}"
-                >
-                  Kumo
-                </fluent-option>
-                <fluent-option
                   value="phoenix"
                   ?selected="${(x) => x.ss.designSystem === 'phoenix'}"
                 >
                   Phoenix
+                </fluent-option>
+                <fluent-option
+                  value="compact"
+                  ?selected="${(x) => x.ss.designSystem === 'compact'}"
+                >
+                  MAI Compact
+                </fluent-option>
+                <fluent-option
+                  value="baseline"
+                  ?selected="${(x) => x.ss.designSystem === 'baseline'}"
+                >
+                  MAI Baseline
                 </fluent-option>
               </fluent-listbox>
             </fluent-dropdown>
@@ -205,6 +211,9 @@ const template = html<WindowsSettings>`
               value="${(x) => x.ss.themeColor}"
               @change="${(x) => x.updateThemeColor()}"
             />
+            <phx-button @click="${(x) => x.resetThemeColor()}">
+              Reset
+            </phx-button>
           </div>
           <div class="entry">
             <label for="theme-palette">Theme palette</label>
@@ -636,7 +645,7 @@ export class WindowsSettings extends FASTElement {
   updateDesignSystem() {
     const newDesignSystem = (
       this.shadowRoot?.querySelector('#design-system') as HTMLSelectElement
-    ).value as 'kumo' | 'phoenix';
+    ).value as 'phoenix' | 'compact' | 'baseline';
     if (newDesignSystem) {
       this.ss.setDesignSystem(newDesignSystem);
     }
@@ -649,5 +658,11 @@ export class WindowsSettings extends FASTElement {
     if (newThemePalette) {
       this.ss.setThemePalette(newThemePalette);
     }
+  }
+
+  resetThemeColor() {
+    this.ss.setThemeColor(null);
+    (this.shadowRoot?.querySelector('#theme-color') as HTMLInputElement).value =
+      '';
   }
 }

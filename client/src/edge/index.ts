@@ -10,8 +10,6 @@ import {
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
-  kumoLightTheme,
-  kumoDarkTheme,
   phoenixSmtcLightTheme,
   phoenixSmtcDarkTheme,
   lightChromiumMapping,
@@ -247,17 +245,21 @@ export class MicrosoftEdge extends FASTElement {
   setTheme() {
     // Set up edge design system
     const themes = {
-      kumo: {
-        light: kumoLightTheme,
-        dark: kumoDarkTheme,
-      },
       phoenix: {
+        light: phoenixSmtcLightTheme,
+        dark: phoenixSmtcDarkTheme,
+      },
+      compact: {
+        light: phoenixSmtcLightTheme,
+        dark: phoenixSmtcDarkTheme,
+      },
+      baseline: {
         light: phoenixSmtcLightTheme,
         dark: phoenixSmtcDarkTheme,
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
-    let selectedTheme = themes[this.ss.designSystem][themeKey];
+    let selectedTheme = { ...themes[this.ss.designSystem][themeKey] };
     if (this.ss.themeColor) {
       selectedTheme = applyChromiumTheme(
         selectedTheme,
