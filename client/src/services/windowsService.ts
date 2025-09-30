@@ -72,6 +72,8 @@ export default class WindowsService {
       : 'light';
     if (this.theme !== osTheme) {
       url.searchParams.set('theme', this.theme);
+    } else {
+      url.searchParams.delete('theme');
     }
     const osTransparency = window.matchMedia(
       '(prefers-reduced-transparency: reduce)',
@@ -80,6 +82,8 @@ export default class WindowsService {
       : 'normal';
     if (this.transparency !== osTransparency) {
       url.searchParams.set('transparency', this.transparency);
+    } else {
+      url.searchParams.delete('transparency');
     }
 
     window.history.pushState({}, '', url.toString());

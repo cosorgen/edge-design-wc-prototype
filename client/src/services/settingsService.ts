@@ -1,5 +1,12 @@
 import { observable } from '@microsoft/fast-element';
 
+export type AvailableThemes =
+  | 'phoenix'
+  | 'mai-phoenix'
+  | 'compact-themed'
+  | 'compact-neutral'
+  | 'baseline';
+
 // Global state for the Edge browser
 export default class EdgeSettingsSerivce {
   @observable theme: 'light' | 'dark' | 'system' = 'system';
@@ -15,7 +22,7 @@ export default class EdgeSettingsSerivce {
   @observable themeColor: string | null = null;
   @observable themePalette: 'tonal' | 'neutral' | 'expressive' | 'vibrant' =
     'tonal';
-  @observable designSystem: 'phoenix' | 'compact' | 'baseline' = 'phoenix';
+  @observable designSystem: AvailableThemes = 'phoenix';
   @observable verticalTabs = false;
 
   constructor() {
@@ -65,10 +72,8 @@ export default class EdgeSettingsSerivce {
     this.themeColor = searchParams.get('themeColor') || this.themeColor;
 
     this.designSystem =
-      (searchParams.get('designSystem') as
-        | 'phoenix'
-        | 'compact'
-        | 'baseline') || this.designSystem;
+      (searchParams.get('designSystem') as AvailableThemes) ||
+      this.designSystem;
 
     this.themePalette =
       (searchParams.get('themePalette') as
@@ -162,7 +167,7 @@ export default class EdgeSettingsSerivce {
     this.setSettingsInURL();
   }
 
-  setDesignSystem(system: 'phoenix' | 'compact' | 'baseline'): void {
+  setDesignSystem(system: AvailableThemes): void {
     this.designSystem = system;
     this.setSettingsInURL();
   }

@@ -28,7 +28,9 @@ import {
 } from '@edge-design/windows-theme';
 import { inject } from '@microsoft/fast-element/di.js';
 import WindowsService from '#serviceswindowsService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import EdgeSettingsSerivce, {
+  AvailableThemes,
+} from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import { CopilotService } from '#servicescopilotService.js';
 
@@ -138,10 +140,22 @@ const template = html<WindowsSettings>`
                   Phoenix
                 </fluent-option>
                 <fluent-option
-                  value="compact"
-                  ?selected="${(x) => x.ss.designSystem === 'compact'}"
+                  value="mai-phoenix"
+                  ?selected="${(x) => x.ss.designSystem === 'mai-phoenix'}"
                 >
-                  MAI Compact
+                  MAI Phoenix
+                </fluent-option>
+                <fluent-option
+                  value="compact-themed"
+                  ?selected="${(x) => x.ss.designSystem === 'compact-themed'}"
+                >
+                  MAI Compact (themed)
+                </fluent-option>
+                <fluent-option
+                  value="compact-neutral"
+                  ?selected="${(x) => x.ss.designSystem === 'compact-neutral'}"
+                >
+                  MAI Compact (neutral)
                 </fluent-option>
                 <fluent-option
                   value="baseline"
@@ -211,8 +225,14 @@ const template = html<WindowsSettings>`
               value="${(x) => x.ss.themeColor}"
               @change="${(x) => x.updateThemeColor()}"
             />
-            <phx-button @click="${(x) => x.resetThemeColor()}">
-              Reset
+            <phx-button
+              @click="${(x) => x.resetThemeColor()}"
+              appearance="subtle"
+              icon-only
+            >
+              <svg>
+                <use href="./img/edge/icons.svg#arrow-clockwise-20-regular" />
+              </svg>
             </phx-button>
           </div>
           <div class="entry">
@@ -645,7 +665,7 @@ export class WindowsSettings extends FASTElement {
   updateDesignSystem() {
     const newDesignSystem = (
       this.shadowRoot?.querySelector('#design-system') as HTMLSelectElement
-    ).value as 'phoenix' | 'compact' | 'baseline';
+    ).value as AvailableThemes;
     if (newDesignSystem) {
       this.ss.setDesignSystem(newDesignSystem);
     }

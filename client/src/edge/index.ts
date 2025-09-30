@@ -14,8 +14,15 @@ import {
   phoenixSmtcDarkTheme,
   lightChromiumMapping,
   darkChromiumMapping,
-  backgroundWindowTabBandVerticalTabs,
 } from '@phoenixui/themes';
+import maiPhoenixLight from '@mai-ui/design-tokens/themes/phoenix.light/phoenix.light.json' with { type: 'json' };
+import maiPhoenixDark from '@mai-ui/design-tokens/themes/phoenix.dark/phoenix.dark.json' with { type: 'json' };
+import maiCompactThemedLight from '@mai-ui/design-tokens/themes/compact-themed.light/compact-themed.light.json' with { type: 'json' };
+import maiCompactThemedDark from '@mai-ui/design-tokens/themes/compact-themed.dark/compact-themed.dark.json' with { type: 'json' };
+import maiCompactNeutralLight from '@mai-ui/design-tokens/themes/compact-neutral.light/compact-neutral.light.json' with { type: 'json' };
+import maiCompactNeutralDark from '@mai-ui/design-tokens/themes/compact-neutral.dark/compact-neutral.dark.json' with { type: 'json' };
+import maiBaselineLight from '@mai-ui/design-tokens/themes/default.light/default.light.json' with { type: 'json' };
+import maiBaselineDark from '@mai-ui/design-tokens/themes/default.dark/default.dark.json' with { type: 'json' };
 import { setThemeFor } from '@phoenixui/web-components';
 import {
   textStyleDefaultRegularWeight,
@@ -28,6 +35,7 @@ import {
   backgroundWindowTabBandInactive,
   backgroundCtrlBrandRest,
   foregroundCtrlOnBrandRest,
+  backgroundWindowTabBandVerticalTabs,
 } from '@phoenixui/themes/smtc-tokens.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
@@ -249,13 +257,21 @@ export class MicrosoftEdge extends FASTElement {
         light: phoenixSmtcLightTheme,
         dark: phoenixSmtcDarkTheme,
       },
-      compact: {
-        light: phoenixSmtcLightTheme,
-        dark: phoenixSmtcDarkTheme,
+      'mai-phoenix': {
+        light: maiPhoenixLight as unknown as Record<string, string>,
+        dark: maiPhoenixDark as unknown as Record<string, string>,
+      },
+      'compact-themed': {
+        light: maiCompactThemedLight as unknown as Record<string, string>,
+        dark: maiCompactThemedDark as unknown as Record<string, string>,
+      },
+      'compact-neutral': {
+        light: maiCompactNeutralLight as unknown as Record<string, string>,
+        dark: maiCompactNeutralDark as unknown as Record<string, string>,
       },
       baseline: {
-        light: phoenixSmtcLightTheme,
-        dark: phoenixSmtcDarkTheme,
+        light: maiBaselineLight as unknown as Record<string, string>,
+        dark: maiBaselineDark as unknown as Record<string, string>,
       },
     };
     const themeKey = this.ss.theme === 'system' ? this.ws.theme : this.ss.theme;
