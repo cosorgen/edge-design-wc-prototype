@@ -22,6 +22,8 @@ import {
   shadowLayer,
   foregroundCtrlNeutralPrimaryRest,
   backgroundLayerPrimarySolid,
+  ctrlWebViewStroke,
+  strokeWidthCardDefault,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
@@ -65,6 +67,7 @@ const styles = css`
     display: flex;
     border-radius: ${cornerLayerDefault};
     box-shadow: ${shadowLayer};
+    border: ${strokeWidthCardDefault} solid ${ctrlWebViewStroke};
     margin: var(--paddingWindowDefault);
     overflow: auto;
     scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
