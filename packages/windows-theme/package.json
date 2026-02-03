@@ -28,6 +28,6 @@
     "clean": "rimraf dist"
   },
   "devDependencies": {
-    "esbuild": "^0.24.0"
+    "esbuild": "^0.25.0"
   }
 }
