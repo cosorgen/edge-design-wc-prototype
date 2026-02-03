@@ -22,7 +22,7 @@ export default class EdgeSettingsSerivce {
   @observable themeColor: string | null = null;
   @observable themePalette: 'tonal' | 'neutral' | 'expressive' | 'vibrant' =
     'tonal';
-  @observable designSystem: AvailableThemes = 'phoenix';
+  @observable designSystem: AvailableThemes = 'compact-themed';
   @observable verticalTabs = false;
 
   constructor() {
