@@ -37,7 +37,8 @@ OPENAI_API_ENDPOINTS= '[
 Then run the following
 
 ```bash
-npm install
+artifacts-npm-credprovider
+npm ci
 npm run build:packages
 npm run dev
 ```
