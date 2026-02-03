@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "esnext", // Latest JS Standard.
-    "module": "Node16", // ESModules support.
-    "moduleResolution": "Node16", // NodeJS module resolution.
+    "module": "nodenext", // ESModules support.
+    "moduleResolution": "nodenext", // NodeJS module resolution.
     "experimentalDecorators": true, // To support FAST decorators.
     "useDefineForClassFields": false, // To support FAST observables.
     "skipLibCheck": true, // TypeScript 5 feature to disable node_modules typecheck.
@@ -10,6 +10,7 @@
     "strict": true, // Security Needed.
     "isolatedModules": true, // Avoid mis-compilation with features like re-exporting types.
     "esModuleInterop": true, // Make type system compatible with ESM imports.
-    "forceConsistentCasingInFileNames": true // Enforce consistent casing in filenames
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing in filenames
+    "declaration": true
   }
 }

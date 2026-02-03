@@ -9,7 +9,7 @@ import {
   spacingVerticalM,
   spacingVerticalS,
   typographyStyles,
-} from '@phoenixui/themes';
+} from '@edge-design/phoenix-theme';
 
 const template = html`<slot name="hero"></slot>
   <div id="by-line">

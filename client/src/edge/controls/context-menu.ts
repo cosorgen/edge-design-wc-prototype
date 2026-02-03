@@ -1,18 +1,18 @@
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
-import {
-  borderRadiusLayerFlyout,
-  colorNeutralForeground1,
-  colorNeutralForegroundHint,
-  shadow28,
-  spacingHorizontalXS,
-  spacingVerticalS,
-  spacingVerticalXS,
-} from '@phoenixui/themes';
 import './menu-item.js';
-import '../../windows/controls/acrylic-material.js';
+import {
+  backgroundFlyoutSolid,
+  cornerFlyoutRest,
+  foregroundContentNeutralPrimary,
+  foregroundContentNeutralSecondary,
+  gapBetweenContentXSmall,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
+  paddingContentXSmall,
+  paddingContentXxSmall,
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<ContextMenu>`
-  <acrylic-material></acrylic-material>
   <div id="menu-items">
     <slot></slot>
   </div>
@@ -20,25 +20,26 @@ const template = html<ContextMenu>`
 
 const styles = css`
   :host {
-    position: relative;
-    display: block;
-    border-radius: ${borderRadiusLayerFlyout};
-    box-shadow: ${shadow28};
+    min-width: 96px;
+    max-width: 512px;
+    display: flex;
+    flex-direction: column;
+    gap: ${gapBetweenContentXSmall};
+    padding: ${paddingContentXSmall};
+    background: ${backgroundFlyoutSolid};
+    border-radius: ${cornerFlyoutRest};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     overflow: hidden;
-    color: ${colorNeutralForeground1};
+    color: ${foregroundContentNeutralPrimary};
   }
 
   #menu-items {
-    position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 96px;
-    max-width: 512px;
-    padding: ${spacingVerticalS};
   }
 
   .hint {
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundContentNeutralSecondary};
   }
 
   svg {
@@ -47,17 +48,13 @@ const styles = css`
   }
 
   svg[slot='end'] {
-    margin-inline-end: calc(0px - ${spacingHorizontalXS});
+    margin-inline-end: calc(0px - ${paddingContentXxSmall});
   }
 
-  phx-divider {
-    margin-block: ${spacingVerticalXS};
+  mai-divider {
+    margin-block: ${paddingContentXxSmall};
   }
 `;
 
-@customElement({
-  name: 'context-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'context-menu', template, styles })
 export default class ContextMenu extends FASTElement {}

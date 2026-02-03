@@ -3,4 +3,4 @@ build
 dist
 storybook-build
 **/*.mdx
-server
+*.tokens.ts

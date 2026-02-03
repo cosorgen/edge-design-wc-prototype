@@ -1,9 +1,10 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, colorNeutralForeground1 } from '@phoenixui/themes';
 import {
+  borderRadiusSmall,
+  colorNeutralForeground1,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@edge-design/windows-theme';
 
 const template = html<CopilotButton>`
   <button>
@@ -34,9 +35,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'copilot-button',
-  template,
-  styles,
-})
+@customElement({ name: 'copilot-button', template, styles })
 export default class CopilotButton extends FASTElement {}

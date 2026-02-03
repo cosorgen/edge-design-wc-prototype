@@ -35,7 +35,7 @@ let copyStaticFiles = {
 };
 
 console.log('Copying server...\n');
-fs.cpSync('./server/index.js', './dist/index.js', { force: true }, (err) => {
+fs.cpSync('./server', './dist', { recursive: true }, (err) => {
   if (err) {
     console.error('An error occurred while copying the server files.');
     return console.error(err);

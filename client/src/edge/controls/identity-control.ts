@@ -6,25 +6,22 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  borderRadiusCircular,
-  colorNeutralForeground1,
-  colorNeutralStroke1Hover,
-  colorNeutralStroke1Pressed,
-  colorSubtleBackgroundHover,
-  colorSubtleBackgroundPressed,
-  fontFamilyBase,
-  fontSizeBase200,
-  fontWeightRegular,
-  lineHeightBase200,
-  spacingHorizontalXS,
-  strokeWidthThin,
-} from '@phoenixui/themes';
+  cornerCircular,
+  gapBetweenContentXxSmall,
+  strokeWidthDefault,
+  textStyleDefaultRegularFontFamily,
+  textGlobalCaption1FontSize,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundCtrlSubtleHover,
+  strokeCtrlOnOutlinePressed,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  textGlobalCaption1LineHeight,
+  strokeCtrlOnOutlineHover,
+  textStyleDefaultRegularWeight,
+} from '@phoenixui/themes/smtc-tokens.js';
 
-const imageIds = {
-  signedIn: 'dog',
-  inPrivate: 'inPrivate',
-  guest: 'guest',
-};
+const imageIds = { signedIn: 'dog', inPrivate: 'inPrivate', guest: 'guest' };
 
 const template = html<IdentityControl>`
   <button>
@@ -50,45 +47,41 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${spacingHorizontalXS};
-    background: none;
+    gap: ${gapBetweenContentXxSmall};
+    background: ${backgroundCtrlSubtleRest};
     cursor: pointer;
-    border-radius: ${borderRadiusCircular};
+    border-radius: ${cornerCircular};
     padding: 0;
-    border: ${strokeWidthThin} solid transparent;
+    border: ${strokeWidthDefault} solid transparent;
 
     /* caption1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase200};
-    line-height: ${lineHeightBase200};
-    font-weight: ${fontWeightRegular};
-    color: ${colorNeutralForeground1};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
+    line-height: ${textGlobalCaption1LineHeight};
+    font-weight: ${textStyleDefaultRegularWeight};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   button:hover {
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1Hover};
-    background-color: ${colorSubtleBackgroundHover};
+    border-color: ${strokeCtrlOnOutlineHover};
+    background-color: ${backgroundCtrlSubtleHover};
   }
 
-  :host([pressed]) button,
-  button:hover:active {
-    border: ${strokeWidthThin} solid ${colorNeutralStroke1Pressed};
-    background-color: ${colorSubtleBackgroundPressed};
+  button:hover:active,
+  :host([pressed='true']) button {
+    border-color: ${strokeCtrlOnOutlinePressed};
+    background-color: ${backgroundCtrlSubtlePressed};
   }
 
   slot[name='image'] img,
   slot[name='image']::slotted(*) {
     width: 24px;
     height: 24px;
-    border-radius: ${borderRadiusCircular};
+    border-radius: ${cornerCircular};
   }
 `;
 
-@customElement({
-  name: 'identity-control',
-  template,
-  styles,
-})
+@customElement({ name: 'identity-control', template, styles })
 export class IdentityControl extends FASTElement {
   @attr appearance: 'signedIn' | 'inPrivate' | 'guest' = 'guest';
   @attr error: 'accountUnsup' | 'signIn' | 'signedOut' | 'custom' | null = null;

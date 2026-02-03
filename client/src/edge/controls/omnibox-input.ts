@@ -6,12 +6,12 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import {
-  colorNeutralForegroundHint,
-  fontFamilyBase,
-  fontSizeBase300,
-  fontWeightRegular,
-  lineHeightBase300,
-} from '@phoenixui/themes';
+  foregroundCtrlNeutralSecondaryRest,
+  textGlobalBody3FontSize,
+  textGlobalBody3LineHeight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<OmniboxInput>`
   <div
@@ -41,16 +41,16 @@ const styles = css`
     overflow: hidden;
     text-overflow: ellipsis;
     /* body1 */
-    font-family: ${fontFamilyBase};
-    font-size: ${fontSizeBase300};
-    line-height: ${lineHeightBase300};
-    font-weight: ${fontWeightRegular};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalBody3FontSize};
+    line-height: ${textGlobalBody3LineHeight};
+    font-weight: ${textStyleDefaultRegularWeight};
     cursor: text;
     outline: none;
 
     &:empty::before {
       content: attr(placeholder);
-      color: ${colorNeutralForegroundHint};
+      color: ${foregroundCtrlNeutralSecondaryRest};
     }
   }
 
@@ -59,15 +59,11 @@ const styles = css`
   }
 
   .metadata {
-    color: ${colorNeutralForegroundHint};
+    color: ${foregroundCtrlNeutralSecondaryRest};
   }
 `;
 
-@customElement({
-  name: 'omnibox-input',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-input', template, styles })
 export class OmniboxInput extends FASTElement {
   @attr value = '';
   input?: HTMLDivElement | null;
@@ -251,10 +247,7 @@ export class OmniboxInput extends FASTElement {
       }
     });
 
-    return {
-      container,
-      offset,
-    };
+    return { container, offset };
   };
 
   saveSelection(el: HTMLElement) {
@@ -271,10 +264,7 @@ export class OmniboxInput extends FASTElement {
       range?.endContainer,
       range?.endOffset,
     );
-    return {
-      startOffset,
-      endOffset,
-    };
+    return { startOffset, endOffset };
   }
 
   restoreSelection(

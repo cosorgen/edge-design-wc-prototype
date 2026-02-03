@@ -1,9 +1,10 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
-import { borderRadiusSmall, spacingHorizontalM } from '@phoenixui/themes';
 import {
+  borderRadiusSmall,
+  spacingHorizontalM,
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@edge-design/windows-theme';
 
 const styles = css`
   button {

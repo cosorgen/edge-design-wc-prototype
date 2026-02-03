@@ -1,11 +1,14 @@
 import {
+  curveDecelerateMax,
+  durationFast,
+} from '@phoenixui/themes/fluent2-tokens.js';
+import {
   attr,
   css,
   customElement,
   FASTElement,
   html,
 } from '@microsoft/fast-element';
-import { curveDecelerateMax, durationFast } from '@phoenixui/themes';
 
 // Popovers need to be manually controlled so that we can use context menus with trackpads
 const template = html<FlyoutMenu>`
@@ -20,8 +23,8 @@ const template = html<FlyoutMenu>`
 
 const styles = css`
   :host {
-    /* Need for collapse */
-    overflow: hidden;
+    display: block;
+    min-width: 16px; /* Need for collapse */
 
     /* Don't clip focus outline */
     margin: -2px;
@@ -63,11 +66,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'flyout-menu',
-  template,
-  styles,
-})
+@customElement({ name: 'flyout-menu', template, styles })
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
   _popoverElement: HTMLElement | null = null;
@@ -235,6 +234,7 @@ export class FlyoutMenu extends FASTElement {
   }
 
   closeMenuListener = (e: Event) => {
+    console.log('closemenu');
     e.stopPropagation();
     this._popoverElement?.hidePopover();
     this._contextPopoverElement?.hidePopover();
@@ -254,12 +254,11 @@ export class FlyoutMenu extends FASTElement {
 
     this._open = e.newState === 'open';
 
-    this._open || this._contextOpen
-      ? this._triggerElement?.setAttribute('pressed', '')
-      : this._triggerElement?.removeAttribute('pressed');
-    this._open
-      ? this._popoverSlottedElement?.setAttribute('open', '')
-      : this._popoverSlottedElement?.removeAttribute('open');
+    this._triggerElement?.setAttribute(
+      'pressed',
+      (this._open || this._contextOpen).toString(),
+    );
+    this._popoverSlottedElement?.setAttribute('open', this._open.toString());
 
     if (this._open || this._contextOpen) {
       // Listen for close events
@@ -295,12 +294,14 @@ export class FlyoutMenu extends FASTElement {
 
     this._contextOpen = e.newState === 'open';
 
-    this._open || this._contextOpen
-      ? this._triggerElement?.setAttribute('pressed', '')
-      : this._triggerElement?.removeAttribute('pressed');
-    this._contextOpen
-      ? this._contextPopoverSlottedElement?.setAttribute('open', '')
-      : this._contextPopoverSlottedElement?.removeAttribute('open');
+    this._triggerElement?.setAttribute(
+      'pressed',
+      (this._open || this._contextOpen).toString(),
+    );
+    this._contextPopoverSlottedElement?.setAttribute(
+      'open',
+      this._open.toString(),
+    );
 
     if (this._contextOpen || this._open) {
       // Listen for close events

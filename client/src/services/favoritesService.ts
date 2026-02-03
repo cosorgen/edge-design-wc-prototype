@@ -13,7 +13,6 @@ export type FavoriteFolder = {
   children?: (Favorite | FavoriteFolder)[];
 };
 
-// Global state for the Edge browser
 export default class FavoritesService {
   @observable favorites: (Favorite | FavoriteFolder)[] = [
     {
@@ -57,10 +56,6 @@ export default class FavoritesService {
       url: 'https://www.nike.com/t/sportswear-essential-womens-quilted-anorak-jacket-wgWFp0/FZ7364-338',
       title: 'Nike jacket',
       favicon: 'https://www.nike.com/favicon.ico?v=1',
-    },
-    {
-      type: 'folder',
-      title: 'Other favorites',
     },
   ];
 

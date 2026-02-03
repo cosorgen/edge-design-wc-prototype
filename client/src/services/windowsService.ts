@@ -1,13 +1,8 @@
 import { observable } from '@microsoft/fast-element';
-import installedApps from '../windows/installedApps.js';
+import installedApps, { type InstalledApp } from '../windows/installedApps.js';
 
 export type OSTheme = 'light' | 'dark';
 export type OSTransparency = 'reduced' | 'normal';
-export type App = {
-  name: string;
-  lightIcon: string;
-  darkIcon?: string;
-};
 export type Window = {
   id: string;
   appName: string;
@@ -20,12 +15,14 @@ export type Window = {
   xPos: number;
   yPos: number;
   zIndex: number;
+  lightIcon?: string;
+  darkIcon?: string;
 };
 
 export default class WindowsService {
   @observable theme: OSTheme;
   @observable transparency: OSTransparency;
-  @observable activeWindowId: string | null = null;
+  @observable activeWindowId?: string;
   @observable windows: Window[] = [];
 
   constructor() {
@@ -57,8 +54,7 @@ export default class WindowsService {
     this.getSettingsFromURL();
 
     // open default window
-    const id = this.openWindow('Microsoft Edge');
-    this.activateWindow(id);
+    this.openWindow('Microsoft Edge');
   }
 
   getSettingsFromURL() {
@@ -71,8 +67,24 @@ export default class WindowsService {
 
   setSettingsInURL() {
     const url = new URL(window.location.href);
-    url.searchParams.set('theme', this.theme);
-    url.searchParams.set('transparency', this.transparency);
+    const osTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+    if (this.theme !== osTheme) {
+      url.searchParams.set('theme', this.theme);
+    } else {
+      url.searchParams.delete('theme');
+    }
+    const osTransparency = window.matchMedia(
+      '(prefers-reduced-transparency: reduce)',
+    ).matches
+      ? 'reduced'
+      : 'normal';
+    if (this.transparency !== osTransparency) {
+      url.searchParams.set('transparency', this.transparency);
+    } else {
+      url.searchParams.delete('transparency');
+    }
 
     window.history.pushState({}, '', url.toString());
   }
@@ -88,11 +100,15 @@ export default class WindowsService {
   }
 
   openWindow(appName: string) {
-    const app = installedApps.find((a) => a.name === appName);
+    const app = installedApps.find((a) => a.name === appName) as InstalledApp;
     const id = crypto.randomUUID();
     const width = app?.width || Math.min(window.innerWidth - 48, 1920); // 48px for padding
     let height = app?.height || width * 0.75; // 4:3 aspect ratio
     height = Math.min(height, window.innerHeight - 48 - 48); // 48px for taskbar
+    const xPos =
+      app?.xPos || (window.innerWidth - width) / 2 + 24 * this.windows.length;
+    const yPos =
+      (window.innerHeight - 48 - height) / 2 + 24 * this.windows.length;
 
     this.windows = [
       ...this.windows,
@@ -100,26 +116,27 @@ export default class WindowsService {
         id,
         appName,
         height,
-        maximized: false,
+        maximized: app.maximized || false,
         minHeight: app?.minHeight || 300,
         minimized: false,
         minWidth: app?.minWidth || 300,
         width,
-        xPos: (window.innerWidth - width) / 2 + 24 * this.windows.length,
-        yPos: (window.innerHeight - 48 - height) / 2 + 24 * this.windows.length,
+        xPos,
+        yPos,
         zIndex: 1 + this.windows.length,
       },
     ];
+    this.activateWindow(id);
 
     return id;
   }
 
-  closeWindow(id: string | null) {
+  closeWindow(id?: string) {
     this.windows = this.windows.filter((w) => w.id !== id);
     this.activateNextWindow(id);
   }
 
-  activateWindow(id: string | null) {
+  activateWindow(id?: string) {
     this.activeWindowId = id;
 
     // Update z-index
@@ -133,28 +150,29 @@ export default class WindowsService {
     );
   }
 
-  activateNextWindow(id: string | null) {
+  activateNextWindow(id?: string) {
     if (this.activeWindowId === id) {
-      this.activeWindowId =
-        this.windows.find((win) => win.id !== id && !win.minimized)?.id || null;
+      this.activeWindowId = this.windows.find(
+        (win) => win.id !== id && !win.minimized,
+      )?.id;
     } else if (this.windows.length > 0) {
       // activate the window with the highest z-index that is not minimized
       this.activeWindowId = this.windows
         .filter((win) => !win.minimized)
         .sort((a, b) => a.zIndex - b.zIndex)[0].id;
     } else {
-      this.activeWindowId = null;
+      this.activeWindowId = undefined;
     }
   }
 
-  minimizeWindow(id: string | null, minimized = true) {
+  minimizeWindow(id?: string, minimized = true) {
     this.windows = this.windows.map((w) =>
       w.id === id ? { ...w, minimized } : w,
     );
     this.activateNextWindow(id);
   }
 
-  maximizeWindow(id: string | null, maximized = true) {
+  maximizeWindow(id?: string, maximized = true) {
     this.windows = this.windows.map((w) =>
       w.id === id ? { ...w, maximized } : w,
     );
@@ -164,7 +182,7 @@ export default class WindowsService {
     return this.windows.find((w) => w.id === this.activeWindowId);
   }
 
-  getWindowById(id: string | null) {
+  getWindowById(id?: string) {
     return this.windows.find((w) => w.id === id);
   }
 
@@ -182,6 +200,6 @@ export default class WindowsService {
 
   closeAllWindows(appName: string) {
     this.windows = this.windows.filter((w) => w.appName !== appName);
-    this.activateNextWindow(null);
+    this.activateNextWindow();
   }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "@edge-design/utilities",
+  "version": "0.0.1",
+  "author": "Microsoft",
+  "description": "Edge design system utilities",
+  "license": "UNLICENSED",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "types": "./dist/dts/index.d.ts",
+      "default": "./dist/esm/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "*.md",
+    "dist/*.js",
+    "dist/*.d.ts"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "compile": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist"
+  }
+}

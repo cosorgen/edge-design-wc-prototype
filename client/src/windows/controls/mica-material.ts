@@ -6,7 +6,6 @@ import {
   observable,
   attr,
 } from '@microsoft/fast-element';
-import { desktopBackground } from '../designSystem.js';
 import {
   tabActiveBackgroundBlur,
   tabActiveBackgroundLuminosity,
@@ -16,7 +15,8 @@ import {
   tabBarBackgroundLuminosity,
   tabBarBackgroundColor,
   tabBarBackgroundNormal,
-} from '@phoenixui/themes';
+  desktopBackground,
+} from '@edge-design/windows-theme';
 
 const template = html<MicaMaterial>`
   <div id="image"></div>

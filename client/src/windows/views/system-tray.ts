@@ -4,11 +4,9 @@ import {
   spacingHorizontalS,
   spacingHorizontalXS,
   colorNeutralForeground1,
-} from '@phoenixui/themes';
-import {
   colorShellFillTaksbarItemSecondary,
   colorShellFillTaksbarItemTeritary,
-} from '../designSystem.js';
+} from '@edge-design/windows-theme';
 
 const template = html<SystemTray>`
   <button>
@@ -50,9 +48,5 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'system-tray',
-  template,
-  styles,
-})
+@customElement({ name: 'system-tray', template, styles })
 export default class SystemTray extends FASTElement {}

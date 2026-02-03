@@ -1,11 +1,14 @@
-export type App = {
+export type InstalledApp = {
   name: string;
   lightIcon: string;
   darkIcon?: string;
+  maximized?: boolean;
   width?: number;
   height?: number;
-  minHeight?: number;
   minWidth?: number;
+  minHeight?: number;
+  xPos?: number;
+  yPos?: number;
 };
 
 export default [
@@ -48,4 +51,4 @@ export default [
     width: 800,
     height: 600,
   },
-] as App[];
+] as InstalledApp[];

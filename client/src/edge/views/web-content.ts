@@ -10,25 +10,39 @@ import {
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import '../controls/web-page.js';
-import {
-  borderRadiusLayerBase,
-  colorLayerBackgroundApp,
-  shadow2,
-  strokeWidthThin,
-} from '@phoenixui/themes';
-import './fullpage/edge-newtab.js';
-import './fullpage/edge-settings.js';
+import './edge-newtab-legacy.js';
+import './copilot-newtab.js';
+import './settings.js';
+import './palette-playground.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
+import {
+  cornerLayerDefault,
+  shadowLayerAmbient,
+  shadowLayerKey,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundLayerPrimarySolid,
+  ctrlWebViewStroke,
+  strokeWidthCardDefault,
+} from '@phoenixui/themes/smtc-tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
-  newtab: html<string>`<edge-newtab
+  newtab: html<string>`<copilot-newtab
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></copilot-newtab>`,
+  newtabEdge: html<string>`<edge-newtab
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></edge-newtab>`,
-  settings: html`<edge-settings
+  newtabLegacy: html<string>`<edge-newtab-legacy
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></edge-settings>`,
+  ></edge-newtab-legacy>`,
+  settings: html`<settings-page
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></settings-page>`,
+  palette: html`<palette-playground
+    ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+  ></palette-playground>`,
 };
 
 const template = html<WebContent>`
@@ -52,27 +66,23 @@ const styles = css`
   :host {
     flex: 1;
     display: flex;
-    border-top: ${strokeWidthThin} solid ${colorLayerBackgroundApp};
-    border-radius: ${borderRadiusLayerBase};
-    box-shadow: ${shadow2};
-    overflow: hidden;
+    border-radius: ${cornerLayerDefault};
+    box-shadow: ${shadowLayerAmbient}, ${shadowLayerKey};
+    border: ${strokeWidthCardDefault} solid ${ctrlWebViewStroke};
+    margin: var(--paddingWindowDefault);
+    overflow: auto;
+    scrollbar-color: ${foregroundCtrlNeutralPrimaryRest}
+      ${backgroundLayerPrimarySolid};
+    scrollbar-width: thin;
     z-index: 0; /* ensure content is under omnibox */
 
-    * {
+    :not([active]) {
       display: none;
-    }
-
-    [active] {
-      display: unset;
     }
   }
 `;
 
-@customElement({
-  name: 'web-content',
-  template,
-  styles,
-})
+@customElement({ name: 'web-content', template, styles })
 export class WebContent extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgeSettingsSerivce) ess!: EdgeSettingsSerivce;
@@ -97,6 +107,21 @@ export class WebContent extends FASTElement {
 
   getHostname(url: string): string {
     const urlObj = new URL(url);
+
+    if (urlObj.hostname === 'newtab') {
+      if (this.ess.showCopilotNTP) {
+        return 'newtab';
+      }
+      if (this.ess.showLegacyNewTab) {
+        return 'newtabLegacy';
+      }
+      return 'newtabEdge';
+    }
+
+    if (urlObj.hostname === 'settings') {
+      return 'settings';
+    }
+
     return urlObj.hostname;
   }
 

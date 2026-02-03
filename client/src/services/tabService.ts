@@ -33,7 +33,8 @@ export class TabService {
       tab = {
         id: `tab-${window.crypto.randomUUID()}`,
         url: 'edge://newtab',
-        title: 'New tab',
+        title: 'New Tab',
+        favicon: './img/edge/icons.svg#tab-desktop-new-page-16-regular',
       };
     }
 
@@ -56,9 +57,7 @@ export class TabService {
       this.activeTabId = this.tabIds[index - 1] || this.tabIds[index + 1];
     }
 
-    this.tabsById = Object.fromEntries(
-      Object.entries(this.tabsById).filter(([id]) => id !== tabId),
-    );
+    delete this.tabsById[tabId]; // this might not work
     this.tabIds = this.tabIds.filter((id) => id !== tabId);
   }
 
@@ -87,10 +86,7 @@ export class TabService {
     tab.url = validUrl;
     tab.loading = true;
     tab.title = url; // update title to query while loading
-    this.tabsById = {
-      ...this.tabsById,
-      [tab.id]: tab,
-    };
+    this.tabsById[id] = tab;
 
     // Get metadata for the new query
     fetch(`/api/metadata?url=${validUrl}`)
@@ -98,7 +94,7 @@ export class TabService {
       .then((res) => {
         const tab = this.tabsById[id];
         tab.title = res.title;
-        tab.favicon = res.favicon;
+        tab.favicon = res.favicon || 'img/edge/icons.svg#document-16-regular';
         this.tabsById = {
           ...this.tabsById,
           [tab.id]: tab,

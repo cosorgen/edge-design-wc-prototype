@@ -1,17 +1,22 @@
-import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import {
-  borderRadiusCircular,
-  colorBrandBackground2,
-  colorBrandBackground2Hover,
-  colorBrandBackground2Pressed,
-  colorNeutralForeground1,
+  backgroundCtrlBrandHover,
+  backgroundCtrlBrandPressed,
+  backgroundCtrlBrandRest,
+  cornerCircular,
+  gapBetweenContentXxSmall,
+  paddingContentXxSmall,
+  paddingContentXxxSmall,
+  statusBrandTintForeground,
+  textGlobalCaption1FontSize,
+  textGlobalCaption1LineHeight,
+  textStyleDefaultRegularFontFamily,
+  textStyleDefaultRegularWeight,
+} from '@phoenixui/themes/smtc-tokens.js';
+import {
   curveDecelerateMax,
   durationSlow,
-  spacingHorizontalS,
-  spacingHorizontalXS,
-  spacingVerticalXXS,
-  typographyStyles,
-} from '@phoenixui/themes';
+} from '@phoenixui/themes/fluent2-tokens.js';
+import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
 const template = html`
   <button>
@@ -24,40 +29,40 @@ const template = html`
 
 const styles = css`
   button {
-    border-radius: ${borderRadiusCircular};
-    background: ${colorBrandBackground2};
+    border-radius: ${cornerCircular};
+    background: ${backgroundCtrlBrandRest};
     border: none;
-    color: ${colorNeutralForeground1};
+    color: ${statusBrandTintForeground};
     cursor: pointer;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: ${spacingHorizontalXS};
+    gap: ${gapBetweenContentXxSmall};
 
     /* Need for collapse */
     min-width: 24px;
     overflow: hidden;
 
     /* Animation on load */
-    padding: ${spacingVerticalXXS};
+    padding: ${paddingContentXxxSmall};
     transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
   :host([expanded]) button {
-    padding: ${spacingVerticalXXS} ${spacingHorizontalS};
+    padding: ${paddingContentXxxSmall} ${paddingContentXxSmall};
   }
 
   button:hover {
-    background: ${colorBrandBackground2Hover};
+    background: ${backgroundCtrlBrandHover};
   }
 
   :host([pressed='true']) button {
-    background: ${colorBrandBackground2Hover};
+    background: ${backgroundCtrlBrandPressed};
   }
 
   button:active {
-    background: ${colorBrandBackground2Pressed};
+    background: ${backgroundCtrlBrandPressed};
   }
 
   svg {
@@ -67,10 +72,10 @@ const styles = css`
 
   div {
     flex: 1;
-    font-family: ${typographyStyles.caption1.fontFamily};
-    font-size: ${typographyStyles.caption1.fontSize};
-    font-weight: ${typographyStyles.caption1.fontWeight};
-    line-height: ${typographyStyles.caption1.lineHeight};
+    font-family: ${textStyleDefaultRegularFontFamily};
+    font-size: ${textGlobalCaption1FontSize};
+    font-weight: ${textStyleDefaultRegularWeight};
+    line-height: ${textGlobalCaption1LineHeight};
     white-space: nowrap;
     overflow: hidden;
     min-width: 0px;
@@ -85,11 +90,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'shopping-button',
-  template,
-  styles,
-})
+@customElement({ name: 'shopping-button', template, styles })
 export class ShoppingButton extends FASTElement {
   connectedCallback() {
     super.connectedCallback();

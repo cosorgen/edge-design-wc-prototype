@@ -14,8 +14,12 @@ import {
   fontWeightRegular,
   lineHeightBase300,
   colorNeutralForeground1,
-} from '@phoenixui/themes';
-import { setTheme } from './designSystem.js';
+  windowsLightTheme,
+  windowsDarkTheme,
+  windowsDarkThemeSolid,
+  windowsLightThemeSolid,
+} from '@edge-design/windows-theme';
+import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/task-bar.js';
@@ -28,6 +32,7 @@ import '../settings/index.js';
 const appTemplates: Record<string, ViewTemplate> = {
   'Microsoft Edge': html`<microsoft-edge></microsoft-edge>`,
   Settings: html`<windows-settings></windows-settings>`,
+  Slides: html`<figma-slides></figma-slides>`,
 };
 
 const styles = css`
@@ -57,8 +62,7 @@ const template = html<WindowsShell>`
   <mica-material
     id="desktop"
     image-only
-    full-fps
-    @click="${(x) => x.ws.activateWindow(null)}"
+    @click="${(x) => x.ws.activateWindow()}"
   ></mica-material>
   ${repeat(
     (x) => x.ws.windows,
@@ -132,7 +136,11 @@ export class WindowsShell extends FASTElement {
   }
 
   setTheme() {
-    setTheme(this.ws.theme, this.ws.transparency);
+    const themes = {
+      light: { reduced: windowsLightThemeSolid, normal: windowsLightTheme },
+      dark: { reduced: windowsDarkThemeSolid, normal: windowsDarkTheme },
+    };
+    setThemeFor(this.shadowRoot!, themes[this.ws.theme][this.ws.transparency]);
   }
 
   handleTaskbarButtonClick(appName: string) {
@@ -141,30 +149,32 @@ export class WindowsShell extends FASTElement {
 
     // if no windows are open, open it
     if (windows.length === 0) {
-      const id = this.ws.openWindow(appName);
-      this.ws.activateWindow(id);
+      this.ws.openWindow(appName);
       return;
     }
 
-    // if there's one window open
-    if (windows.length === 1) {
-      // if it's minimized, restore it
-      if (windows[0].minimized) {
-        this.ws.minimizeWindow(windows[0].id, false);
-        return;
-      }
-      // if it's not active, activate it
-      if (windows[0].id !== this.ws.activeWindowId) {
-        this.ws.activateWindow(windows[0].id);
-        return;
-      }
-      // if it's active, minimize it
-      this.ws.minimizeWindow(windows[0].id);
+    // handle the case of a single window
+    const [window] = windows;
+
+    // if the window is minimized, restore it and activate it
+    if (window.minimized) {
+      this.ws.minimizeWindow(window.id, false); // restore the window
+      this.ws.activateWindow(window.id); // ensure the window is activated and brought to the front
+      const appWindowElement = this.shadowRoot!.querySelector(
+        `app-window[id="${window.id}"]`,
+      ) as HTMLElement;
+      appWindowElement?.focus();
       return;
     }
 
-    // if there are multiple windows open
-    return;
+    // if the window is not active, activate it and bring it to the front
+    if (window.id !== this.ws.activeWindowId) {
+      this.ws.activateWindow(window.id); // activate the window to bring it to the front
+      return;
+    }
+
+    // if the window is already active, minimize it
+    this.ws.minimizeWindow(window.id);
   }
 
   handleWindowMove(e: CustomEvent) {

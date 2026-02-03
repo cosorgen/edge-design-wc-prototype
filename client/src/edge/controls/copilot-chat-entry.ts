@@ -8,33 +8,33 @@ import {
   ViewTemplate,
 } from '@microsoft/fast-element';
 import {
-  borderRadiusLarge,
   borderRadiusMedium,
   colorBrandForegroundLink,
   colorLayerBackgroundDialog,
-  colorNeutralCardBackground,
   colorNeutralForeground1,
   colorNeutralForegroundHint,
   curveDecelerateMax,
   durationNormal,
   durationUltraSlow,
   fontFamilyMonospace,
-  spacingHorizontalL,
   spacingHorizontalS,
   spacingHorizontalXL,
   spacingHorizontalXS,
   spacingVerticalM,
-  spacingVerticalMNudge,
   spacingVerticalXS,
   spacingVerticalXXS,
   typographyStyles,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/spinner.js';
+  smtcBackgroundMessageBubble,
+  smtcForegroundMessageBubble,
+  smtcCornerMessageBubble,
+  smtcPaddingBlockMessageBubble,
+  smtcPaddingInlineMessageBubble,
+  smtcBackgroundSpinnerRest,
+} from '@edge-design/copilot-theme';
+import '@mai-ui/button/define.js';
 import showdown from 'showdown';
 import dompurify from 'dompurify';
 import moment from 'moment';
-import { colorLoadingSpinner } from '../copilotDesignSystem.js';
 
 const template = html`<div id="message">
     ${(x) => {
@@ -46,16 +46,16 @@ const template = html`<div id="message">
   </div>
   <div id="actions">
     <span id="timestamp">${(x) => moment(x.time).fromNow()}</span>
-    <phx-button size="small" appearance="subtle" icon-only>
+    <mai-button appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#thumb-like-20-regular"></use>
       </svg>
-    </phx-button>
-    <phx-button size="small" appearance="subtle" icon-only>
+    </mai-button>
+    <mai-button appearance="subtle" icon-only>
       <svg>
         <use href="img/edge/icons.svg#thumb-dislike-20-regular"></use>
       </svg>
-    </phx-button>
+    </mai-button>
   </div>
   <div id="loading"></div>`;
 
@@ -85,9 +85,10 @@ const styles = css`
   }
 
   :host(:not([system])) #message {
-    padding: ${spacingVerticalMNudge} ${spacingHorizontalL};
-    border-radius: ${borderRadiusLarge};
-    background: ${colorNeutralCardBackground};
+    padding: ${smtcPaddingBlockMessageBubble} ${smtcPaddingInlineMessageBubble};
+    border-radius: ${smtcCornerMessageBubble};
+    background: ${smtcBackgroundMessageBubble};
+    color: ${smtcForegroundMessageBubble};
     align-self: flex-end;
     text-align: end;
     max-width: 80%;
@@ -118,6 +119,7 @@ const styles = css`
 
   #actions {
     width: 100%;
+    position: relative; /* Fix for using MAI buttons */
     display: flex;
     flex-direction: row;
     gap: ${spacingHorizontalXS};
@@ -132,7 +134,7 @@ const styles = css`
     opacity: 0;
     transition: opacity ${durationNormal};
 
-    phx-button {
+    mai-button {
       color: ${colorNeutralForegroundHint};
     }
   }
@@ -150,7 +152,7 @@ const styles = css`
     display: none;
     width: 64px;
     height: 64px;
-    background-color: ${colorLoadingSpinner};
+    background-color: ${smtcBackgroundSpinnerRest};
     mask: url(img/edge/copilotLoading.gif);
     mask-size: cover;
     mask-repeat: no-repeat;

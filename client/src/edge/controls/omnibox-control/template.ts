@@ -3,7 +3,6 @@ import '../omnibox-status.js';
 import '../omnibox-input.js';
 import '../omnibox-icon.js';
 import '../omnibox-dropdown.js';
-import '@phoenixui/web-components/button.js';
 import { OmniboxControl } from './index.js';
 
 export const template = html<OmniboxControl>`
@@ -24,6 +23,9 @@ export const template = html<OmniboxControl>`
               : ''}"
         ></omnibox-icon>
         <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
+      </div>
+      <div id="rest-input" @click="${(x) => x.handleInputClick()}">
+        ${(x) => x.truncatedInputValue()}
       </div>
       <omnibox-input
         value="${(x) => x.inputValue}"

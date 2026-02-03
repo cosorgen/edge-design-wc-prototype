@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import { borderRadiusMedium } from '@phoenixui/themes';
+import { cornerCtrlRest } from '@phoenixui/themes/smtc-tokens.js';
 
 /**
  * The icon component for the Omnibox dropdown item.
@@ -57,7 +57,7 @@ const styles = css`
   }
 
   .entity {
-    border-radius: ${borderRadiusMedium};
+    border-radius: ${cornerCtrlRest};
     width: 32px;
     height: 32px;
   }
@@ -71,11 +71,7 @@ const styles = css`
   }
 `;
 
-@customElement({
-  name: 'omnibox-icon',
-  template,
-  styles,
-})
+@customElement({ name: 'omnibox-icon', template, styles })
 export class OmniboxIcon extends FASTElement {
   @attr type: 'search' | 'entity' | 'history' | 'site' | 'profile' = 'entity';
   @attr({ attribute: 'entity-image' }) entityImage =

@@ -1,6 +1,3 @@
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import WindowsService from '#serviceswindowsService.js';
 import {
   html,
   FASTElement,
@@ -8,8 +5,14 @@ import {
   Observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { setThemeFor } from '@phoenixui/web-components';
-import { copilotLightTheme, copilotDarkTheme } from '../copilotDesignSystem.js';
+import {
+  copilotLightTheme,
+  copilotDarkTheme,
+} from '@edge-design/copilot-theme';
+import { setThemeFor } from '@edge-design/utilities';
+import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
+import WindowsService from '#serviceswindowsService.js';
 
 const template = html` <slot></slot> `;
 
@@ -45,10 +48,7 @@ export class CopilotDesignProvider extends FASTElement {
   }
 
   setTheme() {
-    const themes = {
-      light: copilotLightTheme,
-      dark: copilotDarkTheme,
-    };
+    const themes = { light: copilotLightTheme, dark: copilotDarkTheme };
     const themeSelection =
       this.ess.theme === 'system' ? this.ws.theme : this.ess.theme;
 

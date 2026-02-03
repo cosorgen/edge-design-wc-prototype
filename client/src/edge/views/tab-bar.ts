@@ -6,49 +6,74 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import {
-  shadow2,
-  spacingVerticalSNudge,
-  borderRadiusLarge,
-} from '@phoenixui/themes';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/toggle-button.js';
-import '@phoenixui/web-components/divider.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/divider/define.js';
 import '../controls/horizontal-tab.js';
-import '../../windows/controls/mica-material.js';
-import '../views/caption-controls.js';
 import '../controls/flyout-menu.js';
-import '../controls/identity-control.js';
-import '../controls/identity-flyout.js';
+import '../controls/context-menu.js';
+import '../controls/menu-item.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { spacingFrame } from '../designSystem.js';
+import {
+  ctrlTabBackgroundHorizontalActive,
+  paddingContentXSmall,
+  shadowLayerAmbient,
+  shadowLayerKey,
+} from '@phoenixui/themes/smtc-tokens.js';
+import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<TabBar>`
-  <mica-material tab-bar></mica-material>
   <div id="shadow"></div>
   <div id="content">
-    <div class="group" style="padding: 3px">
-      <flyout-menu>
-        <identity-control
-          appearance="signedIn"
-          slot="trigger"
-        ></identity-control>
-        <identity-flyout></identity-flyout>
-      </flyout-menu>
-    </div>
     <div class="group">
-      <phx-button appearance="subtle" icon-only>
-        <svg>
-          <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
-        </svg>
-      </phx-button>
-      <phx-button appearance="subtle" icon-only>
-        <svg>
-          <use href="img/edge/icons.svg#tab-position-horizontal-20-regular" />
-        </svg>
-      </phx-button>
+      <flyout-menu>
+        <mai-button appearance="subtle" icon-only slot="trigger">
+          <svg>
+            <use href="img/edge/icons.svg#panel-left-text-20-regular" />
+          </svg>
+        </mai-button>
+        <context-menu>
+          <menu-item @click="${(x) => x.showVerticalTabs()}" start-slot>
+            <svg slot="start">
+              <use
+                href="img/edge/icons.svg#tab-position-switch-to-vertical-20-regular"
+              />
+            </svg>
+            Turn on vertical tabs
+          </menu-item>
+          <menu-item start-slot>
+            <svg slot="start">
+              <use href="img/edge/icons.svg#search-20-regular" />
+            </svg>
+            Search tabs
+          </menu-item>
+          <menu-item start-slot>
+            <svg slot="start">
+              <use href="img/edge/icons.svg#tabs-20-regular" />
+            </svg>
+            Organize tabs
+          </menu-item>
+          <menu-item start-slot>
+            <svg slot="start">
+              <use href="img/edge/icons.svg#tab-desktop-clock-20-regular" />
+            </svg>
+            Recently closed tabs
+          </menu-item>
+          <menu-item start-slot>
+            <svg slot="start">
+              <use href="img/edge/icons.svg#phone-desktop-20-regular" />
+            </svg>
+            Tabs from other devices
+          </menu-item>
+          <menu-item start-slot>
+            <svg slot="start">
+              <use href="img/edge/icons.svg#layer-diagonal-20-regular" />
+            </svg>
+            Create new workspace
+          </menu-item>
+        </context-menu>
+      </flyout-menu>
     </div>
     <div id="tabs">
       ${repeat(
@@ -79,13 +104,13 @@ const template = html<TabBar>`
                   >`
                 : null}
           </horizontal-tab>
-          <phx-divider
+          <mai-divider
             orientation="vertical"
             appearance="strong"
-          ></phx-divider>`,
+          ></mai-divider>`,
       )}
     </div>
-    <phx-button
+    <mai-button
       appearance="subtle"
       icon-only
       id="add"
@@ -94,13 +119,12 @@ const template = html<TabBar>`
       <svg>
         <use href="img/edge/icons.svg#add-20-regular" />
       </svg>
-    </phx-button>
+    </mai-button>
     <div
       id="window-grabber"
       @mousedown="${(x, c) => x.handleTitleBarMouseDown(c.event)}"
       @mouseup="${(x, c) => x.handleContextMenu(c.event)}"
     ></div>
-    <caption-controls></caption-controls>
   </div>
 `;
 
@@ -108,27 +132,27 @@ const styles = css`
   :host {
     display: block;
     user-select: none;
-    position: relative; /* for positioning shadow and mica */
+    position: relative; /* for positioning shadow */
+    width: calc(100% - ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '186px')});
+    padding: var(--paddingWindowDefault);
   }
 
   #content {
     position: relative;
     box-sizing: border-box;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    gap: calc(${spacingFrame} * 2);
-    padding-inline-start: ${spacingFrame};
-    padding-inline-end: max(0px, ${spacingFrame});
-    padding-block: ${spacingFrame};
+    align-items: flex-end;
+    gap: var(--paddingWindowDefault);
   }
 
   .group {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: calc(${spacingFrame} / 2);
+    gap: calc(var(--paddingWindowDefault) * 2);
   }
 
   #shadow {
@@ -136,66 +160,56 @@ const styles = css`
     inset-inline: 0;
     bottom: -2px;
     height: 2px;
-    box-shadow: ${shadow2};
+    box-shadow: ${shadowLayerAmbient}, ${shadowLayerKey};
+    background-color: ${ctrlTabBackgroundHorizontalActive};
   }
 
   #tabs {
     display: flex;
     flex-direction: row;
-    gap: calc(${spacingFrame} / 2);
-    min-width: 16px;
-  }
-
-  #add {
-    margin-inline-start: calc(0px - ${spacingFrame});
+    gap: var(--paddingWindowDefault);
+    overflow: hidden;
+    padding: max(10px, var(--paddingWindowDefault));
+    margin: min(
+      -10px,
+      calc(0px - var(--paddingWindowDefault))
+    ); /* for wings to not clip */
   }
 
   #window-grabber {
     flex: 1;
-    height: 100%;
-    min-height: 32px;
-    min-width: 24px;
-    cursor: grab;
-    margin-block-start: calc(0px - ${spacingFrame} * 1.5);
-    padding-block-start: calc(${spacingFrame} * 1.5);
-    margin-block-end: calc(0px - ${spacingFrame} * 0.5);
-    padding-block-end: calc(${spacingFrame} * 0.5);
+    height: calc(100% + (2 * var(--paddingWindowDefault)));
+    margin-block-end: calc(0px - var(--paddingWindowDefault));
+    min-width: ${(x) => (x.ews.activeSidepaneAppId ? '0px' : '24px')};
   }
 
-  phx-button {
-    border-radius: ${borderRadiusLarge};
-  }
-
-  phx-divider,
-  phx-divider:before,
-  phx-divider:after {
+  mai-divider,
+  mai-divider:before,
+  mai-divider:after {
     min-height: unset;
     height: unset;
   }
 
-  phx-divider {
-    margin-block: ${spacingVerticalSNudge};
-    margin-inline: calc(0px - (${spacingFrame} / 2));
+  mai-divider {
+    margin-block: ${paddingContentXSmall};
+    margin-inline: calc(0px - (var(--paddingWindowDefault) / 2));
   }
 
-  horizontal-tab[active] + phx-divider,
-  phx-divider:has(+ horizontal-tab[active]),
-  horizontal-tab:hover + phx-divider,
-  phx-divider:has(+ horizontal-tab:hover),
-  #tabs:has(+ #add:hover) > phx-divider:last-of-type {
+  horizontal-tab[active] + mai-divider,
+  mai-divider:has(+ horizontal-tab[active]),
+  horizontal-tab:hover + mai-divider,
+  mai-divider:has(+ horizontal-tab:hover),
+  #tabs:has(+ #add:hover) > mai-divider:last-of-type {
     visibility: hidden;
   }
 `;
 
-@customElement({
-  name: 'tab-bar',
-  template,
-  styles,
-})
+@customElement({ name: 'tab-bar', template, styles })
 export class TabBar extends FASTElement {
   @inject(WindowsService) ws!: WindowsService;
   @inject(TabService) ts!: TabService;
   @inject(EdgeWindowService) ews!: EdgeWindowService;
+  @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -236,4 +250,8 @@ export class TabBar extends FASTElement {
     e.preventDefault();
     return false;
   };
+
+  showVerticalTabs() {
+    this.ss.verticalTabs = true;
+  }
 }

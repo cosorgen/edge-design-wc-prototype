@@ -27,8 +27,48 @@ export type OpenAIResponse = {
 };
 
 export class CopilotService {
+  @observable composerOverPage = false;
   @observable threadsById: Record<string, Thread> = {};
   @observable activeThreadId?: string;
+  @observable showHint = false;
+  @observable autoOpen = true;
+  @observable autoOpenDelay = 500;
+  @observable sidepaneBackground = false;
+
+  constructor() {
+    this.getSettingsFromURL();
+  }
+
+  getSettingsFromURL() {
+    const url = new URL(window.location.href);
+    this.showHint =
+      url.searchParams.get('showComposerHint') === 'true' || this.showHint;
+
+    const autoOpen = url.searchParams.get('autoOpenComposer');
+    if (autoOpen === 'false') this.autoOpen = false;
+    else if (autoOpen === 'true') this.autoOpen = true;
+
+    this.autoOpenDelay = parseInt(
+      url.searchParams.get('autoOpenDelay') || this.autoOpenDelay.toString(),
+    );
+
+    this.sidepaneBackground =
+      url.searchParams.get('showSidepaneBackground') === 'true' ||
+      this.sidepaneBackground;
+  }
+
+  setSettingsInURL() {
+    const url = new URL(window.location.href);
+    url.searchParams.set('showComposerHint', this.showHint.toString());
+    url.searchParams.set('autoOpenComposer', this.autoOpen.toString());
+    url.searchParams.set('autoOpenDelay', this.autoOpenDelay.toString());
+    url.searchParams.set(
+      'showSidepaneBackground',
+      this.sidepaneBackground.toString(),
+    );
+
+    window.history.pushState({}, '', url.toString());
+  }
 
   browserContextChanged(tab: Tab) {
     if (!this.activeThreadId) this.newThread();
@@ -161,5 +201,25 @@ export class CopilotService {
           this.threadsById = { ...this.threadsById, thread };
         }, delayBeforeComplete);
       });
+  }
+
+  setShowHint(show: boolean) {
+    this.showHint = show;
+    this.setSettingsInURL();
+  }
+
+  setAutoOpen(open: boolean) {
+    this.autoOpen = open;
+    this.setSettingsInURL();
+  }
+
+  setAutoOpenDelay(delay: number) {
+    this.autoOpenDelay = delay;
+    this.setSettingsInURL();
+  }
+
+  setShowSidepaneBackground(show: boolean) {
+    this.sidepaneBackground = show;
+    this.setSettingsInURL();
   }
 }
