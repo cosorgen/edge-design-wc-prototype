@@ -3,7 +3,8 @@ import {
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
   paddingContentMedium,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
 } from '@phoenixui/themes/smtc-tokens.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
@@ -17,7 +18,7 @@ const styles = css`
     padding: ${paddingContentMedium};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;

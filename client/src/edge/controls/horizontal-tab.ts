@@ -10,14 +10,8 @@ import '@mai-ui/button/define.js';
 import '@mai-ui/spinner/define.js';
 import '../../windows/controls/mica-material.js';
 import {
-  shadowLayerAmbientX,
-  shadowLayerKeyBlur,
-  shadowLayerKeyColor,
-  shadowLayerKeyX,
-  shadowLayerKeyY,
-  shadowLayerAmbientY,
-  shadowLayerAmbientBlur,
-  shadowLayerAmbientColor,
+  shadowLayerAmbient,
+  shadowLayerKey,
   gapInsideCtrlDefault,
   paddingCtrlHorizontalDefault,
   paddingContentXSmall,
@@ -29,7 +23,7 @@ import {
   textGlobalCaption1LineHeight,
   ctrlTabBackgroundHorizontalActive,
   cornerCtrlSmRest,
-  ctrlTabBackgroundHorizontalHover,
+  backgroundCtrlSubtleHover,
   ctrlTabCorner,
 } from '@phoenixui/themes/smtc-tokens.js';
 
@@ -77,14 +71,7 @@ const styles = css`
   }
 
   :host([active]) {
-    filter: drop-shadow(
-        ${shadowLayerKeyX} ${shadowLayerKeyY} ${shadowLayerKeyBlur}
-          ${shadowLayerKeyColor}
-      )
-      drop-shadow(
-        ${shadowLayerAmbientX} ${shadowLayerAmbientY} ${shadowLayerAmbientBlur}
-          ${shadowLayerAmbientColor}
-      );
+    filter: drop-shadow(${shadowLayerKey}) drop-shadow(${shadowLayerAmbient});
   }
 
   button {
@@ -105,7 +92,7 @@ const styles = css`
   }
 
   button:hover {
-    background-color: ${ctrlTabBackgroundHorizontalHover};
+    background-color: ${backgroundCtrlSubtleHover};
     color: ${foregroundCtrlNeutralPrimaryHover};
   }
 

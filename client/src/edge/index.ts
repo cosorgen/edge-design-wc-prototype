@@ -12,9 +12,9 @@ import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
 import {
   phoenixSmtcLightTheme,
   phoenixSmtcDarkTheme,
-  lightChromiumMapping,
-  darkChromiumMapping,
 } from '@phoenixui/themes';
+import lightChromiumMapping from '@phoenixui/themes/light-chromium-mapping.json' with { type: 'json' };
+import darkChromiumMapping from '@phoenixui/themes/dark-chromium-mapping.json' with { type: 'json' };
 import maiPhoenixLight from '@mai-ui/design-tokens/themes/phoenix.light/phoenix.light.json' with { type: 'json' };
 import maiPhoenixDark from '@mai-ui/design-tokens/themes/phoenix.dark/phoenix.dark.json' with { type: 'json' };
 import maiCompactThemedLight from '@mai-ui/design-tokens/themes/compact-themed.light/compact-themed.light.json' with { type: 'json' };
@@ -51,7 +51,7 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
-import { applyChromiumTheme } from './applyChromiumTheme.js';
+import { applyChromiumTheme, type PaletteDefinition } from './applyChromiumTheme.js';
 
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
@@ -254,8 +254,8 @@ export class MicrosoftEdge extends FASTElement {
     // Set up edge design system
     const themes = {
       phoenix: {
-        light: phoenixSmtcLightTheme,
-        dark: phoenixSmtcDarkTheme,
+        light: phoenixSmtcLightTheme as unknown as Record<string, string>,
+        dark: phoenixSmtcDarkTheme as unknown as Record<string, string>,
       },
       'mai-phoenix': {
         light: maiPhoenixLight as unknown as Record<string, string>,
@@ -279,7 +279,7 @@ export class MicrosoftEdge extends FASTElement {
     if (this.ss.themeColor) {
       selectedTheme = applyChromiumTheme(
         selectedTheme,
-        themeKey === 'dark' ? darkChromiumMapping : lightChromiumMapping,
+        (themeKey === 'dark' ? darkChromiumMapping : lightChromiumMapping) as Record<string, PaletteDefinition | string>,
         this.ss.themeColor,
         this.ss.themePalette,
       );

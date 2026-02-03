@@ -22,7 +22,8 @@ import {
   cornerFlyoutRest,
   foregroundContentNeutralPrimary,
   paddingContentMedium,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
   textGlobalBody2FontSize,
   textGlobalBody2LineHeight,
   textStyleDefaultHeaderWeight,
@@ -104,7 +105,7 @@ const styles = css`
     min-height: 16px;
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     overflow: hidden;
     color: ${foregroundContentNeutralPrimary};
   }

@@ -8,7 +8,8 @@ import {
   gapBetweenContentSmall,
   gapBetweenContentXSmall,
   paddingContentMedium,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
   textGlobalBody3FontSize,
   textGlobalBody3LineHeight,
   textGlobalCaption2FontSize,
@@ -50,7 +51,11 @@ const template = html<IdentityMenu>` <div id="top-row">
       <div id="actions">
         <mai-button appearance="subtle" size="small" icon-only>
           <svg>
-            <use href="./img/edge/icons.svg#payment-20-regular" x="-2" y="-2"></use>
+            <use
+              href="./img/edge/icons.svg#payment-20-regular"
+              x="-2"
+              y="-2"
+            ></use>
           </svg>
         </mai-button>
         <mai-button appearance="subtle" size="small" icon-only>
@@ -60,7 +65,11 @@ const template = html<IdentityMenu>` <div id="top-row">
         </mai-button>
         <mai-button appearance="subtle" size="small" icon-only>
           <svg>
-            <use href="./img/edge/icons.svg#person-note-20-regular" x="-2" y="-2"></use>
+            <use
+              href="./img/edge/icons.svg#person-note-20-regular"
+              x="-2"
+              y="-2"
+            ></use>
           </svg>
         </mai-button>
       </div>
@@ -127,7 +136,7 @@ const styles = css`
     padding: ${paddingContentMedium};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     color: ${foregroundCtrlNeutralPrimaryRest};
     overflow: hidden;
   }

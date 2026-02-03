@@ -17,8 +17,9 @@ import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   ctrlTabBackgroundHorizontalActive,
-  paddingContentXSmallnudge,
-  shadowLayer,
+  paddingContentXSmall,
+  shadowLayerAmbient,
+  shadowLayerKey,
 } from '@phoenixui/themes/smtc-tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
@@ -159,7 +160,7 @@ const styles = css`
     inset-inline: 0;
     bottom: -2px;
     height: 2px;
-    box-shadow: ${shadowLayer};
+    box-shadow: ${shadowLayerAmbient}, ${shadowLayerKey};
     background-color: ${ctrlTabBackgroundHorizontalActive};
   }
 
@@ -190,7 +191,7 @@ const styles = css`
   }
 
   mai-divider {
-    margin-block: ${paddingContentXSmallnudge};
+    margin-block: ${paddingContentXSmall};
     margin-inline: calc(0px - (var(--paddingWindowDefault) / 2));
   }
 

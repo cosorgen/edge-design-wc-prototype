@@ -27,7 +27,8 @@ import {
   cornerFlyoutRest,
   foregroundContentNeutralPrimary,
   paddingContentXSmall,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
   textGlobalBody3FontSize,
   textGlobalBody3LineHeight,
   textStyleDefaultHeaderWeight,
@@ -167,7 +168,7 @@ const styles = css`
     gap: ${gapBetweenContentMedium};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     color: ${foregroundContentNeutralPrimary};
   }
 

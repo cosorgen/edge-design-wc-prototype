@@ -24,10 +24,11 @@ import {
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralSecondaryRest,
-  paddingContentXSmallnudge,
+  paddingContentXSmall,
   paddingContentXxSmall,
   paddingFlyoutDefault,
-  shadowFlyout,
+  shadowFlyoutKey,
+  shadowFlyoutAmbient,
   textGlobalBody3FontSize,
   textGlobalBody3LineHeight,
   textGlobalCaption1FontSize,
@@ -167,7 +168,7 @@ const styles = css`
     flex-direction: column;
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     overflow: hidden;
   }
 
@@ -195,7 +196,7 @@ const styles = css`
   }
 
   .label {
-    padding: ${paddingContentXSmallnudge};
+    padding: ${paddingContentXSmall};
     border-radius: ${cornerCtrlRest};
 
     font-family: ${textStyleDefaultRegularFontFamily};

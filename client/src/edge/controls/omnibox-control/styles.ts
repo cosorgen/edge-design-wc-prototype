@@ -9,7 +9,8 @@ import {
   gapBetweenContentXxSmall,
   gapInsideCtrlDefault,
   paddingContentNone,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
   strokeWidthDefault,
   cornerCircular,
   paddingContentXxSmall,
@@ -55,7 +56,7 @@ export const styles = css`
   :host([dropdown-open]) [part='container'] {
     background-color: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     padding: 0px;
     border: none;
   }

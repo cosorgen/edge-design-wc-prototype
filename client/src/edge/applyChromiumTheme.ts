@@ -1,4 +1,4 @@
-import { PaletteDefinition, smtcTokens } from '@phoenixui/themes';
+import { smtcTokens } from '@phoenixui/themes';
 import {
   argbFromHex,
   Hct,
@@ -271,6 +271,12 @@ function GeneratePaletteTones(palette: Palette): PaletteTones {
   return { primary, secondary, tertiary, error, neutral, neutralVariant };
 }
 
+export type PaletteDefinition = {
+  variant: keyof PaletteTones;
+  tone: number;
+  alpha?: number;
+};
+
 export function applyChromiumTheme(
   theme: Record<string, string>,
   mapping: Record<string, PaletteDefinition | string>,
@@ -283,7 +289,7 @@ export function applyChromiumTheme(
   );
   const themeColors: Record<string, string> = {};
   Object.keys(mapping).forEach((key) => {
-    const value = mapping[key];
+    const value = mapping[key] as PaletteDefinition | string;
     if (typeof value === 'string') return;
     const { variant, tone, alpha } = value;
     const resolvedAlpha = alpha === undefined ? 1 : alpha;
@@ -295,7 +301,7 @@ export function applyChromiumTheme(
 
   // Apply mapping to theme
   Object.entries(themeColors).forEach(([key, value]) => {
-    const cssVar = smtcTokens[key];
+    const cssVar = smtcTokens[key as keyof typeof smtcTokens];
     if (cssVar) {
       const themeKey = cssVar.replace(/var\(--(.+?)\)/g, '$1');
       theme[themeKey] = value;

@@ -16,7 +16,8 @@ import {
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
   paddingContentMedium,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<ToolbarFlyoutItem>`
@@ -62,7 +63,7 @@ const styles = css`
     padding: ${paddingContentMedium};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;

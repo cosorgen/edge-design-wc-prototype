@@ -7,9 +7,9 @@ import {
   foregroundCtrlNeutralSecondaryRest,
   paddingCtrlSmHorizontalIconOnly,
   foregroundCtrlNeutralSecondaryPressed,
-  ctrlOmniboxActionButtonBackgroundPressed,
-  ctrlOmniboxActionButtonBackgroundRest,
-  ctrlOmniboxActionButtonBackgroundHover,
+  ctrlOmniboxActionBubbleBackgroundPressed,
+  ctrlOmniboxActionBubbleBackgroundRest,
+  ctrlOmniboxActionBubbleBackgroundHover,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<OmniboxActionButton>`
@@ -30,7 +30,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: ${ctrlOmniboxActionButtonBackgroundRest};
+    background: ${ctrlOmniboxActionBubbleBackgroundRest};
     border: none;
     padding: ${paddingCtrlSmHorizontalIconOnly};
     margin: 0;
@@ -39,14 +39,14 @@ const styles = css`
   }
 
   button:hover {
-    background: ${ctrlOmniboxActionButtonBackgroundHover};
+    background: ${ctrlOmniboxActionBubbleBackgroundHover};
     color: ${foregroundCtrlNeutralSecondaryHover};
     cursor: pointer;
   }
 
   button:hover:active,
   :host([pressed='true']) button {
-    background: ${ctrlOmniboxActionButtonBackgroundPressed};
+    background: ${ctrlOmniboxActionBubbleBackgroundPressed};
     color: ${foregroundCtrlNeutralSecondaryPressed};
   }
 

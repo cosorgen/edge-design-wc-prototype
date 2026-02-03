@@ -6,7 +6,8 @@ import {
   foregroundContentNeutralPrimary,
   foregroundContentNeutralSecondary,
   gapBetweenContentXSmall,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
   paddingContentXSmall,
   paddingContentXxSmall,
 } from '@phoenixui/themes/smtc-tokens.js';
@@ -27,7 +28,7 @@ const styles = css`
     padding: ${paddingContentXSmall};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     overflow: hidden;
     color: ${foregroundContentNeutralPrimary};
   }

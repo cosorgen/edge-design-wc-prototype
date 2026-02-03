@@ -30,7 +30,8 @@ import {
   paddingContentXSmall,
   paddingContentXxLarge,
   paddingContentXxSmall,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
   strokeCtrlOnOutlineRest,
   strokeWidthDefault,
   textGlobalBody2FontSize,
@@ -290,7 +291,7 @@ const styles = css`
     gap: ${gapBetweenContentXSmall};
     border-radius: ${cornerCircular};
     background-color: ${ctrlOmniboxBackgroundRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
 
     #start {
       padding: ${paddingContentSmall} ${paddingContentMedium};

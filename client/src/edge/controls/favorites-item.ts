@@ -5,7 +5,7 @@ import {
   cornerCtrlRest,
   foregroundCtrlNeutralPrimaryRest,
   gapBetweenContentXxSmall,
-  paddingContentXSmallnudge,
+  paddingContentXSmall,
   textGlobalCaption1FontSize,
   textGlobalCaption1LineHeight,
   textStyleDefaultRegularFontFamily,
@@ -46,7 +46,7 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     gap: ${gapBetweenContentXxSmall};
-    padding: ${paddingContentXSmallnudge};
+    padding: ${paddingContentXSmall};
     border: none;
     border-radius: ${cornerCtrlRest};
     background: ${backgroundCtrlSubtleRest};

@@ -57,7 +57,7 @@ export class CopilotChat extends FASTElement {
   @inject(CopilotService) cs!: CopilotService;
   @attr({ mode: 'boolean' }) inline = false;
   @attr({ mode: 'boolean' }) empty = true;
-  _updateInterval?: NodeJS.Timeout;
+  _updateInterval?: ReturnType<typeof setInterval>;
 
   connectedCallback(): void {
     super.connectedCallback();

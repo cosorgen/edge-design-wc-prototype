@@ -13,7 +13,8 @@ import {
   cornerFlyoutRest,
   foregroundCtrlNeutralPrimaryRest,
   paddingFlyoutDefault,
-  shadowFlyout,
+  shadowFlyoutAmbient,
+  shadowFlyoutKey,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<OmniboxActionFlyout>`
@@ -35,7 +36,7 @@ const styles = css`
     padding: ${paddingFlyoutDefault};
     background: ${backgroundFlyoutSolid};
     border-radius: ${cornerFlyoutRest};
-    box-shadow: ${shadowFlyout};
+    box-shadow: ${shadowFlyoutAmbient}, ${shadowFlyoutKey};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 `;

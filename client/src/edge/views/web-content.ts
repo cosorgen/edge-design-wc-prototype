@@ -19,7 +19,8 @@ import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   cornerLayerDefault,
-  shadowLayer,
+  shadowLayerAmbient,
+  shadowLayerKey,
   foregroundCtrlNeutralPrimaryRest,
   backgroundLayerPrimarySolid,
   ctrlWebViewStroke,
@@ -66,7 +67,7 @@ const styles = css`
     flex: 1;
     display: flex;
     border-radius: ${cornerLayerDefault};
-    box-shadow: ${shadowLayer};
+    box-shadow: ${shadowLayerAmbient}, ${shadowLayerKey};
     border: ${strokeWidthCardDefault} solid ${ctrlWebViewStroke};
     margin: var(--paddingWindowDefault);
     overflow: auto;

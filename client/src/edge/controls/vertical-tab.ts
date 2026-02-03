@@ -20,10 +20,11 @@ import {
   textGlobalCaption1FontSize,
   textGlobalCaption1LineHeight,
   cornerCtrlSmRest,
-  ctrlTabBackgroundVerticalHover,
+  backgroundCtrlSubtleHover,
   ctrlTabBackgroundVerticalActive,
   ctrlTabCorner,
-  ctrlTabShadowVerticalActive,
+  ctrlTabShadowVerticalActiveAmbient,
+  ctrlTabShadowVerticalActiveKey,
 } from '@phoenixui/themes/smtc-tokens.js';
 
 const template = html<VerticalTab>`
@@ -84,14 +85,15 @@ const styles = css`
   }
 
   button:hover {
-    background-color: ${ctrlTabBackgroundVerticalHover};
+    background-color: ${backgroundCtrlSubtleHover};
     color: ${foregroundCtrlNeutralPrimaryHover};
   }
 
   :host([active]) button {
     cursor: default;
     background-color: ${ctrlTabBackgroundVerticalActive};
-    box-shadow: ${ctrlTabShadowVerticalActive};
+    box-shadow:
+      ${ctrlTabShadowVerticalActiveAmbient}, ${ctrlTabShadowVerticalActiveKey};
   }
 
   :host([active]) button:hover {

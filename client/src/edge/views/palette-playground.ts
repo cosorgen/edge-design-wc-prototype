@@ -70,7 +70,7 @@ function FormatTitle(title: string): string {
     .replace(/([a-z])([A-Z])/g, '$1 $2');
 }
 
-function hexToHue(hex?: string): number | undefined {
+function hexToHue(hex: string | null): number | undefined {
   if (!hex) return;
   hex = hex.replace(/^#/, ''); // Remove the #
   if (hex.length === 3) {
