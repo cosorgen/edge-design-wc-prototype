@@ -25,7 +25,7 @@ import {
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
   paddingContentXSmall,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<AddFavoritesInputs>`
   <div class="favorite-title">

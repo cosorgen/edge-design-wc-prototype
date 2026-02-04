@@ -5,7 +5,7 @@ import {
   css,
   attr,
 } from '@microsoft/fast-element';
-import { cornerCtrlRest } from '@phoenixui/themes/smtc-tokens.js';
+import { cornerCtrlRest } from '@mai-ui/design-tokens/tokens.js';
 
 /**
  * The icon component for the Omnibox dropdown item.

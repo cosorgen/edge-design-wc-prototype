@@ -21,9 +21,9 @@ import {
   cornerCircular,
   gapBetweenContentXxSmall,
   paddingContentXSmall,
-  paddingContentXxxSmall,
+  paddingContentXxSmall,
   strokeWidthDefault,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html` <div
     id="window-grabber"
@@ -69,7 +69,7 @@ const template = html` <div
     @click="${(x) => x.minimizeWindow()}"
   >
     <svg>
-      <use href="img/edge/icons.svg#chrome-minimize-20-regular" />
+      <use x="2" y="2" href="img/edge/icons.svg#chrome-minimize-20-regular" />
     </svg>
   </mai-button>
   <mai-button
@@ -79,7 +79,7 @@ const template = html` <div
     @click="${(x) => x.maximizeWindow()}"
   >
     <svg>
-      <use
+      <use x="2" y="2"
         href="${(x) =>
           x.windowIsMaximized()
             ? 'img/edge/icons.svg#chrome-restore-20-regular'
@@ -95,7 +95,7 @@ const template = html` <div
     id="close"
   >
     <svg>
-      <use href="img/edge/icons.svg#chrome-close-20-regular" />
+      <use  x="2" y="2" href="img/edge/icons.svg#chrome-close-20-regular" />
     </svg>
   </mai-button>`;
 
@@ -138,8 +138,8 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     margin-right: ${paddingContentXSmall};
-    padding: calc(${paddingContentXxxSmall} - ${strokeWidthDefault})
-      ${paddingContentXxxSmall};
+    padding: calc(${paddingContentXxSmall} - ${strokeWidthDefault})
+      ${paddingContentXxSmall};
     gap: ${gapBetweenContentXxSmall};
     border-radius: ${cornerCircular};
     background-color: ${backgroundCtrlNeutralRest};

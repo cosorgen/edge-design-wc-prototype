@@ -15,7 +15,7 @@ import {
   gapBetweenCtrlDefault,
   paddingContentSmall,
   paddingContentXSmall,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<ExtensionHubItem>` <button tabindex="0">
     <div id="start">

@@ -11,7 +11,7 @@ import {
   textGlobalBody3LineHeight,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<OmniboxInput>`
   <div

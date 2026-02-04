@@ -10,7 +10,7 @@ import {
   textGlobalBody3LineHeight,
   textStyleDefaultHeaderWeight,
   textStyleDefaultRegularFontFamily,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html` <div id="title"><slot></slot></div>
   <div id="actions">

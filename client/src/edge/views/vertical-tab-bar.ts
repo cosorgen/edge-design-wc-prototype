@@ -17,7 +17,7 @@ import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
   foregroundCtrlNeutralSecondaryRest,
   textGlobalCaption1FontSize,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<VerticalTabBar>`

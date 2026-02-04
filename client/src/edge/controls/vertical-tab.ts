@@ -21,11 +21,13 @@ import {
   textGlobalCaption1LineHeight,
   cornerCtrlSmRest,
   backgroundCtrlSubtleHover,
+} from '@mai-ui/design-tokens/tokens.js';
+import {
   ctrlTabBackgroundVerticalActive,
   ctrlTabCorner,
   ctrlTabShadowVerticalActiveAmbient,
   ctrlTabShadowVerticalActiveKey,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/edge-tokens.js';
 
 const template = html<VerticalTab>`
   <button @mousedown="${(x, c) => x.handleClick(c.event as MouseEvent)}">

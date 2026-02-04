@@ -23,9 +23,9 @@ import {
   shadowLayerKey,
   foregroundCtrlNeutralPrimaryRest,
   backgroundLayerPrimarySolid,
-  ctrlWebViewStroke,
-  strokeWidthCardDefault,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
+import { ctrlWebViewStroke } from '@mai-ui/design-tokens/edge-tokens.js';
+import { strokeWidthCardDefault } from '@mai-ui/design-tokens/mai-tokens.js';
 
 const edgePages: Record<string, ViewTemplate> = {
   newtab: html<string>`<copilot-newtab

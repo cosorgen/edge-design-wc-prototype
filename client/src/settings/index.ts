@@ -6,14 +6,14 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import '../windows/controls/mica-material.js';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/text-input.js';
-import '@phoenixui/web-components/switch.js';
-import '@fluentui/web-components/dropdown.js';
-import '@fluentui/web-components/listbox.js';
-import '@fluentui/web-components/option.js';
-import '@fluentui/web-components/tablist.js';
-import '@fluentui/web-components/tab.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/text-input/define.js';
+import '@mai-ui/switch/define.js';
+import '@mai-ui/dropdown/define.js';
+import '@mai-ui/listbox/define.js';
+import '@mai-ui/option/define.js';
+import '@mai-ui/tablist/define.js';
+import '@mai-ui/tab/define.js';
 import {
   colorLayerBackgroundDialog,
   spacingHorizontalL,
@@ -44,7 +44,7 @@ const template = html<WindowsSettings>`
       <h1>Settings</h1>
       <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
-        <phx-button
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -52,14 +52,10 @@ const template = html<WindowsSettings>`
           @click="${(x) => x.minimizeWindow()}"
         >
           <svg>
-            <use
-              x="2"
-              y="2"
-              href="./img/edge/icons.svg#chrome-minimize-20-regular"
-            />
+            <use href="./img/edge/icons.svg#chrome-minimize-20-regular" />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -68,14 +64,12 @@ const template = html<WindowsSettings>`
         >
           <svg>
             <use
-              x="2"
-              y="2"
               href="./img/edge/icons.svg#chrome-${(x) =>
                 x.windowIsMaximized() ? 'restore' : 'maximize'}-20-regular"
             />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -84,138 +78,128 @@ const template = html<WindowsSettings>`
           @click="${(x) => x.ws.closeWindow(x.id)}"
         >
           <svg>
-            <use
-              x="2"
-              y="2"
-              href="./img/edge/icons.svg#chrome-close-20-regular"
-            />
+            <use href="./img/edge/icons.svg#chrome-close-20-regular" />
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
     </div>
 
     <div id="container">
-      <fluent-tablist orientation="vertical">
-        <fluent-tab
+      <mai-tablist orientation="vertical">
+        <mai-tab
           class="${(x) =>
             x.selectedButton === 'appearance' ? 'selected' : ''}"
           @click="${(x) => x.handleSidebarButtonClick('appearance')}"
         >
           Overall appearance
-        </fluent-tab>
-        <fluent-tab
+        </mai-tab>
+        <mai-tab
           class="${(x) => (x.selectedButton === 'browser' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('browser')}"
         >
           Browser
-        </fluent-tab>
-        <fluent-tab
+        </mai-tab>
+        <mai-tab
           class="${(x) => (x.selectedButton === 'newtab' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('newtab')}"
         >
           New tab pages
-        </fluent-tab>
-        <fluent-tab
+        </mai-tab>
+        <mai-tab
           class="${(x) => (x.selectedButton === 'copilot' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('copilot')}"
         >
           Copilot
-        </fluent-tab>
-      </fluent-tablist>
+        </mai-tab>
+      </mai-tablist>
 
       <div id="main">
         <!-- Overall Appearance Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'appearance'}">
           <div class="entry">
             <label for="design-system">Design system</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="design-system"
               @change="${(x) => x.updateDesignSystem()}"
             >
-              <fluent-listbox>
-                <fluent-option
-                  value="phoenix"
-                  ?selected="${(x) => x.ss.designSystem === 'phoenix'}"
-                >
-                  Phoenix
-                </fluent-option>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="mai-phoenix"
                   ?selected="${(x) => x.ss.designSystem === 'mai-phoenix'}"
                 >
-                  MAI Phoenix
-                </fluent-option>
-                <fluent-option
+                  Phoenix Semantic
+                </mai-option>
+                <mai-option
                   value="compact-themed"
                   ?selected="${(x) => x.ss.designSystem === 'compact-themed'}"
                 >
                   MAI Compact (themed)
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="compact-neutral"
                   ?selected="${(x) => x.ss.designSystem === 'compact-neutral'}"
                 >
                   MAI Compact (neutral)
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="baseline"
                   ?selected="${(x) => x.ss.designSystem === 'baseline'}"
                 >
                   MAI Baseline
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="theme">Theme</label>
-            <fluent-dropdown id="theme" @change="${(x) => x.updateTheme()}">
-              <fluent-listbox>
-                <fluent-option
+            <mai-dropdown id="theme" @change="${(x) => x.updateTheme()}">
+              <mai-listbox>
+                <mai-option
                   value="light"
                   ?selected="${(x) => x.ws.theme === 'light'}"
                 >
                   Light
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="dark"
                   ?selected="${(x) => x.ws.theme === 'dark'}"
                 >
                   Dark
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="transparency">Transparency</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="transparency"
               @change="${(x) => x.updateTransparency()}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="normal"
                   ?selected="${(x) => x.ws.transparency === 'normal'}"
                 >
                   Normal
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="reduced"
                   ?selected="${(x) => x.ws.transparency === 'reduced'}"
                 >
                   Reduced
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="frame-spacing">Frame spacing</label>
-            <phx-text-input
+            <mai-text-input
               id="frame-spacing"
               type="number"
               value="${(x) => parseInt(x.ss.frameSpacing)}"
               @change="${(x) => x.updateFrameSpacing()}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
           <div class="entry">
             <label for="theme-color">Theme color</label>
@@ -225,7 +209,7 @@ const template = html<WindowsSettings>`
               value="${(x) => x.ss.themeColor}"
               @change="${(x) => x.updateThemeColor()}"
             />
-            <phx-button
+            <mai-button
               @click="${(x) => x.resetThemeColor()}"
               appearance="subtle"
               icon-only
@@ -233,41 +217,41 @@ const template = html<WindowsSettings>`
               <svg>
                 <use href="./img/edge/icons.svg#arrow-clockwise-20-regular" />
               </svg>
-            </phx-button>
+            </mai-button>
           </div>
           <div class="entry">
             <label for="theme-palette">Theme palette</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="theme-palette"
               @change="${(x) => x.updateThemePalette()}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="tonal"
                   ?selected="${(x) => x.ss.themePalette === 'tonal'}"
                 >
                   Tonal (default)
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="neutral"
                   ?selected="${(x) => x.ss.themePalette === 'neutral'}"
                 >
                   Neutral
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="vibrant"
                   ?selected="${(x) => x.ss.themePalette === 'vibrant'}"
                 >
                   Vibrant
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="expressive"
                   ?selected="${(x) => x.ss.themePalette === 'expressive'}"
                 >
                   Expressive
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
         </div>
 
@@ -275,68 +259,68 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'browser'}">
           <div class="entry">
             <label for="show-menus-l0">Show menus in L1</label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="show-menus-l0"
               ?checked="${(x) => x.ss.showMenusInL1}"
               @change="${(x) => x.toggleshowMenusInL1()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="favorites-bar"
               @change="${(x) => x.updateShowFavoritesBar()}"
               value="${(x) => x.ss.showFavoritesBar}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="always"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
                 >
                   Always
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="never"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
                 >
                   Never
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="newtab"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
                 >
                   On new tab
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="truncate-url">Truncate URL</label>
-            <phx-switch
+            <mai-switch
               id="truncate-url"
               ?checked="${(x) => x.ss.truncateURL}"
               @change="${(x) => x.toggleTruncateUrl()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="full-width-omnibox">Full width omnibox</label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="full-width-omnibox"
               ?checked="${(x) => x.ss.fullWidthOmnibox}"
               @change="${(x) => x.toggleFullWidthOmnibox()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="shopping-trigger">Shopping trigger URL</label>
-            <phx-text-input
+            <mai-text-input
               id="shopping-trigger"
               type="text"
               value="${(x) => x.ts.shoppingTriggerURL}"
               @blur="${(x) => x.updateShoppingTrigger()}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
         </div>
 
@@ -344,20 +328,20 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'newtab'}">
           <div class="entry">
             <label for="legacy-newtab"> Show legacy new tab page </label>
-            <phx-switch
+            <mai-switch
               id="legacy-newtab"
               ?checked="${(x) => x.ss.showLegacyNewTab}"
               @change="${(x) => x.toggleShowLegacyNewTab()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="show-copilot-ntp"> Show copilot new tab page </label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="show-copilot-ntp"
               ?checked="${(x) => x.ss.showCopilotNTP}"
               @change="${(x) => x.toggleShowCopilotNTP()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
         </div>
 
@@ -365,50 +349,50 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'copilot'}">
           <div class="entry">
             <label for="legacy-copilot"> Show legacy copilot </label>
-            <phx-switch
+            <mai-switch
               id="legacy-copilot"
               ?checked="${(x) => x.ss.showLegacyCopilot}"
               @change="${(x) => x.toggleShowLegacyCopilot()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="composer-hint"> Show composer hint </label>
-            <phx-switch
+            <mai-switch
               id="composer-hint"
               ?checked="${(x) => x.cs.showHint}"
               @change="${(x) => x.toggleShowComposerHint()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="legacy-newtab"> Auto open composer on hover </label>
-            <phx-switch
+            <mai-switch
               id="composer-auto-open"
               ?checked="${(x) => x.cs.autoOpen}"
               @change="${(x) => x.toggleAutoOpenComposer()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="composer-auto-open-delay"
               >Composer auto open delay (ms)</label
             >
-            <phx-text-input
+            <mai-text-input
               id="composer-auto-open-delay"
               type="number"
               value="${(x) => x.cs.autoOpenDelay}"
               @change="${(x) => x.updateComposerAutoOpenDelay()}"
               ?disabled="${(x) => !x.cs.autoOpen}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
           <div class="entry">
             <label for="copilot-sidepane-background">
               Copilot sidepane background
             </label>
-            <phx-switch
+            <mai-switch
               id="copilot-sidepane-background"
               ?checked="${(x) => x.cs.sidepaneBackground}"
               @change="${(x) => x.toggleShowSidepaneBackground()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
         </div>
       </div>
@@ -441,9 +425,9 @@ const styles = css`
     display: flex;
     align-items: center;
     padding-inline-start: ${spacingHorizontalL};
-    --smtc-corner-ctrl-rest: 0px;
-    --smtc-corner-ctrl-hover: 0px;
-    --smtc-corner-ctrl-pressed: 0px;
+    --smtc-corner-ctrl-lg-rest: 0px;
+    --smtc-corner-ctrl-lg-hover: 0px;
+    --smtc-corner-ctrl-lg-pressed: 0px;
   }
 
   h1 {

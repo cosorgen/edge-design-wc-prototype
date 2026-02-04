@@ -17,7 +17,7 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '@mai-ui/divider/define.js';
 import { TabService } from '#servicestabService.js';
-import { paddingContentXSmall } from '@phoenixui/themes/smtc-tokens.js';
+import { paddingContentXSmall } from '@mai-ui/design-tokens/tokens.js';
 
 const template = html`
   <div id="user">

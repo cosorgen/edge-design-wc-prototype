@@ -15,7 +15,7 @@ import {
   paddingFlyoutDefault,
   shadowFlyoutAmbient,
   shadowFlyoutKey,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<OmniboxActionFlyout>`
   <flyout-menu ?initially-open="${(x) => x.initOpen}">

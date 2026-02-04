@@ -11,6 +11,7 @@
     "isolatedModules": true, // Avoid mis-compilation with features like re-exporting types.
     "esModuleInterop": true, // Make type system compatible with ESM imports.
     "forceConsistentCasingInFileNames": true, // Enforce consistent casing in filenames
-    "declaration": true
+    "declaration": true,
+    "resolveJsonModule": true,
   }
 }

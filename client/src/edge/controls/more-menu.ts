@@ -13,7 +13,7 @@ import './more-menu-zoom.js';
 import '@mai-ui/divider/define.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/text-input/define.js';
-import '@phoenixui/web-components/link.js';
+import '@mai-ui/link/define.js';
 import {
   backgroundCtrlNeutralRest,
   backgroundCtrlSubtleHover,
@@ -36,7 +36,7 @@ import {
   textStyleDefaultHeaderWeight,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const defaultItems: MoreMenuEntry[][] = [
   [

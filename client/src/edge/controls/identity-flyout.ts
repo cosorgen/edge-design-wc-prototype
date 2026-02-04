@@ -22,7 +22,7 @@ import {
   textGlobalCaption1FontSize,
   textStyleDefaultRegularWeight,
   textGlobalCaption1LineHeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import '@mai-ui/link/define.js';
 import '@mai-ui/menu-list/define.js';
 import '@mai-ui/menu-item/define.js';

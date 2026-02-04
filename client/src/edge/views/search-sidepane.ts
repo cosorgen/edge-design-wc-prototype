@@ -2,7 +2,7 @@ import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import '../controls/sidepane-header.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
-import { backgroundWebPagePrimary } from '@phoenixui/themes/smtc-tokens.js';
+import { backgroundWebPagePrimary } from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<SearchSidepane>`<sidepane-header
   @close="${(x) => x.handleClose()}"
