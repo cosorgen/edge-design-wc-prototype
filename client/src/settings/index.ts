@@ -9,11 +9,11 @@ import '../windows/controls/mica-material.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/text-input/define.js';
 import '@mai-ui/switch/define.js';
-import '@fluentui/web-components/dropdown.js';
-import '@fluentui/web-components/listbox.js';
-import '@fluentui/web-components/option.js';
-import '@fluentui/web-components/tablist.js';
-import '@fluentui/web-components/tab.js';
+import '@mai-ui/dropdown/define.js';
+import '@mai-ui/listbox/define.js';
+import '@mai-ui/option/define.js';
+import '@mai-ui/tablist/define.js';
+import '@mai-ui/tab/define.js';
 import {
   colorLayerBackgroundDialog,
   spacingHorizontalL,
@@ -44,7 +44,7 @@ const template = html<WindowsSettings>`
       <h1>Settings</h1>
       <div id="grabber" @mousedown="${(x) => x.$emit('windowmovestart')}"></div>
       <div>
-        <phx-button
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -58,8 +58,8 @@ const template = html<WindowsSettings>`
               href="./img/edge/icons.svg#chrome-minimize-20-regular"
             />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -74,8 +74,8 @@ const template = html<WindowsSettings>`
                 x.windowIsMaximized() ? 'restore' : 'maximize'}-20-regular"
             />
           </svg>
-        </phx-button>
-        <phx-button
+        </mai-button>
+        <mai-button
           size="large"
           shape="square"
           appearance="subtle"
@@ -90,116 +90,116 @@ const template = html<WindowsSettings>`
               href="./img/edge/icons.svg#chrome-close-20-regular"
             />
           </svg>
-        </phx-button>
+        </mai-button>
       </div>
     </div>
 
     <div id="container">
-      <fluent-tablist orientation="vertical">
-        <fluent-tab
+      <mai-tablist orientation="vertical">
+        <mai-tab
           class="${(x) =>
             x.selectedButton === 'appearance' ? 'selected' : ''}"
           @click="${(x) => x.handleSidebarButtonClick('appearance')}"
         >
           Overall appearance
-        </fluent-tab>
-        <fluent-tab
+        </mai-tab>
+        <mai-tab
           class="${(x) => (x.selectedButton === 'browser' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('browser')}"
         >
           Browser
-        </fluent-tab>
-        <fluent-tab
+        </mai-tab>
+        <mai-tab
           class="${(x) => (x.selectedButton === 'newtab' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('newtab')}"
         >
           New tab pages
-        </fluent-tab>
-        <fluent-tab
+        </mai-tab>
+        <mai-tab
           class="${(x) => (x.selectedButton === 'copilot' ? 'selected' : '')}"
           @click="${(x) => x.handleSidebarButtonClick('copilot')}"
         >
           Copilot
-        </fluent-tab>
-      </fluent-tablist>
+        </mai-tab>
+      </mai-tablist>
 
       <div id="main">
         <!-- Overall Appearance Section -->
         <div ?hidden="${(x) => x.selectedButton !== 'appearance'}">
           <div class="entry">
             <label for="design-system">Design system</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="design-system"
               @change="${(x) => x.updateDesignSystem()}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="mai-phoenix"
                   ?selected="${(x) => x.ss.designSystem === 'mai-phoenix'}"
                 >
                   Phoenix Semantic
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="compact-themed"
                   ?selected="${(x) => x.ss.designSystem === 'compact-themed'}"
                 >
                   MAI Compact (themed)
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="compact-neutral"
                   ?selected="${(x) => x.ss.designSystem === 'compact-neutral'}"
                 >
                   MAI Compact (neutral)
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="baseline"
                   ?selected="${(x) => x.ss.designSystem === 'baseline'}"
                 >
                   MAI Baseline
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="theme">Theme</label>
-            <fluent-dropdown id="theme" @change="${(x) => x.updateTheme()}">
-              <fluent-listbox>
-                <fluent-option
+            <mai-dropdown id="theme" @change="${(x) => x.updateTheme()}">
+              <mai-listbox>
+                <mai-option
                   value="light"
                   ?selected="${(x) => x.ws.theme === 'light'}"
                 >
                   Light
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="dark"
                   ?selected="${(x) => x.ws.theme === 'dark'}"
                 >
                   Dark
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="transparency">Transparency</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="transparency"
               @change="${(x) => x.updateTransparency()}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="normal"
                   ?selected="${(x) => x.ws.transparency === 'normal'}"
                 >
                   Normal
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="reduced"
                   ?selected="${(x) => x.ws.transparency === 'reduced'}"
                 >
                   Reduced
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="frame-spacing">Frame spacing</label>
@@ -219,7 +219,7 @@ const template = html<WindowsSettings>`
               value="${(x) => x.ss.themeColor}"
               @change="${(x) => x.updateThemeColor()}"
             />
-            <phx-button
+            <mai-button
               @click="${(x) => x.resetThemeColor()}"
               appearance="subtle"
               icon-only
@@ -227,41 +227,41 @@ const template = html<WindowsSettings>`
               <svg>
                 <use href="./img/edge/icons.svg#arrow-clockwise-20-regular" />
               </svg>
-            </phx-button>
+            </mai-button>
           </div>
           <div class="entry">
             <label for="theme-palette">Theme palette</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="theme-palette"
               @change="${(x) => x.updateThemePalette()}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="tonal"
                   ?selected="${(x) => x.ss.themePalette === 'tonal'}"
                 >
                   Tonal (default)
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="neutral"
                   ?selected="${(x) => x.ss.themePalette === 'neutral'}"
                 >
                   Neutral
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="vibrant"
                   ?selected="${(x) => x.ss.themePalette === 'vibrant'}"
                 >
                   Vibrant
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="expressive"
                   ?selected="${(x) => x.ss.themePalette === 'expressive'}"
                 >
                   Expressive
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
         </div>
 
@@ -278,32 +278,32 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
-            <fluent-dropdown
+            <mai-dropdown
               id="favorites-bar"
               @change="${(x) => x.updateShowFavoritesBar()}"
               value="${(x) => x.ss.showFavoritesBar}"
             >
-              <fluent-listbox>
-                <fluent-option
+              <mai-listbox>
+                <mai-option
                   value="always"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'always'}"
                 >
                   Always
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="never"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'never'}"
                 >
                   Never
-                </fluent-option>
-                <fluent-option
+                </mai-option>
+                <mai-option
                   value="newtab"
                   ?selected="${(x) => x.ss.showFavoritesBar === 'newtab'}"
                 >
                   On new tab
-                </fluent-option>
-              </fluent-listbox>
-            </fluent-dropdown>
+                </mai-option>
+              </mai-listbox>
+            </mai-dropdown>
           </div>
           <div class="entry">
             <label for="truncate-url">Truncate URL</label>
