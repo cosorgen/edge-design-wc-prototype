@@ -5,6 +5,8 @@ import { template } from './template.js';
 import { attr, FASTElement, observable } from '@microsoft/fast-element';
 import { Suggestion } from '#servicesautoSuggestService.js';
 import { OmniboxDropdown } from '../omnibox-dropdown.js';
+import { inject } from '@microsoft/fast-element/di.js';
+import EdgePermissionsService from '#servicespermissionsService.js';
 
 const mod = (n: number, m: number) => ((n % m) + m) % m; // handle negative indexes
 
@@ -18,9 +20,11 @@ export class OmniboxControl extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'truncate-url' }) truncateURL = false;
   @attr({ mode: 'boolean', attribute: 'dropdown-open' }) dropdownOpen = false;
   @attr initialValue = '';
+  @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @observable dropdownSelectedIndex = -1;
   @observable inputValue = '';
   @observable suggestions: Suggestion[] = [];
+  @observable status = '';
   dropdownComponent?: OmniboxDropdown | null = null;
   inputComponent?: HTMLElement | null = null;
 
@@ -40,6 +44,7 @@ export class OmniboxControl extends FASTElement {
     if (this.inputValue !== this.initialValue) {
       // Got a new initial value, update the input value
       this.inputValue = this.initialValue;
+      this.status = this.initialValue;
     }
   }
 
@@ -67,6 +72,7 @@ export class OmniboxControl extends FASTElement {
     const newValue = e.detail;
     if (this.inputValue !== newValue) {
       this.inputValue = newValue;
+      this.status = newValue;
       if (!this.dropdownOpen) this.dropdownOpen = true;
       this.dropdownSelectedIndex = -1;
     }
@@ -76,6 +82,7 @@ export class OmniboxControl extends FASTElement {
     this.dropdownOpen = false;
     this.dropdownSelectedIndex = -1; // Reset to initial value
     this.inputValue = this.initialValue; // Reset to initial value
+    this.status = this.initialValue; // Reset to initial value
   }
 
   setDropdownSelection(step: number) {
@@ -85,12 +92,14 @@ export class OmniboxControl extends FASTElement {
         this.suggestions.length,
       );
       this.inputValue = this.suggestions[this.dropdownSelectedIndex].title;
+      this.status = this.suggestions[this.dropdownSelectedIndex].title;
     }
   }
 
   handleSuggestionClick(e: CustomEvent) {
     (this.shadowRoot?.querySelector('omnibox-input') as HTMLElement).blur();
     this.inputValue = e.detail;
+    this.status = e.detail;
     this.$emit('submit', e.detail);
   }
 

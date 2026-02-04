@@ -28,6 +28,7 @@ import {
 const labels: Record<string, string> = {
   'not-secure': 'Not secure',
   file: 'File',
+  camera: 'Use camera?',
 };
 
 const iconIds: Record<string, string> = {
@@ -35,6 +36,7 @@ const iconIds: Record<string, string> = {
   'not-secure': 'lock-open-20-regular',
   secure: 'lock-closed-20-regular',
   file: 'file-20-regular',
+  camera: 'video-20-regular',
 };
 
 const imgPaths: Record<string, string> = { edge: 'favicon.ico' };

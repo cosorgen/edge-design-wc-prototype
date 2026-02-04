@@ -3,6 +3,7 @@ import '../omnibox-status.js';
 import '../omnibox-input.js';
 import '../omnibox-icon.js';
 import '../omnibox-dropdown.js';
+import '../flyout-menu.js';
 import { OmniboxControl } from './index.js';
 
 export const template = html<OmniboxControl>`
@@ -22,7 +23,10 @@ export const template = html<OmniboxControl>`
               ? x.suggestions[x.dropdownSelectedIndex].entityImage
               : ''}"
         ></omnibox-icon>
-        <omnibox-status value="${(x) => x.inputValue}"></omnibox-status>
+        <flyout-menu>
+          <omnibox-status slot="trigger" value="${(x) => x.status}"></omnibox-status>
+          <more-menu></more-menu>
+        </flyout-menu>
       </div>
       <div id="rest-input" @click="${(x) => x.handleInputClick()}">
         ${(x) => x.truncatedInputValue()}

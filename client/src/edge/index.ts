@@ -49,7 +49,10 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
-import { applyChromiumTheme, type PaletteDefinition } from './applyChromiumTheme.js';
+import {
+  applyChromiumTheme,
+  type PaletteDefinition,
+} from './applyChromiumTheme.js';
 
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
@@ -273,12 +276,18 @@ export class MicrosoftEdge extends FASTElement {
     if (this.ss.themeColor) {
       selectedTheme = applyChromiumTheme(
         selectedTheme,
-        (themeKey === 'dark' ? darkChromiumMapping : lightChromiumMapping) as Record<string, PaletteDefinition | string>,
+        (themeKey === 'dark'
+          ? darkChromiumMapping
+          : lightChromiumMapping) as Record<string, PaletteDefinition | string>,
         this.ss.themeColor,
         this.ss.themePalette,
       );
     }
     selectedTheme.paddingWindowDefault = this.ss.frameSpacing; // override from settings
+    selectedTheme['smtc-corner-ctrl-hover'] =
+      selectedTheme['smtc-corner-ctrl-rest']; // override to remove smtc corner radius
+    selectedTheme['smtc-corner-ctrl-pressed'] =
+      selectedTheme['smtc-corner-ctrl-rest']; // override to remove smtc corner radius
     setThemeFor(this.shadowRoot!, selectedTheme);
   }
 

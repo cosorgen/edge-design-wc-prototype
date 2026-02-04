@@ -32,8 +32,8 @@ export class TabService {
     if (!tab) {
       tab = {
         id: `tab-${window.crypto.randomUUID()}`,
-        url: 'edge://newtab',
-        title: 'New Tab',
+        url: 'edge://palette',
+        title: 'Playground',
         favicon: './img/edge/icons.svg#tab-desktop-new-page-16-regular',
       };
     }

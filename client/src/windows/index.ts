@@ -19,9 +19,6 @@ import {
   windowsDarkThemeSolid,
   windowsLightThemeSolid,
 } from '@edge-design/windows-theme';
-
-import phoenixLightTheme from '@mai-ui/design-tokens/themes/phoenix.light/phoenix.light.json' with { type: 'json' };
-import phoenixDarkTheme from '@mai-ui/design-tokens/themes/phoenix.dark/phoenix.dark.json' with { type: 'json' };
 import { setThemeFor } from '@edge-design/utilities';
 import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
@@ -143,16 +140,13 @@ export class WindowsShell extends FASTElement {
       light: {
         reduced: windowsLightThemeSolid,
         normal: windowsLightTheme,
-        phoenix: phoenixLightTheme,
       },
       dark: {
         reduced: windowsDarkThemeSolid,
         normal: windowsDarkTheme,
-        phoenix: phoenixDarkTheme,
       },
     };
     setThemeFor(this.shadowRoot!, themes[this.ws.theme][this.ws.transparency]);
-    setThemeFor(this.shadowRoot!, themes[this.ws.theme]['phoenix']);
   }
 
   handleTaskbarButtonClick(appName: string) {
