@@ -19,7 +19,7 @@ import {
   textGlobalCaption1LineHeight,
   strokeCtrlOnOutlineHover,
   textStyleDefaultRegularWeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const imageIds = { signedIn: 'dog', inPrivate: 'inPrivate', guest: 'guest' };
 

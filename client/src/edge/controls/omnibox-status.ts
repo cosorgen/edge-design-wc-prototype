@@ -15,7 +15,7 @@ import {
   cornerCircular,
   foregroundCtrlNeutralSecondaryRest,
   paddingCtrlSmHorizontalIconOnly,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 /**
  * omnibox-status is a presentational component that renders

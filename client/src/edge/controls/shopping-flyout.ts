@@ -5,7 +5,7 @@ import {
   paddingContentMedium,
   shadowFlyoutAmbient,
   shadowFlyoutKey,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
 const template = html` Coupons available `;

@@ -1,7 +1,7 @@
 import {
   curveDecelerateMax,
   durationFast,
-} from '@phoenixui/themes/fluent2-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import {
   attr,
   css,

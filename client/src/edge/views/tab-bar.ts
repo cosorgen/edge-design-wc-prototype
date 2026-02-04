@@ -16,11 +16,11 @@ import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
 import {
-  ctrlTabBackgroundHorizontalActive,
   paddingContentXSmall,
   shadowLayerAmbient,
   shadowLayerKey,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
+import { ctrlTabBackgroundHorizontalActive } from '@mai-ui/design-tokens/edge-tokens.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 
 const template = html<TabBar>`

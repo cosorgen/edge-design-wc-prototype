@@ -1,4 +1,3 @@
-import { smtcTokens } from '@phoenixui/themes';
 import {
   argbFromHex,
   Hct,
@@ -6,6 +5,15 @@ import {
   sanitizeDegreesDouble,
   TonalPalette,
 } from '@material/material-color-utilities';
+import * as smtcTokens from '@mai-ui/design-tokens/tokens.js';
+import * as edgeTokens from '@mai-ui/design-tokens/edge-tokens.js';
+import * as maiTokens from '@mai-ui/design-tokens/mai-tokens.js';
+
+const allTokens = {
+  ...smtcTokens,
+  ...edgeTokens,
+  ...maiTokens,
+};
 
 type SchemeVariant = 'tonal' | 'vibrant' | 'expressive' | 'neutral';
 
@@ -301,7 +309,7 @@ export function applyChromiumTheme(
 
   // Apply mapping to theme
   Object.entries(themeColors).forEach(([key, value]) => {
-    const cssVar = smtcTokens[key as keyof typeof smtcTokens];
+    const cssVar = allTokens[key as keyof typeof allTokens];
     if (cssVar) {
       const themeKey = cssVar.replace(/var\(--(.+?)\)/g, '$1');
       theme[themeKey] = value;

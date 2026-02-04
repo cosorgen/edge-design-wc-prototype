@@ -2,9 +2,6 @@ import { css } from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,
-  ctrlOmniboxBackgroundHover,
-  ctrlOmniboxBackgroundRest,
-  ctrlOmniboxStrokeFocused,
   gapBetweenContentNone,
   gapBetweenContentXxSmall,
   gapInsideCtrlDefault,
@@ -14,9 +11,14 @@ import {
   strokeWidthDefault,
   cornerCircular,
   paddingContentXxSmall,
+} from '@mai-ui/design-tokens/tokens.js';
+import {
   ctrlOmniboxStrokeRest,
   ctrlOmniboxStrokeHover,
-} from '@phoenixui/themes/smtc-tokens.js';
+  ctrlOmniboxBackgroundHover,
+  ctrlOmniboxBackgroundRest,
+  ctrlOmniboxStrokeFocused,
+} from '@mai-ui/design-tokens/edge-tokens.js';
 
 export const styles = css`
   :host {

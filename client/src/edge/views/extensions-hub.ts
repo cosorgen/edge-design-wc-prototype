@@ -29,7 +29,7 @@ import {
   textStyleDefaultHeaderWeight,
   textStyleDefaultRegularFontFamily,
   gapBetweenContentXxSmall,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<ExtensionsHub>` <div id="header">
     <span>Extensions</span>

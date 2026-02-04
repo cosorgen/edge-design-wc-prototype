@@ -6,9 +6,9 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import '../windows/controls/mica-material.js';
-import '@phoenixui/web-components/button.js';
-import '@phoenixui/web-components/text-input.js';
-import '@phoenixui/web-components/switch.js';
+import '@mai-ui/button/define.js';
+import '@mai-ui/text-input/define.js';
+import '@mai-ui/switch/define.js';
 import '@fluentui/web-components/dropdown.js';
 import '@fluentui/web-components/listbox.js';
 import '@fluentui/web-components/option.js';
@@ -134,16 +134,10 @@ const template = html<WindowsSettings>`
             >
               <fluent-listbox>
                 <fluent-option
-                  value="phoenix"
-                  ?selected="${(x) => x.ss.designSystem === 'phoenix'}"
-                >
-                  Phoenix
-                </fluent-option>
-                <fluent-option
                   value="mai-phoenix"
                   ?selected="${(x) => x.ss.designSystem === 'mai-phoenix'}"
                 >
-                  MAI Phoenix
+                  Phoenix Semantic
                 </fluent-option>
                 <fluent-option
                   value="compact-themed"

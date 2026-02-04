@@ -52,8 +52,6 @@
     "@mai-ui/tree-item": "^1.2.3",
     "@material/material-color-utilities": "^0.3.0",
     "@microsoft/fast-element": "^2.0.0",
-    "@phoenixui/themes": "^2.7.8",
-    "@phoenixui/web-components": "^1.0.70",
     "dompurify": "^3.2.6",
     "moment": "^2.30.1",
     "showdown": "^2.1.0"

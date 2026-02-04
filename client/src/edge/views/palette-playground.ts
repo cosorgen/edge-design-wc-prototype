@@ -49,8 +49,8 @@ import '@mai-ui/tooltip/define.js';
 import '@mai-ui/tree-item/define.js';
 import '@mai-ui/tree/define.js';
 import '@mai-ui/content-card/define.js';
-import { Dialog } from '@phoenixui/web-components';
-import { Drawer } from '@fluentui/web-components';
+import { Dialog } from '@mai-ui/dialog';
+import { Drawer } from '@mai-ui/drawer';
 import {
   backgroundWebPagePrimary,
   foregroundContentNeutralPrimary,
@@ -60,7 +60,7 @@ import {
   foregroundCtrlNeutralSecondaryRest,
   backgroundCtrlNeutralDisabled,
   foregroundCtrlNeutralPrimaryDisabled,
-} from '@phoenixui/themes/tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 function FormatTitle(title: string): string {
   return title

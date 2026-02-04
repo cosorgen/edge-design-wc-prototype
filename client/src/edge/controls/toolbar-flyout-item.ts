@@ -18,7 +18,7 @@ import {
   paddingContentMedium,
   shadowFlyoutAmbient,
   shadowFlyoutKey,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<ToolbarFlyoutItem>`
   <flyout-menu

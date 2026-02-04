@@ -1,4 +1,4 @@
-import { paddingContentSmall } from '@phoenixui/themes/smtc-tokens.js';
+import { paddingContentSmall } from '@mai-ui/design-tokens/tokens.js';
 import { css } from '@microsoft/fast-element';
 
 export default css`

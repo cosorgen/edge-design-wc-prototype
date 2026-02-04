@@ -10,7 +10,7 @@ import {
   shadowFlyoutKey,
   paddingContentXSmall,
   paddingContentXxSmall,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<ContextMenu>`
   <div id="menu-items">

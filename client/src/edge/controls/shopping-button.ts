@@ -5,17 +5,16 @@ import {
   cornerCircular,
   gapBetweenContentXxSmall,
   paddingContentXxSmall,
-  paddingContentXxxSmall,
   statusBrandTintForeground,
   textGlobalCaption1FontSize,
   textGlobalCaption1LineHeight,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import {
   curveDecelerateMax,
   durationSlow,
-} from '@phoenixui/themes/fluent2-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 
 const template = html`
@@ -45,12 +44,12 @@ const styles = css`
     overflow: hidden;
 
     /* Animation on load */
-    padding: ${paddingContentXxxSmall};
+    padding: ${paddingContentXxSmall};
     transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
   :host([expanded]) button {
-    padding: ${paddingContentXxxSmall} ${paddingContentXxSmall};
+    padding: ${paddingContentXxSmall} ${paddingContentXxSmall};
   }
 
   button:hover {

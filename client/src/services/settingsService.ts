@@ -1,7 +1,6 @@
 import { observable } from '@microsoft/fast-element';
 
 export type AvailableThemes =
-  | 'phoenix'
   | 'mai-phoenix'
   | 'compact-themed'
   | 'compact-neutral'

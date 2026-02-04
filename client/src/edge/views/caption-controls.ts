@@ -21,9 +21,9 @@ import {
   cornerCircular,
   gapBetweenContentXxSmall,
   paddingContentXSmall,
-  paddingContentXxxSmall,
+  paddingContentXxSmall,
   strokeWidthDefault,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html` <div
     id="window-grabber"
@@ -138,8 +138,8 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     margin-right: ${paddingContentXSmall};
-    padding: calc(${paddingContentXxxSmall} - ${strokeWidthDefault})
-      ${paddingContentXxxSmall};
+    padding: calc(${paddingContentXxSmall} - ${strokeWidthDefault})
+      ${paddingContentXxSmall};
     gap: ${gapBetweenContentXxSmall};
     border-radius: ${cornerCircular};
     background-color: ${backgroundCtrlNeutralRest};

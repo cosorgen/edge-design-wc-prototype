@@ -21,11 +21,13 @@ import {
   textStyleDefaultRegularWeight,
   textGlobalCaption1FontSize,
   textGlobalCaption1LineHeight,
-  ctrlTabBackgroundHorizontalActive,
   cornerCtrlSmRest,
   backgroundCtrlSubtleHover,
+} from '@mai-ui/design-tokens/tokens.js';
+import {
   ctrlTabCorner,
-} from '@phoenixui/themes/smtc-tokens.js';
+  ctrlTabBackgroundHorizontalActive,
+} from '@mai-ui/design-tokens/edge-tokens.js';
 
 const template = html<HorizontalTab>`
   <div class="tab-background" id="bg"></div>

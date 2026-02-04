@@ -6,7 +6,7 @@ import {
   shadowLayerAmbient,
   shadowLayerKey,
   paddingContentMedium,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<DownloadsMenu>` Downloads TBD `;
 

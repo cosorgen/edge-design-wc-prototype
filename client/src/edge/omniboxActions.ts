@@ -4,7 +4,7 @@ import './controls/shopping-button.ts';
 import './controls/flyout-menu.js';
 import './controls/shopping-flyout.js';
 import './views/add-favorites-flyout.js';
-import { foregroundContentBrandPrimary } from '@phoenixui/themes/smtc-tokens.js';
+import { foregroundContentBrandPrimary } from '@mai-ui/design-tokens/tokens.js';
 
 export const overflowItems = {
   'limit-cookies': {

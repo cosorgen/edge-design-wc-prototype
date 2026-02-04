@@ -39,7 +39,7 @@ import {
   gapBetweenContentXxSmall,
   paddingContentMedium,
   gapBetweenContentSmall,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<FavoritesMenu>`
   <div id="header">

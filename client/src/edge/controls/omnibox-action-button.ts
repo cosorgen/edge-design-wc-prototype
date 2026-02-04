@@ -10,7 +10,7 @@ import {
   backgroundCtrlSubtleRest,
   backgroundCtrlSubtleHover,
   backgroundCtrlSubtlePressed,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<OmniboxActionButton>`
   <button>

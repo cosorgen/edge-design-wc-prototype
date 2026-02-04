@@ -1,12 +1,12 @@
 import {
   foregroundCtrlNeutralPrimaryRest,
-  gapBetweenContentXxxSmall,
+  gapBetweenContentXxSmall,
   paddingCtrlHorizontalDefault,
   textGlobalBody3FontSize,
   textGlobalBody3LineHeight,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
 
 const template = html<MoreMenuZoom>`
@@ -34,7 +34,7 @@ const styles = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: ${gapBetweenContentXxxSmall};
+    gap: ${gapBetweenContentXxSmall};
     padding-inline-start: ${paddingCtrlHorizontalDefault};
 
     font-family: ${textStyleDefaultRegularFontFamily};

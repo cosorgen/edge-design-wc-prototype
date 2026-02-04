@@ -10,7 +10,7 @@ import {
   textGlobalCaption1LineHeight,
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 import {
   customElement,
   html,

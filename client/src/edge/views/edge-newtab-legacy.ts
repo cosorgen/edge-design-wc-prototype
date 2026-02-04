@@ -17,7 +17,6 @@ import {
   backgroundCtrlSubtleHover,
   cornerCircular,
   cornerCtrlRest,
-  ctrlOmniboxBackgroundRest,
   ctrlLinkForegroundBrandRest,
   foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralSecondaryRest,
@@ -40,7 +39,8 @@ import {
   textStyleDefaultRegularFontFamily,
   textStyleDefaultRegularWeight,
   ctrlLinkForegroundBrandHover,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
+import { ctrlOmniboxBackgroundRest } from '@mai-ui/design-tokens/edge-tokens.js';
 
 const topSites = [
   {

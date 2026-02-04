@@ -11,7 +11,7 @@ import {
   backgroundCtrlSubtleHover,
   paddingContentMedium,
   paddingCtrlHorizontalDefault,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/tokens.js';
 
 export type MoreMenuEntry = {
   title?: string;

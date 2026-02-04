@@ -9,12 +9,8 @@ import {
   attr,
 } from '@microsoft/fast-element';
 import { inject, DI, Registration } from '@microsoft/fast-element/di.js';
-import {
-  phoenixSmtcLightTheme,
-  phoenixSmtcDarkTheme,
-} from '@phoenixui/themes';
-import lightChromiumMapping from '@phoenixui/themes/light-chromium-mapping.json' with { type: 'json' };
-import darkChromiumMapping from '@phoenixui/themes/dark-chromium-mapping.json' with { type: 'json' };
+import lightChromiumMapping from '@mai-ui/design-tokens/chromium-mapping/light-chromium-mapping.json' with { type: 'json' };
+import darkChromiumMapping from '@mai-ui/design-tokens/chromium-mapping/dark-chromium-mapping.json' with { type: 'json' };
 import maiPhoenixLight from '@mai-ui/design-tokens/themes/phoenix.light/phoenix.light.json' with { type: 'json' };
 import maiPhoenixDark from '@mai-ui/design-tokens/themes/phoenix.dark/phoenix.dark.json' with { type: 'json' };
 import maiCompactThemedLight from '@mai-ui/design-tokens/themes/compact-themed.light/compact-themed.light.json' with { type: 'json' };
@@ -23,20 +19,22 @@ import maiCompactNeutralLight from '@mai-ui/design-tokens/themes/compact-neutral
 import maiCompactNeutralDark from '@mai-ui/design-tokens/themes/compact-neutral.dark/compact-neutral.dark.json' with { type: 'json' };
 import maiBaselineLight from '@mai-ui/design-tokens/themes/default.light/default.light.json' with { type: 'json' };
 import maiBaselineDark from '@mai-ui/design-tokens/themes/default.dark/default.dark.json' with { type: 'json' };
-import { setThemeFor } from '@phoenixui/web-components';
+import { setThemeFor } from '@edge-design/utilities';
 import {
   textStyleDefaultRegularWeight,
-  ctrlTabBackgroundHorizontalActive,
   backgroundWindowTabBandSolid,
   foregroundContentNeutralPrimary,
   textGlobalBody3FontSize,
   textGlobalBody3LineHeight,
   textStyleDefaultRegularFontFamily,
-  backgroundWindowTabBandInactive,
   backgroundCtrlBrandRest,
   foregroundCtrlOnBrandRest,
+} from '@mai-ui/design-tokens/tokens.js';
+import {
+  ctrlTabBackgroundHorizontalActive,
+  backgroundWindowTabBandInactive,
   backgroundWindowTabBandVerticalTabs,
-} from '@phoenixui/themes/smtc-tokens.js';
+} from '@mai-ui/design-tokens/edge-tokens.js';
 import WindowsService from '#services/windowsService.js';
 import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -253,10 +251,6 @@ export class MicrosoftEdge extends FASTElement {
   setTheme() {
     // Set up edge design system
     const themes = {
-      phoenix: {
-        light: phoenixSmtcLightTheme as unknown as Record<string, string>,
-        dark: phoenixSmtcDarkTheme as unknown as Record<string, string>,
-      },
       'mai-phoenix': {
         light: maiPhoenixLight as unknown as Record<string, string>,
         dark: maiPhoenixDark as unknown as Record<string, string>,

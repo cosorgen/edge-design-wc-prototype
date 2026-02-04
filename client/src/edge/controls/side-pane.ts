@@ -7,7 +7,7 @@ import {
 } from '@microsoft/fast-element';
 import '../views/copilot-sidepane.js';
 import apps from '../installedApps.js';
-import { cornerLayerDefault } from '@phoenixui/themes/smtc-tokens.js';
+import { cornerLayerDefault } from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<SidePane>`${(x) => apps[x.id].template}`;
 
