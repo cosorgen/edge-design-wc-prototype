@@ -52,11 +52,7 @@ const template = html<WindowsSettings>`
           @click="${(x) => x.minimizeWindow()}"
         >
           <svg>
-            <use
-              x="2"
-              y="2"
-              href="./img/edge/icons.svg#chrome-minimize-20-regular"
-            />
+            <use href="./img/edge/icons.svg#chrome-minimize-20-regular" />
           </svg>
         </mai-button>
         <mai-button
@@ -68,8 +64,6 @@ const template = html<WindowsSettings>`
         >
           <svg>
             <use
-              x="2"
-              y="2"
               href="./img/edge/icons.svg#chrome-${(x) =>
                 x.windowIsMaximized() ? 'restore' : 'maximize'}-20-regular"
             />
@@ -84,11 +78,7 @@ const template = html<WindowsSettings>`
           @click="${(x) => x.ws.closeWindow(x.id)}"
         >
           <svg>
-            <use
-              x="2"
-              y="2"
-              href="./img/edge/icons.svg#chrome-close-20-regular"
-            />
+            <use href="./img/edge/icons.svg#chrome-close-20-regular" />
           </svg>
         </mai-button>
       </div>
@@ -203,13 +193,13 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="frame-spacing">Frame spacing</label>
-            <phx-text-input
+            <mai-text-input
               id="frame-spacing"
               type="number"
               value="${(x) => parseInt(x.ss.frameSpacing)}"
               @change="${(x) => x.updateFrameSpacing()}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
           <div class="entry">
             <label for="theme-color">Theme color</label>
@@ -269,12 +259,12 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'browser'}">
           <div class="entry">
             <label for="show-menus-l0">Show menus in L1</label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="show-menus-l0"
               ?checked="${(x) => x.ss.showMenusInL1}"
               @change="${(x) => x.toggleshowMenusInL1()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="favorites-bar">Show favorites bar</label>
@@ -307,30 +297,30 @@ const template = html<WindowsSettings>`
           </div>
           <div class="entry">
             <label for="truncate-url">Truncate URL</label>
-            <phx-switch
+            <mai-switch
               id="truncate-url"
               ?checked="${(x) => x.ss.truncateURL}"
               @change="${(x) => x.toggleTruncateUrl()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="full-width-omnibox">Full width omnibox</label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="full-width-omnibox"
               ?checked="${(x) => x.ss.fullWidthOmnibox}"
               @change="${(x) => x.toggleFullWidthOmnibox()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="shopping-trigger">Shopping trigger URL</label>
-            <phx-text-input
+            <mai-text-input
               id="shopping-trigger"
               type="text"
               value="${(x) => x.ts.shoppingTriggerURL}"
               @blur="${(x) => x.updateShoppingTrigger()}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
         </div>
 
@@ -338,20 +328,20 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'newtab'}">
           <div class="entry">
             <label for="legacy-newtab"> Show legacy new tab page </label>
-            <phx-switch
+            <mai-switch
               id="legacy-newtab"
               ?checked="${(x) => x.ss.showLegacyNewTab}"
               @change="${(x) => x.toggleShowLegacyNewTab()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="show-copilot-ntp"> Show copilot new tab page </label>
-            <phx-switch
+            <mai-switch
               slot="input"
               id="show-copilot-ntp"
               ?checked="${(x) => x.ss.showCopilotNTP}"
               @change="${(x) => x.toggleShowCopilotNTP()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
         </div>
 
@@ -359,50 +349,50 @@ const template = html<WindowsSettings>`
         <div ?hidden="${(x) => x.selectedButton !== 'copilot'}">
           <div class="entry">
             <label for="legacy-copilot"> Show legacy copilot </label>
-            <phx-switch
+            <mai-switch
               id="legacy-copilot"
               ?checked="${(x) => x.ss.showLegacyCopilot}"
               @change="${(x) => x.toggleShowLegacyCopilot()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="composer-hint"> Show composer hint </label>
-            <phx-switch
+            <mai-switch
               id="composer-hint"
               ?checked="${(x) => x.cs.showHint}"
               @change="${(x) => x.toggleShowComposerHint()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="legacy-newtab"> Auto open composer on hover </label>
-            <phx-switch
+            <mai-switch
               id="composer-auto-open"
               ?checked="${(x) => x.cs.autoOpen}"
               @change="${(x) => x.toggleAutoOpenComposer()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
           <div class="entry">
             <label for="composer-auto-open-delay"
               >Composer auto open delay (ms)</label
             >
-            <phx-text-input
+            <mai-text-input
               id="composer-auto-open-delay"
               type="number"
               value="${(x) => x.cs.autoOpenDelay}"
               @change="${(x) => x.updateComposerAutoOpenDelay()}"
               ?disabled="${(x) => !x.cs.autoOpen}"
             >
-            </phx-text-input>
+            </mai-text-input>
           </div>
           <div class="entry">
             <label for="copilot-sidepane-background">
               Copilot sidepane background
             </label>
-            <phx-switch
+            <mai-switch
               id="copilot-sidepane-background"
               ?checked="${(x) => x.cs.sidepaneBackground}"
               @change="${(x) => x.toggleShowSidepaneBackground()}"
-            ></phx-switch>
+            ></mai-switch>
           </div>
         </div>
       </div>
@@ -435,9 +425,9 @@ const styles = css`
     display: flex;
     align-items: center;
     padding-inline-start: ${spacingHorizontalL};
-    --smtc-corner-ctrl-rest: 0px;
-    --smtc-corner-ctrl-hover: 0px;
-    --smtc-corner-ctrl-pressed: 0px;
+    --smtc-corner-ctrl-lg-rest: 0px;
+    --smtc-corner-ctrl-lg-hover: 0px;
+    --smtc-corner-ctrl-lg-pressed: 0px;
   }
 
   h1 {
