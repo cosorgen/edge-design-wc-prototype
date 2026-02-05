@@ -5,24 +5,41 @@ import {
   css,
   attr,
   when,
+  ViewTemplate,
 } from '@microsoft/fast-element';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
-  backgroundCtrlSubtleHover,
-  backgroundCtrlSubtleRest,
   cornerCircular,
-  foregroundCtrlNeutralSecondaryRest,
+  gapBetweenContentXSmall,
+  paddingContentSmall,
+  paddingContentXSmall,
   paddingCtrlSmHorizontalIconOnly,
 } from '@mai-ui/design-tokens/tokens.js';
 import './flyout-menu.js';
+import '../views/camera-permission-prompt.js';
+import {
+  ctrlOmniboxActionBubbleBackgroundHover,
+  ctrlOmniboxActionBubbleBackgroundPressed,
+  ctrlOmniboxActionBubbleBackgroundRest,
+  ctrlOmniboxActionBubbleForegroundHover,
+  ctrlOmniboxActionBubbleForegroundPressed,
+  ctrlOmniboxActionBubbleForegroundRest,
+} from '@mai-ui/design-tokens/edge-tokens.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',
+  microphone: 'Use microphone?',
 };
 
 const iconIds: Record<string, string> = {
   camera: 'video-20-regular',
+  microphone: 'mic-20-regular',
+};
+
+const prompts: Record<string, ViewTemplate> = {
+  camera: html`<camera-permission-prompt></camera-permission-prompt>`,
+  microphone: html`<microphone-permission-prompt></microphone-permission-prompt>`,
 };
 
 const template = html<PermissionPrompt>`
@@ -36,7 +53,7 @@ const template = html<PermissionPrompt>`
         html` <div part="label">${(x) => labels[x.type]}</div> `,
       )}
     </button>
-    <more-menu></more-menu>
+    ${(x) => prompts[x.type]}
   </flyout-menu>
 `;
 
@@ -52,17 +69,29 @@ const styles = css`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background: ${backgroundCtrlSubtleRest};
+    gap: ${gapBetweenContentXSmall};
+    background: ${ctrlOmniboxActionBubbleBackgroundRest};
     border: none;
-    padding: ${paddingCtrlSmHorizontalIconOnly};
+    padding: ${paddingCtrlSmHorizontalIconOnly} ${paddingContentSmall}
+      ${paddingCtrlSmHorizontalIconOnly} ${paddingContentXSmall};
     margin: 0;
-    color: ${foregroundCtrlNeutralSecondaryRest};
+    color: ${ctrlOmniboxActionBubbleForegroundRest};
     border-radius: ${cornerCircular};
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   button:hover {
-    background: ${backgroundCtrlSubtleHover};
+    background: ${ctrlOmniboxActionBubbleBackgroundHover};
+    color: ${ctrlOmniboxActionBubbleForegroundHover};
     cursor: pointer;
+  }
+
+  button:hover:active,
+  button[pressed='true'] {
+    background: ${ctrlOmniboxActionBubbleBackgroundPressed};
+    color: ${ctrlOmniboxActionBubbleForegroundPressed};
   }
 
   svg,

@@ -19,17 +19,23 @@ const template = html<PalettePlayground>`
     <div id="controls">
       <mai-button
         aria-pressed="${(x) =>
-          x.ps.cameraPermission === 'allow' ? 'true' : 'false'}"
+          x.ps.cameraState === 'active' ? 'true' : 'false'}"
         @click="${(x) => x.ps.requestCameraAccess()}"
       >
         Camera
+        (${(x) =>
+          x.ps.cameraPermission === 'block' ? 'blocked' : x.ps.cameraState})
       </mai-button>
       <mai-button
         aria-pressed="${(x) =>
-          x.ps.microphonePermission === 'allow' ? 'true' : 'false'}"
+          x.ps.microphoneState === 'active' ? 'true' : 'false'}"
         @click="${(x) => x.ps.requestMicrophoneAccess()}"
       >
         Microphone
+        (${(x) =>
+          x.ps.microphonePermission === 'block'
+            ? 'blocked'
+            : x.ps.microphoneState})
       </mai-button>
     </div>
   </div>
@@ -38,7 +44,7 @@ const template = html<PalettePlayground>`
 const styles = css`
   :host {
     box-sizing: border-box;
-    display: none;
+    display: none; 
     flex-direction: column;
     align-items: center;
     gap: 64px;

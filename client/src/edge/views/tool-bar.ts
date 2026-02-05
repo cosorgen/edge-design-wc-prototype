@@ -20,7 +20,7 @@ import '../controls/menu-item.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
 import '../controls/more-menu.js';
-import '../controls/permissionPrompt.js';
+import '../controls/permission-prompt.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {

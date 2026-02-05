@@ -2,14 +2,16 @@ import { observable } from '@microsoft/fast-element';
 
 export default class EdgePermissionsService {
   @observable cameraPermission: 'allow' | 'block' | 'ask' = 'ask';
-  @observable cameraState: 'active' | 'inactive' = 'inactive';
+  @observable cameraState: 'requested' | 'active' | 'inactive' = 'inactive';
 
   @observable microphonePermission: 'allow' | 'block' | 'ask' = 'ask';
-  @observable microphoneState: 'active' | 'inactive' = 'inactive';
+  @observable microphoneState: 'requested' | 'active' | 'inactive' = 'inactive';
 
   @observable permissionsPrompted: Array<'camera' | 'microphone'> = [];
 
   requestCameraAccess() {
+    this.cameraState = 'requested';
+
     if (this.cameraPermission === 'block') {
       this.cameraState = 'inactive';
       return;
@@ -32,6 +34,7 @@ export default class EdgePermissionsService {
       (p) => p !== 'camera',
     );
   }
+
   denyCameraAccess() {
     this.cameraPermission = 'block';
     this.cameraState = 'inactive';
@@ -41,6 +44,8 @@ export default class EdgePermissionsService {
   }
 
   requestMicrophoneAccess() {
+    this.microphoneState = 'requested';
+
     if (this.microphonePermission === 'block') {
       this.microphoneState = 'inactive';
       return;
