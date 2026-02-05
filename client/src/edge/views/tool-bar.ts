@@ -21,6 +21,7 @@ import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
 import '../controls/more-menu.js';
 import '../controls/permission-prompt.js';
+import '../controls/permission-status.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -64,6 +65,18 @@ const template = html<Toolbar>`
           slot="status"
           type="${(x) => x.ps.permissionsPrompted[0]}"
         ></permission-prompt>
+      `,
+    )}
+    ${when(
+      (x) =>
+        (x.ps.cameraPermission !== 'ask' || x.ps.cameraState === 'active') &&
+        x.ps.permissionsPrompted.length === 0,
+      html`
+        <permission-status
+          slot="status"
+          type="camera"
+          permission="${(x) => x.ps.cameraPermission}"
+        ></permission-status>
       `,
     )}
     ${when(

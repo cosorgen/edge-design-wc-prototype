@@ -65,7 +65,6 @@ const template = html<CameraPermissionPrompt>`
       <div class="camera-card">
         <div class="camera-preview">
           <video></video>
-          <div id="smoke"></div>
           <mai-badge appearance="onImage">
             <svg slot="start">
               <use href="img/edge/icons.svg#video-16-filled" />
@@ -89,15 +88,13 @@ const template = html<CameraPermissionPrompt>`
     </div>
   </div>
   <div part="footer">
-    <mai-button @click="${(x) => x.ps.grantCameraAccess(true)}">
+    <mai-button @click="${(x) => x.allowWhileVisiting()}">
       Allow while visiting this site
     </mai-button>
-    <mai-button @click="${(x) => x.ps.grantCameraAccess(false)}">
+    <mai-button @click="${(x) => x.allowThisTime()}">
       Allow this time
     </mai-button>
-    <mai-button @click="${(x) => x.ps.denyCameraAccess()}">
-      Never allow
-    </mai-button>
+    <mai-button @click="${(x) => x.neverAllow()}"> Never allow </mai-button>
   </div>
 `;
 
@@ -215,33 +212,11 @@ export default class CameraPermissionPrompt extends FASTElement {
   _vid?: HTMLVideoElement;
 
   openChanged() {
-    if (!this._vid) return;
-
     if (this.open) {
-      navigator.mediaDevices.enumerateDevices().then((devices) => {
-        this.cams = devices.filter((device) => device.kind === 'videoinput');
-        if (this.cams.length > 0) {
-          this.selectedCamId = this.cams[0].deviceId;
-        }
-      });
-
-      // Start feed
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then((stream) => {
-          if (!this._vid) return;
-          this._vid.srcObject = stream;
-          this._vid.play();
-        })
-        .catch((err) => {
-          console.error('Error accessing camera:', err);
-        });
+      this.updateCameraList();
+      this.openCameraFeed();
     } else {
-      this._vid.pause();
-      const stream = this._vid.srcObject as MediaStream;
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
-      }
+      this.closeCameraFeed();
     }
   }
 
@@ -259,5 +234,50 @@ export default class CameraPermissionPrompt extends FASTElement {
     this.addEventListener('click', (e) => {
       e.stopPropagation();
     });
+  }
+
+  updateCameraList() {
+    navigator.mediaDevices.enumerateDevices().then((devices) => {
+      this.cams = devices.filter((device) => device.kind === 'videoinput');
+      if (this.cams.length > 0) {
+        this.selectedCamId = this.cams[0].deviceId;
+      }
+    });
+  }
+
+  openCameraFeed() {
+    navigator.mediaDevices
+      .getUserMedia({ video: true })
+      .then((stream) => {
+        if (!this._vid) return;
+        this._vid.srcObject = stream;
+        this._vid.play();
+      })
+      .catch((err) => {
+        console.error('Error accessing camera:', err);
+      });
+  }
+
+  closeCameraFeed() {
+    if (!this._vid) return;
+
+    this._vid.pause();
+    const stream = this._vid.srcObject as MediaStream;
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+  }
+
+  allowWhileVisiting() {
+    this.ps.grantCameraAccess(true);
+  }
+
+  allowThisTime() {
+    this.ps.grantCameraAccess(false);
+  }
+
+  neverAllow() {
+    this.ps.denyCameraAccess();
+    this.closeCameraFeed();
   }
 }
