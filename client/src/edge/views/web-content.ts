@@ -40,7 +40,7 @@ const edgePages: Record<string, ViewTemplate> = {
   settings: html`<settings-page
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></settings-page>`,
-  palette: html`<palette-playground
+  playground: html`<palette-playground
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></palette-playground>`,
 };

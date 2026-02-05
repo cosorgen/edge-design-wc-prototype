@@ -240,7 +240,8 @@ export class FlyoutMenu extends FASTElement {
     this._contextPopoverElement?.hidePopover();
   };
 
-  triggerClickListener = () => {
+  triggerClickListener = (e: Event) => {
+    e.stopPropagation();
     this._popoverElement?.togglePopover();
   };
 

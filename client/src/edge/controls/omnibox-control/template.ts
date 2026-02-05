@@ -23,10 +23,12 @@ export const template = html<OmniboxControl>`
               ? x.suggestions[x.dropdownSelectedIndex].entityImage
               : ''}"
         ></omnibox-icon>
-        <flyout-menu>
-          <omnibox-status slot="trigger" value="${(x) => x.status}"></omnibox-status>
-          <more-menu></more-menu>
-        </flyout-menu>
+        <slot name="status">
+          <omnibox-status
+            slot="status"
+            value="${(x) => x.status}"
+          ></omnibox-status>
+        </slot>
       </div>
       <div id="rest-input" @click="${(x) => x.handleInputClick()}">
         ${(x) => x.truncatedInputValue()}

@@ -19,6 +19,8 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
+import '../controls/more-menu.js';
+import '../controls/permissionPrompt.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -31,6 +33,7 @@ import EdgeSettingsService from '#servicessettingsService.js';
 import FavoritesService from '#servicesfavoritesService.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
+import EdgePermissionsService from '#servicespermissionsService.js';
 
 const template = html<Toolbar>`
   <div class="group">
@@ -54,6 +57,15 @@ const template = html<Toolbar>`
     @blur="${(x, c) =>
       x.handleOmniboxChange({ ...c.event, detail: ' ' } as CustomEvent)}"
   >
+    ${when(
+      (x) => x.ps.permissionsPrompted.length > 0,
+      html`
+        <permission-prompt
+          slot="status"
+          type="${(x) => x.ps.permissionsPrompted[0]}"
+        ></permission-prompt>
+      `,
+    )}
     ${when(
       (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.top,
       (x) =>
@@ -202,6 +214,7 @@ export class Toolbar extends FASTElement {
   @inject(EdgeWindowService) ews!: EdgeWindowService;
   @inject(EdgeSettingsService) ess!: EdgeSettingsService;
   @inject(FavoritesService) fs!: FavoritesService;
+  @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @observable suggestions: Suggestion[] = [];
   _derivedToolbarItems: string[] = [];
   omniboxControl?: OmniboxControl | null = null;
