@@ -8,7 +8,13 @@ import {
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
   cornerCircular,
+  foregroundCtrlNeutralSecondaryHover,
+  foregroundCtrlNeutralSecondaryPressed,
+  foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentXSmall,
   paddingCtrlSmHorizontalIconOnly,
 } from '@mai-ui/design-tokens/tokens.js';
@@ -78,6 +84,22 @@ const styles = css`
   button[pressed='true'] {
     background: ${ctrlOmniboxActionBubbleBackgroundPressed};
     color: ${ctrlOmniboxActionBubbleForegroundPressed};
+  }
+
+  :host([permission='block']) button {
+    background: ${backgroundCtrlSubtleRest};
+    color: ${foregroundCtrlNeutralSecondaryRest};
+  }
+
+  :host([permission='block']) button:hover {
+    background: ${backgroundCtrlSubtleHover};
+    color: ${foregroundCtrlNeutralSecondaryHover};
+  }
+
+  :host([permission='block']) button:hover:active,
+  :host([permission='block']) button[pressed='true'] {
+    background: ${backgroundCtrlSubtlePressed};
+    color: ${foregroundCtrlNeutralSecondaryPressed};
   }
 
   svg,
