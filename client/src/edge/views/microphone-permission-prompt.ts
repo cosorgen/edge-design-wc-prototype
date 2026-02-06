@@ -15,12 +15,13 @@ import {
   strokeFlyout,
   textStyleDefaultHeaderWeight,
   gapBetweenContentXSmall,
-  cornerCtrlRest,
   strokeCardOnPrimaryRest,
   backgroundLayerTertiary,
   paddingContentXSmall,
   backgroundCardOnPrimaryDefaultRest,
-  backgroundSmoke,
+  ctrlProgressBackgroundEmpty,
+  ctrlProgressCorner,
+  ctrlProgressBackgroundFilled,
 } from '@mai-ui/design-tokens/tokens.js';
 import {
   cornerCardDefault,
@@ -31,14 +32,12 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import '@mai-ui/button/define.js';
-import '@mai-ui/badge/define.js';
 import '@mai-ui/dropdown/define.js';
 import '@mai-ui/option/define.js';
 import '@mai-ui/listbox/define.js';
-import '@mai-ui/spinner/define.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
 
-const template = html<CameraPermissionPrompt>`
+const template = html<MicrophonePermissionPrompt>`
   <div part="header">
     <div id="title">
       ${(x) => x.ts.tabsById[x.ts.activeTabId!].url} wants to
@@ -58,31 +57,29 @@ const template = html<CameraPermissionPrompt>`
   <div part="body">
     <div id="message">
       <svg>
-        <use href="img/edge/icons.svg#video-20-regular" />
+        <use href="img/edge/icons.svg#mic-20-regular" />
       </svg>
-      Use available cameras (${(x) => x.cams.length})
+      Use available microphones (${(x) => x.mics.length})
     </div>
     <div id="card-container">
-      <div class="camera-card">
-        <div class="camera-preview">
-          <video>
-            <mai-spinner></mai-spinner>
-          </video>
-          <mai-badge appearance="onImage">
-            <svg slot="start">
-              <use href="img/edge/icons.svg#video-16-filled" />
-            </svg>
-            Preview
-          </mai-badge>
+      <div id="microphone-card">
+        <div id="microphone-preview">
+          <audio autoplay muted></audio>
+          <svg>
+            <use href="img/edge/icons.svg#mic-20-regular" />
+          </svg>
+          <div id="level-control">
+            <div id="level"></div>
+          </div>
         </div>
         <mai-dropdown>
           <mai-listbox>
             ${repeat(
-              (x) => x.cams,
+              (x) => x.mics,
               html`<mai-option
-                selected="${(x, c) => x.deviceId === c.parent.cams[0].deviceId}"
+                selected="${(x, c) => x.deviceId === c.parent.mics[0].deviceId}"
               >
-                ${(x, c) => x.label || `Camera ${c.index + 1}`}
+                ${(x, c) => x.label || `Microphone ${c.index + 1}`}
               </mai-option>`,
             )}
           </mai-listbox>
@@ -147,7 +144,7 @@ const styles = css`
       background: ${backgroundLayerTertiary};
       padding: ${paddingContentXSmall};
 
-      .camera-card {
+      #microphone-card {
         display: flex;
         flex-direction: column;
         gap: ${gapBetweenContentXSmall};
@@ -164,27 +161,35 @@ const styles = css`
           }
         }
 
-        .camera-preview {
-          position: relative;
-          overflow: hidden;
-          border-radius: ${cornerCtrlRest};
-          line-height: 0;
+        #microphone-preview {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: ${gapBetweenContentXSmall};
 
-          video {
-            width: 100%;
-            height: auto;
+          svg {
+            width: 20px;
+            height: 20px;
           }
 
-          #smoke {
-            position: absolute;
-            inset: 0;
-            background: ${backgroundSmoke};
-          }
+          #level-control {
+            flex: 1;
+            position: relative;
+            background: ${ctrlProgressBackgroundEmpty};
+            border-radius: ${ctrlProgressCorner};
+            height: 8px;
+            overflow: hidden;
 
-          mai-badge {
-            position: absolute;
-            top: ${gapBetweenContentXSmall};
-            right: ${gapBetweenContentXSmall};
+            #level {
+              position: absolute;
+              left: 0;
+              top: 0;
+              bottom: 0;
+              background: ${ctrlProgressBackgroundFilled};
+              border-radius: ${ctrlProgressCorner};
+              width: ${(x) => x.micLevel};
+              transition: width 150ms linear;
+            }
           }
         }
       }
@@ -205,21 +210,22 @@ const styles = css`
   }
 `;
 
-@customElement({ name: 'camera-permission-prompt', template, styles })
-export default class CameraPermissionPrompt extends FASTElement {
+@customElement({ name: 'microphone-permission-prompt', template, styles })
+export default class MicrophonePermissionPrompt extends FASTElement {
   @attr({ mode: 'boolean' }) open = false;
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
-  @observable cams: Array<MediaDeviceInfo> = [];
-  @observable selectedCamId?: string;
-  _vid?: HTMLVideoElement;
+  @observable mics: Array<MediaDeviceInfo> = [];
+  @observable selectedMicId?: string;
+  @observable micLevel: string = '0%';
+  _aud?: HTMLAudioElement;
 
   openChanged() {
     if (this.open) {
-      this.updateCameraList();
-      this.openCameraFeed();
+      this.updateMicList();
+      this.openMicFeed();
     } else {
-      this.closeCameraFeed();
+      this.closeMicFeed();
     }
   }
 
@@ -230,7 +236,7 @@ export default class CameraPermissionPrompt extends FASTElement {
   }
 
   setElements() {
-    this._vid = this.shadowRoot!.querySelector('video')!;
+    this._aud = this.shadowRoot!.querySelector('audio')!;
   }
 
   addEventListeners() {
@@ -239,48 +245,80 @@ export default class CameraPermissionPrompt extends FASTElement {
     });
   }
 
-  updateCameraList() {
+  updateMicList() {
     navigator.mediaDevices.enumerateDevices().then((devices) => {
-      this.cams = devices.filter((device) => device.kind === 'videoinput');
-      if (this.cams.length > 0) {
-        this.selectedCamId = this.cams[0].deviceId;
+      this.mics = devices.filter((device) => device.kind === 'audioinput');
+      if (this.mics.length > 0) {
+        this.selectedMicId = this.mics[0].deviceId;
       }
     });
   }
 
-  openCameraFeed() {
+  openMicFeed() {
     navigator.mediaDevices
-      .getUserMedia({ video: true })
+      .getUserMedia({ audio: true })
       .then((stream) => {
-        if (!this._vid) return;
-        this._vid.srcObject = stream;
-        this._vid.play();
+        if (!this._aud) return;
+        this._aud.srcObject = stream;
+        this._aud.play();
+
+        // Create audio context and analyser
+        const audioContext = new window.AudioContext();
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
+
+        const source = audioContext.createMediaStreamSource(stream);
+        source.connect(analyser);
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        const updateLevel = () => {
+          analyser.getByteTimeDomainData(dataArray);
+
+          // Calculate RMS (Root Mean Square) volume
+          let sumSquares = 0;
+          for (let i = 0; i < dataArray.length; i++) {
+            const normalized = (dataArray[i] - 128) / 128; // -1 to 1
+            sumSquares += normalized * normalized;
+          }
+          const rms = Math.sqrt(sumSquares / dataArray.length);
+          const levelPercent = Math.min(100, rms * 200); // scale to 0–100%
+
+          // Update UI
+          this.micLevel = `${levelPercent}%`;
+
+          if (this.open) {
+            requestAnimationFrame(updateLevel);
+          }
+        };
+
+        updateLevel();
       })
       .catch((err) => {
-        console.error('Error accessing camera:', err);
+        console.error('Error accessing microphone:', err);
       });
   }
 
-  closeCameraFeed() {
-    if (!this._vid) return;
+  closeMicFeed() {
+    if (!this._aud) return;
 
-    this._vid.pause();
-    const stream = this._vid.srcObject as MediaStream;
+    this._aud.pause();
+    const stream = this._aud.srcObject as MediaStream;
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
     }
   }
 
   allowWhileVisiting() {
-    this.ps.grantCameraAccess(true);
+    this.ps.grantMicrophoneAccess(true);
   }
 
   allowThisTime() {
-    this.ps.grantCameraAccess(false);
+    this.ps.grantMicrophoneAccess(false);
   }
 
   neverAllow() {
-    this.ps.denyCameraAccess();
-    this.closeCameraFeed();
+    this.ps.denyMicrophoneAccess();
+    this.closeMicFeed();
   }
 }

@@ -9,6 +9,9 @@ export default class EdgePermissionsService {
 
   @observable permissionsPrompted: Array<'camera' | 'microphone'> = [];
 
+  @observable statusIcon?: 'camera' | 'microphone';
+  @observable statusState?: 'allow' | 'block';
+
   requestCameraAccess() {
     this.cameraState = 'requested';
 
@@ -30,6 +33,8 @@ export default class EdgePermissionsService {
   grantCameraAccess(alwaysAllow = false) {
     this.cameraPermission = alwaysAllow ? 'allow' : 'ask';
     this.cameraState = 'active';
+    this.statusIcon = 'camera';
+    this.statusState = 'allow';
     this.permissionsPrompted = this.permissionsPrompted.filter(
       (p) => p !== 'camera',
     );
@@ -38,6 +43,8 @@ export default class EdgePermissionsService {
   denyCameraAccess() {
     this.cameraPermission = 'block';
     this.cameraState = 'inactive';
+    this.statusIcon = 'camera';
+    this.statusState = 'block';
     this.permissionsPrompted = this.permissionsPrompted.filter(
       (p) => p !== 'camera',
     );
@@ -64,6 +71,10 @@ export default class EdgePermissionsService {
   grantMicrophoneAccess(alwaysAllow = false) {
     this.microphonePermission = alwaysAllow ? 'allow' : 'ask';
     this.microphoneState = 'active';
+    if (this.statusIcon !== 'camera') {
+      this.statusIcon = 'microphone';
+      this.statusState = 'allow';
+    }
     this.permissionsPrompted = this.permissionsPrompted.filter(
       (p) => p !== 'microphone',
     );
@@ -72,6 +83,10 @@ export default class EdgePermissionsService {
   denyMicrophoneAccess() {
     this.microphonePermission = 'block';
     this.microphoneState = 'inactive';
+    if (this.statusIcon !== 'camera') {
+      this.statusIcon = 'microphone';
+      this.statusState = 'block';
+    }
     this.permissionsPrompted = this.permissionsPrompted.filter(
       (p) => p !== 'microphone',
     );

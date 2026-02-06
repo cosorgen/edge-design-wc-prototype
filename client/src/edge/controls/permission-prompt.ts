@@ -16,8 +16,6 @@ import {
   paddingContentXSmall,
   paddingCtrlSmHorizontalIconOnly,
 } from '@mai-ui/design-tokens/tokens.js';
-import './flyout-menu.js';
-import '../views/camera-permission-prompt.js';
 import {
   ctrlOmniboxActionBubbleBackgroundHover,
   ctrlOmniboxActionBubbleBackgroundPressed,
@@ -26,6 +24,9 @@ import {
   ctrlOmniboxActionBubbleForegroundPressed,
   ctrlOmniboxActionBubbleForegroundRest,
 } from '@mai-ui/design-tokens/edge-tokens.js';
+import './flyout-menu.js';
+import '../views/camera-permission-prompt.js';
+import '../views/microphone-permission-prompt.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',

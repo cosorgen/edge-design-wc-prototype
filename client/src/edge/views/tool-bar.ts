@@ -69,13 +69,14 @@ const template = html<Toolbar>`
     )}
     ${when(
       (x) =>
-        (x.ps.cameraPermission !== 'ask' || x.ps.cameraState === 'active') &&
+        x.ps.statusIcon &&
+        x.ps.statusState &&
         x.ps.permissionsPrompted.length === 0,
       html`
         <permission-status
           slot="status"
-          type="camera"
-          permission="${(x) => x.ps.cameraPermission}"
+          type="${(x) => x.ps.statusIcon!}"
+          permission="${(x) => x.ps.statusState!}"
         ></permission-status>
       `,
     )}
