@@ -83,14 +83,15 @@ const styles = css`
     text-overflow: ellipsis;
   }
 
-  button:hover {
+  button:hover,
+  button[aria-pressed='true']:hover {
     background: ${ctrlOmniboxActionBubbleBackgroundHover};
     color: ${ctrlOmniboxActionBubbleForegroundHover};
     cursor: pointer;
   }
 
   button:hover:active,
-  button[pressed='true'] {
+  button[aria-pressed='true'] {
     background: ${ctrlOmniboxActionBubbleBackgroundPressed};
     color: ${ctrlOmniboxActionBubbleForegroundPressed};
   }

@@ -120,9 +120,13 @@ const styles = css`
   [part='header'] {
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: ${textStyleDefaultHeaderWeight};
+    align-items: start;
+
+    #title {
+      flex: 1;
+      font-weight: ${textStyleDefaultHeaderWeight};
+      text-wrap: pretty;
+    }
   }
 
   [part='body'] {

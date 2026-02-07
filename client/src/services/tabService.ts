@@ -32,9 +32,9 @@ export class TabService {
     if (!tab) {
       tab = {
         id: `tab-${window.crypto.randomUUID()}`,
-        url: 'edge://playground',
-        title: 'Playground',
-        favicon: './img/edge/icons.svg#tab-desktop-new-page-16-regular',
+        url: 'https://permission-playground.com',
+        title: 'Permission Playground',
+        favicon: './img/edge/icons.svg#document-16-regular',
       };
     }
 

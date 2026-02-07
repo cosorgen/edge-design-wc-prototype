@@ -11,7 +11,11 @@ import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
   backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
   backgroundCtrlSubtleRest,
+  backgroundCtrlSubtleSelectedHover,
+  backgroundCtrlSubtleSelectedPressed,
+  backgroundCtrlSubtleSelectedRest,
   cornerCircular,
   foregroundCtrlNeutralSecondaryRest,
   paddingCtrlSmHorizontalIconOnly,
@@ -87,6 +91,22 @@ const styles = css`
   button:hover {
     background: ${backgroundCtrlSubtleHover};
     cursor: pointer;
+  }
+
+  button:hover:active {
+    background: ${backgroundCtrlSubtlePressed};
+  }
+
+  :host([aria-pressed='true']) button {
+    background: ${backgroundCtrlSubtleSelectedRest};
+  }
+
+  :host([aria-pressed='true']) button:hover {
+    background: ${backgroundCtrlSubtleSelectedHover};
+  }
+
+  :host([aria-pressed='true']) button:hover:active {
+    background: ${backgroundCtrlSubtleSelectedPressed};
   }
 
   svg,

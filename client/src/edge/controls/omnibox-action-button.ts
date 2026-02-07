@@ -10,6 +10,12 @@ import {
   backgroundCtrlSubtleRest,
   backgroundCtrlSubtleHover,
   backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleSelectedRest,
+  foregroundCtrlNeutralPrimaryRest,
+  backgroundCtrlSubtleSelectedHover,
+  foregroundCtrlNeutralPrimaryHover,
+  backgroundCtrlSubtleSelectedPressed,
+  foregroundCtrlNeutralPrimaryPressed,
 } from '@mai-ui/design-tokens/tokens.js';
 
 const template = html<OmniboxActionButton>`
@@ -44,10 +50,24 @@ const styles = css`
     cursor: pointer;
   }
 
-  button:hover:active,
-  :host([pressed='true']) button {
+  button:hover:active {
     background: ${backgroundCtrlSubtlePressed};
     color: ${foregroundCtrlNeutralSecondaryPressed};
+  }
+
+  :host([aria-pressed='true']) button {
+    background: ${backgroundCtrlSubtleSelectedRest};
+    color: ${foregroundCtrlNeutralPrimaryRest};
+  }
+
+  :host([aria-pressed='true']) button:hover {
+    background: ${backgroundCtrlSubtleSelectedHover};
+    color: ${foregroundCtrlNeutralPrimaryHover};
+  }
+
+  :host([aria-pressed='true']) button:hover:active {
+    background: ${backgroundCtrlSubtleSelectedPressed};
+    color: ${foregroundCtrlNeutralPrimaryPressed};
   }
 
   ::slotted(svg),

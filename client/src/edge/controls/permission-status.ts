@@ -11,7 +11,13 @@ import {
   backgroundCtrlSubtleHover,
   backgroundCtrlSubtlePressed,
   backgroundCtrlSubtleRest,
+  backgroundCtrlSubtleSelectedHover,
+  backgroundCtrlSubtleSelectedPressed,
+  backgroundCtrlSubtleSelectedRest,
   cornerCircular,
+  foregroundCtrlNeutralPrimaryHover,
+  foregroundCtrlNeutralPrimaryPressed,
+  foregroundCtrlNeutralPrimaryRest,
   foregroundCtrlNeutralSecondaryHover,
   foregroundCtrlNeutralSecondaryPressed,
   foregroundCtrlNeutralSecondaryRest,
@@ -74,14 +80,15 @@ const styles = css`
     text-overflow: ellipsis;
   }
 
-  button:hover {
+  button:hover,
+  :host([aria-pressed='true']) button:hover {
     background: ${ctrlOmniboxActionBubbleBackgroundHover};
     color: ${ctrlOmniboxActionBubbleForegroundHover};
     cursor: pointer;
   }
 
   button:hover:active,
-  button[pressed='true'] {
+  :host([aria-pressed='true']) button {
     background: ${ctrlOmniboxActionBubbleBackgroundPressed};
     color: ${ctrlOmniboxActionBubbleForegroundPressed};
   }
@@ -96,10 +103,24 @@ const styles = css`
     color: ${foregroundCtrlNeutralSecondaryHover};
   }
 
-  :host([permission='block']) button:hover:active,
-  :host([permission='block']) button[pressed='true'] {
+  :host([permission='block']) button:hover:active {
     background: ${backgroundCtrlSubtlePressed};
     color: ${foregroundCtrlNeutralSecondaryPressed};
+  }
+
+  :host([permission='block'][aria-pressed='true']) button {
+    background: ${backgroundCtrlSubtleSelectedRest};
+    color: ${foregroundCtrlNeutralPrimaryRest};
+  }
+
+  :host([permission='block'][aria-pressed='true']) button:hover {
+    background: ${backgroundCtrlSubtleSelectedHover};
+    color: ${foregroundCtrlNeutralPrimaryHover};
+  }
+
+  :host([permission='block'][aria-pressed='true']) button:hover:active {
+    background: ${backgroundCtrlSubtleSelectedPressed};
+    color: ${foregroundCtrlNeutralPrimaryPressed};
   }
 
   svg,

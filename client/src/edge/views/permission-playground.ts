@@ -13,7 +13,7 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
 
-const template = html<PalettePlayground>`
+const template = html<PermissionPlayground>`
   <div class="group">
     <h1>Permission Playground</h1>
     <div id="controls">
@@ -82,8 +82,13 @@ const styles = css`
   }
 `;
 
-@customElement({ name: 'palette-playground', template, styles })
-export class PalettePlayground extends FASTElement {
+@customElement({ name: 'permission-playground', template, styles })
+export class PermissionPlayground extends FASTElement {
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @attr({ mode: 'boolean' }) active = false;
+
+  connectedCallback(): void {
+    super.connectedCallback();
+    this.$emit('pageload');
+  }
 }

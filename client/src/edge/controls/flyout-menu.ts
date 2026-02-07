@@ -256,7 +256,7 @@ export class FlyoutMenu extends FASTElement {
     this._open = e.newState === 'open';
 
     this._triggerElement?.setAttribute(
-      'pressed',
+      'aria-pressed',
       (this._open || this._contextOpen).toString(),
     );
     this._popoverSlottedElement?.setAttribute('open', this._open.toString());
@@ -296,7 +296,7 @@ export class FlyoutMenu extends FASTElement {
     this._contextOpen = e.newState === 'open';
 
     this._triggerElement?.setAttribute(
-      'pressed',
+      'aria-pressed',
       (this._open || this._contextOpen).toString(),
     );
     this._contextPopoverSlottedElement?.setAttribute(

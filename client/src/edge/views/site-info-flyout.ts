@@ -47,8 +47,14 @@ const labels = {
 };
 
 const icons = {
-  camera: 'video-20-regular',
-  microphone: 'mic-20-regular',
+  camera: {
+    active: 'video-20-regular',
+    inactive: 'video-off-20-regular',
+  },
+  microphone: {
+    active: 'mic-20-regular',
+    inactive: 'mic-off-20-regular',
+  },
 };
 
 const template = html<SiteInfoFlyout>`
@@ -114,8 +120,14 @@ const template = html<SiteInfoFlyout>`
             html`<div class="menu-item">
               <svg>
                 <use
-                  href="img/edge/icons.svg#${(x) =>
-                    icons[x as keyof typeof icons]}"
+                  href="img/edge/icons.svg#${(x, c) =>
+                    icons[x as keyof typeof icons][
+                      c.parent.ps.permissions[
+                        x as keyof typeof c.parent.ps.permissions
+                      ].permission !== 'block'
+                        ? 'active'
+                        : 'inactive'
+                    ]}"
                 />
               </svg>
               <div>${(x) => labels[x as keyof typeof labels]}</div>

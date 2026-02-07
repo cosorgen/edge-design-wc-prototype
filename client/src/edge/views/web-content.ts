@@ -13,7 +13,7 @@ import '../controls/web-page.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';
-import './palette-playground.js';
+import './permission-playground.js';
 import EdgeSettingsSerivce from '#servicessettingsService.js';
 import { TabService } from '#servicestabService.js';
 import EdgeWindowService from '#servicesedgeWindowService.js';
@@ -40,24 +40,34 @@ const edgePages: Record<string, ViewTemplate> = {
   settings: html`<settings-page
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
   ></settings-page>`,
-  playground: html`<palette-playground
+};
+
+const customPages: Record<string, ViewTemplate> = {
+  'https://permission-playground.com': html`<permission-playground
     ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-  ></palette-playground>`,
+    @pageload="${(x, c) => c.parent.handleTabLoad(x)}"
+    @pageerror="${(x, c) => c.parent.handleTabLoadError(x)}"
+  ></permission-playground>`,
 };
 
 const template = html<WebContent>`
   ${repeat(
     (x) => x.ts.tabIds,
-    html<string>`${when(
+    html`${when(
       (x, c) => c.parent.ts.tabsById[x].url.startsWith('edge://'),
       (x, c) => edgePages[c.parent.getHostname(c.parent.ts.tabsById[x].url)],
-      html`<web-page
-        id="${(x) => x}"
-        page="${(x, c) => c.parent.ts.tabsById[x].page}"
-        ?active="${(x, c) => x === c.parent.ts.activeTabId}"
-        @pageload="${(x, c) => c.parent.handleTabLoad(x)}"
-        @pageerror="${(x, c) => c.parent.handleTabLoadError(x)}"
-      ></web-page>`,
+      html`${when(
+        (x, c) =>
+          Object.keys(customPages).includes(c.parent.ts.tabsById[x].url),
+        (x, c) => customPages[c.parent.ts.tabsById[x].url],
+        html`<web-page
+          id="${(x) => x}"
+          page="${(x, c) => c.parent.ts.tabsById[x].page}"
+          ?active="${(x, c) => x === c.parent.ts.activeTabId}"
+          @pageload="${(x, c) => c.parent.handleTabLoad(x)}"
+          @pageerror="${(x, c) => c.parent.handleTabLoadError(x)}"
+        ></web-page>`,
+      )}`,
     )}`,
   )}
 `;
