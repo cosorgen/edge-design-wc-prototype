@@ -5,10 +5,12 @@ export default class EdgePermissionsService {
     camera: {
       permission: 'ask' as 'allow' | 'block' | 'ask',
       state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
     },
     microphone: {
       permission: 'ask' as 'allow' | 'block' | 'ask',
       state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
     },
   };
 
@@ -37,6 +39,7 @@ export default class EdgePermissionsService {
     this.permissions = {
       ...this.permissions,
       camera: {
+        ...this.permissions.camera,
         permission: alwaysAllow ? 'allow' : 'ask',
         state: 'active',
       },
@@ -73,6 +76,7 @@ export default class EdgePermissionsService {
     this.permissions = {
       ...this.permissions,
       microphone: {
+        ...this.permissions.microphone,
         permission: alwaysAllow ? 'allow' : 'ask',
         state: 'active',
       },
@@ -83,6 +87,21 @@ export default class EdgePermissionsService {
     this.permissions = {
       ...this.permissions,
       microphone: { ...this.permissions.microphone, permission: 'block' },
+    };
+  }
+
+  resetPermissions() {
+    this.permissions = {
+      camera: {
+        ...this.permissions.camera,
+        permission: this.permissions.camera.default,
+        state: 'inactive',
+      },
+      microphone: {
+        ...this.permissions.microphone,
+        permission: this.permissions.microphone.default,
+        state: 'inactive',
+      },
     };
   }
 }

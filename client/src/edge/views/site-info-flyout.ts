@@ -96,14 +96,20 @@ const template = html<SiteInfoFlyout>`
     ${when(
       (x) =>
         x.ps.permissionPriority.some(
-          (key) => x.ps.permissions[key].permission !== 'ask',
+          (key) =>
+            x.ps.permissions[key].permission !==
+              x.ps.permissions[key].default ||
+            x.ps.permissions[key].state === 'active',
         ),
       html`<div class="menu-section">
           <div class="section-header">Permissions for this site</div>
           ${repeat(
             (x) =>
               x.ps.permissionPriority.filter(
-                (key) => x.ps.permissions[key].permission !== 'ask',
+                (key) =>
+                  x.ps.permissions[key].permission !==
+                    x.ps.permissions[key].default ||
+                  x.ps.permissions[key].state === 'active',
               ),
             html`<div class="menu-item">
               <svg>
@@ -117,7 +123,7 @@ const template = html<SiteInfoFlyout>`
                 checked="${(x, c) =>
                   c.parent.ps.permissions[
                     x as keyof typeof c.parent.ps.permissions
-                  ].permission === 'allow'}"
+                  ].permission !== 'block'}"
                 @click="${(x, c) =>
                   c.parent.togglePermission(
                     x as keyof typeof c.parent.ps.permissions,
@@ -126,7 +132,12 @@ const template = html<SiteInfoFlyout>`
             </div>`,
           )}
           <div class="menu-item">
-            <mai-button appearance="outline"> Reset permission </mai-button>
+            <mai-button
+              appearance="outline"
+              @click="${(x) => x.ps.resetPermissions()}"
+            >
+              Reset permission
+            </mai-button>
           </div>
         </div>
         <mai-divider appearance="subtle"></mai-divider>`,
@@ -267,7 +278,7 @@ export default class SiteInfoFlyout extends FASTElement {
     const currentPermission = this.ps.permissions[key].permission;
     switch (key) {
       case 'camera': {
-        if (currentPermission === 'allow') {
+        if (currentPermission !== 'block') {
           this.ps.denyCameraAccess();
         } else {
           this.ps.grantCameraAccess(true);
@@ -275,7 +286,7 @@ export default class SiteInfoFlyout extends FASTElement {
         break;
       }
       case 'microphone': {
-        if (currentPermission === 'allow') {
+        if (currentPermission !== 'block') {
           this.ps.denyMicrophoneAccess();
         } else {
           this.ps.grantMicrophoneAccess(true);
