@@ -22,6 +22,7 @@ import {
   ctrlProgressBackgroundEmpty,
   ctrlProgressCorner,
   ctrlProgressBackgroundFilled,
+  foregroundCtrlNeutralPrimaryRest,
 } from '@mai-ui/design-tokens/tokens.js';
 import {
   cornerCardDefault,
@@ -110,6 +111,7 @@ const styles = css`
     border: ${strokeWidthCardDefault} solid ${strokeFlyout};
     overflow: hidden;
     padding: ${ctrlDialogPadding};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   [part='header'] {

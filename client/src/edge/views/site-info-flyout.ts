@@ -4,6 +4,8 @@ import {
   css,
   html,
   attr,
+  repeat,
+  when,
 } from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
@@ -26,6 +28,7 @@ import {
   textStyleDataVizHeaderFontFamily,
   textGlobalCaption1FontSize,
   foregroundCtrlNeutralSecondaryRest,
+  foregroundCtrlNeutralPrimaryRest,
 } from '@mai-ui/design-tokens/tokens.js';
 import {
   ctrlDialogPadding,
@@ -37,6 +40,16 @@ import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import '@mai-ui/switch/define.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
+
+const labels = {
+  camera: 'Camera',
+  microphone: 'Microphone',
+};
+
+const icons = {
+  camera: 'video-20-regular',
+  microphone: 'mic-20-regular',
+};
 
 const template = html<SiteInfoFlyout>`
   <div part="header">
@@ -80,20 +93,44 @@ const template = html<SiteInfoFlyout>`
       </button>
     </div>
     <mai-divider appearance="subtle"></mai-divider>
-    <div class="menu-section">
-      <div class="section-header">Permissions for this site</div>
-      <div class="menu-item">
-        <svg>
-          <use href="img/edge/icons.svg#video-20-regular" />
-        </svg>
-        <div>Camera</div>
-        <mai-switch></mai-switch>
-      </div>
-      <div class="menu-item">
-        <mai-button appearance="outline"> Reset permission </mai-button>
-      </div>
-    </div>
-    <mai-divider appearance="subtle"></mai-divider>
+    ${when(
+      (x) =>
+        x.ps.permissionPriority.some(
+          (key) => x.ps.permissions[key].permission !== 'ask',
+        ),
+      html`<div class="menu-section">
+          <div class="section-header">Permissions for this site</div>
+          ${repeat(
+            (x) =>
+              x.ps.permissionPriority.filter(
+                (key) => x.ps.permissions[key].permission !== 'ask',
+              ),
+            html`<div class="menu-item">
+              <svg>
+                <use
+                  href="img/edge/icons.svg#${(x) =>
+                    icons[x as keyof typeof icons]}"
+                />
+              </svg>
+              <div>${(x) => labels[x as keyof typeof labels]}</div>
+              <mai-switch
+                checked="${(x, c) =>
+                  c.parent.ps.permissions[
+                    x as keyof typeof c.parent.ps.permissions
+                  ].permission === 'allow'}"
+                @click="${(x, c) =>
+                  c.parent.togglePermission(
+                    x as keyof typeof c.parent.ps.permissions,
+                  )}"
+              ></mai-switch>
+            </div>`,
+          )}
+          <div class="menu-item">
+            <mai-button appearance="outline"> Reset permission </mai-button>
+          </div>
+        </div>
+        <mai-divider appearance="subtle"></mai-divider>`,
+    )}
     <div class="menu-section">
       <button class="menu-item">
         <svg>
@@ -146,6 +183,7 @@ const styles = css`
     border: ${strokeWidthCardDefault} solid ${strokeFlyout};
     overflow: hidden;
     padding-block: ${ctrlDialogPadding};
+    color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
   [part='header'] {
@@ -223,5 +261,27 @@ export default class SiteInfoFlyout extends FASTElement {
     this.addEventListener('click', (e) => {
       e.stopPropagation();
     });
+  }
+
+  togglePermission(key: keyof typeof this.ps.permissions) {
+    const currentPermission = this.ps.permissions[key].permission;
+    switch (key) {
+      case 'camera': {
+        if (currentPermission === 'allow') {
+          this.ps.denyCameraAccess();
+        } else {
+          this.ps.grantCameraAccess(true);
+        }
+        break;
+      }
+      case 'microphone': {
+        if (currentPermission === 'allow') {
+          this.ps.denyMicrophoneAccess();
+        } else {
+          this.ps.grantMicrophoneAccess(true);
+        }
+        break;
+      }
+    }
   }
 }
