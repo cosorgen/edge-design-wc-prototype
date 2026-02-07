@@ -1,94 +1,88 @@
 import { observable } from '@microsoft/fast-element';
 
 export default class EdgePermissionsService {
-  @observable cameraPermission: 'allow' | 'block' | 'ask' = 'ask';
-  @observable cameraState: 'requested' | 'active' | 'inactive' = 'inactive';
+  @observable permissions = {
+    camera: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+    },
+    microphone: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+    },
+  };
 
-  @observable microphonePermission: 'allow' | 'block' | 'ask' = 'ask';
-  @observable microphoneState: 'requested' | 'active' | 'inactive' = 'inactive';
-
-  @observable permissionsPrompted: Array<'camera' | 'microphone'> = [];
-
-  @observable statusIcon?: 'camera' | 'microphone';
-  @observable statusState?: 'allow' | 'block';
+  permissionPriority = ['camera', 'microphone'] as const;
 
   requestCameraAccess() {
-    this.cameraState = 'requested';
-
-    if (this.cameraPermission === 'block') {
-      this.cameraState = 'inactive';
+    if (this.permissions.camera.permission === 'block') {
       return;
     }
 
-    if (this.cameraPermission === 'allow') {
-      this.cameraState = 'active';
+    if (this.permissions.camera.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        camera: { ...this.permissions.camera, state: 'active' },
+      };
       return;
     }
 
-    if (!this.permissionsPrompted.includes('camera')) {
-      this.permissionsPrompted = [...this.permissionsPrompted, 'camera'];
-    }
+    this.permissions = {
+      ...this.permissions,
+      camera: { ...this.permissions.camera, state: 'requested' },
+    };
   }
 
   grantCameraAccess(alwaysAllow = false) {
-    this.cameraPermission = alwaysAllow ? 'allow' : 'ask';
-    this.cameraState = 'active';
-    this.statusIcon = 'camera';
-    this.statusState = 'allow';
-    this.permissionsPrompted = this.permissionsPrompted.filter(
-      (p) => p !== 'camera',
-    );
+    this.permissions = {
+      ...this.permissions,
+      camera: {
+        permission: alwaysAllow ? 'allow' : 'ask',
+        state: 'active',
+      },
+    };
   }
 
   denyCameraAccess() {
-    this.cameraPermission = 'block';
-    this.cameraState = 'inactive';
-    this.statusIcon = 'camera';
-    this.statusState = 'block';
-    this.permissionsPrompted = this.permissionsPrompted.filter(
-      (p) => p !== 'camera',
-    );
+    this.permissions = {
+      ...this.permissions,
+      camera: { ...this.permissions.camera, permission: 'block' },
+    };
   }
 
   requestMicrophoneAccess() {
-    this.microphoneState = 'requested';
-
-    if (this.microphonePermission === 'block') {
-      this.microphoneState = 'inactive';
+    if (this.permissions.microphone.permission === 'block') {
       return;
     }
 
-    if (this.microphonePermission === 'allow') {
-      this.microphoneState = 'active';
+    if (this.permissions.microphone.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        microphone: { ...this.permissions.microphone, state: 'active' },
+      };
       return;
     }
 
-    if (!this.permissionsPrompted.includes('microphone')) {
-      this.permissionsPrompted = [...this.permissionsPrompted, 'microphone'];
-    }
+    this.permissions = {
+      ...this.permissions,
+      microphone: { ...this.permissions.microphone, state: 'requested' },
+    };
   }
 
   grantMicrophoneAccess(alwaysAllow = false) {
-    this.microphonePermission = alwaysAllow ? 'allow' : 'ask';
-    this.microphoneState = 'active';
-    if (this.statusIcon !== 'camera') {
-      this.statusIcon = 'microphone';
-      this.statusState = 'allow';
-    }
-    this.permissionsPrompted = this.permissionsPrompted.filter(
-      (p) => p !== 'microphone',
-    );
+    this.permissions = {
+      ...this.permissions,
+      microphone: {
+        permission: alwaysAllow ? 'allow' : 'ask',
+        state: 'active',
+      },
+    };
   }
 
   denyMicrophoneAccess() {
-    this.microphonePermission = 'block';
-    this.microphoneState = 'inactive';
-    if (this.statusIcon !== 'camera') {
-      this.statusIcon = 'microphone';
-      this.statusState = 'block';
-    }
-    this.permissionsPrompted = this.permissionsPrompted.filter(
-      (p) => p !== 'microphone',
-    );
+    this.permissions = {
+      ...this.permissions,
+      microphone: { ...this.permissions.microphone, permission: 'block' },
+    };
   }
 }

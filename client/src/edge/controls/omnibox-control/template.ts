@@ -4,6 +4,7 @@ import '../omnibox-input.js';
 import '../omnibox-icon.js';
 import '../omnibox-dropdown.js';
 import '../flyout-menu.js';
+import '../../views/site-info-flyout.js';
 import { OmniboxControl } from './index.js';
 
 export const template = html<OmniboxControl>`
@@ -24,10 +25,13 @@ export const template = html<OmniboxControl>`
               : ''}"
         ></omnibox-icon>
         <slot name="status">
-          <omnibox-status
-            slot="status"
-            value="${(x) => x.status}"
-          ></omnibox-status>
+          <flyout-menu>
+            <omnibox-status
+              slot="trigger"
+              value="${(x) => x.status}"
+            ></omnibox-status>
+            <site-info-flyout></site-info-flyout>
+          </flyout-menu>
         </slot>
       </div>
       <div id="rest-input" @click="${(x) => x.handleInputClick()}">

@@ -40,7 +40,7 @@ import EdgePermissionsService from '#servicespermissionsService.js';
 const template = html<MicrophonePermissionPrompt>`
   <div part="header">
     <div id="title">
-      ${(x) => x.ts.tabsById[x.ts.activeTabId!].url} wants to
+      ${(x) => new URL(x.ts.tabsById[x.ts.activeTabId!].url).hostname} wants to
     </div>
     <mai-button
       appearance="subtle"

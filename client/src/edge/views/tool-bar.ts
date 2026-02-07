@@ -22,6 +22,7 @@ import '../controls/identity-flyout.js';
 import '../controls/more-menu.js';
 import '../controls/permission-prompt.js';
 import '../controls/permission-status.js';
+import './site-info-flyout.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -59,26 +60,53 @@ const template = html<Toolbar>`
       x.handleOmniboxChange({ ...c.event, detail: ' ' } as CustomEvent)}"
   >
     ${when(
-      (x) => x.ps.permissionsPrompted.length > 0,
+      (x) =>
+        Object.values(x.ps.permissions).some(
+          (p) => p.state === 'requested' && p.permission === 'ask',
+        ),
       html`
         <permission-prompt
           slot="status"
-          type="${(x) => x.ps.permissionsPrompted[0]}"
+          type="${(x) =>
+            x.ps.permissionPriority.find(
+              (key) =>
+                x.ps.permissions[key].state === 'requested' &&
+                x.ps.permissions[key].permission === 'ask',
+            )}"
         ></permission-prompt>
       `,
-    )}
-    ${when(
-      (x) =>
-        x.ps.statusIcon &&
-        x.ps.statusState &&
-        x.ps.permissionsPrompted.length === 0,
-      html`
-        <permission-status
-          slot="status"
-          type="${(x) => x.ps.statusIcon!}"
-          permission="${(x) => x.ps.statusState!}"
-        ></permission-status>
-      `,
+      html`${when(
+        (x) =>
+          Object.values(x.ps.permissions).some(
+            (p) =>
+              p.state === 'active' ||
+              (p.permission === 'block' && p.state === 'requested'),
+          ),
+        html`
+          <flyout-menu slot="status">
+            <permission-status
+              slot="trigger"
+              type="${(x) =>
+                x.ps.permissionPriority.find(
+                  (key) =>
+                    x.ps.permissions[key].state === 'active' ||
+                    (x.ps.permissions[key].permission === 'block' &&
+                      x.ps.permissions[key].state === 'requested'),
+                )}"
+              permission="${(x) => {
+                const key = x.ps.permissionPriority.find(
+                  (key) =>
+                    x.ps.permissions[key].state === 'active' ||
+                    (x.ps.permissions[key].permission === 'block' &&
+                      x.ps.permissions[key].state === 'requested'),
+                );
+                return key ? x.ps.permissions[key].permission : 'active';
+              }}"
+            ></permission-status>
+            <site-info-flyout></site-info-flyout>
+          </flyout-menu>
+        `,
+      )}`,
     )}
     ${when(
       (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.top,
