@@ -11,6 +11,8 @@ import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
   cornerCircular,
+  curveDecelerateMax,
+  durationSlow,
   gapBetweenContentXSmall,
   paddingContentSmall,
   paddingContentXSmall,
@@ -101,9 +103,37 @@ const styles = css`
     width: 20px;
     height: 20px;
   }
+
+  [part='label'] {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0px;
+
+    /* Animation on load */
+    width: 0px;
+    transition: all ${durationSlow} ${curveDecelerateMax};
+  }
+
+  :host([aria-expanded='true']) [part='label'] {
+    width: var(--max-label-width);
+  }
 `;
 
 @customElement({ name: 'permission-prompt', template, styles })
 export class PermissionPrompt extends FASTElement {
+  @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
   @attr type: 'camera' | 'microphone' = 'camera';
+  connectedCallback(): void {
+    super.connectedCallback();
+    setTimeout(() => {
+      this.setAttribute(
+        'style',
+        '--max-label-width: ' +
+          this.shadowRoot?.querySelector('div')?.scrollWidth +
+          'px',
+      );
+      this.ariaExpanded = 'true';
+    }, 100);
+  }
 }

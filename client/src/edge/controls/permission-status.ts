@@ -57,7 +57,7 @@ const template = html<PermissionStatus>`
     <svg>
       <use href="img/edge/icons.svg#${(x) => iconIds[x.type][x.permission]}" />
     </svg>
-    <div>
+    <div part="label">
       ${(x) =>
         x.permission === 'allow'
           ? 'Allowed'
@@ -142,7 +142,7 @@ const styles = css`
     height: 20px;
   }
 
-  div {
+  [part='label'] {
     flex: 1;
     white-space: nowrap;
     overflow: hidden;
@@ -153,7 +153,7 @@ const styles = css`
     transition: all ${durationSlow} ${curveDecelerateMax};
   }
 
-  :host([aria-expanded='true']) div {
+  :host([aria-expanded='true']) [part='label'] {
     width: var(--max-label-width);
   }
 `;
@@ -167,13 +167,34 @@ export class PermissionStatus extends FASTElement {
   connectedCallback(): void {
     super.connectedCallback();
     setTimeout(() => {
-      this.setAttribute(
-        'style',
-        '--max-label-width: ' +
-          this.shadowRoot?.querySelector('div')?.scrollWidth +
-          'px',
-      );
+      this.setLabelWidth();
       this.ariaExpanded = 'true';
     }, 100);
+  }
+
+  typeChanged() {
+    this.ariaExpanded = 'false';
+    setTimeout(() => {
+      this.setLabelWidth();
+      this.ariaExpanded = 'true';
+    }, 100);
+  }
+
+  permissionChanged() {
+    this.ariaExpanded = 'false';
+    setTimeout(() => {
+      this.setLabelWidth();
+      this.ariaExpanded = 'true';
+    }, 100);
+  }
+
+  setLabelWidth(width?: string) {
+    this.setAttribute(
+      'style',
+      '--max-label-width: ' +
+        (width ??
+          this.shadowRoot?.querySelector('[part="label"]')?.scrollWidth) +
+        'px',
+    );
   }
 }
