@@ -127,13 +127,25 @@ export class PermissionPrompt extends FASTElement {
   connectedCallback(): void {
     super.connectedCallback();
     setTimeout(() => {
-      this.setAttribute(
-        'style',
-        '--max-label-width: ' +
-          this.shadowRoot?.querySelector('div')?.scrollWidth +
-          'px',
-      );
+      this.setLabelWidth();
       this.ariaExpanded = 'true';
     }, 100);
+  }
+
+  typeChanged() {
+    this.ariaExpanded = 'false';
+    setTimeout(() => {
+      this.setLabelWidth();
+      this.ariaExpanded = 'true';
+    }, 100);
+  }
+
+  private setLabelWidth() {
+    this.setAttribute(
+      'style',
+      '--max-label-width: ' +
+        this.shadowRoot?.querySelector('div')?.scrollWidth +
+        'px',
+    );
   }
 }
