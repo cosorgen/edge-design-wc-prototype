@@ -52,19 +52,25 @@ const iconIds: Record<string, Record<string, string>> = {
   },
 };
 
+const labels: Record<string, Record<string, string>> = {
+  camera: {
+    allow: 'Camera in use',
+    ask: 'Camera in use',
+    block: 'Camera not allowed',
+  },
+  microphone: {
+    allow: 'Microphone in use',
+    ask: 'Microphone in use',
+    block: 'Microphone not allowed',
+  },
+};
+
 const template = html<PermissionStatus>`
   <button>
     <svg>
       <use href="img/edge/icons.svg#${(x) => iconIds[x.type][x.permission]}" />
     </svg>
-    <div part="label">
-      ${(x) =>
-        x.permission === 'allow'
-          ? 'Allowed'
-          : x.permission === 'block'
-            ? 'Not allowed'
-            : 'Allowed'}
-    </div>
+    <div part="label">${(x) => labels[x.type][x.permission]}</div>
   </button>
 `;
 
