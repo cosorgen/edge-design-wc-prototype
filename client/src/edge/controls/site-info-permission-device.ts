@@ -26,6 +26,10 @@ const labels = {
     title: 'Device name',
     description: 'Bluetooth device',
   },
+  serial: {
+    title: 'Device name',
+    description: 'Serial port',
+  },
 };
 
 const template = html<SiteInfoPermissionDevice>`
@@ -92,7 +96,7 @@ const styles = css`
 
 @customElement({ name: 'site-info-permission-device', template, styles })
 export default class SiteInfoPermissionDevice extends FASTElement {
-  @attr type?: 'usb' | 'bluetooth';
+  @attr type?: 'usb' | 'bluetooth' | 'serial';
   @attr deviceName?: string;
   @attr deviceIcon?: string;
 }

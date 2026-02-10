@@ -31,12 +31,14 @@ import '../views/camera-permission-prompt.js';
 import '../views/microphone-permission-prompt.js';
 import '../views/usb-permission-prompt.js';
 import '../views/bluetooth-permission-prompt.js';
+import '../views/serial-permission-prompt.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',
   microphone: 'Use microphone?',
   usb: 'Connect USB device?',
   bluetooth: 'Connect Bluetooth device?',
+  serial: 'Connect Serial device?',
 };
 
 const iconIds: Record<string, string> = {
@@ -44,6 +46,7 @@ const iconIds: Record<string, string> = {
   microphone: 'mic-20-regular',
   usb: 'placeholder-20-regular',
   bluetooth: 'bluetooth-20-regular',
+  serial: 'serial-port-20-regular',
 };
 
 const prompts: Record<string, ViewTemplate> = {
@@ -51,6 +54,7 @@ const prompts: Record<string, ViewTemplate> = {
   microphone: html`<microphone-permission-prompt></microphone-permission-prompt>`,
   usb: html`<usb-permission-prompt></usb-permission-prompt>`,
   bluetooth: html`<bluetooth-permission-prompt></bluetooth-permission-prompt>`,
+  serial: html`<serial-permission-prompt></serial-permission-prompt>`,
 };
 
 const template = html<PermissionPrompt>`

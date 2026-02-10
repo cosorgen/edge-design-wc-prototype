@@ -24,6 +24,12 @@ export default class EdgePermissionsService {
       allowedDevices: [] as { name: string; id: string; icon: string }[],
       default: 'ask' as const,
     },
+    serial: {
+      permission: 'ask' as const,
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      allowedDevices: [] as { name: string; id: string }[],
+      default: 'ask' as const,
+    },
   };
 
   permissionPriority = Object.keys(this.permissions);
@@ -196,6 +202,53 @@ export default class EdgePermissionsService {
     };
   }
 
+  requestSerialAccess() {
+    this.permissions = {
+      ...this.permissions,
+      serial: { ...this.permissions.serial, state: 'requested' },
+    };
+  }
+
+  grantSerialAccess(device: { name: string; id: string }) {
+    this.permissions = {
+      ...this.permissions,
+      serial: {
+        ...this.permissions.serial,
+        state: 'active',
+        allowedDevices: Array.from(
+          new Set([...this.permissions.serial.allowedDevices, device]),
+        ),
+      },
+    };
+  }
+
+  cancelSerialRequest() {
+    this.permissions = {
+      ...this.permissions,
+      serial: {
+        ...this.permissions.serial,
+        state:
+          this.permissions.serial.allowedDevices.length > 0
+            ? 'active'
+            : 'inactive',
+      },
+    };
+  }
+
+  denySerialAccess(deviceId: string) {
+    const allowedDevices = this.permissions.serial.allowedDevices.filter(
+      (d) => d.id !== deviceId,
+    );
+    this.permissions = {
+      ...this.permissions,
+      serial: {
+        ...this.permissions.serial,
+        allowedDevices,
+        state: allowedDevices.length > 0 ? 'active' : 'inactive',
+      },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -217,6 +270,12 @@ export default class EdgePermissionsService {
       bluetooth: {
         ...this.permissions.bluetooth,
         permission: this.permissions.bluetooth.default,
+        state: 'inactive',
+        allowedDevices: [],
+      },
+      serial: {
+        ...this.permissions.serial,
+        permission: this.permissions.serial.default,
         state: 'inactive',
         allowedDevices: [],
       },

@@ -60,6 +60,11 @@ const iconIds: Record<string, Record<string, string>> = {
     ask: 'bluetooth-20-regular',
     block: 'bluetooth-off-20-regular',
   },
+  serial: {
+    allow: 'serial-port-20-regular',
+    ask: 'serial-port-20-regular',
+    block: 'placeholder-20-regular',
+  },
 };
 
 const labels: Record<string, Record<string, string>> = {
@@ -82,6 +87,11 @@ const labels: Record<string, Record<string, string>> = {
     allow: 'Bluetooth device connected',
     ask: 'Bluetooth device connected',
     block: 'Bluetooth device not allowed',
+  },
+  serial: {
+    allow: 'Serial port connected',
+    ask: 'Serial port connected',
+    block: 'Serial port not allowed',
   },
 };
 

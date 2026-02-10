@@ -61,6 +61,17 @@ const template = html<PermissionPlayground>`
             ? `active: ${x.ps.permissions.bluetooth.allowedDevices.map((d) => d.name).join(', ')}`
             : x.ps.permissions.bluetooth.state})
       </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.serial.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestSerialAccess()}"
+      >
+        Serial port
+        (${(x) =>
+          x.ps.permissions.serial.state === 'active'
+            ? `active: ${x.ps.permissions.serial.allowedDevices.map((d) => d.name).join(', ')}`
+            : x.ps.permissions.serial.state})
+      </mai-button>
     </div>
   </div>
 `;

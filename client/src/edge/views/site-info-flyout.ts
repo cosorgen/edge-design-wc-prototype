@@ -71,6 +71,15 @@ const permissionItemsByKey: Record<string, ViewTemplate> = {
       deviceIcon="${(x) => x.icon}"
     ></site-info-permission-device>`,
   )}`,
+  serial: html`${repeat(
+    (x, c) => c.parent.ps.permissions.serial.allowedDevices,
+    html`<site-info-permission-device
+      type="serial"
+      id="${(x) => x.id}"
+      deviceName="${(x) => x.name}"
+      deviceIcon="serial-port"
+    ></site-info-permission-device>`,
+  )}`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -314,6 +323,11 @@ export default class SiteInfoFlyout extends FASTElement {
       case 'bluetooth': {
         const { id } = e.detail;
         this.ps.denyBluetoothAccess(id);
+        break;
+      }
+      case 'serial': {
+        const { id } = e.detail;
+        this.ps.denySerialAccess(id);
         break;
       }
     }
