@@ -50,6 +50,17 @@ const template = html<PermissionPlayground>`
             ? `active: ${x.ps.permissions.usb.allowedDevices.map((d) => d.name).join(', ')}`
             : x.ps.permissions.usb.state})
       </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.bluetooth.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestBluetoothAccess()}"
+      >
+        Bluetooth
+        (${(x) =>
+          x.ps.permissions.bluetooth.state === 'active'
+            ? `active: ${x.ps.permissions.bluetooth.allowedDevices.map((d) => d.name).join(', ')}`
+            : x.ps.permissions.bluetooth.state})
+      </mai-button>
     </div>
   </div>
 `;

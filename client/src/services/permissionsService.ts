@@ -13,14 +13,20 @@ export default class EdgePermissionsService {
       default: 'ask' as 'allow' | 'block' | 'ask',
     },
     usb: {
-      permission: 'ask',
+      permission: 'ask' as const,
       state: 'inactive' as 'requested' | 'active' | 'inactive',
       allowedDevices: [] as { name: string; id: string; icon: string }[],
-      default: 'ask',
+      default: 'ask' as const,
+    },
+    bluetooth: {
+      permission: 'ask' as const,
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      allowedDevices: [] as { name: string; id: string; icon: string }[],
+      default: 'ask' as const,
     },
   };
 
-  permissionPriority = ['camera', 'microphone', 'usb'] as const;
+  permissionPriority = Object.keys(this.permissions);
 
   requestCameraAccess() {
     if (this.permissions.camera.permission === 'block') {
@@ -143,6 +149,53 @@ export default class EdgePermissionsService {
     };
   }
 
+  requestBluetoothAccess() {
+    this.permissions = {
+      ...this.permissions,
+      bluetooth: { ...this.permissions.bluetooth, state: 'requested' },
+    };
+  }
+
+  grantBluetoothAccess(device: { name: string; id: string; icon: string }) {
+    this.permissions = {
+      ...this.permissions,
+      bluetooth: {
+        ...this.permissions.bluetooth,
+        state: 'active',
+        allowedDevices: Array.from(
+          new Set([...this.permissions.bluetooth.allowedDevices, device]),
+        ),
+      },
+    };
+  }
+
+  cancelBluetoothRequest() {
+    this.permissions = {
+      ...this.permissions,
+      bluetooth: {
+        ...this.permissions.bluetooth,
+        state:
+          this.permissions.bluetooth.allowedDevices.length > 0
+            ? 'active'
+            : 'inactive',
+      },
+    };
+  }
+
+  denyBluetoothAccess(deviceId: string) {
+    const allowedDevices = this.permissions.bluetooth.allowedDevices.filter(
+      (d) => d.id !== deviceId,
+    );
+    this.permissions = {
+      ...this.permissions,
+      bluetooth: {
+        ...this.permissions.bluetooth,
+        allowedDevices,
+        state: allowedDevices.length > 0 ? 'active' : 'inactive',
+      },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -158,6 +211,12 @@ export default class EdgePermissionsService {
       usb: {
         ...this.permissions.usb,
         permission: this.permissions.usb.default,
+        state: 'inactive',
+        allowedDevices: [],
+      },
+      bluetooth: {
+        ...this.permissions.bluetooth,
+        permission: this.permissions.bluetooth.default,
         state: 'inactive',
         allowedDevices: [],
       },

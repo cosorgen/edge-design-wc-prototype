@@ -22,17 +22,30 @@ const labels = {
     title: 'Device name',
     description: 'USB device',
   },
+  bluetooth: {
+    title: 'Device name',
+    description: 'Bluetooth device',
+  },
 };
 
 const template = html<SiteInfoPermissionDevice>`
   <svg>
-    <use href="img/edge/icons.svg#${(x) => x.deviceIcon}-20-regular" />
+    <use
+      href="img/edge/icons.svg#${(x) =>
+        x.deviceIcon || 'placeholder'}-20-regular"
+    />
   </svg>
   <div>
     <div>
-      ${(x) => x.deviceName || labels[x.type as keyof typeof labels].title}
+      ${(x) =>
+        x.deviceName ||
+        labels[x.type as keyof typeof labels].title ||
+        'Unknown device'}
     </div>
-    <div>${(x) => labels[x.type as keyof typeof labels].description}</div>
+    <div>
+      ${(x) =>
+        labels[x.type as keyof typeof labels].description || 'Unknown device'}
+    </div>
   </div>
   <mai-button
     appearance="subtle"
@@ -79,7 +92,7 @@ const styles = css`
 
 @customElement({ name: 'site-info-permission-device', template, styles })
 export default class SiteInfoPermissionDevice extends FASTElement {
-  @attr type = 'usb';
-  @attr deviceName = '';
-  @attr deviceIcon = '';
+  @attr type?: 'usb' | 'bluetooth';
+  @attr deviceName?: string;
+  @attr deviceIcon?: string;
 }

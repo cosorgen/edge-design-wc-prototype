@@ -62,6 +62,15 @@ const permissionItemsByKey: Record<string, ViewTemplate> = {
       deviceIcon="${(x) => x.icon}"
     ></site-info-permission-device>`,
   )}`,
+  bluetooth: html`${repeat(
+    (x, c) => c.parent.ps.permissions.bluetooth.allowedDevices,
+    html`<site-info-permission-device
+      type="bluetooth"
+      id="${(x) => x.id}"
+      deviceName="${(x) => x.name}"
+      deviceIcon="${(x) => x.icon}"
+    ></site-info-permission-device>`,
+  )}`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -110,9 +119,11 @@ const template = html<SiteInfoFlyout>`
       (x) =>
         x.ps.permissionPriority.some(
           (key) =>
-            x.ps.permissions[key].permission !==
-              x.ps.permissions[key].default ||
-            x.ps.permissions[key].state === 'active',
+            x.ps.permissions[key as keyof typeof x.ps.permissions]
+              .permission !==
+              x.ps.permissions[key as keyof typeof x.ps.permissions].default ||
+            x.ps.permissions[key as keyof typeof x.ps.permissions].state ===
+              'active',
         ),
       html`<div class="menu-section">
           <div class="section-header">Permissions for this site</div>
@@ -120,9 +131,12 @@ const template = html<SiteInfoFlyout>`
             (x) =>
               x.ps.permissionPriority.filter(
                 (key) =>
-                  x.ps.permissions[key].permission !==
-                    x.ps.permissions[key].default ||
-                  x.ps.permissions[key].state === 'active',
+                  x.ps.permissions[key as keyof typeof x.ps.permissions]
+                    .permission !==
+                    x.ps.permissions[key as keyof typeof x.ps.permissions]
+                      .default ||
+                  x.ps.permissions[key as keyof typeof x.ps.permissions]
+                    .state === 'active',
               ),
             html`${(x) => permissionItemsByKey[x]}`,
           )}
@@ -295,6 +309,11 @@ export default class SiteInfoFlyout extends FASTElement {
       case 'usb': {
         const { id } = e.detail;
         this.ps.denyUsbAccess(id);
+        break;
+      }
+      case 'bluetooth': {
+        const { id } = e.detail;
+        this.ps.denyBluetoothAccess(id);
         break;
       }
     }

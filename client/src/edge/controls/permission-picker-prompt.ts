@@ -4,6 +4,7 @@ import {
   css,
   html,
   attr,
+  when,
 } from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
@@ -23,6 +24,7 @@ import {
   strokeWidthCardDefault,
 } from '@mai-ui/design-tokens/mai-tokens.js';
 import '@mai-ui/button/define.js';
+import '@mai-ui/spinner/define.js';
 
 const template = html<PermissionPickerPrompt>`
   <div part="header">
@@ -47,18 +49,27 @@ const template = html<PermissionPickerPrompt>`
     </div>
   </div>
   <div part="footer">
-    <mai-button
-      appearance="subtle"
-      @click="${(x) => {
-        x.$emit('help');
-        x.$emit('closemenu');
-      }}"
-      icon-only
-    >
-      <svg>
-        <use href="img/edge/icons.svg#question-circle-20-regular" />
-      </svg>
-    </mai-button>
+    <div>
+      <mai-button
+        appearance="subtle"
+        @click="${(x) => {
+          x.$emit('help');
+          x.$emit('closemenu');
+        }}"
+        icon-only
+      >
+        <svg>
+          <use href="img/edge/icons.svg#question-circle-20-regular" />
+        </svg>
+      </mai-button>
+      ${when(
+        (x) => x.scanning,
+        html`
+          <mai-spinner ?active="${(x) => x.scanning}"></mai-spinner
+          ><label>Scanning... </label>
+        `,
+      )}
+    </div>
     <div>
       <mai-button
         @click="${(x) => x.$emit('connect')}"
@@ -126,6 +137,10 @@ const styles = css`
       flex-direction: row;
       align-items: center;
       gap: ${gapBetweenContentXSmall};
+
+      mai-spinner {
+        --_size: 20px;
+      }
     }
   }
 `;
@@ -133,4 +148,5 @@ const styles = css`
 @customElement({ name: 'permission-picker-prompt', template, styles })
 export default class PermissionPickerPrompt extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'enable-connect' }) enableConnect = false;
+  @attr({ mode: 'boolean', attribute: 'scanning' }) scanning = false;
 }

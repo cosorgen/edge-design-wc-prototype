@@ -14,8 +14,8 @@ import '../controls/permission-picker-prompt.js';
 import '@mai-ui/tree/define.js';
 import '@mai-ui/tree-item/define.js';
 
-const template = html<UsbPermissionPrompt>`
-  <permission-picker-prompt ?enable-connect="${(x) => !!x.selectedId}">
+const template = html<BluetoothPermissionPrompt>`
+  <permission-picker-prompt ?enable-connect="${(x) => !!x.selectedId}" scanning>
     <span slot="title">
       ${(x) => new URL(x.ts.tabsById[x.ts.activeTabId!].url).hostname} wants to
     </span>
@@ -45,15 +45,17 @@ const styles = css`
   }
 `;
 
-@customElement({ name: 'usb-permission-prompt', template, styles })
-export default class UsbPermissionPrompt extends FASTElement {
+@customElement({ name: 'bluetooth-permission-prompt', template, styles })
+export default class BluetoothPermissionPrompt extends FASTElement {
   @attr({ mode: 'boolean' }) open = false;
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @observable availableDevices = [
-    { name: 'Keyboard', id: 'usb-device-1', icon: 'placeholder' },
-    { name: 'Mouse', id: 'usb-device-2', icon: 'placeholder' },
-    { name: 'Drive', id: 'usb-device-3', icon: 'placeholder' },
+    { name: 'Keyboard', id: 'bt-device-1', icon: 'cell-data-1' },
+    { name: 'Mouse', id: 'bt-device-2', icon: 'cell-data-2' },
+    { name: 'TV', id: 'bt-device-3', icon: 'cell-data-3' },
+    { name: 'Phone', id: 'bt-device-4', icon: 'cell-data-4' },
+    { name: 'Phone', id: 'bt-device-5', icon: 'cell-data-5' },
   ];
   @observable selectedId?: string;
 
@@ -78,7 +80,7 @@ export default class UsbPermissionPrompt extends FASTElement {
       this.ts.activateTab(id);
       this.ts.navigateTab(
         id,
-        'https://bing.com/search?q=usb+permissions+in+edge',
+        'https://bing.com/search?q=bluetooth+permissions+in+edge',
       );
     });
     this.addEventListener('connect', () => {
@@ -86,12 +88,12 @@ export default class UsbPermissionPrompt extends FASTElement {
       if (!d) {
         return;
       }
-      this.ps.grantUsbAccess(d);
+      this.ps.grantBluetoothAccess(d);
     });
     this.addEventListener('closemenu', () => {
       // clear request on close
       this.selectedId = undefined;
-      this.ps.cancelUsbRequest();
+      this.ps.cancelBluetoothRequest();
     });
   }
 }
