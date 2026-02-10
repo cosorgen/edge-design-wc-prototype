@@ -39,6 +39,17 @@ const template = html<PermissionPlayground>`
             ? 'blocked'
             : x.ps.permissions.microphone.state})
       </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.usb.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestUsbAccess()}"
+      >
+        USB
+        (${(x) =>
+          x.ps.permissions.usb.permission === 'block'
+            ? 'blocked'
+            : x.ps.permissions.usb.state})
+      </mai-button>
     </div>
   </div>
 `;

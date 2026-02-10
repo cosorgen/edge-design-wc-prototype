@@ -71,7 +71,8 @@ const styles = css`
   [part='header'] {
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
+    gap: ${gapBetweenContentXSmall};
 
     #title {
       flex: 1;

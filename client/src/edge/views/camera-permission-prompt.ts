@@ -9,7 +9,7 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import '../controls/camera-permission-card.js';
-import '../controls/media-prompt.js';
+import '../controls/permission-media-prompt.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
 import CameraPermissionCard from '../controls/camera-permission-card.js';
 

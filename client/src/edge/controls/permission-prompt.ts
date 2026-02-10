@@ -29,20 +29,24 @@ import {
 import './flyout-menu.js';
 import '../views/camera-permission-prompt.js';
 import '../views/microphone-permission-prompt.js';
+import '../views/usb-permission-prompt.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',
   microphone: 'Use microphone?',
+  usb: 'Connect USB device?',
 };
 
 const iconIds: Record<string, string> = {
   camera: 'video-20-regular',
   microphone: 'mic-20-regular',
+  usb: 'placeholder-20-regular',
 };
 
 const prompts: Record<string, ViewTemplate> = {
   camera: html`<camera-permission-prompt></camera-permission-prompt>`,
   microphone: html`<microphone-permission-prompt></microphone-permission-prompt>`,
+  usb: html`<usb-permission-prompt></usb-permission-prompt>`,
 };
 
 const template = html<PermissionPrompt>`
@@ -123,7 +127,7 @@ const styles = css`
 @customElement({ name: 'permission-prompt', template, styles })
 export class PermissionPrompt extends FASTElement {
   @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
-  @attr type: 'camera' | 'microphone' = 'camera';
+  @attr type: 'camera' | 'microphone' | 'usb' = 'camera';
   connectedCallback(): void {
     super.connectedCallback();
     setTimeout(() => {

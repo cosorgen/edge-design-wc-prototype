@@ -12,9 +12,15 @@ export default class EdgePermissionsService {
       state: 'inactive' as 'requested' | 'active' | 'inactive',
       default: 'ask' as 'allow' | 'block' | 'ask',
     },
+    usb: {
+      permission: 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      allowedDevices: [] as string[],
+      default: 'ask',
+    },
   };
 
-  permissionPriority = ['camera', 'microphone'] as const;
+  permissionPriority = ['camera', 'microphone', 'usb'] as const;
 
   requestCameraAccess() {
     if (this.permissions.camera.permission === 'block') {
@@ -90,6 +96,37 @@ export default class EdgePermissionsService {
     };
   }
 
+  requestUsbAccess() {
+    if (this.permissions.usb.permission === 'block') {
+      return;
+    }
+
+    if (this.permissions.usb.permission === 'ask') {
+      this.permissions = {
+        ...this.permissions,
+        usb: { ...this.permissions.usb, state: 'requested' },
+      };
+    }
+  }
+
+  grantUsbAccess(alwaysAllow = false) {
+    this.permissions = {
+      ...this.permissions,
+      usb: {
+        ...this.permissions.usb,
+        permission: alwaysAllow ? 'ask' : 'block',
+        state: 'active',
+      },
+    };
+  }
+
+  denyUsbAccess() {
+    this.permissions = {
+      ...this.permissions,
+      usb: { ...this.permissions.usb, permission: 'block' },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -100,6 +137,11 @@ export default class EdgePermissionsService {
       microphone: {
         ...this.permissions.microphone,
         permission: this.permissions.microphone.default,
+        state: 'inactive',
+      },
+      usb: {
+        ...this.permissions.usb,
+        permission: this.permissions.usb.default,
         state: 'inactive',
       },
     };
