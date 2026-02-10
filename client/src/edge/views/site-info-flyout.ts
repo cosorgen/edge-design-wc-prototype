@@ -6,6 +6,7 @@ import {
   attr,
   repeat,
   when,
+  ViewTemplate,
 } from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
@@ -38,23 +39,29 @@ import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
-import '@mai-ui/switch/define.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
+import '../controls/site-info-permission-item.js';
+import '../controls/site-info-permission-device.js';
 
-const labels = {
-  camera: 'Camera',
-  microphone: 'Microphone',
-};
-
-const icons = {
-  camera: {
-    active: 'video-20-regular',
-    inactive: 'video-off-20-regular',
-  },
-  microphone: {
-    active: 'mic-20-regular',
-    inactive: 'mic-off-20-regular',
-  },
+const permissionItemsByKey: Record<string, ViewTemplate> = {
+  camera: html`<site-info-permission-item
+    type="camera"
+    ?checked="${(x, c) => c.parent.ps.permissions.camera.state === 'active'}"
+  ></site-info-permission-item>`,
+  microphone: html`<site-info-permission-item
+    type="microphone"
+    ?checked="${(x, c) =>
+      c.parent.ps.permissions.microphone.state === 'active'}"
+  ></site-info-permission-item>`,
+  usb: html`${repeat(
+    (x, c) => c.parent.ps.permissions.usb.allowedDevices,
+    html`<site-info-permission-device
+      type="usb"
+      id="${(x) => x.id}"
+      deviceName="${(x) => x.name}"
+      deviceIcon="${(x) => x.icon}"
+    ></site-info-permission-device>`,
+  )}`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -117,31 +124,7 @@ const template = html<SiteInfoFlyout>`
                     x.ps.permissions[key].default ||
                   x.ps.permissions[key].state === 'active',
               ),
-            html`<div class="menu-item">
-              <svg>
-                <use
-                  href="img/edge/icons.svg#${(x, c) =>
-                    icons[x as keyof typeof icons][
-                      c.parent.ps.permissions[
-                        x as keyof typeof c.parent.ps.permissions
-                      ].permission !== 'block'
-                        ? 'active'
-                        : 'inactive'
-                    ]}"
-                />
-              </svg>
-              <div>${(x) => labels[x as keyof typeof labels]}</div>
-              <mai-switch
-                checked="${(x, c) =>
-                  c.parent.ps.permissions[
-                    x as keyof typeof c.parent.ps.permissions
-                  ].permission !== 'block'}"
-                @click="${(x, c) =>
-                  c.parent.togglePermission(
-                    x as keyof typeof c.parent.ps.permissions,
-                  )}"
-              ></mai-switch>
-            </div>`,
+            html`${(x) => permissionItemsByKey[x]}`,
           )}
           <div class="menu-item">
             <mai-button
@@ -284,13 +267,17 @@ export default class SiteInfoFlyout extends FASTElement {
     this.addEventListener('click', (e) => {
       e.stopPropagation();
     });
+    this.addEventListener('togglepermission', (e: Event) => {
+      if (!(e instanceof CustomEvent)) return;
+      this.togglePermission(e);
+    });
   }
 
-  togglePermission(key: keyof typeof this.ps.permissions) {
-    const currentPermission = this.ps.permissions[key].permission;
-    switch (key) {
+  togglePermission(e: CustomEvent) {
+    const { type } = e.detail;
+    switch (type) {
       case 'camera': {
-        if (currentPermission !== 'block') {
+        if (this.ps.permissions.camera.permission !== 'block') {
           this.ps.denyCameraAccess();
         } else {
           this.ps.grantCameraAccess(true);
@@ -298,11 +285,16 @@ export default class SiteInfoFlyout extends FASTElement {
         break;
       }
       case 'microphone': {
-        if (currentPermission !== 'block') {
+        if (this.ps.permissions.microphone.permission !== 'block') {
           this.ps.denyMicrophoneAccess();
         } else {
           this.ps.grantMicrophoneAccess(true);
         }
+        break;
+      }
+      case 'usb': {
+        const { id } = e.detail;
+        this.ps.denyUsbAccess(id);
         break;
       }
     }

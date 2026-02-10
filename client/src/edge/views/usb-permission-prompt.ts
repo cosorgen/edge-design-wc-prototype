@@ -51,9 +51,9 @@ export default class UsbPermissionPrompt extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @observable availableDevices = [
-    { name: 'USB Device 1', id: 'device-1', icon: 'placeholder' },
-    { name: 'USB Device 2', id: 'device-2', icon: 'placeholder' },
-    { name: 'USB Device 3', id: 'device-3', icon: 'placeholder' },
+    { name: 'Keyboard', id: 'device-1', icon: 'placeholder' },
+    { name: 'Mouse', id: 'device-2', icon: 'placeholder' },
+    { name: 'Drive', id: 'device-3', icon: 'placeholder' },
   ];
   @observable selectedId?: string;
 
@@ -73,10 +73,25 @@ export default class UsbPermissionPrompt extends FASTElement {
       e.stopPropagation();
     });
 
-    this.addEventListener('allow', () => {});
+    this.addEventListener('help', () => {
+      const id = this.ts.addTab();
+      this.ts.activateTab(id);
+      this.ts.navigateTab(
+        id,
+        'https://bing.com/search?q=usb+permissions+in+edge',
+      );
+    });
+    this.addEventListener('connect', () => {
+      const d = this.availableDevices.find((d) => d.id === this.selectedId);
+      if (!d) {
+        return;
+      }
+      this.ps.grantUsbAccess(d);
+    });
     this.addEventListener('closemenu', () => {
       // clear request on close
       this.selectedId = undefined;
+      this.ps.cancelUsbRequest();
     });
   }
 }

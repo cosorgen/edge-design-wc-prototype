@@ -50,6 +50,11 @@ const iconIds: Record<string, Record<string, string>> = {
     ask: 'mic-20-regular',
     block: 'mic-off-20-regular',
   },
+  usb: {
+    allow: 'placeholder-20-regular',
+    ask: 'placeholder-20-regular',
+    block: 'placeholder-20-regular',
+  },
 };
 
 const labels: Record<string, Record<string, string>> = {
@@ -62,6 +67,11 @@ const labels: Record<string, Record<string, string>> = {
     allow: 'Microphone in use',
     ask: 'Microphone in use',
     block: 'Microphone not allowed',
+  },
+  usb: {
+    allow: 'USB device connected',
+    ask: 'USB device connected',
+    block: 'USB device blocked',
   },
 };
 

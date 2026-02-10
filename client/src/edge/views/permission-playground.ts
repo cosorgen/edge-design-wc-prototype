@@ -46,8 +46,8 @@ const template = html<PermissionPlayground>`
       >
         USB
         (${(x) =>
-          x.ps.permissions.usb.permission === 'block'
-            ? 'blocked'
+          x.ps.permissions.usb.state === 'active'
+            ? `active: ${x.ps.permissions.usb.allowedDevices.map((d) => d.name).join(', ')}`
             : x.ps.permissions.usb.state})
       </mai-button>
     </div>

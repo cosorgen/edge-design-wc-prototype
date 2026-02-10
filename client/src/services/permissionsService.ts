@@ -15,7 +15,7 @@ export default class EdgePermissionsService {
     usb: {
       permission: 'ask',
       state: 'inactive' as 'requested' | 'active' | 'inactive',
-      allowedDevices: [] as string[],
+      allowedDevices: [] as { name: string; id: string; icon: string }[],
       default: 'ask',
     },
   };
@@ -97,33 +97,49 @@ export default class EdgePermissionsService {
   }
 
   requestUsbAccess() {
-    if (this.permissions.usb.permission === 'block') {
-      return;
-    }
-
-    if (this.permissions.usb.permission === 'ask') {
-      this.permissions = {
-        ...this.permissions,
-        usb: { ...this.permissions.usb, state: 'requested' },
-      };
-    }
+    this.permissions = {
+      ...this.permissions,
+      usb: { ...this.permissions.usb, state: 'requested' },
+    };
   }
 
-  grantUsbAccess(alwaysAllow = false) {
+  grantUsbAccess(device: { name: string; id: string; icon: string }) {
     this.permissions = {
       ...this.permissions,
       usb: {
         ...this.permissions.usb,
-        permission: alwaysAllow ? 'ask' : 'block',
         state: 'active',
+        allowedDevices: Array.from(
+          new Set([...this.permissions.usb.allowedDevices, device]),
+        ),
       },
     };
   }
 
-  denyUsbAccess() {
+  cancelUsbRequest() {
     this.permissions = {
       ...this.permissions,
-      usb: { ...this.permissions.usb, permission: 'block' },
+      usb: {
+        ...this.permissions.usb,
+        state:
+          this.permissions.usb.allowedDevices.length > 0
+            ? 'active'
+            : 'inactive',
+      },
+    };
+  }
+
+  denyUsbAccess(deviceId: string) {
+    const allowedDevices = this.permissions.usb.allowedDevices.filter(
+      (d) => d.id !== deviceId,
+    );
+    this.permissions = {
+      ...this.permissions,
+      usb: {
+        ...this.permissions.usb,
+        allowedDevices,
+        state: allowedDevices.length > 0 ? 'active' : 'inactive',
+      },
     };
   }
 
@@ -143,6 +159,7 @@ export default class EdgePermissionsService {
         ...this.permissions.usb,
         permission: this.permissions.usb.default,
         state: 'inactive',
+        allowedDevices: [],
       },
     };
   }

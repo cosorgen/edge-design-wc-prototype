@@ -49,7 +49,10 @@ const template = html<PermissionPickerPrompt>`
   <div part="footer">
     <mai-button
       appearance="subtle"
-      @click="${(x) => x.$emit('help')}"
+      @click="${(x) => {
+        x.$emit('help');
+        x.$emit('closemenu');
+      }}"
       icon-only
     >
       <svg>
@@ -58,7 +61,7 @@ const template = html<PermissionPickerPrompt>`
     </mai-button>
     <div>
       <mai-button
-        @click="${(x) => x.$emit('connect', { device: '' })}"
+        @click="${(x) => x.$emit('connect')}"
         ?disabled="${(x) => !x.enableConnect}"
       >
         Connect
