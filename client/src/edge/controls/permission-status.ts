@@ -179,7 +179,6 @@ const styles = css`
   }
 
   [part='label'] {
-    flex: 1;
     white-space: nowrap;
     overflow: hidden;
     min-width: 0px;
@@ -191,6 +190,11 @@ const styles = css`
 
   :host([aria-expanded='true']) [part='label'] {
     width: var(--max-label-width);
+  }
+
+  :host([aria-expanded='false']) button {
+    padding: ${paddingCtrlSmHorizontalIconOnly};
+    gap: 0px;
   }
 `;
 
@@ -205,6 +209,7 @@ export class PermissionStatus extends FASTElement {
     setTimeout(() => {
       this.setLabelWidth();
       this.ariaExpanded = 'true';
+      this.setClose();
     }, 100);
   }
 
@@ -213,6 +218,7 @@ export class PermissionStatus extends FASTElement {
     setTimeout(() => {
       this.setLabelWidth();
       this.ariaExpanded = 'true';
+      this.setClose();
     }, 100);
   }
 
@@ -221,6 +227,7 @@ export class PermissionStatus extends FASTElement {
     setTimeout(() => {
       this.setLabelWidth();
       this.ariaExpanded = 'true';
+      this.setClose();
     }, 100);
   }
 
@@ -232,5 +239,11 @@ export class PermissionStatus extends FASTElement {
           this.shadowRoot?.querySelector('[part="label"]')?.scrollWidth) +
         'px',
     );
+  }
+
+  setClose() {
+    setTimeout(() => {
+      this.ariaExpanded = 'false';
+    }, 3000);
   }
 }
