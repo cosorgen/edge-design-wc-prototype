@@ -10,9 +10,18 @@ import {
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
 import {
+  backgroundCtrlSubtleHover,
+  backgroundCtrlSubtlePressed,
+  backgroundCtrlSubtleRest,
+  backgroundCtrlSubtleSelectedHover,
+  backgroundCtrlSubtleSelectedPressed,
+  backgroundCtrlSubtleSelectedRest,
   cornerCircular,
   curveDecelerateMax,
   durationSlow,
+  foregroundCtrlNeutralSecondaryHover,
+  foregroundCtrlNeutralSecondaryPressed,
+  foregroundCtrlNeutralSecondaryRest,
   gapBetweenContentXSmall,
   paddingContentSmall,
   paddingContentXSmall,
@@ -36,17 +45,17 @@ import '../views/serial-permission-prompt.js';
 const labels: Record<string, string> = {
   camera: 'Use camera?',
   microphone: 'Use microphone?',
-  usb: 'Connect USB device?',
-  bluetooth: 'Connect Bluetooth device?',
-  serial: 'Connect Serial device?',
+  usb: '',
+  bluetooth: '',
+  serial: '',
 };
 
 const iconIds: Record<string, string> = {
   camera: 'video-20-regular',
   microphone: 'mic-20-regular',
-  usb: 'placeholder-20-regular',
-  bluetooth: 'bluetooth-20-regular',
-  serial: 'serial-port-20-regular',
+  usb: 'lock-closed-20-regular',
+  bluetooth: 'lock-closed-20-regular',
+  serial: 'lock-closed-20-regular',
 };
 
 const prompts: Record<string, ViewTemplate> = {
@@ -110,6 +119,36 @@ const styles = css`
     color: ${ctrlOmniboxActionBubbleForegroundPressed};
   }
 
+  :host([ignore]) button {
+    background: ${backgroundCtrlSubtleRest};
+    color: ${foregroundCtrlNeutralSecondaryRest};
+  }
+
+  :host([ignore]) button:hover {
+    background: ${backgroundCtrlSubtleHover};
+    color: ${foregroundCtrlNeutralSecondaryHover};
+  }
+
+  :host([ignore]) button:hover:active {
+    background: ${backgroundCtrlSubtlePressed};
+    color: ${foregroundCtrlNeutralSecondaryPressed};
+  }
+
+  :host([ignore]) button[aria-pressed='true'] {
+    background: ${backgroundCtrlSubtleSelectedRest};
+    color: ${foregroundCtrlNeutralSecondaryRest};
+  }
+
+  :host([ignore]) button[aria-pressed='true']:hover {
+    background: ${backgroundCtrlSubtleSelectedHover};
+    color: ${foregroundCtrlNeutralSecondaryHover};
+  }
+
+  :host([ignore]) button[aria-pressed='true']:hover:active {
+    background: ${backgroundCtrlSubtleSelectedPressed};
+    color: ${foregroundCtrlNeutralSecondaryPressed};
+  }
+
   svg,
   img {
     width: 20px;
@@ -130,12 +169,23 @@ const styles = css`
   :host([aria-expanded='true']) [part='label'] {
     width: var(--max-label-width);
   }
+
+  :host([ignore]) [part='label'] {
+    display: none;
+  }
+
+  :host([ignore]) button {
+    padding: ${paddingCtrlSmHorizontalIconOnly};
+    gap: 0px;
+  }
 `;
 
 @customElement({ name: 'permission-prompt', template, styles })
 export class PermissionPrompt extends FASTElement {
   @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
   @attr type: 'camera' | 'microphone' | 'usb' = 'camera';
+  @attr({ mode: 'boolean' }) ignore = false;
+
   connectedCallback(): void {
     super.connectedCallback();
     setTimeout(() => {

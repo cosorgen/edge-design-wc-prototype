@@ -51,19 +51,24 @@ const iconIds: Record<string, Record<string, string>> = {
     block: 'mic-off-20-regular',
   },
   usb: {
-    allow: 'placeholder-20-regular',
-    ask: 'placeholder-20-regular',
-    block: 'placeholder-20-regular',
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
   },
   bluetooth: {
-    allow: 'bluetooth-20-regular',
-    ask: 'bluetooth-20-regular',
-    block: 'bluetooth-off-20-regular',
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
   },
   serial: {
-    allow: 'serial-port-20-regular',
-    ask: 'serial-port-20-regular',
-    block: 'placeholder-20-regular',
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
+  },
+  popup: {
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
   },
 };
 
@@ -79,19 +84,24 @@ const labels: Record<string, Record<string, string>> = {
     block: 'Microphone not allowed',
   },
   usb: {
-    allow: 'USB device connected',
-    ask: 'USB device connected',
-    block: 'USB device not allowed',
+    allow: '',
+    ask: '',
+    block: '',
   },
   bluetooth: {
-    allow: 'Bluetooth device connected',
-    ask: 'Bluetooth device connected',
-    block: 'Bluetooth device not allowed',
+    allow: '',
+    ask: '',
+    block: '',
   },
   serial: {
-    allow: 'Serial port connected',
-    ask: 'Serial port connected',
-    block: 'Serial port not allowed',
+    allow: '',
+    ask: '',
+    block: '',
+  },
+  popup: {
+    allow: '',
+    ask: '',
+    block: '',
   },
 };
 
@@ -142,32 +152,38 @@ const styles = css`
     color: ${ctrlOmniboxActionBubbleForegroundPressed};
   }
 
-  :host([permission='block']) button {
+  :host([permission='block']) button,
+  :host([ignore]) button {
     background: ${backgroundCtrlSubtleRest};
     color: ${foregroundCtrlNeutralSecondaryRest};
   }
 
-  :host([permission='block']) button:hover {
+  :host([permission='block']) button:hover,
+  :host([ignore]) button:hover {
     background: ${backgroundCtrlSubtleHover};
     color: ${foregroundCtrlNeutralSecondaryHover};
   }
 
-  :host([permission='block']) button:hover:active {
+  :host([permission='block']) button:hover:active,
+  :host([ignore]) button:hover:active {
     background: ${backgroundCtrlSubtlePressed};
     color: ${foregroundCtrlNeutralSecondaryPressed};
   }
 
-  :host([permission='block'][aria-pressed='true']) button {
+  :host([permission='block'][aria-pressed='true']) button,
+  :host([ignore][aria-pressed='true']) button {
     background: ${backgroundCtrlSubtleSelectedRest};
     color: ${foregroundCtrlNeutralPrimaryRest};
   }
 
-  :host([permission='block'][aria-pressed='true']) button:hover {
+  :host([permission='block'][aria-pressed='true']) button:hover,
+  :host([ignore][aria-pressed='true']) button:hover {
     background: ${backgroundCtrlSubtleSelectedHover};
     color: ${foregroundCtrlNeutralPrimaryHover};
   }
 
-  :host([permission='block'][aria-pressed='true']) button:hover:active {
+  :host([permission='block'][aria-pressed='true']) button:hover:active,
+  :host([ignore][aria-pressed='true']) button:hover:active {
     background: ${backgroundCtrlSubtleSelectedPressed};
     color: ${foregroundCtrlNeutralPrimaryPressed};
   }
@@ -192,9 +208,14 @@ const styles = css`
     width: var(--max-label-width);
   }
 
-  :host([aria-expanded='false']) button {
+  :host([aria-expanded='false']) button,
+  :host([ignore]) button {
     padding: ${paddingCtrlSmHorizontalIconOnly};
     gap: 0px;
+  }
+
+  :host([ignore]) [part='label'] {
+    display: none;
   }
 `;
 
@@ -203,6 +224,7 @@ export class PermissionStatus extends FASTElement {
   @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
   @attr type: 'camera' | 'microphone' = 'camera';
   @attr permission: 'allow' | 'block' | 'ask' = 'ask';
+  @attr({ mode: 'boolean' }) ignore = false;
 
   connectedCallback(): void {
     super.connectedCallback();

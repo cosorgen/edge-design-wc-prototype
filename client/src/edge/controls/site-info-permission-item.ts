@@ -19,6 +19,7 @@ import '@mai-ui/switch/define.js';
 const labels = {
   camera: 'Camera',
   microphone: 'Microphone',
+  popup: 'Pop-ups and redirects',
 };
 
 const icons = {
@@ -29,6 +30,10 @@ const icons = {
   microphone: {
     active: 'mic-20-regular',
     inactive: 'mic-off-20-regular',
+  },
+  popup: {
+    active: 'open-20-regular',
+    inactive: 'open-off-20-regular',
   },
 };
 
@@ -74,5 +79,5 @@ const styles = css`
 @customElement({ name: 'site-info-permission-item', template, styles })
 export default class SiteInfoPermissionItem extends FASTElement {
   @attr({ mode: 'boolean' }) checked = false;
-  @attr type: 'camera' | 'microphone' = 'camera';
+  @attr type: 'camera' | 'microphone' | 'popup' = 'camera';
 }

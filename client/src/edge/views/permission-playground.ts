@@ -72,6 +72,7 @@ const template = html<PermissionPlayground>`
             ? `active: ${x.ps.permissions.serial.allowedDevices.map((d) => d.name).join(', ')}`
             : x.ps.permissions.serial.state})
       </mai-button>
+      <mai-button @click="${(x) => x.ps.openPopup()}"> Popup </mai-button>
     </div>
   </div>
 `;

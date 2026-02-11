@@ -80,6 +80,10 @@ const permissionItemsByKey: Record<string, ViewTemplate> = {
       deviceIcon="serial-port"
     ></site-info-permission-device>`,
   )}`,
+  popup: html`<site-info-permission-item
+    type="popup"
+    ?checked="${(x, c) => c.parent.ps.permissions.popup.permission === 'allow'}"
+  ></site-info-permission-item>`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -328,6 +332,14 @@ export default class SiteInfoFlyout extends FASTElement {
       case 'serial': {
         const { id } = e.detail;
         this.ps.denySerialAccess(id);
+        break;
+      }
+      case 'popup': {
+        if (this.ps.permissions.popup.permission !== 'block') {
+          this.ps.denyPopup();
+        } else {
+          this.ps.allowPopup();
+        }
         break;
       }
     }

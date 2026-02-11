@@ -22,7 +22,9 @@ import '../controls/identity-flyout.js';
 import '../controls/more-menu.js';
 import '../controls/permission-prompt.js';
 import '../controls/permission-status.js';
+import '../controls/popup-blocked-omnibox-action.js';
 import './site-info-flyout.js';
+import './popup-blocked-flyout.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -36,6 +38,8 @@ import FavoritesService from '#servicesfavoritesService.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
+
+const ignorePermissions = ['usb', 'bluetooth', 'serial', 'popup'];
 
 const template = html<Toolbar>`
   <div class="group">
@@ -60,53 +64,42 @@ const template = html<Toolbar>`
       x.handleOmniboxChange({ ...c.event, detail: ' ' } as CustomEvent)}"
   >
     ${when(
-      (x) =>
-        Object.values(x.ps.permissions).some(
-          (p) => p.state === 'requested' && p.permission === 'ask',
-        ),
+      (x) => x.showPermissionPrompt,
       html`
         <permission-prompt
           slot="status"
-          type="${(x) =>
-            x.ps.permissionPriority.find(
-              (key) =>
-                x.ps.permissions[key].state === 'requested' &&
-                x.ps.permissions[key].permission === 'ask',
-            )}"
+          type="${(x) => x.permissionPromptType}"
+          ?ignore="${(x) => ignorePermissions.includes(x.permissionPromptType)}"
         ></permission-prompt>
       `,
       html`${when(
-        (x) =>
-          Object.values(x.ps.permissions).some(
-            (p) =>
-              p.state === 'active' ||
-              (p.permission === 'block' && p.state === 'requested'),
-          ),
+        (x) => x.showPermissionStatus,
         html`
           <flyout-menu slot="status">
             <permission-status
               slot="trigger"
-              type="${(x) =>
-                x.ps.permissionPriority.find(
-                  (key) =>
-                    x.ps.permissions[key].state === 'active' ||
-                    (x.ps.permissions[key].permission === 'block' &&
-                      x.ps.permissions[key].state === 'requested'),
-                )}"
-              permission="${(x) => {
-                const key = x.ps.permissionPriority.find(
-                  (key) =>
-                    x.ps.permissions[key].state === 'active' ||
-                    (x.ps.permissions[key].permission === 'block' &&
-                      x.ps.permissions[key].state === 'requested'),
-                );
-                return key ? x.ps.permissions[key].permission : 'active';
-              }}"
+              type="${(x) => x.permissionStatusType}"
+              permission="${(x) => x.permissionValue}"
+              ?ignore="${(x) =>
+                ignorePermissions.includes(x.permissionStatusType)}"
             ></permission-status>
             <site-info-flyout></site-info-flyout>
           </flyout-menu>
         `,
       )}`,
+    )}
+    ${when(
+      (x) =>
+        x.ps.permissions.popup.permission === 'block' &&
+        x.ps.permissions.popup.state === 'active',
+      html`
+        <flyout-menu slot="actions">
+          <popup-blocked-omnibox-action
+            slot="trigger"
+          ></popup-blocked-omnibox-action>
+          <popup-blocked-flyout></popup-blocked-flyout>
+        </flyout-menu>
+      `,
     )}
     ${when(
       (x) => x.ts.tabsById[x.ts.activeTabId || 0].actionIds?.top,
@@ -317,6 +310,66 @@ export class Toolbar extends FASTElement {
     );
 
     return this._derivedToolbarItems;
+  }
+
+  @volatile
+  get showPermissionPrompt() {
+    return Object.values(this.ps.permissions).some(
+      (p) => p.state === 'requested' && p.permission === 'ask',
+    );
+  }
+
+  @volatile
+  get permissionPromptType() {
+    return (
+      this.ps.permissionPriority.find(
+        (key) =>
+          this.ps.permissions[key as keyof typeof this.ps.permissions].state ===
+            'requested' &&
+          this.ps.permissions[key as keyof typeof this.ps.permissions]
+            .permission === 'ask',
+      ) || 'Unknown'
+    );
+  }
+
+  @volatile
+  get showPermissionStatus() {
+    return Object.values(this.ps.permissions).some(
+      (p) =>
+        p.state === 'active' ||
+        (p.permission === 'block' && p.state === 'requested'),
+    );
+  }
+
+  @volatile
+  get permissionStatusType() {
+    return (
+      this.ps.permissionPriority.find(
+        (key) =>
+          this.ps.permissions[key as keyof typeof this.ps.permissions].state ===
+            'active' ||
+          (this.ps.permissions[key as keyof typeof this.ps.permissions]
+            .permission === 'block' &&
+            this.ps.permissions[key as keyof typeof this.ps.permissions]
+              .state === 'requested'),
+      ) || 'Unknown'
+    );
+  }
+
+  @volatile
+  get permissionValue() {
+    const key = this.ps.permissionPriority.find(
+      (key) =>
+        this.ps.permissions[key as keyof typeof this.ps.permissions].state ===
+          'active' ||
+        (this.ps.permissions[key as keyof typeof this.ps.permissions]
+          .permission === 'block' &&
+          this.ps.permissions[key as keyof typeof this.ps.permissions].state ===
+            'requested'),
+    );
+    return key
+      ? this.ps.permissions[key as keyof typeof this.ps.permissions].permission
+      : 'active';
   }
 
   suggestionsChanged() {

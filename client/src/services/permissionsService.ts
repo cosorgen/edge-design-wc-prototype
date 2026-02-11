@@ -30,6 +30,11 @@ export default class EdgePermissionsService {
       allowedDevices: [] as { name: string; id: string }[],
       default: 'ask' as const,
     },
+    popup: {
+      permission: 'block' as 'block' | 'allow',
+      state: 'inactive' as 'inactive' | 'active',
+      default: 'block' as 'block' | 'allow',
+    },
   };
 
   permissionPriority = Object.keys(this.permissions);
@@ -249,6 +254,48 @@ export default class EdgePermissionsService {
     };
   }
 
+  openPopup() {
+    if (this.permissions.popup.permission === 'block') {
+      this.permissions = {
+        ...this.permissions,
+        popup: { ...this.permissions.popup, state: 'active' },
+      };
+      return;
+    }
+
+    this.permissions = {
+      ...this.permissions,
+      popup: { ...this.permissions.popup, state: 'active' },
+    };
+    window.open(
+      '',
+      'Popup',
+      'width=400,height=400,toolbar=no,menubar=no,scrollbars=no,resizable=no',
+    );
+  }
+
+  allowPopup() {
+    this.permissions = {
+      ...this.permissions,
+      popup: {
+        ...this.permissions.popup,
+        permission: 'allow',
+        state: 'active',
+      },
+    };
+  }
+
+  denyPopup() {
+    this.permissions = {
+      ...this.permissions,
+      popup: {
+        ...this.permissions.popup,
+        permission: 'block',
+        state: 'active',
+      },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -278,6 +325,11 @@ export default class EdgePermissionsService {
         permission: this.permissions.serial.default,
         state: 'inactive',
         allowedDevices: [],
+      },
+      popup: {
+        ...this.permissions.popup,
+        state: 'inactive',
+        permission: this.permissions.popup.default,
       },
     };
   }
