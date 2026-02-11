@@ -4,6 +4,7 @@ import {
   css,
   html,
   attr,
+  observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
@@ -29,6 +30,7 @@ const template = html<PopupBlockedFlyout>`
       slot="controls"
       name="popup-permission"
       orientation="vertical"
+      value="${(x) => (x.allow ? 'allow' : 'block')}"
     >
       <mai-field label-position="after">
         <label slot="label">
@@ -39,8 +41,7 @@ const template = html<PopupBlockedFlyout>`
           slot="input"
           name="popup-permission"
           value="allow"
-          ?checked="${(x) => x.ps.permissions.popup.permission === 'allow'}"
-          @click="${(x) => (x._allow = true)}"
+          @click="${(x) => (x.allow = true)}"
         ></mai-radio>
       </mai-field>
       <mai-field label-position="after">
@@ -49,8 +50,7 @@ const template = html<PopupBlockedFlyout>`
           slot="input"
           name="popup-permission"
           value="block"
-          ?checked="${(x) => x.ps.permissions.popup.permission === 'block'}"
-          @click="${(x) => (x._allow = false)}"
+          @click="${(x) => (x.allow = false)}"
         ></mai-radio>
       </mai-field>
     </mai-radio-group>
@@ -64,12 +64,18 @@ export default class PopupBlockedFlyout extends FASTElement {
   @attr({ mode: 'boolean' }) open = false;
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
-  _allow = false;
+  @observable allow = false;
 
   connectedCallback(): void {
     super.connectedCallback();
     this.addEventListeners();
-    this._allow = this.ps.permissions.popup.permission === 'allow';
+    this.allow = this.ps.permissions.popup.permission === 'allow';
+  }
+
+  openChanged() {
+    if (!this.open) {
+      this.allow = this.ps.permissions.popup.permission === 'allow';
+    }
   }
 
   addEventListeners() {
@@ -88,7 +94,7 @@ export default class PopupBlockedFlyout extends FASTElement {
     });
 
     this.addEventListener('done', () => {
-      if (this._allow) {
+      if (this.allow) {
         this.ps.allowPopup();
       } else {
         this.ps.denyPopup();

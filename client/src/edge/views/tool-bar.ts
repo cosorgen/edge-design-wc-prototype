@@ -93,7 +93,7 @@ const template = html<Toolbar>`
         x.ps.permissions.popup.permission === 'block' &&
         x.ps.permissions.popup.state === 'active',
       html`
-        <flyout-menu slot="actions">
+        <flyout-menu slot="actions" popover-align-start>
           <popup-blocked-omnibox-action
             slot="trigger"
           ></popup-blocked-omnibox-action>

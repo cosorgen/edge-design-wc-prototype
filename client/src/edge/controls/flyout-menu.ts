@@ -55,6 +55,10 @@ const styles = css`
       overlay ${durationFast} ${curveDecelerateMax} 50ms allow-discrete;
   }
 
+  :host([popover-align-start]) [popover] {
+    position-area: block-end span-inline-start;
+  }
+
   [popover]:popover-open {
     transform: translateY(0px);
     opacity: 1;
@@ -69,6 +73,8 @@ const styles = css`
 @customElement({ name: 'flyout-menu', template, styles })
 export class FlyoutMenu extends FASTElement {
   @attr({ mode: 'boolean', attribute: 'initially-open' }) initOpen = false;
+  @attr({ mode: 'boolean', attribute: 'popover-align-start' }) alignStart =
+    false;
   _popoverElement: HTMLElement | null = null;
   _popoverSlottedElement: HTMLElement | null = null;
   _contextPopoverElement: HTMLElement | null = null;
@@ -234,7 +240,6 @@ export class FlyoutMenu extends FASTElement {
   }
 
   closeMenuListener = (e: Event) => {
-    console.log('closemenu');
     e.stopPropagation();
     this._popoverElement?.hidePopover();
     this._contextPopoverElement?.hidePopover();

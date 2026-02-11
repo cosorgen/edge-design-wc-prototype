@@ -152,6 +152,7 @@ const template = html<SiteInfoFlyout>`
                     .state === 'active',
               ),
             html`${(x) => permissionItemsByKey[x]}`,
+            { recycle: false }, // Disable recycling to ensure state is properly updated when permissions change  
           )}
           <div class="menu-item">
             <mai-button
