@@ -23,7 +23,7 @@ import {
 } from '@mai-ui/design-tokens/mai-tokens.js';
 import '@mai-ui/button/define.js';
 
-const template = html<MediaPrompt>`
+const template = html<PermissionMediaPrompt>`
   <div part="header">
     <div id="title">
       <slot name="title">x wants to</slot>
@@ -50,12 +50,14 @@ const template = html<MediaPrompt>`
   </div>
   <div part="footer">
     <mai-button @click="${(x) => x.$emit('allow')}">
-      Allow while visiting this site
+      ${(x) => (x.legacyLayout ? 'Allow' : 'Allow while visiting this site')}
     </mai-button>
     <mai-button @click="${(x) => x.$emit('allowOnce')}">
       Allow this time
     </mai-button>
-    <mai-button @click="${(x) => x.$emit('block')}"> Never allow </mai-button>
+    <mai-button @click="${(x) => x.$emit('block')}">
+      ${(x) => (x.legacyLayout ? 'Block' : 'Never allow')}
+    </mai-button>
   </div>
 `;
 
@@ -137,9 +139,23 @@ const styles = css`
       width: 100%;
     }
   }
+
+  :host([legacy-layout]) [part='footer'] {
+    flex-direction: row;
+    justify-content: flex-end;
+
+    mai-button {
+      width: auto;
+    }
+
+    mai-button:nth-of-type(2) {
+      display: none;
+    }
+  }
 `;
 
-@customElement({ name: 'media-prompt', template, styles })
-export default class MediaPrompt extends FASTElement {
+@customElement({ name: 'permission-media-prompt', template, styles })
+export default class PermissionMediaPrompt extends FASTElement {
   @attr({ attribute: 'has-cards', mode: 'boolean' }) hasCards = false;
+  @attr({ attribute: 'legacy-layout', mode: 'boolean' }) legacyLayout = false;
 }

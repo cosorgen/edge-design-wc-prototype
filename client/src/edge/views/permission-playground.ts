@@ -84,6 +84,17 @@ const template = html<PermissionPlayground>`
             ? 'blocked'
             : x.ps.permissions.location.state})
       </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.download.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestDownload()}"
+      >
+        Download multiple files
+        (${(x) =>
+          x.ps.permissions.download.permission === 'block'
+            ? 'blocked'
+            : x.ps.permissions.download.state})
+      </mai-button>
     </div>
   </div>
 `;

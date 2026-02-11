@@ -14,7 +14,7 @@ import EdgePermissionsService from '#servicespermissionsService.js';
 import CameraPermissionCard from '../controls/camera-permission-card.js';
 
 const template = html<CameraPermissionPrompt>`
-  <media-prompt has-cards>
+  <permission-media-prompt has-cards>
     <span slot="title">
       ${(x) => new URL(x.ts.tabsById[x.ts.activeTabId!].url).hostname} wants to
     </span>
@@ -25,7 +25,7 @@ const template = html<CameraPermissionPrompt>`
     <span slot="cards">
       <camera-permission-card></camera-permission-card>
     </span>
-  </media-prompt>
+  </permission-media-prompt>
 `;
 
 const styles = css``;

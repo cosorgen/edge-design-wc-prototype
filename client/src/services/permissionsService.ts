@@ -40,6 +40,11 @@ export default class EdgePermissionsService {
       state: 'inactive' as 'requested' | 'active' | 'inactive',
       default: 'ask' as 'allow' | 'block' | 'ask',
     },
+    download: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
+    },
   };
 
   permissionPriority = Object.keys(this.permissions);
@@ -338,6 +343,46 @@ export default class EdgePermissionsService {
     };
   }
 
+  requestDownload() {
+    if (this.permissions.download.permission === 'block') {
+      return;
+    }
+
+    if (this.permissions.download.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        download: { ...this.permissions.download, state: 'active' },
+      };
+      return;
+    }
+
+    this.permissions = {
+      ...this.permissions,
+      download: { ...this.permissions.download, state: 'requested' },
+    };
+  }
+
+  allowDownload() {
+    this.permissions = {
+      ...this.permissions,
+      download: {
+        ...this.permissions.download,
+        permission: 'allow',
+        state: 'active',
+      },
+    };
+  }
+
+  denyDownload() {
+    this.permissions = {
+      ...this.permissions,
+      download: {
+        ...this.permissions.download,
+        permission: 'block',
+      },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -376,6 +421,11 @@ export default class EdgePermissionsService {
       location: {
         ...this.permissions.location,
         permission: this.permissions.location.default,
+        state: 'inactive',
+      },
+      download: {
+        ...this.permissions.download,
+        permission: this.permissions.download.default,
         state: 'inactive',
       },
     };

@@ -99,12 +99,17 @@ const permissionItemsByKey: Record<
   popup: (permission) =>
     html`<site-info-permission-item
       type="popup"
-      ?checked="${permission.permission === 'allow'}"
+      ?checked="${permission.permission !== 'block'}"
     ></site-info-permission-item>`,
   location: (permission) =>
     html`<site-info-permission-item
       type="location"
-      ?checked="${permission.permission === 'allow'}"
+      ?checked="${permission.permission !== 'block'}"
+    ></site-info-permission-item>`,
+  download: (permission) =>
+    html`<site-info-permission-item
+      type="download"
+      ?checked="${permission.permission !== 'block'}"
     ></site-info-permission-item>`,
 };
 
@@ -369,6 +374,14 @@ export default class SiteInfoFlyout extends FASTElement {
           this.ps.denyLocationAccess();
         } else {
           this.ps.grantLocationAccess(true);
+        }
+        break;
+      }
+      case 'download': {
+        if (this.ps.permissions.download.permission !== 'block') {
+          this.ps.denyDownload();
+        } else {
+          this.ps.allowDownload();
         }
         break;
       }

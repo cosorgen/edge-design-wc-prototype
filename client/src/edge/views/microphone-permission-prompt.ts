@@ -14,7 +14,7 @@ import '../controls/microphone-permission-card.js';
 import MicrophonePermissionCard from '../controls/microphone-permission-card.js';
 
 const template = html<MicrophonePermissionPrompt>`
-  <media-prompt has-cards>
+  <permission-media-prompt has-cards>
     <span slot="title">
       ${(x) => new URL(x.ts.tabsById[x.ts.activeTabId!].url).hostname} wants to
     </span>
@@ -25,7 +25,7 @@ const template = html<MicrophonePermissionPrompt>`
     <span slot="cards">
       <microphone-permission-card></microphone-permission-card>
     </span>
-  </media-prompt>
+  </permission-media-prompt>
 `;
 
 const styles = css``;

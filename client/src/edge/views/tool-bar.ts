@@ -26,6 +26,7 @@ import '../controls/popup-blocked-omnibox-action.js';
 import './site-info-flyout.js';
 import './popup-blocked-flyout.js';
 import './location-permission-flyout.js';
+import './download-permission-flyout.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -40,13 +41,20 @@ import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
 
-const ignorePermissionsPrompts = ['usb', 'bluetooth', 'serial', 'popup'];
+const ignorePermissionsPrompts = [
+  'usb',
+  'bluetooth',
+  'serial',
+  'popup',
+  'download',
+];
 const ignorePermissionsStatus = [
   'usb',
   'bluetooth',
   'serial',
   'popup',
   'location',
+  'download',
 ];
 
 const template = html<Toolbar>`
@@ -126,6 +134,25 @@ const template = html<Toolbar>`
             />
           </svg>
           <location-permission-flyout></location-permission-flyout>
+        </omnibox-action-flyout>
+      `,
+    )}
+    ${when(
+      (x) =>
+        x.ps.permissions.download.state === 'active' ||
+        (x.ps.permissions.download.permission === 'block' &&
+          x.ps.permissions.download.state === 'requested'),
+      html`
+        <omnibox-action-flyout id="download" slot="actions">
+          <svg slot="trigger-content">
+            <use
+              href="img/edge/icons.svg#arrow-download-${(x) =>
+                x.ps.permissions.download.permission === 'block'
+                  ? 'off-'
+                  : ''}20-regular"
+            />
+          </svg>
+          <download-permission-flyout></download-permission-flyout>
         </omnibox-action-flyout>
       `,
     )}

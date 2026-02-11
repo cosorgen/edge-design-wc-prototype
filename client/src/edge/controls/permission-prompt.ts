@@ -42,6 +42,7 @@ import '../views/usb-permission-prompt.js';
 import '../views/bluetooth-permission-prompt.js';
 import '../views/serial-permission-prompt.js';
 import '../views/location-permission-prompt.js';
+import '../views/download-permission-prompt.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',
@@ -50,6 +51,7 @@ const labels: Record<string, string> = {
   bluetooth: '',
   serial: '',
   location: 'Use your location?',
+  download: '',
 };
 
 const iconIds: Record<string, string> = {
@@ -59,6 +61,7 @@ const iconIds: Record<string, string> = {
   bluetooth: 'lock-closed-20-regular',
   serial: 'lock-closed-20-regular',
   location: 'location-20-regular',
+  download: 'lock-closed-20-regular',
 };
 
 const prompts: Record<string, ViewTemplate> = {
@@ -68,6 +71,7 @@ const prompts: Record<string, ViewTemplate> = {
   bluetooth: html`<bluetooth-permission-prompt></bluetooth-permission-prompt>`,
   serial: html`<serial-permission-prompt></serial-permission-prompt>`,
   location: html`<location-permission-prompt></location-permission-prompt>`,
+  download: html`<download-permission-prompt></download-permission-prompt>`,
 };
 
 const template = html<PermissionPrompt>`
