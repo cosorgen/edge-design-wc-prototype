@@ -36,13 +36,16 @@ export default class CameraPermissionPrompt extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @observable camCard?: CameraPermissionCard;
+  _init = false;
 
   openChanged() {
     if (this.open) {
+      if (!this._init) this._init = true;
       this.camCard?.updateCameraList();
       this.camCard?.openCameraFeed();
-    } else {
+    } else if (this._init) {
       this.camCard?.closeCameraFeed();
+      this.ps.clearCameraRequest();
     }
   }
 

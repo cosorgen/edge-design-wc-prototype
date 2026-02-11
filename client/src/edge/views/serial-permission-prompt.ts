@@ -53,8 +53,16 @@ export default class SerialPermissionPrompt extends FASTElement {
     { name: 'Communications port', id: 'COM3' },
   ];
   @observable selectedId?: string;
+  _init = false;
 
-  openChanged() {}
+  openChanged() {
+    if (this.open) {
+      if (!this._init) this._init = true;
+    } else if (this._init) {
+      this.selectedId = undefined;
+      this.ps.clearSerialRequest();
+    }
+  }
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -84,11 +92,6 @@ export default class SerialPermissionPrompt extends FASTElement {
         return;
       }
       this.ps.grantSerialAccess(d);
-    });
-    this.addEventListener('closemenu', () => {
-      // clear request on close
-      this.selectedId = undefined;
-      this.ps.cancelSerialRequest();
     });
   }
 }

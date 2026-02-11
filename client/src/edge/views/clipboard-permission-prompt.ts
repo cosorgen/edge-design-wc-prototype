@@ -29,8 +29,15 @@ export default class ClipboardPermissionPrompt extends FASTElement {
   @attr({ mode: 'boolean' }) open = false;
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
+  _init = false;
 
-  openChanged() {}
+  openChanged() {
+    if (this.open && !this._init) {
+      this._init = true;
+    } else if (this._init) {
+      this.ps.clearClipboardRequest();
+    }
+  }
 
   connectedCallback(): void {
     super.connectedCallback();

@@ -36,13 +36,16 @@ export default class MicrophonePermissionPrompt extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
   @observable micCard?: MicrophonePermissionCard;
+  _init = false;
 
   openChanged() {
     if (this.open) {
+      if (!this._init) this._init = true;
       this.micCard?.updateMicList();
       this.micCard?.openMicFeed();
-    } else {
+    } else if (this._init) {
       this.micCard?.closeMicFeed();
+      this.ps.clearMicrophoneRequest();
     }
   }
 

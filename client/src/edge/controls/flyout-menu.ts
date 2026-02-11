@@ -260,12 +260,6 @@ export class FlyoutMenu extends FASTElement {
 
     this._open = e.newState === 'open';
 
-    this._triggerElement?.setAttribute(
-      'aria-pressed',
-      (this._open || this._contextOpen).toString(),
-    );
-    this._popoverSlottedElement?.setAttribute('open', this._open.toString());
-
     if (this._open || this._contextOpen) {
       // Listen for close events
       document.addEventListener('mouseup', this.documentClickHandler, {
@@ -288,10 +282,9 @@ export class FlyoutMenu extends FASTElement {
 
   transitionEndFlyoutHandler = (e: TransitionEvent) => {
     if (e.propertyName === 'opacity' && e.target === this._popoverElement) {
-      const isOpen = this._open || this._contextOpen;
-      const newState = isOpen ? 'open' : 'closed';
-      const oldState = !isOpen ? 'closed' : 'open';
-      this.dispatchEvent(new ToggleEvent('toggle', { newState, oldState }));
+      // Update the UI
+      this._triggerElement?.setAttribute('aria-pressed', this._open.toString());
+      this._popoverSlottedElement?.setAttribute('open', this._open.toString());
     }
   };
 
@@ -299,15 +292,6 @@ export class FlyoutMenu extends FASTElement {
     if (!(e instanceof ToggleEvent)) return;
 
     this._contextOpen = e.newState === 'open';
-
-    this._triggerElement?.setAttribute(
-      'aria-pressed',
-      (this._open || this._contextOpen).toString(),
-    );
-    this._contextPopoverSlottedElement?.setAttribute(
-      'open',
-      this._open.toString(),
-    );
 
     if (this._contextOpen || this._open) {
       // Listen for close events
@@ -334,10 +318,15 @@ export class FlyoutMenu extends FASTElement {
       e.propertyName === 'opacity' &&
       e.target === this._contextPopoverElement
     ) {
-      const isOpen = this._open || this._contextOpen;
-      const newState = isOpen ? 'open' : 'closed';
-      const oldState = !isOpen ? 'closed' : 'open';
-      this.dispatchEvent(new ToggleEvent('toggle', { newState, oldState }));
+      // Update the UI
+      this._triggerElement?.setAttribute(
+        'aria-pressed',
+        this._contextOpen.toString(),
+      );
+      this._contextPopoverSlottedElement?.setAttribute(
+        'open',
+        this._contextOpen.toString(),
+      );
     }
   };
 

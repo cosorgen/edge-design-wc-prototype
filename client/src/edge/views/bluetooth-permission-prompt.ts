@@ -58,8 +58,16 @@ export default class BluetoothPermissionPrompt extends FASTElement {
     { name: 'Phone', id: 'bt-device-5', icon: 'cell-data-5' },
   ];
   @observable selectedId?: string;
+  _init = false;
 
-  openChanged() {}
+  openChanged() {
+    if (this.open) {
+      if (!this._init) this._init = true;
+    } else if (this._init) {
+      this.selectedId = undefined;
+      this.ps.clearBluetoothRequest();
+    }
+  }
 
   connectedCallback(): void {
     super.connectedCallback();
@@ -89,11 +97,6 @@ export default class BluetoothPermissionPrompt extends FASTElement {
         return;
       }
       this.ps.grantBluetoothAccess(d);
-    });
-    this.addEventListener('closemenu', () => {
-      // clear request on close
-      this.selectedId = undefined;
-      this.ps.cancelBluetoothRequest();
     });
   }
 }

@@ -83,6 +83,17 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearCameraRequest() {
+    this.permissions = {
+      ...this.permissions,
+      camera: {
+        ...this.permissions.camera,
+        permission: this.permissions.camera.default,
+        state: 'inactive',
+      },
+    };
+  }
+
   grantCameraAccess(alwaysAllow = false) {
     this.permissions = {
       ...this.permissions,
@@ -120,6 +131,17 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearMicrophoneRequest() {
+    this.permissions = {
+      ...this.permissions,
+      microphone: {
+        ...this.permissions.microphone,
+        permission: this.permissions.microphone.default,
+        state: 'inactive',
+      },
+    };
+  }
+
   grantMicrophoneAccess(alwaysAllow = false) {
     this.permissions = {
       ...this.permissions,
@@ -142,6 +164,19 @@ export default class EdgePermissionsService {
     this.permissions = {
       ...this.permissions,
       usb: { ...this.permissions.usb, state: 'requested' },
+    };
+  }
+
+  clearUsbRequest() {
+    this.permissions = {
+      ...this.permissions,
+      usb: {
+        ...this.permissions.usb,
+        state:
+          this.permissions.usb.allowedDevices.length > 0
+            ? 'active'
+            : 'inactive',
+      },
     };
   }
 
@@ -192,6 +227,19 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearBluetoothRequest() {
+    this.permissions = {
+      ...this.permissions,
+      bluetooth: {
+        ...this.permissions.bluetooth,
+        state:
+          this.permissions.bluetooth.allowedDevices.length > 0
+            ? 'active'
+            : 'inactive',
+      },
+    };
+  }
+
   grantBluetoothAccess(device: { name: string; id: string; icon: string }) {
     this.permissions = {
       ...this.permissions,
@@ -201,19 +249,6 @@ export default class EdgePermissionsService {
         allowedDevices: Array.from(
           new Set([...this.permissions.bluetooth.allowedDevices, device]),
         ),
-      },
-    };
-  }
-
-  cancelBluetoothRequest() {
-    this.permissions = {
-      ...this.permissions,
-      bluetooth: {
-        ...this.permissions.bluetooth,
-        state:
-          this.permissions.bluetooth.allowedDevices.length > 0
-            ? 'active'
-            : 'inactive',
       },
     };
   }
@@ -239,6 +274,19 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearSerialRequest() {
+    this.permissions = {
+      ...this.permissions,
+      serial: {
+        ...this.permissions.serial,
+        state:
+          this.permissions.serial.allowedDevices.length > 0
+            ? 'active'
+            : 'inactive',
+      },
+    };
+  }
+
   grantSerialAccess(device: { name: string; id: string }) {
     this.permissions = {
       ...this.permissions,
@@ -248,19 +296,6 @@ export default class EdgePermissionsService {
         allowedDevices: Array.from(
           new Set([...this.permissions.serial.allowedDevices, device]),
         ),
-      },
-    };
-  }
-
-  cancelSerialRequest() {
-    this.permissions = {
-      ...this.permissions,
-      serial: {
-        ...this.permissions.serial,
-        state:
-          this.permissions.serial.allowedDevices.length > 0
-            ? 'active'
-            : 'inactive',
       },
     };
   }
@@ -340,6 +375,17 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearLocationRequest() {
+    this.permissions = {
+      ...this.permissions,
+      location: {
+        ...this.permissions.location,
+        permission: this.permissions.location.default,
+        state: 'inactive',
+      },
+    };
+  }
+
   grantLocationAccess(alwaysAllow = false) {
     this.permissions = {
       ...this.permissions,
@@ -374,6 +420,17 @@ export default class EdgePermissionsService {
     this.permissions = {
       ...this.permissions,
       download: { ...this.permissions.download, state: 'requested' },
+    };
+  }
+
+  clearDownloadRequest() {
+    this.permissions = {
+      ...this.permissions,
+      download: {
+        ...this.permissions.download,
+        permission: this.permissions.download.default,
+        state: 'inactive',
+      },
     };
   }
 
@@ -417,6 +474,17 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearMidiRequest() {
+    this.permissions = {
+      ...this.permissions,
+      midi: {
+        ...this.permissions.midi,
+        permission: this.permissions.midi.default,
+        state: 'inactive',
+      },
+    };
+  }
+
   grantMidiAccess() {
     this.permissions = {
       ...this.permissions,
@@ -457,6 +525,17 @@ export default class EdgePermissionsService {
     };
   }
 
+  clearClipboardRequest() {
+    this.permissions = {
+      ...this.permissions,
+      clipboard: {
+        ...this.permissions.clipboard,
+        permission: this.permissions.clipboard.default,
+        state: 'inactive',
+      },
+    };
+  }
+
   grantClipboardAccess() {
     this.permissions = {
       ...this.permissions,
@@ -494,6 +573,17 @@ export default class EdgePermissionsService {
     this.permissions = {
       ...this.permissions,
       notification: { ...this.permissions.notification, state: 'requested' },
+    };
+  }
+
+  clearNotificationRequest() {
+    this.permissions = {
+      ...this.permissions,
+      notification: {
+        ...this.permissions.notification,
+        permission: this.permissions.notification.default,
+        state: 'inactive',
+      },
     };
   }
 
