@@ -104,7 +104,7 @@ const styles = css`
     #message {
       display: flex;
       flex-direction: row;
-      align-items: center;
+      align-items: flex-start;
       gap: ${gapBetweenContentXSmall};
 
       ::slotted(svg) {

@@ -8,6 +8,7 @@ import {
 import { inject } from '@microsoft/fast-element/di.js';
 import { TabService } from '#servicestabService.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
+import '../controls/permission-media-prompt.js';
 
 const template = html<DownloadPermissionPrompt>`
   <permission-media-prompt legacy-layout>

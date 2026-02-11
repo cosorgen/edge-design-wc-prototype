@@ -43,6 +43,9 @@ import '../views/bluetooth-permission-prompt.js';
 import '../views/serial-permission-prompt.js';
 import '../views/location-permission-prompt.js';
 import '../views/download-permission-prompt.js';
+import '../views/midi-permission-prompt.js';
+import '../views/clipboard-permission-prompt.js';
+import '../views/notification-permission-prompt.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',
@@ -52,6 +55,9 @@ const labels: Record<string, string> = {
   serial: '',
   location: 'Use your location?',
   download: '',
+  midi: 'Control & reprogram MIDI devices?',
+  clipboard: 'Share clipboard?',
+  notification: 'Get notifications?',
 };
 
 const iconIds: Record<string, string> = {
@@ -62,6 +68,9 @@ const iconIds: Record<string, string> = {
   serial: 'lock-closed-20-regular',
   location: 'location-20-regular',
   download: 'lock-closed-20-regular',
+  midi: 'midi-20-regular',
+  clipboard: 'clipboard-20-regular',
+  notification: 'alert-20-regular',
 };
 
 const prompts: Record<string, ViewTemplate> = {
@@ -72,6 +81,9 @@ const prompts: Record<string, ViewTemplate> = {
   serial: html`<serial-permission-prompt></serial-permission-prompt>`,
   location: html`<location-permission-prompt></location-permission-prompt>`,
   download: html`<download-permission-prompt></download-permission-prompt>`,
+  midi: html`<midi-permission-prompt></midi-permission-prompt>`,
+  clipboard: html`<clipboard-permission-prompt></clipboard-permission-prompt>`,
+  notification: html`<notification-permission-prompt></notification-permission-prompt>`,
 };
 
 const template = html<PermissionPrompt>`
@@ -191,7 +203,17 @@ const styles = css`
 @customElement({ name: 'permission-prompt', template, styles })
 export class PermissionPrompt extends FASTElement {
   @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
-  @attr type: 'camera' | 'microphone' | 'usb' | 'location' = 'camera';
+  @attr type:
+    | 'camera'
+    | 'microphone'
+    | 'usb'
+    | 'bluetooth'
+    | 'serial'
+    | 'location'
+    | 'download'
+    | 'midi'
+    | 'clipboard'
+    | 'notification' = 'camera';
   @attr({ mode: 'boolean' }) ignore = false;
 
   connectedCallback(): void {

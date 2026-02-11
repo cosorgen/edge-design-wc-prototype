@@ -45,6 +45,21 @@ export default class EdgePermissionsService {
       state: 'inactive' as 'requested' | 'active' | 'inactive',
       default: 'ask' as 'allow' | 'block' | 'ask',
     },
+    midi: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
+    },
+    clipboard: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
+    },
+    notification: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
+    },
   };
 
   permissionPriority = Object.keys(this.permissions);
@@ -383,6 +398,126 @@ export default class EdgePermissionsService {
     };
   }
 
+  requestMidiAccess() {
+    if (this.permissions.midi.permission === 'block') {
+      return;
+    }
+
+    if (this.permissions.midi.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        midi: { ...this.permissions.midi, state: 'active' },
+      };
+      return;
+    }
+
+    this.permissions = {
+      ...this.permissions,
+      midi: { ...this.permissions.midi, state: 'requested' },
+    };
+  }
+
+  grantMidiAccess() {
+    this.permissions = {
+      ...this.permissions,
+      midi: {
+        ...this.permissions.midi,
+        permission: 'allow',
+        state: 'active',
+      },
+    };
+  }
+
+  denyMidiAccess() {
+    this.permissions = {
+      ...this.permissions,
+      midi: {
+        ...this.permissions.midi,
+        permission: 'block',
+      },
+    };
+  }
+
+  requestClipboardAccess() {
+    if (this.permissions.clipboard.permission === 'block') {
+      return;
+    }
+
+    if (this.permissions.clipboard.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        clipboard: { ...this.permissions.clipboard, state: 'active' },
+      };
+      return;
+    }
+
+    this.permissions = {
+      ...this.permissions,
+      clipboard: { ...this.permissions.clipboard, state: 'requested' },
+    };
+  }
+
+  grantClipboardAccess() {
+    this.permissions = {
+      ...this.permissions,
+      clipboard: {
+        ...this.permissions.clipboard,
+        permission: 'allow',
+        state: 'active',
+      },
+    };
+  }
+
+  denyClipboardAccess() {
+    this.permissions = {
+      ...this.permissions,
+      clipboard: {
+        ...this.permissions.clipboard,
+        permission: 'block',
+      },
+    };
+  }
+
+  requestNotificationAccess() {
+    if (this.permissions.notification.permission === 'block') {
+      return;
+    }
+
+    if (this.permissions.notification.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        notification: { ...this.permissions.notification, state: 'active' },
+      };
+      return;
+    }
+
+    this.permissions = {
+      ...this.permissions,
+      notification: { ...this.permissions.notification, state: 'requested' },
+    };
+  }
+
+  grantNotificationAccess() {
+    this.permissions = {
+      ...this.permissions,
+      notification: {
+        ...this.permissions.notification,
+        permission: 'allow',
+        state: 'active',
+      },
+    };
+  }
+
+  denyNotificationAccess() {
+    this.permissions = {
+      ...this.permissions,
+      notification: {
+        ...this.permissions.notification,
+        permission: 'block',
+      },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -426,6 +561,21 @@ export default class EdgePermissionsService {
       download: {
         ...this.permissions.download,
         permission: this.permissions.download.default,
+        state: 'inactive',
+      },
+      midi: {
+        ...this.permissions.midi,
+        permission: this.permissions.midi.default,
+        state: 'inactive',
+      },
+      clipboard: {
+        ...this.permissions.clipboard,
+        permission: this.permissions.clipboard.default,
+        state: 'inactive',
+      },
+      notification: {
+        ...this.permissions.notification,
+        permission: this.permissions.notification.default,
         state: 'inactive',
       },
     };

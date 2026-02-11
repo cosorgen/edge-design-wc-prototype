@@ -80,6 +80,21 @@ const iconIds: Record<string, Record<string, string>> = {
     ask: 'lock-closed-20-regular',
     block: 'lock-closed-20-regular',
   },
+  midi: {
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
+  },
+  clipboard: {
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
+  },
+  notification: {
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
+  },
 };
 
 const labels: Record<string, Record<string, string>> = {
@@ -119,6 +134,21 @@ const labels: Record<string, Record<string, string>> = {
     block: '',
   },
   download: {
+    allow: '',
+    ask: '',
+    block: '',
+  },
+  midi: {
+    allow: '',
+    ask: '',
+    block: '',
+  },
+  clipboard: {
+    allow: '',
+    ask: '',
+    block: '',
+  },
+  notification: {
     allow: '',
     ask: '',
     block: '',
@@ -242,7 +272,17 @@ const styles = css`
 @customElement({ name: 'permission-status', template, styles })
 export class PermissionStatus extends FASTElement {
   @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
-  @attr type: 'camera' | 'microphone' = 'camera';
+  @attr type:
+    | 'camera'
+    | 'microphone'
+    | 'usb'
+    | 'bluetooth'
+    | 'serial'
+    | 'location'
+    | 'download'
+    | 'midi'
+    | 'clipboard'
+    | 'notification' = 'camera';
   @attr permission: 'allow' | 'block' | 'ask' = 'ask';
   @attr({ mode: 'boolean' }) ignore = false;
 

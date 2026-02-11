@@ -95,6 +95,39 @@ const template = html<PermissionPlayground>`
             ? 'blocked'
             : x.ps.permissions.download.state})
       </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.midi.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestMidiAccess()}"
+      >
+        MIDI
+        (${(x) =>
+          x.ps.permissions.midi.permission === 'block'
+            ? 'blocked'
+            : x.ps.permissions.midi.state})
+      </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.clipboard.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestClipboardAccess()}"
+      >
+        Clipboard
+        (${(x) =>
+          x.ps.permissions.clipboard.permission === 'block'
+            ? 'blocked'
+            : x.ps.permissions.clipboard.state})
+      </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.notification.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestNotificationAccess()}"
+      >
+        Notification
+        (${(x) =>
+          x.ps.permissions.notification.permission === 'block'
+            ? 'blocked'
+            : x.ps.permissions.notification.state})
+      </mai-button>
     </div>
   </div>
 `;
@@ -135,6 +168,13 @@ const styles = css`
     flex-direction: column;
     gap: 16px;
     width: 100%;
+  }
+
+  #controls {
+    padding: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 `;
 

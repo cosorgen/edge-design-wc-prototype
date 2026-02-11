@@ -22,6 +22,9 @@ const labels = {
   popup: 'Pop-ups and redirects',
   location: 'Location',
   download: 'Automatic downloads',
+  midi: 'MIDI device control & reprogram',
+  clipboard: 'Clipboard',
+  notification: 'Notifications',
 };
 
 const icons = {
@@ -44,6 +47,18 @@ const icons = {
   download: {
     active: 'arrow-download-20-regular',
     inactive: 'arrow-download-off-20-regular',
+  },
+  midi: {
+    active: 'midi-20-regular',
+    inactive: 'placeholder-20-regular',
+  },
+  clipboard: {
+    active: 'clipboard-20-regular',
+    inactive: 'placeholder-20-regular',
+  },
+  notification: {
+    active: 'alert-20-regular',
+    inactive: 'alert-off-20-regular',
   },
 };
 
@@ -89,6 +104,13 @@ const styles = css`
 @customElement({ name: 'site-info-permission-item', template, styles })
 export default class SiteInfoPermissionItem extends FASTElement {
   @attr({ mode: 'boolean' }) checked = false;
-  @attr type: 'camera' | 'microphone' | 'popup' | 'location' | 'download' =
-    'camera';
+  @attr type:
+    | 'camera'
+    | 'microphone'
+    | 'popup'
+    | 'location'
+    | 'download'
+    | 'midi'
+    | 'clipboard'
+    | 'notification' = 'camera';
 }

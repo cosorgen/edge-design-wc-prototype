@@ -55,6 +55,9 @@ const ignorePermissionsStatus = [
   'popup',
   'location',
   'download',
+  'midi',
+  'clipboard',
+  'notification',
 ];
 
 const template = html<Toolbar>`

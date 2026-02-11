@@ -10,22 +10,22 @@ import { TabService } from '#servicestabService.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
 import '../controls/permission-media-prompt.js';
 
-const template = html<LocationPermissionPrompt>`
-  <permission-media-prompt>
+const template = html<MidiPermissionPrompt>`
+  <permission-media-prompt legacy-layout>
     <span slot="title">
       ${(x) => new URL(x.ts.tabsById[x.ts.activeTabId!].url).hostname} wants to
     </span>
     <svg>
-      <use href="img/edge/icons.svg#location-20-regular" />
+      <use href="img/edge/icons.svg#midi-20-regular" />
     </svg>
-    Know your location
+    Control & reprogram your MIDI devices
   </permission-media-prompt>
 `;
 
 const styles = css``;
 
-@customElement({ name: 'location-permission-prompt', template, styles })
-export default class LocationPermissionPrompt extends FASTElement {
+@customElement({ name: 'midi-permission-prompt', template, styles })
+export default class MidiPermissionPrompt extends FASTElement {
   @attr({ mode: 'boolean' }) open = false;
   @inject(TabService) ts!: TabService;
   @inject(EdgePermissionsService) ps!: EdgePermissionsService;
@@ -46,12 +46,9 @@ export default class LocationPermissionPrompt extends FASTElement {
       e.stopPropagation();
     });
 
-    this.addEventListener('allow', () => this.ps.grantLocationAccess(true));
-    this.addEventListener('allowOnce', () =>
-      this.ps.grantLocationAccess(false),
-    );
+    this.addEventListener('allow', () => this.ps.grantMidiAccess());
     this.addEventListener('block', () => {
-      this.ps.denyLocationAccess();
+      this.ps.denyMidiAccess();
     });
   }
 }

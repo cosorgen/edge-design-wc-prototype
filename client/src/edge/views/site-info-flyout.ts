@@ -111,6 +111,21 @@ const permissionItemsByKey: Record<
       type="download"
       ?checked="${permission.permission !== 'block'}"
     ></site-info-permission-item>`,
+  midi: (permission) =>
+    html`<site-info-permission-item
+      type="midi"
+      ?checked="${permission.permission !== 'block'}"
+    ></site-info-permission-item>`,
+  clipboard: (permission) =>
+    html`<site-info-permission-item
+      type="clipboard"
+      ?checked="${permission.permission !== 'block'}"
+    ></site-info-permission-item>`,
+  notification: (permission) =>
+    html`<site-info-permission-item
+      type="notification"
+      ?checked="${permission.permission !== 'block'}"
+    ></site-info-permission-item>`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -382,6 +397,30 @@ export default class SiteInfoFlyout extends FASTElement {
           this.ps.denyDownload();
         } else {
           this.ps.allowDownload();
+        }
+        break;
+      }
+      case 'midi': {
+        if (this.ps.permissions.midi.permission !== 'block') {
+          this.ps.denyMidiAccess();
+        } else {
+          this.ps.grantMidiAccess();
+        }
+        break;
+      }
+      case 'clipboard': {
+        if (this.ps.permissions.clipboard.permission !== 'block') {
+          this.ps.denyClipboardAccess();
+        } else {
+          this.ps.grantClipboardAccess();
+        }
+        break;
+      }
+      case 'notification': {
+        if (this.ps.permissions.notification.permission !== 'block') {
+          this.ps.denyNotificationAccess();
+        } else {
+          this.ps.grantNotificationAccess();
         }
         break;
       }
