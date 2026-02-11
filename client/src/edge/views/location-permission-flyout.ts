@@ -61,7 +61,14 @@ const template = html<LocationPermissionFlyout>`
   </permission-action-prompt>
 `;
 
-const styles = css``;
+const styles = css`
+  mai-field {
+    align-items: flex-start;
+  }
+  mai-radio {
+    margin-top: 6px;
+  }
+`;
 
 @customElement({ name: 'location-permission-flyout', template, styles })
 export default class LocationPermissionFlyout extends FASTElement {
@@ -97,7 +104,7 @@ export default class LocationPermissionFlyout extends FASTElement {
 
     this.addEventListener('done', () => {
       if (this.allow) {
-        this.ps.grantLocationAccess();
+        this.ps.grantLocationAccess(true);
       } else {
         this.ps.denyLocationAccess();
       }

@@ -13,8 +13,6 @@ import {
   strokeFlyout,
   textStyleDefaultHeaderWeight,
   gapBetweenContentXSmall,
-  backgroundLayerTertiary,
-  paddingContentXSmall,
   foregroundCtrlNeutralPrimaryRest,
 } from '@mai-ui/design-tokens/tokens.js';
 import {
@@ -45,7 +43,7 @@ const template = html<PermissionActionPrompt>`
       <slot>Permission message goes here</slot>
     </div>
     <div id="controls">
-      <slot name="controls">Media cards go here</slot>
+      <slot name="controls">Controls go here</slot>
     </div>
   </div>
   <div part="footer">
@@ -106,14 +104,6 @@ const styles = css`
         width: 20px;
         height: 20px;
       }
-    }
-
-    #card-container {
-      display: flex;
-      flex-direction: column;
-      gap: ${gapBetweenContentXSmall};
-      background: ${backgroundLayerTertiary};
-      padding: ${paddingContentXSmall};
     }
   }
 

@@ -57,7 +57,14 @@ const template = html<PopupBlockedFlyout>`
   </permission-action-prompt>
 `;
 
-const styles = css``;
+const styles = css`
+  mai-field {
+    align-items: flex-start;
+  }
+  mai-radio {
+    margin-top: 6px;
+  }
+`;
 
 @customElement({ name: 'popup-blocked-flyout', template, styles })
 export default class PopupBlockedFlyout extends FASTElement {

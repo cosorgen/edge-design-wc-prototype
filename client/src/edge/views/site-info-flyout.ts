@@ -7,6 +7,7 @@ import {
   repeat,
   when,
   ViewTemplate,
+  volatile,
 } from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
@@ -43,52 +44,68 @@ import EdgePermissionsService from '#servicespermissionsService.js';
 import '../controls/site-info-permission-item.js';
 import '../controls/site-info-permission-device.js';
 
-const permissionItemsByKey: Record<string, ViewTemplate> = {
-  camera: html`<site-info-permission-item
-    type="camera"
-    ?checked="${(x, c) => c.parent.ps.permissions.camera.state === 'active'}"
-  ></site-info-permission-item>`,
-  microphone: html`<site-info-permission-item
-    type="microphone"
-    ?checked="${(x, c) =>
-      c.parent.ps.permissions.microphone.state === 'active'}"
-  ></site-info-permission-item>`,
-  usb: html`${repeat(
-    (x, c) => c.parent.ps.permissions.usb.allowedDevices,
-    html`<site-info-permission-device
-      type="usb"
-      id="${(x) => x.id}"
-      deviceName="${(x) => x.name}"
-      deviceIcon="${(x) => x.icon}"
-    ></site-info-permission-device>`,
-  )}`,
-  bluetooth: html`${repeat(
-    (x, c) => c.parent.ps.permissions.bluetooth.allowedDevices,
-    html`<site-info-permission-device
-      type="bluetooth"
-      id="${(x) => x.id}"
-      deviceName="${(x) => x.name}"
-      deviceIcon="${(x) => x.icon}"
-    ></site-info-permission-device>`,
-  )}`,
-  serial: html`${repeat(
-    (x, c) => c.parent.ps.permissions.serial.allowedDevices,
-    html`<site-info-permission-device
-      type="serial"
-      id="${(x) => x.id}"
-      deviceName="${(x) => x.name}"
-      deviceIcon="serial-port"
-    ></site-info-permission-device>`,
-  )}`,
-  popup: html`<site-info-permission-item
-    type="popup"
-    ?checked="${(x, c) => c.parent.ps.permissions.popup.permission === 'allow'}"
-  ></site-info-permission-item>`,
-  location: html`<site-info-permission-item
-    type="location"
-    ?checked="${(x, c) =>
-      c.parent.ps.permissions.location.permission === 'allow'}"
-  ></site-info-permission-item>`,
+const permissionItemsByKey: Record<
+  string,
+  (permission: {
+    state?: string;
+    permission?: string;
+    allowedDevices?: Array<{
+      id: string;
+      name: string;
+      icon: string;
+    }>;
+  }) => ViewTemplate
+> = {
+  camera: (permission) =>
+    html`<site-info-permission-item
+      type="camera"
+      ?checked="${permission.state === 'active'}"
+    ></site-info-permission-item>`,
+  microphone: (permission) =>
+    html`<site-info-permission-item
+      type="microphone"
+      ?checked="${permission.state === 'active'}"
+    ></site-info-permission-item>`,
+  usb: (permission) =>
+    html`${repeat(
+      permission.allowedDevices!,
+      html`<site-info-permission-device
+        type="usb"
+        id="${(x) => x.id}"
+        deviceName="${(x) => x.name}"
+        deviceIcon="${(x) => x.icon}"
+      ></site-info-permission-device>`,
+    )}`,
+  bluetooth: (permission) =>
+    html`${repeat(
+      permission.allowedDevices!,
+      html`<site-info-permission-device
+        type="bluetooth"
+        id="${(x) => x.id}"
+        deviceName="${(x) => x.name}"
+        deviceIcon="${(x) => x.icon}"
+      ></site-info-permission-device>`,
+    )}`,
+  serial: (permission) =>
+    html`${repeat(
+      permission.allowedDevices!,
+      html`<site-info-permission-device
+        type="serial"
+        id="${(x) => x.id}"
+        deviceName="${(x) => x.name}"
+        deviceIcon="serial-port"
+      ></site-info-permission-device>`,
+    )}`,
+  popup: (permission) =>
+    html`<site-info-permission-item
+      type="popup"
+      ?checked="${permission.permission === 'allow'}"
+    ></site-info-permission-item>`,
+  location: (permission) =>
+    html`<site-info-permission-item
+      type="location"
+      ?checked="${permission.permission === 'allow'}"
+    ></site-info-permission-item>`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -134,30 +151,12 @@ const template = html<SiteInfoFlyout>`
     </div>
     <mai-divider appearance="subtle"></mai-divider>
     ${when(
-      (x) =>
-        x.ps.permissionPriority.some(
-          (key) =>
-            x.ps.permissions[key as keyof typeof x.ps.permissions]
-              .permission !==
-              x.ps.permissions[key as keyof typeof x.ps.permissions].default ||
-            x.ps.permissions[key as keyof typeof x.ps.permissions].state ===
-              'active',
-        ),
+      (x) => x.permissionsInFlyout.length > 0,
       html`<div class="menu-section">
           <div class="section-header">Permissions for this site</div>
           ${repeat(
-            (x) =>
-              x.ps.permissionPriority.filter(
-                (key) =>
-                  x.ps.permissions[key as keyof typeof x.ps.permissions]
-                    .permission !==
-                    x.ps.permissions[key as keyof typeof x.ps.permissions]
-                      .default ||
-                  x.ps.permissions[key as keyof typeof x.ps.permissions]
-                    .state === 'active',
-              ),
-            html`${(x) => permissionItemsByKey[x]}`,
-            { recycle: false }, // Disable recycling to ensure state is properly updated when permissions change
+            (x) => x.permissionsInFlyout,
+            html`${(x) => permissionItemsByKey[x.key](x.permission)}`,
           )}
           <div class="menu-item">
             <mai-button
@@ -304,6 +303,23 @@ export default class SiteInfoFlyout extends FASTElement {
       if (!(e instanceof CustomEvent)) return;
       this.togglePermission(e);
     });
+  }
+
+  @volatile
+  get permissionsInFlyout() {
+    return (
+      this.ps.permissionPriority as Array<keyof typeof this.ps.permissions>
+    )
+      .filter(
+        (key) =>
+          this.ps.permissions[key].permission !==
+            this.ps.permissions[key].default ||
+          this.ps.permissions[key].state === 'active',
+      )
+      .map((key) => ({
+        key,
+        permission: this.ps.permissions[key],
+      }));
   }
 
   togglePermission(e: CustomEvent) {
