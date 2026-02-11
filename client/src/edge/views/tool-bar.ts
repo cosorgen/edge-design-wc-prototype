@@ -27,6 +27,8 @@ import './site-info-flyout.js';
 import './popup-blocked-flyout.js';
 import './location-permission-flyout.js';
 import './download-permission-flyout.js';
+import './midi-permission-flyout.js';
+import './clipboard-permission-flyout.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -156,6 +158,44 @@ const template = html<Toolbar>`
             />
           </svg>
           <download-permission-flyout></download-permission-flyout>
+        </omnibox-action-flyout>
+      `,
+    )}
+    ${when(
+      (x) =>
+        x.ps.permissions.midi.state === 'active' ||
+        (x.ps.permissions.midi.permission === 'block' &&
+          x.ps.permissions.midi.state === 'requested'),
+      html`
+        <omnibox-action-flyout id="midi" slot="actions">
+          <svg slot="trigger-content">
+            <use
+              href="img/edge/icons.svg#${(x) =>
+                x.ps.permissions.midi.permission === 'block'
+                  ? 'placeholder'
+                  : 'midi'}-20-regular"
+            />
+          </svg>
+          <midi-permission-flyout></midi-permission-flyout>
+        </omnibox-action-flyout>
+      `,
+    )}
+    ${when(
+      (x) =>
+        x.ps.permissions.clipboard.state === 'active' ||
+        (x.ps.permissions.clipboard.permission === 'block' &&
+          x.ps.permissions.clipboard.state === 'requested'),
+      html`
+        <omnibox-action-flyout id="clipboard" slot="actions">
+          <svg slot="trigger-content">
+            <use
+              href="img/edge/icons.svg#${(x) =>
+                x.ps.permissions.clipboard.permission === 'block'
+                  ? 'placeholder'
+                  : 'clipboard'}-20-regular"
+            />
+          </svg>
+          <clipboard-permission-flyout></clipboard-permission-flyout>
         </omnibox-action-flyout>
       `,
     )}
