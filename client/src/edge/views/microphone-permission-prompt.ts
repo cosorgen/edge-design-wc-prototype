@@ -14,7 +14,7 @@ import '../controls/microphone-permission-card.js';
 import MicrophonePermissionCard from '../controls/microphone-permission-card.js';
 
 const template = html<MicrophonePermissionPrompt>`
-  <media-prompt>
+  <media-prompt has-cards>
     <span slot="title">
       ${(x) => new URL(x.ts.tabsById[x.ts.activeTabId!].url).hostname} wants to
     </span>

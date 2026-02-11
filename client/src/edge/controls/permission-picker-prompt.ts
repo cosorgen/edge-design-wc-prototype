@@ -31,17 +31,19 @@ const template = html<PermissionPickerPrompt>`
     <div id="title">
       <slot name="title">x wants to</slot>
     </div>
-    <mai-button
-      appearance="subtle"
-      @click="${(x) => {
-        x.$emit('closemenu');
-      }}"
-      icon-only
-    >
-      <svg>
-        <use href="img/edge/icons.svg#dismiss-20-regular" />
-      </svg>
-    </mai-button>
+    <div id="actions">
+      <mai-button
+        appearance="subtle"
+        @click="${(x) => {
+          x.$emit('closemenu');
+        }}"
+        icon-only
+      >
+        <svg>
+          <use href="img/edge/icons.svg#dismiss-20-regular" />
+        </svg>
+      </mai-button>
+    </div>
   </div>
   <div part="body">
     <div id="container">
@@ -106,6 +108,13 @@ const styles = css`
       flex: 1;
       font-weight: ${textStyleDefaultHeaderWeight};
       text-wrap: pretty;
+    }
+
+    #actions {
+      height: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
     }
   }
 

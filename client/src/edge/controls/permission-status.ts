@@ -70,6 +70,11 @@ const iconIds: Record<string, Record<string, string>> = {
     ask: 'lock-closed-20-regular',
     block: 'lock-closed-20-regular',
   },
+  location: {
+    allow: 'lock-closed-20-regular',
+    ask: 'lock-closed-20-regular',
+    block: 'lock-closed-20-regular',
+  },
 };
 
 const labels: Record<string, Record<string, string>> = {
@@ -99,6 +104,11 @@ const labels: Record<string, Record<string, string>> = {
     block: '',
   },
   popup: {
+    allow: '',
+    ask: '',
+    block: '',
+  },
+  location: {
     allow: '',
     ask: '',
     block: '',

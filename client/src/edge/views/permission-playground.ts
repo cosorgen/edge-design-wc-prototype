@@ -73,6 +73,17 @@ const template = html<PermissionPlayground>`
             : x.ps.permissions.serial.state})
       </mai-button>
       <mai-button @click="${(x) => x.ps.openPopup()}"> Popup </mai-button>
+      <mai-button
+        aria-pressed="${(x) =>
+          x.ps.permissions.location.state === 'active' ? 'true' : 'false'}"
+        @click="${(x) => x.ps.requestLocationAccess()}"
+      >
+        Location
+        (${(x) =>
+          x.ps.permissions.location.permission === 'block'
+            ? 'blocked'
+            : x.ps.permissions.location.state})
+      </mai-button>
     </div>
   </div>
 `;

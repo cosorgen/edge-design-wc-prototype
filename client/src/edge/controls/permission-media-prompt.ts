@@ -1,4 +1,10 @@
-import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  css,
+  html,
+  attr,
+} from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,
@@ -22,25 +28,25 @@ const template = html<MediaPrompt>`
     <div id="title">
       <slot name="title">x wants to</slot>
     </div>
-    <mai-button
-      appearance="subtle"
-      @click="${(x) => {
-        x.$emit('closemenu');
-      }}"
-      icon-only
-    >
-      <svg>
-        <use href="img/edge/icons.svg#dismiss-20-regular" />
-      </svg>
-    </mai-button>
+    <div id="actions">
+      <mai-button
+        appearance="subtle"
+        @click="${(x) => {
+          x.$emit('closemenu');
+        }}"
+        icon-only
+      >
+        <svg>
+          <use href="img/edge/icons.svg#dismiss-20-regular" />
+        </svg>
+      </mai-button>
+    </div>
   </div>
   <div part="body">
     <div id="message">
       <slot>Permission message goes here</slot>
     </div>
-    <div id="card-container">
-      <slot name="cards">Media cards go here</slot>
-    </div>
+    <slot name="cards">Media cards go here</slot>
   </div>
   <div part="footer">
     <mai-button @click="${(x) => x.$emit('allow')}">
@@ -79,6 +85,13 @@ const styles = css`
       font-weight: ${textStyleDefaultHeaderWeight};
       text-wrap: pretty;
     }
+
+    #actions {
+      height: stretch;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+    }
   }
 
   [part='body'] {
@@ -98,13 +111,18 @@ const styles = css`
       }
     }
 
-    #card-container {
-      display: flex;
+    [name='cards'] {
+      display: none;
       flex-direction: column;
       gap: ${gapBetweenContentXSmall};
       background: ${backgroundLayerTertiary};
       padding: ${paddingContentXSmall};
+      border-radius: ${cornerFlyoutRest};
     }
+  }
+
+  :host([has-cards]) [name='cards'] {
+    display: flex;
   }
 
   [part='footer'] {
@@ -122,4 +140,6 @@ const styles = css`
 `;
 
 @customElement({ name: 'media-prompt', template, styles })
-export default class MediaPrompt extends FASTElement {}
+export default class MediaPrompt extends FASTElement {
+  @attr({ attribute: 'has-cards', mode: 'boolean' }) hasCards = false;
+}

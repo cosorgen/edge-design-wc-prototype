@@ -41,6 +41,7 @@ import '../views/microphone-permission-prompt.js';
 import '../views/usb-permission-prompt.js';
 import '../views/bluetooth-permission-prompt.js';
 import '../views/serial-permission-prompt.js';
+import '../views/location-permission-prompt.js';
 
 const labels: Record<string, string> = {
   camera: 'Use camera?',
@@ -48,6 +49,7 @@ const labels: Record<string, string> = {
   usb: '',
   bluetooth: '',
   serial: '',
+  location: 'Use your location?',
 };
 
 const iconIds: Record<string, string> = {
@@ -56,6 +58,7 @@ const iconIds: Record<string, string> = {
   usb: 'lock-closed-20-regular',
   bluetooth: 'lock-closed-20-regular',
   serial: 'lock-closed-20-regular',
+  location: 'location-20-regular',
 };
 
 const prompts: Record<string, ViewTemplate> = {
@@ -64,6 +67,7 @@ const prompts: Record<string, ViewTemplate> = {
   usb: html`<usb-permission-prompt></usb-permission-prompt>`,
   bluetooth: html`<bluetooth-permission-prompt></bluetooth-permission-prompt>`,
   serial: html`<serial-permission-prompt></serial-permission-prompt>`,
+  location: html`<location-permission-prompt></location-permission-prompt>`,
 };
 
 const template = html<PermissionPrompt>`
@@ -183,7 +187,7 @@ const styles = css`
 @customElement({ name: 'permission-prompt', template, styles })
 export class PermissionPrompt extends FASTElement {
   @attr({ attribute: 'aria-expanded' }) ariaExpanded = 'false';
-  @attr type: 'camera' | 'microphone' | 'usb' = 'camera';
+  @attr type: 'camera' | 'microphone' | 'usb' | 'location' = 'camera';
   @attr({ mode: 'boolean' }) ignore = false;
 
   connectedCallback(): void {

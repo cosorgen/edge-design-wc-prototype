@@ -25,6 +25,7 @@ import '../controls/permission-status.js';
 import '../controls/popup-blocked-omnibox-action.js';
 import './site-info-flyout.js';
 import './popup-blocked-flyout.js';
+import './location-permission-flyout.js';
 import { TabService } from '#servicestabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -39,7 +40,14 @@ import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
 import EdgePermissionsService from '#servicespermissionsService.js';
 
-const ignorePermissions = ['usb', 'bluetooth', 'serial', 'popup'];
+const ignorePermissionsPrompts = ['usb', 'bluetooth', 'serial', 'popup'];
+const ignorePermissionsStatus = [
+  'usb',
+  'bluetooth',
+  'serial',
+  'popup',
+  'location',
+];
 
 const template = html<Toolbar>`
   <div class="group">
@@ -69,7 +77,8 @@ const template = html<Toolbar>`
         <permission-prompt
           slot="status"
           type="${(x) => x.permissionPromptType}"
-          ?ignore="${(x) => ignorePermissions.includes(x.permissionPromptType)}"
+          ?ignore="${(x) =>
+            ignorePermissionsPrompts.includes(x.permissionPromptType)}"
         ></permission-prompt>
       `,
       html`${when(
@@ -81,7 +90,7 @@ const template = html<Toolbar>`
               type="${(x) => x.permissionStatusType}"
               permission="${(x) => x.permissionValue}"
               ?ignore="${(x) =>
-                ignorePermissions.includes(x.permissionStatusType)}"
+                ignorePermissionsStatus.includes(x.permissionStatusType)}"
             ></permission-status>
             <site-info-flyout></site-info-flyout>
           </flyout-menu>
@@ -99,6 +108,25 @@ const template = html<Toolbar>`
           ></popup-blocked-omnibox-action>
           <popup-blocked-flyout></popup-blocked-flyout>
         </flyout-menu>
+      `,
+    )}
+    ${when(
+      (x) =>
+        x.ps.permissions.location.state === 'active' ||
+        (x.ps.permissions.location.permission === 'block' &&
+          x.ps.permissions.location.state === 'requested'),
+      html`
+        <omnibox-action-flyout id="location" slot="actions">
+          <svg slot="trigger-content">
+            <use
+              href="img/edge/icons.svg#location-${(x) =>
+                x.ps.permissions.location.permission === 'block'
+                  ? 'off-'
+                  : ''}20-regular"
+            />
+          </svg>
+          <location-permission-flyout></location-permission-flyout>
+        </omnibox-action-flyout>
       `,
     )}
     ${when(

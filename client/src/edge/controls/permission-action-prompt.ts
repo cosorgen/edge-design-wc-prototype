@@ -1,4 +1,10 @@
-import { FASTElement, customElement, css, html } from '@microsoft/fast-element';
+import {
+  FASTElement,
+  customElement,
+  css,
+  html,
+  attr,
+} from '@microsoft/fast-element';
 import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,
@@ -111,6 +117,10 @@ const styles = css`
     }
   }
 
+  :host([no-message]) [part='body'] #message {
+    display: none;
+  }
+
   [part='footer'] {
     display: flex;
     flex-direction: row;
@@ -122,4 +132,6 @@ const styles = css`
 `;
 
 @customElement({ name: 'permission-action-prompt', template, styles })
-export default class PermissionActionPrompt extends FASTElement {}
+export default class PermissionActionPrompt extends FASTElement {
+  @attr({ mode: 'boolean', attribute: 'no-message' }) noMessage = false;
+}

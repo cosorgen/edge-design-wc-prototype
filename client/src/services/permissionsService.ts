@@ -35,6 +35,11 @@ export default class EdgePermissionsService {
       state: 'inactive' as 'inactive' | 'active',
       default: 'block' as 'block' | 'allow',
     },
+    location: {
+      permission: 'ask' as 'allow' | 'block' | 'ask',
+      state: 'inactive' as 'requested' | 'active' | 'inactive',
+      default: 'ask' as 'allow' | 'block' | 'ask',
+    },
   };
 
   permissionPriority = Object.keys(this.permissions);
@@ -296,6 +301,43 @@ export default class EdgePermissionsService {
     };
   }
 
+  requestLocationAccess() {
+    if (this.permissions.location.permission === 'block') {
+      return;
+    }
+
+    if (this.permissions.location.permission === 'allow') {
+      this.permissions = {
+        ...this.permissions,
+        location: { ...this.permissions.location, state: 'active' },
+      };
+      return;
+    }
+
+    this.permissions = {
+      ...this.permissions,
+      location: { ...this.permissions.location, state: 'requested' },
+    };
+  }
+
+  grantLocationAccess(alwaysAllow = false) {
+    this.permissions = {
+      ...this.permissions,
+      location: {
+        ...this.permissions.location,
+        permission: alwaysAllow ? 'allow' : 'ask',
+        state: 'active',
+      },
+    };
+  }
+
+  denyLocationAccess() {
+    this.permissions = {
+      ...this.permissions,
+      location: { ...this.permissions.location, permission: 'block' },
+    };
+  }
+
   resetPermissions() {
     this.permissions = {
       camera: {
@@ -330,6 +372,11 @@ export default class EdgePermissionsService {
         ...this.permissions.popup,
         state: 'inactive',
         permission: this.permissions.popup.default,
+      },
+      location: {
+        ...this.permissions.location,
+        permission: this.permissions.location.default,
+        state: 'inactive',
       },
     };
   }

@@ -20,6 +20,7 @@ const labels = {
   camera: 'Camera',
   microphone: 'Microphone',
   popup: 'Pop-ups and redirects',
+  location: 'Location',
 };
 
 const icons = {
@@ -34,6 +35,10 @@ const icons = {
   popup: {
     active: 'open-20-regular',
     inactive: 'open-off-20-regular',
+  },
+  location: {
+    active: 'location-20-regular',
+    inactive: 'location-off-20-regular',
   },
 };
 
@@ -79,5 +84,5 @@ const styles = css`
 @customElement({ name: 'site-info-permission-item', template, styles })
 export default class SiteInfoPermissionItem extends FASTElement {
   @attr({ mode: 'boolean' }) checked = false;
-  @attr type: 'camera' | 'microphone' | 'popup' = 'camera';
+  @attr type: 'camera' | 'microphone' | 'popup' | 'location' = 'camera';
 }

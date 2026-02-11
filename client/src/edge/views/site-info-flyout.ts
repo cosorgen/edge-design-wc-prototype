@@ -84,6 +84,11 @@ const permissionItemsByKey: Record<string, ViewTemplate> = {
     type="popup"
     ?checked="${(x, c) => c.parent.ps.permissions.popup.permission === 'allow'}"
   ></site-info-permission-item>`,
+  location: html`<site-info-permission-item
+    type="location"
+    ?checked="${(x, c) =>
+      c.parent.ps.permissions.location.permission === 'allow'}"
+  ></site-info-permission-item>`,
 };
 
 const template = html<SiteInfoFlyout>`
@@ -152,7 +157,7 @@ const template = html<SiteInfoFlyout>`
                     .state === 'active',
               ),
             html`${(x) => permissionItemsByKey[x]}`,
-            { recycle: false }, // Disable recycling to ensure state is properly updated when permissions change  
+            { recycle: false }, // Disable recycling to ensure state is properly updated when permissions change
           )}
           <div class="menu-item">
             <mai-button
@@ -340,6 +345,14 @@ export default class SiteInfoFlyout extends FASTElement {
           this.ps.denyPopup();
         } else {
           this.ps.allowPopup();
+        }
+        break;
+      }
+      case 'location': {
+        if (this.ps.permissions.location.permission !== 'block') {
+          this.ps.denyLocationAccess();
+        } else {
+          this.ps.grantLocationAccess(true);
         }
         break;
       }
