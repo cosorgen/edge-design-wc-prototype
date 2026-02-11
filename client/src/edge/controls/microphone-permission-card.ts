@@ -5,6 +5,7 @@ import {
   html,
   observable,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import {
   gapBetweenContentXSmall,
@@ -35,13 +36,17 @@ const template = html<MicrophonePermissionCard>`
   </div>
   <mai-dropdown>
     <mai-listbox>
-      ${repeat(
-        (x) => x.mics,
-        html`<mai-option
-          selected="${(x, c) => x.deviceId === c.parent.mics[0].deviceId}"
-        >
-          ${(x, c) => x.label || `Microphone ${c.index + 1}`}
-        </mai-option>`,
+      ${when(
+        (x) => x.mics.length === 0,
+        html`<mai-option disabled>No microphones found</mai-option>`,
+        html`${repeat(
+          (x) => x.mics,
+          html`<mai-option
+            selected="${(x, c) => x.deviceId === c.parent.mics[0].deviceId}"
+          >
+            ${(x, c) => x.label || `Microphone ${c.index + 1}`}
+          </mai-option>`,
+        )}`,
       )}
     </mai-listbox>
   </mai-dropdown>

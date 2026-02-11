@@ -5,6 +5,7 @@ import {
   html,
   observable,
   repeat,
+  when,
 } from '@microsoft/fast-element';
 import {
   gapBetweenContentXSmall,
@@ -25,25 +26,31 @@ import '@mai-ui/spinner/define.js';
 
 const template = html<CameraPermissionCard>`
   <div class="camera-preview">
-    <video>
-      <mai-spinner></mai-spinner>
-    </video>
-    <mai-badge appearance="onImage">
-      <svg slot="start">
-        <use href="img/edge/icons.svg#video-16-filled" />
-      </svg>
-      Preview
-    </mai-badge>
+    ${when(
+      (x) => x.cams.length === 0,
+      html`<mai-spinner></mai-spinner>`,
+      html`<video></video>
+        <mai-badge appearance="onImage">
+          <svg slot="start">
+            <use href="img/edge/icons.svg#video-16-filled" />
+          </svg>
+          Preview
+        </mai-badge>`,
+    )}
   </div>
   <mai-dropdown>
     <mai-listbox>
-      ${repeat(
-        (x) => x.cams,
-        html`<mai-option
-          selected="${(x, c) => x.deviceId === c.parent.cams[0].deviceId}"
-        >
-          ${(x, c) => x.label || `Camera ${c.index + 1}`}
-        </mai-option>`,
+      ${when(
+        (x) => x.cams.length === 0,
+        html`<mai-option disabled>No cameras found</mai-option>`,
+        html`${repeat(
+          (x) => x.cams,
+          html`<mai-option
+            selected="${(x, c) => x.deviceId === c.parent.cams[0].deviceId}"
+          >
+            ${(x, c) => x.label || `Camera ${c.index + 1}`}
+          </mai-option>`,
+        )}`,
       )}
     </mai-listbox>
   </mai-dropdown>
@@ -73,6 +80,7 @@ const styles = css`
     overflow: hidden;
     border-radius: ${cornerCtrlRest};
     line-height: 0;
+    min-height: 100px;
 
     video {
       width: 100%;
@@ -83,6 +91,13 @@ const styles = css`
       position: absolute;
       top: ${gapBetweenContentXSmall};
       right: ${gapBetweenContentXSmall};
+    }
+
+    mai-spinner {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 `;
