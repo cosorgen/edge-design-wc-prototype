@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "strict": true, // Security Needed.
+    "target": "esnext", // Latest JS Standard.
+    "module": "nodenext", // ESModules support.
+    "moduleResolution": "nodenext", // NodeJS module resolution.
+    "experimentalDecorators": true, // To support FAST decorators.
+    "useDefineForClassFields": false, // To support FAST observables.
+    "skipLibCheck": true, // TypeScript 5 feature to disable node_modules typecheck.
+    "allowSyntheticDefaultImports": true, // For supporting default imports.
+    "isolatedModules": true, // Avoid mis-compilation with features like re-exporting types.
+    "esModuleInterop": true, // Make type system compatible with ESM imports.
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing in filenames
+    "resolveJsonModule": true, // To support importing JSON files.
+    "outDir": "dist" // Output directory for compiled files.
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
+}

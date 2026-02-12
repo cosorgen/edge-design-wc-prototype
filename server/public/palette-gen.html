@@ -1,0 +1,84 @@
+<script type="module">
+  import { Contrast, argbFromHex } from 'https://cdn.jsdelivr.net/npm/@material/material-color-utilities@0.3.0/+esm';
+  function FormatTitle(title) {
+    return title.split(/(?=[A-Z])/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+      .replace(/([a-z])([A-Z])/g, '$1 $2');
+  }
+
+  // Convert ARGB to relative luminance
+  function relativeLuminance(argb) {
+    const r = ((argb >> 16) & 0xff) / 255;
+    const g = ((argb >> 8) & 0xff) / 255;
+    const b = (argb & 0xff) / 255;
+
+    const toLinear = (c) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4));
+
+    return 0.2126 * toLinear(r) + 0.7152 * toLinear(g) + 0.0722 * toLinear(b);
+  }
+
+  // Calculate contrast ratio
+  function contrastRatio(color1, color2) {
+    const lum1 = relativeLuminance(color1);
+    const lum2 = relativeLuminance(color2);
+
+    const brightest = Math.max(lum1, lum2);
+    const darkest = Math.min(lum1, lum2);
+
+    return (brightest + 0.05) / (darkest + 0.05);
+  }
+
+  // { scheme: { use: { tone: color, } } }
+  const defaultColor = '#ff0000';
+  const colorInput = document.getElementById('color');
+  colorInput.addEventListener('change', (event) => {
+    const color = event.target.value;
+    const hexColor = color.replace('#', '');
+    render(hexColor);
+  });
+
+  async function render(hexColor) {
+    const palette = await fetch(`/api/palette-gen?seed=${hexColor}`)
+      .then(response => response.json())
+      .catch(error => {
+        console.error('Error fetching palette:', error);
+        return null;
+      });
+    if (palette) {
+      const root = document.querySelector('.root');
+      root.innerHTML = Object.entries(palette).map(([scheme, uses]) => /* html */ `
+<table>
+  <thead>
+    <tr>
+      ${Object.keys(uses).map(use => /* html */` <th>${FormatTitle(scheme)} ${FormatTitle(use)}</th> `).join('')}
+    </tr>
+  </thead>
+  <tbody>
+    ${Object.keys(uses[Object.keys(uses)[0]]).map((tone) => /* html */ `
+    <tr>
+      ${Object.keys(uses).map((use) => /* html */ `
+      <td style="background-color: ${uses[use][tone]}; color: ${parseInt(tone) > 50 ? 'black' : 'white'};">
+        <div>
+          <div>${tone}</div>
+          <div>${(uses[use][tone] || '').toUpperCase()}</div>
+          <div>
+      </td>
+      `).join('')}
+    </tr>
+    `).join('')}
+  </tbody>
+</table>
+`).join('');
+    } else {
+      document.querySelector('.root').innerHTML = '<p>Error loading palette.</p>';
+    }
+  }
+
+  colorInput.value = defaultColor;
+  colorInput.dispatchEvent(new Event('change'));
+</script>
+</head>
+<label>Seed color:</label>
+<input type="color" id="color" />
+<div class="root"></div>
