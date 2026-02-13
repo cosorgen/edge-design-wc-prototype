@@ -17,7 +17,7 @@ export type BingSuggestion = {
 };
 
 export type EdgeSuggestion = {
-  type: string;
+  type: 'search' | 'entity';
   title: string;
   value: string;
   entityImage?: string;

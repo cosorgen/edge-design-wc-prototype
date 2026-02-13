@@ -1,9 +1,9 @@
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '#serviceswindowsService.js';
-import { TabService } from '#servicestabService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsService from '#services/settingsService.js';
+import WindowsService from '#services/windowsService.js';
+import { TabService } from '#services/tabService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import EdgeSettingsService from '#services//settingsService.js';
 import {
   colorShellFillCaptionControlPrimaryHover,
   colorShellFillCaptionControlPrimaryPressed,
@@ -79,7 +79,9 @@ const template = html` <div
     @click="${(x) => x.maximizeWindow()}"
   >
     <svg>
-      <use x="2" y="2"
+      <use
+        x="2"
+        y="2"
         href="${(x) =>
           x.windowIsMaximized()
             ? 'img/edge/icons.svg#chrome-restore-20-regular'
@@ -95,7 +97,7 @@ const template = html` <div
     id="close"
   >
     <svg>
-      <use  x="2" y="2" href="img/edge/icons.svg#chrome-close-20-regular" />
+      <use x="2" y="2" href="img/edge/icons.svg#chrome-close-20-regular" />
     </svg>
   </mai-button>`;
 
@@ -110,7 +112,7 @@ const styles = css`
     position: absolute;
     inset-inline-end: max(
       /* equal spacing top and right */
-        calc((var(--caption-controls-height) - 40px) / 2),
+      calc((var(--caption-controls-height) - 40px) / 2),
       0px
     );
     inset-block-start: 0;

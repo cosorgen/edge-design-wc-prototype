@@ -1,6 +1,6 @@
 import { FASTElement, css, customElement, html } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import PrototypeService from '#services/prototypeService.js';
+import PrototypeService from '#services//prototypeService.js';
 import './windows';
 
 const template = html` ${(x: AppRoot) =>

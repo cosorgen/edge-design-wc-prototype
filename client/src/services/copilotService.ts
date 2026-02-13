@@ -1,4 +1,4 @@
-import { Tab } from '#servicestabService.js';
+import { Tab } from '#services/tabService.js';
 import { observable } from '@microsoft/fast-element';
 
 export type Message = {

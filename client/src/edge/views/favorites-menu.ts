@@ -13,9 +13,9 @@ import { inject } from '@microsoft/fast-element/di.js';
 import FavoritesService, {
   Favorite,
   FavoriteFolder,
-} from '#services/favoritesService.js';
-import { TabService } from '#services/tabService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+} from '#services//favoritesService.js';
+import { TabService } from '#services//tabService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
 import '../controls/favorites-item.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';

@@ -1,4 +1,4 @@
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
 import {
   css,
   FASTElement,

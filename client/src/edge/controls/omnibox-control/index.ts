@@ -3,7 +3,7 @@ import { customElement } from '@microsoft/fast-element';
 import { styles } from './styles.js';
 import { template } from './template.js';
 import { attr, FASTElement, observable } from '@microsoft/fast-element';
-import { Suggestion } from '#servicesautoSuggestService.js';
+import { Suggestion } from '#services/autoSuggestService.js';
 import { OmniboxDropdown } from '../omnibox-dropdown.js';
 
 const mod = (n: number, m: number) => ((n % m) + m) % m; // handle negative indexes

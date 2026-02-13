@@ -10,9 +10,9 @@ import {
   copilotDarkTheme,
 } from '@edge-design/copilot-theme';
 import { setThemeFor } from '@edge-design/utilities';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import WindowsService from '#serviceswindowsService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
+import WindowsService from '#services/windowsService.js';
 
 const template = html` <slot></slot> `;
 

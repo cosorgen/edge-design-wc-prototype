@@ -14,9 +14,9 @@ import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';
 import './palette-playground.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import { TabService } from '#servicestabService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
+import { TabService } from '#services/tabService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 import {
   cornerLayerDefault,
   shadowLayerAmbient,
