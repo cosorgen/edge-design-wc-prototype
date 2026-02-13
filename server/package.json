@@ -1,17 +1,9 @@
 {
-  "name": "edge-ux-server",
+  "name": "@edge-design/server",
   "version": "1.0.4",
   "description": "Edge UX prototype server",
   "main": "dist/index.js",
-  "scripts": {
-    "dev": "node scripts/dev.mjs",
-    "build": "node scripts/build.mjs",
-    "clean": "node scripts/clean.mjs",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "prettier": "prettier --check .",
-    "prettier:fix": "prettier --write ."
-  },
+  "scripts": {},
   "author": "Cody Sorgenfrey",
   "license": "ISC",
   "devDependencies": {

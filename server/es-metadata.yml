@@ -1,8 +1,0 @@
-schemaVersion: 0.0.1
-isProduction: false
-accountableOwners:
-  service: c4e69aa4-94f4-48d3-8531-302301433fcd
-routing:
-  defaultAreaPath:
-    org: microsoftdesign
-    path: edge-design

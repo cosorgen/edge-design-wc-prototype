@@ -1,5 +1,0 @@
-# ignore artifacts:
-build
-dist
-storybook-build
-**/*.mdx

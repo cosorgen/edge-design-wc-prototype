@@ -11,7 +11,7 @@ dotenv.config();
 const PORT = process.env.PORT || 8080;
 const PUBLIC_DIR = process.env.PUBLIC_DIR || 'public';
 
-let copyStaticFiles = {
+let copyStaticFiles = (dir) => ({
   name: 'copyStaticFiles',
   setup(build) {
     build.onEnd((result) => {
@@ -19,27 +19,23 @@ let copyStaticFiles = {
         console.error('An error occurred while building the project.');
         return console.error(result.errors);
       }
-      fs.cpSync(
-        './client/www',
-        `./dist/${PUBLIC_DIR}`,
-        { recursive: true },
-        (err) => {
-          if (err) {
-            console.error('An error occurred while copying the static files.');
-            return console.error(err);
-          }
-        },
-      );
+      fs.cpSync(dir, `./dist/${PUBLIC_DIR}`, { recursive: true }, (err) => {
+        if (err) {
+          console.error('An error occurred while copying the static files.');
+          return console.error(err);
+        }
+      });
     });
   },
-};
+});
 
-console.log('Copying server...\n');
-fs.cpSync('./server', './dist', { recursive: true }, (err) => {
-  if (err) {
-    console.error('An error occurred while copying the server files.');
-    return console.error(err);
-  }
+const serverAppContext = await esbuild.context({
+  entryPoints: ['./server/src/index.ts'],
+  bundle: true,
+  outfile: `./dist/index.js`,
+  format: 'cjs',
+  platform: 'node',
+  plugins: [copyStaticFiles('./server/www')],
 });
 
 const clientAppContext = await esbuild.context({
@@ -47,8 +43,13 @@ const clientAppContext = await esbuild.context({
   bundle: true,
   outfile: `./dist/${PUBLIC_DIR}/bundle.js`,
   format: 'esm',
-  plugins: [copyStaticFiles],
+  plugins: [copyStaticFiles('./client/www')],
 });
+
+console.log('Building server...\n');
+await serverAppContext.rebuild();
+await serverAppContext.watch();
+console.log('Watching server for changes...\n');
 
 console.log('Building client...\n');
 await clientAppContext.rebuild();

@@ -1,5 +1,5 @@
 {
-  "name": "@edge-design-wc-prototype/client",
+  "name": "@edge-design/client",
   "private": true,
   "type": "module",
   "version": "0.0.1",
