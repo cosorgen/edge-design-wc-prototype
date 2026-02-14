@@ -14,8 +14,8 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '../controls/flyout-menu.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
 import apps, { ToolbarApp } from '../installedApps.js';
 import {
   backgroundFlyoutSolid,

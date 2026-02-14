@@ -35,10 +35,10 @@ import {
   backgroundWindowTabBandInactive,
   backgroundWindowTabBandVerticalTabs,
 } from '@mai-ui/design-tokens/edge-tokens.js';
-import WindowsService from '#services/windowsService.js';
-import EdgeSettingsService from '#services/settingsService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import { TabService } from '#services/tabService.js';
+import WindowsService from '#services//windowsService.js';
+import EdgeSettingsService from '#services//settingsService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import { TabService } from '#services//tabService.js';
 import './views/tab-bar.js';
 import './views/title-bar.js';
 import './views/vertical-tab-bar.js';
@@ -49,7 +49,10 @@ import './views/favorites-bar.js';
 import './controls/side-pane.js';
 import './views/copilot-sidepane.js';
 import './views/caption-controls.js';
-import { applyChromiumTheme, type PaletteDefinition } from './applyChromiumTheme.js';
+import {
+  applyChromiumTheme,
+  type PaletteDefinition,
+} from './applyChromiumTheme.js';
 
 const template = html<MicrosoftEdge>`
   <caption-controls></caption-controls>
@@ -273,7 +276,9 @@ export class MicrosoftEdge extends FASTElement {
     if (this.ss.themeColor) {
       selectedTheme = applyChromiumTheme(
         selectedTheme,
-        (themeKey === 'dark' ? darkChromiumMapping : lightChromiumMapping) as Record<string, PaletteDefinition | string>,
+        (themeKey === 'dark'
+          ? darkChromiumMapping
+          : lightChromiumMapping) as Record<string, PaletteDefinition | string>,
         this.ss.themeColor,
         this.ss.themePalette,
       );

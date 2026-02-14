@@ -19,16 +19,16 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
-import { TabService } from '#servicestabService.js';
+import { TabService } from '#services/tabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
   Suggestion,
   generateSuggestions,
-} from '#servicesautoSuggestService.js';
-import WindowsService from '#serviceswindowsService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsService from '#servicessettingsService.js';
-import FavoritesService from '#servicesfavoritesService.js';
+} from '#services/autoSuggestService.js';
+import WindowsService from '#services/windowsService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import EdgeSettingsService from '#services/settingsService.js';
+import FavoritesService from '#services/favoritesService.js';
 import apps from '../installedApps.js';
 import omniboxActions, { overflowItems } from '../omniboxActions.js';
 
@@ -209,7 +209,7 @@ export class Toolbar extends FASTElement {
   connectedCallback() {
     super.connectedCallback();
     this.omniboxControl = this.shadowRoot?.querySelector('omnibox-control');
-    generateSuggestions('').then((res) => {
+    generateSuggestions('').then((res) => { 
       this.suggestions = res.suggestions;
     });
     this.addEventListener('contextmenu', this.handleContextMenu);

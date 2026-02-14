@@ -1,4 +1,4 @@
-import WindowsService from '#serviceswindowsService.js';
+import WindowsService from '#services/windowsService.js';
 import { observable } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 

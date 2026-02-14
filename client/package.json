@@ -1,5 +1,5 @@
 {
-  "name": "@edge-design-wc-prototype/client",
+  "name": "@edge-design/client",
   "private": true,
   "type": "module",
   "version": "0.0.1",
@@ -56,7 +56,7 @@
     "showdown": "^2.1.0"
   },
   "imports": {
-    "#services*": "./src/services/*"
+    "#services/*": "./src/services/*"
   },
   "devDependencies": {
     "@types/dompurify": "^3.2.0",

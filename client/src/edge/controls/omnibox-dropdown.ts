@@ -8,7 +8,7 @@ import {
   attr,
   nullableNumberConverter,
 } from '@microsoft/fast-element';
-import { Suggestion } from '#servicesautoSuggestService.js';
+import { Suggestion } from '#services/autoSuggestService.js';
 
 const template = html<OmniboxDropdown>`
   <div part="container">

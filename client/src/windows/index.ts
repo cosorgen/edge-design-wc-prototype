@@ -23,7 +23,7 @@ import {
 import phoenixLightTheme from '@mai-ui/design-tokens/themes/phoenix.light/phoenix.light.json' with { type: 'json' };
 import phoenixDarkTheme from '@mai-ui/design-tokens/themes/phoenix.dark/phoenix.dark.json' with { type: 'json' };
 import { setThemeFor } from '@edge-design/utilities';
-import WindowsService from '#services/windowsService.js';
+import WindowsService from '#services//windowsService.js';
 import installedApps from './installedApps.js';
 import './views/task-bar.js';
 import './controls/taskbar-button.js';

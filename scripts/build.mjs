@@ -33,23 +33,46 @@ const buildClientApp = async () => {
   });
 };
 
+const buildServerApp = async () => {
+  console.log('Copying static files...');
+  fs.cpSync(
+    './server/www',
+    `./dist/${PUBLIC_DIR}`,
+    { recursive: true },
+    (err) => {
+      if (err) {
+        console.error('An error occurred while copying the folder.');
+        return console.error(err);
+      }
+      console.log('Done.');
+    },
+  );
+
+  return esbuild.build({
+    entryPoints: ['./server/src/index.ts'],
+    bundle: true,
+    outfile: `./dist/index.js`,
+    format: 'cjs',
+    platform: 'node',
+    minify: true,
+    metafile: true,
+  });
+};
+
 console.log('Cleaning up the dist folder...');
 fs.rmSync('./dist', { recursive: true, force: true });
 console.log('Done.\n');
 
-console.log('Copying server app...');
-fs.cpSync('./server', './dist', { recursive: true }, (err) => {
-  if (err) {
-    console.error('An error occurred while copying the server files.');
-    return console.error(err);
-  }
-});
+console.log('Building server app...');
+const serverResult = await buildServerApp();
+const serverMeta = await esbuild.analyzeMetafile(serverResult.metafile);
+console.log(serverMeta);
 console.log('Done.\n');
 
 console.log('Building client app...');
-const result = await buildClientApp();
-const meta = await esbuild.analyzeMetafile(result.metafile);
-console.log(meta);
+const clientResult = await buildClientApp();
+const clientMeta = await esbuild.analyzeMetafile(clientResult.metafile);
+console.log(clientMeta);
 console.log('Done.\n');
 
 // Remove the metafile

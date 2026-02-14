@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sign In</title>
+    <style>
+      body {
+        width: calc(100vw - 48px);
+        height: calc(100vh - 48px);
+        padding: 24px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: white;
+
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 1em;
+        color: black;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: black;
+          color: white;
+        }
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        document.getElementById('password').focus();
+
+        const form = document.querySelector('form');
+        if (form) {
+          form.onsubmit = (e) => {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            if (password === '') {
+              alert('Please enter a password.');
+              return false;
+            }
+
+            fetch(window.location.href, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: new URLSearchParams({ password }),
+            }).then((response) => {
+              if (response.ok) {
+                // Reload the page to show the content
+                window.location.href = window.location.href;
+              } else {
+                alert('Invalid password.');
+              }
+            });
+
+            return true;
+          };
+        }
+      };
+    </script>
+  </head>
+
+  <body>
+    <form>
+      <label for="password">Password:&nbsp;</label>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Password"
+      />
+      <input type="submit" value="Sign in" />
+    </form>
+  </body>
+</html>

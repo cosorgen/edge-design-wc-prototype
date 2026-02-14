@@ -20,6 +20,11 @@ module.exports = [
   },
   {
     files: ['*.ts', '*.tsx', '*.js'],
+    languageOptions: {
+      parserOptions: {
+        tsconfigRootDir: __dirname,
+      },
+    },
   },
   prettierConfig,
 ];

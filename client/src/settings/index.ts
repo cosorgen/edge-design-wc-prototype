@@ -27,12 +27,12 @@ import {
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '@edge-design/windows-theme';
 import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '#serviceswindowsService.js';
+import WindowsService from '#services/windowsService.js';
 import EdgeSettingsSerivce, {
   AvailableThemes,
-} from '#servicessettingsService.js';
-import { TabService } from '#servicestabService.js';
-import { CopilotService } from '#servicescopilotService.js';
+} from '#services/settingsService.js';
+import { TabService } from '#services/tabService.js';
+import { CopilotService } from '#services/copilotService.js';
 
 const template = html<WindowsSettings>`
   <mica-material
