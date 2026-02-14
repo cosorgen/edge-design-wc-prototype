@@ -37,7 +37,7 @@ const template = html<HorizontalTab>`
     <div id="favicon" part="favicon">
       ${when(
         (x) => x.loading,
-        html`<mai-spinner size="tiny"></mai-spinner>`,
+        html`<mai-spinner></mai-spinner>`,
         html`<slot name="favicon">
           <svg width="16" height="16">
             <use
@@ -193,7 +193,7 @@ const styles = css`
   }
 
   mai-spinner {
-    --size: 16px;
+    --_size: 16px;
   }
 `;
 
