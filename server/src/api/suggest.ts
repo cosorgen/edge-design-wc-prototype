@@ -119,21 +119,60 @@ function fetchBingEntities(
   return [results, fullyEnhanced] as EntityResult;
 }
 
+export type BraveSuggestion = {
+  query: string;
+  is_entity: boolean;
+  title?: string;
+  description?: string;
+  img?: string;
+};
+
+export async function fetchBraveSuggestions(query: string) {
+  const res = await fetch(
+    `${process.env.BRAVE_APP_ENDPOINT}/suggest/search?q=${encodeURIComponent(
+      query || ' ',
+    )}&lang=en&country=US&rich=true`,
+    {
+      headers: {
+        Accept: 'application/json',
+        'Accept-Encoding': 'gzip',
+        'X-Subscription-Token': process.env.BRAVE_APP_KEY!,
+      },
+    },
+  );
+  if (!res.ok)
+    throwServerError(`Brave API error ${res.status}: ${res.statusText}`, 500);
+  const json = await res.json();
+  return (
+    json.results.map((r: BraveSuggestion) => ({
+      type: r.is_entity ? 'entity' : 'search',
+      title: r.is_entity ? r.title : r.query,
+      value: `https://bing.com/search?q=${encodeURIComponent(r.query)}`,
+      entityImage: r.img,
+      subtitle2: r.description,
+    })) || []
+  );
+}
+
 export default async (req: Request, res: Response): Promise<void> => {
   try {
     const { q, enhance } = req.query;
 
-    if (!process.env.BING_APP_ID || !process.env.BING_APP_ENDPOINT)
-      throwServerError('Missing Bing configuration', 500);
+    if (process.env.BING_APP_ID && process.env.BING_APP_ENDPOINT) {
+      let suggestions = await fetchBingSuggestions(q as string);
+      let fullyEnhanced = true;
 
-    let suggestions = await fetchBingSuggestions(q as string);
-    let fullyEnhanced = true;
+      if (enhance === 'true')
+        [suggestions, fullyEnhanced] = fetchBingEntities(suggestions);
 
-    if (enhance === 'true')
-      [suggestions, fullyEnhanced] = fetchBingEntities(suggestions);
-
-    if (fullyEnhanced) res.set('Cache-Control', 'public, max-age=86400'); // one day
-    res.json({ q, suggestions });
+      if (fullyEnhanced) res.set('Cache-Control', 'public, max-age=86400'); // one day
+      res.json({ q, suggestions });
+    } else if (process.env.BRAVE_APP_KEY && process.env.BRAVE_APP_ENDPOINT) {
+      const suggestions = await fetchBraveSuggestions(q as string);
+      res.json({ q, suggestions });
+    } else {
+      throwServerError('No search provider configured', 500);
+    }
   } catch (err) {
     console.error(err);
     if (err instanceof ServerError) {
