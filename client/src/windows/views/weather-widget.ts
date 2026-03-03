@@ -120,7 +120,7 @@ export default class WeatherWidget extends FASTElement {
           this.loaded = true;
         })
         .catch((err) => {
-          console.log(err);
+          console.error(err);
         });
     });
   }

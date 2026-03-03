@@ -305,7 +305,6 @@ export class FavoritesMenu extends FASTElement {
 
   handlePinToggle() {
     this.pinned = !this.pinned;
-    console.log('Toggled pinned state:', this.pinned);
     this.$emit('togglepintoolbaritem', this.pinned);
   }
 
