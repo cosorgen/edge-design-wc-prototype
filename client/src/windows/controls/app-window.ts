@@ -7,6 +7,7 @@ import {
 } from '@edge-design/windows-theme';
 import {
   FASTElement,
+  Updates,
   attr,
   css,
   customElement,
@@ -196,15 +197,21 @@ export class AppWindow extends FASTElement {
   @attr({ attribute: 'min-height', converter: nullableNumberConverter })
   minHeight = 400;
   @attr({ mode: 'boolean' }) dragging = false;
+  @attr({ mode: 'boolean' }) active = false;
+  @attr({ mode: 'boolean', attribute: 'clear-theme' }) shouldClearTheme = false;
   @observable screenWidth = window.innerWidth;
   @observable screenHeight = window.innerHeight;
   _appElement?: HTMLElement;
   _contentElement?: HTMLElement;
+  _slotElement?: HTMLSlotElement;
 
   connectedCallback() {
     super.connectedCallback();
     this.addEventListeners();
     this.setElements();
+    Updates.enqueue(() => {
+      if (this.isConnected && this.shouldClearTheme) this.clearTheme();
+    });
   }
 
   disconnectedCallback() {
@@ -232,12 +239,13 @@ export class AppWindow extends FASTElement {
   }
 
   setElements() {
-    this._appElement = this.shadowRoot
-      ?.querySelector('slot')
-      ?.assignedElements()[0] as HTMLElement;
+    this._slotElement = this.shadowRoot?.querySelector(
+      'slot',
+    ) as HTMLSlotElement;
     this._contentElement = this.shadowRoot?.querySelector(
       '#content',
     ) as HTMLElement;
+    this._appElement = this._slotElement?.assignedElements()[0] as HTMLElement;
 
     if (this._appElement) this._appElement.id = this.id;
   }
@@ -246,6 +254,7 @@ export class AppWindow extends FASTElement {
     if (this._appElement) this._appElement.id = '';
     this._appElement = undefined;
     this._contentElement = undefined;
+    this._slotElement = undefined;
   }
 
   mouseDown(widthAmp: number, heightAmp: number, xAmp: number, yAmp: number) {
@@ -317,6 +326,18 @@ export class AppWindow extends FASTElement {
   handleClick = () => {
     this.$emit('activate');
   };
+
+  clearTheme() {
+    if (!this._slotElement) return;
+
+    const styles = getComputedStyle(this);
+
+    for (const property of styles) {
+      if (property.startsWith('--')) {
+        this._slotElement.style.setProperty(property, 'initial');
+      }
+    }
+  }
 
   focus() {
     this._appElement?.focus();

@@ -234,7 +234,6 @@ export class FlyoutMenu extends FASTElement {
   }
 
   closeMenuListener = (e: Event) => {
-    console.log('closemenu');
     e.stopPropagation();
     this._popoverElement?.hidePopover();
     this._contextPopoverElement?.hidePopover();

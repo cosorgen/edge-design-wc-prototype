@@ -80,6 +80,8 @@ const template = html<WindowsShell>`
         ?minimized="${(x) => x.minimized}"
         ?maximized="${(x) => x.maximized}"
         ?active="${(x, c) => x.id === c.parent.ws.activeWindowId}"
+        ?clear-theme="${(x) =>
+          installedApps.find((app) => app.name === x.appName)?.clearTheme}"
         @windowmove="${(x, c) =>
           c.parent.handleWindowMove(c.event as CustomEvent)}"
         @activate="${(x, c) => c.parent.ws.activateWindow(x.id)}"
