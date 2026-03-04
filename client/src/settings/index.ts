@@ -486,6 +486,7 @@ export class WindowsSettings extends FASTElement {
   @inject(EdgeSettingsSerivce) ss!: EdgeSettingsSerivce;
   @inject(TabService) ts!: TabService;
   @inject(CopilotService) cs!: CopilotService;
+
   @observable selectedButton = 'appearance';
 
   handleSidebarButtonClick(button: string) {
