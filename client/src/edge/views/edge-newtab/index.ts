@@ -1,7 +1,7 @@
 import { FASTElement, Updates, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import { TabService } from '#services/tabService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 import { template } from './template.js';
 import { styles } from './styles.js';
 

@@ -20,11 +20,11 @@ import {
   typographyStyles,
 } from '@edge-design/copilot-theme';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import { CopilotService } from '#servicescopilotService.js';
-import WindowsService from '#serviceswindowsService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import { TabService } from '#services/tabService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import { CopilotService } from '#services/copilotService.js';
+import WindowsService from '#services/windowsService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
 
 const template = html<CopilotNewtab>`<img
     id="bg"

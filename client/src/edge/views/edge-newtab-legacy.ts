@@ -8,9 +8,9 @@ import {
 } from '@microsoft/fast-element';
 import '@mai-ui/button/define.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '#serviceswindowsService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import { TabService } from '#servicestabService.js';
+import WindowsService from '#services/windowsService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import { TabService } from '#services/tabService.js';
 import {
   backgroundCardOnPrimaryDefaultHover,
   backgroundCardOnPrimaryDefaultRest,

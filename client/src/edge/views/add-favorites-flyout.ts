@@ -9,8 +9,8 @@ import { inject } from '@microsoft/fast-element/di.js';
 import '@mai-ui/text-input/define.js';
 import { TextInput } from '@mai-ui/text-input';
 import '@mai-ui/button/define.js';
-import { TabService } from '#services/tabService.js';
-import FavoritesService from '#services/favoritesService.js';
+import { TabService } from '#services//tabService.js';
+import FavoritesService from '#services//favoritesService.js';
 import {
   backgroundFlyoutSolid,
   cornerFlyoutRest,

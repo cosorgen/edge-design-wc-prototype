@@ -10,13 +10,13 @@ import { inject } from '@microsoft/fast-element/di.js';
 import FavoritesService, {
   Favorite,
   FavoriteFolder,
-} from '#services/favoritesService.js';
+} from '#services//favoritesService.js';
 import '../controls/favorites-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import '@mai-ui/divider/define.js';
-import { TabService } from '#servicestabService.js';
+import { TabService } from '#services/tabService.js';
 import { paddingContentXSmall } from '@mai-ui/design-tokens/tokens.js';
 
 const template = html`

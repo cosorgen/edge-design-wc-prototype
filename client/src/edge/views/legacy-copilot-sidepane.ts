@@ -1,4 +1,4 @@
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 import { html, css, FASTElement, customElement } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
 import {

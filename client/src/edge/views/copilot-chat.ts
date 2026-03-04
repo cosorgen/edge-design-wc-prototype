@@ -17,7 +17,7 @@ import {
 import '../controls/copilot-chat-entry.js';
 import { CopilotChatEntry } from '../controls/copilot-chat-entry.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import { CopilotService } from '#servicescopilotService.js';
+import { CopilotService } from '#services/copilotService.js';
 
 const template = html<CopilotChat>``;
 

@@ -14,14 +14,14 @@ import '../controls/context-menu.js';
 import '../controls/menu-item.js';
 import { TabService } from '#services/tabService.js';
 import WindowsService from '#services/windowsService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 import {
   paddingContentXSmall,
   shadowLayerAmbient,
   shadowLayerKey,
 } from '@mai-ui/design-tokens/tokens.js';
 import { ctrlTabBackgroundHorizontalActive } from '@mai-ui/design-tokens/edge-tokens.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
 
 const template = html<TabBar>`
   <div id="shadow"></div>

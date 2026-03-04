@@ -3,7 +3,7 @@ import { customElement } from '@microsoft/fast-element';
 import { styles } from './styles.js';
 import { template } from './template.js';
 import { attr, FASTElement, observable } from '@microsoft/fast-element';
-import { Suggestion } from '#servicesautoSuggestService.js';
+import { Suggestion } from '#services/autoSuggestService.js';
 import { OmniboxDropdown } from '../omnibox-dropdown.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import EdgePermissionsService from '#servicespermissionsService.js';

@@ -27,11 +27,11 @@ import '../controls/copilot-design-provider.js';
 import '../controls/copilot-input.js';
 import './copilot-chat.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import { CopilotService } from '#servicescopilotService.js';
-import { TabService } from '#servicestabService.js';
+import { CopilotService } from '#services/copilotService.js';
+import { TabService } from '#services/tabService.js';
 import { CopilotChat } from './copilot-chat.js';
 import { CopilotInput } from '../controls/copilot-input.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 
 const template = html<CopilotComposer>`
   <copilot-design-provider>

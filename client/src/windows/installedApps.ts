@@ -9,6 +9,7 @@ export type InstalledApp = {
   minHeight?: number;
   xPos?: number;
   yPos?: number;
+  clearTheme?: boolean;
 };
 
 export default [
@@ -39,6 +40,7 @@ export default [
   {
     name: 'Microsoft Edge',
     lightIcon: 'img/windows/edge-24.svg',
+    clearTheme: true,
   },
   {
     name: 'Microsoft Store',

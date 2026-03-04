@@ -11,14 +11,14 @@ import '../controls/vertical-tab.js';
 import '../controls/menu-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
-import { TabService } from '#services/tabService.js';
-import WindowsService from '#services/windowsService.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
+import { TabService } from '#services//tabService.js';
+import WindowsService from '#services//windowsService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
 import {
   foregroundCtrlNeutralSecondaryRest,
   textGlobalCaption1FontSize,
 } from '@mai-ui/design-tokens/tokens.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
 
 const template = html<VerticalTabBar>`
   <div class="group">

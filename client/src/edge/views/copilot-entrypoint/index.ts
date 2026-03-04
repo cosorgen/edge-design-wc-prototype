@@ -25,10 +25,10 @@ import {
 } from '@edge-design/copilot-theme';
 import '../copilot-composer.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import EdgeWindowService from '#servicesedgeWindowService.js';
-import EdgeSettingsSerivce from '#servicessettingsService.js';
-import { CopilotService } from '#servicescopilotService.js';
-import { TabService } from '#servicestabService.js';
+import EdgeWindowService from '#services/edgeWindowService.js';
+import EdgeSettingsSerivce from '#services/settingsService.js';
+import { CopilotService } from '#services/copilotService.js';
+import { TabService } from '#services/tabService.js';
 import inlineCenterStyles from './inline-center-styles.js';
 import inlineStartStyles from './inline-start-styles.js';
 import inlineEndStyles from './inline-end-styles.js';

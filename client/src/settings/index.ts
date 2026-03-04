@@ -27,15 +27,12 @@ import {
   colorShellForegroundCaptionControlPrimaryPressed,
 } from '@edge-design/windows-theme';
 import { inject } from '@microsoft/fast-element/di.js';
-import WindowsService from '#serviceswindowsService.js';
+import WindowsService from '#services/windowsService.js';
 import EdgeSettingsSerivce, {
   AvailableThemes,
-} from '#servicessettingsService.js';
-import { TabService } from '#servicestabService.js';
-import { CopilotService } from '#servicescopilotService.js';
-import phoenixLightTheme from '@mai-ui/design-tokens/themes/phoenix.light/phoenix.light.json' with { type: 'json' };
-import phoenixDarkTheme from '@mai-ui/design-tokens/themes/phoenix.dark/phoenix.dark.json' with { type: 'json' };
-import { setThemeFor } from '@edge-design/utilities';
+} from '#services/settingsService.js';
+import { TabService } from '#services/tabService.js';
+import { CopilotService } from '#services/copilotService.js';
 
 const template = html<WindowsSettings>`
   <mica-material
@@ -490,16 +487,6 @@ export class WindowsSettings extends FASTElement {
   @inject(TabService) ts!: TabService;
   @inject(CopilotService) cs!: CopilotService;
   @observable selectedButton = 'appearance';
-
-  connectedCallback(): void {
-    super.connectedCallback();
-
-    const themes = {
-      light: phoenixLightTheme,
-      dark: phoenixDarkTheme,
-    };
-    setThemeFor(this.shadowRoot!, themes[this.ws.theme]);
-  }
 
   handleSidebarButtonClick(button: string) {
     this.selectedButton = button;
