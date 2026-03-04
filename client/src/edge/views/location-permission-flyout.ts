@@ -8,9 +8,9 @@ import {
   volatile,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
+import { TabService } from '#services/tabService.js';
 import '../controls/permission-action-prompt.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 import '@mai-ui/radio-group/define.js';
 import '@mai-ui/radio/define.js';
 import '@mai-ui/field/define.js';

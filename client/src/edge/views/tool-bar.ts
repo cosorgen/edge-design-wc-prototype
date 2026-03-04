@@ -16,9 +16,20 @@ import '../controls/toolbar-flyout-item.js';
 import '../controls/toolbar-sidepane-item.js';
 import '../controls/omnibox-action-flyout.js';
 import '../controls/context-menu.js';
+import '../controls/flyout-menu.js';
 import '../controls/menu-item.js';
 import '../controls/identity-control.js';
 import '../controls/identity-flyout.js';
+import '../controls/permission-prompt.js';
+import '../controls/permission-status.js';
+import '../controls/popup-blocked-omnibox-action.js';
+import '../controls/more-menu.js';
+import './site-info-flyout.js';
+import './popup-blocked-flyout.js';
+import './location-permission-flyout.js';
+import './download-permission-flyout.js';
+import './midi-permission-flyout.js';
+import './clipboard-permission-flyout.js';
 import { TabService } from '#services/tabService.js';
 import { inject } from '@microsoft/fast-element/di.js';
 import {
@@ -345,7 +356,7 @@ export class Toolbar extends FASTElement {
   connectedCallback() {
     super.connectedCallback();
     this.omniboxControl = this.shadowRoot?.querySelector('omnibox-control');
-    generateSuggestions('').then((res) => { 
+    generateSuggestions('').then((res) => {
       this.suggestions = res.suggestions;
     });
     this.addEventListener('contextmenu', this.handleContextMenu);

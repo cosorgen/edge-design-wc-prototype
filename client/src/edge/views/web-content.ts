@@ -13,7 +13,7 @@ import '../controls/web-page.js';
 import './edge-newtab-legacy.js';
 import './copilot-newtab.js';
 import './settings.js';
-import './palette-playground.js';
+import './permission-playground.js';
 import EdgeSettingsSerivce from '#services/settingsService.js';
 import { TabService } from '#services/tabService.js';
 import EdgeWindowService from '#services/edgeWindowService.js';

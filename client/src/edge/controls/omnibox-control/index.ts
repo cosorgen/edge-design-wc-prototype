@@ -6,7 +6,7 @@ import { attr, FASTElement, observable } from '@microsoft/fast-element';
 import { Suggestion } from '#services/autoSuggestService.js';
 import { OmniboxDropdown } from '../omnibox-dropdown.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 
 const mod = (n: number, m: number) => ((n % m) + m) % m; // handle negative indexes
 

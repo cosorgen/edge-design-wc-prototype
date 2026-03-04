@@ -37,10 +37,10 @@ import {
   strokeWidthCardDefault,
 } from '@mai-ui/design-tokens/mai-tokens.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
+import { TabService } from '#services/tabService.js';
 import '@mai-ui/button/define.js';
 import '@mai-ui/divider/define.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 import '../controls/site-info-permission-item.js';
 import '../controls/site-info-permission-device.js';
 

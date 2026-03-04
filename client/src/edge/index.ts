@@ -35,10 +35,10 @@ import {
   backgroundWindowTabBandInactive,
   backgroundWindowTabBandVerticalTabs,
 } from '@mai-ui/design-tokens/edge-tokens.js';
-import WindowsService from '#services//windowsService.js';
-import EdgeSettingsService from '#services//settingsService.js';
+import WindowsService from '#services/windowsService.js';
+import EdgeSettingsService from '#services/settingsService.js';
 import EdgeWindowService from '#services/edgeWindowService.js';
-import { TabService } from '#services//tabService.js';
+import { TabService } from '#services/tabService.js';
 import './views/tab-bar.js';
 import './views/title-bar.js';
 import './views/vertical-tab-bar.js';

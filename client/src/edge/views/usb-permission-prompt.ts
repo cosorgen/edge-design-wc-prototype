@@ -8,8 +8,8 @@ import {
   repeat,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import { TabService } from '#services/tabService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 import '../controls/permission-picker-prompt.js';
 import '@mai-ui/tree/define.js';
 import '@mai-ui/tree-item/define.js';

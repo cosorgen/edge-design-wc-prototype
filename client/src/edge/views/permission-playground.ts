@@ -11,7 +11,7 @@ import {
   foregroundContentNeutralPrimary,
 } from '@mai-ui/design-tokens/tokens.js';
 import { inject } from '@microsoft/fast-element/di.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 
 const template = html<PermissionPlayground>`
   <div class="group">

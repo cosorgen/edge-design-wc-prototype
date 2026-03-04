@@ -10,7 +10,7 @@ import { inject } from '@microsoft/fast-element/di.js';
 import FavoritesService, {
   Favorite,
   FavoriteFolder,
-} from '#services//favoritesService.js';
+} from '#services/favoritesService.js';
 import '../controls/favorites-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';

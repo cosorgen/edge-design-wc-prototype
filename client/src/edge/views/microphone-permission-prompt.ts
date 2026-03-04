@@ -7,8 +7,8 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import { TabService } from '#services/tabService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 import '../controls/permission-media-prompt.js';
 import '../controls/microphone-permission-card.js';
 import MicrophonePermissionCard from '../controls/microphone-permission-card.js';

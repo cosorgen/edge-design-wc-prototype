@@ -11,8 +11,8 @@ import '../controls/vertical-tab.js';
 import '../controls/menu-item.js';
 import '../controls/flyout-menu.js';
 import '../controls/context-menu.js';
-import { TabService } from '#services//tabService.js';
-import WindowsService from '#services//windowsService.js';
+import { TabService } from '#services/tabService.js';
+import WindowsService from '#services/windowsService.js';
 import EdgeWindowService from '#services/edgeWindowService.js';
 import {
   foregroundCtrlNeutralSecondaryRest,

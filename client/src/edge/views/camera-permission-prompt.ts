@@ -7,10 +7,10 @@ import {
   observable,
 } from '@microsoft/fast-element';
 import { inject } from '@microsoft/fast-element/di.js';
-import { TabService } from '#servicestabService.js';
+import { TabService } from '#services/tabService.js';
 import '../controls/camera-permission-card.js';
 import '../controls/permission-media-prompt.js';
-import EdgePermissionsService from '#servicespermissionsService.js';
+import EdgePermissionsService from '#services/permissionsService.js';
 import CameraPermissionCard from '../controls/camera-permission-card.js';
 
 const template = html<CameraPermissionPrompt>`

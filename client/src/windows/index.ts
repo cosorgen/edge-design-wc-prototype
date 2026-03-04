@@ -20,7 +20,7 @@ import {
   windowsLightThemeSolid,
 } from '@edge-design/windows-theme';
 import { setThemeFor } from '@edge-design/utilities';
-import WindowsService from '#services//windowsService.js';
+import WindowsService from '#services/windowsService.js';
 import installedApps from './installedApps.js';
 import './views/task-bar.js';
 import './controls/taskbar-button.js';
